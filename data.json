@@ -1,0 +1,528 @@
+{
+  "Races": [
+    {
+      "Name": "Alf",
+      "Keywords": [
+        "Elder",
+        "Subterranean"
+      ],
+      "Attributes": [
+        {
+          "STR": 1,
+          "AGI": 2,
+          "INT": 3,
+          "CHA": 2
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D4",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 1
+        },
+        {
+          "Name": "Dodge",
+          "Level": 2
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 3
+        },
+        {
+          "Name": "Command",
+          "Level": 2
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Blank",
+      "Keywords": [
+        "Large"
+      ],
+      "Attributes": [
+        {
+          "STR": 2,
+          "AGI": 2,
+          "INT": 2,
+          "CHA": 2
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D6",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 2
+        },
+        {
+          "Name": "Dodge",
+          "Level": 1
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 2
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Bolgrim",
+      "Keywords": [
+        "Large",
+        "Wild"
+      ],
+      "Attributes": [
+        {
+          "STR": 3,
+          "AGI": 1,
+          "INT": 2,
+          "CHA": 2
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D4",
+      "HP": 8,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 3
+        },
+        {
+          "Name": "Dodge",
+          "Level": 1
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 2
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Dwerg",
+      "Keywords": [
+        "Small",
+        "Subterranean"
+      ],
+      "Attributes": [
+        {
+          "STR": 3,
+          "AGI": 2,
+          "INT": 2,
+          "CHA": 1
+        }
+      ],
+      "MOB": 4,
+      "DIV": "D4",
+      "HP": 8,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 3
+        },
+        {
+          "Name": "Dodge",
+          "Level": 2
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 1
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Fayling",
+      "Keywords": [
+        "Small"
+      ],
+      "Attributes": [
+        {
+          "STR": 1,
+          "AGI": 3,
+          "INT": 1,
+          "CHA": 3
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D6",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 1
+        },
+        {
+          "Name": "Dodge",
+          "Level": 3
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 2
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Human",
+      "Keywords": [
+        "Human"
+      ],
+      "Attributes": [
+        {
+          "STR": 1,
+          "AGI": 2,
+          "INT": 2,
+          "CHA": 3
+        },
+        {
+          "STR": 2,
+          "AGI": 1,
+          "INT": 2,
+          "CHA": 3
+        },
+        {
+          "STR": 2,
+          "AGI": 2,
+          "INT": 1,
+          "CHA": 3
+        },
+        {
+          "STR": 1,
+          "AGI": 2,
+          "INT": 3,
+          "CHA": 2
+        },
+        {
+          "STR": 2,
+          "AGI": 1,
+          "INT": 3,
+          "CHA": 2
+        },
+        {
+          "STR": 2,
+          "AGI": 2,
+          "INT": 3,
+          "CHA": 1
+        },
+        {
+          "STR": 1,
+          "AGI": 3,
+          "INT": 2,
+          "CHA": 2
+        },
+        {
+          "STR": 2,
+          "AGI": 3,
+          "INT": 1,
+          "CHA": 2
+        },
+        {
+          "STR": 2,
+          "AGI": 3,
+          "INT": 2,
+          "CHA": 1
+        },
+        {
+          "STR": 3,
+          "AGI": 1,
+          "INT": 2,
+          "CHA": 2
+        },
+        {
+          "STR": 3,
+          "AGI": 2,
+          "INT": 1,
+          "CHA": 2
+        },
+        {
+          "STR": 3,
+          "AGI": 2,
+          "INT": 2,
+          "CHA": 1
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D4",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 2
+        },
+        {
+          "Name": "Dodge",
+          "Level": 2
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 2
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Shrewick",
+      "Keywords": [
+        "Small",
+        "Outlandish"
+      ],
+      "Attributes": [
+        {
+          "STR": 2,
+          "AGI": 3,
+          "INT": 2,
+          "CHA": 1
+        }
+      ],
+      "MOB": 8,
+      "DIV": "D4",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Bite",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 1
+        },
+        {
+          "Name": "Dodge",
+          "Level": 3
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 2
+        },
+        {
+          "Name": "Command",
+          "Level": 1
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    },
+    {
+      "Name": "Algrim",
+      "Keywords": [
+        "Outlandish"
+      ],
+      "Attributes": [
+        {
+          "STR": 1,
+          "AGI": 2,
+          "INT": 2,
+          "CHA": 3
+        },
+        {
+          "STR": 2,
+          "AGI": 1,
+          "INT": 2,
+          "CHA": 3
+        }
+      ],
+      "MOB": 6,
+      "DIV": "D4",
+      "HP": 6,
+      "Action cards": [
+        {
+          "Name": "Bash",
+          "Level": 1
+        },
+        {
+          "Name": "Endurance",
+          "Level": 1
+        },
+        {
+          "Name": "Dodge",
+          "Level": 1
+        },
+        {
+          "Name": "Combat Insight",
+          "Level": 3
+        },
+        {
+          "Name": "Command",
+          "Level": 3
+        },
+        {
+          "Name": "Shoot",
+          "Level": 1
+        }
+      ]
+    }
+  ],
+  "Origins": [
+    {
+      "Name": "Arcane Academy",
+      "Keywords": [
+        "Arcana",
+        "Cityborn",
+        "Investigation"
+      ],
+      "Items": [
+        {
+          "Name": "Spellbok",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    }
+  ],
+  "Proffesions": [
+    {
+      "Name": "Barbarian",
+      "Keywords": [
+        "Athletics"
+      ],
+      "Advancement Trees": [
+        "Close Combat",
+        "Marksmanship"
+      ],
+      "Paths": [
+        {
+          "Name": "Brute",
+          "Attributes": [
+            {
+              "STR": 1,
+              "AGI": 0,
+              "INT": 0,
+              "CHA": 0
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Death Whistle",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Rage",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Wildling",
+          "Attributes": [
+            {
+              "STR": 0,
+              "AGI": 1,
+              "INT": 0,
+              "CHA": 0
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Notram’s Ring",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Weapon Throw",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Glowdrinker",
+          "Attributes": [
+            {
+              "STR": 0,
+              "AGI": 0,
+              "INT": 0,
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Glowjuice",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Manic Laugh",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
