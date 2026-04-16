@@ -675,7 +675,7 @@
       ],
       "Items": [
         {
-          "Name": "Warden’s Greaves",
+          "Name": "Warden's Greaves",
           "Type": "Feet"
         }
       ],
@@ -824,6 +824,766 @@
           "Action cards": [
             {
               "Name": "Manic Laugh",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Bard",
+      "Keywords": [
+        "Performer"
+      ],
+      "Advancement Trees": [
+        "Support Magic",
+        "Thiefcraft"
+      ],
+      "Paths": [
+        {
+          "Name": "Entertainer",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Throwing Dagger",
+              "Type": "Hand"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Inspire",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Trickster",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Smoke Bomb",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Smoke and Mirrors",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Lorekeeper",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Book of Sagas",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Weak Point",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Custodian",
+      "Keywords": [
+        "Investigation"
+      ],
+      "Advancement Trees": [
+        "Subterfuge",
+        "Scholarship"
+      ],
+      "Paths": [
+        {
+          "Name": "Relic Hunter",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Anchor Chain",
+              "Type": "Hand"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Pike Strike",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Savant",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Whispering Box",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Bright Mind",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Librarian",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Codex Vestigium",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Applied Knowledge",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Druid",
+      "Keywords": [
+        "Survival"
+      ],
+      "Advancement Trees": [
+        "Nature",
+        "Battle Magic"
+      ],      
+      "Paths": [
+        {
+          "Name": "Warden",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Curing Leaves",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Freezing Smash",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Soothsayer",
+          "Attributes": [
+            {
+              "DIV": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Stone of Nivar",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Cure and Poison",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Beastmaster",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Calling Reed",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Summon Swarm",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Executor",
+      "Keywords": [
+        "Stealth"
+      ],
+      "Paths": [
+        {
+          "Name": "Assassin",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Garrote",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Eliminate",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Reclaimer",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Evidence",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Impose Your Will",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Bounty Hunter",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Weighted Net",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Mark Bounty",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Fighter",
+      "Keywords": [
+        "Intimidation"
+      ],
+      "Paths": [
+        {
+          "Name": "Vanguard",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Lucky Pommel",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Adamant Stance",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Sentinel",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "War Horn",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Guidance",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Duelist",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Parrying Cape",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Riposte",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Hunter",
+      "Keywords": [
+        "Vigilance"
+      ],
+      "Paths": [
+        {
+          "Name": "Archer",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Prayer Bell",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Precise Shot",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Tracker",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Peliago's Coin",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Freezing Traps",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Beastslayer",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Grisly Trophy",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Heroic Strike",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Lifeshaper",
+      "Keywords": [
+        "Medicine"
+      ],
+      "Paths": [
+        {
+          "Name": "Plantcrafter",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Rootstalk",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Release Pollen",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Spiritmaker",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Homunculus",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Guardian Spirits",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Evolver",
+          "Attributes": [
+            {
+              "DIV": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Fleshcraft Toolkit",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Tumorous Growth",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Mage",
+      "Keywords": [
+        "Arcana"
+      ],
+      "Paths": [
+        {
+          "Name": "Conjurer",
+          "Attributes": [
+            {
+              "DIV": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Grimoire",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Unleash Divinum",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Advisor",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Orb",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Premonition",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Runecarver",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Runic Chisel",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Runic Projectile",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Moonshield Paladin",
+      "Keywords": [
+        "Leadership"
+      ],
+      "Paths": [
+        {
+          "Name": "Protector",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Buckler",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Taunt",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Arbiter",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Blessed Charm",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Aura of Justice",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Skygazer",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Spyglass",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Moondisc",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Omu Priest",
+      "Keywords": [
+        "Lore"
+      ],
+      "Paths": [
+        {
+          "Name": "Godseeker",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Penitent's Clogs",
+              "Type": "Feet"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Divine Justice",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Hermit",
+          "Attributes": [
+            {
+              "STR": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Incense",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Swing of Incense",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Justiciar",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Tome of Omu",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Summoned for Trial",
+              "Level": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Scoundrel",
+      "Keywords": [
+        "Deception"
+      ],
+      "Paths": [
+        {
+          "Name": "Thief",
+          "Attributes": [
+            {
+              "AGI": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Thief's Gloves",
+              "Type": "Hand"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Weapon Steal",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Spy",
+          "Attributes": [
+            {
+              "INT": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "Needle Dart",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Inside Information",
+              "Level": 1
+            }
+          ]
+        },
+        {
+          "Name": "Con Artist",
+          "Attributes": [
+            {
+              "CHA": 1
+            }
+          ],
+          "Items": [
+            {
+              "Name": "False Documents",
+              "Type": "Small"
+            }
+          ],
+          "Action cards": [
+            {
+              "Name": "Becoming the Role",
               "Level": 1
             }
           ]
