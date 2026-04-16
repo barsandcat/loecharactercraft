@@ -435,8 +435,323 @@
       ],
       "Items": [
         {
-          "Name": "Spellbok",
+          "Name": "Spellbook",
           "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Asylum",
+      "Keywords": [
+        "Intimidation",
+        "Medicine",
+        "Outlandish"
+      ],
+      "Items": [
+        {
+          "Name": "Iron Mask",
+          "Type": "Head"
+        }
+      ],
+      "Brill": 0
+    },
+    {
+      "Name": "Battleborn",
+      "Keywords": [
+        "Athletics",
+        "Leadership",
+        "Medicine"
+      ],
+      "Items": [
+        {
+          "Name": "Highlander's Belt",
+          "Type": "Chest"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Blackridge Lookout",
+      "Keywords": [
+        "Pathfinding",
+        "Vigilance",
+        "Wild"
+      ],
+      "Items": [
+        {
+          "Name": "Lantern",
+          "Type": "Hand"
+        }
+      ],
+      "Brill": 2
+    },
+    {
+      "Name": "Cult of Makrash",
+      "Keywords": [
+        "Alchemy",
+        "Clergy",
+        "Deception"
+      ],
+      "Items": [
+        {
+          "Name": "Sunbreaker Pendant",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Drysea Nomad",
+      "Keywords": [
+        "Drysea",
+        "Pathfinding",
+        "Wild"
+      ],
+      "Items": [
+        {
+          "Name": "Drysea Strider Hatchling",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 0
+    },
+    {
+      "Name": "Fadeborn",
+      "Keywords": [
+        "Fadelands",
+        "Outlandish",
+        "Stealth"
+      ],
+      "Items": [
+        {
+          "Name": "High Realm Collar",
+          "Type": "Head"
+        }
+      ],
+      "Brill": 0
+    },
+    {
+      "Name": "Farmstead",
+      "Keywords": [
+        "Animal Handling",
+        "Athletics",
+        "Rural"
+      ],
+      "Items": [
+        {
+          "Name": "Straw Hat",
+          "Type": "Head"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Forgetown",
+      "Keywords": [
+        "Artistry",
+        "Cityborn",
+        "Engineering"
+      ],
+      "Items": [
+        {
+          "Name": "Leather Apron",
+          "Type": "Chest"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Freed Rotlander",
+      "Keywords": [
+        "Outlandish",
+        "Resilience",
+        "Wild"
+      ],
+      "Items": [
+        {
+          "Name": "Puffshroom Bomb",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Kestrel's Chosen",
+      "Keywords": [
+        "Sleight of Hand",
+        "Subterranean",
+        "Resilience"
+      ],
+      "Items": [
+        {
+          "Name": "Poisoned Needle",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Midlands Aristocrat",
+      "Keywords": [
+        "Diplomacy",
+        "Midlands",
+        "Noble"
+      ],
+      "Items": [
+        {
+          "Name": "Heirloom",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Midlands Citizen",
+      "Keywords": [
+        "Artistry",
+        "Cityborn",
+        "Midlands"
+      ],
+      "Items": [
+        {
+          "Name": "Fancy Poulaines",
+          "Type": "Feet"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Militia",
+      "Keywords": [
+        "Cityborn",
+        "Vigilance",
+        "Midlands"
+      ],
+      "Items": [
+        {
+          "Name": "Poleyn",
+          "Type": "Feet"
+        }
+      ],
+      "Brill": 2
+    },
+    {
+      "Name": "Orphanage",
+      "Keywords": [
+        "Clergy",
+        "Lore",
+        "Rural"
+      ],
+      "Items": [
+        {
+          "Name": "Moon Pendant",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Port Town",
+      "Keywords": [
+        "Charm",
+        "Cityborn",
+        "Forlorn Sea"
+      ],
+      "Items": [
+        {
+          "Name": "Crystal Glasses",
+          "Type": "Head"
+        }
+      ],
+      "Brill": 2
+    },
+    {
+      "Name": "Scavenger Outpost",
+      "Keywords": [
+        "Animal Handling",
+        "Rimlands",
+        "Survival"
+      ],
+      "Items": [
+        {
+          "Name": "Warden’s Greaves",
+          "Type": "Feet"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Sepulcher",
+      "Keywords": [
+        "Engineering",
+        "Noble",
+        "Subterranean"
+      ],
+      "Items": [
+        {
+          "Name": "Survival Kit",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Street Urchin",
+      "Keywords": [
+        "Cityborn",
+        "Sleight of Hand",
+        "Survival"
+      ],
+      "Items": [
+        {
+          "Name": "Lucky Charm",
+          "Type": "Small"
+        }
+      ],
+      "Brill": 1
+    },    
+    {
+      "Name": "Traveling Show",
+      "Keywords": [
+        "Charm",
+        "Deception",
+        "Performer"
+      ],
+      "Items": [
+        {
+          "Name": "Lute",
+          "Type": "Hand"
+        }
+      ],
+      "Brill": 2
+    },
+    {
+      "Name": "Vagabond",
+      "Keywords": [
+        "Rural",
+        "Stealth",
+        "Wild"
+      ],
+      "Items": [
+        {
+          "Name": "Reliable Boots",
+          "Type": "Feet"
+        }
+      ],
+      "Brill": 1
+    },
+    {
+      "Name": "Weeping Heart Monastery",
+      "Keywords": [
+        "Alchemy",
+        "Clergy",
+        "Heart"
+      ],
+      "Items": [
+        {
+          "Name": "Censer",
+          "Type": "Hand"
         }
       ],
       "Brill": 1
@@ -488,7 +803,7 @@
           ],
           "Items": [
             {
-              "Name": "Notram’s Ring",
+              "Name": "Notram's Ring",
               "Type": "Small"
             }
           ],
