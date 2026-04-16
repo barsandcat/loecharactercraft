@@ -772,10 +772,7 @@
           "Name": "Brute",
           "Attributes": [
             {
-              "STR": 1,
-              "AGI": 0,
-              "INT": 0,
-              "CHA": 0
+              "STR": 1
             }
           ],
           "Items": [
@@ -795,10 +792,7 @@
           "Name": "Wildling",
           "Attributes": [
             {
-              "STR": 0,
-              "AGI": 1,
-              "INT": 0,
-              "CHA": 0
+              "AGI": 1
             }
           ],
           "Items": [
@@ -818,9 +812,6 @@
           "Name": "Glowdrinker",
           "Attributes": [
             {
-              "STR": 0,
-              "AGI": 0,
-              "INT": 0,
               "CHA": 1
             }
           ],
