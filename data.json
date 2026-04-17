@@ -1051,6 +1051,10 @@
       "Keywords": [
         "Stealth"
       ],
+      "Advancement Trees": [
+        "Subterfuge",
+        "Close Combat"
+      ],
       "Paths": [
         {
           "Name": "Assassin",
@@ -1062,7 +1066,7 @@
           "Items": [
             {
               "Name": "Garrote",
-              "Type": "Small"
+              "Type": "Hand"
             }
           ],
           "Action cards": [
@@ -1102,7 +1106,7 @@
           "Items": [
             {
               "Name": "Weighted Net",
-              "Type": "Small"
+              "Type": "Hand"
             }
           ],
           "Action cards": [
@@ -1119,6 +1123,10 @@
       "Keywords": [
         "Intimidation"
       ],
+      "Advancement Trees": [
+        "Warfare",
+        "Close Combat"
+      ],
       "Paths": [
         {
           "Name": "Vanguard",
@@ -1130,7 +1138,7 @@
           "Items": [
             {
               "Name": "Lucky Pommel",
-              "Type": "Small"
+              "Type": "Hand"
             }
           ],
           "Action cards": [
@@ -1170,7 +1178,7 @@
           "Items": [
             {
               "Name": "Parrying Cape",
-              "Type": "Small"
+              "Type": "Chest"
             }
           ],
           "Action cards": [
@@ -1186,6 +1194,10 @@
       "Name": "Hunter",
       "Keywords": [
         "Vigilance"
+      ],
+      "Advancement Trees": [
+        "Marksmanship",
+        "Nature"
       ],
       "Paths": [
         {
@@ -1255,6 +1267,10 @@
       "Keywords": [
         "Medicine"
       ],
+      "Advancement Trees": [
+        "Scholarship",
+        "Nature"
+      ],
       "Paths": [
         {
           "Name": "Plantcrafter",
@@ -1322,6 +1338,10 @@
       "Name": "Mage",
       "Keywords": [
         "Arcana"
+      ],
+      "Advancement Trees": [
+        "Battle Magic",
+        "Support Magic"
       ],
       "Paths": [
         {
@@ -1391,6 +1411,10 @@
       "Keywords": [
         "Leadership"
       ],
+	  "Advancement Trees": [
+        "Battle Magic",
+        "Warfare"
+      ],
       "Paths": [
         {
           "Name": "Protector",
@@ -1459,6 +1483,10 @@
       "Keywords": [
         "Lore"
       ],
+	  "Advancement Trees": [
+        "Support Magic",
+        "Scholarship"
+      ],
       "Paths": [
         {
           "Name": "Godseeker",
@@ -1490,7 +1518,7 @@
           "Items": [
             {
               "Name": "Incense",
-              "Type": "Small"
+              "Type": "Hand"
             }
           ],
           "Action cards": [
@@ -1526,6 +1554,10 @@
       "Name": "Scoundrel",
       "Keywords": [
         "Deception"
+      ],
+	  "Advancement Trees": [
+        "Thiefcraft",
+        "Subterfuge"
       ],
       "Paths": [
         {
