@@ -44,18 +44,24 @@ class SelectorButton(QPushButton):
     def __init__(self, items, render_popup_fn, render_button_fn, on_change, default_text, parent=None):
         super().__init__(parent)
 
-        self.items = items
+        self.items = []
         self.render_popup_fn = render_popup_fn
         self.render_button_fn = render_button_fn
         self.on_change = on_change
         self.default_text = default_text
 
-        self.selected = items[0] if len(items) == 1 else None
+        self.selected = None
         self.setFixedHeight(30)
         self.setStyleSheet("text-align: left; padding: 5px;")
-        self.update_text()
+        self.set_items(items)
 
         self.clicked.connect(self.open_popup)
+
+    def set_items(self, items):
+        self.items = items
+        self.selected = items[0] if len(items) == 1 else None
+        self.setEnabled(bool(items))
+        self.update_text()
 
     def update_text(self):
         if self.selected:
@@ -64,6 +70,9 @@ class SelectorButton(QPushButton):
             self.setText(self.default_text)
 
     def open_popup(self):
+        if not self.items:
+            return
+
         popup = SelectionPopup(
             self.items,
             self.render_popup_fn,
@@ -79,7 +88,7 @@ class SelectorButton(QPushButton):
 
 
 # -------------------------
-# Step Section (Locked Flow)
+# Step Section
 # -------------------------
 class StepSection(QWidget):
     def __init__(
@@ -98,45 +107,19 @@ class StepSection(QWidget):
         self.on_change = on_change
 
         self.layout = QVBoxLayout(self)
-
-        self.selector = None
         self.items = []
-
-        self.locked = True
-        self.update_visual_state()
-
-    def set_locked(self, locked=True):
-        self.locked = locked
-        self.update_visual_state()
-
-    def update_visual_state(self):
-        if self.locked:
-            self.setEnabled(False)
-            self.setStyleSheet("opacity: 0.5;")
-        else:
-            self.setEnabled(True)
-            self.setStyleSheet("")
-
-    def set_items(self, items):
-        self.items = items
-
-        if self.selector:
-            self.layout.removeWidget(self.selector)
-            self.selector.deleteLater()
-            self.selector = None
-
-        if not items:
-            return
-
         self.selector = SelectorButton(
-            items,
+            [],
             self.render_popup_fn,
             self.render_button_fn,
             self._handle_change,
             self.title
         )
-
         self.layout.addWidget(self.selector)
+
+    def set_items(self, items):
+        self.items = items
+        self.selector.set_items(items)
 
         if len(items) == 1:
             self._handle_change(items[0])
@@ -231,9 +214,10 @@ class CharacterBuilder(QWidget):
 
         # Initialize
         self.race_step.set_items(self.data["Races"])
-        self.race_step.set_locked(False)
+        self.attr_step.set_items([])
         self.origin_step.set_items(self.data["Origins"])
         self.prof_step.set_items(self.data["Proffesions"])
+        self.path_step.set_items([])
 
     def clear_selected(self, attr_name):
         if hasattr(self, attr_name):
@@ -250,21 +234,15 @@ class CharacterBuilder(QWidget):
             self.clear_selected("selected_attr")
             self.attr_step.set_items(race["Attributes"])
 
-        self.attr_step.set_locked(False)
-
         self.update_summary()
 
     def on_attr_selected(self, attr):
         self.selected_attr = attr
 
-        self.origin_step.set_locked(False)
-
         self.update_summary()
 
     def on_origin_selected(self, origin):
         self.selected_origin = origin
-
-        self.prof_step.set_locked(False)
 
         self.update_summary()
 
@@ -275,8 +253,6 @@ class CharacterBuilder(QWidget):
         if prof_changed:
             self.clear_selected("selected_path")
             self.path_step.set_items(prof["Paths"])
-
-        self.path_step.set_locked(False)
 
         self.update_summary()
 
