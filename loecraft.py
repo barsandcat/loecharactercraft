@@ -55,9 +55,6 @@ class SelectorButton(QPushButton):
         self.setStyleSheet("text-align: left; padding: 5px;")
         self.update_text()
 
-        if self.selected:
-            self.on_change(self.selected)
-
         self.clicked.connect(self.open_popup)
 
     def update_text(self):
@@ -140,6 +137,9 @@ class StepSection(QWidget):
         )
 
         self.layout.addWidget(self.selector)
+
+        if len(items) == 1:
+            self._handle_change(items[0])
 
     def _handle_change(self, item):
         if self.on_change:
@@ -239,33 +239,33 @@ class CharacterBuilder(QWidget):
     def on_race_selected(self, race):
         self.selected_race = race
 
-        self.attr_step.set_items(race["Attributes"])
-        self.attr_step.set_locked(False)
-
         self.origin_step.set_locked(True)
         self.prof_step.set_locked(True)
         self.path_step.set_locked(True)
+
+        self.attr_step.set_items(race["Attributes"])
+        self.attr_step.set_locked(False)
 
         self.update_summary()
 
     def on_attr_selected(self, attr):
         self.selected_attr = attr
 
-        self.origin_step.set_items(self.data["Origins"])
-        self.origin_step.set_locked(False)
-
         self.prof_step.set_locked(True)
         self.path_step.set_locked(True)
+
+        self.origin_step.set_items(self.data["Origins"])
+        self.origin_step.set_locked(False)
 
         self.update_summary()
 
     def on_origin_selected(self, origin):
         self.selected_origin = origin
 
+        self.path_step.set_locked(True)
+
         self.prof_step.set_items(self.data["Proffesions"])
         self.prof_step.set_locked(False)
-
-        self.path_step.set_locked(True)
 
         self.update_summary()
 
