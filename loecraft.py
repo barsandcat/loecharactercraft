@@ -216,7 +216,7 @@ class CharacterBuilder(QWidget):
         self.race_step.set_items(self.data["Races"])
         self.attr_step.set_items([])
         self.origin_step.set_items(self.data["Origins"])
-        self.prof_step.set_items(self.data["Proffesions"])
+        self.prof_step.set_items(self.data["Professions"])
         self.path_step.set_items([])
 
     def clear_selected(self, attr_name):
