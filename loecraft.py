@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
     QLabel, QTextEdit, QPushButton, QDialog, QScrollArea
 )
+from PyQt6.QtCore import Qt
 
 
 # -------------------------
@@ -40,22 +41,30 @@ class SelectionPopup(QDialog):
 # Selector Button
 # -------------------------
 class SelectorButton(QPushButton):
-    def __init__(self, items, render_popup_fn, render_button_fn, on_change, parent=None):
+    def __init__(self, items, render_popup_fn, render_button_fn, on_change, default_text, parent=None):
         super().__init__(parent)
 
         self.items = items
         self.render_popup_fn = render_popup_fn
         self.render_button_fn = render_button_fn
         self.on_change = on_change
+        self.default_text = default_text
 
-        self.selected = items[0] if items else None
+        self.selected = items[0] if len(items) == 1 else None
+        self.setFixedHeight(30)
+        self.setStyleSheet("text-align: left; padding: 5px;")
         self.update_text()
+
+        if self.selected:
+            self.on_change(self.selected)
 
         self.clicked.connect(self.open_popup)
 
     def update_text(self):
         if self.selected:
             self.setText(self.render_button_fn(self.selected))
+        else:
+            self.setText(self.default_text)
 
     def open_popup(self):
         popup = SelectionPopup(
@@ -86,15 +95,12 @@ class StepSection(QWidget):
     ):
         super().__init__(parent)
 
+        self.title = title
         self.render_popup_fn = render_popup_fn
         self.render_button_fn = render_button_fn
         self.on_change = on_change
 
         self.layout = QVBoxLayout(self)
-
-        self.label = QLabel(title)
-        self.label.setStyleSheet("font-weight: bold;")
-        self.layout.addWidget(self.label)
 
         self.selector = None
         self.items = []
@@ -129,7 +135,8 @@ class StepSection(QWidget):
             items,
             self.render_popup_fn,
             self.render_button_fn,
-            self._handle_change
+            self._handle_change,
+            self.title
         )
 
         self.layout.addWidget(self.selector)
@@ -163,6 +170,8 @@ class CharacterBuilder(QWidget):
         main_layout = QHBoxLayout(self)
 
         self.left_layout = QVBoxLayout()
+        self.left_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.left_layout.setSpacing(5)
 
         # Steps
         self.race_step = StepSection(
