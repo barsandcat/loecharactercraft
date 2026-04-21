@@ -232,18 +232,24 @@ class CharacterBuilder(QWidget):
         # Initialize
         self.race_step.set_items(self.data["Races"])
         self.race_step.set_locked(False)
+        self.origin_step.set_items(self.data["Origins"])
+        self.prof_step.set_items(self.data["Proffesions"])
+
+    def clear_selected(self, attr_name):
+        if hasattr(self, attr_name):
+            delattr(self, attr_name)
 
     # -------------------------
     # Step Logic
     # -------------------------
     def on_race_selected(self, race):
+        race_changed = getattr(self, "selected_race", None) != race
         self.selected_race = race
 
-        self.origin_step.set_locked(True)
-        self.prof_step.set_locked(True)
-        self.path_step.set_locked(True)
+        if race_changed:
+            self.clear_selected("selected_attr")
+            self.attr_step.set_items(race["Attributes"])
 
-        self.attr_step.set_items(race["Attributes"])
         self.attr_step.set_locked(False)
 
         self.update_summary()
@@ -251,10 +257,6 @@ class CharacterBuilder(QWidget):
     def on_attr_selected(self, attr):
         self.selected_attr = attr
 
-        self.prof_step.set_locked(True)
-        self.path_step.set_locked(True)
-
-        self.origin_step.set_items(self.data["Origins"])
         self.origin_step.set_locked(False)
 
         self.update_summary()
@@ -262,17 +264,18 @@ class CharacterBuilder(QWidget):
     def on_origin_selected(self, origin):
         self.selected_origin = origin
 
-        self.path_step.set_locked(True)
-
-        self.prof_step.set_items(self.data["Proffesions"])
         self.prof_step.set_locked(False)
 
         self.update_summary()
 
     def on_prof_selected(self, prof):
+        prof_changed = getattr(self, "selected_prof", None) != prof
         self.selected_prof = prof
 
-        self.path_step.set_items(prof["Paths"])
+        if prof_changed:
+            self.clear_selected("selected_path")
+            self.path_step.set_items(prof["Paths"])
+
         self.path_step.set_locked(False)
 
         self.update_summary()
