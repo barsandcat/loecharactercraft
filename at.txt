@@ -1,0 +1,231 @@
+CHAPTER 9 - ADVANCEMENT TREES
+==============================
+
+Each Character has three separate trees: one Primary tree (same as your Profession) and two Secondary trees.
+Primary trees are unique to each Profession. Secondary trees have some overlap between Professions.
+
+
+================================================================================
+PRIMARY TREES (Profession-specific)
+================================================================================
+
+--------------------------------------------------------------------------------
+BARBARIAN TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Furious Attacks (P19) or Insult (P20) card.
+Level 2 - Gain: 1 AGI, +2 max HP.
+Level 3 - Gain: Athletics token, Dual Wielding (P21) card.
+Level 4 - Gain: 1 INT, Leadership token.
+Level 5 - Gain: Resilience token, 1 STR or 1 CHA. Upgrade your Endurance card to Exceptional Endurance.
+Level 6 - Gain: 1 AGI, Retribution (P23) card.
+Level 7 - Gain: Charging Bull (P22) card, +2 MOB.
+Level 8 - Gain: 1 STR or 1 CHA, +2 max HP, Follow Through (P24) card.
+
+--------------------------------------------------------------------------------
+BARD TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Song of Protection (P16) or Soothing Voice (P01) card.
+Level 2 - Gain: 1 AGI or 1 INT, Diplomacy token.
+Level 3 - Gain: +2 max HP, Hymn of Malady (P02) card.
+Level 4 - Gain: 1 CHA, Charm token.
+Level 5 - Gain: 1 STR or 1 CHA, +2 MOB. Upgrade your Command card to Inspiring Command.
+Level 6 - Gain: Performer token. Upgrade your DIV die or gain 1 INT.
+Level 7 - Gain: 1 CHA, Rousing Ballad (P03) or Sly Tongue (P17) card.
+Level 8 - Gain: +2 max HP, Applause (P18) card.
+
+--------------------------------------------------------------------------------
+CUSTODIAN TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Adventurer's Luck (P61) or Ticking Vestigial (P62) card.
+Level 2 - Gain: 1 AGI, +2 max HP.
+Level 3 - Gain: Engineering token, Scrapping (P63) card.
+Level 4 - Gain: 1 AGI or 1 INT, Artistry token.
+Level 5 - Gain: Vigilance token, 1 AGI or 1 INT. Upgrade your Dodge card to Nimble Dodge.
+Level 6 - Gain: Upgrade your DIV die, Divinum Infused Tools (P64) card.
+Level 7 - Gain: Quick Reflexes (P65) card, +2 max HP.
+Level 8 - Gain: Upgrade your DIV die or 1 STR, +2 max HP, Final Enhancement (P66) card.
+
+--------------------------------------------------------------------------------
+DRUID TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Spikes (P25) or Earth Shell (P26) card.
+Level 2 - Gain: 1 CHA, +2 max HP.
+Level 3 - Gain: Alchemy token, Cauldron of Wonders (P27) card.
+Level 4 - Gain: 1 STR, Resilience token.
+Level 5 - Gain: 1 INT or 1 CHA, Leadership token. Upgrade your Dodge card to Nimble Dodge.
+Level 6 - Gain: Evoke Blizzard (P29) card. Upgrade your DIV die.
+Level 7 - Gain: Animal Form (P28) card, +2 MOB.
+Level 8 - Gain: 1 STR or 1 CHA, +2 max HP, True Bond (P30) card.
+
+--------------------------------------------------------------------------------
+EXECUTOR TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Poisoned Darts (P43) or Mighty Blow (P44) card.
+Level 2 - Gain: 1 STR, +2 max HP.
+Level 3 - Gain: 1 AGI, Investigation token, Executor's Insight (P45) card.
+Level 4 - Gain: 1 CHA, Diplomacy token.
+Level 5 - Gain: Stealth or Pathfinding token, 1 INT or 1 CHA, +2 max HP. Upgrade your Endurance card to Exceptional Endurance.
+Level 6 - Gain: 1 STR or 1 AGI, +2 MOB.
+Level 7 - Gain: Know your Enemy (P46) card or Personal Style (P47).
+Level 8 - Gain: +2 MOB, Thousand Cuts (P48) card.
+
+--------------------------------------------------------------------------------
+FIGHTER TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Charge (P37) or Target Weak Spot (P38) card.
+Level 2 - Gain: 1 AGI, Athletics token.
+Level 3 - Gain: +2 max HP, Vengeful Stance (P39) card.
+Level 4 - Gain: 1 CHA or 1 INT, Charm token.
+Level 5 - Gain: 1 STR, +2 max HP. Upgrade your Endurance card to Exceptional Endurance.
+Level 6 - Gain: 1 STR or 1 AGI, Strength of Heart (P40) card.
+Level 7 - Gain: 1 AGI, Inner Strength (P41) card.
+Level 8 - Gain: Survival or Animal Handling token, Dance of War (P48) card.
+
+--------------------------------------------------------------------------------
+HUNTER TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Sneak (P31) or Focus (P32) card.
+Level 2 - Gain: 1 STR, +2 max HP.
+Level 3 - Gain: Survival token, Blend In (P33) card.
+Level 4 - Gain: 1 CHA, Pathfinding token.
+Level 5 - Gain: 1 AGI or 1 INT, Stealth token. Upgrade your Dodge card to Nimble Dodge.
+Level 6 - Gain: Inhale Divinum (P34) card. Upgrade your DIV die.
+Level 7 - Gain: Scent of Blood (P35) card, +2 MOB.
+Level 8 - Gain: 1 STR or 1 INT, +2 max HP, Become Predator (P36) card.
+
+--------------------------------------------------------------------------------
+LIFESHAPER TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Osteoporosis (P67) or Mind Parasite (P68) card.
+Level 2 - Gain: 1 CHA, +2 MOB.
+Level 3 - Gain: +2 max HP, Artificial Life (P69) card.
+Level 4 - Gain: 1 AGI, Survival token.
+Level 5 - Gain: 1 STR or 1 INT, +2 max HP, Alchemy token. Upgrade your Endurance card to Exceptional Endurance.
+Level 6 - Gain: Upgrade your DIV die or 1 INT, Arcana token.
+Level 7 - Gain: 1 CHA or 1 AGI, Leeching Seedlings (P70) or Proliferation (P71) card.
+Level 8 - Gain: +2 max HP, Blossom (P72) card.
+
+--------------------------------------------------------------------------------
+MAGE TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Summon Divling (P10) or Ice Bolts (P12) card.
+Level 2 - Gain: 1 AGI, +2 MOB.
+Level 3 - Gain: 1 INT, Magic Circle (P11) card.
+Level 4 - Gain: 1 STR or 1 CHA, +2 max HP, Lore token.
+Level 5 - Gain: 1 STR or 1 AGI, +2 max HP, Diplomacy token.
+Level 6 - Gain: Artistry token. Upgrade your Dodge card to Nimble Dodge.
+Level 7 - Gain: Outburst of Divinum (P13) or Evoke Nightmares (P14) card.
+Level 8 - Gain: Fireball (P15) card. Upgrade your DIV die.
+
+--------------------------------------------------------------------------------
+MOONSHIELD TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Counter (P04) or Battle Prayer (P05) card.
+Level 2 - Gain: 1 STR, Vigilance token.
+Level 3 - Gain: +2 max HP, Guided Smite (P06) card.
+Level 4 - Gain: 1 INT or 1 CHA, Diplomacy token.
+Level 5 - Gain: 1 AGI or 1 INT, +2 max HP, +2 MOB. Upgrade your Combat Insight card to Crucial Combat Insight.
+Level 6 - Gain: Lore token. Upgrade your DIV die.
+Level 7 - Gain: Bulwark of Hope (P07) or Beacon of Hope (P08) card.
+Level 8 - Gain: 1 INT or 1 CHA, Divine Intervention (P09) card.
+
+--------------------------------------------------------------------------------
+OMU PRIEST TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Hand of Retribution (P49) or Shield of Omu (P50) card.
+Level 2 - Gain: 1 STR, +2 MOB.
+Level 3 - Gain: Arcana token, Divine Brew (P51) card.
+Level 4 - Gain: 1 CHA or 1 STR, Medicine token.
+Level 5 - Gain: 1 INT or 1 CHA, Diplomacy token. Upgrade your Command card to Inspiring Command.
+Level 6 - Gain: Upgrade your DIV, The Guiding Light (P52) card.
+Level 7 - Gain: +2 max HP, Wrathful Decree (P53) card.
+Level 8 - Gain: 1 CHA or 1 STR, +2 MOB, Ascension (P54) card.
+
+--------------------------------------------------------------------------------
+SCOUNDREL TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Caltrops (P55) or Ventriloquism (P56) card.
+Level 2 - Gain: 1 STR, +2 max HP.
+Level 3 - Gain: Vigilance token, Gaining Advantage (P57) card.
+Level 4 - Gain: 1 INT, Survival token.
+Level 5 - Gain: 1 INT or 1 CHA, Stealth token. Upgrade your Dodge card to Nimble Dodge.
+Level 6 - Gain: Upgrade your DIV, Shadow Form (P58) card.
+Level 7 - Gain: +2 MOB, Shadowsteps (P59) card.
+Level 8 - Gain: 1 INT or 1 AGI, +2 MOB, Entangled by Shadows (P54) card.
+
+
+================================================================================
+SECONDARY TREES (Shared across Professions)
+================================================================================
+
+--------------------------------------------------------------------------------
+CLOSE COMBAT TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Parry (S17) or Trip (S18) card.
+Level 2 - Gain: 1 CHA or 1 AGI, Intimidation token.
+Level 3 - Gain: 1 STR. Upgrade your Endurance card to Exceptional Endurance or Upgrade your Bash card to Mighty Bash.
+Level 4 - Gain: +2 max HP, Follow-up (S19) or Into the Fray (S20) card.
+
+--------------------------------------------------------------------------------
+WARFARE TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Coordinated Advance (S01) or Flank Attack (S02) card.
+Level 2 - Gain: 1 STR or 1 CHA, +2 max HP.
+Level 3 - Gain: Coordinated Attack (S03) or Indomitable Presence (S04) card. Upgrade your Command card to Inspiring Command or Upgrade your Bash to Mighty Bash.
+Level 4 - Gain: 1 CHA, Leadership token.
+
+--------------------------------------------------------------------------------
+MARKSMANSHIP TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Shoot and Dash (S21) or Take Aim (S22) card.
+Level 2 - Gain: 1 STR or 1 CHA, Athletics token.
+Level 3 - Gain: 1 AGI. Upgrade your Combat Insight card to Crucial Combat Insight or Upgrade your Shoot card to Powerful Shot.
+Level 4 - Gain: +2 MOB, Arrow Rain (S23) or Frost Shot (S24) card.
+
+--------------------------------------------------------------------------------
+NATURE TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Sense Danger (S25) or Relieving Aura (S26) card.
+Level 2 - Gain: 1 AGI. Upgrade your Dodge card to Nimble Dodge.
+Level 3 - Gain: 1 INT or 1 CHA, Medicine or Animal Handling token.
+Level 4 - Gain: +2 max HP, Nature's Revenge (S27) or Entangle (S28) card.
+
+--------------------------------------------------------------------------------
+BATTLE MAGIC TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Focus Divinum (S05) or Energy Shield (S06) card.
+Level 2 - Gain: 1 STR. Upgrade your Endurance card to Exceptional Endurance.
+Level 3 - Gain: +2 max HP, Chain Lightning (S07) or Web of Minds (S08) card.
+Level 4 - Gain: Arcana token. Upgrade your DIV die or gain 1 INT.
+
+--------------------------------------------------------------------------------
+SUPPORT MAGIC TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Ritual of Haste (S09) or Protective Gestures (S10) card.
+Level 2 - Gain: 1 AGI or 1 INT, Alchemy token.
+Level 3 - Gain: +2 max HP, Rain of Divinum (S11) or Healing Burst (S12) card.
+Level 4 - Gain: 1 INT. Upgrade your Combat Insight card to Crucial Combat Insight.
+
+--------------------------------------------------------------------------------
+THIEFCRAFT TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Swerve (S13) or Sucker Punch (S14) card.
+Level 2 - Gain: 1 CHA or 1 AGI. Upgrade your Dodge card to Nimble Dodge or Upgrade your Shoot card to Powerful Shot.
+Level 3 - Gain: +2 MOB, Feint (S15) or Backstab (S16) card.
+Level 4 - Gain: 1 AGI, Sleight of Hand token.
+
+--------------------------------------------------------------------------------
+SUBTERFUGE TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Shadow Jump (S33) or Veilkin (S34) card.
+Level 2 - Gain: 1 CHA or 1 INT, Deception token.
+Level 3 - Gain: 1 AGI. Upgrade your Dodge card to Nimble Dodge.
+Level 4 - Gain: +2 MOB, Skilled Imitator (S36) or Shadow Blade (S35) card.
+
+--------------------------------------------------------------------------------
+SCHOLARSHIP TREE
+--------------------------------------------------------------------------------
+Level 1 - Gain: Academic Magic (S29) or Cognitive Enhancement (S30) card.
+Level 2 - Gain: 1 STR or 1 CHA. Upgrade your Combat Insight card to Crucial Combat Insight.
+Level 3 - Gain: 1 INT, Lore or Investigation token.
+Level 4 - Gain: Stratagem (S32) or Rejuvenation (S31) card. +2 max HP.

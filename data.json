@@ -710,7 +710,7 @@
         }
       ],
       "Brill": 1
-    },    
+    },
     {
       "Name": "Traveling Show",
       "Keywords": [
@@ -982,7 +982,7 @@
       "Advancement Trees": [
         "Nature",
         "Battle Magic"
-      ],      
+      ],
       "Paths": [
         {
           "Name": "Warden",
@@ -1411,7 +1411,7 @@
       "Keywords": [
         "Leadership"
       ],
-	  "Advancement Trees": [
+      "Advancement Trees": [
         "Battle Magic",
         "Warfare"
       ],
@@ -1483,7 +1483,7 @@
       "Keywords": [
         "Lore"
       ],
-	  "Advancement Trees": [
+      "Advancement Trees": [
         "Support Magic",
         "Scholarship"
       ],
@@ -1555,7 +1555,7 @@
       "Keywords": [
         "Deception"
       ],
-	  "Advancement Trees": [
+      "Advancement Trees": [
         "Thiefcraft",
         "Subterfuge"
       ],
@@ -1621,6 +1621,2672 @@
           ]
         }
       ]
+    }
+  ],
+  "Advancement Trees": [
+    {
+      "Name": "Barbarian",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Furious Attacks",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Insult",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Athletics"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dual Wielding",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Leadership"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Keywords": [
+              "Resilience"
+            ],
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Resilience"
+            ],
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Retribution",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Charging Bull",
+                "Level": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Follow Through",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Follow Through",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Bard",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Song of Protection",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Soothing Voice",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Hymn of Malady",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Charm"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Keywords": [
+              "Performer"
+            ],
+            "DIV": "Upgrade"
+          },
+          {
+            "Keywords": [
+              "Performer"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Rousing Ballad",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Sly Tongue",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Applause",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Custodian",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Adventurer's Luck",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Ticking Vestigial",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Engineering"
+            ],
+            "Action cards": [
+              {
+                "Name": "Scrapping",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Keywords": [
+              "Artistry"
+            ],
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Artistry"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Keywords": [
+              "Vigilance"
+            ],
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Vigilance"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "DIV": "Upgrade",
+            "Action cards": [
+              {
+                "Name": "Divinum Infused Tools",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Quick Reflexes",
+                "Level": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Final Enhancement",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "DIV": "Upgrade",
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Final Enhancement",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Druid",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Spikes",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Earth Shell",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Alchemy"
+            ],
+            "Action cards": [
+              {
+                "Name": "Cauldron of Wonders",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Keywords": [
+              "Resilience"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Leadership"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Leadership"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Action cards": [
+              {
+                "Name": "Evoke Blizzard",
+                "Level": 1
+              }
+            ],
+            "DIV": "Upgrade"
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Animal Form",
+                "Level": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "True Bond",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "True Bond",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Executor",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Poisoned Darts",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Mighty Blow",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Investigation"
+            ],
+            "Action cards": [
+              {
+                "Name": "Executor's Insight",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Keywords": [
+              "Stealth"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Stealth"
+            ],
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Pathfinding"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Pathfinding"
+            ],
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "MOB": 2
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Know your Enemy",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Personal Style",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Thousand Cuts",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Fighter",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Charge",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Target Weak Spot",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Athletics"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Vengeful Stance",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Charm"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Charm"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Strength of Heart",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Strength of Heart",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Inner Strength",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "Keywords": [
+              "Survival"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dance of War",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Keywords": [
+              "Animal Handling"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dance of War",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Hunter",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Sneak",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Focus",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Survival"
+            ],
+            "Action cards": [
+              {
+                "Name": "Blend In",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Pathfinding"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Stealth"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Stealth"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Action cards": [
+              {
+                "Name": "Inhale Divinum",
+                "Level": 1
+              }
+            ],
+            "DIV": "Upgrade"
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Scent of Blood",
+                "Level": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Become Predator",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Become Predator",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Lifeshaper",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Osteoporosis",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Mind Parasite",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Artificial Life",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Survival"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Alchemy"
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Alchemy"
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "DIV": "Upgrade",
+            "Keywords": [
+              "Arcana"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Arcana"
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Leeching Seedlings",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Proliferation",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Leeching Seedlings",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Proliferation",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Blossom",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Mage",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Summon Divling",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Ice Bolts",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Magic Circle",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Lore"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Lore"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Diplomacy"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "HP": 2,
+            "Keywords": [
+              "Diplomacy"
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Keywords": [
+              "Artistry"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Outburst of Divinum",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Evoke Nightmares",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "Action cards": [
+              {
+                "Name": "Fireball",
+                "Level": 1
+              }
+            ],
+            "DIV": "Upgrade"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Moonshield",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Counter",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Battle Prayer",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Keywords": [
+              "Vigilance"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Guided Smite",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "HP": 2,
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "HP": 2,
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "Keywords": [
+              "Lore"
+            ],
+            "DIV": "Upgrade"
+          }
+        ],
+        "7": [
+          {
+            "Action cards": [
+              {
+                "Name": "Bulwark of Hope",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Beacon of Hope",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Divine Intervention",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Divine Intervention",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Omu Priest",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Hand of Retribution",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Shield of Omu",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "MOB": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Arcana"
+            ],
+            "Action cards": [
+              {
+                "Name": "Divine Brew",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Medicine"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Keywords": [
+              "Medicine"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ],
+            "Action cards": [
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Diplomacy"
+            ],
+            "Action cards": [
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "DIV": "Upgrade",
+            "Action cards": [
+              {
+                "Name": "The Guiding Light",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Wrathful Decree",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Ascension",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Ascension",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Scoundrel",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Caltrops",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Ventriloquism",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Keywords": [
+              "Vigilance"
+            ],
+            "Action cards": [
+              {
+                "Name": "Gaining Advantage",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Survival"
+            ]
+          }
+        ],
+        "5": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Stealth"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Stealth"
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "6": [
+          {
+            "DIV": "Upgrade",
+            "Action cards": [
+              {
+                "Name": "Shadow Form",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "7": [
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Shadowsteps",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "8": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Entangled by Shadows",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Entangled by Shadows",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Close Combat",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Parry",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Trip",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Intimidation"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Intimidation"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Bash",
+                "Level": 2
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Follow-up",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Into the Fray",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Warfare",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Coordinated Advance",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Flank Attack",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "HP": 2
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "HP": 2
+          }
+        ],
+        "3": [
+          {
+            "Action cards": [
+              {
+                "Name": "Coordinated Attack",
+                "Level": 1
+              },
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Coordinated Attack",
+                "Level": 1
+              },
+              {
+                "Name": "Bash",
+                "Level": 2
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Indomitable Presence",
+                "Level": 1
+              },
+              {
+                "Name": "Command",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Indomitable Presence",
+                "Level": 1
+              },
+              {
+                "Name": "Bash",
+                "Level": 2
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Leadership"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Marksmanship",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Shoot and Dash",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Take Aim",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Keywords": [
+              "Athletics"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Athletics"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Shoot",
+                "Level": 2
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Arrow Rain",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Frost Shot",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Nature",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Sense Danger",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Relieving Aura",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Medicine"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Animal Handling"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Medicine"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Animal Handling"
+            ]
+          }
+        ],
+        "4": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Nature's Revenge",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Entangle",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Battle Magic",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Focus Divinum",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Energy Shield",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Endurance",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Chain Lightning",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Web of Minds",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Keywords": [
+              "Arcana"
+            ],
+            "DIV": "Upgrade"
+          },
+          {
+            "Keywords": [
+              "Arcana"
+            ],
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Support Magic",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Ritual of Haste",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Protective Gestures",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Alchemy"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Alchemy"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Rain of Divinum",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "HP": 2,
+            "Action cards": [
+              {
+                "Name": "Healing Burst",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Thiefcraft",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Swerve",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Sucker Punch",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Shoot",
+                "Level": 2
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Shoot",
+                "Level": 2
+              }
+            ]
+          }
+        ],
+        "3": [
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Feint",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Backstab",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Keywords": [
+              "Sleight of Hand"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Subterfuge",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Shadow Jump",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Veilkin",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Keywords": [
+              "Deception"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Deception"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "AGI": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Dodge",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "4": [
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Skilled Imitator",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "MOB": 2,
+            "Action cards": [
+              {
+                "Name": "Shadow Blade",
+                "Level": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Name": "Scholarship",
+      "Levels": {
+        "1": [
+          {
+            "Action cards": [
+              {
+                "Name": "Academic Magic",
+                "Level": 1
+              }
+            ]
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Cognitive Enhancement",
+                "Level": 1
+              }
+            ]
+          }
+        ],
+        "2": [
+          {
+            "Attributes": [
+              {
+                "STR": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "CHA": 1
+              }
+            ],
+            "Action cards": [
+              {
+                "Name": "Combat Insight",
+                "Level": 3
+              }
+            ]
+          }
+        ],
+        "3": [
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Lore"
+            ]
+          },
+          {
+            "Attributes": [
+              {
+                "INT": 1
+              }
+            ],
+            "Keywords": [
+              "Investigation"
+            ]
+          }
+        ],
+        "4": [
+          {
+            "Action cards": [
+              {
+                "Name": "Stratagem",
+                "Level": 1
+              }
+            ],
+            "HP": 2
+          },
+          {
+            "Action cards": [
+              {
+                "Name": "Rejuvenation",
+                "Level": 1
+              }
+            ],
+            "HP": 2
+          }
+        ]
+      }
     }
   ]
 }
