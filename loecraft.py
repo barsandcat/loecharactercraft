@@ -271,35 +271,35 @@ class CharacterBuilder(QWidget):
         # Steps
         self.race_step = StepSection(
             "Choose Race",
-            self.render_race_popup,
+            self.render_race_button,
             self.render_race_button,
             self.on_race_selected
         )
 
         self.attr_step = StepSection(
             "Choose Attributes",
-            self.render_attr_popup,
+            self.render_attr_button,
             self.render_attr_button,
             self.on_attr_selected
         )
 
         self.origin_step = StepSection(
             "Choose Origin",
-            self.render_origin_popup,
+            self.render_origin_button,
             self.render_origin_button,
             self.on_origin_selected
         )
 
         self.prof_step = StepSection(
             "Choose Profession",
-            self.render_prof_popup,
+            self.render_prof_button,
             self.render_prof_button,
             self.on_prof_selected
         )
 
         self.path_step = StepSection(
             "Choose Path",
-            self.render_path_popup,
+            self.render_path_button,
             self.render_path_button,
             self.on_path_selected
         )
@@ -432,16 +432,6 @@ class CharacterBuilder(QWidget):
     # -------------------------
     # Render Functions
     # -------------------------
-    def render_race_popup(self, race):
-        attr = race["Attributes"][0]
-        return (
-            f"{race['Name']}\n"
-            f"Keywords: {', '.join(race.get('Keywords', []))}\n"
-            f"STR {attr.get('STR',0)}, AGI {attr.get('AGI',0)}, "
-            f"INT {attr.get('INT',0)}, CHA {attr.get('CHA',0)}\n"
-            f"MOB {race['MOB']}, HP {race['HP']}, DIV {race['DIV']}"
-        )
-
     def render_race_button(self, race):
         keywords = ", ".join(race.get("Keywords", []))
         extras = []
@@ -452,27 +442,12 @@ class CharacterBuilder(QWidget):
         extras.append(f"DIV: {race.get('DIV', '-')}")
         return f"{race['Name']}\n" + ", ".join(extras)
 
-    def render_attr_popup(self, attr):
-        return (
-            f"STR {attr.get('STR',0)}, "
-            f"AGI {attr.get('AGI',0)}, "
-            f"INT {attr.get('INT',0)}, "
-            f"CHA {attr.get('CHA',0)}"
-        )
-
     def render_attr_button(self, attr):
         return (
             f"STR {attr.get('STR',0)}, "
             f"AGI {attr.get('AGI',0)}, "
             f"INT {attr.get('INT',0)}, "
             f"CHA {attr.get('CHA',0)}"
-        )
-
-    def render_origin_popup(self, origin):
-        return (
-            f"{origin['Name']}\n"
-            f"Keywords: {', '.join(origin['Keywords'])}\n"
-            f"Brill: {origin['Brill']}"
         )
 
     def render_origin_button(self, origin):
@@ -483,30 +458,11 @@ class CharacterBuilder(QWidget):
         extras.append(f"Brill: {origin.get('Brill', 0)}")
         return f"{origin['Name']}\n" + ", ".join(extras)
 
-    def render_prof_popup(self, prof):
-        return (
-            f"{prof['Name']}\n"
-            f"Keywords: {', '.join(prof['Keywords'])}"
-        )
-
     def render_prof_button(self, prof):
         keywords = ", ".join(prof.get("Keywords", []))
         if keywords:
             return f"{prof['Name']}\n{keywords}"
         return prof["Name"]
-
-    def render_path_popup(self, path):
-        if path.get("DIV") == "Upgrade":
-            detail = "DIV Upgrade"
-        elif path.get("DIV"):
-            detail = f"DIV {path['DIV']}"
-        elif path.get("Attributes"):
-            attr = path["Attributes"][0]
-            key, value = list(attr.items())[0]
-            detail = f"+{value} {key}"
-        else:
-            detail = "No attribute bonus"
-        return f"{path['Name']}\n{detail}"
 
     def render_path_button(self, path):
         keywords = ", ".join(path.get("Keywords", []))
