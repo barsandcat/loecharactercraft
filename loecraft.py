@@ -863,7 +863,7 @@ class CharacterBuilder(QWidget):
         html_parts = []
         html_parts.append("<style>")
         html_parts.append("body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; }")
-        html_parts.append(".tree-title { font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 10px; color: #000000; }")
+        html_parts.append(".tree-title { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }")
         html_parts.append(".tree-subtitle { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }")
         html_parts.append(".level-line { margin-left: 15px; margin-bottom: 5px; }")
         html_parts.append(".version-line { margin-left: 30px; margin-bottom: 3px; font-size: 12px; }")
@@ -880,7 +880,7 @@ class CharacterBuilder(QWidget):
             
             result = []
             if is_primary:
-                result.append(f"<div class='tree-title'>{tree_name.upper()}</div>")
+                result.append(f"<div class='tree-title'>{tree_name}</div>")
             else:
                 result.append(f"<div class='tree-subtitle'>{tree_name}</div>")
             
@@ -1108,7 +1108,7 @@ class CharacterBuilder(QWidget):
                 html_parts.append(f"<div class='line'>{html.escape(str(value))}</div>")
 
         add_section(
-            "ATTRIBUTES",
+            "Attributes",
             [
                 f"STR: {attributes.get('STR', 0)}",
                 f"AGI: {attributes.get('AGI', 0)}",
@@ -1121,11 +1121,11 @@ class CharacterBuilder(QWidget):
         if div_die:
             stat_lines.append(f"DIV: {div_die}")
         stat_lines.append(f"Brill: {brill}")
-        add_section("STATS", stat_lines)
+        add_section("Stats", stat_lines)
 
         if keyword_counts:
             add_section(
-                "KEYWORDS",
+                "Keywords",
                 [
                     ", ".join(
                         (
@@ -1139,11 +1139,11 @@ class CharacterBuilder(QWidget):
             )
 
         add_section(
-            "ITEMS",
+            "Items",
             [f"{item['Name']} ({item['Type']})" for item in unique_items]
         )
         add_section(
-            "ACTION CARDS",
+            "Action Cards",
             [f"{act['Name']} (Lvl {act['Level']})" for act in unique_actions]
         )
 
