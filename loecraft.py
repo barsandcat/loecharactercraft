@@ -1,5 +1,6 @@
 import sys
 import json
+import html
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
     QLabel, QTextEdit, QPushButton, QDialog, QScrollArea,
@@ -1088,57 +1089,63 @@ class CharacterBuilder(QWidget):
         unique_actions = actions_by_name.values()
 
         # -------------------------
-        # Build output
+        # Build output (HTML)
         # -------------------------
-        lines = []
+        html_parts = []
+        html_parts.append("<style>")
+        html_parts.append("body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; color: #000000; }")
+        html_parts.append(".section-title { font-weight: bold; margin-top: 10px; margin-bottom: 3px; }")
+        html_parts.append(".line { margin-left: 12px; margin-bottom: 2px; }")
+        html_parts.append("</style>")
 
-        # Attributes
-        lines.append("ATTRIBUTES")
-        lines.append(f"STR: {attributes.get('STR', 0)}")
-        lines.append(f"AGI: {attributes.get('AGI', 0)}")
-        lines.append(f"INT: {attributes.get('INT', 0)}")
-        lines.append(f"CHA: {attributes.get('CHA', 0)}")
-        lines.append("")
+        def add_section(title, values):
+            if not values:
+                return
+            html_parts.append(f"<div class='section-title'>{html.escape(title)}</div>")
+            for value in values:
+                html_parts.append(f"<div class='line'>{html.escape(str(value))}</div>")
 
-        # Core stats
-        lines.append("STATS")
-        lines.append(f"MOV: {mob}")
-        lines.append(f"HP: {hp}")
+        add_section(
+            "ATTRIBUTES",
+            [
+                f"STR: {attributes.get('STR', 0)}",
+                f"AGI: {attributes.get('AGI', 0)}",
+                f"INT: {attributes.get('INT', 0)}",
+                f"CHA: {attributes.get('CHA', 0)}"
+            ]
+        )
+
+        stat_lines = [f"MOV: {mob}", f"HP: {hp}"]
         if div_die:
-            lines.append(f"DIV: {div_die}")
-        lines.append(f"Brill: {brill}")
-        lines.append("")
+            stat_lines.append(f"DIV: {div_die}")
+        stat_lines.append(f"Brill: {brill}")
+        add_section("STATS", stat_lines)
 
-        # Keywords
         if keyword_counts:
-            lines.append("KEYWORDS")
-            lines.append(
-                ", ".join(
-                    (
-                        f"{keyword} x{keyword_counts[keyword]}"
-                        if keyword_counts[keyword] > 1
-                        else keyword
+            add_section(
+                "KEYWORDS",
+                [
+                    ", ".join(
+                        (
+                            f"{keyword} x{keyword_counts[keyword]}"
+                            if keyword_counts[keyword] > 1
+                            else keyword
+                        )
+                        for keyword in sorted(keyword_counts)
                     )
-                    for keyword in sorted(keyword_counts)
-                )
+                ]
             )
-            lines.append("")
 
-        # Items
-        if unique_items:
-            lines.append("ITEMS")
-            for item in unique_items:
-                lines.append(f"{item['Name']} ({item['Type']})")
-            lines.append("")
+        add_section(
+            "ITEMS",
+            [f"{item['Name']} ({item['Type']})" for item in unique_items]
+        )
+        add_section(
+            "ACTION CARDS",
+            [f"{act['Name']} (Lvl {act['Level']})" for act in unique_actions]
+        )
 
-        # Actions
-        if unique_actions:
-            lines.append("ACTION CARDS")
-            for act in unique_actions:
-                lines.append(f"{act['Name']} (Lvl {act['Level']})")
-            lines.append("")
-
-        self.summary.setText("\n".join(lines))
+        self.summary.setHtml("".join(html_parts))
 
 
 # -------------------------
