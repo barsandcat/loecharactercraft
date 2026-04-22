@@ -329,13 +329,15 @@ class CharacterBuilder(QWidget):
         for section in self.level_up_sections:
             self.left_layout.addWidget(section)
 
-        # Middle panel - Character Summary
-        middle_layout = QVBoxLayout()
+        # Middle panel - Character Board
+        middle_container = QWidget()
+        middle_layout = QVBoxLayout(middle_container)
+        middle_title = QLabel("Character board")
+        middle_title.setStyleSheet("font-weight: bold; font-size: 14px;")
+        middle_layout.addWidget(middle_title)
         self.summary = QTextEdit()
         self.summary.setReadOnly(True)
         self.summary.setStyleSheet("font-family: monospace; font-size: 11px; background-color: white;")
-
-        middle_layout.addWidget(QLabel("Character Summary"))
         middle_layout.addWidget(self.summary)
 
         # Right panel - Advancement Trees
@@ -347,7 +349,7 @@ class CharacterBuilder(QWidget):
         left_scroll.setWidgetResizable(True)
         
         middle_scroll = QScrollArea()
-        middle_scroll.setWidget(self.summary)
+        middle_scroll.setWidget(middle_container)
         middle_scroll.setWidgetResizable(True)
         
         right_scroll = QScrollArea()
@@ -515,7 +517,7 @@ class CharacterBuilder(QWidget):
         attributes = []
         for attr in path.get("Attributes", []):
             for key, value in attr.items():
-                attributes.append(f"{key} {value:+}")
+                attributes.append(f"{value:+} {key}")
 
         extras = []
         if keywords:
