@@ -428,10 +428,15 @@ class CharacterBuilder(QWidget):
         if len(versions) == 1:
             detail = self.format_advancement_summary(versions[0])
         else:
-            detail = f"{len(versions)} versions available"
-
+            # Display all versions with their summaries
+            details = []
+            for idx, version in enumerate(versions):
+                summary = self.format_advancement_summary(version)
+                details.append(f"Version {idx + 1}: {summary}")
+            detail = "\n".join(details)
+        
         return f"{option['tree_name']} - Level {option['level']}\n{detail}"
-
+        
     def render_level_up_tree_button(self, option):
         return f"{option['tree_name']} L{option['level']}"
 
