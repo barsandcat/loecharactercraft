@@ -2,9 +2,11 @@ import sys
 import json
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
-    QLabel, QTextEdit, QPushButton, QDialog, QScrollArea
+    QLabel, QTextEdit, QPushButton, QDialog, QScrollArea,
+    QGroupBox, QFrame
 )
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QTextCursor, QTextCharFormat, QColor, QFont
 
 
 # -------------------------
@@ -194,6 +196,35 @@ class StepSection(QWidget):
 
 
 # -------------------------
+# Advancement Tree Panel
+# -------------------------
+class AdvancementTreePanel(QWidget):
+    def __init__(self, get_advancement_data_fn, parent=None):
+        super().__init__(parent)
+        self.get_advancement_data_fn = get_advancement_data_fn
+        
+        layout = QVBoxLayout(self)
+        
+        title = QLabel("Advancement Trees")
+        title.setStyleSheet("font-weight: bold; font-size: 14px;")
+        layout.addWidget(title)
+        
+        self.tree_display = QTextEdit()
+        self.tree_display.setReadOnly(True)
+        self.tree_display.setStyleSheet("""
+            font-family: monospace; 
+            font-size: 12px;
+            background-color: white;
+            color: black;
+        """)
+        layout.addWidget(self.tree_display)
+        
+    def refresh(self):
+        data = self.get_advancement_data_fn()
+        self.tree_display.setHtml(data)
+
+
+# -------------------------
 # Character Builder
 # -------------------------
 class CharacterBuilder(QWidget):
@@ -201,7 +232,7 @@ class CharacterBuilder(QWidget):
         super().__init__()
 
         self.setWindowTitle("Lands of Evershade - RPG Builder")
-        self.resize(1000, 600)
+        self.resize(1400, 700)
 
         with open("data.json", "r") as f:
             self.data = json.load(f)
@@ -219,6 +250,7 @@ class CharacterBuilder(QWidget):
     def init_ui(self):
         main_layout = QHBoxLayout(self)
 
+        # Left panel - Character creation
         left_container = QWidget()
         self.left_layout = QVBoxLayout(left_container)
         self.left_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -285,20 +317,34 @@ class CharacterBuilder(QWidget):
         for section in self.level_up_sections:
             self.left_layout.addWidget(section)
 
-        # Summary
-        right_layout = QVBoxLayout()
+        # Middle panel - Character Summary
+        middle_layout = QVBoxLayout()
         self.summary = QTextEdit()
         self.summary.setReadOnly(True)
+        self.summary.setStyleSheet("font-family: monospace; font-size: 11px; background-color: white;")
 
-        right_layout.addWidget(QLabel("Character Summary"))
-        right_layout.addWidget(self.summary)
+        middle_layout.addWidget(QLabel("Character Summary"))
+        middle_layout.addWidget(self.summary)
 
+        # Right panel - Advancement Trees
+        self.advancement_panel = AdvancementTreePanel(self.get_advancement_tree_summary)
+        
+        # Scroll areas
         left_scroll = QScrollArea()
         left_scroll.setWidget(left_container)
         left_scroll.setWidgetResizable(True)
+        
+        middle_scroll = QScrollArea()
+        middle_scroll.setWidget(self.summary)
+        middle_scroll.setWidgetResizable(True)
+        
+        right_scroll = QScrollArea()
+        right_scroll.setWidget(self.advancement_panel)
+        right_scroll.setWidgetResizable(True)
 
-        main_layout.addWidget(left_scroll, 1)
-        main_layout.addLayout(right_layout, 2)
+        main_layout.addWidget(left_scroll, 2)
+        main_layout.addWidget(middle_scroll, 2)
+        main_layout.addWidget(right_scroll, 2)
 
         # Initialize
         self.race_step.set_items(self.data["Races"])
@@ -324,16 +370,17 @@ class CharacterBuilder(QWidget):
             self.attr_step.set_items(race["Attributes"])
 
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_attr_selected(self, attr):
         self.selected_attr = attr
-
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_origin_selected(self, origin):
         self.selected_origin = origin
-
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_prof_selected(self, prof):
         prof_changed = getattr(self, "selected_prof", None) != prof
@@ -345,10 +392,12 @@ class CharacterBuilder(QWidget):
             self.reset_level_up_state()
 
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_path_selected(self, path):
         self.selected_path = path
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_level_up_tree_selected(self, slot_index, tree_level_option):
         state = self.level_up_state[slot_index]
@@ -357,12 +406,14 @@ class CharacterBuilder(QWidget):
 
         self.refresh_level_up_sections()
         self.update_summary()
+        self.advancement_panel.refresh()
 
     def on_level_up_version_selected(self, slot_index, version_option):
         self.level_up_state[slot_index]["version_index"] = version_option["index"]
 
         self.refresh_level_up_sections()
         self.update_summary()
+        self.advancement_panel.refresh()
 
     # -------------------------
     # Render Functions
@@ -428,15 +479,14 @@ class CharacterBuilder(QWidget):
         if len(versions) == 1:
             detail = self.format_advancement_summary(versions[0])
         else:
-            # Display all versions with their summaries
             details = []
             for idx, version in enumerate(versions):
                 summary = self.format_advancement_summary(version)
                 details.append(f"Version {idx + 1}: {summary}")
             detail = "\n".join(details)
-        
+
         return f"{option['tree_name']} - Level {option['level']}\n{detail}"
-        
+
     def render_level_up_tree_button(self, option):
         return f"{option['tree_name']} L{option['level']}"
 
@@ -708,6 +758,164 @@ class CharacterBuilder(QWidget):
             return div_die
 
         return dice_progression[current_index + 1]
+
+    # -------------------------
+    # Advancement Tree Summary
+    # -------------------------
+    def get_advancement_tree_summary(self):
+        if not hasattr(self, "selected_prof"):
+            return "<span style='color: #888888;'>No profession selected.<br><br>Select a profession to see available advancement trees.</span>"
+        
+        # Get all accessible trees
+        tree_names = self.get_accessible_advancement_tree_names()
+        
+        if not tree_names:
+            return "<span style='color: #888888;'>No advancement trees available for this profession.</span>"
+        
+        # Get selected options
+        selected_by_tree = {}
+        selected_version_by_key = {}
+        
+        for slot_idx, state in enumerate(self.level_up_state):
+            if state["tree_level_key"] and state["version_index"] is not None:
+                option = self.get_tree_level_option_by_key(state["tree_level_key"])
+                if option:
+                    version_options = self.get_version_options(option)
+                    if 0 <= state["version_index"] < len(version_options):
+                        version_key = f"{option['tree_name']}|{option['level']}|{state['version_index']}"
+                        selected_version_by_key[version_key] = {
+                            "tree": option["tree_name"],
+                            "level": option["level"],
+                            "version_index": state["version_index"],
+                            "entry": version_options[state["version_index"]]["entry"]
+                        }
+                        if option["tree_name"] not in selected_by_tree:
+                            selected_by_tree[option["tree_name"]] = {}
+                        selected_by_tree[option["tree_name"]][option["level"]] = state["version_index"]
+        
+        # Separate primary and secondary trees
+        primary_tree = tree_names[0] if tree_names else None
+        secondary_trees = tree_names[1:] if len(tree_names) > 1 else []
+        
+        html_parts = []
+        html_parts.append("<style>")
+        html_parts.append("body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; }")
+        html_parts.append(".tree-title { font-size: 15px; font-weight: bold; margin-top: 15px; margin-bottom: 10px; color: #000000; }")
+        html_parts.append(".tree-subtitle { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }")
+        html_parts.append(".level-line { margin-left: 15px; margin-bottom: 5px; }")
+        html_parts.append(".version-line { margin-left: 30px; margin-bottom: 3px; font-size: 12px; }")
+        html_parts.append(".selected { font-weight: bold; color: #000000; }")
+        html_parts.append(".available { font-weight: normal; color: #000000; }")
+        html_parts.append(".unavailable { font-weight: normal; color: #888888; }")
+        html_parts.append(".level-tag { font-weight: bold; display: inline-block; width: 50px; }")
+        html_parts.append("</style>")
+        
+        def render_tree(tree_name, is_primary):
+            tree = self.advancement_trees_by_name.get(tree_name)
+            if not tree:
+                return ""
+            
+            result = []
+            if is_primary:
+                result.append(f"<div class='tree-title'>{tree_name.upper()}</div>")
+            else:
+                result.append(f"<div class='tree-subtitle'>{tree_name}</div>")
+            
+            # Get all levels in order
+            all_levels = sorted([int(l) for l in tree["Levels"].keys()])
+            
+            # Get picked levels for this tree
+            picked_levels_for_tree = selected_by_tree.get(tree_name, {})
+            
+            # Determine what's available vs unavailable
+            taken_levels = set(picked_levels_for_tree.keys())
+            
+            # Simulate progression to see what's available
+            available_levels = set()
+            simulated_taken = set()
+            slot_counter = 1
+            
+            for level in all_levels:
+                if level in taken_levels:
+                    simulated_taken.add(level)
+                    continue
+                
+                # Check if this level is unlocked
+                if self.is_advancement_level_unlocked_for_tree(level, simulated_taken, slot_counter):
+                    available_levels.add(level)
+            
+            # Display all levels in order
+            for level in all_levels:
+                versions = tree["Levels"][str(level)]
+                
+                # Level line - just the level number
+                if level in picked_levels_for_tree:
+                    # Selected level - bold black
+                    result.append(f"<div class='level-line selected'>")
+                    result.append(f"<span class='level-tag'>Level {level}</span>")
+                    result.append(f"</div>")
+                elif level in available_levels:
+                    # Available level - normal black
+                    result.append(f"<div class='level-line available'>")
+                    result.append(f"<span class='level-tag'>Level {level}</span>")
+                    result.append(f"</div>")
+                else:
+                    # Unavailable level - grey
+                    result.append(f"<div class='level-line unavailable'>")
+                    result.append(f"<span class='level-tag'>Level {level}</span>")
+                    result.append(f"</div>")
+                
+                # Show all versions for this level
+                selected_version_index = picked_levels_for_tree.get(level, -1)
+                
+                for idx, version in enumerate(versions):
+                    summary = self.format_advancement_summary(version)
+                    
+                    if idx == selected_version_index:
+                        # Selected version - bold black
+                        result.append(f"<div class='version-line selected'>  {summary}</div>")
+                    elif level in available_levels:
+                        # Available version - normal black
+                        result.append(f"<div class='version-line available'>  {summary}</div>")
+                    else:
+                        # Unavailable version - grey
+                        result.append(f"<div class='version-line unavailable'>  {summary}</div>")
+            
+            return "\n".join(result)
+        
+        # Render primary tree
+        if primary_tree:
+            html_parts.append(render_tree(primary_tree, True))
+        
+        # Render secondary trees
+        for tree_name in secondary_trees:
+            html_parts.append(render_tree(tree_name, False))
+        
+        # Add progress summary
+        filled_slots = len([s for s in self.level_up_state if s["tree_level_key"] is not None and s["version_index"] is not None])
+        html_parts.append(f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>")
+        html_parts.append(f"<span style='font-weight: bold;'>Progress: {filled_slots}/12 level ups selected</span>")
+        html_parts.append("</div>")
+        
+        return "\n".join(html_parts)
+    
+    def is_advancement_level_unlocked_for_tree(self, level, taken_levels, slot_number):
+        """Check if a level is unlocked based on taken levels and current slot position"""
+        if level == 1:
+            return True
+        if level in (2, 3):
+            return 1 in taken_levels
+        if level == 4:
+            return 3 in taken_levels
+        if level == 5:
+            return 3 in taken_levels and slot_number >= 4
+        if level == 6:
+            return 5 in taken_levels
+        if level == 7:
+            return 5 in taken_levels and slot_number >= 6
+        if level == 8:
+            return 7 in taken_levels
+        return False
 
     # -------------------------
     # Summary
