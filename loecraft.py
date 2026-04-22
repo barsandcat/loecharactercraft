@@ -717,9 +717,13 @@ class CharacterBuilder(QWidget):
         div_die = None
         brill = 0
 
-        keywords = set()
+        keyword_counts = {}
         items_by_key = {}
         actions_by_name = {}
+
+        def add_keywords(values):
+            for value in values:
+                keyword_counts[value] = keyword_counts.get(value, 0) + 1
 
         def add_item(item):
             items_by_key.setdefault((item["Name"], item["Type"]), item)
@@ -740,7 +744,7 @@ class CharacterBuilder(QWidget):
             hp += entry.get("HP", 0)
             brill += entry.get("Brill", 0)
 
-            keywords.update(entry.get("Keywords", []))
+            add_keywords(entry.get("Keywords", []))
 
             div_value = entry.get("DIV")
             if div_value == "Upgrade":
@@ -769,7 +773,7 @@ class CharacterBuilder(QWidget):
             hp = race.get("HP", 0)
             div_die = race.get("DIV")
 
-            keywords.update(race.get("Keywords", []))
+            add_keywords(race.get("Keywords", []))
             for action in race.get("Action cards", []):
                 add_action(action)
 
@@ -779,7 +783,7 @@ class CharacterBuilder(QWidget):
         if hasattr(self, "selected_origin"):
             origin = self.selected_origin
 
-            keywords.update(origin.get("Keywords", []))
+            add_keywords(origin.get("Keywords", []))
             for item in origin.get("Items", []):
                 add_item(item)
             brill += origin.get("Brill", 0)
@@ -789,7 +793,7 @@ class CharacterBuilder(QWidget):
         # -------------------------
         if hasattr(self, "selected_prof"):
             prof = self.selected_prof
-            keywords.update(prof.get("Keywords", []))
+            add_keywords(prof.get("Keywords", []))
 
         # -------------------------
         # Path
@@ -842,9 +846,18 @@ class CharacterBuilder(QWidget):
         lines.append("")
 
         # Keywords
-        if keywords:
+        if keyword_counts:
             lines.append("KEYWORDS")
-            lines.append(", ".join(sorted(keywords)))
+            lines.append(
+                ", ".join(
+                    (
+                        f"{keyword} x{keyword_counts[keyword]}"
+                        if keyword_counts[keyword] > 1
+                        else keyword
+                    )
+                    for keyword in sorted(keyword_counts)
+                )
+            )
             lines.append("")
 
         # Items
