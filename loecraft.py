@@ -378,10 +378,14 @@ class CharacterBuilder(QWidget):
     def on_race_selected(self, race):
         race_changed = getattr(self, "selected_race", None) != race
         self.selected_race = race
+        attr_options = race.get("Attributes", [])
 
         if race_changed:
             self.clear_selected("selected_attr")
-            self.attr_step.set_items(race["Attributes"])
+            self.attr_step.set_items(attr_options)
+
+        # Gray out attributes selector when there is only one possible option.
+        self.attr_step.selector.setEnabled(len(attr_options) > 1)
 
         self.update_summary()
         self.advancement_panel.refresh()
