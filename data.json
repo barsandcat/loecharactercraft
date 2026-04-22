@@ -1006,11 +1006,7 @@
         },
         {
           "Name": "Soothsayer",
-          "Attributes": [
-            {
-              "DIV": 1
-            }
-          ],
+          "DIV": "Upgrade",
           "Items": [
             {
               "Name": "Stone of Nivar",
@@ -1314,11 +1310,7 @@
         },
         {
           "Name": "Evolver",
-          "Attributes": [
-            {
-              "DIV": 1
-            }
-          ],
+          "DIV": "Upgrade",
           "Items": [
             {
               "Name": "Fleshcraft Toolkit",
@@ -1346,11 +1338,7 @@
       "Paths": [
         {
           "Name": "Conjurer",
-          "Attributes": [
-            {
-              "DIV": 1
-            }
-          ],
+          "DIV": "Upgrade",
           "Items": [
             {
               "Name": "Grimoire",

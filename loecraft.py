@@ -467,9 +467,17 @@ class CharacterBuilder(QWidget):
         return prof["Name"]
 
     def render_path_popup(self, path):
-        attr = path["Attributes"][0]
-        key = list(attr.keys())[0]
-        return f"{path['Name']}\n+{key}"
+        if path.get("DIV") == "Upgrade":
+            detail = "DIV Upgrade"
+        elif path.get("DIV"):
+            detail = f"DIV {path['DIV']}"
+        elif path.get("Attributes"):
+            attr = path["Attributes"][0]
+            key, value = list(attr.items())[0]
+            detail = f"+{value} {key}"
+        else:
+            detail = "No attribute bonus"
+        return f"{path['Name']}\n{detail}"
 
     def render_path_button(self, path):
         return path["Name"]
@@ -749,7 +757,7 @@ class CharacterBuilder(QWidget):
         return ", ".join(parts) if parts else "No changes"
 
     def upgrade_div_die(self, div_die):
-        dice_progression = ["D4", "D6", "D8", "D10", "D12"]
+        dice_progression = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
         if div_die not in dice_progression:
             return div_die
 
@@ -1013,16 +1021,7 @@ class CharacterBuilder(QWidget):
         # -------------------------
         if hasattr(self, "selected_path"):
             path = self.selected_path
-
-            # Attribute bonuses
-            for attr in path.get("Attributes", []):
-                for k, v in attr.items():
-                    attributes[k] = attributes.get(k, 0) + v
-
-            for item in path.get("Items", []):
-                add_item(item)
-            for action in path.get("Action cards", []):
-                add_action(action)
+            apply_advancement(path)
 
         # -------------------------
         # Level Ups
