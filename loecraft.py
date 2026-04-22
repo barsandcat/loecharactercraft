@@ -53,7 +53,7 @@ class SelectorButton(QPushButton):
         self.default_text = default_text
 
         self.selected = None
-        self.setFixedHeight(30)
+        self.setFixedHeight(48)
         self.setStyleSheet("text-align: left; padding: 5px;")
         self.set_items(items)
 
@@ -112,15 +112,11 @@ class LevelUpSection(QWidget):
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(4)
-
-        title = QLabel(f"Level Up {level_number}")
-        title.setStyleSheet("font-weight: bold;")
-        layout.addWidget(title)
+        layout.setSpacing(2)
 
         selectors_layout = QHBoxLayout()
         selectors_layout.setContentsMargins(0, 0, 0, 0)
-        selectors_layout.setSpacing(5)
+        selectors_layout.setSpacing(3)
 
         self.tree_selector = SelectorButton(
             [],
@@ -442,7 +438,14 @@ class CharacterBuilder(QWidget):
         )
 
     def render_race_button(self, race):
-        return race["Name"]
+        keywords = ", ".join(race.get("Keywords", []))
+        extras = []
+        if keywords:
+            extras.append(keywords)
+        extras.append(f"MOV: {race.get('MOB', 0)}")
+        extras.append(f"HP: {race.get('HP', 0)}")
+        extras.append(f"DIV: {race.get('DIV', '-')}")
+        return f"{race['Name']}\n" + " | ".join(extras)
 
     def render_attr_popup(self, attr):
         return (
@@ -468,7 +471,12 @@ class CharacterBuilder(QWidget):
         )
 
     def render_origin_button(self, origin):
-        return origin["Name"]
+        keywords = ", ".join(origin.get("Keywords", []))
+        extras = []
+        if keywords:
+            extras.append(keywords)
+        extras.append(f"BRILL: {origin.get('Brill', 0)}")
+        return f"{origin['Name']}\n" + " | ".join(extras)
 
     def render_prof_popup(self, prof):
         return (
@@ -477,6 +485,9 @@ class CharacterBuilder(QWidget):
         )
 
     def render_prof_button(self, prof):
+        keywords = ", ".join(prof.get("Keywords", []))
+        if keywords:
+            return f"{prof['Name']}\n{keywords}"
         return prof["Name"]
 
     def render_path_popup(self, path):
@@ -493,6 +504,32 @@ class CharacterBuilder(QWidget):
         return f"{path['Name']}\n{detail}"
 
     def render_path_button(self, path):
+        keywords = ", ".join(path.get("Keywords", []))
+        mob = path.get("MOB")
+        hp = path.get("HP")
+        div = path.get("DIV")
+        brill = path.get("Brill")
+        attributes = []
+        for attr in path.get("Attributes", []):
+            for key, value in attr.items():
+                attributes.append(f"{key} {value:+}")
+
+        extras = []
+        if keywords:
+            extras.append(keywords)
+        if attributes:
+            extras.append(", ".join(attributes))
+        if mob is not None:
+            extras.append(f"MOV: {mob}")
+        if hp is not None:
+            extras.append(f"HP: {hp}")
+        if div is not None:
+            extras.append(f"DIV: {div}")
+        if brill is not None:
+            extras.append(f"BRILL: {brill}")
+
+        if extras:
+            return f"{path['Name']}\n" + " | ".join(extras)
         return path["Name"]
 
     def render_level_up_tree_popup(self, option):
@@ -520,7 +557,7 @@ class CharacterBuilder(QWidget):
 
     def render_level_up_version_button(self, version_option):
         summary = self.format_advancement_summary(version_option["entry"])
-        return f"V{version_option['index'] + 1}: {summary}"
+        return summary
 
     # -------------------------
     # Advancement Logic
