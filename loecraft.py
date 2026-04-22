@@ -124,14 +124,14 @@ class LevelUpSection(QWidget):
             render_tree_popup_fn,
             render_tree_button_fn,
             on_tree_change,
-            "Choose tree and level"
+            "Level up"
         )
         self.version_selector = SelectorButton(
             [],
             render_version_popup_fn,
             render_version_button_fn,
             on_version_change,
-            "Choose version"
+            "Choose reward"
         )
 
         selectors_layout.addWidget(self.tree_selector, 2)
@@ -501,7 +501,9 @@ class CharacterBuilder(QWidget):
             details = []
             for idx, version in enumerate(versions):
                 summary = self.format_advancement_summary(version)
-                details.append(f"Version {idx + 1}: {summary}")
+                details.append(summary)
+                if idx < len(versions) - 1:
+                    details.append("or")
             detail = "\n".join(details)
 
         return f"{option['tree_name']} - Level {option['level']}\n{detail}"
@@ -511,8 +513,6 @@ class CharacterBuilder(QWidget):
 
     def render_level_up_version_popup(self, version_option):
         return (
-            f"{version_option['tree_name']} - Level {version_option['level']} "
-            f"(Version {version_option['index'] + 1})\n"
             f"{self.format_advancement_summary(version_option['entry'])}"
         )
 
