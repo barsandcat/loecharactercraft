@@ -202,6 +202,7 @@ class AdvancementTreePanel(QWidget):
     def __init__(self, get_advancement_data_fn, parent=None):
         super().__init__(parent)
         self.get_advancement_data_fn = get_advancement_data_fn
+        self._pending_refresh = False
         
         layout = QVBoxLayout(self)
         
@@ -220,8 +221,20 @@ class AdvancementTreePanel(QWidget):
         layout.addWidget(self.tree_display)
         
     def refresh(self):
+        viewport = self.tree_display.viewport()
+        # Avoid triggering rich-text painting while the viewport is not ready yet.
+        if not viewport.isVisible() or viewport.width() <= 0 or viewport.height() <= 0:
+            self._pending_refresh = True
+            return
+
         data = self.get_advancement_data_fn()
         self.tree_display.setHtml(data)
+        self._pending_refresh = False
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        if self._pending_refresh:
+            self.refresh()
 
 
 # -------------------------
