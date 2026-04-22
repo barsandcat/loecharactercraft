@@ -164,6 +164,8 @@ class StepSection(QWidget):
         self.on_change = on_change
 
         self.layout = QVBoxLayout(self)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setSpacing(2)
         self.items = []
         self.selector = SelectorButton(
             [],
@@ -263,39 +265,39 @@ class CharacterBuilder(QWidget):
         left_container = QWidget()
         self.left_layout = QVBoxLayout(left_container)
         self.left_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.left_layout.setSpacing(5)
+        self.left_layout.setSpacing(2)
 
         # Steps
         self.race_step = StepSection(
-            "1. Choose Race",
+            "Choose Race",
             self.render_race_popup,
             self.render_race_button,
             self.on_race_selected
         )
 
         self.attr_step = StepSection(
-            "2. Choose Attributes",
+            "Choose Attributes",
             self.render_attr_popup,
             self.render_attr_button,
             self.on_attr_selected
         )
 
         self.origin_step = StepSection(
-            "3. Choose Origin",
+            "Choose Origin",
             self.render_origin_popup,
             self.render_origin_button,
             self.on_origin_selected
         )
 
         self.prof_step = StepSection(
-            "4. Choose Profession",
+            "Choose Profession",
             self.render_prof_popup,
             self.render_prof_button,
             self.on_prof_selected
         )
 
         self.path_step = StepSection(
-            "5. Choose Path",
+            "Choose Path",
             self.render_path_popup,
             self.render_path_button,
             self.on_path_selected
@@ -432,9 +434,9 @@ class CharacterBuilder(QWidget):
         return (
             f"{race['Name']}\n"
             f"Keywords: {', '.join(race.get('Keywords', []))}\n"
-            f"STR {attr.get('STR',0)} | AGI {attr.get('AGI',0)} | "
-            f"INT {attr.get('INT',0)} | CHA {attr.get('CHA',0)}\n"
-            f"MOB {race['MOB']} | HP {race['HP']} | DIV {race['DIV']}"
+            f"STR {attr.get('STR',0)}, AGI {attr.get('AGI',0)}, "
+            f"INT {attr.get('INT',0)}, CHA {attr.get('CHA',0)}\n"
+            f"MOB {race['MOB']}, HP {race['HP']}, DIV {race['DIV']}"
         )
 
     def render_race_button(self, race):
@@ -445,13 +447,13 @@ class CharacterBuilder(QWidget):
         extras.append(f"MOV: {race.get('MOB', 0)}")
         extras.append(f"HP: {race.get('HP', 0)}")
         extras.append(f"DIV: {race.get('DIV', '-')}")
-        return f"{race['Name']}\n" + " | ".join(extras)
+        return f"{race['Name']}\n" + ", ".join(extras)
 
     def render_attr_popup(self, attr):
         return (
-            f"STR {attr.get('STR',0)} | "
-            f"AGI {attr.get('AGI',0)} | "
-            f"INT {attr.get('INT',0)} | "
+            f"STR {attr.get('STR',0)}, "
+            f"AGI {attr.get('AGI',0)}, "
+            f"INT {attr.get('INT',0)}, "
             f"CHA {attr.get('CHA',0)}"
         )
 
@@ -475,8 +477,8 @@ class CharacterBuilder(QWidget):
         extras = []
         if keywords:
             extras.append(keywords)
-        extras.append(f"BRILL: {origin.get('Brill', 0)}")
-        return f"{origin['Name']}\n" + " | ".join(extras)
+        extras.append(f"Brill: {origin.get('Brill', 0)}")
+        return f"{origin['Name']}\n" + ", ".join(extras)
 
     def render_prof_popup(self, prof):
         return (
@@ -526,10 +528,10 @@ class CharacterBuilder(QWidget):
         if div is not None:
             extras.append(f"DIV: {div}")
         if brill is not None:
-            extras.append(f"BRILL: {brill}")
+            extras.append(f"Brill: {brill}")
 
         if extras:
-            return f"{path['Name']}\n" + " | ".join(extras)
+            return f"{path['Name']}\n" + ", ".join(extras)
         return path["Name"]
 
     def render_level_up_tree_popup(self, option):
@@ -788,7 +790,7 @@ class CharacterBuilder(QWidget):
             parts.append(f"+{entry['MOB']} MOB")
 
         if entry.get("Brill"):
-            parts.append(f"+{entry['Brill']} BRILL")
+            parts.append(f"+{entry['Brill']} Brill")
 
         div_value = entry.get("DIV")
         if div_value == "Upgrade":
@@ -1104,7 +1106,7 @@ class CharacterBuilder(QWidget):
         lines.append(f"HP: {hp}")
         if div_die:
             lines.append(f"DIV: {div_die}")
-        lines.append(f"BRILL: {brill}")
+        lines.append(f"Brill: {brill}")
         lines.append("")
 
         # Keywords
