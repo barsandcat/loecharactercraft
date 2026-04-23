@@ -20,15 +20,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -36,11 +39,13 @@
         },
         {
           "Name": "Command",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -63,15 +68,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -79,11 +87,13 @@
         },
         {
           "Name": "Command",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -107,15 +117,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 3
+          "Level": 3,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -123,11 +136,13 @@
         },
         {
           "Name": "Command",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -151,15 +166,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 3
+          "Level": 3,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -167,11 +185,13 @@
         },
         {
           "Name": "Command",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -194,15 +214,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 3
+          "Level": 3,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -210,11 +233,13 @@
         },
         {
           "Name": "Command",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -303,15 +328,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -319,11 +347,13 @@
         },
         {
           "Name": "Command",
-          "Level": 2
+          "Level": 2,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -347,7 +377,8 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Bite",
@@ -355,11 +386,13 @@
         },
         {
           "Name": "Endurance",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 3
+          "Level": 3,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -367,11 +400,13 @@
         },
         {
           "Name": "Command",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     },
@@ -400,15 +435,18 @@
       "Action cards": [
         {
           "Name": "Bash",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
@@ -416,11 +454,13 @@
         },
         {
           "Name": "Command",
-          "Level": 3
+          "Level": 3,
+          "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
-          "Level": 1
+          "Level": 1,
+          "ScaleAttribute": "AGI"
         }
       ]
     }
@@ -1681,7 +1721,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -1697,7 +1738,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -1837,7 +1879,8 @@
             "Action cards": [
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           },
@@ -1851,7 +1894,8 @@
             "Action cards": [
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           }
@@ -1994,7 +2038,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -2010,7 +2055,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -2134,7 +2180,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -2150,7 +2197,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -2284,7 +2332,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -2301,7 +2350,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -2318,7 +2368,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -2335,7 +2386,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -2466,7 +2518,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -2609,7 +2662,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -2625,7 +2679,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -2752,7 +2807,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -2769,7 +2825,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -2961,7 +3018,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -3230,7 +3288,8 @@
             "Action cards": [
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           },
@@ -3246,7 +3305,8 @@
             "Action cards": [
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           }
@@ -3374,7 +3434,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -3390,7 +3451,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -3502,7 +3564,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -3515,7 +3578,8 @@
             "Action cards": [
               {
                 "Name": "Bash",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -3590,7 +3654,8 @@
               },
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           },
@@ -3602,7 +3667,8 @@
               },
               {
                 "Name": "Bash",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "STR"
               }
             ]
           },
@@ -3614,7 +3680,8 @@
               },
               {
                 "Name": "Command",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "CHA"
               }
             ]
           },
@@ -3626,7 +3693,8 @@
               },
               {
                 "Name": "Bash",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -3711,7 +3779,8 @@
             "Action cards": [
               {
                 "Name": "Shoot",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -3769,7 +3838,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -3869,7 +3939,8 @@
             "Action cards": [
               {
                 "Name": "Endurance",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "STR"
               }
             ]
           }
@@ -4025,7 +4096,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -4038,7 +4110,8 @@
             "Action cards": [
               {
                 "Name": "Shoot",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -4051,7 +4124,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           },
@@ -4064,7 +4138,8 @@
             "Action cards": [
               {
                 "Name": "Shoot",
-                "Level": 2
+                "Level": 2,
+                "ScaleAttribute": "AGI"
               }
             ]
           }
@@ -4156,7 +4231,8 @@
             "Action cards": [
               {
                 "Name": "Dodge",
-                "Level": 3
+                "Level": 3,
+                "ScaleAttribute": "AGI"
               }
             ]
           }

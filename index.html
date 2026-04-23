@@ -1285,8 +1285,8 @@
           container.appendChild(createListSection("Items", itemLines));
         }
 
-        const actionLines = Array.from(stats.actions.values()).map(
-          (action) => action.Name + " (Lvl " + action.Level + ")"
+        const actionLines = Array.from(stats.actions.values()).map((action) =>
+          formatActionCardSummary(action)
         );
         if (actionLines.length) {
           container.appendChild(createListSection("Action Cards", actionLines));
@@ -2040,7 +2040,7 @@
         });
 
         (entry["Action cards"] || []).forEach((action) => {
-          parts.push(action.Name + " L" + action.Level);
+          parts.push(formatActionCardSummary(action));
         });
 
         return parts.join(", ");
@@ -2060,6 +2060,11 @@
 
       function formatAttributeSummary(attributeSet) {
         return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
+      }
+
+      function formatActionCardSummary(action) {
+        const scale = action.ScaleAttribute ? " (" + action.ScaleAttribute + ")" : "";
+        return action.Name + scale + " L" + action.Level;
       }
 
       function describeRaceOption(race) {
