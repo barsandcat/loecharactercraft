@@ -53,6 +53,18 @@ def render_entry_summary(entry):
     return ", ".join(parts)
 
 
+def get_version_options(tree_level_option):
+    return [
+        {
+            "index": index,
+            "tree_name": tree_level_option["tree_name"],
+            "level": tree_level_option["level"],
+            "entry": entry
+        }
+        for index, entry in enumerate(tree_level_option["versions"])
+    ]
+
+
 def upgrade_div_die(div_die):
     if div_die not in DICE_PROGRESSION:
         return div_die
@@ -206,10 +218,36 @@ class LevelUpSection(QWidget):
         selectors_layout.addWidget(self.version_selector, 3)
         layout.addLayout(selectors_layout)
 
-    def refresh(self, tree_options, selected_tree, version_options, selected_version, can_fill):
+    def refresh(self, tree_options, unlocked):
+        selected_tree, version_options, selected_version = self._resolve_selection(tree_options)
+
         self.tree_selector.set_items(tree_options, selected_tree)
-        self.tree_selector.setEnabled(can_fill and len(tree_options) > 1)
+        self.tree_selector.setEnabled(unlocked and len(tree_options) > 1)
         self.version_selector.set_items(version_options, selected_version)
+
+        return selected_tree
+
+    def _resolve_selection(self, tree_options):
+        selected_tree = next(
+            (o for o in tree_options if self.state.matches_tree_option(o)), None
+        )
+        if selected_tree is None:
+            self.state.clear()
+            return None, [], None
+
+        version_options = get_version_options(selected_tree)
+
+        if len(version_options) == 1:
+            self.state.select_version(0)
+            return selected_tree, version_options, version_options[0]
+
+        selected_version = next(
+            (o for o in version_options if o["index"] == self.state.version_index), None
+        )
+        if selected_version is None:
+            self.state.clear_version()
+
+        return selected_tree, version_options, selected_version
 
     def is_complete(self):
         return self.state.is_complete()
@@ -596,53 +634,17 @@ class CharacterBuilder(QWidget):
 
     def refresh_level_up_sections(self):
         prior_selected_options = []
-        can_fill_slot = self._selected_prof is not None
+        unlocked = self._selected_prof is not None
 
         for slot_index, section in enumerate(self._level_up_sections):
-            state = section.state
-
             tree_options = (
                 self.get_available_level_up_options(slot_index, prior_selected_options)
-                if can_fill_slot else []
+                if unlocked else []
             )
-
-            selected_tree_option = next(
-                (o for o in tree_options if state.matches_tree_option(o)), None
-            )
-            if selected_tree_option is None:
-                state.clear()
-
-            version_options, selected_version_option = self._resolve_version_selection(
-                state, selected_tree_option
-            )
-
-            section.refresh(tree_options, selected_tree_option, version_options, selected_version_option, can_fill_slot)
-
-            if selected_tree_option is not None:
-                prior_selected_options.append(selected_tree_option)
-
-            can_fill_slot = can_fill_slot and section.is_complete()
-
-    def _resolve_version_selection(self, state, tree_option):
-        if tree_option is None:
-            state.clear_version()
-            return [], None
-
-        version_options = self.get_version_options(tree_option)
-
-        if len(version_options) == 1:
-            state.select_version(0)
-
-        selected = next(
-            (o for o in version_options if o["index"] == state.version_index), None
-        )
-        if selected is None:
-            if len(version_options) == 1:
-                selected = version_options[0]
-            else:
-                state.clear_version()
-
-        return version_options, selected
+            selected_tree = section.refresh(tree_options, unlocked)
+            if selected_tree is not None:
+                prior_selected_options.append(selected_tree)
+            unlocked = unlocked and section.is_complete()
 
     def get_available_level_up_options(self, slot_index, prior_selected_options):
         slot_number = slot_index + 1
@@ -733,17 +735,6 @@ class CharacterBuilder(QWidget):
             return 7 in taken_levels
         return False
 
-    def get_version_options(self, tree_level_option):
-        return [
-            {
-                "index": index,
-                "tree_name": tree_level_option["tree_name"],
-                "level": tree_level_option["level"],
-                "entry": entry
-            }
-            for index, entry in enumerate(tree_level_option["versions"])
-        ]
-
     def get_selected_advancement_entries(self):
         entries = []
 
@@ -757,7 +748,7 @@ class CharacterBuilder(QWidget):
             if option is None:
                 continue
 
-            version_options = self.get_version_options(option)
+            version_options = get_version_options(option)
             if 0 <= version_index < len(version_options):
                 entries.append(version_options[version_index]["entry"])
 
