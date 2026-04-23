@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Optional
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
-    QLabel, QTextEdit, QPushButton, QDialog, QScrollArea,
+    QLabel, QTextEdit, QPushButton, QScrollArea,
     QStackedWidget
 )
 from PyQt6.QtCore import Qt
@@ -133,33 +133,6 @@ def build_empty_level_up_state():
 # -------------------------
 # Selection Popup
 # -------------------------
-class SelectionPopup(QDialog):
-    def __init__(self, items, render_fn, on_select, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Select Option")
-        self.resize(350, 450)
-
-        layout = QVBoxLayout(self)
-
-        scroll = QScrollArea()
-        container = QWidget()
-        vbox = QVBoxLayout(container)
-
-        for item in items:
-            btn = QPushButton(render_fn(item))
-            btn.setStyleSheet("text-align: left; padding: 8px;")
-            btn.clicked.connect(lambda _, i=item: self.select(i, on_select))
-            vbox.addWidget(btn)
-
-        scroll.setWidget(container)
-        scroll.setWidgetResizable(True)
-        layout.addWidget(scroll)
-
-    def select(self, item, callback):
-        callback(item)
-        self.accept()
-
-
 # -------------------------
 # Selector Button
 # -------------------------
@@ -171,7 +144,7 @@ class SelectorButton(QPushButton):
         render_button_fn,
         on_change,
         default_text,
-        on_open_selector=None,
+        on_open_selector,
         parent=None
     ):
         super().__init__(parent)
@@ -210,18 +183,7 @@ class SelectorButton(QPushButton):
     def open_selector(self):
         if not self.items:
             return
-
-        if self.on_open_selector:
-            self.on_open_selector(self)
-            return
-
-        popup = SelectionPopup(
-            self.items,
-            self.render_popup_fn,
-            self.set_selected,
-            self
-        )
-        popup.exec()
+        self.on_open_selector(self)
 
     def set_selected(self, item):
         self.selected = item
@@ -239,7 +201,7 @@ class LevelUpSection(QWidget):
         render_version_button_fn,
         on_tree_change,
         on_version_change,
-        on_open_selector=None,
+        on_open_selector,
         parent=None
     ):
         super().__init__(parent)
@@ -292,7 +254,7 @@ class StepSection(QWidget):
         render_popup_fn,
         render_button_fn,
         on_change,
-        on_open_selector=None,
+        on_open_selector,
         parent=None
     ):
         super().__init__(parent)
