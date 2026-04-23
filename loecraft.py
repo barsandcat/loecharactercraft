@@ -4,10 +4,14 @@ import html
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
     QLabel, QTextEdit, QPushButton, QDialog, QScrollArea,
-    QGroupBox, QFrame, QStackedWidget
+    QStackedWidget
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QTextCursor, QTextCharFormat, QColor, QFont
+
+
+LEVEL_UP_SLOTS = 12
+ATTRIBUTES = ("STR", "AGI", "INT", "CHA")
+DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
 
 
 # -------------------------
@@ -273,7 +277,7 @@ class CharacterBuilder(QWidget):
         }
         self.level_up_state = [
             {"tree_level_key": None, "version_index": None}
-            for _ in range(12)
+            for _ in range(LEVEL_UP_SLOTS)
         ]
 
         self.init_ui()
@@ -329,7 +333,7 @@ class CharacterBuilder(QWidget):
         )
 
         self.level_up_sections = []
-        for level_number in range(1, 13):
+        for level_number in range(1, LEVEL_UP_SLOTS + 1):
             section = LevelUpSection(
                 level_number,
                 self.render_level_up_tree_popup,
@@ -523,12 +527,7 @@ class CharacterBuilder(QWidget):
         return f"{race['Name']}\n" + ", ".join(extras)
 
     def render_attr_button(self, attr):
-        return (
-            f"STR {attr.get('STR',0)}, "
-            f"AGI {attr.get('AGI',0)}, "
-            f"INT {attr.get('INT',0)}, "
-            f"CHA {attr.get('CHA',0)}"
-        )
+        return ", ".join(f"{k} {attr.get(k, 0)}" for k in ATTRIBUTES)
 
     def render_origin_button(self, origin):
         keywords = ", ".join(origin.get("Keywords", []))
@@ -606,7 +605,7 @@ class CharacterBuilder(QWidget):
     def reset_level_up_state(self):
         self.level_up_state = [
             {"tree_level_key": None, "version_index": None}
-            for _ in range(12)
+            for _ in range(LEVEL_UP_SLOTS)
         ]
         self.refresh_level_up_sections()
 
@@ -848,15 +847,14 @@ class CharacterBuilder(QWidget):
         return ", ".join(parts) if parts else "No changes"
 
     def upgrade_div_die(self, div_die):
-        dice_progression = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
-        if div_die not in dice_progression:
+        if div_die not in DICE_PROGRESSION:
             return div_die
 
-        current_index = dice_progression.index(div_die)
-        if current_index == len(dice_progression) - 1:
+        current_index = DICE_PROGRESSION.index(div_die)
+        if current_index == len(DICE_PROGRESSION) - 1:
             return div_die
 
-        return dice_progression[current_index + 1]
+        return DICE_PROGRESSION[current_index + 1]
 
     # -------------------------
     # Advancement Tree Summary
@@ -993,7 +991,7 @@ class CharacterBuilder(QWidget):
         # Add progress summary
         filled_slots = len([s for s in self.level_up_state if s["tree_level_key"] is not None and s["version_index"] is not None])
         html_parts.append(f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>")
-        html_parts.append(f"<span style='font-weight: bold;'>Progress: {filled_slots}/12 level ups selected</span>")
+        html_parts.append(f"<span style='font-weight: bold;'>Progress: {filled_slots}/{LEVEL_UP_SLOTS} level ups selected</span>")
         html_parts.append("</div>")
         
         return "\n".join(html_parts)
@@ -1023,7 +1021,7 @@ class CharacterBuilder(QWidget):
         # -------------------------
         # Base values
         # -------------------------
-        attributes = {"STR": 0, "AGI": 0, "INT": 0, "CHA": 0}
+        attributes = {k: 0 for k in ATTRIBUTES}
         mob = 0  # will be shown as MOV
         hp = 0
         div_die = None
@@ -1145,12 +1143,7 @@ class CharacterBuilder(QWidget):
 
         add_section(
             "Attributes",
-            [
-                f"STR: {attributes.get('STR', 0)}",
-                f"AGI: {attributes.get('AGI', 0)}",
-                f"INT: {attributes.get('INT', 0)}",
-                f"CHA: {attributes.get('CHA', 0)}"
-            ]
+            [f"{k}: {attributes.get(k, 0)}" for k in ATTRIBUTES]
         )
 
         stat_lines = [f"MOV: {mob}", f"HP: {hp}"]
