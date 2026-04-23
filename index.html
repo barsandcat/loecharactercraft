@@ -3,9 +3,2294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+  <title>Lands of Evershade Character Builder</title>
+  <style>
+    :root {
+      --bg-top: #f4ead5;
+      --bg-bottom: #d5bb8b;
+      --panel: rgba(252, 245, 228, 0.84);
+      --panel-strong: rgba(255, 251, 239, 0.94);
+      --panel-border: rgba(89, 63, 31, 0.14);
+      --ink: #2f2417;
+      --muted: #6b5a3d;
+      --accent: #35533d;
+      --accent-soft: #e0ebdf;
+      --accent-warm: #935f2a;
+      --accent-warm-soft: #f3e0ca;
+      --danger: #7f2f27;
+      --danger-soft: #f2d7cf;
+      --available: #385b43;
+      --selected: #8f5821;
+      --unavailable: #90816a;
+      --shadow: 0 18px 50px rgba(58, 39, 16, 0.18);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: light;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 247, 225, 0.95), transparent 38%),
+        radial-gradient(circle at top right, rgba(222, 234, 206, 0.78), transparent 30%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 999px;
+      filter: blur(8px);
+    }
+
+    body::before {
+      width: 22rem;
+      height: 22rem;
+      left: -6rem;
+      bottom: -8rem;
+      background: rgba(111, 143, 98, 0.16);
+    }
+
+    body::after {
+      width: 26rem;
+      height: 26rem;
+      right: -10rem;
+      top: 6rem;
+      background: rgba(189, 131, 66, 0.13);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 28px clamp(18px, 3vw, 36px) 40px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      padding: 28px clamp(20px, 4vw, 34px);
+      border-radius: calc(var(--radius-xl) + 6px);
+      background:
+        linear-gradient(135deg, rgba(255, 251, 241, 0.92), rgba(242, 230, 204, 0.78)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      border: 1px solid rgba(87, 63, 33, 0.14);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+      animation: rise-in 600ms ease-out both;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(79, 116, 86, 0.18), transparent 62%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      line-height: 1.02;
+      letter-spacing: 0.01em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      margin-bottom: 10px;
+    }
+
+    .hero-copy {
+      max-width: 64ch;
+    }
+
+    .hero-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+      align-items: flex-start;
+      min-width: 220px;
+    }
+
+    .status-chip,
+    .ghost-button {
+      border-radius: 999px;
+      padding: 10px 16px;
+      border: 1px solid rgba(58, 82, 61, 0.18);
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--ink);
+      box-shadow: 0 8px 24px rgba(51, 36, 18, 0.1);
+    }
+
+    .status-chip {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .ghost-button {
+      cursor: pointer;
+      transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+    }
+
+    .ghost-button:hover:not(:disabled),
+    .ghost-button:focus-visible:not(:disabled) {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.82);
+      border-color: rgba(58, 82, 61, 0.32);
+    }
+
+    .ghost-button:disabled {
+      opacity: 0.58;
+      cursor: not-allowed;
+    }
+
+    .error-banner {
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(127, 47, 39, 0.16);
+      box-shadow: 0 10px 24px rgba(80, 25, 15, 0.08);
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.08fr) minmax(300px, 0.92fr) minmax(320px, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      animation: rise-in 680ms ease-out both;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 22px 22px 14px;
+      border-bottom: 1px solid rgba(77, 58, 30, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+    }
+
+    .panel-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .panel-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(53, 83, 61, 0.1);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .panel-body {
+      padding: 18px 18px 22px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step-card,
+    .tree-card,
+    .summary-card,
+    .stat-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 56, 28, 0.1);
+      background: rgba(255, 251, 242, 0.9);
+      box-shadow: 0 10px 22px rgba(57, 39, 17, 0.08);
+    }
+
+    .step-card {
+      padding: 14px;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(53, 83, 61, 0.18);
+      box-shadow: 0 14px 28px rgba(57, 39, 17, 0.1);
+    }
+
+    .step-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .step-kicker {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .step-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: rgba(147, 95, 42, 0.1);
+      color: var(--accent-warm);
+    }
+
+    .step-status.complete {
+      background: rgba(53, 83, 61, 0.12);
+      color: var(--accent);
+    }
+
+    .step-status.locked {
+      background: rgba(144, 129, 106, 0.14);
+      color: var(--unavailable);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice-grid.two-up {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choice-button {
+      display: grid;
+      gap: 6px;
+      width: 100%;
+      padding: 14px 15px;
+      text-align: left;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(82, 61, 32, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(248, 240, 223, 0.78));
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .choice-button:hover:not(:disabled),
+    .choice-button:focus-visible:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(53, 83, 61, 0.32);
+      box-shadow: 0 10px 22px rgba(57, 39, 17, 0.1);
+      outline: none;
+    }
+
+    .choice-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .choice-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .choice-main {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      white-space: pre-line;
+    }
+
+    .choice-detail {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+      min-height: 1.2em;
+      white-space: pre-line;
+    }
+
+    .choice-button.is-empty {
+      border-style: dashed;
+    }
+
+    .choice-button.is-accent {
+      border-color: rgba(53, 83, 61, 0.2);
+      background: linear-gradient(180deg, rgba(238, 245, 232, 0.88), rgba(230, 239, 226, 0.74));
+    }
+
+    .build-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(53, 83, 61, 0.1);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .tag span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-card {
+      padding: 16px;
+    }
+
+    .summary-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.18rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .stat-card {
+      padding: 14px 12px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255, 248, 233, 0.92), rgba(240, 228, 205, 0.92));
+    }
+
+    .stat-value {
+      font-size: 1.45rem;
+      font-family: "Consolas", "Courier New", monospace;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .list-block {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(80, 60, 34, 0.08);
+      line-height: 1.4;
+    }
+
+    .tree-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tree-progress {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(224, 235, 223, 0.94), rgba(240, 247, 238, 0.88));
+      border: 1px solid rgba(53, 83, 61, 0.14);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .tree-card {
+      padding: 16px;
+    }
+
+    .tree-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .tree-title-row h3 {
+      font-size: 1.24rem;
+    }
+
+    .tree-type {
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+    }
+
+    .tree-level {
+      padding: 12px 0;
+      border-top: 1px solid rgba(73, 54, 27, 0.08);
+    }
+
+    .tree-level:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .tree-level-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .tree-level-header span:last-child {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(144, 129, 106, 0.12);
+    }
+
+    .tree-level.selected .tree-level-header,
+    .tree-level.selected .tree-version.selected {
+      color: var(--selected);
+    }
+
+    .tree-level.available .tree-level-header,
+    .tree-level.available .tree-version {
+      color: var(--available);
+    }
+
+    .tree-level.unavailable .tree-level-header,
+    .tree-level.unavailable .tree-version {
+      color: var(--unavailable);
+    }
+
+    .tree-level.selected .tree-level-header span:last-child {
+      background: rgba(147, 95, 42, 0.12);
+    }
+
+    .tree-level.available .tree-level-header span:last-child {
+      background: rgba(53, 83, 61, 0.12);
+    }
+
+    .tree-version-list {
+      display: grid;
+      gap: 6px;
+      margin-left: 12px;
+    }
+
+    .tree-version {
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(82, 61, 32, 0.08);
+      font-size: 0.94rem;
+      line-height: 1.35;
+    }
+
+    .tree-version.selected {
+      border-color: rgba(147, 95, 42, 0.18);
+      background: rgba(250, 236, 217, 0.86);
+      font-weight: 700;
+    }
+
+    .empty-state {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(96, 76, 45, 0.18);
+      background: rgba(255, 255, 255, 0.44);
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .selector-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: flex-end;
+      background: rgba(41, 28, 14, 0.42);
+      backdrop-filter: blur(8px);
+      padding-left: min(8vw, 64px);
+      animation: fade-in 180ms ease-out both;
+    }
+
+    .selector-sheet {
+      width: min(560px, 100%);
+      height: 100%;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(247, 237, 217, 0.96));
+      border-left: 1px solid rgba(76, 56, 28, 0.12);
+      box-shadow: -18px 0 40px rgba(39, 25, 11, 0.18);
+      overflow-y: auto;
+      animation: slide-in 220ms ease-out both;
+    }
+
+    .selector-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .selector-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .close-button {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(53, 83, 61, 0.1);
+      color: var(--accent);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: transform 160ms ease, background-color 160ms ease;
+    }
+
+    .close-button:hover,
+    .close-button:focus-visible {
+      transform: rotate(90deg);
+      background: rgba(53, 83, 61, 0.18);
+      outline: none;
+    }
+
+    .selector-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-card {
+      display: grid;
+      gap: 8px;
+      width: 100%;
+      padding: 16px;
+      text-align: left;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(84, 61, 31, 0.12);
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .option-card:hover,
+    .option-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(53, 83, 61, 0.32);
+      box-shadow: 0 14px 28px rgba(57, 39, 17, 0.11);
+      outline: none;
+    }
+
+    .option-card.active {
+      border-color: rgba(147, 95, 42, 0.26);
+      background: rgba(251, 240, 220, 0.9);
+      box-shadow: 0 14px 28px rgba(90, 55, 18, 0.1);
+    }
+
+    .option-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .option-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.35;
+      white-space: pre-line;
+    }
+
+    .option-check {
+      flex-shrink: 0;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(147, 95, 42, 0.12);
+      color: var(--accent-warm);
+      font-weight: 700;
+    }
+
+    .option-detail {
+      color: var(--muted);
+      line-height: 1.45;
+      white-space: pre-line;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      border: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translateX(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        min-width: 0;
+      }
+
+      .choice-grid.two-up,
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app-shell {
+        padding: 18px 14px 24px;
+      }
+
+      .hero {
+        padding: 20px 18px;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+
+      .panel-header,
+      .panel-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .choice-grid.two-up,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .selector-overlay {
+        padding-left: 0;
+      }
+
+      .selector-sheet {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Lands of Evershade</p>
+        <h1>Character Builder</h1>
+        <p>PyQt character creation has been rebuilt here as a browser-based builder with the same race, origin, profession, path, and advancement-tree flow.</p>
+      </div>
+      <div class="hero-actions">
+        <div id="loadStatus" class="status-chip">Loading data...</div>
+        <button id="resetButton" class="ghost-button" type="button" disabled>Reset build</button>
+      </div>
+    </header>
+
+    <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+
+    <section class="board" aria-label="Character builder workspace">
+      <section class="panel" aria-labelledby="controlsTitle">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Selections</p>
+            <h2 id="controlsTitle">Build Steps</h2>
+            <p>Choose your starting options, then spend up to 12 level-up rewards.</p>
+          </div>
+          <div id="controlsCount" class="panel-count">0</div>
+        </div>
+        <div class="panel-body">
+          <div id="controlsPanel" class="stack"></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="summaryTitle">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Totals</p>
+            <h2 id="summaryTitle">Character Board</h2>
+            <p>Live totals are recalculated from your current selections.</p>
+          </div>
+          <div id="summaryCount" class="panel-count">0</div>
+        </div>
+        <div class="panel-body">
+          <div id="summaryPanel" class="summary-grid"></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="treesTitle">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Advancement</p>
+            <h2 id="treesTitle">Advancement Trees</h2>
+            <p>Available, selected, and locked rewards update as you level.</p>
+          </div>
+          <div id="treesCount" class="panel-count">0</div>
+        </div>
+        <div class="panel-body">
+          <div id="treesPanel" class="tree-stack"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="selectorOverlay" class="selector-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="selectorTitle">
+    <div class="selector-sheet">
+      <div class="selector-header">
+        <div>
+          <p id="selectorKicker" class="eyebrow">Choose Option</p>
+          <h2 id="selectorTitle">Options</h2>
+          <p id="selectorDescription"></p>
+        </div>
+        <button id="selectorClose" class="close-button" type="button" aria-label="Close selector">&times;</button>
+      </div>
+      <div id="selectorOptions" class="selector-options"></div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="app-shell">
+      <div class="error-banner">This page needs JavaScript to run the character builder.</div>
+    </div>
+  </noscript>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const LEVEL_UP_SLOTS = 12;
+      const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
+      const DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"];
+
+      const state = {
+        data: null,
+        trees: new Map(),
+        selectedRace: null,
+        selectedAttr: null,
+        selectedOrigin: null,
+        selectedProf: null,
+        selectedPath: null,
+        levelUps: Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState()),
+        selector: null,
+      };
+
+      const ui = {};
+
+      document.addEventListener("DOMContentLoaded", init);
+
+      async function init() {
+        cacheUi();
+        bindEvents();
+        renderLoadingState();
+
+        try {
+          const response = await fetch("data.json", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error("Request failed with status " + response.status + ".");
+          }
+
+          state.data = await response.json();
+          state.trees = new Map(
+            state.data["Advancement Trees"].map((tree) => [tree.Name, tree])
+          );
+
+          setLoadStatus(
+            state.data.Races.length +
+              " races | " +
+              state.data.Professions.length +
+              " professions | " +
+              state.data["Advancement Trees"].length +
+              " trees"
+          );
+          ui.resetButton.disabled = false;
+          clearError();
+          render();
+        } catch (error) {
+          setLoadStatus("Data unavailable");
+          showError(
+            "Could not load data.json. If you opened this file directly from disk, serve the folder over HTTP or open the GitHub Pages version instead. " +
+              error.message
+          );
+        }
+      }
+
+      function cacheUi() {
+        ui.loadStatus = document.getElementById("loadStatus");
+        ui.resetButton = document.getElementById("resetButton");
+        ui.errorBanner = document.getElementById("errorBanner");
+        ui.controlsCount = document.getElementById("controlsCount");
+        ui.summaryCount = document.getElementById("summaryCount");
+        ui.treesCount = document.getElementById("treesCount");
+        ui.controlsPanel = document.getElementById("controlsPanel");
+        ui.summaryPanel = document.getElementById("summaryPanel");
+        ui.treesPanel = document.getElementById("treesPanel");
+        ui.selectorOverlay = document.getElementById("selectorOverlay");
+        ui.selectorKicker = document.getElementById("selectorKicker");
+        ui.selectorTitle = document.getElementById("selectorTitle");
+        ui.selectorDescription = document.getElementById("selectorDescription");
+        ui.selectorOptions = document.getElementById("selectorOptions");
+        ui.selectorClose = document.getElementById("selectorClose");
+      }
+
+      function bindEvents() {
+        ui.resetButton.addEventListener("click", resetBuild);
+        ui.selectorClose.addEventListener("click", closeSelector);
+        ui.selectorOverlay.addEventListener("click", (event) => {
+          if (event.target === ui.selectorOverlay) {
+            closeSelector();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !ui.selectorOverlay.classList.contains("hidden")) {
+            closeSelector();
+          }
+        });
+      }
+
+      function createLevelUpState() {
+        return {
+          treeName: null,
+          level: null,
+          versionIndex: null,
+        };
+      }
+
+      function resetBuild() {
+        state.selectedRace = null;
+        state.selectedAttr = null;
+        state.selectedOrigin = null;
+        state.selectedProf = null;
+        state.selectedPath = null;
+        state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+        closeSelector();
+        render();
+      }
+
+      function renderLoadingState() {
+        ui.controlsCount.textContent = "...";
+        ui.summaryCount.textContent = "...";
+        ui.treesCount.textContent = "...";
+
+        ui.controlsPanel.replaceChildren(
+          createEmptyState("Loading builder data...")
+        );
+        ui.summaryPanel.replaceChildren(
+          createEmptyState("Loading character board...")
+        );
+        ui.treesPanel.replaceChildren(
+          createEmptyState("Loading advancement trees...")
+        );
+      }
+
+      function render() {
+        if (!state.data) {
+          renderLoadingState();
+          return;
+        }
+
+        const levelMeta = refreshLevelUpStates();
+        renderControls(levelMeta);
+        renderSummary();
+        renderTrees(levelMeta);
+      }
+
+      function renderControls(levelMeta) {
+        const container = ui.controlsPanel;
+        container.replaceChildren();
+
+        const attrOptions = state.selectedRace ? state.selectedRace.Attributes || [] : [];
+        const pathOptions = state.selectedProf ? state.selectedProf.Paths || [] : [];
+        const completeSelections = countCompleteSelections(levelMeta);
+        ui.controlsCount.textContent = String(completeSelections);
+
+        const buildSteps = [
+          createSingleChoiceCard({
+            kicker: "Step 1",
+            title: "Race",
+            description: "Select your ancestry, movement, hit points, and divine die.",
+            status: state.selectedRace ? "Chosen" : "Open",
+            complete: Boolean(state.selectedRace),
+            buttonLabel: "Race",
+            buttonMain: state.selectedRace ? state.selectedRace.Name : "Choose race",
+            buttonDetail: state.selectedRace
+              ? raceButtonDetail(state.selectedRace)
+              : state.data.Races.length + " available options",
+            onClick: () =>
+              openSelector({
+                kicker: "Step 1",
+                title: "Choose Race",
+                description: "Pick a race to unlock its attribute spreads.",
+                options: state.data.Races,
+                getOptionContent: describeRaceOption,
+                onSelect: selectRace,
+                isSelected: (option) => state.selectedRace === option,
+              }),
+          }),
+          createSingleChoiceCard({
+            kicker: "Step 2",
+            title: "Attributes",
+            description: "Apply the race-specific attribute distribution.",
+            status: !state.selectedRace ? "Locked" : state.selectedAttr ? "Chosen" : "Open",
+            complete: Boolean(state.selectedAttr),
+            locked: !state.selectedRace,
+            buttonLabel: "Attributes",
+            buttonMain: state.selectedAttr
+              ? formatAttributeSummary(state.selectedAttr)
+              : "Choose attributes",
+            buttonDetail: !state.selectedRace
+              ? "Pick a race first."
+              : attrOptions.length + " available spread" + (attrOptions.length === 1 ? "" : "s"),
+            empty: !state.selectedAttr,
+            disabled: !state.selectedRace || attrOptions.length <= 1,
+            onClick: () =>
+              openSelector({
+                kicker: "Step 2",
+                title: "Choose Attributes",
+                description: "Different races can offer one or more starting spreads.",
+                options: attrOptions,
+                getOptionContent: describeAttributeOption,
+                onSelect: selectAttr,
+                isSelected: (option) => state.selectedAttr === option,
+              }),
+          }),
+          createSingleChoiceCard({
+            kicker: "Step 3",
+            title: "Origin",
+            description: "Origins grant keywords, items, and starting Brill.",
+            status: state.selectedOrigin ? "Chosen" : "Open",
+            complete: Boolean(state.selectedOrigin),
+            buttonLabel: "Origin",
+            buttonMain: state.selectedOrigin ? state.selectedOrigin.Name : "Choose origin",
+            buttonDetail: state.selectedOrigin
+              ? renderEntrySummary(state.selectedOrigin) || "No changes"
+              : state.data.Origins.length + " available options",
+            onClick: () =>
+              openSelector({
+                kicker: "Step 3",
+                title: "Choose Origin",
+                description: "Origins affect your background equipment, keywords, and wealth.",
+                options: state.data.Origins,
+                getOptionContent: describeEntryOption,
+                onSelect: selectOrigin,
+                isSelected: (option) => state.selectedOrigin === option,
+              }),
+          }),
+          createSingleChoiceCard({
+            kicker: "Step 4",
+            title: "Profession",
+            description: "Professions unlock paths and advancement trees.",
+            status: state.selectedProf ? "Chosen" : "Open",
+            complete: Boolean(state.selectedProf),
+            buttonLabel: "Profession",
+            buttonMain: state.selectedProf ? state.selectedProf.Name : "Choose profession",
+            buttonDetail: state.selectedProf
+              ? renderEntrySummary(state.selectedProf) || "No changes"
+              : state.data.Professions.length + " available options",
+            onClick: () =>
+              openSelector({
+                kicker: "Step 4",
+                title: "Choose Profession",
+                description: "Your profession determines available paths and late-game growth.",
+                options: state.data.Professions,
+                getOptionContent: describeProfessionOption,
+                onSelect: selectProfession,
+                isSelected: (option) => state.selectedProf === option,
+              }),
+          }),
+          createSingleChoiceCard({
+            kicker: "Step 5",
+            title: "Path",
+            description: "Each profession offers multiple paths with different rewards.",
+            status: !state.selectedProf ? "Locked" : state.selectedPath ? "Chosen" : "Open",
+            complete: Boolean(state.selectedPath),
+            locked: !state.selectedProf,
+            buttonLabel: "Path",
+            buttonMain: state.selectedPath ? state.selectedPath.Name : "Choose path",
+            buttonDetail: !state.selectedProf
+              ? "Pick a profession first."
+              : state.selectedPath
+                ? renderEntrySummary(state.selectedPath) || "No changes"
+                : pathOptions.length + " available options",
+            empty: !state.selectedPath,
+            disabled: !state.selectedProf || pathOptions.length <= 1,
+            onClick: () =>
+              openSelector({
+                kicker: "Step 5",
+                title: "Choose Path",
+                description: "Paths add your core equipment and starting actions.",
+                options: pathOptions,
+                getOptionContent: describeEntryOption,
+                onSelect: selectPath,
+                isSelected: (option) => state.selectedPath === option,
+              }),
+          }),
+        ];
+
+        buildSteps.forEach((element) => container.appendChild(element));
+
+        levelMeta.forEach((meta) => {
+          const stepCard = createDualChoiceCard({
+            kicker: "Level Up " + meta.slotNumber,
+            title: "Reward Slot " + meta.slotNumber,
+            description: meta.unlocked
+              ? "Choose a tree level, then choose which reward version to take."
+              : meta.slotNumber === 1
+                ? "Pick a profession first to unlock your first level up."
+                : "Complete the previous slot before choosing this one.",
+            status: !meta.unlocked ? "Locked" : meta.isComplete ? "Chosen" : "Open",
+            complete: meta.isComplete,
+            locked: !meta.unlocked,
+            firstButton: {
+              label: "Tree",
+              main: meta.selectedTree
+                ? meta.selectedTree.treeName + " L" + meta.selectedTree.level
+                : "Choose level up",
+              detail: !meta.unlocked
+                ? "Locked for now."
+                : meta.treeOptions.length + " available option" + (meta.treeOptions.length === 1 ? "" : "s"),
+              disabled: !meta.unlocked || meta.treeOptions.length === 0,
+              accent: meta.selectedTree !== null,
+              empty: meta.selectedTree === null,
+              onClick: () =>
+                openSelector({
+                  kicker: "Level Up " + meta.slotNumber,
+                  title: "Choose Level-Up Tree",
+                  description: "Select which tree level to spend this slot on.",
+                  options: meta.treeOptions,
+                  getOptionContent: describeTreeLevelOption,
+                  onSelect: (option) => selectLevelUpTree(meta.slotIndex, option),
+                  isSelected: (option) =>
+                    Boolean(
+                      meta.selectedTree &&
+                        meta.selectedTree.treeName === option.treeName &&
+                        meta.selectedTree.level === option.level
+                    ),
+                }),
+            },
+            secondButton: {
+              label: "Reward",
+              main: meta.selectedVersion
+                ? renderEntrySummary(meta.selectedVersion.entry) || "No changes"
+                : "Choose reward",
+              detail: !meta.selectedTree
+                ? "Choose a tree level first."
+                : meta.versionOptions.length + " available reward" + (meta.versionOptions.length === 1 ? "" : "s"),
+              disabled: !meta.selectedTree || meta.versionOptions.length <= 1,
+              accent: meta.selectedVersion !== null,
+              empty: meta.selectedVersion === null,
+              onClick: () =>
+                openSelector({
+                  kicker: "Level Up " + meta.slotNumber,
+                  title: "Choose Reward",
+                  description: "Pick the reward version for this tree level.",
+                  options: meta.versionOptions,
+                  getOptionContent: describeVersionOption,
+                  onSelect: (option) => selectLevelUpVersion(meta.slotIndex, option),
+                  isSelected: (option) =>
+                    Boolean(meta.selectedVersion && meta.selectedVersion.index === option.index),
+                }),
+            },
+          });
+
+          container.appendChild(stepCard);
+        });
+      }
+
+      function renderSummary() {
+        const container = ui.summaryPanel;
+        container.replaceChildren();
+
+        const tags = [
+          state.selectedRace ? ["Race", state.selectedRace.Name] : null,
+          state.selectedOrigin ? ["Origin", state.selectedOrigin.Name] : null,
+          state.selectedProf ? ["Profession", state.selectedProf.Name] : null,
+          state.selectedPath ? ["Path", state.selectedPath.Name] : null,
+        ].filter(Boolean);
+
+        ui.summaryCount.textContent = String(tags.length);
+
+        if (
+          !state.selectedRace &&
+          !state.selectedOrigin &&
+          !state.selectedProf &&
+          !state.selectedPath &&
+          getFilledLevelCount() === 0
+        ) {
+          container.appendChild(
+            createEmptyState(
+              "Start by choosing a race, origin, and profession. Your attributes, items, keywords, and actions will appear here as the build comes together."
+            )
+          );
+          return;
+        }
+
+        if (tags.length) {
+          const tagCard = document.createElement("section");
+          tagCard.className = "summary-card";
+          const heading = document.createElement("h3");
+          heading.textContent = "Current Build";
+          tagCard.appendChild(heading);
+
+          const tagWrap = document.createElement("div");
+          tagWrap.className = "build-tags";
+          tags.forEach(([label, value]) => {
+            const chip = document.createElement("div");
+            chip.className = "tag";
+            const accent = document.createElement("span");
+            accent.textContent = label;
+            const valueText = document.createElement("strong");
+            valueText.textContent = value;
+            chip.appendChild(accent);
+            chip.appendChild(valueText);
+            tagWrap.appendChild(chip);
+          });
+
+          tagCard.appendChild(tagWrap);
+          container.appendChild(tagCard);
+        }
+
+        const stats = collectCharacterStats();
+
+        const attributeCard = document.createElement("section");
+        attributeCard.className = "summary-card";
+        const attributeTitle = document.createElement("h3");
+        attributeTitle.textContent = "Attributes";
+        attributeCard.appendChild(attributeTitle);
+
+        const attributeGrid = document.createElement("div");
+        attributeGrid.className = "stat-grid";
+        ATTRIBUTES.forEach((attribute) => {
+          attributeGrid.appendChild(
+            createStatCard(attribute, String(stats.attributes[attribute] || 0))
+          );
+        });
+        attributeCard.appendChild(attributeGrid);
+        container.appendChild(attributeCard);
+
+        const statCard = document.createElement("section");
+        statCard.className = "summary-card";
+        const statTitle = document.createElement("h3");
+        statTitle.textContent = "Stats";
+        statCard.appendChild(statTitle);
+
+        const statGrid = document.createElement("div");
+        statGrid.className = "stat-grid";
+        statGrid.appendChild(createStatCard("MOV", String(stats.mob)));
+        statGrid.appendChild(createStatCard("HP", String(stats.hp)));
+        statGrid.appendChild(createStatCard("DIV", stats.divDie || "-"));
+        statGrid.appendChild(createStatCard("Brill", String(stats.brill)));
+        statCard.appendChild(statGrid);
+        container.appendChild(statCard);
+
+        const keywordSummary = formatKeywordSummary(stats.keywordCounts);
+        if (keywordSummary) {
+          container.appendChild(createListSection("Keywords", [keywordSummary]));
+        }
+
+        const itemLines = Array.from(stats.items.values()).map(
+          (item) => item.Name + " (" + item.Type + ")"
+        );
+        if (itemLines.length) {
+          container.appendChild(createListSection("Items", itemLines));
+        }
+
+        const actionLines = Array.from(stats.actions.values()).map(
+          (action) => action.Name + " (Lvl " + action.Level + ")"
+        );
+        if (actionLines.length) {
+          container.appendChild(createListSection("Action Cards", actionLines));
+        }
+      }
+
+      function renderTrees(levelMeta) {
+        const container = ui.treesPanel;
+        container.replaceChildren();
+        ui.treesCount.textContent = String(getFilledLevelCount());
+
+        if (!state.selectedProf) {
+          container.appendChild(
+            createEmptyState(
+              "No profession selected yet. Choose a profession to reveal its primary tree and any extra advancement trees."
+            )
+          );
+          return;
+        }
+
+        const treeNames = getAccessibleAdvancementTreeNames();
+        if (!treeNames.length) {
+          container.appendChild(
+            createEmptyState("This profession does not expose any advancement trees.")
+          );
+          return;
+        }
+
+        const progress = document.createElement("section");
+        progress.className = "tree-progress";
+        const filled = getFilledLevelCount();
+        const openSlots = levelMeta.filter((meta) => meta.unlocked && !meta.isComplete).length;
+        progress.append(
+          document.createTextNode("Progress: " + filled + "/" + LEVEL_UP_SLOTS + " level ups selected")
+        );
+        const side = document.createElement("span");
+        side.textContent = openSlots > 0 ? openSlots + " slot ready to fill" + (openSlots === 1 ? "" : "s") : "No open slot";
+        progress.appendChild(side);
+        container.appendChild(progress);
+
+        const selectedByTree = buildSelectedByTree();
+        treeNames.forEach((treeName, index) => {
+          const tree = state.trees.get(treeName);
+          if (!tree) {
+            return;
+          }
+
+          const card = document.createElement("article");
+          card.className = "tree-card";
+
+          const titleRow = document.createElement("div");
+          titleRow.className = "tree-title-row";
+
+          const title = document.createElement("h3");
+          title.textContent = treeName;
+          titleRow.appendChild(title);
+
+          const type = document.createElement("div");
+          type.className = "tree-type";
+          type.textContent = index === 0 ? "Primary tree" : "Additional tree";
+          titleRow.appendChild(type);
+
+          card.appendChild(titleRow);
+
+          const picked = selectedByTree[treeName] || {};
+          const taken = new Set(Object.keys(picked).map((value) => Number(value)));
+          const allLevels = Object.keys(tree.Levels)
+            .map((value) => Number(value))
+            .sort((a, b) => a - b);
+
+          const available = new Set();
+          const simulatedTaken = new Set();
+          allLevels.forEach((level) => {
+            if (taken.has(level)) {
+              simulatedTaken.add(level);
+            } else if (isAdvancementLevelUnlocked(level, simulatedTaken, 1)) {
+              available.add(level);
+            }
+          });
+
+          allLevels.forEach((level) => {
+            const levelBlock = document.createElement("section");
+            levelBlock.className = "tree-level";
+
+            if (picked[level] !== undefined) {
+              levelBlock.classList.add("selected");
+            } else if (available.has(level)) {
+              levelBlock.classList.add("available");
+            } else {
+              levelBlock.classList.add("unavailable");
+            }
+
+            const header = document.createElement("div");
+            header.className = "tree-level-header";
+            const name = document.createElement("span");
+            name.textContent = "Level " + level;
+            header.appendChild(name);
+
+            const badge = document.createElement("span");
+            badge.textContent =
+              picked[level] !== undefined
+                ? "Selected"
+                : available.has(level)
+                  ? "Available"
+                  : "Locked";
+            header.appendChild(badge);
+            levelBlock.appendChild(header);
+
+            const versionList = document.createElement("div");
+            versionList.className = "tree-version-list";
+
+            tree.Levels[String(level)].forEach((entry, versionIndex) => {
+              const versionLine = document.createElement("div");
+              versionLine.className = "tree-version";
+
+              if (picked[level] === versionIndex) {
+                versionLine.classList.add("selected");
+              }
+
+              versionLine.textContent = renderEntrySummary(entry) || "No changes";
+              versionList.appendChild(versionLine);
+            });
+
+            levelBlock.appendChild(versionList);
+            card.appendChild(levelBlock);
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      function createSingleChoiceCard(config) {
+        const card = document.createElement("section");
+        card.className = "step-card";
+
+        const head = document.createElement("div");
+        head.className = "step-head";
+        head.appendChild(createStepHeading(config.kicker, config.title, config.description));
+        head.appendChild(createStatusBadge(config.status, config.complete, config.locked));
+        card.appendChild(head);
+
+        const grid = document.createElement("div");
+        grid.className = "choice-grid";
+        grid.appendChild(
+          createChoiceButton({
+            label: config.buttonLabel,
+            main: config.buttonMain,
+            detail: config.buttonDetail,
+            onClick: config.onClick,
+            disabled: config.disabled,
+            empty: config.empty,
+            accent: config.complete,
+          })
+        );
+        card.appendChild(grid);
+        return card;
+      }
+
+      function createDualChoiceCard(config) {
+        const card = document.createElement("section");
+        card.className = "step-card";
+
+        const head = document.createElement("div");
+        head.className = "step-head";
+        head.appendChild(createStepHeading(config.kicker, config.title, config.description));
+        head.appendChild(createStatusBadge(config.status, config.complete, config.locked));
+        card.appendChild(head);
+
+        const grid = document.createElement("div");
+        grid.className = "choice-grid two-up";
+        grid.appendChild(createChoiceButton(config.firstButton));
+        grid.appendChild(createChoiceButton(config.secondButton));
+        card.appendChild(grid);
+        return card;
+      }
+
+      function createStepHeading(kicker, title, description) {
+        const wrap = document.createElement("div");
+        const kick = document.createElement("div");
+        kick.className = "step-kicker";
+        kick.textContent = kicker;
+        wrap.appendChild(kick);
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+        wrap.appendChild(heading);
+
+        const detail = document.createElement("p");
+        detail.textContent = description;
+        wrap.appendChild(detail);
+
+        return wrap;
+      }
+
+      function createStatusBadge(text, complete, locked) {
+        const badge = document.createElement("div");
+        badge.className = "step-status";
+        if (complete) {
+          badge.classList.add("complete");
+        } else if (locked) {
+          badge.classList.add("locked");
+        }
+        badge.textContent = text;
+        return badge;
+      }
+
+      function createChoiceButton(config) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice-button";
+        if (config.empty) {
+          button.classList.add("is-empty");
+        }
+        if (config.accent) {
+          button.classList.add("is-accent");
+        }
+        button.disabled = Boolean(config.disabled);
+
+        if (!button.disabled && typeof config.onClick === "function") {
+          button.addEventListener("click", config.onClick);
+        }
+
+        const label = document.createElement("span");
+        label.className = "choice-label";
+        label.textContent = config.label;
+        button.appendChild(label);
+
+        const main = document.createElement("span");
+        main.className = "choice-main";
+        main.textContent = config.main;
+        button.appendChild(main);
+
+        const detail = document.createElement("span");
+        detail.className = "choice-detail";
+        detail.textContent = config.detail || "";
+        button.appendChild(detail);
+
+        return button;
+      }
+
+      function createStatCard(label, value) {
+        const card = document.createElement("div");
+        card.className = "stat-card";
+
+        const statValue = document.createElement("div");
+        statValue.className = "stat-value";
+        statValue.textContent = value;
+        card.appendChild(statValue);
+
+        const statLabel = document.createElement("div");
+        statLabel.className = "stat-label";
+        statLabel.textContent = label;
+        card.appendChild(statLabel);
+
+        return card;
+      }
+
+      function createListSection(title, items) {
+        const section = document.createElement("section");
+        section.className = "summary-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+        section.appendChild(heading);
+
+        const list = document.createElement("ul");
+        list.className = "list-block";
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "list-item";
+          li.textContent = item;
+          list.appendChild(li);
+        });
+
+        section.appendChild(list);
+        return section;
+      }
+
+      function createEmptyState(text) {
+        const box = document.createElement("div");
+        box.className = "empty-state";
+        box.textContent = text;
+        return box;
+      }
+
+      function openSelector(config) {
+        state.selector = config;
+        ui.selectorKicker.textContent = config.kicker || "Choose Option";
+        ui.selectorTitle.textContent = config.title || "Options";
+        ui.selectorDescription.textContent = config.description || "";
+        ui.selectorOptions.replaceChildren();
+
+        if (!config.options.length) {
+          ui.selectorOptions.appendChild(
+            createEmptyState("No options are available here yet.")
+          );
+        } else {
+          config.options.forEach((option) => {
+            const content = config.getOptionContent(option);
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "option-card";
+            if (config.isSelected && config.isSelected(option)) {
+              button.classList.add("active");
+            }
+
+            button.addEventListener("click", () => {
+              config.onSelect(option);
+              closeSelector();
+            });
+
+            const titleRow = document.createElement("div");
+            titleRow.className = "option-title-row";
+
+            const title = document.createElement("div");
+            title.className = "option-title";
+            title.textContent = content.title;
+            titleRow.appendChild(title);
+
+            if (config.isSelected && config.isSelected(option)) {
+              const check = document.createElement("div");
+              check.className = "option-check";
+              check.textContent = "OK";
+              titleRow.appendChild(check);
+            }
+
+            button.appendChild(titleRow);
+
+            if (content.detail) {
+              const detail = document.createElement("div");
+              detail.className = "option-detail";
+              detail.textContent = content.detail;
+              button.appendChild(detail);
+            }
+
+            ui.selectorOptions.appendChild(button);
+          });
+        }
+
+        ui.selectorOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        ui.selectorClose.focus();
+      }
+
+      function closeSelector() {
+        state.selector = null;
+        ui.selectorOverlay.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+
+      function selectRace(race) {
+        const raceChanged = state.selectedRace !== race;
+        state.selectedRace = race;
+
+        if (raceChanged) {
+          state.selectedAttr = null;
+          const attrOptions = race.Attributes || [];
+          if (attrOptions.length === 1) {
+            state.selectedAttr = attrOptions[0];
+          }
+        }
+
+        render();
+      }
+
+      function selectAttr(attr) {
+        state.selectedAttr = attr;
+        render();
+      }
+
+      function selectOrigin(origin) {
+        state.selectedOrigin = origin;
+        render();
+      }
+
+      function selectProfession(profession) {
+        const professionChanged = state.selectedProf !== profession;
+        state.selectedProf = profession;
+
+        if (professionChanged) {
+          state.selectedPath = null;
+          const pathOptions = profession.Paths || [];
+          if (pathOptions.length === 1) {
+            state.selectedPath = pathOptions[0];
+          }
+          state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+        }
+
+        render();
+      }
+
+      function selectPath(path) {
+        state.selectedPath = path;
+        render();
+      }
+
+      function selectLevelUpTree(slotIndex, treeLevelOption) {
+        const slot = state.levelUps[slotIndex];
+        slot.treeName = treeLevelOption.treeName;
+        slot.level = treeLevelOption.level;
+        slot.versionIndex = null;
+        render();
+      }
+
+      function selectLevelUpVersion(slotIndex, versionOption) {
+        state.levelUps[slotIndex].versionIndex = versionOption.index;
+        render();
+      }
+
+      function refreshLevelUpStates() {
+        const meta = [];
+        const priorSelectedOptions = [];
+        let unlocked = state.selectedProf !== null;
+
+        for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
+          const slotNumber = slotIndex + 1;
+          const slotState = state.levelUps[slotIndex];
+          const treeOptions = unlocked
+            ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
+            : [];
+
+          let selectedTree =
+            treeOptions.find(
+              (option) =>
+                slotState.treeName === option.treeName && slotState.level === option.level
+            ) || null;
+
+          if (!selectedTree) {
+            if (treeOptions.length === 1) {
+              selectedTree = treeOptions[0];
+              slotState.treeName = selectedTree.treeName;
+              slotState.level = selectedTree.level;
+            } else {
+              slotState.treeName = null;
+              slotState.level = null;
+              slotState.versionIndex = null;
+            }
+          }
+
+          let versionOptions = [];
+          let selectedVersion = null;
+
+          if (selectedTree) {
+            versionOptions = getVersionOptions(selectedTree);
+            if (versionOptions.length === 1) {
+              slotState.versionIndex = 0;
+            }
+
+            selectedVersion =
+              versionOptions.find((option) => option.index === slotState.versionIndex) || null;
+
+            if (!selectedVersion && versionOptions.length !== 1) {
+              slotState.versionIndex = null;
+            }
+          } else {
+            slotState.versionIndex = null;
+          }
+
+          const isComplete = Boolean(selectedTree && selectedVersion);
+
+          if (isComplete) {
+            priorSelectedOptions.push(selectedTree);
+          }
+
+          meta.push({
+            slotIndex,
+            slotNumber,
+            unlocked,
+            treeOptions,
+            selectedTree,
+            versionOptions,
+            selectedVersion,
+            isComplete,
+          });
+
+          unlocked = unlocked && isComplete;
+        }
+
+        return meta;
+      }
+
+      function getAvailableLevelUpOptions(slotIndex, priorSelectedOptions) {
+        const slotNumber = slotIndex + 1;
+        const treeNames = getAccessibleAdvancementTreeNames();
+        const takenLevelsByTree = new Map();
+
+        priorSelectedOptions.forEach((option) => {
+          if (!takenLevelsByTree.has(option.treeName)) {
+            takenLevelsByTree.set(option.treeName, new Set());
+          }
+          takenLevelsByTree.get(option.treeName).add(option.level);
+        });
+
+        const options = [];
+        treeNames.forEach((treeName) => {
+          const tree = state.trees.get(treeName);
+          if (!tree) {
+            return;
+          }
+
+          const takenLevels = takenLevelsByTree.get(treeName) || new Set();
+          Object.keys(tree.Levels)
+            .map((value) => Number(value))
+            .sort((a, b) => a - b)
+            .forEach((level) => {
+              if (takenLevels.has(level)) {
+                return;
+              }
+
+              if (isAdvancementLevelUnlocked(level, takenLevels, slotNumber)) {
+                options.push({
+                  treeName,
+                  level,
+                  versions: tree.Levels[String(level)],
+                });
+              }
+            });
+        });
+
+        return options;
+      }
+
+      function getAccessibleAdvancementTreeNames() {
+        if (!state.selectedProf) {
+          return [];
+        }
+
+        const treeNames = [];
+        const primaryTreeName = resolvePrimaryTreeName(state.selectedProf.Name);
+
+        if (state.trees.has(primaryTreeName)) {
+          treeNames.push(primaryTreeName);
+        }
+
+        (state.selectedProf["Advancement Trees"] || []).forEach((treeName) => {
+          if (state.trees.has(treeName) && !treeNames.includes(treeName)) {
+            treeNames.push(treeName);
+          }
+        });
+
+        return treeNames;
+      }
+
+      function resolvePrimaryTreeName(professionName) {
+        if (state.trees.has(professionName)) {
+          return professionName;
+        }
+
+        const normalizedProfession = normalizeName(professionName);
+        let bestMatch = null;
+
+        state.trees.forEach((_, treeName) => {
+          const normalizedTree = normalizeName(treeName);
+          if (
+            normalizedProfession.startsWith(normalizedTree) ||
+            normalizedTree.startsWith(normalizedProfession)
+          ) {
+            if (
+              !bestMatch ||
+              normalizedTree.length > normalizeName(bestMatch).length
+            ) {
+              bestMatch = treeName;
+            }
+          }
+        });
+
+        return bestMatch || professionName;
+      }
+
+      function normalizeName(value) {
+        return value
+          .toLowerCase()
+          .split("")
+          .filter((character) => /[a-z0-9]/.test(character))
+          .join("");
+      }
+
+      function isAdvancementLevelUnlocked(level, takenLevels, slotNumber) {
+        if (level === 1) {
+          return true;
+        }
+        if (level === 2 || level === 3) {
+          return takenLevels.has(1);
+        }
+        if (level === 4) {
+          return takenLevels.has(3);
+        }
+        if (level === 5) {
+          return takenLevels.has(3) && slotNumber >= 4;
+        }
+        if (level === 6) {
+          return takenLevels.has(5);
+        }
+        if (level === 7) {
+          return takenLevels.has(5) && slotNumber >= 6;
+        }
+        if (level === 8) {
+          return takenLevels.has(7);
+        }
+        return false;
+      }
+
+      function getSelectedAdvancementEntries() {
+        const entries = [];
+
+        state.levelUps.forEach((slotState) => {
+          if (
+            slotState.treeName === null ||
+            slotState.level === null ||
+            slotState.versionIndex === null
+          ) {
+            return;
+          }
+
+          const option = getTreeLevelOption(slotState.treeName, slotState.level);
+          if (!option) {
+            return;
+          }
+
+          const versionOptions = getVersionOptions(option);
+          if (
+            slotState.versionIndex >= 0 &&
+            slotState.versionIndex < versionOptions.length
+          ) {
+            entries.push(versionOptions[slotState.versionIndex].entry);
+          }
+        });
+
+        return entries;
+      }
+
+      function getTreeLevelOption(treeName, level) {
+        const tree = state.trees.get(treeName);
+        if (!tree) {
+          return null;
+        }
+
+        const versions = tree.Levels[String(level)];
+        if (!versions) {
+          return null;
+        }
+
+        return {
+          treeName,
+          level,
+          versions,
+        };
+      }
+
+      function getVersionOptions(treeLevelOption) {
+        return treeLevelOption.versions.map((entry, index) => ({
+          index,
+          entry,
+        }));
+      }
+
+      function collectCharacterStats() {
+        const stats = {
+          attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
+          mob: 0,
+          hp: 0,
+          divDie: null,
+          brill: 0,
+          keywordCounts: new Map(),
+          items: new Map(),
+          actions: new Map(),
+        };
+
+        if (state.selectedRace) {
+          applyRace(stats, state.selectedRace, state.selectedAttr);
+        }
+
+        if (state.selectedOrigin) {
+          addKeywords(stats, state.selectedOrigin.Keywords || []);
+          (state.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
+          stats.brill += state.selectedOrigin.Brill || 0;
+        }
+
+        if (state.selectedProf) {
+          addKeywords(stats, state.selectedProf.Keywords || []);
+        }
+
+        if (state.selectedPath) {
+          applyEntry(stats, state.selectedPath);
+        }
+
+        getSelectedAdvancementEntries().forEach((entry) => applyEntry(stats, entry));
+        return stats;
+      }
+
+      function addKeywords(stats, values) {
+        values.forEach((value) => {
+          stats.keywordCounts.set(value, (stats.keywordCounts.get(value) || 0) + 1);
+        });
+      }
+
+      function addItem(stats, item) {
+        const key = item.Name + "::" + item.Type;
+        if (!stats.items.has(key)) {
+          stats.items.set(key, item);
+        }
+      }
+
+      function addAction(stats, action) {
+        const current = stats.actions.get(action.Name);
+        if (!current || action.Level > current.Level) {
+          stats.actions.set(action.Name, action);
+        }
+      }
+
+      function applyRace(stats, race, attributes) {
+        if (attributes) {
+          Object.keys(attributes).forEach((key) => {
+            stats.attributes[key] += attributes[key];
+          });
+        }
+
+        stats.mob = race.MOB || 0;
+        stats.hp = race.HP || 0;
+        stats.divDie = race.DIV || null;
+        addKeywords(stats, race.Keywords || []);
+        (race["Action cards"] || []).forEach((action) => addAction(stats, action));
+      }
+
+      function applyEntry(stats, entry) {
+        (entry.Attributes || []).forEach((attributeSet) => {
+          Object.keys(attributeSet).forEach((key) => {
+            stats.attributes[key] += attributeSet[key];
+          });
+        });
+
+        stats.mob += entry.MOB || 0;
+        stats.hp += entry.HP || 0;
+        stats.brill += entry.Brill || 0;
+        addKeywords(stats, entry.Keywords || []);
+
+        const divValue = entry.DIV;
+        if (divValue === "Upgrade") {
+          stats.divDie = upgradeDivDie(stats.divDie);
+        } else if (divValue) {
+          stats.divDie = divValue;
+        }
+
+        (entry.Items || []).forEach((item) => addItem(stats, item));
+        (entry["Action cards"] || []).forEach((action) => addAction(stats, action));
+      }
+
+      function upgradeDivDie(divDie) {
+        const currentIndex = DICE_PROGRESSION.indexOf(divDie);
+        if (currentIndex === -1 || currentIndex === DICE_PROGRESSION.length - 1) {
+          return divDie;
+        }
+        return DICE_PROGRESSION[currentIndex + 1];
+      }
+
+      function buildSelectedByTree() {
+        const selectedByTree = {};
+
+        state.levelUps.forEach((slotState) => {
+          if (
+            slotState.treeName === null ||
+            slotState.level === null ||
+            slotState.versionIndex === null
+          ) {
+            return;
+          }
+
+          const option = getTreeLevelOption(slotState.treeName, slotState.level);
+          if (!option) {
+            return;
+          }
+
+          if (!selectedByTree[option.treeName]) {
+            selectedByTree[option.treeName] = {};
+          }
+          selectedByTree[option.treeName][option.level] = slotState.versionIndex;
+        });
+
+        return selectedByTree;
+      }
+
+      function renderEntrySummary(entry) {
+        const parts = [];
+
+        (entry.Attributes || []).forEach((attributeSet) => {
+          Object.entries(attributeSet).forEach(([key, value]) => {
+            parts.push(value + " " + key);
+          });
+        });
+
+        if (entry.HP) {
+          parts.push(entry.HP + " HP");
+        }
+        if (entry.MOB) {
+          parts.push(entry.MOB + " MOV");
+        }
+        if (entry.Brill) {
+          parts.push(entry.Brill + " Brill");
+        }
+
+        const divValue = entry.DIV;
+        if (divValue === "Upgrade") {
+          parts.push("DIV Upgrade");
+        } else if (divValue) {
+          parts.push("DIV " + divValue);
+        }
+
+        parts.push(...(entry.Keywords || []));
+
+        (entry.Items || []).forEach((item) => {
+          parts.push(item.Name + " (" + item.Type + ")");
+        });
+
+        (entry["Action cards"] || []).forEach((action) => {
+          parts.push(action.Name + " L" + action.Level);
+        });
+
+        return parts.join(", ");
+      }
+
+      function raceButtonDetail(race) {
+        const extras = [];
+        const keywords = (race.Keywords || []).join(", ");
+        if (keywords) {
+          extras.push(keywords);
+        }
+        extras.push("MOV: " + (race.MOB || 0));
+        extras.push("HP: " + (race.HP || 0));
+        extras.push("DIV: " + (race.DIV || "-"));
+        return extras.join(" | ");
+      }
+
+      function formatAttributeSummary(attributeSet) {
+        return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
+      }
+
+      function describeRaceOption(race) {
+        return {
+          title: race.Name,
+          detail: raceButtonDetail(race),
+        };
+      }
+
+      function describeAttributeOption(attributeSet) {
+        return {
+          title: formatAttributeSummary(attributeSet),
+          detail: "Race attribute spread",
+        };
+      }
+
+      function describeEntryOption(entry) {
+        return {
+          title: entry.Name,
+          detail: renderEntrySummary(entry) || "No changes",
+        };
+      }
+
+      function describeProfessionOption(profession) {
+        const details = [];
+        const summary = renderEntrySummary(profession);
+        if (summary) {
+          details.push(summary);
+        }
+        if (profession.Paths && profession.Paths.length) {
+          details.push("Paths: " + profession.Paths.map((path) => path.Name).join(", "));
+        }
+        const accessibleTrees = [];
+        const primaryTree = resolvePrimaryTreeName(profession.Name);
+        if (state.trees.has(primaryTree)) {
+          accessibleTrees.push(primaryTree);
+        }
+        (profession["Advancement Trees"] || []).forEach((treeName) => {
+          if (!accessibleTrees.includes(treeName)) {
+            accessibleTrees.push(treeName);
+          }
+        });
+        if (accessibleTrees.length) {
+          details.push("Trees: " + accessibleTrees.join(", "));
+        }
+        return {
+          title: profession.Name,
+          detail: details.join("\n"),
+        };
+      }
+
+      function describeTreeLevelOption(option) {
+        return {
+          title: option.treeName + " - Level " + option.level,
+          detail: option.versions
+            .map((entry) => renderEntrySummary(entry) || "No changes")
+            .join("\nOR\n"),
+        };
+      }
+
+      function describeVersionOption(option) {
+        return {
+          title: renderEntrySummary(option.entry) || "No changes",
+          detail: "",
+        };
+      }
+
+      function formatKeywordSummary(keywordCounts) {
+        if (!keywordCounts.size) {
+          return "";
+        }
+
+        return Array.from(keywordCounts.keys())
+          .sort((a, b) => a.localeCompare(b))
+          .map((keyword) => {
+            const count = keywordCounts.get(keyword);
+            return count > 1 ? keyword + " x" + count : keyword;
+          })
+          .join(", ");
+      }
+
+      function countCompleteSelections(levelMeta) {
+        let count = 0;
+        if (state.selectedRace) {
+          count += 1;
+        }
+        if (state.selectedAttr) {
+          count += 1;
+        }
+        if (state.selectedOrigin) {
+          count += 1;
+        }
+        if (state.selectedProf) {
+          count += 1;
+        }
+        if (state.selectedPath) {
+          count += 1;
+        }
+        count += levelMeta.filter((meta) => meta.isComplete).length;
+        return count;
+      }
+
+      function getFilledLevelCount() {
+        return state.levelUps.reduce((count, slotState) => {
+          return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
+        }, 0);
+      }
+
+      function setLoadStatus(text) {
+        ui.loadStatus.textContent = text;
+      }
+
+      function showError(message) {
+        ui.errorBanner.textContent = message;
+        ui.errorBanner.classList.remove("hidden");
+      }
+
+      function clearError() {
+        ui.errorBanner.textContent = "";
+        ui.errorBanner.classList.add("hidden");
+      }
+    })();
+  </script>
 </body>
 </html>
