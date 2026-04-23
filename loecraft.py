@@ -102,13 +102,7 @@ class LevelUpSlotState:
         return self.has_tree_selected() and self.version_index is not None
 
 
-def build_empty_level_up_state():
-    return [LevelUpSlotState() for _ in range(LEVEL_UP_SLOTS)]
 
-
-# -------------------------
-# Selection Popup
-# -------------------------
 # -------------------------
 # Selector Button
 # -------------------------
@@ -211,6 +205,11 @@ class LevelUpSection(QWidget):
         selectors_layout.addWidget(self.version_selector, 3)
         layout.addLayout(selectors_layout)
 
+    def refresh(self, tree_options, selected_tree, version_options, selected_version, can_fill):
+        self.tree_selector.set_items(tree_options, selected_tree)
+        self.tree_selector.setEnabled(can_fill and len(tree_options) > 1)
+        self.version_selector.set_items(version_options, selected_version)
+
     def is_complete(self):
         return (
             self.tree_selector.selected is not None
@@ -233,40 +232,28 @@ class StepSection(QWidget):
     ):
         super().__init__(parent)
 
-        self.title = title
-        self.render_popup_fn = render_popup_fn
-        self.render_button_fn = render_button_fn
         self.on_change = on_change
 
-        self.layout = QVBoxLayout(self)
-        self.layout.setContentsMargins(0, 0, 0, 0)
-        self.layout.setSpacing(2)
-        self.items = []
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(2)
         self.selector = SelectorButton(
             [],
-            self.render_popup_fn,
-            self.render_button_fn,
-            self._handle_change,
-            self.title,
+            render_popup_fn,
+            render_button_fn,
+            on_change,
+            title,
             on_open_selector
         )
-        self.layout.addWidget(self.selector)
+        layout.addWidget(self.selector)
 
     def set_items(self, items):
-        self.items = items
         self.selector.set_items(items)
-
         if len(items) == 1:
-            self._handle_change(items[0])
-
-    def _handle_change(self, item):
-        if self.on_change:
-            self.on_change(item)
+            self.on_change(items[0])
 
     def get_selected(self):
-        if self.selector:
-            return self.selector.selected
-        return None
+        return self.selector.selected
 
 
 # -------------------------
@@ -332,7 +319,8 @@ class CharacterBuilder(QWidget):
         self._selected_origin = None
         self._selected_prof = None
         self._selected_path = None
-        self._level_up_state = build_empty_level_up_state()
+        self._level_up_state = [LevelUpSlotState() for _ in range(LEVEL_UP_SLOTS)]
+        self._active_selector = None
 
         self.init_ui()
 
@@ -392,8 +380,8 @@ class CharacterBuilder(QWidget):
                 level_number,
                 self.render_level_up_tree_popup,
                 self.render_level_up_tree_button,
-                self.render_level_up_version_popup,
-                self.render_level_up_version_button,
+                self.render_level_up_version_summary,
+                self.render_level_up_version_summary,
                 lambda item, idx=level_number - 1: self.on_level_up_tree_selected(idx, item),
                 lambda item, idx=level_number - 1: self.on_level_up_version_selected(idx, item),
                 self.open_selector_panel
@@ -590,33 +578,22 @@ class CharacterBuilder(QWidget):
         return f"{path['Name']}\n{extras}" if extras else path["Name"]
 
     def render_level_up_tree_popup(self, option):
-        versions = option["versions"]
-        if len(versions) == 1:
-            detail = render_entry_summary(versions[0]) or "No changes"
-        else:
-            details = []
-            for idx, version in enumerate(versions):
-                details.append(render_entry_summary(version) or "No changes")
-                if idx < len(versions) - 1:
-                    details.append("or")
-            detail = "\n".join(details)
-
+        detail = "\nor\n".join(
+            render_entry_summary(v) or "No changes" for v in option["versions"]
+        )
         return f"{option['tree_name']} - Level {option['level']}\n{detail}"
 
     def render_level_up_tree_button(self, option):
         return f"{option['tree_name']} L{option['level']}"
 
-    def render_level_up_version_popup(self, version_option):
-        return render_entry_summary(version_option['entry']) or "No changes"
-
-    def render_level_up_version_button(self, version_option):
+    def render_level_up_version_summary(self, version_option):
         return render_entry_summary(version_option["entry"]) or "No changes"
 
     # -------------------------
     # Advancement Logic
     # -------------------------
     def reset_level_up_state(self):
-        self._level_up_state = build_empty_level_up_state()
+        self._level_up_state = [LevelUpSlotState() for _ in range(LEVEL_UP_SLOTS)]
         self.refresh_level_up_sections()
 
     def refresh_level_up_sections(self):
@@ -626,61 +603,48 @@ class CharacterBuilder(QWidget):
         for slot_index, section in enumerate(self._level_up_sections):
             state = self._level_up_state[slot_index]
 
-            if can_fill_slot:
-                tree_options = self.get_available_level_up_options(
-                    slot_index,
-                    prior_selected_options
-                )
-            else:
-                tree_options = []
-
-            selected_tree_option = next(
-                (option for option in tree_options if state.matches_tree_option(option)),
-                None
+            tree_options = (
+                self.get_available_level_up_options(slot_index, prior_selected_options)
+                if can_fill_slot else []
             )
 
+            selected_tree_option = next(
+                (o for o in tree_options if state.matches_tree_option(o)), None
+            )
             if selected_tree_option is None:
                 state.clear()
 
-            section.tree_selector.set_items(
-                tree_options,
-                selected_tree_option
+            version_options, selected_version_option = self._resolve_version_selection(
+                state, selected_tree_option
             )
-            section.tree_selector.setEnabled(can_fill_slot and len(tree_options) > 1)
 
-            version_options = []
-            selected_version_option = None
-
-            if selected_tree_option is not None:
-                version_options = self.get_version_options(selected_tree_option)
-
-                if len(version_options) == 1:
-                    state.select_version(0)
-
-                selected_version_option = next(
-                    (
-                        option for option in version_options
-                        if option["index"] == state.version_index
-                    ),
-                    None
-                )
-
-                if selected_version_option is None and len(version_options) == 1:
-                    selected_version_option = version_options[0]
-                elif selected_version_option is None:
-                    state.clear_version()
-            else:
-                state.clear_version()
-
-            section.version_selector.set_items(
-                version_options,
-                selected_version_option
-            )
+            section.refresh(tree_options, selected_tree_option, version_options, selected_version_option, can_fill_slot)
 
             if selected_tree_option is not None:
                 prior_selected_options.append(selected_tree_option)
 
             can_fill_slot = can_fill_slot and section.is_complete()
+
+    def _resolve_version_selection(self, state, tree_option):
+        if tree_option is None:
+            state.clear_version()
+            return [], None
+
+        version_options = self.get_version_options(tree_option)
+
+        if len(version_options) == 1:
+            state.select_version(0)
+
+        selected = next(
+            (o for o in version_options if o["index"] == state.version_index), None
+        )
+        if selected is None:
+            if len(version_options) == 1:
+                selected = version_options[0]
+            else:
+                state.clear_version()
+
+        return version_options, selected
 
     def get_available_level_up_options(self, slot_index, prior_selected_options):
         slot_number = slot_index + 1
