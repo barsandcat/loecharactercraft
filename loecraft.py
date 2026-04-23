@@ -93,25 +93,37 @@ def render_entry_extras(entry):
 
 @dataclass
 class LevelUpSlotState:
-    tree_level_key: Optional[str] = None
+    tree_name: Optional[str] = None
+    level: Optional[int] = None
     version_index: Optional[int] = None
 
     def clear(self):
-        self.tree_level_key = None
+        self.tree_name = None
+        self.level = None
         self.version_index = None
 
     def clear_version(self):
         self.version_index = None
 
-    def select_tree(self, tree_level_key):
-        self.tree_level_key = tree_level_key
+    def select_tree(self, tree_name, level):
+        self.tree_name = tree_name
+        self.level = level
         self.version_index = None
 
     def select_version(self, version_index):
         self.version_index = version_index
 
+    def has_tree_selected(self):
+        return self.tree_name is not None and self.level is not None
+
+    def matches_tree_option(self, option):
+        return (
+            self.tree_name == option["tree_name"]
+            and self.level == option["level"]
+        )
+
     def is_complete(self):
-        return self.tree_level_key is not None and self.version_index is not None
+        return self.has_tree_selected() and self.version_index is not None
 
 
 def build_empty_level_up_state():
@@ -600,7 +612,7 @@ class CharacterBuilder(QWidget):
 
     def on_level_up_tree_selected(self, slot_index, tree_level_option):
         state = self._level_up_state[slot_index]
-        state.select_tree(tree_level_option["key"])
+        state.select_tree(tree_level_option["tree_name"], tree_level_option["level"])
 
         self.refresh_level_up_sections()
         self.update_summary()
@@ -692,7 +704,7 @@ class CharacterBuilder(QWidget):
                 tree_options = []
 
             selected_tree_option = next(
-                (option for option in tree_options if option["key"] == state.tree_level_key),
+                (option for option in tree_options if state.matches_tree_option(option)),
                 None
             )
 
@@ -765,7 +777,6 @@ class CharacterBuilder(QWidget):
                 if self.is_advancement_level_unlocked(level, taken_levels, slot_number):
                     options.append(
                         {
-                            "key": f"{tree_name}|{level}",
                             "tree_name": tree_name,
                             "level": level,
                             "versions": tree["Levels"][level_key]
@@ -835,7 +846,6 @@ class CharacterBuilder(QWidget):
     def get_version_options(self, tree_level_option):
         return [
             {
-                "key": f"{tree_level_option['key']}|{index}",
                 "index": index,
                 "tree_name": tree_level_option["tree_name"],
                 "level": tree_level_option["level"],
@@ -848,12 +858,11 @@ class CharacterBuilder(QWidget):
         entries = []
 
         for state in self._level_up_state:
-            tree_level_key = state.tree_level_key
             version_index = state.version_index
-            if tree_level_key is None or version_index is None:
+            if not state.has_tree_selected() or version_index is None:
                 continue
 
-            option = self.get_tree_level_option_by_key(tree_level_key)
+            option = self.get_tree_level_option(state.tree_name, state.level)
             if option is None:
                 continue
 
@@ -863,20 +872,19 @@ class CharacterBuilder(QWidget):
 
         return entries
 
-    def get_tree_level_option_by_key(self, tree_level_key):
-        tree_name, level_key = tree_level_key.rsplit("|", 1)
+    def get_tree_level_option(self, tree_name, level):
         tree = self._trees.get(tree_name)
         if tree is None:
             return None
 
+        level_key = str(level)
         versions = tree["Levels"].get(level_key)
         if versions is None:
             return None
 
         return {
-            "key": tree_level_key,
             "tree_name": tree_name,
-            "level": int(level_key),
+            "level": level,
             "versions": versions
         }
 
@@ -927,9 +935,9 @@ class CharacterBuilder(QWidget):
         """Return {tree_name: {level: version_index}} for all fully-selected level-up slots."""
         selected_by_tree = {}
         for state in self._level_up_state:
-            if not state.tree_level_key or state.version_index is None:
+            if not state.has_tree_selected() or state.version_index is None:
                 continue
-            option = self.get_tree_level_option_by_key(state.tree_level_key)
+            option = self.get_tree_level_option(state.tree_name, state.level)
             if option:
                 selected_by_tree.setdefault(option["tree_name"], {})[option["level"]] = state.version_index
         return selected_by_tree
