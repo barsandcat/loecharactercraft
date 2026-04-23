@@ -866,154 +866,119 @@ class CharacterBuilder(QWidget):
     def get_advancement_tree_summary(self):
         if not hasattr(self, "_selected_prof"):
             return "<span style='color: #888888;'>No profession selected.<br><br>Select a profession to see available advancement trees.</span>"
-        
-        # Get all accessible trees
+
         tree_names = self.get_accessible_advancement_tree_names()
-        
         if not tree_names:
             return "<span style='color: #888888;'>No advancement trees available for this profession.</span>"
-        
-        # Get selected options
-        selected_by_tree = {}
-        selected_version_by_key = {}
-        
-        for slot_idx, state in enumerate(self._level_up_state):
-            if state["tree_level_key"] and state["version_index"] is not None:
-                option = self.get_tree_level_option_by_key(state["tree_level_key"])
-                if option:
-                    version_options = self.get_version_options(option)
-                    if 0 <= state["version_index"] < len(version_options):
-                        version_key = f"{option['tree_name']}|{option['level']}|{state['version_index']}"
-                        selected_version_by_key[version_key] = {
-                            "tree": option["tree_name"],
-                            "level": option["level"],
-                            "version_index": state["version_index"],
-                            "entry": version_options[state["version_index"]]["entry"]
-                        }
-                        if option["tree_name"] not in selected_by_tree:
-                            selected_by_tree[option["tree_name"]] = {}
-                        selected_by_tree[option["tree_name"]][option["level"]] = state["version_index"]
-        
-        # Separate primary and secondary trees
-        primary_tree = tree_names[0] if tree_names else None
-        secondary_trees = tree_names[1:] if len(tree_names) > 1 else []
-        
-        html_parts = []
-        html_parts.append("<style>")
-        html_parts.append("body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; }")
-        html_parts.append(".tree-title { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }")
-        html_parts.append(".tree-subtitle { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }")
-        html_parts.append(".level-line { margin-left: 15px; margin-bottom: 5px; }")
-        html_parts.append(".version-line { margin-left: 30px; margin-bottom: 3px; font-size: 12px; }")
-        html_parts.append(".selected { font-weight: bold; color: #000000; }")
-        html_parts.append(".available { font-weight: normal; color: #000000; }")
-        html_parts.append(".unavailable { font-weight: normal; color: #888888; }")
-        html_parts.append(".level-tag { font-weight: bold; display: inline-block; width: 50px; }")
-        html_parts.append("</style>")
-        
-        def render_tree(tree_name, is_primary):
-            tree = self._trees.get(tree_name)
-            if not tree:
-                return ""
-            
-            result = []
-            if is_primary:
-                result.append(f"<div class='tree-title'>{tree_name}</div>")
-            else:
-                result.append(f"<div class='tree-subtitle'>{tree_name}</div>")
-            
-            # Get all levels in order
-            all_levels = sorted([int(l) for l in tree["Levels"].keys()])
-            
-            # Get picked levels for this tree
-            picked_levels_for_tree = selected_by_tree.get(tree_name, {})
-            
-            # Determine what's available vs unavailable
-            taken_levels = set(picked_levels_for_tree.keys())
-            
-            # Simulate progression to see what's available
-            available_levels = set()
-            simulated_taken = set()
-            slot_counter = 1
-            
-            for level in all_levels:
-                if level in taken_levels:
-                    simulated_taken.add(level)
-                    continue
-                
-                # Check if this level is unlocked
-                if self.is_advancement_level_unlocked(level, simulated_taken, slot_counter):
-                    available_levels.add(level)
-            
-            # Display all levels in order
-            for level in all_levels:
-                versions = tree["Levels"][str(level)]
-                
-                # Level line - just the level number
-                if level in picked_levels_for_tree:
-                    # Selected level - bold black
-                    result.append(f"<div class='level-line selected'>")
-                    result.append(f"<span class='level-tag'>Level {level}</span>")
-                    result.append(f"</div>")
-                elif level in available_levels:
-                    # Available level - normal black
-                    result.append(f"<div class='level-line available'>")
-                    result.append(f"<span class='level-tag'>Level {level}</span>")
-                    result.append(f"</div>")
-                else:
-                    # Unavailable level - grey
-                    result.append(f"<div class='level-line unavailable'>")
-                    result.append(f"<span class='level-tag'>Level {level}</span>")
-                    result.append(f"</div>")
-                
-                # Show all versions for this level
-                selected_version_index = picked_levels_for_tree.get(level, -1)
-                
-                for idx, version in enumerate(versions):
-                    summary = format_advancement_summary(version)
-                    
-                    if idx == selected_version_index:
-                        # Selected version - bold black
-                        result.append(f"<div class='version-line selected'>  {summary}</div>")
-                    elif level in available_levels:
-                        # Available version - normal black
-                        result.append(f"<div class='version-line available'>  {summary}</div>")
-                    else:
-                        # Unavailable version - grey
-                        result.append(f"<div class='version-line unavailable'>  {summary}</div>")
-            
-            return "\n".join(result)
-        
-        # Render primary tree
-        if primary_tree:
-            html_parts.append(render_tree(primary_tree, True))
-        
-        # Render secondary trees
-        for tree_name in secondary_trees:
-            html_parts.append(render_tree(tree_name, False))
-        
-        # Add progress summary
-        filled_slots = len([s for s in self._level_up_state if s["tree_level_key"] is not None and s["version_index"] is not None])
-        html_parts.append(f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>")
-        html_parts.append(f"<span style='font-weight: bold;'>Progress: {filled_slots}/{LEVEL_UP_SLOTS} level ups selected</span>")
-        html_parts.append("</div>")
-        
+
+        selected_by_tree = self._build_selected_by_tree()
+
+        html_parts = [
+            "<style>",
+            "body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; }",
+            ".tree-title { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }",
+            ".tree-subtitle { font-size: 13px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #000000; }",
+            ".level-line { margin-left: 15px; margin-bottom: 5px; }",
+            ".version-line { margin-left: 30px; margin-bottom: 3px; font-size: 12px; }",
+            ".selected { font-weight: bold; color: #000000; }",
+            ".available { font-weight: normal; color: #000000; }",
+            ".unavailable { font-weight: normal; color: #888888; }",
+            ".level-tag { font-weight: bold; display: inline-block; width: 50px; }",
+            "</style>",
+            self._render_tree_html(tree_names[0], is_primary=True,  selected_by_tree=selected_by_tree),
+        ]
+        for tree_name in tree_names[1:]:
+            html_parts.append(self._render_tree_html(tree_name, is_primary=False, selected_by_tree=selected_by_tree))
+
+        filled_slots = sum(
+            1 for s in self._level_up_state
+            if s["tree_level_key"] is not None and s["version_index"] is not None
+        )
+        html_parts.append(
+            f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>"
+            f"<span style='font-weight: bold;'>Progress: {filled_slots}/{LEVEL_UP_SLOTS} level ups selected</span>"
+            f"</div>"
+        )
+
         return "\n".join(html_parts)
+
+    def _build_selected_by_tree(self):
+        """Return {tree_name: {level: version_index}} for all fully-selected level-up slots."""
+        selected_by_tree = {}
+        for state in self._level_up_state:
+            if not state["tree_level_key"] or state["version_index"] is None:
+                continue
+            option = self.get_tree_level_option_by_key(state["tree_level_key"])
+            if option:
+                selected_by_tree.setdefault(option["tree_name"], {})[option["level"]] = state["version_index"]
+        return selected_by_tree
+
+    def _render_tree_html(self, tree_name, is_primary, selected_by_tree):
+        """Render a single advancement tree as an HTML fragment."""
+        tree = self._trees.get(tree_name)
+        if not tree:
+            return ""
+
+        title_class = "tree-title" if is_primary else "tree-subtitle"
+        result = [f"<div class='{title_class}'>{tree_name}</div>"]
+
+        all_levels = sorted(int(k) for k in tree["Levels"].keys())
+        picked = selected_by_tree.get(tree_name, {})
+        taken = set(picked.keys())
+
+        available = set()
+        simulated_taken = set()
+        for level in all_levels:
+            if level in taken:
+                simulated_taken.add(level)
+            elif self.is_advancement_level_unlocked(level, simulated_taken, slot_number=1):
+                available.add(level)
+
+        for level in all_levels:
+            versions = tree["Levels"][str(level)]
+
+            if level in picked:
+                level_class = "selected"
+            elif level in available:
+                level_class = "available"
+            else:
+                level_class = "unavailable"
+
+            result.append(f"<div class='level-line {level_class}'><span class='level-tag'>Level {level}</span></div>")
+
+            selected_version_index = picked.get(level, -1)
+            for idx, version in enumerate(versions):
+                summary = format_advancement_summary(version)
+                if idx == selected_version_index:
+                    ver_class = "selected"
+                elif level in available:
+                    ver_class = "available"
+                else:
+                    ver_class = "unavailable"
+                result.append(f"<div class='version-line {ver_class}'>  {summary}</div>")
+
+        return "\n".join(result)
     
 
     # -------------------------
     # Summary
     # -------------------------
     def update_summary(self):
-        # -------------------------
-        # Base values
-        # -------------------------
+        stats = self._collect_character_stats()
+        self.summary.setHtml(self._render_summary_html(stats))
+
+    def _collect_character_stats(self):
+        """Accumulate all character stats from selected race, origin, prof, path and level-ups.
+
+        Returns a plain dict with keys:
+            attributes, mob, hp, div_die, brill,
+            keyword_counts, items, actions
+        """
         attributes = {k: 0 for k in ATTRIBUTES}
-        mob = 0  # will be shown as MOV
+        mob = 0
         hp = 0
         div_die = None
         brill = 0
-
         keyword_counts = {}
         items_by_key = {}
         actions_by_name = {}
@@ -1030,140 +995,106 @@ class CharacterBuilder(QWidget):
             if current is None or action["Level"] > current["Level"]:
                 actions_by_name[action["Name"]] = action
 
-        def apply_advancement(entry):
+        def apply_entry(entry):
             nonlocal mob, hp, div_die, brill
-
             for attr in entry.get("Attributes", []):
                 for key, value in attr.items():
                     attributes[key] = attributes.get(key, 0) + value
-
             mob += entry.get("MOB", 0)
             hp += entry.get("HP", 0)
             brill += entry.get("Brill", 0)
-
             add_keywords(entry.get("Keywords", []))
-
             div_value = entry.get("DIV")
             if div_value == "Upgrade":
                 div_die = upgrade_div_die(div_die)
             elif div_value:
                 div_die = div_value
-
             for item in entry.get("Items", []):
                 add_item(item)
-
             for action in entry.get("Action cards", []):
                 add_action(action)
 
-        # -------------------------
-        # Race
-        # -------------------------
         if hasattr(self, "_selected_race"):
             race = self._selected_race
-
-            # Attributes
             if hasattr(self, "_selected_attr"):
                 for k, v in self._selected_attr.items():
                     attributes[k] += v
-
             mob = race.get("MOB", 0)
             hp = race.get("HP", 0)
             div_die = race.get("DIV")
-
             add_keywords(race.get("Keywords", []))
             for action in race.get("Action cards", []):
                 add_action(action)
 
-        # -------------------------
-        # Origin
-        # -------------------------
         if hasattr(self, "_selected_origin"):
             origin = self._selected_origin
-
             add_keywords(origin.get("Keywords", []))
             for item in origin.get("Items", []):
                 add_item(item)
             brill += origin.get("Brill", 0)
 
-        # -------------------------
-        # Profession
-        # -------------------------
         if hasattr(self, "_selected_prof"):
-            prof = self._selected_prof
-            add_keywords(prof.get("Keywords", []))
+            add_keywords(self._selected_prof.get("Keywords", []))
 
-        # -------------------------
-        # Path
-        # -------------------------
         if hasattr(self, "_selected_path"):
-            path = self._selected_path
-            apply_advancement(path)
+            apply_entry(self._selected_path)
 
-        # -------------------------
-        # Level Ups
-        # -------------------------
         for entry in self.get_selected_advancement_entries():
-            apply_advancement(entry)
+            apply_entry(entry)
 
-        # -------------------------
-        # Deduplicate
-        # -------------------------
-        unique_items = items_by_key.values()
-        unique_actions = actions_by_name.values()
+        return {
+            "attributes":     attributes,
+            "mob":            mob,
+            "hp":             hp,
+            "div_die":        div_die,
+            "brill":          brill,
+            "keyword_counts": keyword_counts,
+            "items":          list(items_by_key.values()),
+            "actions":        list(actions_by_name.values()),
+        }
 
-        # -------------------------
-        # Build output (HTML)
-        # -------------------------
-        html_parts = []
-        html_parts.append("<style>")
-        html_parts.append("body { font-family: monospace; font-size: 13px; margin: 10px; background-color: white; color: #000000; }")
-        html_parts.append(".section-title { font-weight: bold; margin-top: 10px; margin-bottom: 3px; }")
-        html_parts.append(".line { margin-left: 12px; margin-bottom: 2px; }")
-        html_parts.append("</style>")
+    def _render_summary_html(self, stats):
+        """Render a collected stats dict as an HTML string for the summary panel."""
+        parts = [
+            "<style>",
+            "body { font-family: monospace; font-size: 13px; margin: 10px;"
+            " background-color: white; color: #000000; }",
+            ".section-title { font-weight: bold; margin-top: 10px; margin-bottom: 3px; }",
+            ".line { margin-left: 12px; margin-bottom: 2px; }",
+            "</style>",
+        ]
 
         def add_section(title, values):
             if not values:
                 return
-            html_parts.append(f"<div class='section-title'>{html.escape(title)}</div>")
+            parts.append(f"<div class='section-title'>{html.escape(title)}</div>")
             for value in values:
-                html_parts.append(f"<div class='line'>{html.escape(str(value))}</div>")
+                parts.append(f"<div class='line'>{html.escape(str(value))}</div>")
 
         add_section(
             "Attributes",
-            [f"{k}: {attributes.get(k, 0)}" for k in ATTRIBUTES]
+            [f"{k}: {stats['attributes'].get(k, 0)}" for k in ATTRIBUTES]
         )
 
-        stat_lines = [f"MOV: {mob}", f"HP: {hp}"]
-        if div_die:
-            stat_lines.append(f"DIV: {div_die}")
-        stat_lines.append(f"Brill: {brill}")
+        stat_lines = [f"MOV: {stats['mob']}", f"HP: {stats['hp']}"]
+        if stats["div_die"]:
+            stat_lines.append(f"DIV: {stats['div_die']}")
+        stat_lines.append(f"Brill: {stats['brill']}")
         add_section("Stats", stat_lines)
 
-        if keyword_counts:
-            add_section(
-                "Keywords",
-                [
-                    ", ".join(
-                        (
-                            f"{keyword} x{keyword_counts[keyword]}"
-                            if keyword_counts[keyword] > 1
-                            else keyword
-                        )
-                        for keyword in sorted(keyword_counts)
-                    )
-                ]
-            )
+        if stats["keyword_counts"]:
+            kw_counts = stats["keyword_counts"]
+            add_section("Keywords", [
+                ", ".join(
+                    f"{kw} x{kw_counts[kw]}" if kw_counts[kw] > 1 else kw
+                    for kw in sorted(kw_counts)
+                )
+            ])
 
-        add_section(
-            "Items",
-            [f"{item['Name']} ({item['Type']})" for item in unique_items]
-        )
-        add_section(
-            "Action Cards",
-            [f"{act['Name']} (Lvl {act['Level']})" for act in unique_actions]
-        )
+        add_section("Items",        [f"{i['Name']} ({i['Type']})" for i in stats["items"]])
+        add_section("Action Cards", [f"{a['Name']} (Lvl {a['Level']})" for a in stats["actions"]])
 
-        self.summary.setHtml("".join(html_parts))
+        return "".join(parts)
 
 
 # -------------------------
