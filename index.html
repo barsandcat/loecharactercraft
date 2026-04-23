@@ -80,7 +80,7 @@
       gap: 18px;
       align-items: center;
       margin-bottom: 12px;
-      padding: 14px clamp(16px, 3vw, 24px);
+      padding: 7px clamp(14px, 3vw, 24px);
       background: var(--dark);
       border: 1px solid rgba(201, 168, 64, 0.28);
       box-shadow: var(--shadow-lg);
@@ -115,7 +115,11 @@
       font-weight: 700;
     }
 
-    .hero-copy { max-width: 64ch; }
+    .hero-copy {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
 
     .hero-actions {
       display: flex;
@@ -190,14 +194,11 @@
     }
 
     .panel-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 11px 14px 9px;
+      padding: 7px 14px;
       background: var(--dark);
       border-bottom: 1px solid rgba(201, 168, 64, 0.18);
     }
+
 
     .panel-header h2 {
       font-size: 0.82rem;
@@ -205,27 +206,10 @@
       color: var(--dark-text);
       text-transform: uppercase;
       font-weight: 600;
+      margin: 0;
     }
 
-    .panel-header .eyebrow {
-      color: var(--gold);
-      margin: 0 0 1px;
-      font-size: 0.62rem;
-    }
-
-    .panel-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 30px;
-      padding: 3px 7px;
-      background: rgba(201, 168, 64, 0.12);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      border: 1px solid rgba(201, 168, 64, 0.28);
-    }
+    .panel-count { display: none; }
 
     .panel-body {
       padding: 10px 12px 16px;
@@ -300,8 +284,7 @@
     }
 
     .choice-button.is-empty {
-      border-style: dashed;
-      opacity: 0.65;
+      border-color: rgba(201, 168, 64, 0.45);
     }
 
     /* Accent / selected: dark band style like handbook section headers */
@@ -435,15 +418,18 @@
     .tree-level {
       padding: 6px 0;
       border-top: 1px solid rgba(70, 48, 12, 0.1);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
     }
     .tree-level:first-of-type { border-top: 0; padding-top: 0; }
 
     .tree-level-header {
       display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 5px;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 58px;
+      flex-shrink: 0;
       font-family: 'Cinzel', serif;
       font-size: 0.7rem;
       font-weight: 600;
@@ -452,9 +438,9 @@
     }
 
     .tree-level-header span:last-child {
-      font-size: 0.62rem;
-      padding: 2px 6px;
-      background: rgba(70, 48, 12, 0.08);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      font-weight: 400;
     }
 
     .tree-level.selected .tree-level-header,
@@ -464,14 +450,7 @@
     .tree-level.unavailable .tree-level-header,
     .tree-level.unavailable .tree-version       { color: var(--unavailable); }
 
-    .tree-level.selected .tree-level-header span:last-child {
-      background: rgba(154, 114, 32, 0.12);
-    }
-    .tree-level.available .tree-level-header span:last-child {
-      background: rgba(38, 72, 32, 0.1);
-    }
-
-    .tree-version-list { display: grid; gap: 4px; margin-left: 10px; }
+    .tree-version-list { display: grid; gap: 4px; flex: 1; min-width: 0; }
 
     .tree-version {
       padding: 4px 8px;
@@ -700,6 +679,7 @@
       </div>
       <div class="hero-actions">
         <div id="loadStatus" class="status-chip">Loading data...</div>
+        <button id="randomButton" class="ghost-button" type="button" disabled>Random build</button>
         <button id="copyLinkButton" class="ghost-button" type="button" disabled>Copy link</button>
         <button id="resetButton" class="ghost-button" type="button" disabled>Reset build</button>
       </div>
@@ -710,10 +690,7 @@
     <section class="board" aria-label="Character builder workspace">
       <section class="panel" aria-labelledby="controlsTitle">
         <div class="panel-header">
-          <div>
-            <p class="eyebrow">Selections</p>
-            <h2 id="controlsTitle">Build Steps</h2>
-          </div>
+          <h2 id="controlsTitle">Build Steps</h2>
           <div id="controlsCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
@@ -723,10 +700,7 @@
 
       <section class="panel" aria-labelledby="summaryTitle">
         <div class="panel-header">
-          <div>
-            <p class="eyebrow">Totals</p>
-            <h2 id="summaryTitle">Character Board</h2>
-          </div>
+          <h2 id="summaryTitle">Character Board</h2>
           <div id="summaryCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
@@ -736,10 +710,7 @@
 
       <section class="panel" aria-labelledby="treesTitle">
         <div class="panel-header">
-          <div>
-            <p class="eyebrow">Advancement</p>
-            <h2 id="treesTitle">Advancement Trees</h2>
-          </div>
+          <h2 id="treesTitle">Advancement Trees</h2>
           <div id="treesCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
@@ -818,6 +789,7 @@
               " trees"
           );
           ui.resetButton.disabled = false;
+          ui.randomButton.disabled = false;
           ui.copyLinkButton.disabled = false;
           clearError();
           restoreStateFromUrl();
@@ -833,6 +805,7 @@
 
       function cacheUi() {
         ui.loadStatus = document.getElementById("loadStatus");
+        ui.randomButton = document.getElementById("randomButton");
         ui.copyLinkButton = document.getElementById("copyLinkButton");
         ui.resetButton = document.getElementById("resetButton");
         ui.errorBanner = document.getElementById("errorBanner");
@@ -852,6 +825,7 @@
 
       function bindEvents() {
         ui.resetButton.addEventListener("click", resetBuild);
+        ui.randomButton.addEventListener("click", randomBuild);
         ui.copyLinkButton.addEventListener("click", copyLink);
         ui.selectorClose.addEventListener("click", closeSelector);
         ui.selectorOverlay.addEventListener("click", (event) => {
@@ -883,6 +857,25 @@
         state.selectedPath = null;
         state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
         closeSelector();
+        pushStateToUrl();
+        render();
+      }
+
+      function randomBuild() {
+        const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+        const race = pick(state.data.Races);
+        state.selectedRace = race;
+        const attrs = race.Attributes || [];
+        state.selectedAttr = attrs.length ? pick(attrs) : null;
+
+        state.selectedOrigin = pick(state.data.Origins);
+
+        const prof = pick(state.data.Professions);
+        state.selectedProf = prof;
+        const paths = prof.Paths || [];
+        state.selectedPath = paths.length ? pick(paths) : null;
+
         pushStateToUrl();
         render();
       }
@@ -1313,18 +1306,6 @@
           );
           return;
         }
-
-        const progress = document.createElement("section");
-        progress.className = "tree-progress";
-        const filled = getFilledLevelCount();
-        const openSlots = levelMeta.filter((meta) => meta.unlocked && !meta.isComplete).length;
-        progress.append(
-          document.createTextNode("Progress: " + filled + "/" + LEVEL_UP_SLOTS + " level ups selected")
-        );
-        const side = document.createElement("span");
-        side.textContent = openSlots > 0 ? openSlots + " slot ready to fill" + (openSlots === 1 ? "" : "s") : "No open slot";
-        progress.appendChild(side);
-        container.appendChild(progress);
 
         const selectedByTree = buildSelectedByTree();
         treeNames.forEach((treeName, index) => {
