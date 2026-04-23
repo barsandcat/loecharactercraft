@@ -15,6 +15,81 @@ DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
 
 
 # -------------------------
+# Module-level helpers
+# -------------------------
+
+def format_advancement_summary(entry):
+    parts = []
+
+    for attr in entry.get("Attributes", []):
+        for key, value in attr.items():
+            parts.append(f"+{value} {key}")
+
+    if entry.get("HP"):
+        parts.append(f"+{entry['HP']} HP")
+
+    if entry.get("MOB"):
+        parts.append(f"+{entry['MOB']} MOB")
+
+    if entry.get("Brill"):
+        parts.append(f"+{entry['Brill']} Brill")
+
+    div_value = entry.get("DIV")
+    if div_value == "Upgrade":
+        parts.append("DIV Upgrade")
+    elif div_value:
+        parts.append(f"DIV {div_value}")
+
+    parts.extend(entry.get("Keywords", []))
+
+    for item in entry.get("Items", []):
+        parts.append(f"{item['Name']} ({item['Type']})")
+
+    for action in entry.get("Action cards", []):
+        parts.append(f"{action['Name']} L{action['Level']}")
+
+    return ", ".join(parts) if parts else "No changes"
+
+
+def upgrade_div_die(div_die):
+    if div_die not in DICE_PROGRESSION:
+        return div_die
+
+    current_index = DICE_PROGRESSION.index(div_die)
+    if current_index == len(DICE_PROGRESSION) - 1:
+        return div_die
+
+    return DICE_PROGRESSION[current_index + 1]
+
+
+def render_entry_extras(entry):
+    """Compact extras string for button/popup labels.
+
+    Includes keywords, attribute deltas, and optional stats that are present.
+    Stats always shown on races (MOB, HP, DIV) are left to render_race_button
+    so it can display them even when zero.
+    """
+    keywords = ", ".join(entry.get("Keywords", []))
+    attributes = [
+        f"{value:+} {key}"
+        for attr in entry.get("Attributes", [])
+        for key, value in attr.items()
+    ]
+
+    extras = []
+    if keywords:
+        extras.append(keywords)
+    if attributes:
+        extras.append(", ".join(attributes))
+    for stat, label in (("MOB", "MOV"), ("HP", "HP"), ("DIV", "DIV"), ("Brill", "Brill")):
+        value = entry.get(stat)
+        if value is not None:
+            extras.append(f"{label}: {value}")
+
+    return ", ".join(extras)
+
+
+# -------------------------
 # Selection Popup
 # -------------------------
 class SelectionPopup(QDialog):
@@ -517,6 +592,7 @@ class CharacterBuilder(QWidget):
     # Render Functions
     # -------------------------
     def render_race_button(self, race):
+        # MOV, HP and DIV are always shown for races, even when zero/absent.
         keywords = ", ".join(race.get("Keywords", []))
         extras = []
         if keywords:
@@ -530,56 +606,25 @@ class CharacterBuilder(QWidget):
         return ", ".join(f"{k} {attr.get(k, 0)}" for k in ATTRIBUTES)
 
     def render_origin_button(self, origin):
-        keywords = ", ".join(origin.get("Keywords", []))
-        extras = []
-        if keywords:
-            extras.append(keywords)
-        extras.append(f"Brill: {origin.get('Brill', 0)}")
-        return f"{origin['Name']}\n" + ", ".join(extras)
+        extras = render_entry_extras(origin)
+        return f"{origin['Name']}\n{extras}" if extras else origin["Name"]
 
     def render_prof_button(self, prof):
-        keywords = ", ".join(prof.get("Keywords", []))
-        if keywords:
-            return f"{prof['Name']}\n{keywords}"
-        return prof["Name"]
+        extras = render_entry_extras(prof)
+        return f"{prof['Name']}\n{extras}" if extras else prof["Name"]
 
     def render_path_button(self, path):
-        keywords = ", ".join(path.get("Keywords", []))
-        mob = path.get("MOB")
-        hp = path.get("HP")
-        div = path.get("DIV")
-        brill = path.get("Brill")
-        attributes = []
-        for attr in path.get("Attributes", []):
-            for key, value in attr.items():
-                attributes.append(f"{value:+} {key}")
-
-        extras = []
-        if keywords:
-            extras.append(keywords)
-        if attributes:
-            extras.append(", ".join(attributes))
-        if mob is not None:
-            extras.append(f"MOV: {mob}")
-        if hp is not None:
-            extras.append(f"HP: {hp}")
-        if div is not None:
-            extras.append(f"DIV: {div}")
-        if brill is not None:
-            extras.append(f"Brill: {brill}")
-
-        if extras:
-            return f"{path['Name']}\n" + ", ".join(extras)
-        return path["Name"]
+        extras = render_entry_extras(path)
+        return f"{path['Name']}\n{extras}" if extras else path["Name"]
 
     def render_level_up_tree_popup(self, option):
         versions = option["versions"]
         if len(versions) == 1:
-            detail = self.format_advancement_summary(versions[0])
+            detail = format_advancement_summary(versions[0])
         else:
             details = []
             for idx, version in enumerate(versions):
-                summary = self.format_advancement_summary(version)
+                summary = format_advancement_summary(version)
                 details.append(summary)
                 if idx < len(versions) - 1:
                     details.append("or")
@@ -592,11 +637,11 @@ class CharacterBuilder(QWidget):
 
     def render_level_up_version_popup(self, version_option):
         return (
-            f"{self.format_advancement_summary(version_option['entry'])}"
+            f"{format_advancement_summary(version_option['entry'])}"
         )
 
     def render_level_up_version_button(self, version_option):
-        summary = self.format_advancement_summary(version_option["entry"])
+        summary = format_advancement_summary(version_option["entry"])
         return summary
 
     # -------------------------
@@ -814,47 +859,6 @@ class CharacterBuilder(QWidget):
             "versions": versions
         }
 
-    def format_advancement_summary(self, entry):
-        parts = []
-
-        for attr in entry.get("Attributes", []):
-            for key, value in attr.items():
-                parts.append(f"+{value} {key}")
-
-        if entry.get("HP"):
-            parts.append(f"+{entry['HP']} HP")
-
-        if entry.get("MOB"):
-            parts.append(f"+{entry['MOB']} MOB")
-
-        if entry.get("Brill"):
-            parts.append(f"+{entry['Brill']} Brill")
-
-        div_value = entry.get("DIV")
-        if div_value == "Upgrade":
-            parts.append("DIV Upgrade")
-        elif div_value:
-            parts.append(f"DIV {div_value}")
-
-        parts.extend(entry.get("Keywords", []))
-
-        for item in entry.get("Items", []):
-            parts.append(f"{item['Name']} ({item['Type']})")
-
-        for action in entry.get("Action cards", []):
-            parts.append(f"{action['Name']} L{action['Level']}")
-
-        return ", ".join(parts) if parts else "No changes"
-
-    def upgrade_div_die(self, div_die):
-        if div_die not in DICE_PROGRESSION:
-            return div_die
-
-        current_index = DICE_PROGRESSION.index(div_die)
-        if current_index == len(DICE_PROGRESSION) - 1:
-            return div_die
-
-        return DICE_PROGRESSION[current_index + 1]
 
     # -------------------------
     # Advancement Tree Summary
@@ -966,7 +970,7 @@ class CharacterBuilder(QWidget):
                 selected_version_index = picked_levels_for_tree.get(level, -1)
                 
                 for idx, version in enumerate(versions):
-                    summary = self.format_advancement_summary(version)
+                    summary = format_advancement_summary(version)
                     
                     if idx == selected_version_index:
                         # Selected version - bold black
@@ -1041,7 +1045,7 @@ class CharacterBuilder(QWidget):
 
             div_value = entry.get("DIV")
             if div_value == "Upgrade":
-                div_die = self.upgrade_div_die(div_die)
+                div_die = upgrade_div_die(div_die)
             elif div_value:
                 div_die = div_value
 
