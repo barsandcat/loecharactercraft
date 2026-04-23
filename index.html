@@ -821,6 +821,7 @@
       </div>
       <div class="hero-actions">
         <div id="loadStatus" class="status-chip">Loading data...</div>
+        <button id="copyLinkButton" class="ghost-button" type="button" disabled>Copy link</button>
         <button id="resetButton" class="ghost-button" type="button" disabled>Reset build</button>
       </div>
     </header>
@@ -941,7 +942,9 @@
               " trees"
           );
           ui.resetButton.disabled = false;
+          ui.copyLinkButton.disabled = false;
           clearError();
+          restoreStateFromUrl();
           render();
         } catch (error) {
           setLoadStatus("Data unavailable");
@@ -954,6 +957,7 @@
 
       function cacheUi() {
         ui.loadStatus = document.getElementById("loadStatus");
+        ui.copyLinkButton = document.getElementById("copyLinkButton");
         ui.resetButton = document.getElementById("resetButton");
         ui.errorBanner = document.getElementById("errorBanner");
         ui.controlsCount = document.getElementById("controlsCount");
@@ -972,6 +976,7 @@
 
       function bindEvents() {
         ui.resetButton.addEventListener("click", resetBuild);
+        ui.copyLinkButton.addEventListener("click", copyLink);
         ui.selectorClose.addEventListener("click", closeSelector);
         ui.selectorOverlay.addEventListener("click", (event) => {
           if (event.target === ui.selectorOverlay) {
@@ -1002,7 +1007,108 @@
         state.selectedPath = null;
         state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
         closeSelector();
+        pushStateToUrl();
         render();
+      }
+
+      function serializeState() {
+        const attrIndex = state.selectedRace && state.selectedAttr
+          ? (state.selectedRace.Attributes || []).indexOf(state.selectedAttr)
+          : null;
+
+        const lu = state.levelUps.map((slot) =>
+          slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
+            ? [slot.treeName, slot.level, slot.versionIndex]
+            : null
+        );
+        while (lu.length > 0 && lu[lu.length - 1] === null) {
+          lu.pop();
+        }
+
+        const compact = {
+          r: state.selectedRace ? state.selectedRace.Name : null,
+          ai: attrIndex !== null && attrIndex !== -1 ? attrIndex : null,
+          o: state.selectedOrigin ? state.selectedOrigin.Name : null,
+          p: state.selectedProf ? state.selectedProf.Name : null,
+          pa: state.selectedPath ? state.selectedPath.Name : null,
+          lu: lu.length > 0 ? lu : null,
+        };
+
+        try {
+          const json = JSON.stringify(compact);
+          return btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16))));
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function deserializeState(encoded) {
+        try {
+          const json = decodeURIComponent(
+            atob(encoded).split("").map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0")).join("")
+          );
+          return JSON.parse(json);
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function pushStateToUrl() {
+        const encoded = serializeState();
+        history.replaceState(null, "", encoded ? "#" + encoded : location.pathname + location.search);
+      }
+
+      function restoreStateFromUrl() {
+        const hash = location.hash.slice(1);
+        if (!hash) {
+          return;
+        }
+
+        const compact = deserializeState(hash);
+        if (!compact) {
+          return;
+        }
+
+        if (compact.r) {
+          state.selectedRace = state.data.Races.find((r) => r.Name === compact.r) || null;
+          if (state.selectedRace && compact.ai !== null) {
+            state.selectedAttr = (state.selectedRace.Attributes || [])[compact.ai] || null;
+          }
+        }
+
+        if (compact.o) {
+          state.selectedOrigin = state.data.Origins.find((o) => o.Name === compact.o) || null;
+        }
+
+        if (compact.p) {
+          state.selectedProf = state.data.Professions.find((p) => p.Name === compact.p) || null;
+          if (state.selectedProf && compact.pa) {
+            state.selectedPath = (state.selectedProf.Paths || []).find((p) => p.Name === compact.pa) || null;
+          }
+        }
+
+        if (compact.lu) {
+          compact.lu.forEach((entry, index) => {
+            if (entry && index < LEVEL_UP_SLOTS) {
+              state.levelUps[index] = {
+                treeName: entry[0],
+                level: entry[1],
+                versionIndex: entry[2],
+              };
+            }
+          });
+        }
+      }
+
+      function copyLink() {
+        pushStateToUrl();
+        navigator.clipboard.writeText(location.href).then(() => {
+          const original = ui.copyLinkButton.textContent;
+          ui.copyLinkButton.textContent = "Copied!";
+          setTimeout(() => {
+            ui.copyLinkButton.textContent = original;
+          }, 1800);
+        });
       }
 
       function renderLoadingState() {
@@ -1697,16 +1803,19 @@
           }
         }
 
+        pushStateToUrl();
         render();
       }
 
       function selectAttr(attr) {
         state.selectedAttr = attr;
+        pushStateToUrl();
         render();
       }
 
       function selectOrigin(origin) {
         state.selectedOrigin = origin;
+        pushStateToUrl();
         render();
       }
 
@@ -1723,11 +1832,13 @@
           state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
         }
 
+        pushStateToUrl();
         render();
       }
 
       function selectPath(path) {
         state.selectedPath = path;
+        pushStateToUrl();
         render();
       }
 
@@ -1736,11 +1847,13 @@
         slot.treeName = treeLevelOption.treeName;
         slot.level = treeLevelOption.level;
         slot.versionIndex = null;
+        pushStateToUrl();
         render();
       }
 
       function selectLevelUpVersion(slotIndex, versionOption) {
         state.levelUps[slotIndex].versionIndex = versionOption.index;
+        pushStateToUrl();
         render();
       }
 
