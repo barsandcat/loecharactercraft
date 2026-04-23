@@ -391,6 +391,11 @@ class CharacterBuilder(QWidget):
         self._trees = {
             tree["Name"]: tree for tree in self.data["Advancement Trees"]
         }
+        self._selected_race = None
+        self._selected_attr = None
+        self._selected_origin = None
+        self._selected_prof = None
+        self._selected_path = None
         self._level_up_state = build_empty_level_up_state()
 
         self.init_ui()
@@ -561,20 +566,16 @@ class CharacterBuilder(QWidget):
     def show_main_controls_panel(self):
         self._left_stack.setCurrentIndex(0)
 
-    def clear_selected(self, attr_name):
-        if hasattr(self, attr_name):
-            delattr(self, attr_name)
-
     # -------------------------
     # Step Logic
     # -------------------------
     def on_race_selected(self, race):
-        race_changed = getattr(self, "_selected_race", None) != race
+        race_changed = self._selected_race != race
         self._selected_race = race
         attr_options = race.get("Attributes", [])
 
         if race_changed:
-            self.clear_selected("_selected_attr")
+            self._selected_attr = None
             self.attr_step.set_items(attr_options)
 
         # Gray out attributes selector when there is only one possible option.
@@ -594,11 +595,11 @@ class CharacterBuilder(QWidget):
         self._adv_panel.refresh()
 
     def on_prof_selected(self, prof):
-        prof_changed = getattr(self, "_selected_prof", None) != prof
+        prof_changed = self._selected_prof != prof
         self._selected_prof = prof
 
         if prof_changed:
-            self.clear_selected("_selected_path")
+            self._selected_path = None
             self.path_step.set_items(prof["Paths"])
             self.reset_level_up_state()
 
@@ -690,7 +691,7 @@ class CharacterBuilder(QWidget):
 
     def refresh_level_up_sections(self):
         prior_selected_options = []
-        can_fill_slot = hasattr(self, "_selected_prof")
+        can_fill_slot = self._selected_prof is not None
 
         for slot_index, section in enumerate(self._level_up_sections):
             state = self._level_up_state[slot_index]
@@ -786,7 +787,7 @@ class CharacterBuilder(QWidget):
         return options
 
     def get_accessible_advancement_tree_names(self):
-        if not hasattr(self, "_selected_prof"):
+        if self._selected_prof is None:
             return []
 
         tree_names = []
@@ -893,7 +894,7 @@ class CharacterBuilder(QWidget):
     # Advancement Tree Summary
     # -------------------------
     def get_advancement_tree_summary(self):
-        if not hasattr(self, "_selected_prof"):
+        if self._selected_prof is None:
             return "<span style='color: #888888;'>No profession selected.<br><br>Select a profession to see available advancement trees.</span>"
 
         tree_names = self.get_accessible_advancement_tree_names()
@@ -1043,9 +1044,9 @@ class CharacterBuilder(QWidget):
             for action in entry.get("Action cards", []):
                 add_action(action)
 
-        if hasattr(self, "_selected_race"):
+        if self._selected_race is not None:
             race = self._selected_race
-            if hasattr(self, "_selected_attr"):
+            if self._selected_attr is not None:
                 for k, v in self._selected_attr.items():
                     attributes[k] += v
             mob = race.get("MOB", 0)
@@ -1055,17 +1056,17 @@ class CharacterBuilder(QWidget):
             for action in race.get("Action cards", []):
                 add_action(action)
 
-        if hasattr(self, "_selected_origin"):
+        if self._selected_origin is not None:
             origin = self._selected_origin
             add_keywords(origin.get("Keywords", []))
             for item in origin.get("Items", []):
                 add_item(item)
             brill += origin.get("Brill", 0)
 
-        if hasattr(self, "_selected_prof"):
+        if self._selected_prof is not None:
             add_keywords(self._selected_prof.get("Keywords", []))
 
-        if hasattr(self, "_selected_path"):
+        if self._selected_path is not None:
             apply_entry(self._selected_path)
 
         for entry in self.get_selected_advancement_entries():
