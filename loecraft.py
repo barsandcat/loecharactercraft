@@ -20,21 +20,21 @@ DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
 # Module-level helpers
 # -------------------------
 
-def format_advancement_summary(entry):
+def render_entry_summary(entry):
     parts = []
 
     for attr in entry.get("Attributes", []):
         for key, value in attr.items():
-            parts.append(f"+{value} {key}")
+            parts.append(f"{value} {key}")
 
     if entry.get("HP"):
-        parts.append(f"+{entry['HP']} HP")
+        parts.append(f"{entry['HP']} HP")
 
     if entry.get("MOB"):
-        parts.append(f"+{entry['MOB']} MOB")
+        parts.append(f"{entry['MOB']} MOV")
 
     if entry.get("Brill"):
-        parts.append(f"+{entry['Brill']} Brill")
+        parts.append(f"{entry['Brill']} Brill")
 
     div_value = entry.get("DIV")
     if div_value == "Upgrade":
@@ -50,7 +50,7 @@ def format_advancement_summary(entry):
     for action in entry.get("Action cards", []):
         parts.append(f"{action['Name']} L{action['Level']}")
 
-    return ", ".join(parts) if parts else "No changes"
+    return ", ".join(parts)
 
 
 def upgrade_div_die(div_die):
@@ -64,31 +64,7 @@ def upgrade_div_die(div_die):
     return DICE_PROGRESSION[current_index + 1]
 
 
-def render_entry_extras(entry):
-    """Compact extras string for button/popup labels.
 
-    Includes keywords, attribute deltas, and optional stats that are present.
-    Stats always shown on races (MOB, HP, DIV) are left to render_race_button
-    so it can display them even when zero.
-    """
-    keywords = ", ".join(entry.get("Keywords", []))
-    attributes = [
-        f"{value:+} {key}"
-        for attr in entry.get("Attributes", [])
-        for key, value in attr.items()
-    ]
-
-    extras = []
-    if keywords:
-        extras.append(keywords)
-    if attributes:
-        extras.append(", ".join(attributes))
-    for stat, label in (("MOB", "MOV"), ("HP", "HP"), ("DIV", "DIV"), ("Brill", "Brill")):
-        value = entry.get(stat)
-        if value is not None:
-            extras.append(f"{label}: {value}")
-
-    return ", ".join(extras)
 
 
 @dataclass
@@ -169,7 +145,7 @@ class SelectorButton(QPushButton):
             self.selected = selected
         else:
             self.selected = items[0] if len(items) == 1 else None
-        self.setEnabled(bool(items))
+        self.setEnabled(len(items) > 1)
         self.update_text()
 
     def update_text(self):
@@ -538,8 +514,6 @@ class CharacterBuilder(QWidget):
             self._selected_attr = None
             self.attr_step.set_items(attr_options)
 
-        # Gray out attributes selector when there is only one possible option.
-        self.attr_step.selector.setEnabled(len(attr_options) > 1)
 
         self.update_summary()
         self._adv_panel.refresh()
@@ -604,26 +578,25 @@ class CharacterBuilder(QWidget):
         return ", ".join(f"{k} {attr.get(k, 0)}" for k in ATTRIBUTES)
 
     def render_origin_button(self, origin):
-        extras = render_entry_extras(origin)
+        extras = render_entry_summary(origin)
         return f"{origin['Name']}\n{extras}" if extras else origin["Name"]
 
     def render_prof_button(self, prof):
-        extras = render_entry_extras(prof)
+        extras = render_entry_summary(prof)
         return f"{prof['Name']}\n{extras}" if extras else prof["Name"]
 
     def render_path_button(self, path):
-        extras = render_entry_extras(path)
+        extras = render_entry_summary(path)
         return f"{path['Name']}\n{extras}" if extras else path["Name"]
 
     def render_level_up_tree_popup(self, option):
         versions = option["versions"]
         if len(versions) == 1:
-            detail = format_advancement_summary(versions[0])
+            detail = render_entry_summary(versions[0]) or "No changes"
         else:
             details = []
             for idx, version in enumerate(versions):
-                summary = format_advancement_summary(version)
-                details.append(summary)
+                details.append(render_entry_summary(version) or "No changes")
                 if idx < len(versions) - 1:
                     details.append("or")
             detail = "\n".join(details)
@@ -634,13 +607,10 @@ class CharacterBuilder(QWidget):
         return f"{option['tree_name']} L{option['level']}"
 
     def render_level_up_version_popup(self, version_option):
-        return (
-            f"{format_advancement_summary(version_option['entry'])}"
-        )
+        return render_entry_summary(version_option['entry']) or "No changes"
 
     def render_level_up_version_button(self, version_option):
-        summary = format_advancement_summary(version_option["entry"])
-        return summary
+        return render_entry_summary(version_option["entry"]) or "No changes"
 
     # -------------------------
     # Advancement Logic
@@ -676,7 +646,7 @@ class CharacterBuilder(QWidget):
                 tree_options,
                 selected_tree_option
             )
-            section.tree_selector.setEnabled(can_fill_slot and bool(tree_options))
+            section.tree_selector.setEnabled(can_fill_slot and len(tree_options) > 1)
 
             version_options = []
             selected_version_option = None
@@ -706,7 +676,6 @@ class CharacterBuilder(QWidget):
                 version_options,
                 selected_version_option
             )
-            section.version_selector.setEnabled(len(version_options) > 1)
 
             if selected_tree_option is not None:
                 prior_selected_options.append(selected_tree_option)
@@ -936,7 +905,7 @@ class CharacterBuilder(QWidget):
 
             selected_version_index = picked.get(level, -1)
             for idx, version in enumerate(versions):
-                summary = format_advancement_summary(version)
+                summary = render_entry_summary(version) or "No changes"
                 if idx == selected_version_index:
                     ver_class = "selected"
                 elif level in available:
