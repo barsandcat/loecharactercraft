@@ -4,7 +4,7 @@ import html
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
     QLabel, QTextEdit, QPushButton, QDialog, QScrollArea,
-    QGroupBox, QFrame
+    QGroupBox, QFrame, QStackedWidget
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QTextCursor, QTextCharFormat, QColor, QFont
@@ -44,7 +44,16 @@ class SelectionPopup(QDialog):
 # Selector Button
 # -------------------------
 class SelectorButton(QPushButton):
-    def __init__(self, items, render_popup_fn, render_button_fn, on_change, default_text, parent=None):
+    def __init__(
+        self,
+        items,
+        render_popup_fn,
+        render_button_fn,
+        on_change,
+        default_text,
+        on_open_selector=None,
+        parent=None
+    ):
         super().__init__(parent)
 
         self.items = []
@@ -52,13 +61,14 @@ class SelectorButton(QPushButton):
         self.render_button_fn = render_button_fn
         self.on_change = on_change
         self.default_text = default_text
+        self.on_open_selector = on_open_selector
 
         self.selected = None
         self.setFixedHeight(48)
         self.setStyleSheet("text-align: left; padding: 5px;")
         self.set_items(items)
 
-        self.clicked.connect(self.open_popup)
+        self.clicked.connect(self.open_selector)
 
     def set_items(self, items, selected=None, auto_select_single=True):
         self.items = items
@@ -77,8 +87,12 @@ class SelectorButton(QPushButton):
         else:
             self.setText(self.default_text)
 
-    def open_popup(self):
+    def open_selector(self):
         if not self.items:
+            return
+
+        if self.on_open_selector:
+            self.on_open_selector(self)
             return
 
         popup = SelectionPopup(
@@ -105,6 +119,7 @@ class LevelUpSection(QWidget):
         render_version_button_fn,
         on_tree_change,
         on_version_change,
+        on_open_selector=None,
         parent=None
     ):
         super().__init__(parent)
@@ -124,14 +139,16 @@ class LevelUpSection(QWidget):
             render_tree_popup_fn,
             render_tree_button_fn,
             on_tree_change,
-            "Level up"
+            "Level up",
+            on_open_selector
         )
         self.version_selector = SelectorButton(
             [],
             render_version_popup_fn,
             render_version_button_fn,
             on_version_change,
-            "Choose reward"
+            "Choose reward",
+            on_open_selector
         )
 
         selectors_layout.addWidget(self.tree_selector, 2)
@@ -155,6 +172,7 @@ class StepSection(QWidget):
         render_popup_fn,
         render_button_fn,
         on_change,
+        on_open_selector=None,
         parent=None
     ):
         super().__init__(parent)
@@ -173,7 +191,8 @@ class StepSection(QWidget):
             self.render_popup_fn,
             self.render_button_fn,
             self._handle_change,
-            self.title
+            self.title,
+            on_open_selector
         )
         self.layout.addWidget(self.selector)
 
@@ -263,8 +282,8 @@ class CharacterBuilder(QWidget):
         main_layout = QHBoxLayout(self)
 
         # Left panel - Character creation
-        left_container = QWidget()
-        self.left_layout = QVBoxLayout(left_container)
+        self.left_controls_widget = QWidget()
+        self.left_layout = QVBoxLayout(self.left_controls_widget)
         self.left_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.left_layout.setSpacing(2)
 
@@ -273,35 +292,40 @@ class CharacterBuilder(QWidget):
             "Choose Race",
             self.render_race_button,
             self.render_race_button,
-            self.on_race_selected
+            self.on_race_selected,
+            self.open_selector_panel
         )
 
         self.attr_step = StepSection(
             "Choose Attributes",
             self.render_attr_button,
             self.render_attr_button,
-            self.on_attr_selected
+            self.on_attr_selected,
+            self.open_selector_panel
         )
 
         self.origin_step = StepSection(
             "Choose Origin",
             self.render_origin_button,
             self.render_origin_button,
-            self.on_origin_selected
+            self.on_origin_selected,
+            self.open_selector_panel
         )
 
         self.prof_step = StepSection(
             "Choose Profession",
             self.render_prof_button,
             self.render_prof_button,
-            self.on_prof_selected
+            self.on_prof_selected,
+            self.open_selector_panel
         )
 
         self.path_step = StepSection(
             "Choose Path",
             self.render_path_button,
             self.render_path_button,
-            self.on_path_selected
+            self.on_path_selected,
+            self.open_selector_panel
         )
 
         self.level_up_sections = []
@@ -313,7 +337,8 @@ class CharacterBuilder(QWidget):
                 self.render_level_up_version_popup,
                 self.render_level_up_version_button,
                 lambda item, idx=level_number - 1: self.on_level_up_tree_selected(idx, item),
-                lambda item, idx=level_number - 1: self.on_level_up_version_selected(idx, item)
+                lambda item, idx=level_number - 1: self.on_level_up_version_selected(idx, item),
+                self.open_selector_panel
             )
             self.level_up_sections.append(section)
 
@@ -345,8 +370,32 @@ class CharacterBuilder(QWidget):
         
         # Scroll areas
         left_scroll = QScrollArea()
-        left_scroll.setWidget(left_container)
+        left_scroll.setWidget(self.left_controls_widget)
         left_scroll.setWidgetResizable(True)
+
+        # Left panel selector view (replaces controls while selecting)
+        self.selector_view = QWidget()
+        selector_layout = QVBoxLayout(self.selector_view)
+        selector_layout.setContentsMargins(0, 0, 0, 0)
+        selector_layout.setSpacing(4)
+
+        self.selector_title = QLabel("Choose Option")
+        self.selector_title.setStyleSheet("font-weight: bold; font-size: 14px;")
+        selector_layout.addWidget(self.selector_title)
+
+        selector_scroll = QScrollArea()
+        selector_scroll.setWidgetResizable(True)
+        self.selector_options_container = QWidget()
+        self.selector_options_layout = QVBoxLayout(self.selector_options_container)
+        self.selector_options_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.selector_options_layout.setSpacing(3)
+        selector_scroll.setWidget(self.selector_options_container)
+        selector_layout.addWidget(selector_scroll)
+
+        self.left_stack = QStackedWidget()
+        self.left_stack.addWidget(left_scroll)
+        self.left_stack.addWidget(self.selector_view)
+        self.left_stack.setCurrentIndex(0)
         
         middle_scroll = QScrollArea()
         middle_scroll.setWidget(middle_container)
@@ -356,7 +405,7 @@ class CharacterBuilder(QWidget):
         right_scroll.setWidget(self.advancement_panel)
         right_scroll.setWidgetResizable(True)
 
-        main_layout.addWidget(left_scroll, 2)
+        main_layout.addWidget(self.left_stack, 2)
         main_layout.addWidget(middle_scroll, 2)
         main_layout.addWidget(right_scroll, 2)
 
@@ -367,6 +416,33 @@ class CharacterBuilder(QWidget):
         self.prof_step.set_items(self.data["Professions"])
         self.path_step.set_items([])
         self.refresh_level_up_sections()
+
+    def open_selector_panel(self, selector):
+        self.active_selector = selector
+        self.selector_title.setText(selector.default_text)
+
+        while self.selector_options_layout.count():
+            item = self.selector_options_layout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
+
+        for option in selector.items:
+            option_btn = QPushButton(selector.render_popup_fn(option))
+            option_btn.setStyleSheet("text-align: left; padding: 8px;")
+            option_btn.clicked.connect(
+                lambda _, s=selector, o=option: self._select_from_panel(s, o)
+            )
+            self.selector_options_layout.addWidget(option_btn)
+
+        self.left_stack.setCurrentIndex(1)
+
+    def _select_from_panel(self, selector, option):
+        selector.set_selected(option)
+        self.show_main_controls_panel()
+
+    def show_main_controls_panel(self):
+        self.left_stack.setCurrentIndex(0)
 
     def clear_selected(self, attr_name):
         if hasattr(self, attr_name):
