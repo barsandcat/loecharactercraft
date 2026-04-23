@@ -175,6 +175,7 @@ class LevelUpSection(QWidget):
         super().__init__(parent)
 
         self.level_number = level_number
+        self.state = LevelUpSlotState()
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -211,10 +212,7 @@ class LevelUpSection(QWidget):
         self.version_selector.set_items(version_options, selected_version)
 
     def is_complete(self):
-        return (
-            self.tree_selector.selected is not None
-            and self.version_selector.selected is not None
-        )
+        return self.state.is_complete()
 
 
 # -------------------------
@@ -319,7 +317,6 @@ class CharacterBuilder(QWidget):
         self._selected_origin = None
         self._selected_prof = None
         self._selected_path = None
-        self._level_up_state = [LevelUpSlotState() for _ in range(LEVEL_UP_SLOTS)]
         self._active_selector = None
 
         self.init_ui()
@@ -534,7 +531,7 @@ class CharacterBuilder(QWidget):
         self._adv_panel.refresh()
 
     def on_level_up_tree_selected(self, slot_index, tree_level_option):
-        state = self._level_up_state[slot_index]
+        state = self._level_up_sections[slot_index].state
         state.select_tree(tree_level_option["tree_name"], tree_level_option["level"])
 
         self.refresh_level_up_sections()
@@ -542,7 +539,7 @@ class CharacterBuilder(QWidget):
         self._adv_panel.refresh()
 
     def on_level_up_version_selected(self, slot_index, version_option):
-        self._level_up_state[slot_index].select_version(version_option["index"])
+        self._level_up_sections[slot_index].state.select_version(version_option["index"])
 
         self.refresh_level_up_sections()
         self.update_summary()
@@ -593,7 +590,8 @@ class CharacterBuilder(QWidget):
     # Advancement Logic
     # -------------------------
     def reset_level_up_state(self):
-        self._level_up_state = [LevelUpSlotState() for _ in range(LEVEL_UP_SLOTS)]
+        for section in self._level_up_sections:
+            section.state.clear()
         self.refresh_level_up_sections()
 
     def refresh_level_up_sections(self):
@@ -601,7 +599,7 @@ class CharacterBuilder(QWidget):
         can_fill_slot = self._selected_prof is not None
 
         for slot_index, section in enumerate(self._level_up_sections):
-            state = self._level_up_state[slot_index]
+            state = section.state
 
             tree_options = (
                 self.get_available_level_up_options(slot_index, prior_selected_options)
@@ -749,7 +747,8 @@ class CharacterBuilder(QWidget):
     def get_selected_advancement_entries(self):
         entries = []
 
-        for state in self._level_up_state:
+        for section in self._level_up_sections:
+            state = section.state
             version_index = state.version_index
             if not state.has_tree_selected() or version_index is None:
                 continue
@@ -811,10 +810,7 @@ class CharacterBuilder(QWidget):
         for tree_name in tree_names[1:]:
             html_parts.append(self._render_tree_html(tree_name, is_primary=False, selected_by_tree=selected_by_tree))
 
-        filled_slots = sum(
-            1 for s in self._level_up_state
-            if s.is_complete()
-        )
+        filled_slots = sum(1 for s in self._level_up_sections if s.is_complete())
         html_parts.append(
             f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>"
             f"<span style='font-weight: bold;'>Progress: {filled_slots}/{LEVEL_UP_SLOTS} level ups selected</span>"
@@ -826,7 +822,8 @@ class CharacterBuilder(QWidget):
     def _build_selected_by_tree(self):
         """Return {tree_name: {level: version_index}} for all fully-selected level-up slots."""
         selected_by_tree = {}
-        for state in self._level_up_state:
+        for section in self._level_up_sections:
+            state = section.state
             if not state.has_tree_selected() or state.version_index is None:
                 continue
             option = self.get_tree_level_option(state.tree_name, state.level)
