@@ -938,7 +938,7 @@ class CharacterBuilder(QWidget):
                     continue
                 
                 # Check if this level is unlocked
-                if self.is_advancement_level_unlocked_for_tree(level, simulated_taken, slot_counter):
+                if self.is_advancement_level_unlocked(level, simulated_taken, slot_counter):
                     available_levels.add(level)
             
             # Display all levels in order
@@ -996,23 +996,6 @@ class CharacterBuilder(QWidget):
         
         return "\n".join(html_parts)
     
-    def is_advancement_level_unlocked_for_tree(self, level, taken_levels, slot_number):
-        """Check if a level is unlocked based on taken levels and current slot position"""
-        if level == 1:
-            return True
-        if level in (2, 3):
-            return 1 in taken_levels
-        if level == 4:
-            return 3 in taken_levels
-        if level == 5:
-            return 3 in taken_levels and slot_number >= 4
-        if level == 6:
-            return 5 in taken_levels
-        if level == 7:
-            return 5 in taken_levels and slot_number >= 6
-        if level == 8:
-            return 7 in taken_levels
-        return False
 
     # -------------------------
     # Summary
