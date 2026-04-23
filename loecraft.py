@@ -163,14 +163,12 @@ class SelectorButton(QPushButton):
 
         self.clicked.connect(self.open_selector)
 
-    def set_items(self, items, selected=None, auto_select_single=True):
+    def set_items(self, items, selected=None):
         self.items = items
         if selected is not None:
             self.selected = selected
         else:
-            self.selected = (
-                items[0] if auto_select_single and len(items) == 1 else None
-            )
+            self.selected = items[0] if len(items) == 1 else None
         self.setEnabled(bool(items))
         self.update_text()
 
@@ -676,8 +674,7 @@ class CharacterBuilder(QWidget):
 
             section.tree_selector.set_items(
                 tree_options,
-                selected_tree_option,
-                auto_select_single=False
+                selected_tree_option
             )
             section.tree_selector.setEnabled(can_fill_slot and bool(tree_options))
 
@@ -707,8 +704,7 @@ class CharacterBuilder(QWidget):
 
             section.version_selector.set_items(
                 version_options,
-                selected_version_option,
-                auto_select_single=True
+                selected_version_option
             )
             section.version_selector.setEnabled(len(version_options) > 1)
 
