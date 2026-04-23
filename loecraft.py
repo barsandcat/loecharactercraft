@@ -84,6 +84,67 @@ def upgrade_div_die(div_die):
 
 
 
+class CharacterStats:
+    def __init__(self):
+        self.attributes = {k: 0 for k in ATTRIBUTES}
+        self.mob = 0
+        self.hp = 0
+        self.div_die = None
+        self.brill = 0
+        self.keyword_counts = {}
+        self._items_by_key = {}
+        self._actions_by_name = {}
+
+    @property
+    def items(self):
+        return list(self._items_by_key.values())
+
+    @property
+    def actions(self):
+        return list(self._actions_by_name.values())
+
+    def add_keywords(self, values):
+        for value in values:
+            self.keyword_counts[value] = self.keyword_counts.get(value, 0) + 1
+
+    def add_item(self, item):
+        self._items_by_key.setdefault((item["Name"], item["Type"]), item)
+
+    def add_action(self, action):
+        current = self._actions_by_name.get(action["Name"])
+        if current is None or action["Level"] > current["Level"]:
+            self._actions_by_name[action["Name"]] = action
+
+    def apply_race(self, race, attr):
+        if attr is not None:
+            for k, v in attr.items():
+                self.attributes[k] += v
+        self.mob = race.get("MOB", 0)
+        self.hp = race.get("HP", 0)
+        self.div_die = race.get("DIV")
+        self.add_keywords(race.get("Keywords", []))
+        for action in race.get("Action cards", []):
+            self.add_action(action)
+
+    def apply_entry(self, entry):
+        for attr in entry.get("Attributes", []):
+            for key, value in attr.items():
+                self.attributes[key] = self.attributes.get(key, 0) + value
+        self.mob += entry.get("MOB", 0)
+        self.hp += entry.get("HP", 0)
+        self.brill += entry.get("Brill", 0)
+        self.add_keywords(entry.get("Keywords", []))
+        div_value = entry.get("DIV")
+        if div_value == "Upgrade":
+            self.div_die = upgrade_div_die(self.div_die)
+        elif div_value:
+            self.div_die = div_value
+        for item in entry.get("Items", []):
+            self.add_item(item)
+        for action in entry.get("Action cards", []):
+            self.add_action(action)
+
+
 @dataclass
 class LevelUpSlotState:
     tree_name: Optional[str] = None
@@ -873,90 +934,28 @@ class CharacterBuilder(QWidget):
         self.summary.setHtml(self._render_summary_html(stats))
 
     def _collect_character_stats(self):
-        """Accumulate all character stats from selected race, origin, prof, path and level-ups.
-
-        Returns a plain dict with keys:
-            attributes, mob, hp, div_die, brill,
-            keyword_counts, items, actions
-        """
-        attributes = {k: 0 for k in ATTRIBUTES}
-        mob = 0
-        hp = 0
-        div_die = None
-        brill = 0
-        keyword_counts = {}
-        items_by_key = {}
-        actions_by_name = {}
-
-        def add_keywords(values):
-            for value in values:
-                keyword_counts[value] = keyword_counts.get(value, 0) + 1
-
-        def add_item(item):
-            items_by_key.setdefault((item["Name"], item["Type"]), item)
-
-        def add_action(action):
-            current = actions_by_name.get(action["Name"])
-            if current is None or action["Level"] > current["Level"]:
-                actions_by_name[action["Name"]] = action
-
-        def apply_entry(entry):
-            nonlocal mob, hp, div_die, brill
-            for attr in entry.get("Attributes", []):
-                for key, value in attr.items():
-                    attributes[key] = attributes.get(key, 0) + value
-            mob += entry.get("MOB", 0)
-            hp += entry.get("HP", 0)
-            brill += entry.get("Brill", 0)
-            add_keywords(entry.get("Keywords", []))
-            div_value = entry.get("DIV")
-            if div_value == "Upgrade":
-                div_die = upgrade_div_die(div_die)
-            elif div_value:
-                div_die = div_value
-            for item in entry.get("Items", []):
-                add_item(item)
-            for action in entry.get("Action cards", []):
-                add_action(action)
+        stats = CharacterStats()
 
         if self._selected_race is not None:
-            race = self._selected_race
-            if self._selected_attr is not None:
-                for k, v in self._selected_attr.items():
-                    attributes[k] += v
-            mob = race.get("MOB", 0)
-            hp = race.get("HP", 0)
-            div_die = race.get("DIV")
-            add_keywords(race.get("Keywords", []))
-            for action in race.get("Action cards", []):
-                add_action(action)
+            stats.apply_race(self._selected_race, self._selected_attr)
 
         if self._selected_origin is not None:
             origin = self._selected_origin
-            add_keywords(origin.get("Keywords", []))
+            stats.add_keywords(origin.get("Keywords", []))
             for item in origin.get("Items", []):
-                add_item(item)
-            brill += origin.get("Brill", 0)
+                stats.add_item(item)
+            stats.brill += origin.get("Brill", 0)
 
         if self._selected_prof is not None:
-            add_keywords(self._selected_prof.get("Keywords", []))
+            stats.add_keywords(self._selected_prof.get("Keywords", []))
 
         if self._selected_path is not None:
-            apply_entry(self._selected_path)
+            stats.apply_entry(self._selected_path)
 
         for entry in self.get_selected_advancement_entries():
-            apply_entry(entry)
+            stats.apply_entry(entry)
 
-        return {
-            "attributes":     attributes,
-            "mob":            mob,
-            "hp":             hp,
-            "div_die":        div_die,
-            "brill":          brill,
-            "keyword_counts": keyword_counts,
-            "items":          list(items_by_key.values()),
-            "actions":        list(actions_by_name.values()),
-        }
+        return stats
 
     def _render_summary_html(self, stats):
         """Render a collected stats dict as an HTML string for the summary panel."""
@@ -978,17 +977,17 @@ class CharacterBuilder(QWidget):
 
         add_section(
             "Attributes",
-            [f"{k}: {stats['attributes'].get(k, 0)}" for k in ATTRIBUTES]
+            [f"{k}: {stats.attributes.get(k, 0)}" for k in ATTRIBUTES]
         )
 
-        stat_lines = [f"MOV: {stats['mob']}", f"HP: {stats['hp']}"]
-        if stats["div_die"]:
-            stat_lines.append(f"DIV: {stats['div_die']}")
-        stat_lines.append(f"Brill: {stats['brill']}")
+        stat_lines = [f"MOV: {stats.mob}", f"HP: {stats.hp}"]
+        if stats.div_die:
+            stat_lines.append(f"DIV: {stats.div_die}")
+        stat_lines.append(f"Brill: {stats.brill}")
         add_section("Stats", stat_lines)
 
-        if stats["keyword_counts"]:
-            kw_counts = stats["keyword_counts"]
+        if stats.keyword_counts:
+            kw_counts = stats.keyword_counts
             add_section("Keywords", [
                 ", ".join(
                     f"{kw} x{kw_counts[kw]}" if kw_counts[kw] > 1 else kw
@@ -996,8 +995,8 @@ class CharacterBuilder(QWidget):
                 )
             ])
 
-        add_section("Items",        [f"{i['Name']} ({i['Type']})" for i in stats["items"]])
-        add_section("Action Cards", [f"{a['Name']} (Lvl {a['Level']})" for a in stats["actions"]])
+        add_section("Items",        [f"{i['Name']} ({i['Type']})" for i in stats.items])
+        add_section("Action Cards", [f"{a['Name']} (Lvl {a['Level']})" for a in stats.actions])
 
         return "".join(parts)
 
