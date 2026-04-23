@@ -347,10 +347,10 @@ class CharacterBuilder(QWidget):
         with open("data.json", "r") as f:
             self.data = json.load(f)
 
-        self.advancement_trees_by_name = {
+        self._trees = {
             tree["Name"]: tree for tree in self.data["Advancement Trees"]
         }
-        self.level_up_state = [
+        self._level_up_state = [
             {"tree_level_key": None, "version_index": None}
             for _ in range(LEVEL_UP_SLOTS)
         ]
@@ -407,7 +407,7 @@ class CharacterBuilder(QWidget):
             self.open_selector_panel
         )
 
-        self.level_up_sections = []
+        self._level_up_sections = []
         for level_number in range(1, LEVEL_UP_SLOTS + 1):
             section = LevelUpSection(
                 level_number,
@@ -419,7 +419,7 @@ class CharacterBuilder(QWidget):
                 lambda item, idx=level_number - 1: self.on_level_up_version_selected(idx, item),
                 self.open_selector_panel
             )
-            self.level_up_sections.append(section)
+            self._level_up_sections.append(section)
 
         for step in [
             self.race_step,
@@ -430,7 +430,7 @@ class CharacterBuilder(QWidget):
         ]:
             self.left_layout.addWidget(step)
 
-        for section in self.level_up_sections:
+        for section in self._level_up_sections:
             self.left_layout.addWidget(section)
 
         # Middle panel - Character Board
@@ -445,7 +445,7 @@ class CharacterBuilder(QWidget):
         middle_layout.addWidget(self.summary)
 
         # Right panel - Advancement Trees
-        self.advancement_panel = AdvancementTreePanel(self.get_advancement_tree_summary)
+        self._adv_panel = AdvancementTreePanel(self.get_advancement_tree_summary)
         
         # Scroll areas
         left_scroll = QScrollArea()
@@ -453,38 +453,38 @@ class CharacterBuilder(QWidget):
         left_scroll.setWidgetResizable(True)
 
         # Left panel selector view (replaces controls while selecting)
-        self.selector_view = QWidget()
-        selector_layout = QVBoxLayout(self.selector_view)
+        self._selector_panel = QWidget()
+        selector_layout = QVBoxLayout(self._selector_panel)
         selector_layout.setContentsMargins(0, 0, 0, 0)
         selector_layout.setSpacing(4)
 
-        self.selector_title = QLabel("Choose Option")
-        self.selector_title.setStyleSheet("font-weight: bold; font-size: 14px;")
-        selector_layout.addWidget(self.selector_title)
+        self._selector_title = QLabel("Choose Option")
+        self._selector_title.setStyleSheet("font-weight: bold; font-size: 14px;")
+        selector_layout.addWidget(self._selector_title)
 
         selector_scroll = QScrollArea()
         selector_scroll.setWidgetResizable(True)
         self.selector_options_container = QWidget()
-        self.selector_options_layout = QVBoxLayout(self.selector_options_container)
-        self.selector_options_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.selector_options_layout.setSpacing(3)
+        self._selector_options_layout = QVBoxLayout(self.selector_options_container)
+        self._selector_options_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self._selector_options_layout.setSpacing(3)
         selector_scroll.setWidget(self.selector_options_container)
         selector_layout.addWidget(selector_scroll)
 
-        self.left_stack = QStackedWidget()
-        self.left_stack.addWidget(left_scroll)
-        self.left_stack.addWidget(self.selector_view)
-        self.left_stack.setCurrentIndex(0)
+        self._left_stack = QStackedWidget()
+        self._left_stack.addWidget(left_scroll)
+        self._left_stack.addWidget(self._selector_panel)
+        self._left_stack.setCurrentIndex(0)
         
         middle_scroll = QScrollArea()
         middle_scroll.setWidget(middle_container)
         middle_scroll.setWidgetResizable(True)
         
         right_scroll = QScrollArea()
-        right_scroll.setWidget(self.advancement_panel)
+        right_scroll.setWidget(self._adv_panel)
         right_scroll.setWidgetResizable(True)
 
-        main_layout.addWidget(self.left_stack, 2)
+        main_layout.addWidget(self._left_stack, 2)
         main_layout.addWidget(middle_scroll, 2)
         main_layout.addWidget(right_scroll, 2)
 
@@ -497,11 +497,11 @@ class CharacterBuilder(QWidget):
         self.refresh_level_up_sections()
 
     def open_selector_panel(self, selector):
-        self.active_selector = selector
-        self.selector_title.setText(selector.default_text)
+        self._active_selector = selector
+        self._selector_title.setText(selector.default_text)
 
-        while self.selector_options_layout.count():
-            item = self.selector_options_layout.takeAt(0)
+        while self._selector_options_layout.count():
+            item = self._selector_options_layout.takeAt(0)
             widget = item.widget()
             if widget:
                 widget.deleteLater()
@@ -512,16 +512,16 @@ class CharacterBuilder(QWidget):
             option_btn.clicked.connect(
                 lambda _, s=selector, o=option: self._select_from_panel(s, o)
             )
-            self.selector_options_layout.addWidget(option_btn)
+            self._selector_options_layout.addWidget(option_btn)
 
-        self.left_stack.setCurrentIndex(1)
+        self._left_stack.setCurrentIndex(1)
 
     def _select_from_panel(self, selector, option):
         selector.set_selected(option)
         self.show_main_controls_panel()
 
     def show_main_controls_panel(self):
-        self.left_stack.setCurrentIndex(0)
+        self._left_stack.setCurrentIndex(0)
 
     def clear_selected(self, attr_name):
         if hasattr(self, attr_name):
@@ -531,62 +531,62 @@ class CharacterBuilder(QWidget):
     # Step Logic
     # -------------------------
     def on_race_selected(self, race):
-        race_changed = getattr(self, "selected_race", None) != race
-        self.selected_race = race
+        race_changed = getattr(self, "_selected_race", None) != race
+        self._selected_race = race
         attr_options = race.get("Attributes", [])
 
         if race_changed:
-            self.clear_selected("selected_attr")
+            self.clear_selected("_selected_attr")
             self.attr_step.set_items(attr_options)
 
         # Gray out attributes selector when there is only one possible option.
         self.attr_step.selector.setEnabled(len(attr_options) > 1)
 
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_attr_selected(self, attr):
-        self.selected_attr = attr
+        self._selected_attr = attr
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_origin_selected(self, origin):
-        self.selected_origin = origin
+        self._selected_origin = origin
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_prof_selected(self, prof):
-        prof_changed = getattr(self, "selected_prof", None) != prof
-        self.selected_prof = prof
+        prof_changed = getattr(self, "_selected_prof", None) != prof
+        self._selected_prof = prof
 
         if prof_changed:
-            self.clear_selected("selected_path")
+            self.clear_selected("_selected_path")
             self.path_step.set_items(prof["Paths"])
             self.reset_level_up_state()
 
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_path_selected(self, path):
-        self.selected_path = path
+        self._selected_path = path
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_level_up_tree_selected(self, slot_index, tree_level_option):
-        state = self.level_up_state[slot_index]
+        state = self._level_up_state[slot_index]
         state["tree_level_key"] = tree_level_option["key"]
         state["version_index"] = None
 
         self.refresh_level_up_sections()
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     def on_level_up_version_selected(self, slot_index, version_option):
-        self.level_up_state[slot_index]["version_index"] = version_option["index"]
+        self._level_up_state[slot_index]["version_index"] = version_option["index"]
 
         self.refresh_level_up_sections()
         self.update_summary()
-        self.advancement_panel.refresh()
+        self._adv_panel.refresh()
 
     # -------------------------
     # Render Functions
@@ -648,7 +648,7 @@ class CharacterBuilder(QWidget):
     # Advancement Logic
     # -------------------------
     def reset_level_up_state(self):
-        self.level_up_state = [
+        self._level_up_state = [
             {"tree_level_key": None, "version_index": None}
             for _ in range(LEVEL_UP_SLOTS)
         ]
@@ -656,10 +656,10 @@ class CharacterBuilder(QWidget):
 
     def refresh_level_up_sections(self):
         prior_selected_options = []
-        can_fill_slot = hasattr(self, "selected_prof")
+        can_fill_slot = hasattr(self, "_selected_prof")
 
-        for slot_index, section in enumerate(self.level_up_sections):
-            state = self.level_up_state[slot_index]
+        for slot_index, section in enumerate(self._level_up_sections):
+            state = self._level_up_state[slot_index]
 
             if can_fill_slot:
                 tree_options = self.get_available_level_up_options(
@@ -731,7 +731,7 @@ class CharacterBuilder(QWidget):
 
         options = []
         for tree_name in tree_names:
-            tree = self.advancement_trees_by_name.get(tree_name)
+            tree = self._trees.get(tree_name)
             if tree is None:
                 continue
 
@@ -754,17 +754,17 @@ class CharacterBuilder(QWidget):
         return options
 
     def get_accessible_advancement_tree_names(self):
-        if not hasattr(self, "selected_prof"):
+        if not hasattr(self, "_selected_prof"):
             return []
 
         tree_names = []
-        primary_tree_name = self.resolve_primary_tree_name(self.selected_prof["Name"])
-        if primary_tree_name in self.advancement_trees_by_name:
+        primary_tree_name = self.resolve_primary_tree_name(self._selected_prof["Name"])
+        if primary_tree_name in self._trees:
             tree_names.append(primary_tree_name)
 
-        for tree_name in self.selected_prof.get("Advancement Trees", []):
+        for tree_name in self._selected_prof.get("Advancement Trees", []):
             if (
-                tree_name in self.advancement_trees_by_name
+                tree_name in self._trees
                 and tree_name not in tree_names
             ):
                 tree_names.append(tree_name)
@@ -772,13 +772,13 @@ class CharacterBuilder(QWidget):
         return tree_names
 
     def resolve_primary_tree_name(self, profession_name):
-        if profession_name in self.advancement_trees_by_name:
+        if profession_name in self._trees:
             return profession_name
 
         normalized_profession = self.normalize_name(profession_name)
         matches = []
 
-        for tree_name in self.advancement_trees_by_name:
+        for tree_name in self._trees:
             normalized_tree = self.normalize_name(tree_name)
             if (
                 normalized_profession.startswith(normalized_tree)
@@ -826,7 +826,7 @@ class CharacterBuilder(QWidget):
     def get_selected_advancement_entries(self):
         entries = []
 
-        for state in self.level_up_state:
+        for state in self._level_up_state:
             tree_level_key = state["tree_level_key"]
             version_index = state["version_index"]
             if tree_level_key is None or version_index is None:
@@ -844,7 +844,7 @@ class CharacterBuilder(QWidget):
 
     def get_tree_level_option_by_key(self, tree_level_key):
         tree_name, level_key = tree_level_key.rsplit("|", 1)
-        tree = self.advancement_trees_by_name.get(tree_name)
+        tree = self._trees.get(tree_name)
         if tree is None:
             return None
 
@@ -864,7 +864,7 @@ class CharacterBuilder(QWidget):
     # Advancement Tree Summary
     # -------------------------
     def get_advancement_tree_summary(self):
-        if not hasattr(self, "selected_prof"):
+        if not hasattr(self, "_selected_prof"):
             return "<span style='color: #888888;'>No profession selected.<br><br>Select a profession to see available advancement trees.</span>"
         
         # Get all accessible trees
@@ -877,7 +877,7 @@ class CharacterBuilder(QWidget):
         selected_by_tree = {}
         selected_version_by_key = {}
         
-        for slot_idx, state in enumerate(self.level_up_state):
+        for slot_idx, state in enumerate(self._level_up_state):
             if state["tree_level_key"] and state["version_index"] is not None:
                 option = self.get_tree_level_option_by_key(state["tree_level_key"])
                 if option:
@@ -912,7 +912,7 @@ class CharacterBuilder(QWidget):
         html_parts.append("</style>")
         
         def render_tree(tree_name, is_primary):
-            tree = self.advancement_trees_by_name.get(tree_name)
+            tree = self._trees.get(tree_name)
             if not tree:
                 return ""
             
@@ -993,7 +993,7 @@ class CharacterBuilder(QWidget):
             html_parts.append(render_tree(tree_name, False))
         
         # Add progress summary
-        filled_slots = len([s for s in self.level_up_state if s["tree_level_key"] is not None and s["version_index"] is not None])
+        filled_slots = len([s for s in self._level_up_state if s["tree_level_key"] is not None and s["version_index"] is not None])
         html_parts.append(f"<div style='margin-top: 20px; border-top: 1px solid #cccccc; padding-top: 10px; color: #000000;'>")
         html_parts.append(f"<span style='font-weight: bold;'>Progress: {filled_slots}/{LEVEL_UP_SLOTS} level ups selected</span>")
         html_parts.append("</div>")
@@ -1058,12 +1058,12 @@ class CharacterBuilder(QWidget):
         # -------------------------
         # Race
         # -------------------------
-        if hasattr(self, "selected_race"):
-            race = self.selected_race
+        if hasattr(self, "_selected_race"):
+            race = self._selected_race
 
             # Attributes
-            if hasattr(self, "selected_attr"):
-                for k, v in self.selected_attr.items():
+            if hasattr(self, "_selected_attr"):
+                for k, v in self._selected_attr.items():
                     attributes[k] += v
 
             mob = race.get("MOB", 0)
@@ -1077,8 +1077,8 @@ class CharacterBuilder(QWidget):
         # -------------------------
         # Origin
         # -------------------------
-        if hasattr(self, "selected_origin"):
-            origin = self.selected_origin
+        if hasattr(self, "_selected_origin"):
+            origin = self._selected_origin
 
             add_keywords(origin.get("Keywords", []))
             for item in origin.get("Items", []):
@@ -1088,15 +1088,15 @@ class CharacterBuilder(QWidget):
         # -------------------------
         # Profession
         # -------------------------
-        if hasattr(self, "selected_prof"):
-            prof = self.selected_prof
+        if hasattr(self, "_selected_prof"):
+            prof = self._selected_prof
             add_keywords(prof.get("Keywords", []))
 
         # -------------------------
         # Path
         # -------------------------
-        if hasattr(self, "selected_path"):
-            path = self.selected_path
+        if hasattr(self, "_selected_path"):
+            path = self._selected_path
             apply_advancement(path)
 
         # -------------------------
