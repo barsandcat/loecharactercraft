@@ -2135,8 +2135,8 @@
           return "";
         }
         const displayName = card.DisplayName || card.Name;
-        const scale = card.ScaleAttribute ? " " + card.ScaleAttribute : "";
-        return displayName + " (" + cardId + ")" + scale;
+        const scale = card.ScaleAttribute ? " (Roll " + card.ScaleAttribute + ")" : "";
+        return cardId + " " + displayName + scale;
       }
 
       function formatActionCardSummary(cardId) {
