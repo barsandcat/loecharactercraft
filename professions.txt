@@ -1,0 +1,1065 @@
+Eventually, you learned your own, dangerous trade. Its choice will greatly impact the game – giving you access to three different Advancement trees, adding your starting Actions and Reactions, as well as giving you
+some basic tools to do your job.
+
+Choose your Profession
+Choose from the following or roll a D12 in the table below – your profession must be different from the
+professions of other Characters. Discuss with other players to create a well-rounded team.
+D12
+
+D12
+
+Barbarian
+
+Hunter
+
+Bard
+
+Lifeshaper
+
+Custodian
+
+Mage
+
+Druid
+
+Moonshield
+
+Executor
+
+Omu Priest
+
+Fighter
+
+Scoundrel
+
+Barbarian
+The time you had to spend outside of civilized realms honed your fighting skills and taught you to rely on your natural strength, endurance,
+and sharpened senses instead of expensive equipment.
+Your manners are not fit for the tables of nobility. Your simple, brutal solutions may shock your allies, but they can also intimidate your enemies.
+Keywords:
+Athletics – Your well-trained body is capable of incredible feats.
+Advancement Trees: As a Barbarian, you will be able to pick Advancements from your own tree as well as the Close Combat and Marksmanship trees.
+
+Shards of the Past
+After the Breaking of the Sun, the fragment of the
+world that Luada managed to save fell into centuries of chaos, as empires were shattered, old alliances broke, and people tried to adjust to life in perpetual gloom.
+As a result, many once-civilized nations fell back into
+barbarity. Today, Evershade is home to two types of
+wildlings: those who were never civilized, and those
+who returned to nature and now treat the last mementos of their past as no more than totems and idols.
+
+Barbarian Paths
+
+If you wish to choose a Barbarian, pick one of three initial paths below:
+
+Brute
+
+Wildling
+
+You are the ultimate fighting machine, relying on
+sheer force and devastating strikes to lay down even
+the strongest opponents.
+
+You are an expert in braving the harshest regions of
+Evershade and a capable, versatile fighter able to answer different threats.
+
+Attributes: Becoming a Brute will raise your Strength.
+
+Attributes: Becoming a Wildling will raise your Agility.
+
+Starting Equipment: A basic melee and ranged weap- Starting Equipment: A basic weapon and a ring signion. A ceremonial stone whistle in the shape of a skull fying your devotion to Notram, a chaotic god of war.
+that is a reminder of your tribe.
+To play the Wildling:
+To play the Brute:
+a) Increase your AGI by 1.
+a) Increase your STR by 1.
+b) Place the Barbarian Profession token in your
+b) Place the Barbarian Profession token in your
+Character board, A/B side down.
+Character board, A/B side down.
+c) Add the Notram’s Ring
+Item and Club / Staff
+c) Add the Death Whistle
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+Item tokens to your Pouch.
+Sling
+d) Add the Weapon Throw (PP08) card to your
+d) Add the Rage (PP07) card to your Pouch.
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+e) Proceed to the next chapter ((Companions, p. 111).
+
+Glowdrinker
+Glowjuice from some Evershade plants has potent
+euphoric and hallucinogenic properties. Some barbarians use it to enter a combat trance that makes
+them feel neither fear nor pain.
+Attributes: Becoming a Glowdrinker will raise your
+Charisma.
+Starting Equipment: A basic melee and ranged weapon. A set of vials with various hallucinogenic glowjuices.
+To play the Glowdrinker:
+a) Increase your CHA by 1.
+b) Place the Barbarian Profession token in your
+Character board, A/B side down.
+c) Add the Glowjuice
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Manic Laugh (PP09) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Bard
+In a world where so much was lost and erased, the keepers of old lore
+were always important. But now, with the arrival of Divinum, some
+great bards and storytellers can shape reality itself with their art.
+Keywords:
+Performer – From popular songs and acrobatic tricks to sorrowful tales,
+you know how to entertain a crowd or draw attention.
+Advancement Trees: As a Bard, you will be able to pick Advancements
+from your own tree as well as the Support Magic and Thiefcraft trees.
+
+Livemask
+A mask of Divinum-infused clay is a frequent sight on a theatre stage
+and in street performances. A magically gifted performer may control
+the Divinum within the mask, causing it to change appearance or even
+modify the wearer’s voice. Some bards become so proficient in using
+these tools they can impersonate pretty much anyone – and use these
+skills for more than just stage plays.
+
+Bard Paths
+
+If you choose to play a Bard, pick one of three initial paths below:
+
+Entertainer
+
+Trickster
+
+The trail is your home, as you travel from settlement
+to settlement, delighting and surprising people of
+Evershade with your art.
+
+A master of disguise, you lean on your inborn magical talents to create impossible tricks and dumbfound
+other people with realistic illusions.
+
+Attributes: Becoming an Entertainer will raise your
+Charisma.
+
+Attributes: Becoming a Trickster will raise your Agility.
+
+Starting Equipment: A basic melee and ranged weapStarting Equipment: A basic melee and ranged weap- on. A smoke bomb useful when you wish to avoid
+on. A throwing dagger you fall back on when your conflict.
+entertainment skills aren’t enough.
+To play the Trickster:
+To play the Entertainer:
+a) Increase your AGI by 1.
+a) Increase your CHA by 1.
+b) Place the Bard Profession token in your Charb) Place the Bard Profession token in your Character board, A/B side down.
+acter board, A/B side down.
+c) Add the Smoke Bomb
+Item and Club / Staff
+c) Add the Throwing Dagger
+Item and Club /
+Item tokens to your Pouch.
+Sling
+Staff Sling
+Item tokens to your Pouch.
+d) Add the Smoke and Mirrors (PP14) card to your
+d) Add the Inspire (PP13) card to your Pouch.
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+e) Proceed to the next chapter ((Companions, p. 111).
+
+Lorekeeper
+Often the only source of news for remote settlements, Lorekeepers pride themselves on recounting
+true events and tales from across Evershade.
+Attributes: Becoming a Lorekeeper will raise your
+Intellect.
+Starting Equipment: A basic melee and ranged weapon. A thick tome of stories and sagas that contain
+many useful hints to adventurers such as yourself.
+To play the Lorekeeper:
+a) Increase your INT by 1.
+b) Place the Bard Profession token in your Character board, A/B side down.
+c) Add the Book of Sagas
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Weak Point (PP15) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Custodian
+As a member of a secret society of scholars and adventurers, you pursue
+the remnants of the old world, recovering the lost knowledge and artifacts of long-gone civilizations. It is a deadly occupation, as relics left
+in the wake of faded empires are seldom dormant. Yet, with vast knowledge, an insightful mind, and some grasp of magic, you can stabilize
+a Vestigial long enough to study it and extract the knowledge you seek.
+While you are well equipped to deal with the past, the immediate dangers of the present may prove more challenging.
+Keywords:
+Investigation – Few details escape your keen eyes, and even keener senses.
+Advancement Trees: As a Custodian, you will be able to pick Advancements from your own tree as well as the Subterfuge and Scholarship trees.
+
+Seeker’s Needle
+This cleverly designed apparatus lets a Custodian follow the trail of
+magical objects by the force they continuously emit – provided they
+know how to use the charts and Divinumetric maps needed to calibrate
+it. That’s because all of Evershade teems with ambient Divinum, whose
+levels can vary widely even over a few-mile stretch.
+
+Custodian Paths
+
+If you choose to play a Custodian, pick one of three initial paths below:
+
+Relic Hunter
+
+Savant
+
+A born adventurer, you stand at the vanguard of the
+Custodians’ society. You delve into dark, treacherous
+ruins in search of relics that may be hunting you even
+as you hunt them.
+
+Some say you are obsessed – but you know that, once
+in a while, even a small piece of obscure lore can reshape the past and the future. Your exceptionally
+bright and vast mind holds space to contain them all.
+Piece by piece, you tirelessly put together the great
+puzzle of yore.
+
+Attributes: Becoming a Relic Hunter will raise your
+Agility.
+
+Attributes: Becoming a Savant will raise your Intellect.
+Starting Equipment: Aside from a simple weapon,
+you wield the Anchor Chain to confront your great- Starting Equipment: You trust the weapon at your
+est opponent – crumbling, inaccessible ruins.
+side, but even more the Whispering Box in your pocket – a mysterious device that serves as both adviser
+To play the Relic Hunter:
+and friend.
+a) Increase your AGI by 1.
+To play the Savant:
+b) Place the Custodian Profession token in your
+a) Increase your INT by 1.
+Character board, A/B side down.
+b)
+Place the Custodian Profession token in your
+c) Add the Anchor Chain
+Item and Club / Staff
+Character board, A/B side down.
+Sling
+Item tokens to your Pouch.
+c) Add the Whispering Box
+Item and Club / Staff
+d) Add the Pike Strike (PP31) card to your Pouch.
+Sling
+Item tokens to your Pouch.
+e) Proceed to the next chapter (Companions,
+(
+p. 111).
+d) Add the Bright Mind (PP32) card to your Pouch.
+e) Proceed to the next chapter ((Companions, p. 111).
+
+Librarian
+You work at the very heart of the Custodians’ trade.
+Wielding intricate magic and centuries of accumulated knowledge, you contain and stabilize artifacts
+and Vestigials, making them bend to your will. Then
+you carefully study their secrets, and meticulously
+catalogue them for future generations.
+Attributes: Becoming a Librarian will raise your
+Intellect.
+Starting Equipment: The thick Codex Vestigium allows you to tame unruly magical objects. For taming
+everything else, a simple weapon suffices.
+To play the Librarian:
+a) Increase your INT by 1.
+b) Place the Custodian Profession token in your
+Character board, A/B side down.
+c) Add the Codex Vestigium
+Item and Club /
+Staff Sling
+Item tokens to your Pouch.
+d) Add the Applied Knowledge (PP33) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Druid
+Long spiritual training attuned you to the animals and plants of Evershade and gave you considerable power over the magic that lingers
+in them.
+Your powers are most useful when surrounded by untamed nature and
+elements. There’s little of interest to you in the dead, stone cities of
+the world.
+Keywords:
+Survival – Finding food and shelter where there’s neither in plain sight
+comes easy to you.
+Advancement Trees: As a Druid, you will be able to pick Advancements
+from your own tree as well as the Nature and Battle Magic trees.
+
+Shadespeaker’s Runes
+The same act of Luada that saved countless lives from the Broken Sun
+was also an egregious violation of the natural order. As the stone disc
+covered most of the sky, countless species withered and died off. The
+entire cycle of nature had to be reshaped by the Moon Lady to give
+the survivors any chance of thriving in this new environment. The results of this intervention reverberated for many centuries and drove
+many of those who were attuned to the old natural order insane. Today, though, the land has reached a new equilibrium. A new generation of druids appeared: those who know how to talk to the strange
+plants and wildlife of Evershade.
+
+Druid Paths
+
+If you wish to choose a Druid, pick one of three initial paths below:
+
+Warden
+
+Soothsayer
+
+Maintaining and studying the wilds is your life’s
+mission. Over the years, you’ve learned everything
+about various wild areas of Evershade, their plants,
+animals – and monsters.
+
+There is no secret you can’t glean from your bone
+runes. A gift of Divinum flows through your veins,
+and you’re well-versed in channeling this primal magic.
+
+Attributes: Becoming a Warden will raise your
+Strength.
+
+Attributes: Becoming a Soothsayer will raise your
+Divinum.
+
+Starting Equipment: A basic melee and ranged weapStarting Equipment: A basic melee and ranged weap- on. A gemstone with an inclusion in the shape of
+on. A pack of herbal leaves with healing properties.
+a tornado: immovable, yet seemingly ready to explode – just like the god of nature, Nivar.
+To play the Warden:
+To play the Soothsayer:
+a) Increase your STR by 1.
+a) Upgrade your DIV die.
+b) Place the Druid Profession token in your Character board, A/B side down.
+b) Place the Druid Profession token in your Character board, A/B side down.
+c) Add the Curing Leaves
+Item and Club / Staff
+c) Add the Stone of Nivar
+Sling
+Item tokens to your Pouch.
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Freezing Smash (PP04) card to your
+d) Add the Cure and Poison (PP05) card to your
+Pouch.
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+e) Proceed to the next chapter ((Companions, p. 111).
+
+Beastmaster
+While some druids study the magic of Evershade or
+seek power in its plants, you have forged an undying
+alliance with the wild animals and creatures of the
+land who rise to protect you.
+Attributes: Becoming a Beastmaster will raise your
+Charisma.
+Starting Equipment: A basic melee and ranged
+weapon. A magical reed that allows you to commune
+with nearby animals.
+To play the Beastmaster:
+a) Increase your CHA by 1.
+b) Place the Druid Profession token in your Character board, A/B side down.
+c) Add the Calling Reed
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Summon Swarm (PP06) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Executor
+The laws across hundreds of Evershade’s kingdoms, city-states, tribes,
+and jurisdictions may differ – but the justice is one. You are its hand.
+As a member of the Executors’ Guild, your task is to deliver verdicts
+and mete out punishments, as long as the work is backed by coin and
+issued by a lawful court or ruler who has signed the guild’s charter.
+You are feared and respected, but not well liked. It is often wise to
+hide your face behind the guild’s mask, lest those who resent justice
+seek retribution.
+Keywords:
+Stealth – You’ve learned to become quiet and invisible, if needs be.
+Advancement Trees: As an Executor, you will be able to pick Advancements from your own tree as well as the Subterfuge and Close Combat trees.
+
+Hand of Justice
+Only registered members of the Executor guild are allowed to wear
+this symbol, and they often go out of their way to display it on even
+the smallest piece of their equipment.
+To simple people of the realm, the hand of justice helps tell the licensed Executors apart from simple bounty hunters and mercenaries
+who are not bound by the guild’s laws. To those with a contract on
+them, this symbol is a reminder that whoever you are, and wherever
+you hide, the hand of justice will find a way to reach you.
+
+Executor Paths
+
+If you choose to play an Executor, pick one of three initial paths below:
+
+Assassin
+
+Reclaimer
+
+You specialize in carrying out quick, silent assassinations in the name of justice. If a name is inked on
+your contract, their blood will be spilled. All you need
+is a second of their inattention.
+
+You are an expert at repossessing stolen property and
+collecting fines. There is often no need to use direct
+violence in your trade – reason, flattery, and good
+old-fashioned intimidation often work wonders. Few
+can stand against your iron will.
+
+Attributes: Becoming an Assassin will raise your
+Agility.
+
+Attributes: Becoming a Reclaimer will raise your
+Charisma.
+
+Starting Equipment: Conventional weapons have
+their place in your equipment, but you favor a sub- Starting Equipment: If the evidence of rightful owntler instrument – a deadly garrote.
+ership will not convince them, the weapon in your
+hand will.
+To play the Assassin:
+To play the Reclaimer:
+a) Increase your AGI by 1.
+a) Increase your CHA by 1.
+b) Place the Executor Profession token in your
+b) Place the Executor Profession token in your
+Character board, A/B side down.
+Character board, A/B side down.
+c) Add the Garrote
+Item and Club / Staff Sling
+c) Add the Evidence
+Item tokens to your Pouch.
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Eliminate (PP22) card to your Pouch.
+d) Add the Impose Your Will (PP23) card to your
+e) Proceed to the next chapter (Companions, p. 111).
+Pouch.
+e) Proceed to the next chapter ((Companions, p. 111)
+
+Bounty Hunter
+Once a price is set on a fugitive, they have no hope of
+hiding from you. Whichever hole within or beyond
+Evershade they’ve crawled into – you will drag them
+out and bring them to justice. You have the strength
+to make it across the continent and back with a felon thrashing in your grip.
+Attributes: Becoming a Bounty Hunter will raise your
+Strength.
+Starting Equipment: A simple weapon and a weighted net – that’s all you need to incapacitate and seize
+your target.
+To play the Bounty Hunter:
+a) Increase your STR by 1.
+b) Place the Executor Profession token in your
+Character board, A/B side down.
+c) Add the Weighted Net
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Mark Bounty (PP24) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Fighter
+They say it doesn’t take much training to stick the enemies with the
+pointy end of a spear. And yet, in your experience, a skilled fighter can
+be worth five armed amateurs.
+Your talents are best served on the frontline of any armed confrontation, where you can either protect other party members or dish out
+massive damage.
+Keywords:
+Intimidation – The scars you’ve earned in your career tell a story—and
+the story is “don’t get me angry.”
+Advancement Trees: As a Fighter, you will be able to pick Advancements from your own tree as well as the Close Combat and Warfare trees.
+
+The Horn of the Sentinel
+There’s never been true peace in Evershade. Lords of the overpopulated Midlands fight each other tooth and nail for resources and raid the
+Grain Ring. The Rimlanders build long walls and forts to defend from
+hungry hordes. The dwellers of the Weeping Heart fight new dangerous
+beasts and wildlife adapted to perpetual gloom. Professional warriors
+and soldiers are at the forefront of all these battles, forming a thin steel
+line separating struggling civilizations from pure chaos.
+
+Fighter Paths
+
+If you choose to play a Fighter, pick one of three initial paths below:
+
+Sentinel
+
+Vanguard
+
+Your great strength and dangerous weapon make you As a born leader with a skilled and steady sword hand,
+the perfect choice for leading a charge or holding a vi- you have experience in commanding groups of other
+armed men. However, you’re also no stranger to long,
+tal point against waves of enemies.
+lone patrols through dangerous parts of Evershade.
+Attributes: Becoming a Vanguard will raise your
+Attributes: Becoming a Sentinel will raise your
+Strength.
+Charisma.
+Starting Equipment: A basic weapon, and a remnant of your very first sword that broke while sav- Starting Equipment: Your trusty war-horn is always
+at your side, to inspire allies and rally them around
+ing your life.
+you.
+To play the Vanguard:
+To play the Sentinel:
+a) Increase your STR by 1.
+a) Increase your CHA by 1.
+b) Place the Fighter Profession token in your Charb) Place the Fighter Profession token in your Character board, A/B side down.
+acter board, A/B side down.
+c) Add the Lucky Pommel
+Item and Club / Staff
+c) Add the War Horn
+Item and Club / Staff Sling
+Sling
+Item tokens to your Pouch.
+Item
+tokens
+to
+your
+Pouch.
+d) Add the Adamant Stance (PP19) card to your
+d)
+Add
+the
+Guidance
+(PP20)
+card to your Pouch.
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+e) Proceed to the next chapter (Companions, p. 111).
+
+Duelist
+Your incredible fencing skills opened a risky but profitable trade for you: representing others in armed duels or taking part in tournaments.
+Attributes: Becoming a Duelist will raise your Agility.
+Starting Equipment: A basic weapon. A thick parrying cape that helps you trap an enemy’s weapon
+before you deliver a killing blow.
+To play the Duelist:
+a) Increase your AGI by 1.
+b) Place the Fighter Profession token in your Character board, A/B side down.
+c) Add the Parrying Cape
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Riposte (PP21) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Hunter
+The whole of Evershade is your home – from desolate wildlands to the
+dark alleys of forgotten towns. You’re trained in tracking or avoiding
+the many strange creatures that inhabit the world since the Breaking
+of the Sun.
+Keywords:
+Vigilance – Whether wild animals or bandits, most of those who tried to
+ambush you instead found out you never let your guard down.
+Advancement Trees: As a Hunter, you will be able to pick Advancements from your own tree as well as the Marksmanship and Nature trees.
+
+Brilliance Arrowhead
+It takes a lot of courage to venture alone into the dim, dark wilds of
+Evershade. And yet, the risk is worth it. Far from civilization, one can
+still find treasures such as fallen pieces of the Higher Realm and the
+precious metal they were built from: Brilliance. When charged with
+sunlight, it becomes incredibly strong and light, a favorite combination
+of those who have to travel long distances on foot.
+
+Hunter Paths
+
+If you wish to choose a Hunter, pick one of three initial paths below:
+
+Archer
+
+Tracker
+
+You’re a proficient shooter, blessed with keen sight
+and a steady hand.
+
+No clues or details escape your keen senses, and
+you’re used to long, exhausting marches and runs.
+You’re capable of stalking any prey for as long as it
+Attributes: Becoming an Archer will raise your Agility.
+takes – be it a human or a beast.
+Starting Equipment: A dual melee and ranged weapAttributes: Becoming a Tracker will raise your Intellect.
+on. A relic of Motran, god of discipline and war, that
+reminds you of your rigorous training.
+Starting Equipment: A basic melee and ranged weapon. A coin with an avian face of the god of speed and
+To play the Archer:
+hunt, Peliago.
+a) Increase your AGI by 1.
+To play the Tracker:
+b) Place the Hunter Profession token in your Chara) Increase your INT by 1.
+acter board, A/B side down.
+b) Place the Hunter Profession token in your Charc) Add the Prayer Bell
+Item and Club / Staff
+acter board, A/B side down.
+Sling
+Item tokens to your Pouch.
+c) Add the Peliago’s Coin
+Item and Club / Staff
+d) Add the Precise Shot (PP01) card to your Pouch.
+Sling
+Item tokens to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+d) Add the Freezing Traps (PP02) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Beastslayer
+With the world threatened by both the remnants of
+ancient powers and new dangerous species, you rose
+to protect the simple people.
+Attributes: Becoming a Beastslayer will raise your
+Strength.
+Starting Equipment: A basic melee and ranged weapon. A trophy from one of your recent hunts.
+To play the Beastslayer:
+a) Increase your STR by 1.
+b) Place the Hunter Profession token in your Character board, A/B side down.
+c) Add the Grisly Trophy
+Item and Club / Staff
+Item tokens to your Pouch.
+Sling
+d) Add the Heroic Strike (PP03) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Lifeshaper
+For centuries, the creation of life was the domain of gods, the sole
+original wielders of Divinum. Now, this power belongs to anyone gifted enough. As a Lifeshaper, you use this heavenly element to modify
+life itself.
+Your keen mind is set on solving the puzzle of the natural world – and
+improving upon it. You heal what the greatest medics could not; you
+help the creatures of the old world thrive in the shade; you create beings from scratch that have never walked the earth. You turn the harmless into the lethal, and vice versa.
+While your trade is frowned upon in public, even forbidden, it is often
+silently praised. The Moonshield Order and the Circle of Druids hate
+you most, each seeing you as a threat to the existing order – either divine or natural.
+Keywords:
+Medicine – You know how to treat most sicknesses and how to sew a badly gnarled wound.
+Advancement Trees: As a Lifeshaper, you will be able to pick Advancements from your own tree as well as the Nature and Scholarship trees.
+
+Primordial Shroom
+Many Lifeshapers carry this inconspicuous, fleshy pulp in their sample
+bags. Believed to be the first new life to form beneath the Disc after the
+Breaking of the Sun, it has adapted to the omnipresent shade. Novice
+Lifeshapers call it the “primalis”, as it easily yields to shaping with only
+a small amount of Divinum. The Primordial Shroom can be modified to
+take a form compatible with that of a plant or an animal. With enough
+skill, it can even fit a complex organism such as a human.
+
+Lifeshaper Paths
+
+If you choose to play a Lifeshaper, pick one of three initial paths below:
+
+Plantcrafter
+
+Spiritmaker
+
+You have chosen the path many Lifeshapers favor for
+its versatility. As a Plantcrafter, you collect and study
+Evershade’s abundant plants and fungi. As you enhance their natural traits, the results can be miraculous for your allies and deadly for your foes.
+
+As a Spiritmaker, you turn your gaze toward a realm
+few others consider – the boring, inanimate matter.
+You have mastered the art of giving life to what has
+never lived, if only for a moment. Your creations are
+your power – and your responsibility.
+
+Attributes: Becoming a Plantcrafter will raise your
+Intellect.
+
+Attributes: Becoming a Spiritmaker will raise your
+Charisma.
+
+Starting Equipment: An unaware enemy may laugh
+upon seeing you draw a strange rootstalk instead of
+a weapon, but that will be their last laugh.
+
+Starting Equipment: A simple weapon that can take
+a life. A Homunculus that lets you create life.
+To play the Spiritmaker:
+
+To play the Plantcrafter:
+a) Increase your INT by 1.
+b) Place the Lifeshaper Profession token in your
+Character board, A/B side down.
+c) Add the Rootstalk
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Release Pollen (PP34) card to your Pouch.
+e) Proceed to the next chapter (Companions,
+Companions, p. 111).
+
+a) Increase your CHA by 1.
+b) Place the Lifeshaper Profession token in your
+Character board, A/B side down.
+c) Add the Homunculus
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Guardian Spirits (PP35) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Evolver
+As an Evolver, you practice the most hazardous – and
+forbidden – branch of Lifeshaping: tampering with
+living, sentient beings. Using a specialized array of
+surgical and magical tools, you modify and augment
+an individual’s flesh, either improving their existence
+with new capabilities or cursing it with unimaginable
+torment.
+Attributes: Becoming an Evolver will raise your
+Divinum.
+Starting Equipment: Your Fleshcraft Toolkit has improved many lives and saved even more – yet, if need
+be, the simple weapon at your side is ready to do harm.
+To play the Evolver:
+a) Upgrade your DIV die.
+b) Place the Lifeshaper Profession token in your
+Character board, A/B side down.
+c) Add the Fleshcraft Toolkit
+Item and Club /
+Staff Sling
+Item tokens to your Pouch.
+d) Add the Tumorous Growth (PP36) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Mage
+For years, you carefully studied the invisible laws of nature, the properties of matter, and the elemental powers. Now, using your Divinum,
+you can bend them to your will, and use them as your weapon.
+Well-educated and dangerous, you are an asset both in combat and
+when interfacing with various mystical objects and powers. However, you are not very used to the hardships of the trail, and feel most at
+home in studies and libraries.
+Keywords:
+Arcana – You are well-versed in theoretical knowledge about Divinum
+and various forms of magic.
+Advancement Trees: As a Mage, you will be able to pick Advancements
+from your own tree as well as the Battle Magic and Support Magic trees.
+
+Divinum-bound Pendant
+There is no magic without Divinum: an element that is said to come
+from the Higher Realm. Yet at times the earth yields strange gemstones
+of a translucent, golden hue, each with an ancient drop of Divinum
+trapped within. Mages regard these stones as the purest and most primal form of the power. They set them into pendants and wear them as
+symbols of their trade, which glow near active sources of power.
+
+Mage Paths
+
+If you choose to play a Mage, pick one of three initial paths below:
+
+Conjurer
+
+Advisor
+
+In all your pursuits, you never lost sight of what is
+most important: raw, unbridled power. You carefully
+honed your skills at controlling elements and conjuring otherworldly forces, making you a deadly threat –
+at least as long as your enemies remain at a comfortable distance.
+
+Educated, diplomatic, and dangerously smart, you
+specialize in advising nobles and merchants. Palace
+corridors and elaborate conspiracies are your second
+nature.
+
+Attributes: Becoming a Conjurer will raise your
+Divinum.
+
+Attributes: Becoming an Advisor will raise your
+Intellect.
+
+Starting Equipment: A basic melee and ranged
+weapon. The orb you use when you ponder diffiStarting Equipment: A basic melee and ranged weap- cult questions.
+on. A grimoire, acquired through enigmatic means.
+To play an Advisor:
+To play a Conjurer:
+a) Increase your INT by 1.
+a) Upgrade your DIV die.
+b) Place the Mage Profession token in your Charb) Place the Mage Profession token in your Character board, A/B side down.
+acter board, A/B side down.
+c) Add the Orb
+Item and Club / Staff Sling
+c) Add the Grimoire
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+Item tokens to your Pouch.
+d) Add the Premonition (PP11) card to your Pouch.
+d) Add the Unleash Divinum (PP10) card to your
+e) Proceed to the next chapter (Companions, p. 111).
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Runecarver
+Those who study this ancient art can create sigils and
+symbols that trap Divinum within for hours, days,
+or centuries – until someone releases it, unleashing
+the spell.
+Attributes: Becoming a Runecarver will raise your
+Agility.
+Starting Equipment: A chisel of infused brilliance
+that’s the basic tool of your trade.
+To play the Runecarver:
+a) Increase your AGI by 1.
+b) Place the Mage Profession token in your Character board, A/B side down.
+c) Add the Runic Chisel
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Runic Projectile (PP12) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Moonshield
+Paladin
+A young member of the Moonshield order, you swore to protect the
+people and the law of Evershade just like Luada does, at any cost.
+With the strict knights’ code binding your hands, you’re not well suited
+to treacherous or dishonorable acts. But the same code makes people
+more likely to trust you and causes simple folks to see you as their savior.
+Keywords:
+Leadership – People tend to naturally follow your lead.
+Advancement Trees: As a Moonshield, you will be able to pick Advancements from your own tree as well as the Warfare and Battle Magic trees.
+
+The Book of the Code
+For the Paladins of the Moonshield Order, the Code is
+the highest authority on all matters. A book containing it, apart from their titular Moonshield, is something a Paladin must always carry. It is said the Code
+was passed from Luada herself and represents her perfect, intended way for the people of Evershade to live.
+However, many people of Evershade beg to differ.
+
+Moonshield Paths
+
+If you wish to choose a Moonshield, pick one of three initial paths below:
+
+Protector
+
+Arbiter
+
+You went through rigorous martial training and
+swore to become a shield that defends the simple
+people of the realm.
+
+You are the voice of Luada, trying to bring reason and
+law to the conflicted parts of Evershade. People look
+toward you as a judge and peacekeeper.
+
+Attributes: Becoming a Protector will raise your
+Strength.
+
+Attributes: Becoming an Arbiter will raise your
+Charisma.
+
+Starting Equipment: A basic weapon and a trusty
+buckler that has already saved you from more than
+one lethal blow.
+
+Starting Equipment: A basic weapon and a sacred
+pendant you can use to pass your Lady’s blessing to
+your companions.
+
+To play the Protector:
+
+To play the Arbiter:
+
+a) Increase your STR by 1.
+b) Place the Moonshield Profession token in your
+Character board, A/B side down.
+c) Add the Buckler
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Taunt (PP16) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+a) Increase your CHA by 1.
+b) Place the Moonshield Profession token in your
+Character board, A/B side down.
+c) Add the Blessed Charm
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Aura of Justice (PP17) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Skygazer
+With their goddess always visible above them, some
+Moonshields are known to commune with Luada directly.
+Attributes: Becoming a Skygazer will raise your
+Intellect.
+Starting Equipment: A basic weapon and a spyglass
+you use for your divinations.
+To play the Skygazer:
+a) Increase your INT by 1.
+b) Place the Moonshield Profession token in your
+Character board, A/B side down.
+c) Add the Spyglass
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Moondisc (PP18) card to your Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Omu Priest
+As a priest of Omu’s order, you do not merely believe your god still lives.
+You know it, as you find his signs all across Evershade. You have vowed
+to continue the centuries-long search for the lost deity, and to preserve
+his domain along the way.
+Your wisdom, and the remnants of your god’s miraculous power, let you
+aid your allies through all manner of trials: physical, moral, and strategic. However, you are not best suited to direct confrontation. After all,
+there are wiser ways to resolve conflicts.
+Keywords:
+Lore – Preserving knowledge is your sacred duty. Using it to aid your
+cause is a boon that follows.
+Advancement Trees: As an Omu Priest, you will be able to pick Advancements from your own tree as well as the Support Magic and
+Scholarship trees.
+
+Flame of Wisdom
+Upon taking their vows, a newly ordained Omu priest receives a special gift – a lantern-like vial of ever-burning flame, a symbol of undying
+wisdom. Its flame rises when the cleric acts wisely and wanes whenever they yield to ignorance or folly. It is said that a flame strong enough
+may guide the way to Omu, yet one should beware of gazing into the
+fire too long, lest it enthrall them.
+
+Omu Priest Paths
+
+If you choose to play a Omu Priest, pick one of three initial paths below:
+
+Godseeker
+
+Hermit
+
+You continue your order’s great search, wandering
+Evershade and beyond, following subtle signs of
+Omu’s enduring presence. You seldom spend your
+keen mind on others’ affairs. The lost god must be
+found. There is nothing more important.
+
+You do not follow Omu himself, but rather the path
+your god once walked, dedicating your life to knowledge. You allow no distractions to disturb your search
+for the absolute, aligning your body and mind to
+grasp it.
+
+Attributes: Becoming a Godseeker will raise your
+Intellect.
+
+Attributes: Becoming a Hermit will raise your
+Strength.
+
+Starting Equipment: A pair of Penitent’s Clogs, so Starting Equipment: A basic weapon to fend off the
+that you never forget your goal – and a simple weap- creatures of the wild, and potent incense to deepen
+on to clear your path to it.
+your meditations.
+To play the Godseeker:
+
+To play the Hermit:
+
+a) Increase your INT by 1.
+b) Place the Omu Priest Profession token in your
+Character board, A/B side down.
+c) Add the Penitent’s Clogs
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Divine Justice (PP25) card to your Pouch.
+e) Proceed to the next chapter (Companions,, p. 111).
+
+a) Increase your STR by 1.
+b) Place the Omu Priest Profession token in your
+Character board, A/B side down.
+c) Add the Incense
+Item and Club / Staff Sling
+Item tokens to your Pouch.
+d) Add the Swing of Incense (PP26) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Justiciar
+While most Omu priests travel the land in search
+of their missing god, you prefer to use Omu’s wisdom and teachings to resolve difficult conflicts, advise those in need, and deliver just verdicts.
+Attributes: Becoming a Justiciar will raise your
+Charisma.
+Starting Equipment: The Book of Omu’s Teachings
+is your weapon, your shield, and the tool of your
+trade. The people of Evershade respect its wisdom.
+To play the Justiciar:
+a) Increase your CHA by 1.
+b) Place the Omu Priest Profession token in your
+Character board, A/B side down.
+c) Add the Tome of Omu
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Summoned for Trial (PP27) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).
+
+Scoundrel
+In the overcrowded cities and forgotten regions of Evershade, theft,
+deception, and fraud are sometimes the only ways to survive. In that
+regard, the back alleys of a slum differ little from the polished halls of
+noble courts.
+Nimble fingers, fast reflexes, and quick thinking serve you equally well
+both in and out of combat. That is your way of dealing with the world –
+getting what you want and vanishing as if you were never there.
+Keywords:
+Deception – You can pretend to be just about anyone, and you find it
+easy to blend into any kind of group.
+Advancement Trees: As a Scoundrel, you will be able to pick Advancements from your own tree as well as the Subterfuge and Thiefcraft trees.
+
+Smuggler’s Sleeve
+A true Scoundrel is not afraid to make bets with uncertain outcomes.
+And when things don’t go their way, sometimes the moment calls for
+a bad solution: a cleverly hidden, tiny blade. It is hard to spot and quick
+to use – perfect to get rid of snoops or inconvenient witnesses. The
+sleeve itself also proves useful for concealing what should not be found.
+
+Scoundrel Paths
+
+If you choose to play a Scoundrel, pick one of three initial paths below:
+
+Thief
+
+Spy
+
+You didn’t pick your risky trade just for personal gain. You always found the subtle art of obtaining inforYou’re also in it for sport. Nothing delights you more mation more alluring than simple theft. It demands
+than the look on an enemy’s face as they reach to a cover more intricate than a hood and gloves, and
+draw steel, only to clutch at empty air, for their weap- a mind sharper than a dagger. At the same time,
+on is already in your hand.
+knowledge often proves more valuable than material goods – and can be easily traded for them.
+Attributes: Becoming a Thief will raise your Agility.
+Attributes: Becoming a Spy will raise your Intellect.
+Starting Equipment: A pair of well-worn and comfortable Thief’s Gloves, and a basic weapon for when Starting Equipment: In the courtly game of appearthings go south.
+ances, drawing a weapon is considered in poor taste –
+but a poison-tipped Needle Dart may prove handy.
+To play the Thief:
+To play the Spy:
+a) Increase your AGI by 1.
+a) Increase your INT by 1.
+b) Place the Scoundrel Profession token in your
+b) Place the Scoundrel Profession token in your
+Character board, A/B side down.
+Character board, A/B side down.
+c) Add the Thief’s Gloves
+Item and Club / Staff
+c) Add the Needle Dart
+Sling
+Item tokens to your Pouch.
+Item and Club / Staff
+Sling
+Item tokens to your Pouch.
+d) Add the Weapon Steal (PP28) card to your Pouch.
+d) Add the Inside Information (PP29) card to your
+e) Proceed to the next chapter (Companions, p. 111).
+Pouch.
+e) Proceed to the next chapter ((Companions, p. 111).
+
+Con Artist
+In your line of work, you don’t need reality-altering
+magic, or hidden weapons. All you need is a fool with
+some money to lose – and the world teems with those
+eager to believe your every word. You’re a puppeteer
+among marionettes, making them dance to your tune.
+Attributes: Becoming a Con Artist will raise your
+Charisma.
+Starting Equipment: It’s always wise to carry a basic weapon, but you prefer your “props”, such as your
+wide array of false documents.
+To play the Con Artist:
+a) Increase your CHA by 1.
+b) Place the Scoundrel Profession token in your
+Character board, A/B side down.
+c) Add the False Documents
+Item and Club /
+Staff Sling
+Item tokens to your Pouch.
+d) Add the Becoming the Role (PP30) card to your
+Pouch.
+e) Proceed to the next chapter (Companions, p. 111).

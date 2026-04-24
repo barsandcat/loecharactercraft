@@ -872,7 +872,8 @@
           "Action cards": [
             {
               "Name": "Rage",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP07"
             }
           ]
         },
@@ -892,7 +893,8 @@
           "Action cards": [
             {
               "Name": "Weapon Throw",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP08"
             }
           ]
         },
@@ -912,7 +914,8 @@
           "Action cards": [
             {
               "Name": "Manic Laugh",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP09"
             }
           ]
         }
@@ -944,7 +947,8 @@
           "Action cards": [
             {
               "Name": "Inspire",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP13"
             }
           ]
         },
@@ -964,7 +968,8 @@
           "Action cards": [
             {
               "Name": "Smoke and Mirrors",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP14"
             }
           ]
         },
@@ -984,7 +989,8 @@
           "Action cards": [
             {
               "Name": "Weak Point",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP15"
             }
           ]
         }
@@ -1016,7 +1022,8 @@
           "Action cards": [
             {
               "Name": "Pike Strike",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP31"
             }
           ]
         },
@@ -1036,7 +1043,8 @@
           "Action cards": [
             {
               "Name": "Bright Mind",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP32"
             }
           ]
         },
@@ -1056,7 +1064,8 @@
           "Action cards": [
             {
               "Name": "Applied Knowledge",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP33"
             }
           ]
         }
@@ -1088,7 +1097,8 @@
           "Action cards": [
             {
               "Name": "Freezing Smash",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP04"
             }
           ]
         },
@@ -1104,7 +1114,8 @@
           "Action cards": [
             {
               "Name": "Cure and Poison",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP05"
             }
           ]
         },
@@ -1124,7 +1135,8 @@
           "Action cards": [
             {
               "Name": "Summon Swarm",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP06"
             }
           ]
         }
@@ -1156,7 +1168,8 @@
           "Action cards": [
             {
               "Name": "Eliminate",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP22"
             }
           ]
         },
@@ -1176,7 +1189,8 @@
           "Action cards": [
             {
               "Name": "Impose Your Will",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP23"
             }
           ]
         },
@@ -1196,7 +1210,8 @@
           "Action cards": [
             {
               "Name": "Mark Bounty",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP24"
             }
           ]
         }
@@ -1228,7 +1243,8 @@
           "Action cards": [
             {
               "Name": "Adamant Stance",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP19"
             }
           ]
         },
@@ -1248,7 +1264,8 @@
           "Action cards": [
             {
               "Name": "Guidance",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP20"
             }
           ]
         },
@@ -1268,7 +1285,8 @@
           "Action cards": [
             {
               "Name": "Riposte",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP21"
             }
           ]
         }
@@ -1300,7 +1318,8 @@
           "Action cards": [
             {
               "Name": "Precise Shot",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP01"
             }
           ]
         },
@@ -1320,7 +1339,8 @@
           "Action cards": [
             {
               "Name": "Freezing Traps",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP02"
             }
           ]
         },
@@ -1340,7 +1360,8 @@
           "Action cards": [
             {
               "Name": "Heroic Strike",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP03"
             }
           ]
         }
@@ -1372,7 +1393,8 @@
           "Action cards": [
             {
               "Name": "Release Pollen",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP34"
             }
           ]
         },
@@ -1392,7 +1414,8 @@
           "Action cards": [
             {
               "Name": "Guardian Spirits",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP35"
             }
           ]
         },
@@ -1408,7 +1431,8 @@
           "Action cards": [
             {
               "Name": "Tumorous Growth",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP36"
             }
           ]
         }
@@ -1436,7 +1460,8 @@
           "Action cards": [
             {
               "Name": "Unleash Divinum",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP10"
             }
           ]
         },
@@ -1456,7 +1481,8 @@
           "Action cards": [
             {
               "Name": "Premonition",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP11"
             }
           ]
         },
@@ -1476,7 +1502,8 @@
           "Action cards": [
             {
               "Name": "Runic Projectile",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP12"
             }
           ]
         }
@@ -1508,7 +1535,8 @@
           "Action cards": [
             {
               "Name": "Taunt",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP16"
             }
           ]
         },
@@ -1528,7 +1556,8 @@
           "Action cards": [
             {
               "Name": "Aura of Justice",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP17"
             }
           ]
         },
@@ -1548,7 +1577,8 @@
           "Action cards": [
             {
               "Name": "Moondisc",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP18"
             }
           ]
         }
@@ -1580,7 +1610,8 @@
           "Action cards": [
             {
               "Name": "Divine Justice",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP25"
             }
           ]
         },
@@ -1600,7 +1631,8 @@
           "Action cards": [
             {
               "Name": "Swing of Incense",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP26"
             }
           ]
         },
@@ -1620,7 +1652,8 @@
           "Action cards": [
             {
               "Name": "Summoned for Trial",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP27"
             }
           ]
         }
@@ -1652,7 +1685,8 @@
           "Action cards": [
             {
               "Name": "Weapon Steal",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP28"
             }
           ]
         },
@@ -1672,7 +1706,8 @@
           "Action cards": [
             {
               "Name": "Inside Information",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP29"
             }
           ]
         },
@@ -1692,7 +1727,8 @@
           "Action cards": [
             {
               "Name": "Becoming the Role",
-              "Level": 1
+              "Level": 1,
+              "CardId": "PP30"
             }
           ]
         }
