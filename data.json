@@ -3606,6 +3606,7 @@
     },
     "B13": {
       "Name": "Bite",
+      "ScaleAttribute": "STR",
       "Level": 1
     },
     "B14": {
@@ -3640,6 +3641,7 @@
     },
     "P04": {
       "Name": "Counter",
+      "ScaleAttribute": "AGI",
       "Level": 1
     },
     "P05": {
@@ -3672,6 +3674,7 @@
     },
     "P12": {
       "Name": "Ice Bolts",
+      "ScaleAttribute": "AGI+DIV or INT+DIV",
       "Level": 1
     },
     "P13": {
@@ -3944,6 +3947,7 @@
     },
     "PP10": {
       "Name": "Unleash Divinum",
+      "ScaleAttribute": "STR",
       "Level": 1
     },
     "PP11": {
