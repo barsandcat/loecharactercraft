@@ -805,11 +805,11 @@ class CharacterBuilder(QWidget):
         if level == 4:
             return 3 in taken_levels
         if level == 5:
-            return 3 in taken_levels and slot_number >= 4
+            return 3 in taken_levels and slot_number > 4
         if level == 6:
             return 5 in taken_levels
         if level == 7:
-            return 5 in taken_levels and slot_number >= 6
+            return 5 in taken_levels and slot_number > 6
         if level == 8:
             return 7 in taken_levels
         return False

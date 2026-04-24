@@ -1851,13 +1851,13 @@
           return takenLevels.has(3);
         }
         if (level === 5) {
-          return takenLevels.has(3) && slotNumber >= 4;
+          return takenLevels.has(3) && slotNumber > 4;
         }
         if (level === 6) {
           return takenLevels.has(5);
         }
         if (level === 7) {
-          return takenLevels.has(5) && slotNumber >= 6;
+          return takenLevels.has(5) && slotNumber > 6;
         }
         if (level === 8) {
           return takenLevels.has(7);
