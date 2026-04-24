@@ -20,7 +20,7 @@ DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
 # Module-level helpers
 # -------------------------
 
-def render_entry_summary(entry):
+def render_entry_summary(entry, action_cards_registry):
     parts = []
 
     for attr in entry.get("Attributes", []):
@@ -47,8 +47,10 @@ def render_entry_summary(entry):
     for item in entry.get("Items", []):
         parts.append(f"{item['Name']} ({item['Type']})")
 
-    for action in entry.get("Action cards", []):
-        parts.append(f"{action['Name']} L{action['Level']}")
+    for card_id in entry.get("Action cards", []):
+        if card_id in action_cards_registry:
+            card = action_cards_registry[card_id]
+            parts.append(f"{card['Name']} L{card['Level']}")
 
     return ", ".join(parts)
 
@@ -85,7 +87,7 @@ def upgrade_div_die(div_die):
 
 
 class CharacterStats:
-    def __init__(self):
+    def __init__(self, action_cards_registry=None):
         self.attributes = {k: 0 for k in ATTRIBUTES}
         self.mob = 0
         self.hp = 0
@@ -94,6 +96,7 @@ class CharacterStats:
         self.keyword_counts = {}
         self._items_by_key = {}
         self._actions_by_name = {}
+        self.action_cards_registry = action_cards_registry or {}
 
     @property
     def items(self):
@@ -111,6 +114,16 @@ class CharacterStats:
         self._items_by_key.setdefault((item["Name"], item["Type"]), item)
 
     def add_action(self, action):
+        """Add an action card. Action can be a card ID (string) or a card object (dict)."""
+        if isinstance(action, str):
+            # It's a card ID, look it up
+            if action in self.action_cards_registry:
+                action = self.action_cards_registry[action]
+            else:
+                # Card ID not found, skip it
+                return
+        
+        # Now action is a dict
         current = self._actions_by_name.get(action["Name"])
         if current is None or action["Level"] > current["Level"]:
             self._actions_by_name[action["Name"]] = action
@@ -410,6 +423,9 @@ class CharacterBuilder(QWidget):
         with open("data.json", "r") as f:
             self.data = json.load(f)
 
+        # Extract action cards registry
+        self.action_cards_registry = self.data.get("Action Cards", {})
+
         self._trees = {
             tree["Name"]: tree for tree in self.data["Advancement Trees"]
         }
@@ -664,20 +680,20 @@ class CharacterBuilder(QWidget):
         return ", ".join(f"{k} {attr.get(k, 0)}" for k in ATTRIBUTES)
 
     def render_origin_button(self, origin):
-        extras = render_entry_summary(origin)
+        extras = render_entry_summary(origin, self.action_cards_registry)
         return f"{origin['Name']}\n{extras}" if extras else origin["Name"]
 
     def render_prof_button(self, prof):
-        extras = render_entry_summary(prof)
+        extras = render_entry_summary(prof, self.action_cards_registry)
         return f"{prof['Name']}\n{extras}" if extras else prof["Name"]
 
     def render_path_button(self, path):
-        extras = render_entry_summary(path)
+        extras = render_entry_summary(path, self.action_cards_registry)
         return f"{path['Name']}\n{extras}" if extras else path["Name"]
 
     def render_level_up_tree_popup(self, option):
         detail = "\nor\n".join(
-            render_entry_summary(v) or "No changes" for v in option.versions
+            render_entry_summary(v, self.action_cards_registry) or "No changes" for v in option.versions
         )
         return f"{option.tree_name} - Level {option.level}\n{detail}"
 
@@ -685,7 +701,7 @@ class CharacterBuilder(QWidget):
         return f"{option.tree_name} L{option.level}"
 
     def render_level_up_version_summary(self, version_option):
-        return render_entry_summary(version_option.entry) or "No changes"
+        return render_entry_summary(version_option.entry, self.action_cards_registry) or "No changes"
 
     # -------------------------
     # Advancement Logic
@@ -934,7 +950,7 @@ class CharacterBuilder(QWidget):
         self.summary.setHtml(self._render_summary_html(stats))
 
     def _collect_character_stats(self):
-        stats = CharacterStats()
+        stats = CharacterStats(self.action_cards_registry)
 
         if self._selected_race is not None:
             stats.apply_race(self._selected_race, self._selected_attr)
