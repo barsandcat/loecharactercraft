@@ -3537,805 +3537,662 @@
     "B00": {
       "Name": "Bash",
       "Level": 1,
-      "CardId": "B00",
-      "ScaleAttribute": "STR"
+      "ScaleAttribute": "STR",
+      "DisplayName": "Bash"
     },
     "B01": {
       "Name": "Endurance",
       "Level": 2,
-      "CardId": "B01",
-      "ScaleAttribute": "STR"
+      "ScaleAttribute": "STR",
+      "DisplayName": "Endurance"
     },
     "B02": {
       "Name": "Endurance",
       "Level": 3,
-      "CardId": "B02",
-      "ScaleAttribute": "STR"
+      "ScaleAttribute": "STR",
+      "DisplayName": "Exceptional Endurance"
     },
     "B03": {
       "Name": "Endurance",
       "Level": 1,
-      "CardId": "B03",
-      "ScaleAttribute": "STR"
+      "ScaleAttribute": "STR",
+      "DisplayName": "Limited Endurance"
     },
     "B04": {
       "Name": "Dodge",
       "Level": 2,
-      "CardId": "B04",
-      "ScaleAttribute": "AGI"
+      "ScaleAttribute": "AGI",
+      "DisplayName": "Dodge"
     },
     "B05": {
       "Name": "Dodge",
       "Level": 3,
-      "CardId": "B05",
-      "ScaleAttribute": "AGI"
+      "ScaleAttribute": "AGI",
+      "DisplayName": "Nimble Dodge"
     },
     "B06": {
       "Name": "Dodge",
       "Level": 1,
-      "CardId": "B06",
-      "ScaleAttribute": "AGI"
+      "ScaleAttribute": "AGI",
+      "DisplayName": "Clumsy Dodge"
     },
     "B07": {
       "Name": "Combat Insight",
       "Level": 2,
-      "CardId": "B07"
+      "DisplayName": "Combat Insight"
     },
     "B08": {
       "Name": "Combat Insight",
       "Level": 3,
-      "CardId": "B08"
+      "DisplayName": "Crucial Combat Insight"
     },
     "B10": {
       "Name": "Command",
       "Level": 2,
-      "CardId": "B10",
-      "ScaleAttribute": "CHA"
+      "ScaleAttribute": "CHA",
+      "DisplayName": "Command"
     },
     "B11": {
       "Name": "Command",
       "Level": 3,
-      "CardId": "B11",
-      "ScaleAttribute": "CHA"
+      "ScaleAttribute": "CHA",
+      "DisplayName": "Inspiring Command"
     },
     "B12": {
       "Name": "Command",
       "Level": 1,
-      "CardId": "B12",
-      "ScaleAttribute": "CHA"
+      "ScaleAttribute": "CHA",
+      "DisplayName": "Pitiful Command"
     },
     "B13": {
       "Name": "Bite",
-      "Level": 1,
-      "CardId": "B13"
+      "Level": 1
     },
     "B14": {
       "Name": "Bash",
       "Level": 2,
-      "CardId": "B14",
-      "ScaleAttribute": "STR"
+      "ScaleAttribute": "STR",
+      "DisplayName": "Mighty Bash"
     },
     "B15": {
       "Name": "Shoot",
       "Level": 1,
-      "CardId": "B15",
-      "ScaleAttribute": "AGI"
+      "ScaleAttribute": "AGI",
+      "DisplayName": "Shoot"
     },
     "B16": {
       "Name": "Shoot",
       "Level": 2,
-      "CardId": "B16",
-      "ScaleAttribute": "AGI"
+      "ScaleAttribute": "AGI",
+      "DisplayName": "Powerful Shot"
     },
     "P01": {
       "Name": "Soothing Voice",
-      "Level": 1,
-      "CardId": "P01"
+      "Level": 1
     },
     "P02": {
       "Name": "Hymn of Malady",
-      "Level": 1,
-      "CardId": "P02"
+      "Level": 1
     },
     "P03": {
       "Name": "Rousing Ballad",
-      "Level": 1,
-      "CardId": "P03"
+      "Level": 1
     },
     "P04": {
       "Name": "Counter",
-      "Level": 1,
-      "CardId": "P04"
+      "Level": 1
     },
     "P05": {
       "Name": "Battle Prayer",
-      "Level": 1,
-      "CardId": "P05"
+      "Level": 1
     },
     "P06": {
       "Name": "Guided Smite",
-      "Level": 1,
-      "CardId": "P06"
+      "Level": 1
     },
     "P07": {
       "Name": "Bulwark of Hope",
-      "Level": 1,
-      "CardId": "P07"
+      "Level": 1
     },
     "P08": {
       "Name": "Beacon of Hope",
-      "Level": 1,
-      "CardId": "P08"
+      "Level": 1
     },
     "P09": {
       "Name": "Divine Intervention",
-      "Level": 1,
-      "CardId": "P09"
+      "Level": 1
     },
     "P10": {
       "Name": "Summon Divling",
-      "Level": 1,
-      "CardId": "P10"
+      "Level": 1
     },
     "P11": {
       "Name": "Magic Circle",
-      "Level": 1,
-      "CardId": "P11"
+      "Level": 1
     },
     "P12": {
       "Name": "Ice Bolts",
-      "Level": 1,
-      "CardId": "P12"
+      "Level": 1
     },
     "P13": {
       "Name": "Outburst of Divinum",
-      "Level": 1,
-      "CardId": "P13"
+      "Level": 1
     },
     "P14": {
       "Name": "Evoke Nightmares",
-      "Level": 1,
-      "CardId": "P14"
+      "Level": 1
     },
     "P15": {
       "Name": "Fireball",
-      "Level": 1,
-      "CardId": "P15"
+      "Level": 1
     },
     "P16": {
       "Name": "Song of Protection",
-      "Level": 1,
-      "CardId": "P16"
+      "Level": 1
     },
     "P17": {
       "Name": "Sly Tongue",
-      "Level": 1,
-      "CardId": "P17"
+      "Level": 1
     },
     "P18": {
       "Name": "Applause",
-      "Level": 1,
-      "CardId": "P18"
+      "Level": 1
     },
     "P19": {
       "Name": "Furious Attacks",
-      "Level": 1,
-      "CardId": "P19"
+      "Level": 1
     },
     "P20": {
       "Name": "Insult",
-      "Level": 1,
-      "CardId": "P20"
+      "Level": 1
     },
     "P21": {
       "Name": "Dual Wielding",
-      "Level": 1,
-      "CardId": "P21"
+      "Level": 1
     },
     "P22": {
       "Name": "Charging Bull",
-      "Level": 1,
-      "CardId": "P22"
+      "Level": 1
     },
     "P23": {
       "Name": "Retribution",
-      "Level": 1,
-      "CardId": "P23"
+      "Level": 1
     },
     "P24": {
       "Name": "Follow Through",
-      "Level": 1,
-      "CardId": "P24"
+      "Level": 1
     },
     "P25": {
       "Name": "Spikes",
-      "Level": 1,
-      "CardId": "P25"
+      "Level": 1
     },
     "P26": {
       "Name": "Earth Shell",
-      "Level": 1,
-      "CardId": "P26"
+      "Level": 1
     },
     "P27": {
       "Name": "Cauldron of Wonders",
-      "Level": 1,
-      "CardId": "P27"
+      "Level": 1
     },
     "P28": {
       "Name": "Animal Form",
-      "Level": 1,
-      "CardId": "P28"
+      "Level": 1
     },
     "P29": {
       "Name": "Evoke Blizzard",
-      "Level": 1,
-      "CardId": "P29"
+      "Level": 1
     },
     "P30": {
       "Name": "True Bond",
-      "Level": 1,
-      "CardId": "P30"
+      "Level": 1
     },
     "P31": {
       "Name": "Sneak",
-      "Level": 1,
-      "CardId": "P31"
+      "Level": 1
     },
     "P32": {
       "Name": "Focus",
-      "Level": 1,
-      "CardId": "P32"
+      "Level": 1
     },
     "P33": {
       "Name": "Blend In",
-      "Level": 1,
-      "CardId": "P33"
+      "Level": 1
     },
     "P34": {
       "Name": "Inhale Divinum",
-      "Level": 1,
-      "CardId": "P34"
+      "Level": 1
     },
     "P35": {
       "Name": "Scent of Blood",
-      "Level": 1,
-      "CardId": "P35"
+      "Level": 1
     },
     "P36": {
       "Name": "Become Predator",
-      "Level": 1,
-      "CardId": "P36"
+      "Level": 1
     },
     "P37": {
       "Name": "Charge",
-      "Level": 1,
-      "CardId": "P37"
+      "Level": 1
     },
     "P38": {
       "Name": "Target Weak Spot",
-      "Level": 1,
-      "CardId": "P38"
+      "Level": 1
     },
     "P39": {
       "Name": "Vengeful Stance",
-      "Level": 1,
-      "CardId": "P39"
+      "Level": 1
     },
     "P40": {
       "Name": "Strength of Heart",
-      "Level": 1,
-      "CardId": "P40"
+      "Level": 1
     },
     "P41": {
       "Name": "Inner Strength",
-      "Level": 1,
-      "CardId": "P41"
+      "Level": 1
     },
     "P43": {
       "Name": "Poisoned Darts",
-      "Level": 1,
-      "CardId": "P43"
+      "Level": 1
     },
     "P44": {
       "Name": "Mighty Blow",
-      "Level": 1,
-      "CardId": "P44"
+      "Level": 1
     },
     "P45": {
       "Name": "Executor's Insight",
-      "Level": 1,
-      "CardId": "P45"
+      "Level": 1
     },
     "P46": {
       "Name": "Know your Enemy",
-      "Level": 1,
-      "CardId": "P46"
+      "Level": 1
     },
     "P47": {
       "Name": "Personal Style",
-      "Level": 1,
-      "CardId": "P47"
+      "Level": 1
     },
     "P48": {
       "Name": "Thousand Cuts",
-      "Level": 1,
-      "CardId": "P48"
+      "Level": 1
     },
     "P49": {
       "Name": "Hand of Retribution",
-      "Level": 1,
-      "CardId": "P49"
+      "Level": 1
     },
     "P50": {
       "Name": "Shield of Omu",
-      "Level": 1,
-      "CardId": "P50"
+      "Level": 1
     },
     "P51": {
       "Name": "Divine Brew",
-      "Level": 1,
-      "CardId": "P51"
+      "Level": 1
     },
     "P52": {
       "Name": "The Guiding Light",
-      "Level": 1,
-      "CardId": "P52"
+      "Level": 1
     },
     "P53": {
       "Name": "Wrathful Decree",
-      "Level": 1,
-      "CardId": "P53"
+      "Level": 1
     },
     "P54": {
       "Name": "Ascension",
-      "Level": 1,
-      "CardId": "P54"
+      "Level": 1
     },
     "P55": {
       "Name": "Caltrops",
-      "Level": 1,
-      "CardId": "P55"
+      "Level": 1
     },
     "P56": {
       "Name": "Ventriloquism",
-      "Level": 1,
-      "CardId": "P56"
+      "Level": 1
     },
     "P57": {
       "Name": "Gaining Advantage",
-      "Level": 1,
-      "CardId": "P57"
+      "Level": 1
     },
     "P58": {
       "Name": "Shadow Form",
-      "Level": 1,
-      "CardId": "P58"
+      "Level": 1
     },
     "P59": {
       "Name": "Shadowsteps",
-      "Level": 1,
-      "CardId": "P59"
+      "Level": 1
     },
     "P61": {
       "Name": "Adventurer's Luck",
-      "Level": 1,
-      "CardId": "P61"
+      "Level": 1
     },
     "P62": {
       "Name": "Ticking Vestigial",
-      "Level": 1,
-      "CardId": "P62"
+      "Level": 1
     },
     "P63": {
       "Name": "Scrapping",
-      "Level": 1,
-      "CardId": "P63"
+      "Level": 1
     },
     "P64": {
       "Name": "Divinum Infused Tools",
-      "Level": 1,
-      "CardId": "P64"
+      "Level": 1
     },
     "P65": {
       "Name": "Quick Reflexes",
-      "Level": 1,
-      "CardId": "P65"
+      "Level": 1
     },
     "P66": {
       "Name": "Final Enhancement",
-      "Level": 1,
-      "CardId": "P66"
+      "Level": 1
     },
     "P67": {
       "Name": "Osteoporosis",
-      "Level": 1,
-      "CardId": "P67"
+      "Level": 1
     },
     "P68": {
       "Name": "Mind Parasite",
-      "Level": 1,
-      "CardId": "P68"
+      "Level": 1
     },
     "P69": {
       "Name": "Artificial Life",
-      "Level": 1,
-      "CardId": "P69"
+      "Level": 1
     },
     "P70": {
       "Name": "Leeching Seedlings",
-      "Level": 1,
-      "CardId": "P70"
+      "Level": 1
     },
     "P71": {
       "Name": "Proliferation",
-      "Level": 1,
-      "CardId": "P71"
+      "Level": 1
     },
     "P72": {
       "Name": "Blossom",
-      "Level": 1,
-      "CardId": "P72"
+      "Level": 1
     },
     "PP01": {
       "Name": "Precise Shot",
-      "Level": 1,
-      "CardId": "PP01"
+      "Level": 1
     },
     "PP02": {
       "Name": "Freezing Traps",
-      "Level": 1,
-      "CardId": "PP02"
+      "Level": 1
     },
     "PP03": {
       "Name": "Heroic Strike",
-      "Level": 1,
-      "CardId": "PP03"
+      "Level": 1
     },
     "PP04": {
       "Name": "Freezing Smash",
-      "Level": 1,
-      "CardId": "PP04"
+      "Level": 1
     },
     "PP05": {
       "Name": "Cure and Poison",
-      "Level": 1,
-      "CardId": "PP05"
+      "Level": 1
     },
     "PP06": {
       "Name": "Summon Swarm",
-      "Level": 1,
-      "CardId": "PP06"
+      "Level": 1
     },
     "PP07": {
       "Name": "Rage",
-      "Level": 1,
-      "CardId": "PP07"
+      "Level": 1
     },
     "PP08": {
       "Name": "Weapon Throw",
-      "Level": 1,
-      "CardId": "PP08"
+      "Level": 1
     },
     "PP09": {
       "Name": "Manic Laugh",
-      "Level": 1,
-      "CardId": "PP09"
+      "Level": 1
     },
     "PP10": {
       "Name": "Unleash Divinum",
-      "Level": 1,
-      "CardId": "PP10"
+      "Level": 1
     },
     "PP11": {
       "Name": "Premonition",
-      "Level": 1,
-      "CardId": "PP11"
+      "Level": 1
     },
     "PP12": {
       "Name": "Runic Projectile",
-      "Level": 1,
-      "CardId": "PP12"
+      "Level": 1
     },
     "PP13": {
       "Name": "Inspire",
-      "Level": 1,
-      "CardId": "PP13"
+      "Level": 1
     },
     "PP14": {
       "Name": "Smoke and Mirrors",
-      "Level": 1,
-      "CardId": "PP14"
+      "Level": 1
     },
     "PP15": {
       "Name": "Weak Point",
-      "Level": 1,
-      "CardId": "PP15"
+      "Level": 1
     },
     "PP16": {
       "Name": "Taunt",
-      "Level": 1,
-      "CardId": "PP16"
+      "Level": 1
     },
     "PP17": {
       "Name": "Aura of Justice",
-      "Level": 1,
-      "CardId": "PP17"
+      "Level": 1
     },
     "PP18": {
       "Name": "Moondisc",
-      "Level": 1,
-      "CardId": "PP18"
+      "Level": 1
     },
     "PP19": {
       "Name": "Adamant Stance",
-      "Level": 1,
-      "CardId": "PP19"
+      "Level": 1
     },
     "PP20": {
       "Name": "Guidance",
-      "Level": 1,
-      "CardId": "PP20"
+      "Level": 1
     },
     "PP21": {
       "Name": "Riposte",
-      "Level": 1,
-      "CardId": "PP21"
+      "Level": 1
     },
     "PP22": {
       "Name": "Eliminate",
-      "Level": 1,
-      "CardId": "PP22"
+      "Level": 1
     },
     "PP23": {
       "Name": "Impose Your Will",
-      "Level": 1,
-      "CardId": "PP23"
+      "Level": 1
     },
     "PP24": {
       "Name": "Mark Bounty",
-      "Level": 1,
-      "CardId": "PP24"
+      "Level": 1
     },
     "PP25": {
       "Name": "Divine Justice",
-      "Level": 1,
-      "CardId": "PP25"
+      "Level": 1
     },
     "PP26": {
       "Name": "Swing of Incense",
-      "Level": 1,
-      "CardId": "PP26"
+      "Level": 1
     },
     "PP27": {
       "Name": "Summoned for Trial",
-      "Level": 1,
-      "CardId": "PP27"
+      "Level": 1
     },
     "PP28": {
       "Name": "Weapon Steal",
-      "Level": 1,
-      "CardId": "PP28"
+      "Level": 1
     },
     "PP29": {
       "Name": "Inside Information",
-      "Level": 1,
-      "CardId": "PP29"
+      "Level": 1
     },
     "PP30": {
       "Name": "Becoming the Role",
-      "Level": 1,
-      "CardId": "PP30"
+      "Level": 1
     },
     "PP31": {
       "Name": "Pike Strike",
-      "Level": 1,
-      "CardId": "PP31"
+      "Level": 1
     },
     "PP32": {
       "Name": "Bright Mind",
-      "Level": 1,
-      "CardId": "PP32"
+      "Level": 1
     },
     "PP33": {
       "Name": "Applied Knowledge",
-      "Level": 1,
-      "CardId": "PP33"
+      "Level": 1
     },
     "PP34": {
       "Name": "Release Pollen",
-      "Level": 1,
-      "CardId": "PP34"
+      "Level": 1
     },
     "PP35": {
       "Name": "Guardian Spirits",
-      "Level": 1,
-      "CardId": "PP35"
+      "Level": 1
     },
     "PP36": {
       "Name": "Tumorous Growth",
-      "Level": 1,
-      "CardId": "PP36"
+      "Level": 1
     },
     "S01": {
       "Name": "Coordinated Advance",
-      "Level": 1,
-      "CardId": "S01"
+      "Level": 1
     },
     "S02": {
       "Name": "Flank Attack",
-      "Level": 1,
-      "CardId": "S02"
+      "Level": 1
     },
     "S03": {
       "Name": "Coordinated Attack",
-      "Level": 1,
-      "CardId": "S03"
+      "Level": 1
     },
     "S04": {
       "Name": "Indomitable Presence",
-      "Level": 1,
-      "CardId": "S04"
+      "Level": 1
     },
     "S05": {
       "Name": "Focus Divinum",
-      "Level": 1,
-      "CardId": "S05"
+      "Level": 1
     },
     "S06": {
       "Name": "Energy Shield",
-      "Level": 1,
-      "CardId": "S06"
+      "Level": 1
     },
     "S07": {
       "Name": "Chain Lightning",
-      "Level": 1,
-      "CardId": "S07"
+      "Level": 1
     },
     "S08": {
       "Name": "Web of Minds",
-      "Level": 1,
-      "CardId": "S08"
+      "Level": 1
     },
     "S09": {
       "Name": "Ritual of Haste",
-      "Level": 1,
-      "CardId": "S09"
+      "Level": 1
     },
     "S10": {
       "Name": "Protective Gestures",
-      "Level": 1,
-      "CardId": "S10"
+      "Level": 1
     },
     "S11": {
       "Name": "Rain of Divinum",
-      "Level": 1,
-      "CardId": "S11"
+      "Level": 1
     },
     "S12": {
       "Name": "Healing Burst",
-      "Level": 1,
-      "CardId": "S12"
+      "Level": 1
     },
     "S13": {
       "Name": "Swerve",
-      "Level": 1,
-      "CardId": "S13"
+      "Level": 1
     },
     "S14": {
       "Name": "Sucker Punch",
-      "Level": 1,
-      "CardId": "S14"
+      "Level": 1
     },
     "S15": {
       "Name": "Feint",
-      "Level": 1,
-      "CardId": "S15"
+      "Level": 1
     },
     "S16": {
       "Name": "Backstab",
-      "Level": 1,
-      "CardId": "S16"
+      "Level": 1
     },
     "S17": {
       "Name": "Parry",
-      "Level": 1,
-      "CardId": "S17"
+      "Level": 1
     },
     "S18": {
       "Name": "Trip",
-      "Level": 1,
-      "CardId": "S18"
+      "Level": 1
     },
     "S19": {
       "Name": "Follow-up",
-      "Level": 1,
-      "CardId": "S19"
+      "Level": 1
     },
     "S20": {
       "Name": "Into the Fray",
-      "Level": 1,
-      "CardId": "S20"
+      "Level": 1
     },
     "S21": {
       "Name": "Shoot and Dash",
-      "Level": 1,
-      "CardId": "S21"
+      "Level": 1
     },
     "S22": {
       "Name": "Take Aim",
-      "Level": 1,
-      "CardId": "S22"
+      "Level": 1
     },
     "S23": {
       "Name": "Arrow Rain",
-      "Level": 1,
-      "CardId": "S23"
+      "Level": 1
     },
     "S24": {
       "Name": "Frost Shot",
-      "Level": 1,
-      "CardId": "S24"
+      "Level": 1
     },
     "S25": {
       "Name": "Sense Danger",
-      "Level": 1,
-      "CardId": "S25"
+      "Level": 1
     },
     "S26": {
       "Name": "Relieving Aura",
-      "Level": 1,
-      "CardId": "S26"
+      "Level": 1
     },
     "S27": {
       "Name": "Nature's Revenge",
-      "Level": 1,
-      "CardId": "S27"
+      "Level": 1
     },
     "S28": {
       "Name": "Entangle",
-      "Level": 1,
-      "CardId": "S28"
+      "Level": 1
     },
     "S29": {
       "Name": "Academic Magic",
-      "Level": 1,
-      "CardId": "S29"
+      "Level": 1
     },
     "S30": {
       "Name": "Cognitive Enhancement",
-      "Level": 1,
-      "CardId": "S30"
+      "Level": 1
     },
     "S31": {
       "Name": "Rejuvenation",
-      "Level": 1,
-      "CardId": "S31"
+      "Level": 1
     },
     "S32": {
       "Name": "Stratagem",
-      "Level": 1,
-      "CardId": "S32"
+      "Level": 1
     },
     "S33": {
       "Name": "Shadow Jump",
-      "Level": 1,
-      "CardId": "S33"
+      "Level": 1
     },
     "S34": {
       "Name": "Veilkin",
-      "Level": 1,
-      "CardId": "S34"
+      "Level": 1
     },
     "S35": {
       "Name": "Shadow Blade",
-      "Level": 1,
-      "CardId": "S35"
+      "Level": 1
     },
     "S36": {
       "Name": "Skilled Imitator",
-      "Level": 1,
-      "CardId": "S36"
+      "Level": 1
     }
   }
 }

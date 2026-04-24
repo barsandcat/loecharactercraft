@@ -20,6 +20,13 @@ DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"]
 # Module-level helpers
 # -------------------------
 
+def render_action_card(card_id, action_cards_registry):
+    if card_id in action_cards_registry:
+        card = action_cards_registry[card_id]
+        display_name = card["DisplayName"] if "DisplayName" in card else card["Name"]
+        return f"{display_name} ({card_id})"
+    return f"Unknown Action Card ({card_id})"
+
 def render_entry_summary(entry, action_cards_registry):
     parts = []
 
@@ -48,9 +55,7 @@ def render_entry_summary(entry, action_cards_registry):
         parts.append(f"{item['Name']} ({item['Type']})")
 
     for card_id in entry.get("Action cards", []):
-        if card_id in action_cards_registry:
-            card = action_cards_registry[card_id]
-            parts.append(f"{card['Name']} L{card['Level']}")
+        parts.append(render_action_card(card_id, action_cards_registry))
 
     return ", ".join(parts)
 
@@ -113,15 +118,12 @@ class CharacterStats:
     def add_item(self, item):
         self._items_by_key.setdefault((item["Name"], item["Type"]), item)
 
-    def add_action(self, action):
-        """Add an action card. Action can be a card ID (string) or a card object (dict)."""
-        if isinstance(action, str):
-            # It's a card ID, look it up
-            if action in self.action_cards_registry:
-                action = self.action_cards_registry[action]
-            else:
-                # Card ID not found, skip it
-                return
+    def add_action(self, card_id):
+        if card_id in self.action_cards_registry:
+            action = self.action_cards_registry[card_id]
+            action.setdefault("CardId", card_id)
+        else:
+            return
         
         # Now action is a dict
         current = self._actions_by_name.get(action["Name"])
@@ -930,7 +932,7 @@ class CharacterBuilder(QWidget):
 
             selected_version_index = picked.get(level, -1)
             for idx, version in enumerate(versions):
-                summary = render_entry_summary(version) or "No changes"
+                summary = render_entry_summary(version, self.action_cards_registry) or "No changes"
                 if idx == selected_version_index:
                     ver_class = "selected"
                 elif level in available:
@@ -1012,7 +1014,7 @@ class CharacterBuilder(QWidget):
             ])
 
         add_section("Items",        [f"{i['Name']} ({i['Type']})" for i in stats.items])
-        add_section("Action Cards", [f"{a['Name']} (Lvl {a['Level']})" for a in stats.actions])
+        add_section("Action Cards", [render_action_card(a['CardId'], self.action_cards_registry) for a in stats.actions])
 
         return "".join(parts)
 

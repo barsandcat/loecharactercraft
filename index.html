@@ -1286,8 +1286,7 @@
         }
 
         const actionLines = Array.from(stats.actions.values()).map((card) => {
-          const scale = card.ScaleAttribute ? " (" + card.ScaleAttribute + ")" : "";
-          return card.Name + scale + " L" + card.Level;
+          return formatActionCardLabel(card._cardId, card);
         });
         if (actionLines.length) {
           container.appendChild(createListSection("Action Cards", actionLines));
@@ -1937,7 +1936,7 @@
         }
         const current = stats.actions.get(card.Name);
         if (!current || card.Level > current.Level) {
-          stats.actions.set(card.Name, card);
+          stats.actions.set(card.Name, { ...card, _cardId: cardId });
         }
       }
 
@@ -2067,13 +2066,20 @@
         return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
       }
 
-      function formatActionCardSummary(cardId) {
-        const card = state.data["Action Cards"][cardId];
+      function formatActionCardLabel(cardId, card) {
+        if (!card) {
+          card = state.data["Action Cards"][cardId];
+        }
         if (!card) {
           return "";
         }
-        const scale = card.ScaleAttribute ? " (" + card.ScaleAttribute + ")" : "";
-        return card.Name + scale + " L" + card.Level;
+        const displayName = card.DisplayName || card.Name;
+        const scale = card.ScaleAttribute ? " " + card.ScaleAttribute : "";
+        return displayName + " (" + cardId + ")" + scale;
+      }
+
+      function formatActionCardSummary(cardId) {
+        return formatActionCardLabel(cardId);
       }
 
       function describeRaceOption(race) {
