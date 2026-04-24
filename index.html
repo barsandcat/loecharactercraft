@@ -347,6 +347,19 @@
       margin-bottom: 2px;
     }
 
+    .stat-card.is-over-limit {
+      border-color: rgba(122, 37, 32, 0.55);
+      background: #2A1210;
+    }
+
+    .stat-card.is-over-limit .stat-value {
+      color: #E05050;
+    }
+
+    .stat-card.is-over-limit .stat-label {
+      color: rgba(224, 80, 80, 0.65);
+    }
+
     .stat-label {
       font-family: 'Cinzel', serif;
       color: rgba(240, 234, 216, 0.55);
@@ -1264,9 +1277,10 @@
 
         const attributeGrid = document.createElement("div");
         attributeGrid.className = "stat-grid";
+        const ATTRIBUTE_LIMIT = 6;
         ATTRIBUTES.forEach((attribute) => {
           attributeGrid.appendChild(
-            createStatCard(attribute, String(stats.attributes[attribute] || 0))
+            createStatCard(attribute, String(stats.attributes[attribute] || 0), ATTRIBUTE_LIMIT)
           );
         });
         attributeCard.appendChild(attributeGrid);
@@ -1280,8 +1294,8 @@
 
         const statGrid = document.createElement("div");
         statGrid.className = "stat-grid";
-        statGrid.appendChild(createStatCard("MOV", String(stats.mov)));
-        statGrid.appendChild(createStatCard("HP", String(stats.hp)));
+        statGrid.appendChild(createStatCard("MOV", String(stats.mov), 10));
+        statGrid.appendChild(createStatCard("HP", String(stats.hp), 16));
         statGrid.appendChild(createStatCard("DIV", stats.divDie || "-"));
         statGrid.appendChild(createStatCard("Brill", String(stats.brill)));
         statCard.appendChild(statGrid);
@@ -1500,9 +1514,14 @@
         return button;
       }
 
-      function createStatCard(label, value) {
+      function createStatCard(label, value, limit) {
         const card = document.createElement("div");
         card.className = "stat-card";
+
+        const numericValue = parseFloat(value);
+        if (limit !== undefined && !isNaN(numericValue) && numericValue > limit) {
+          card.classList.add("is-over-limit");
+        }
 
         const statValue = document.createElement("div");
         statValue.className = "stat-value";
