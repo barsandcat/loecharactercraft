@@ -399,6 +399,89 @@
       color: var(--ink);
     }
 
+    /* Action Card Categories */
+    .action-category-group {
+      margin-bottom: 12px;
+    }
+
+    .action-category-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .action-category-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-text);
+      font-weight: 600;
+      margin: 0 0 6px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(201, 168, 64, 0.22);
+    }
+
+    .action-list {
+      display: grid;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .action-list-item {
+      padding: 0;
+    }
+
+    /* Action Card ID Box */
+    .action-card-row {
+      display: flex;
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    .action-card-id {
+      flex-shrink: 0;
+      padding: 7px 8px;
+      border: 1px solid rgba(70, 48, 12, 0.1);
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      text-align: center;
+    }
+
+    .action-card-id.is-action {
+      background: var(--dark);
+      border-color: rgba(201, 168, 64, 0.32);
+      color: var(--gold);
+    }
+
+    .action-card-id.is-reaction {
+      background: rgba(255, 255, 255, 0.32);
+      border-color: rgba(70, 48, 12, 0.1);
+      color: var(--ink);
+    }
+
+    .action-card-label {
+      flex: 1;
+      padding: 7px 10px;
+      border: 1px solid rgba(70, 48, 12, 0.1);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.9rem;
+      line-height: 1.35;
+      color: var(--ink);
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.32);
+    }
+
     /* ── Trees ── */
     .tree-stack { display: grid; gap: 10px; }
 
@@ -1331,15 +1414,76 @@
             actionSection.appendChild(upgradeChip);
           }
 
-          const actionList = document.createElement("ul");
-          actionList.className = "list-block";
-          actionLines.forEach((line) => {
-            const li = document.createElement("li");
-            li.className = "list-item";
-            li.textContent = line;
-            actionList.appendChild(li);
+          // Group action cards by category
+          const cardsByCategory = {
+            Offensive: [],
+            Defensive: [],
+            Support: []
+          };
+
+          Array.from(stats.actions.values()).forEach((card) => {
+            const category = card.Category || "Offensive"; // Default to Offensive if no category
+            const cardType = card.Type || "Action"; // Default to Action if no type
+            const label = formatActionCardLabel(card._cardId, card);
+            
+            if (cardsByCategory[category]) {
+              cardsByCategory[category].push({
+                label: label,
+                cardId: card._cardId,
+                type: cardType
+              });
+            }
           });
-          actionSection.appendChild(actionList);
+
+          // Render each category
+          ["Offensive", "Defensive", "Support"].forEach((category) => {
+            const cards = cardsByCategory[category];
+            if (cards.length > 0) {
+              const categoryGroup = document.createElement("div");
+              categoryGroup.className = "action-category-group";
+
+              const categoryTitle = document.createElement("h4");
+              categoryTitle.className = "action-category-title";
+              categoryTitle.textContent = category;
+              categoryGroup.appendChild(categoryTitle);
+
+              const actionList = document.createElement("ul");
+              actionList.className = "action-list";
+
+              cards.forEach((cardData) => {
+                const li = document.createElement("li");
+                li.className = "action-list-item";
+                
+                // Create row container
+                const row = document.createElement("div");
+                row.className = "action-card-row";
+                
+                // Create ID box
+                const idBox = document.createElement("div");
+                idBox.className = "action-card-id";
+                if (cardData.type === "Action") {
+                  idBox.classList.add("is-action");
+                } else if (cardData.type === "Reaction") {
+                  idBox.classList.add("is-reaction");
+                }
+                idBox.textContent = cardData.cardId;
+                row.appendChild(idBox);
+                
+                // Create label box
+                const labelBox = document.createElement("div");
+                labelBox.className = "action-card-label";
+                labelBox.textContent = cardData.label;
+                row.appendChild(labelBox);
+                
+                li.appendChild(row);
+                actionList.appendChild(li);
+              });
+
+              categoryGroup.appendChild(actionList);
+              actionSection.appendChild(categoryGroup);
+            }
+          });
+
           container.appendChild(actionSection);
         }
       }
@@ -2136,7 +2280,7 @@
         }
         const displayName = card.DisplayName || card.Name;
         const scale = card.ScaleAttribute ? " (Roll " + card.ScaleAttribute + ")" : "";
-        return cardId + " " + displayName + scale;
+        return displayName + scale;
       }
 
       function formatActionCardSummary(cardId) {
