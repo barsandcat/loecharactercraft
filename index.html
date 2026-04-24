@@ -362,6 +362,20 @@
       list-style: none;
     }
 
+    .free-upgrades-chip {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      background: rgba(201, 168, 64, 0.12);
+      border: 1px solid rgba(201, 168, 64, 0.38);
+      color: var(--gold-text);
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+    }
+
     .list-item {
       padding: 6px 9px;
       background: rgba(255, 255, 255, 0.32);
@@ -1289,7 +1303,30 @@
           return formatActionCardLabel(card._cardId, card);
         });
         if (actionLines.length) {
-          container.appendChild(createListSection("Action Cards", actionLines));
+          const actionSection = document.createElement("section");
+          actionSection.className = "summary-card";
+
+          const actionTitle = document.createElement("h3");
+          actionTitle.textContent = "Action Cards";
+          actionSection.appendChild(actionTitle);
+
+          if (stats.freeUpgrades > 0) {
+            const upgradeChip = document.createElement("div");
+            upgradeChip.className = "free-upgrades-chip";
+            upgradeChip.textContent = stats.freeUpgrades + " free upgrade" + (stats.freeUpgrades > 1 ? "s" : "") + " available";
+            actionSection.appendChild(upgradeChip);
+          }
+
+          const actionList = document.createElement("ul");
+          actionList.className = "list-block";
+          actionLines.forEach((line) => {
+            const li = document.createElement("li");
+            li.className = "list-item";
+            li.textContent = line;
+            actionList.appendChild(li);
+          });
+          actionSection.appendChild(actionList);
+          container.appendChild(actionSection);
         }
       }
 
@@ -1892,6 +1929,7 @@
           keywordCounts: new Map(),
           items: new Map(),
           actions: new Map(),
+          freeUpgrades: 0,
         };
 
         if (state.selectedRace) {
@@ -1935,7 +1973,11 @@
           return;
         }
         const current = stats.actions.get(card.Name);
-        if (!current || card.Level > current.Level) {
+        if (!current) {
+          stats.actions.set(card.Name, { ...card, _cardId: cardId });
+        } else if (card.Level === current.Level) {
+          stats.freeUpgrades += 1;
+        } else if (card.Level > current.Level) {
           stats.actions.set(card.Name, { ...card, _cardId: cardId });
         }
       }
