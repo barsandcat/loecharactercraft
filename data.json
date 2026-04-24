@@ -3834,6 +3834,9 @@
     },
     "P43": {
       "Name": "Poisoned Darts",
+      "Type": "Action",
+      "Category": "Offensive",
+      "ScaleAttribute": "AGI",
       "Level": 1
     },
     "P44": {
@@ -4131,6 +4134,9 @@
     },
     "S07": {
       "Name": "Chain Lightning",
+      "Type": "Action",
+      "Category": "Offensive",
+      "ScaleAttribute": "INT+DIV",
       "Level": 1
     },
     "S08": {
