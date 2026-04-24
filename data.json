@@ -3703,6 +3703,7 @@
     },
     "P19": {
       "Name": "Furious Attacks",
+      "ScaleAttribute": "STR+DIV",
       "Level": 1
     },
     "P20": {
@@ -3727,6 +3728,7 @@
     },
     "P25": {
       "Name": "Spikes",
+      "ScaleAttribute": "INT+DIV",
       "Level": 1
     },
     "P26": {
@@ -3823,6 +3825,7 @@
     },
     "P50": {
       "Name": "Shield of Omu",
+      "ScaleAttribute": "STR+DIV",
       "Level": 1
     },
     "P51": {
