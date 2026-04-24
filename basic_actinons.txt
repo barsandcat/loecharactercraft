@@ -1,0 +1,27 @@
+Dodge
+Clumsy Dodge (B06) L1
+Dodge (B04) L2
+Nimble Dodge (B05) L3
+
+Endurance
+Limited Endurance (B03) L1
+Endurance (B01) L2
+Exceptional Endurance (B02) L3
+
+Command
+Pitiful Command (B12) L1
+Command (B10) L2
+Inspiring Command (B11) L3
+
+Combat Insight
+Minor Combat Insight (B09) L1 
+Combat Insight (B07) L2
+Crucial Combat Insight (B08) L3
+
+Bash
+Bash (B00) L1
+Mighty Bash (B14) L2
+
+Shoot
+Shoot (B15) L1
+Powerful Shot (B16) L2

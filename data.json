@@ -21,30 +21,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 1,
+          "CardId": "B03",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 2,
+          "CardId": "B04",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 3
+          "Level": 3,
+          "CardId": "B08"
         },
         {
           "Name": "Command",
           "Level": 2,
+          "CardId": "B10",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -69,30 +75,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 2,
+          "CardId": "B01",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 1,
+          "CardId": "B06",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 2,
+          "CardId": "B10",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -118,30 +130,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 3,
+          "CardId": "B02",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 1,
+          "CardId": "B06",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 2,
+          "CardId": "B10",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -167,30 +185,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 3,
+          "CardId": "B02",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 2,
+          "CardId": "B04",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 1,
+          "CardId": "B12",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -215,30 +239,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 1,
+          "CardId": "B03",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 3,
+          "CardId": "B05",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 2,
+          "CardId": "B10",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -329,30 +359,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 2,
+          "CardId": "B01",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 2,
+          "CardId": "B04",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 2,
+          "CardId": "B10",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -378,6 +414,7 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
@@ -387,25 +424,30 @@
         {
           "Name": "Endurance",
           "Level": 1,
+          "CardId": "B03",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 3,
+          "CardId": "B05",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 2
+          "Level": 2,
+          "CardId": "B07"
         },
         {
           "Name": "Command",
           "Level": 1,
+          "CardId": "B12",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -436,30 +478,36 @@
         {
           "Name": "Bash",
           "Level": 1,
+          "CardId": "B00",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Endurance",
           "Level": 1,
+          "CardId": "B03",
           "ScaleAttribute": "STR"
         },
         {
           "Name": "Dodge",
           "Level": 1,
+          "CardId": "B06",
           "ScaleAttribute": "AGI"
         },
         {
           "Name": "Combat Insight",
-          "Level": 3
+          "Level": 3,
+          "CardId": "B08"
         },
         {
           "Name": "Command",
           "Level": 3,
+          "CardId": "B11",
           "ScaleAttribute": "CHA"
         },
         {
           "Name": "Shoot",
           "Level": 1,
+          "CardId": "B15",
           "ScaleAttribute": "AGI"
         }
       ]
@@ -1660,7 +1708,8 @@
             "Action cards": [
               {
                 "Name": "Furious Attacks",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P19"
               }
             ]
           },
@@ -1668,7 +1717,8 @@
             "Action cards": [
               {
                 "Name": "Insult",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P20"
               }
             ]
           }
@@ -1691,7 +1741,8 @@
             "Action cards": [
               {
                 "Name": "Dual Wielding",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P21"
               }
             ]
           }
@@ -1722,6 +1773,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -1739,6 +1791,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -1754,7 +1807,8 @@
             "Action cards": [
               {
                 "Name": "Retribution",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P23"
               }
             ]
           }
@@ -1764,7 +1818,8 @@
             "Action cards": [
               {
                 "Name": "Charging Bull",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P22"
               }
             ],
             "MOB": 2
@@ -1781,7 +1836,8 @@
             "Action cards": [
               {
                 "Name": "Follow Through",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P24"
               }
             ]
           },
@@ -1795,7 +1851,8 @@
             "Action cards": [
               {
                 "Name": "Follow Through",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P24"
               }
             ]
           }
@@ -1810,7 +1867,8 @@
             "Action cards": [
               {
                 "Name": "Song of Protection",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P16"
               }
             ]
           },
@@ -1818,7 +1876,8 @@
             "Action cards": [
               {
                 "Name": "Soothing Voice",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P01"
               }
             ]
           }
@@ -1851,7 +1910,8 @@
             "Action cards": [
               {
                 "Name": "Hymn of Malady",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P02"
               }
             ]
           }
@@ -1880,6 +1940,7 @@
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -1895,6 +1956,7 @@
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -1928,7 +1990,8 @@
             "Action cards": [
               {
                 "Name": "Rousing Ballad",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P03"
               }
             ]
           },
@@ -1941,7 +2004,8 @@
             "Action cards": [
               {
                 "Name": "Sly Tongue",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P17"
               }
             ]
           }
@@ -1952,7 +2016,8 @@
             "Action cards": [
               {
                 "Name": "Applause",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P18"
               }
             ]
           }
@@ -1967,7 +2032,8 @@
             "Action cards": [
               {
                 "Name": "Adventurer's Luck",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P61"
               }
             ]
           },
@@ -1975,7 +2041,8 @@
             "Action cards": [
               {
                 "Name": "Ticking Vestigial",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P62"
               }
             ]
           }
@@ -1998,7 +2065,8 @@
             "Action cards": [
               {
                 "Name": "Scrapping",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P63"
               }
             ]
           }
@@ -2039,6 +2107,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2056,6 +2125,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2067,7 +2137,8 @@
             "Action cards": [
               {
                 "Name": "Divinum Infused Tools",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P64"
               }
             ]
           }
@@ -2077,7 +2148,8 @@
             "Action cards": [
               {
                 "Name": "Quick Reflexes",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P65"
               }
             ],
             "HP": 2
@@ -2094,7 +2166,8 @@
             "Action cards": [
               {
                 "Name": "Final Enhancement",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P66"
               }
             ]
           },
@@ -2104,7 +2177,8 @@
             "Action cards": [
               {
                 "Name": "Final Enhancement",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P66"
               }
             ]
           }
@@ -2119,7 +2193,8 @@
             "Action cards": [
               {
                 "Name": "Spikes",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P25"
               }
             ]
           },
@@ -2127,7 +2202,8 @@
             "Action cards": [
               {
                 "Name": "Earth Shell",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P26"
               }
             ]
           }
@@ -2150,7 +2226,8 @@
             "Action cards": [
               {
                 "Name": "Cauldron of Wonders",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P27"
               }
             ]
           }
@@ -2181,6 +2258,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2198,6 +2276,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2208,7 +2287,8 @@
             "Action cards": [
               {
                 "Name": "Evoke Blizzard",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P29"
               }
             ],
             "DIV": "Upgrade"
@@ -2219,7 +2299,8 @@
             "Action cards": [
               {
                 "Name": "Animal Form",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P28"
               }
             ],
             "MOB": 2
@@ -2236,7 +2317,8 @@
             "Action cards": [
               {
                 "Name": "True Bond",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P30"
               }
             ]
           },
@@ -2250,7 +2332,8 @@
             "Action cards": [
               {
                 "Name": "True Bond",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P30"
               }
             ]
           }
@@ -2265,7 +2348,8 @@
             "Action cards": [
               {
                 "Name": "Poisoned Darts",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P43"
               }
             ]
           },
@@ -2273,7 +2357,8 @@
             "Action cards": [
               {
                 "Name": "Mighty Blow",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P44"
               }
             ]
           }
@@ -2301,7 +2386,8 @@
             "Action cards": [
               {
                 "Name": "Executor's Insight",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P45"
               }
             ]
           }
@@ -2333,6 +2419,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2351,6 +2438,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2369,6 +2457,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2387,6 +2476,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2415,7 +2505,8 @@
             "Action cards": [
               {
                 "Name": "Know your Enemy",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P46"
               }
             ]
           },
@@ -2423,7 +2514,8 @@
             "Action cards": [
               {
                 "Name": "Personal Style",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P47"
               }
             ]
           }
@@ -2434,7 +2526,8 @@
             "Action cards": [
               {
                 "Name": "Thousand Cuts",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P48"
               }
             ]
           }
@@ -2449,7 +2542,8 @@
             "Action cards": [
               {
                 "Name": "Charge",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P37"
               }
             ]
           },
@@ -2457,7 +2551,8 @@
             "Action cards": [
               {
                 "Name": "Target Weak Spot",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P38"
               }
             ]
           }
@@ -2480,7 +2575,8 @@
             "Action cards": [
               {
                 "Name": "Vengeful Stance",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P39"
               }
             ]
           }
@@ -2519,6 +2615,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2534,7 +2631,8 @@
             "Action cards": [
               {
                 "Name": "Strength of Heart",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P40"
               }
             ]
           },
@@ -2547,7 +2645,8 @@
             "Action cards": [
               {
                 "Name": "Strength of Heart",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P40"
               }
             ]
           }
@@ -2562,7 +2661,8 @@
             "Action cards": [
               {
                 "Name": "Inner Strength",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P41"
               }
             ]
           }
@@ -2575,7 +2675,8 @@
             "Action cards": [
               {
                 "Name": "Dance of War",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P48"
               }
             ]
           },
@@ -2586,7 +2687,8 @@
             "Action cards": [
               {
                 "Name": "Dance of War",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P48"
               }
             ]
           }
@@ -2601,7 +2703,8 @@
             "Action cards": [
               {
                 "Name": "Sneak",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P31"
               }
             ]
           },
@@ -2609,7 +2712,8 @@
             "Action cards": [
               {
                 "Name": "Focus",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P32"
               }
             ]
           }
@@ -2632,7 +2736,8 @@
             "Action cards": [
               {
                 "Name": "Blend In",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P33"
               }
             ]
           }
@@ -2663,6 +2768,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2680,6 +2786,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -2690,7 +2797,8 @@
             "Action cards": [
               {
                 "Name": "Inhale Divinum",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P34"
               }
             ],
             "DIV": "Upgrade"
@@ -2701,7 +2809,8 @@
             "Action cards": [
               {
                 "Name": "Scent of Blood",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P35"
               }
             ],
             "MOB": 2
@@ -2718,7 +2827,8 @@
             "Action cards": [
               {
                 "Name": "Become Predator",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P36"
               }
             ]
           },
@@ -2732,7 +2842,8 @@
             "Action cards": [
               {
                 "Name": "Become Predator",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P36"
               }
             ]
           }
@@ -2747,7 +2858,8 @@
             "Action cards": [
               {
                 "Name": "Osteoporosis",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P67"
               }
             ]
           },
@@ -2755,7 +2867,8 @@
             "Action cards": [
               {
                 "Name": "Mind Parasite",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P68"
               }
             ]
           }
@@ -2776,7 +2889,8 @@
             "Action cards": [
               {
                 "Name": "Artificial Life",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P69"
               }
             ]
           }
@@ -2808,6 +2922,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2826,6 +2941,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -2859,7 +2975,8 @@
             "Action cards": [
               {
                 "Name": "Leeching Seedlings",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P70"
               }
             ]
           },
@@ -2872,7 +2989,8 @@
             "Action cards": [
               {
                 "Name": "Proliferation",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P71"
               }
             ]
           },
@@ -2885,7 +3003,8 @@
             "Action cards": [
               {
                 "Name": "Leeching Seedlings",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P70"
               }
             ]
           },
@@ -2898,7 +3017,8 @@
             "Action cards": [
               {
                 "Name": "Proliferation",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P71"
               }
             ]
           }
@@ -2909,7 +3029,8 @@
             "Action cards": [
               {
                 "Name": "Blossom",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P72"
               }
             ]
           }
@@ -2924,7 +3045,8 @@
             "Action cards": [
               {
                 "Name": "Summon Divling",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P10"
               }
             ]
           },
@@ -2932,7 +3054,8 @@
             "Action cards": [
               {
                 "Name": "Ice Bolts",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P12"
               }
             ]
           }
@@ -2957,7 +3080,8 @@
             "Action cards": [
               {
                 "Name": "Magic Circle",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P11"
               }
             ]
           }
@@ -3019,6 +3143,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -3029,7 +3154,8 @@
             "Action cards": [
               {
                 "Name": "Outburst of Divinum",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P13"
               }
             ]
           },
@@ -3037,7 +3163,8 @@
             "Action cards": [
               {
                 "Name": "Evoke Nightmares",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P14"
               }
             ]
           }
@@ -3047,7 +3174,8 @@
             "Action cards": [
               {
                 "Name": "Fireball",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P15"
               }
             ],
             "DIV": "Upgrade"
@@ -3063,7 +3191,8 @@
             "Action cards": [
               {
                 "Name": "Counter",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P04"
               }
             ]
           },
@@ -3071,7 +3200,8 @@
             "Action cards": [
               {
                 "Name": "Battle Prayer",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P05"
               }
             ]
           }
@@ -3094,7 +3224,8 @@
             "Action cards": [
               {
                 "Name": "Guided Smite",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P06"
               }
             ]
           }
@@ -3133,7 +3264,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           },
@@ -3148,7 +3280,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           }
@@ -3166,7 +3299,8 @@
             "Action cards": [
               {
                 "Name": "Bulwark of Hope",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P07"
               }
             ]
           },
@@ -3174,7 +3308,8 @@
             "Action cards": [
               {
                 "Name": "Beacon of Hope",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P08"
               }
             ]
           }
@@ -3189,7 +3324,8 @@
             "Action cards": [
               {
                 "Name": "Divine Intervention",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P09"
               }
             ]
           },
@@ -3202,7 +3338,8 @@
             "Action cards": [
               {
                 "Name": "Divine Intervention",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P09"
               }
             ]
           }
@@ -3217,7 +3354,8 @@
             "Action cards": [
               {
                 "Name": "Hand of Retribution",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P49"
               }
             ]
           },
@@ -3225,7 +3363,8 @@
             "Action cards": [
               {
                 "Name": "Shield of Omu",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P50"
               }
             ]
           }
@@ -3248,7 +3387,8 @@
             "Action cards": [
               {
                 "Name": "Divine Brew",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P51"
               }
             ]
           }
@@ -3289,6 +3429,7 @@
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -3306,6 +3447,7 @@
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -3317,7 +3459,8 @@
             "Action cards": [
               {
                 "Name": "The Guiding Light",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P52"
               }
             ]
           }
@@ -3328,7 +3471,8 @@
             "Action cards": [
               {
                 "Name": "Wrathful Decree",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P53"
               }
             ]
           }
@@ -3344,7 +3488,8 @@
             "Action cards": [
               {
                 "Name": "Ascension",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P54"
               }
             ]
           },
@@ -3358,7 +3503,8 @@
             "Action cards": [
               {
                 "Name": "Ascension",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P54"
               }
             ]
           }
@@ -3373,7 +3519,8 @@
             "Action cards": [
               {
                 "Name": "Caltrops",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P55"
               }
             ]
           },
@@ -3381,7 +3528,8 @@
             "Action cards": [
               {
                 "Name": "Ventriloquism",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P56"
               }
             ]
           }
@@ -3404,7 +3552,8 @@
             "Action cards": [
               {
                 "Name": "Gaining Advantage",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P57"
               }
             ]
           }
@@ -3435,6 +3584,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -3452,6 +3602,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -3463,7 +3614,8 @@
             "Action cards": [
               {
                 "Name": "Shadow Form",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P58"
               }
             ]
           }
@@ -3474,7 +3626,8 @@
             "Action cards": [
               {
                 "Name": "Shadowsteps",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P59"
               }
             ]
           }
@@ -3490,7 +3643,8 @@
             "Action cards": [
               {
                 "Name": "Entangled by Shadows",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P54"
               }
             ]
           },
@@ -3504,7 +3658,8 @@
             "Action cards": [
               {
                 "Name": "Entangled by Shadows",
-                "Level": 1
+                "Level": 1,
+                "CardId": "P54"
               }
             ]
           }
@@ -3519,7 +3674,8 @@
             "Action cards": [
               {
                 "Name": "Parry",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S17"
               }
             ]
           },
@@ -3527,7 +3683,8 @@
             "Action cards": [
               {
                 "Name": "Trip",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S18"
               }
             ]
           }
@@ -3565,6 +3722,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -3579,6 +3737,7 @@
               {
                 "Name": "Bash",
                 "Level": 2,
+                "CardId": "B14",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -3590,7 +3749,8 @@
             "Action cards": [
               {
                 "Name": "Follow-up",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S19"
               }
             ]
           },
@@ -3599,7 +3759,8 @@
             "Action cards": [
               {
                 "Name": "Into the Fray",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S20"
               }
             ]
           }
@@ -3614,7 +3775,8 @@
             "Action cards": [
               {
                 "Name": "Coordinated Advance",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S01"
               }
             ]
           },
@@ -3622,7 +3784,8 @@
             "Action cards": [
               {
                 "Name": "Flank Attack",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S02"
               }
             ]
           }
@@ -3650,11 +3813,13 @@
             "Action cards": [
               {
                 "Name": "Coordinated Attack",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S03"
               },
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -3663,11 +3828,13 @@
             "Action cards": [
               {
                 "Name": "Coordinated Attack",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S03"
               },
               {
                 "Name": "Bash",
                 "Level": 2,
+                "CardId": "B14",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -3676,11 +3843,13 @@
             "Action cards": [
               {
                 "Name": "Indomitable Presence",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S04"
               },
               {
                 "Name": "Command",
                 "Level": 3,
+                "CardId": "B11",
                 "ScaleAttribute": "CHA"
               }
             ]
@@ -3689,11 +3858,13 @@
             "Action cards": [
               {
                 "Name": "Indomitable Presence",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S04"
               },
               {
                 "Name": "Bash",
                 "Level": 2,
+                "CardId": "B14",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -3721,7 +3892,8 @@
             "Action cards": [
               {
                 "Name": "Shoot and Dash",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S21"
               }
             ]
           },
@@ -3729,7 +3901,8 @@
             "Action cards": [
               {
                 "Name": "Take Aim",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S22"
               }
             ]
           }
@@ -3766,7 +3939,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           },
@@ -3780,6 +3954,7 @@
               {
                 "Name": "Shoot",
                 "Level": 2,
+                "CardId": "B16",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -3791,7 +3966,8 @@
             "Action cards": [
               {
                 "Name": "Arrow Rain",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S23"
               }
             ]
           },
@@ -3800,7 +3976,8 @@
             "Action cards": [
               {
                 "Name": "Frost Shot",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S24"
               }
             ]
           }
@@ -3815,7 +3992,8 @@
             "Action cards": [
               {
                 "Name": "Sense Danger",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S25"
               }
             ]
           },
@@ -3823,7 +4001,8 @@
             "Action cards": [
               {
                 "Name": "Relieving Aura",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S26"
               }
             ]
           }
@@ -3839,6 +4018,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -3892,7 +4072,8 @@
             "Action cards": [
               {
                 "Name": "Nature's Revenge",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S27"
               }
             ]
           },
@@ -3901,7 +4082,8 @@
             "Action cards": [
               {
                 "Name": "Entangle",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S28"
               }
             ]
           }
@@ -3916,7 +4098,8 @@
             "Action cards": [
               {
                 "Name": "Focus Divinum",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S05"
               }
             ]
           },
@@ -3924,7 +4107,8 @@
             "Action cards": [
               {
                 "Name": "Energy Shield",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S06"
               }
             ]
           }
@@ -3940,6 +4124,7 @@
               {
                 "Name": "Endurance",
                 "Level": 3,
+                "CardId": "B02",
                 "ScaleAttribute": "STR"
               }
             ]
@@ -3951,7 +4136,8 @@
             "Action cards": [
               {
                 "Name": "Chain Lightning",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S07"
               }
             ]
           },
@@ -3960,7 +4146,8 @@
             "Action cards": [
               {
                 "Name": "Web of Minds",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S08"
               }
             ]
           }
@@ -3993,7 +4180,8 @@
             "Action cards": [
               {
                 "Name": "Ritual of Haste",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S09"
               }
             ]
           },
@@ -4001,7 +4189,8 @@
             "Action cards": [
               {
                 "Name": "Protective Gestures",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S10"
               }
             ]
           }
@@ -4034,7 +4223,8 @@
             "Action cards": [
               {
                 "Name": "Rain of Divinum",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S11"
               }
             ]
           },
@@ -4043,7 +4233,8 @@
             "Action cards": [
               {
                 "Name": "Healing Burst",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S12"
               }
             ]
           }
@@ -4058,7 +4249,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           }
@@ -4073,7 +4265,8 @@
             "Action cards": [
               {
                 "Name": "Swerve",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S13"
               }
             ]
           },
@@ -4081,7 +4274,8 @@
             "Action cards": [
               {
                 "Name": "Sucker Punch",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S14"
               }
             ]
           }
@@ -4097,6 +4291,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -4111,6 +4306,7 @@
               {
                 "Name": "Shoot",
                 "Level": 2,
+                "CardId": "B16",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -4125,6 +4321,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -4139,6 +4336,7 @@
               {
                 "Name": "Shoot",
                 "Level": 2,
+                "CardId": "B16",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -4150,7 +4348,8 @@
             "Action cards": [
               {
                 "Name": "Feint",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S15"
               }
             ]
           },
@@ -4159,7 +4358,8 @@
             "Action cards": [
               {
                 "Name": "Backstab",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S16"
               }
             ]
           }
@@ -4186,7 +4386,8 @@
             "Action cards": [
               {
                 "Name": "Shadow Jump",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S33"
               }
             ]
           },
@@ -4194,7 +4395,8 @@
             "Action cards": [
               {
                 "Name": "Veilkin",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S34"
               }
             ]
           }
@@ -4232,6 +4434,7 @@
               {
                 "Name": "Dodge",
                 "Level": 3,
+                "CardId": "B05",
                 "ScaleAttribute": "AGI"
               }
             ]
@@ -4243,7 +4446,8 @@
             "Action cards": [
               {
                 "Name": "Skilled Imitator",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S36"
               }
             ]
           },
@@ -4252,7 +4456,8 @@
             "Action cards": [
               {
                 "Name": "Shadow Blade",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S35"
               }
             ]
           }
@@ -4267,7 +4472,8 @@
             "Action cards": [
               {
                 "Name": "Academic Magic",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S29"
               }
             ]
           },
@@ -4275,7 +4481,8 @@
             "Action cards": [
               {
                 "Name": "Cognitive Enhancement",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S30"
               }
             ]
           }
@@ -4290,7 +4497,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           },
@@ -4303,7 +4511,8 @@
             "Action cards": [
               {
                 "Name": "Combat Insight",
-                "Level": 3
+                "Level": 3,
+                "CardId": "B08"
               }
             ]
           }
@@ -4335,7 +4544,8 @@
             "Action cards": [
               {
                 "Name": "Stratagem",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S32"
               }
             ],
             "HP": 2
@@ -4344,7 +4554,8 @@
             "Action cards": [
               {
                 "Name": "Rejuvenation",
-                "Level": 1
+                "Level": 1,
+                "CardId": "S31"
               }
             ],
             "HP": 2
