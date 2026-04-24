@@ -3536,93 +3536,125 @@
   "Action Cards": {
     "B00": {
       "Name": "Bash",
+      "Type": "Action",
+      "Category": "Offensive",
       "Level": 1,
       "ScaleAttribute": "STR",
       "DisplayName": "Bash"
     },
     "B01": {
       "Name": "Endurance",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 2,
       "ScaleAttribute": "STR",
       "DisplayName": "Endurance"
     },
     "B02": {
       "Name": "Endurance",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 3,
       "ScaleAttribute": "STR",
       "DisplayName": "Exceptional Endurance"
     },
     "B03": {
       "Name": "Endurance",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 1,
       "ScaleAttribute": "STR",
       "DisplayName": "Limited Endurance"
     },
     "B04": {
       "Name": "Dodge",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 2,
       "ScaleAttribute": "AGI",
       "DisplayName": "Dodge"
     },
     "B05": {
       "Name": "Dodge",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 3,
       "ScaleAttribute": "AGI",
       "DisplayName": "Nimble Dodge"
     },
     "B06": {
       "Name": "Dodge",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "Level": 1,
       "ScaleAttribute": "AGI",
       "DisplayName": "Clumsy Dodge"
     },
     "B07": {
       "Name": "Combat Insight",
+      "Type": "Reaction",
+      "Category": "Support",
       "Level": 2,
       "DisplayName": "Combat Insight"
     },
     "B08": {
       "Name": "Combat Insight",
+      "Type": "Reaction",
+      "Category": "Support",
       "Level": 3,
       "DisplayName": "Crucial Combat Insight"
     },
     "B10": {
       "Name": "Command",
+      "Type": "Action",
+      "Category": "Support",
       "Level": 2,
       "ScaleAttribute": "CHA",
       "DisplayName": "Command"
     },
     "B11": {
       "Name": "Command",
+      "Type": "Action",
+      "Category": "Support",
       "Level": 3,
       "ScaleAttribute": "CHA",
       "DisplayName": "Inspiring Command"
     },
     "B12": {
       "Name": "Command",
+      "Type": "Action",
+      "Category": "Support",
       "Level": 1,
       "ScaleAttribute": "CHA",
       "DisplayName": "Pitiful Command"
     },
     "B13": {
       "Name": "Bite",
+      "Type": "Action",
+      "Category": "Offensive",
       "ScaleAttribute": "STR",
       "Level": 1
     },
     "B14": {
       "Name": "Bash",
+      "Type": "Action",
+      "Category": "Offensive",
       "Level": 2,
       "ScaleAttribute": "STR",
       "DisplayName": "Mighty Bash"
     },
     "B15": {
       "Name": "Shoot",
+      "Type": "Action",
+      "Category": "Offensive",
       "Level": 1,
       "ScaleAttribute": "AGI",
       "DisplayName": "Shoot"
     },
     "B16": {
       "Name": "Shoot",
+      "Type": "Action",
+      "Category": "Offensive",
       "Level": 2,
       "ScaleAttribute": "AGI",
       "DisplayName": "Powerful Shot"
@@ -3641,6 +3673,8 @@
     },
     "P04": {
       "Name": "Counter",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "ScaleAttribute": "AGI",
       "Level": 1
     },
@@ -3674,6 +3708,8 @@
     },
     "P12": {
       "Name": "Ice Bolts",
+      "Type": "Action",
+      "Category": "Offensive",
       "ScaleAttribute": "AGI+DIV or INT+DIV",
       "Level": 1
     },
@@ -3703,6 +3739,8 @@
     },
     "P19": {
       "Name": "Furious Attacks",
+      "Type": "Action",
+      "Category": "Offensive",
       "ScaleAttribute": "STR+DIV",
       "Level": 1
     },
@@ -3728,7 +3766,6 @@
     },
     "P25": {
       "Name": "Spikes",
-      "ScaleAttribute": "INT+DIV",
       "Level": 1
     },
     "P26": {
@@ -3825,6 +3862,8 @@
     },
     "P50": {
       "Name": "Shield of Omu",
+      "Type": "Reaction",
+      "Category": "Defensive",
       "ScaleAttribute": "STR+DIV",
       "Level": 1
     },
@@ -3938,6 +3977,8 @@
     },
     "PP07": {
       "Name": "Rage",
+      "Type": "Reaction",
+      "Category": "Support",
       "Level": 1
     },
     "PP08": {
@@ -3950,6 +3991,8 @@
     },
     "PP10": {
       "Name": "Unleash Divinum",
+      "Type": "Action",
+      "Category": "Offensive",
       "ScaleAttribute": "STR",
       "Level": 1
     },
@@ -3975,6 +4018,8 @@
     },
     "PP16": {
       "Name": "Taunt",
+      "Type": "Reaction",
+      "Category": "Support",
       "Level": 1
     },
     "PP17": {
@@ -4011,6 +4056,9 @@
     },
     "PP25": {
       "Name": "Divine Justice",
+      "Type": "Reaction",
+      "Category": "Offensive",
+      "ScaleAttribute": "INT+DIV",
       "Level": 1
     },
     "PP26": {
