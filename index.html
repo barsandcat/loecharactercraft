@@ -1368,7 +1368,7 @@
 
         const statGrid = document.createElement("div");
         statGrid.className = "stat-grid";
-        statGrid.appendChild(createStatCard("MOV", String(stats.mov), 10));
+        statGrid.appendChild(createStatCard("MOB", String(stats.mob), 10));
         statGrid.appendChild(createStatCard("HP", String(stats.hp), 16));
         statGrid.appendChild(createStatCard("DIV", stats.divDie || "-"));
         statGrid.appendChild(createStatCard("Brill", String(stats.brill)));
@@ -2074,7 +2074,7 @@
       function collectCharacterStats() {
         const stats = {
           attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
-          mov: 0,
+          mob: 0,
           hp: 0,
           divDie: null,
           brill: 0,
@@ -2145,7 +2145,7 @@
           });
         }
 
-        stats.mov = race.MOB || 0;
+        stats.mob = race.MOB || 0;
         stats.hp = race.HP || 0;
         stats.divDie = race.DIV || null;
         incrementCountMap(stats.keywordCounts, race.Keywords || []);
@@ -2160,7 +2160,7 @@
           });
         });
 
-        stats.mov += entry.MOB || 0;
+        stats.mob += entry.MOB || 0;
         stats.hp += entry.HP || 0;
         stats.brill += entry.Brill || 0;
         incrementCountMap(stats.keywordCounts, entry.Keywords || []);
@@ -2223,7 +2223,7 @@
           parts.push(entry.HP + " HP");
         }
         if (entry.MOB) {
-          parts.push(entry.MOB + " MOV");
+          parts.push(entry.MOB + " MOB");
         }
         if (entry.Brill) {
           parts.push(entry.Brill + " Brill");
@@ -2256,7 +2256,7 @@
         if (keywords) {
           extras.push(keywords);
         }
-        extras.push("MOV: " + (race.MOB || 0));
+        extras.push("MOB: " + (race.MOB || 0));
         extras.push("HP: " + (race.HP || 0));
         extras.push("DIV: " + (race.DIV || "-"));
         return extras.join(", ");
