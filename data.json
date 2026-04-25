@@ -3542,7 +3542,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Level": 1,
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "DisplayName": "Bash"
     },
     "B01": {
@@ -3550,7 +3550,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 2,
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "DisplayName": "Endurance"
     },
     "B02": {
@@ -3558,7 +3558,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 3,
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "DisplayName": "Exceptional Endurance"
     },
     "B03": {
@@ -3566,7 +3566,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 1,
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "DisplayName": "Limited Endurance"
     },
     "B04": {
@@ -3574,7 +3574,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 2,
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "DisplayName": "Dodge"
     },
     "B05": {
@@ -3582,7 +3582,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 3,
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "DisplayName": "Nimble Dodge"
     },
     "B06": {
@@ -3590,7 +3590,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 1,
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "DisplayName": "Clumsy Dodge"
     },
     "B07": {
@@ -3612,7 +3612,7 @@
       "Type": "Action",
       "Category": "Support",
       "Level": 2,
-      "ScaleAttribute": "Roll CHA",
+      "CardDescription": "Roll CHA",
       "DisplayName": "Command"
     },
     "B11": {
@@ -3620,7 +3620,7 @@
       "Type": "Action",
       "Category": "Support",
       "Level": 3,
-      "ScaleAttribute": "Roll CHA",
+      "CardDescription": "Roll CHA",
       "DisplayName": "Inspiring Command"
     },
     "B12": {
@@ -3628,14 +3628,14 @@
       "Type": "Action",
       "Category": "Support",
       "Level": 1,
-      "ScaleAttribute": "Roll CHA",
+      "CardDescription": "Roll CHA",
       "DisplayName": "Pitiful Command"
     },
     "B13": {
       "Name": "Bite",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "Level": 1
     },
     "B14": {
@@ -3643,7 +3643,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Level": 2,
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "DisplayName": "Mighty Bash"
     },
     "B15": {
@@ -3651,7 +3651,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Level": 1,
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "DisplayName": "Shoot"
     },
     "B16": {
@@ -3659,7 +3659,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Level": 2,
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "DisplayName": "Powerful Shot"
     },
     "P01": {
@@ -3678,14 +3678,14 @@
       "Name": "Counter",
       "Type": "Reaction",
       "Category": "Defensive",
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "Level": 1
     },
     "P05": {
       "Name": "Battle Prayer",
       "Type": "Action",
       "Category": "Support",
-      "ScaleAttribute": "Roll CHA+DIV",
+      "CardDescription": "Roll CHA+DIV",
       "Level": 1
     },
     "P06": {
@@ -3716,7 +3716,7 @@
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll AGI+DIV or INT+DIV",
+      "CardDescription": "Roll AGI+DIV or INT+DIV",
       "Level": 1
     },
     "P13": {
@@ -3747,7 +3747,7 @@
       "Name": "Furious Attacks",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll STR+DIV",
+      "CardDescription": "Roll STR+DIV",
       "Level": 1
     },
     "P20": {
@@ -3842,7 +3842,7 @@
       "Name": "Poisoned Darts",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll AGI",
+      "CardDescription": "Roll AGI",
       "Level": 1
     },
     "P44": {
@@ -3873,7 +3873,7 @@
       "Name": "Shield of Omu",
       "Type": "Reaction",
       "Category": "Defensive",
-      "ScaleAttribute": "Roll STR+DIV",
+      "CardDescription": "Roll STR+DIV",
       "Level": 1
     },
     "P51": {
@@ -3988,7 +3988,7 @@
       "Name": "Rage",
       "Type": "Reaction",
       "Category": "Support",
-      "ScaleAttribute": "Add STR to damage",
+      "CardDescription": "Add STR to damage",
       "Level": 1
     },
     "PP08": {
@@ -4003,7 +4003,7 @@
       "Name": "Unleash Divinum",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll STR",
+      "CardDescription": "Roll STR",
       "Level": 1
     },
     "PP11": {
@@ -4068,7 +4068,7 @@
       "Name": "Divine Justice",
       "Type": "Reaction",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll INT+DIV",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "PP26": {
@@ -4143,7 +4143,7 @@
       "Name": "Chain Lightning",
       "Type": "Action",
       "Category": "Offensive",
-      "ScaleAttribute": "Roll INT+DIV",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "S08": {

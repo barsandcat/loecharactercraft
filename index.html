@@ -2274,8 +2274,8 @@
           return "";
         }
         const displayName = card.DisplayName || card.Name;
-        const scale = card.ScaleAttribute ? " (" + card.ScaleAttribute + ")" : "";
-        return displayName + scale;
+        const desc = card.CardDescription ? " (" + card.CardDescription + ")" : "";
+        return displayName + desc;
       }
 
       function describeRaceOption(race) {
