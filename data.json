@@ -131,8 +131,10 @@
     {
       "Name": "Human",
       "Keywords": [
-        "Any skill",
         "Human"
+      ],
+      "Skills": [
+        "Any skill"
       ],
       "Attributes": [
         {
@@ -1385,11 +1387,11 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Athletics"
-            ],
             "Action cards": [
               "P21"
+            ],
+            "Skills": [
+              "Athletics"
             ]
           }
         ],
@@ -1400,16 +1402,13 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Leadership"
             ]
           }
         ],
         "5": [
           {
-            "Keywords": [
-              "Resilience"
-            ],
             "Attributes": [
               {
                 "STR": 1
@@ -1417,12 +1416,12 @@
             ],
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Resilience"
             ]
           },
           {
-            "Keywords": [
-              "Resilience"
-            ],
             "Attributes": [
               {
                 "CHA": 1
@@ -1430,6 +1429,9 @@
             ],
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Resilience"
             ]
           }
         ],
@@ -1501,7 +1503,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           },
@@ -1511,7 +1513,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           }
@@ -1531,7 +1533,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Charm"
             ]
           }
@@ -1562,19 +1564,19 @@
         ],
         "6": [
           {
-            "Keywords": [
+            "DIV": "Upgrade",
+            "Skills": [
               "Performer"
-            ],
-            "DIV": "Upgrade"
+            ]
           },
           {
-            "Keywords": [
-              "Performer"
-            ],
             "Attributes": [
               {
                 "INT": 1
               }
+            ],
+            "Skills": [
+              "Performer"
             ]
           }
         ],
@@ -1637,41 +1639,38 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Engineering"
-            ],
             "Action cards": [
               "P63"
+            ],
+            "Skills": [
+              "Engineering"
             ]
           }
         ],
         "4": [
           {
-            "Keywords": [
-              "Artistry"
-            ],
             "Attributes": [
               {
                 "AGI": 1
               }
+            ],
+            "Skills": [
+              "Artistry"
             ]
           },
           {
-            "Keywords": [
-              "Artistry"
-            ],
             "Attributes": [
               {
                 "INT": 1
               }
+            ],
+            "Skills": [
+              "Artistry"
             ]
           }
         ],
         "5": [
           {
-            "Keywords": [
-              "Vigilance"
-            ],
             "Attributes": [
               {
                 "AGI": 1
@@ -1679,12 +1678,12 @@
             ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Vigilance"
             ]
           },
           {
-            "Keywords": [
-              "Vigilance"
-            ],
             "Attributes": [
               {
                 "INT": 1
@@ -1692,6 +1691,9 @@
             ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Vigilance"
             ]
           }
         ],
@@ -1760,11 +1762,11 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Alchemy"
-            ],
             "Action cards": [
               "P27"
+            ],
+            "Skills": [
+              "Alchemy"
             ]
           }
         ],
@@ -1775,7 +1777,7 @@
                 "STR": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Resilience"
             ]
           }
@@ -1787,11 +1789,11 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
-              "Leadership"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Leadership"
             ]
           },
           {
@@ -1800,11 +1802,11 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
-              "Leadership"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Leadership"
             ]
           }
         ],
@@ -1882,11 +1884,11 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
-              "Investigation"
-            ],
             "Action cards": [
               "P45"
+            ],
+            "Skills": [
+              "Investigation"
             ]
           }
         ],
@@ -1897,16 +1899,13 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           }
         ],
         "5": [
           {
-            "Keywords": [
-              "Stealth"
-            ],
             "Attributes": [
               {
                 "INT": 1
@@ -1915,12 +1914,12 @@
             "HP": 2,
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           },
           {
-            "Keywords": [
-              "Stealth"
-            ],
             "Attributes": [
               {
                 "CHA": 1
@@ -1929,12 +1928,12 @@
             "HP": 2,
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           },
           {
-            "Keywords": [
-              "Pathfinding"
-            ],
             "Attributes": [
               {
                 "INT": 1
@@ -1943,12 +1942,12 @@
             "HP": 2,
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Pathfinding"
             ]
           },
           {
-            "Keywords": [
-              "Pathfinding"
-            ],
             "Attributes": [
               {
                 "CHA": 1
@@ -1957,6 +1956,9 @@
             "HP": 2,
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Pathfinding"
             ]
           }
         ],
@@ -2022,7 +2024,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Athletics"
             ]
           }
@@ -2042,7 +2044,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Charm"
             ]
           },
@@ -2052,7 +2054,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Charm"
             ]
           }
@@ -2106,19 +2108,19 @@
         ],
         "8": [
           {
-            "Keywords": [
-              "Survival"
-            ],
             "Action cards": [
               "P48"
+            ],
+            "Skills": [
+              "Survival"
             ]
           },
           {
-            "Keywords": [
-              "Animal Handling"
-            ],
             "Action cards": [
               "P48"
+            ],
+            "Skills": [
+              "Animal Handling"
             ]
           }
         ]
@@ -2151,11 +2153,11 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Survival"
-            ],
             "Action cards": [
               "P33"
+            ],
+            "Skills": [
+              "Survival"
             ]
           }
         ],
@@ -2166,7 +2168,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Pathfinding"
             ]
           }
@@ -2178,11 +2180,11 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
-              "Stealth"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           },
           {
@@ -2191,11 +2193,11 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
-              "Stealth"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           }
         ],
@@ -2281,7 +2283,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Survival"
             ]
           }
@@ -2294,11 +2296,11 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
-              "Alchemy"
-            ],
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Alchemy"
             ]
           },
           {
@@ -2308,18 +2310,18 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
-              "Alchemy"
-            ],
             "Action cards": [
               "B02"
+            ],
+            "Skills": [
+              "Alchemy"
             ]
           }
         ],
         "6": [
           {
             "DIV": "Upgrade",
-            "Keywords": [
+            "Skills": [
               "Arcana"
             ]
           },
@@ -2329,7 +2331,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Arcana"
             ]
           }
@@ -2431,7 +2433,7 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
+            "Skills": [
               "Lore"
             ]
           },
@@ -2442,7 +2444,7 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
+            "Skills": [
               "Lore"
             ]
           }
@@ -2455,7 +2457,7 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           },
@@ -2466,18 +2468,18 @@
               }
             ],
             "HP": 2,
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           }
         ],
         "6": [
           {
-            "Keywords": [
-              "Artistry"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Artistry"
             ]
           }
         ],
@@ -2525,7 +2527,7 @@
                 "STR": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Vigilance"
             ]
           }
@@ -2545,7 +2547,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           },
@@ -2555,7 +2557,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Diplomacy"
             ]
           }
@@ -2588,10 +2590,10 @@
         ],
         "6": [
           {
-            "Keywords": [
+            "DIV": "Upgrade",
+            "Skills": [
               "Lore"
-            ],
-            "DIV": "Upgrade"
+            ]
           }
         ],
         "7": [
@@ -2657,11 +2659,11 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Arcana"
-            ],
             "Action cards": [
               "P51"
+            ],
+            "Skills": [
+              "Arcana"
             ]
           }
         ],
@@ -2672,7 +2674,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Medicine"
             ]
           },
@@ -2682,7 +2684,7 @@
                 "STR": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Medicine"
             ]
           }
@@ -2694,11 +2696,11 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
-              "Diplomacy"
-            ],
             "Action cards": [
               "B11"
+            ],
+            "Skills": [
+              "Diplomacy"
             ]
           },
           {
@@ -2707,11 +2709,11 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
-              "Diplomacy"
-            ],
             "Action cards": [
               "B11"
+            ],
+            "Skills": [
+              "Diplomacy"
             ]
           }
         ],
@@ -2784,11 +2786,11 @@
         ],
         "3": [
           {
-            "Keywords": [
-              "Vigilance"
-            ],
             "Action cards": [
               "P57"
+            ],
+            "Skills": [
+              "Vigilance"
             ]
           }
         ],
@@ -2799,7 +2801,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Survival"
             ]
           }
@@ -2811,11 +2813,11 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
-              "Stealth"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           },
           {
@@ -2824,11 +2826,11 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
-              "Stealth"
-            ],
             "Action cards": [
               "B05"
+            ],
+            "Skills": [
+              "Stealth"
             ]
           }
         ],
@@ -2896,7 +2898,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Intimidation"
             ]
           },
@@ -2906,7 +2908,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Intimidation"
             ]
           }
@@ -3015,7 +3017,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Leadership"
             ]
           }
@@ -3044,7 +3046,7 @@
                 "STR": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Athletics"
             ]
           },
@@ -3054,7 +3056,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Athletics"
             ]
           }
@@ -3131,7 +3133,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Medicine"
             ]
           },
@@ -3141,7 +3143,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Animal Handling"
             ]
           },
@@ -3151,7 +3153,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Medicine"
             ]
           },
@@ -3161,7 +3163,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Animal Handling"
             ]
           }
@@ -3225,19 +3227,19 @@
         ],
         "4": [
           {
-            "Keywords": [
+            "DIV": "Upgrade",
+            "Skills": [
               "Arcana"
-            ],
-            "DIV": "Upgrade"
+            ]
           },
           {
-            "Keywords": [
-              "Arcana"
-            ],
             "Attributes": [
               {
                 "INT": 1
               }
+            ],
+            "Skills": [
+              "Arcana"
             ]
           }
         ]
@@ -3265,7 +3267,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Alchemy"
             ]
           },
@@ -3275,7 +3277,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Alchemy"
             ]
           }
@@ -3386,7 +3388,7 @@
                 "AGI": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Sleight of Hand"
             ]
           }
@@ -3415,7 +3417,7 @@
                 "CHA": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Deception"
             ]
           },
@@ -3425,7 +3427,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Deception"
             ]
           }
@@ -3502,7 +3504,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Lore"
             ]
           },
@@ -3512,7 +3514,7 @@
                 "INT": 1
               }
             ],
-            "Keywords": [
+            "Skills": [
               "Investigation"
             ]
           }

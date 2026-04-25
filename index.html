@@ -1389,6 +1389,11 @@
           container.appendChild(createListSection("Keywords", [keywordSummary]));
         }
 
+        const skillSummary = formatSkillSummary(stats.skillCounts);
+        if (skillSummary.length > 0) {
+          container.appendChild(createSkillsSection(skillSummary));
+        }
+
         const itemLines = Array.from(stats.items.values()).map(
           (item) => item.Name + " (" + item.Type + ")"
         );
@@ -2090,6 +2095,7 @@
           divDie: null,
           brill: 0,
           keywordCounts: new Map(),
+          skillCounts: new Map(),
           items: new Map(),
           actions: new Map(),
           freeUpgrades: 0,
@@ -2113,13 +2119,22 @@
           applyEntry(stats, state.selectedPath);
         }
 
-        getSelectedAdvancementEntries().forEach((entry) => applyEntry(stats, entry));
+        getSelectedAdvancementEntries().forEach((entry) => {
+          applyEntry(stats, entry);
+          addSkills(stats, entry.Skills || []);
+        });
         return stats;
       }
 
       function addKeywords(stats, values) {
         values.forEach((value) => {
           stats.keywordCounts.set(value, (stats.keywordCounts.get(value) || 0) + 1);
+        });
+      }
+
+      function addSkills(stats, values) {
+        values.forEach((value) => {
+          stats.skillCounts.set(value, (stats.skillCounts.get(value) || 0) + 1);
         });
       }
 
@@ -2156,6 +2171,7 @@
         stats.hp = race.HP || 0;
         stats.divDie = race.DIV || null;
         addKeywords(stats, race.Keywords || []);
+        addSkills(stats, race.Skills || []);
         (race["Action cards"] || []).forEach((action) => addAction(stats, action));
       }
 
@@ -2243,6 +2259,7 @@
         }
 
         parts.push(...(entry.Keywords || []));
+        parts.push(...(entry.Skills || []));
 
         (entry.Items || []).forEach((item) => {
           parts.push(item.Name + " (" + item.Type + ")");
@@ -2364,6 +2381,66 @@
             return count > 1 ? keyword + " x" + count : keyword;
           })
           .join(", ");
+      }
+
+      function formatSkillSummary(skillCounts) {
+        if (!skillCounts.size) {
+          return [];
+        }
+
+        return Array.from(skillCounts.keys())
+          .sort((a, b) => a.localeCompare(b))
+          .slice(0, 3)
+          .map((skill) => {
+            const count = skillCounts.get(skill);
+            return count > 1 ? skill + " x" + count : skill;
+          });
+      }
+
+      function createSkillsSection(skillItems) {
+        const section = document.createElement("section");
+        section.className = "summary-card";
+
+        const headerRow = document.createElement("div");
+        headerRow.style.display = "flex";
+        headerRow.style.justifyContent = "space-between";
+        headerRow.style.alignItems = "center";
+        headerRow.style.marginBottom = "8px";
+        headerRow.style.paddingBottom = "5px";
+        headerRow.style.borderBottom = "1px solid rgba(201, 168, 64, 0.22)";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Skills";
+        heading.style.margin = "0";
+        heading.style.fontFamily = "'Cinzel', serif";
+        heading.style.fontSize = "0.72rem";
+        heading.style.letterSpacing = "0.2em";
+        heading.style.textTransform = "uppercase";
+        heading.style.color = "var(--gold-text)";
+        heading.style.fontWeight = "600";
+
+        const caption = document.createElement("span");
+        caption.textContent = "max 3";
+        caption.style.fontFamily = "'EB Garamond', serif";
+        caption.style.fontSize = "0.75rem";
+        caption.style.color = "var(--muted)";
+        caption.style.fontStyle = "italic";
+
+        headerRow.appendChild(heading);
+        headerRow.appendChild(caption);
+        section.appendChild(headerRow);
+
+        const list = document.createElement("ul");
+        list.className = "list-block";
+        skillItems.forEach((skill) => {
+          const li = document.createElement("li");
+          li.className = "list-item";
+          li.textContent = skill;
+          list.appendChild(li);
+        });
+
+        section.appendChild(list);
+        return section;
       }
 
 
