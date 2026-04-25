@@ -1389,9 +1389,9 @@
           container.appendChild(createListSection("Keywords", [keywordSummary]));
         }
 
-        const skillSummary = formatSkillSummary(stats.skillCounts);
-        if (skillSummary.length > 0) {
-          container.appendChild(createSkillsSection(skillSummary));
+        const skillSummary = formatKeywordSummary(stats.skillCounts);
+        if (skillSummary) {
+          container.appendChild(createListSection("Skills (max 3)", [skillSummary]));
         }
 
         const itemLines = Array.from(stats.items.values()).map(
