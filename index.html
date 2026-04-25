@@ -920,7 +920,7 @@
         data: null,
         trees: new Map(),
         selectedRace: null,
-        selectedAttr: null,
+        selectedAttributeSet: null,
         selectedOrigin: null,
         selectedProf: null,
         selectedPath: null,
@@ -1016,14 +1016,13 @@
 
       function resetBuild() {
         state.selectedRace = null;
-        state.selectedAttr = null;
+        state.selectedAttributeSet = null;
         state.selectedOrigin = null;
         state.selectedProf = null;
         state.selectedPath = null;
         state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
         closeSelector();
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function randomBuild() {
@@ -1032,7 +1031,7 @@
         const race = pick(state.data.Races);
         state.selectedRace = race;
         const attrs = race.Attributes || [];
-        state.selectedAttr = attrs.length ? pick(attrs) : null;
+        state.selectedAttributeSet = attrs.length ? pick(attrs) : null;
 
         state.selectedOrigin = pick(state.data.Origins);
 
@@ -1041,13 +1040,12 @@
         const paths = prof.Paths || [];
         state.selectedPath = paths.length ? pick(paths) : null;
 
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function serializeState() {
-        const attrIndex = state.selectedRace && state.selectedAttr
-          ? (state.selectedRace.Attributes || []).indexOf(state.selectedAttr)
+        const attrIndex = state.selectedRace && state.selectedAttributeSet
+          ? (state.selectedRace.Attributes || []).indexOf(state.selectedAttributeSet)
           : null;
 
         const lu = state.levelUps.map((slot) =>
@@ -1092,6 +1090,11 @@
         history.replaceState(null, "", encoded ? "#" + encoded : location.pathname + location.search);
       }
 
+      function commitSelection() {
+        pushStateToUrl();
+        render();
+      }
+
       function restoreStateFromUrl() {
         const hash = location.hash.slice(1);
         if (!hash) {
@@ -1107,7 +1110,7 @@
         if (compact.r) {
           state.selectedRace = state.data.Races.find((r) => r.Name === compact.r) || null;
           if (state.selectedRace && compact.ai !== null) {
-            state.selectedAttr = (state.selectedRace.Attributes || [])[compact.ai] || null;
+            state.selectedAttributeSet = (state.selectedRace.Attributes || [])[compact.ai] || null;
           }
         }
 
@@ -1195,19 +1198,19 @@
 
         container.appendChild(singleChoiceGrid({
           label: "Attributes",
-          main: state.selectedAttr ? formatAttributeSummary(state.selectedAttr) : "Choose attributes",
+          main: state.selectedAttributeSet ? formatAttributeSummary(state.selectedAttributeSet) : "Choose attributes",
           detail: !state.selectedRace
             ? "Pick a race first."
             : attrOptions.length + " available spread" + (attrOptions.length === 1 ? "" : "s"),
-          complete: Boolean(state.selectedAttr),
-          empty: !state.selectedAttr,
+          complete: Boolean(state.selectedAttributeSet),
+          empty: !state.selectedAttributeSet,
           disabled: !state.selectedRace || attrOptions.length <= 1,
           onClick: () => openSelector({
             title: "Choose Attributes",
             options: attrOptions,
             getOptionContent: describeAttributeOption,
             onSelect: selectAttr,
-            isSelected: (option) => state.selectedAttr === option,
+            isSelected: (option) => state.selectedAttributeSet === option,
           }),
         }));
 
@@ -1263,56 +1266,56 @@
           }),
         }));
 
-        levelMeta.forEach((meta) => {
+        levelMeta.forEach((slotMeta) => {
           container.appendChild(dualChoiceGrid({
             firstButton: {
               label: "Tree",
-              main: meta.selectedTree
-                ? meta.selectedTree.treeName + " L" + meta.selectedTree.level
+              main: slotMeta.selectedTree
+                ? slotMeta.selectedTree.treeName + " L" + slotMeta.selectedTree.level
                 : "Choose level up",
-              detail: !meta.unlocked
+              detail: !slotMeta.unlocked
                 ? "Locked for now."
-                : meta.treeOptions.length + " available option" + (meta.treeOptions.length === 1 ? "" : "s"),
-              disabled: !meta.unlocked || meta.treeOptions.length === 0,
-              accent: meta.selectedTree !== null,
-              empty: meta.selectedTree === null,
+                : slotMeta.treeOptions.length + " available option" + (slotMeta.treeOptions.length === 1 ? "" : "s"),
+              disabled: !slotMeta.unlocked || slotMeta.treeOptions.length === 0,
+              accent: slotMeta.selectedTree !== null,
+              empty: slotMeta.selectedTree === null,
               onClick: () =>
                 openSelector({
-                  kicker: "Level Up " + meta.slotNumber,
+                  kicker: "Level Up " + slotMeta.slotNumber,
                   title: "Choose Level-Up Tree",
                   description: "Select which tree level to spend this slot on.",
-                  options: meta.treeOptions,
+                  options: slotMeta.treeOptions,
                   getOptionContent: describeTreeLevelOption,
-                  onSelect: (option) => selectLevelUpTree(meta.slotIndex, option),
+                  onSelect: (option) => selectLevelUpTree(slotMeta.slotIndex, option),
                   isSelected: (option) =>
                     Boolean(
-                      meta.selectedTree &&
-                        meta.selectedTree.treeName === option.treeName &&
-                        meta.selectedTree.level === option.level
+                      slotMeta.selectedTree &&
+                        slotMeta.selectedTree.treeName === option.treeName &&
+                        slotMeta.selectedTree.level === option.level
                     ),
                 }),
             },
             secondButton: {
               label: "Reward",
-              main: meta.selectedVersion
-                ? summarizeEntry(meta.selectedVersion.entry) || "No changes"
+              main: slotMeta.selectedVersion
+                ? summarizeEntry(slotMeta.selectedVersion.entry) || "No changes"
                 : "Choose reward",
-              detail: !meta.selectedTree
+              detail: !slotMeta.selectedTree
                 ? "Choose a tree level first."
-                : meta.versionOptions.length + " available reward" + (meta.versionOptions.length === 1 ? "" : "s"),
-              disabled: !meta.selectedTree || meta.versionOptions.length <= 1,
-              accent: meta.selectedVersion !== null,
-              empty: meta.selectedVersion === null,
+                : slotMeta.versionOptions.length + " available reward" + (slotMeta.versionOptions.length === 1 ? "" : "s"),
+              disabled: !slotMeta.selectedTree || slotMeta.versionOptions.length <= 1,
+              accent: slotMeta.selectedVersion !== null,
+              empty: slotMeta.selectedVersion === null,
               onClick: () =>
                 openSelector({
-                  kicker: "Level Up " + meta.slotNumber,
+                  kicker: "Level Up " + slotMeta.slotNumber,
                   title: "Choose Reward",
                   description: "Pick the reward version for this tree level.",
-                  options: meta.versionOptions,
+                  options: slotMeta.versionOptions,
                   getOptionContent: describeVersionOption,
-                  onSelect: (option) => selectLevelUpVersion(meta.slotIndex, option),
+                  onSelect: (option) => selectLevelUpVersion(slotMeta.slotIndex, option),
                   isSelected: (option) =>
-                    Boolean(meta.selectedVersion && meta.selectedVersion.index === option.index),
+                    Boolean(slotMeta.selectedVersion && slotMeta.selectedVersion.index === option.index),
                 }),
             },
           }));
@@ -1771,27 +1774,24 @@
         state.selectedRace = race;
 
         if (raceChanged) {
-          state.selectedAttr = null;
+          state.selectedAttributeSet = null;
           const attrOptions = race.Attributes || [];
           if (attrOptions.length === 1) {
-            state.selectedAttr = attrOptions[0];
+            state.selectedAttributeSet = attrOptions[0];
           }
         }
 
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function selectAttr(attr) {
-        state.selectedAttr = attr;
-        pushStateToUrl();
-        render();
+        state.selectedAttributeSet = attr;
+        commitSelection();
       }
 
       function selectOrigin(origin) {
         state.selectedOrigin = origin;
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function selectProfession(profession) {
@@ -1807,14 +1807,12 @@
           state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
         }
 
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function selectPath(path) {
         state.selectedPath = path;
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function selectLevelUpTree(slotIndex, treeLevelOption) {
@@ -1822,18 +1820,16 @@
         slot.treeName = treeLevelOption.treeName;
         slot.level = treeLevelOption.level;
         slot.versionIndex = null;
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function selectLevelUpVersion(slotIndex, versionOption) {
         state.levelUps[slotIndex].versionIndex = versionOption.index;
-        pushStateToUrl();
-        render();
+        commitSelection();
       }
 
       function refreshLevelUpStates() {
-        const meta = [];
+        const levelUpMeta = [];
         const priorSelectedOptions = [];
         let unlocked = state.selectedProf !== null;
 
@@ -1887,7 +1883,7 @@
             priorSelectedOptions.push(selectedTree);
           }
 
-          meta.push({
+          levelUpMeta.push({
             slotIndex,
             slotNumber,
             unlocked,
@@ -1901,7 +1897,7 @@
           unlocked = unlocked && isComplete;
         }
 
-        return meta;
+        return levelUpMeta;
       }
 
       function getAvailableLevelUpOptions(slotIndex, priorSelectedOptions) {
@@ -2090,17 +2086,17 @@
         };
 
         if (state.selectedRace) {
-          applyRace(stats, state.selectedRace, state.selectedAttr);
+          applyRace(stats, state.selectedRace, state.selectedAttributeSet);
         }
 
         if (state.selectedOrigin) {
-          addKeywords(stats, state.selectedOrigin.Keywords || []);
+          incrementCountMap(stats.keywordCounts, state.selectedOrigin.Keywords || []);
           (state.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
           stats.brill += state.selectedOrigin.Brill || 0;
         }
 
         if (state.selectedProf) {
-          addKeywords(stats, state.selectedProf.Keywords || []);
+          incrementCountMap(stats.keywordCounts, state.selectedProf.Keywords || []);
         }
 
         if (state.selectedPath) {
@@ -2109,20 +2105,14 @@
 
         getSelectedAdvancementEntries().forEach((entry) => {
           applyEntry(stats, entry);
-          addSkills(stats, entry.Skills || []);
+          incrementCountMap(stats.skillCounts, entry.Skills || []);
         });
         return stats;
       }
 
-      function addKeywords(stats, values) {
+      function incrementCountMap(map, values) {
         values.forEach((value) => {
-          stats.keywordCounts.set(value, (stats.keywordCounts.get(value) || 0) + 1);
-        });
-      }
-
-      function addSkills(stats, values) {
-        values.forEach((value) => {
-          stats.skillCounts.set(value, (stats.skillCounts.get(value) || 0) + 1);
+          map.set(value, (map.get(value) || 0) + 1);
         });
       }
 
@@ -2158,8 +2148,8 @@
         stats.mov = race.MOB || 0;
         stats.hp = race.HP || 0;
         stats.divDie = race.DIV || null;
-        addKeywords(stats, race.Keywords || []);
-        addSkills(stats, race.Skills || []);
+        incrementCountMap(stats.keywordCounts, race.Keywords || []);
+        incrementCountMap(stats.skillCounts, race.Skills || []);
         (race["Action cards"] || []).forEach((action) => addAction(stats, action));
       }
 
@@ -2173,7 +2163,7 @@
         stats.mov += entry.MOB || 0;
         stats.hp += entry.HP || 0;
         stats.brill += entry.Brill || 0;
-        addKeywords(stats, entry.Keywords || []);
+        incrementCountMap(stats.keywordCounts, entry.Keywords || []);
 
         const divValue = entry.DIV;
         if (divValue === "Upgrade") {
@@ -2365,20 +2355,6 @@
             return count > 1 ? keyword + " x" + count : keyword;
           })
           .join(", ");
-      }
-
-      function formatSkillSummary(skillCounts) {
-        if (!skillCounts.size) {
-          return [];
-        }
-
-        return Array.from(skillCounts.keys())
-          .sort((a, b) => a.localeCompare(b))
-          .slice(0, 3)
-          .map((skill) => {
-            const count = skillCounts.get(skill);
-            return count > 1 ? skill + " x" + count : skill;
-          });
       }
 
       function getFilledLevelCount() {
