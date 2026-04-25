@@ -58,9 +58,6 @@
       background: linear-gradient(90deg, #6A4C10 0%, #C9A840 25%, #EDD878 50%, #C9A840 75%, #6A4C10 100%);
       z-index: 200;
       pointer-events: none;
-      border-radius: 0;
-      filter: none;
-      width: 100%;
     }
     body::before { top: 0; }
     body::after  { bottom: 0; }
@@ -210,8 +207,6 @@
       font-weight: 600;
       margin: 0;
     }
-
-    .panel-count { display: none; }
 
     .panel-body {
       padding: 10px 12px 16px;
@@ -829,7 +824,6 @@
       .selector-sheet {
         width: 100%;
         height: auto;
-        max-height: 100%;
         max-height: min(100dvh, 100%);
         padding: 14px;
         border-left: 0;
@@ -868,7 +862,6 @@
       <section class="panel" aria-labelledby="controlsTitle">
         <div class="panel-header">
           <h2 id="controlsTitle">Build Steps</h2>
-          <div id="controlsCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
           <div id="controlsPanel" class="stack"></div>
@@ -878,7 +871,6 @@
       <section class="panel" aria-labelledby="summaryTitle">
         <div class="panel-header">
           <h2 id="summaryTitle">Character Board</h2>
-          <div id="summaryCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
           <div id="summaryPanel" class="summary-grid"></div>
@@ -888,7 +880,6 @@
       <section class="panel" aria-labelledby="treesTitle">
         <div class="panel-header">
           <h2 id="treesTitle">Advancement Trees</h2>
-          <div id="treesCount" class="panel-count">0</div>
         </div>
         <div class="panel-body">
           <div id="treesPanel" class="tree-stack"></div>
@@ -986,9 +977,6 @@
         ui.copyLinkButton = document.getElementById("copyLinkButton");
         ui.resetButton = document.getElementById("resetButton");
         ui.errorBanner = document.getElementById("errorBanner");
-        ui.controlsCount = document.getElementById("controlsCount");
-        ui.summaryCount = document.getElementById("summaryCount");
-        ui.treesCount = document.getElementById("treesCount");
         ui.controlsPanel = document.getElementById("controlsPanel");
         ui.summaryPanel = document.getElementById("summaryPanel");
         ui.treesPanel = document.getElementById("treesPanel");
@@ -2266,7 +2254,7 @@
         });
 
         (entry["Action cards"] || []).forEach((action) => {
-          parts.push(formatActionCardSummary(action));
+          parts.push(formatActionCardLabel(action));
         });
 
         return parts.join(", ");
@@ -2298,10 +2286,6 @@
         const displayName = card.DisplayName || card.Name;
         const scale = card.ScaleAttribute ? " (Roll " + card.ScaleAttribute + ")" : "";
         return displayName + scale;
-      }
-
-      function formatActionCardSummary(cardId) {
-        return formatActionCardLabel(cardId);
       }
 
       function describeRaceOption(race) {
@@ -2396,53 +2380,6 @@
             return count > 1 ? skill + " x" + count : skill;
           });
       }
-
-      function createSkillsSection(skillItems) {
-        const section = document.createElement("section");
-        section.className = "summary-card";
-
-        const headerRow = document.createElement("div");
-        headerRow.style.display = "flex";
-        headerRow.style.justifyContent = "space-between";
-        headerRow.style.alignItems = "center";
-        headerRow.style.marginBottom = "8px";
-        headerRow.style.paddingBottom = "5px";
-        headerRow.style.borderBottom = "1px solid rgba(201, 168, 64, 0.22)";
-
-        const heading = document.createElement("h3");
-        heading.textContent = "Skills";
-        heading.style.margin = "0";
-        heading.style.fontFamily = "'Cinzel', serif";
-        heading.style.fontSize = "0.72rem";
-        heading.style.letterSpacing = "0.2em";
-        heading.style.textTransform = "uppercase";
-        heading.style.color = "var(--gold-text)";
-        heading.style.fontWeight = "600";
-
-        const caption = document.createElement("span");
-        caption.textContent = "max 3";
-        caption.style.fontFamily = "'EB Garamond', serif";
-        caption.style.fontSize = "0.75rem";
-        caption.style.color = "var(--muted)";
-        caption.style.fontStyle = "italic";
-
-        headerRow.appendChild(heading);
-        headerRow.appendChild(caption);
-        section.appendChild(headerRow);
-
-        const list = document.createElement("ul");
-        list.className = "list-block";
-        skillItems.forEach((skill) => {
-          const li = document.createElement("li");
-          li.className = "list-item";
-          li.textContent = skill;
-          list.appendChild(li);
-        });
-
-        section.appendChild(list);
-        return section;
-      }
-
 
       function getFilledLevelCount() {
         return state.levelUps.reduce((count, slotState) => {
