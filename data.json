@@ -3683,6 +3683,9 @@
     },
     "P05": {
       "Name": "Battle Prayer",
+      "Type": "Action",
+      "Category": "Support",
+      "ScaleAttribute": "CHA+DIV",
       "Level": 1
     },
     "P06": {

@@ -1,7 +1,6 @@
 P01 (Soothing Voice)
 P02 (Hymn of Malady)
 P03 (Rousing Ballad)
-P05 (Battle Prayer)
 P06 (Guided Smite)
 P07 (Bulwark of Hope)
 P08 (Beacon of Hope)
