@@ -3690,6 +3690,9 @@
     },
     "P06": {
       "Name": "Guided Smite",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll STR+DIV",
       "Level": 1
     },
     "P07": {
@@ -3800,6 +3803,9 @@
     },
     "P32": {
       "Name": "Focus",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Roll INT",
       "Level": 1
     },
     "P33": {
@@ -3820,10 +3826,15 @@
     },
     "P37": {
       "Name": "Charge",
+      "Type": "Action",
+      "Category": "Offensive",
       "Level": 1
     },
     "P38": {
       "Name": "Target Weak Spot",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "P39": {
@@ -4117,10 +4128,16 @@
     },
     "S01": {
       "Name": "Coordinated Advance",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Roll CHA+DIV",
       "Level": 1
     },
     "S02": {
       "Name": "Flank Attack",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll STR",
       "Level": 1
     },
     "S03": {
@@ -4137,6 +4154,9 @@
     },
     "S06": {
       "Name": "Energy Shield",
+      "Type": "Reaction",
+      "Category": "Defensive",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "S07": {
@@ -4200,14 +4220,23 @@
     },
     "S21": {
       "Name": "Shoot and Dash",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll AGI+DIV",
       "Level": 1
     },
     "S22": {
       "Name": "Take Aim",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Roll INT",
       "Level": 1
     },
     "S23": {
       "Name": "Arrow Rain",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll AGI+DIV",
       "Level": 1
     },
     "S24": {
@@ -4216,6 +4245,9 @@
     },
     "S25": {
       "Name": "Sense Danger",
+      "Type": "Reaction",
+      "Category": "Support",
+      "CardDescription": "Roll INT",
       "Level": 1
     },
     "S26": {
@@ -4228,6 +4260,9 @@
     },
     "S28": {
       "Name": "Entangle",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "S29": {
