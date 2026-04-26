@@ -475,7 +475,7 @@
           "Type": "Feet"
         }
       ],
-      "Brill": 1
+      "Brill": 3
     },
     {
       "Name": "Militia",
@@ -4019,6 +4019,9 @@
     },
     "PP11": {
       "Name": "Premonition",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Roll INT",
       "Level": 1
     },
     "PP12": {
@@ -4150,6 +4153,9 @@
     },
     "S05": {
       "Name": "Focus Divinum",
+      "Type": "Action",
+      "Category": "Support",
+      "CardDescription": "Add DIV6",
       "Level": 1
     },
     "S06": {
