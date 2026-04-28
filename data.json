@@ -1197,7 +1197,7 @@
       "Keywords": [
         "Spell"
       ],
-      "Effect": "Prevent 4 spell dmg or 2 terror"
+      "Effect": "Prevent 4 spell damage or 2 terror"
     },
     "Highlander's Belt": {
       "Type": "Chest",
@@ -1205,7 +1205,7 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Passive": "+1 melee dmg"
+      "Passive": "+1 melee damage"
     },
     "Lantern": {
       "Type": "Hand",
@@ -1218,7 +1218,7 @@
     "Sunbreaker Pendant": {
       "Type": "Small",
       "DisplayName": "Sunbreaker Pendant",
-      "Effect": "Against spell deal 3 dmg"
+      "Effect": "Against spell deal 3 damage"
     },
     "Drysea Strider Hatchling": {
       "Type": "Small",
@@ -1231,7 +1231,7 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Effect": "+1 Fate -2 hp"
+      "Effect": "+1 Fate -2 HP"
     },
     "Straw Hat": {
       "Type": "Head",
@@ -1252,7 +1252,7 @@
       "Keywords": [
         "Poison"
       ],
-      "Effect": "3 dmg in R4"
+      "Effect": "3 damage in R4"
     },
     "Poisoned Needle": {
       "Type": "Small",
@@ -1260,7 +1260,7 @@
       "Keywords": [
         "Poison"
       ],
-      "Effect": "Ranged +2 dmg"
+      "Effect": "Ranged +2 damage"
     },
     "Heirloom": {
       "Type": "Small",
@@ -1374,7 +1374,7 @@
       "Keywords": [
         "Ranged"
       ],
-      "Effect": "4 dmg in r4"
+      "Effect": "4 damage in R4"
     },
     "Smoke Bomb": {
       "Type": "Small",
@@ -1453,7 +1453,7 @@
       "Keywords": [
         "Survival"
       ],
-      "Effect": "-1 melee diff"
+      "Effect": "-1 melee difficulty"
     },
     "Lucky Pommel": {
       "Type": "Hand",
@@ -1466,7 +1466,7 @@
       "Keywords": [
         "Leadership"
       ],
-      "Effect": "choose dual token side"
+      "Effect": "Choose dual token side"
     },
     "Parrying Cape": {
       "Type": "Chest",
@@ -1537,7 +1537,7 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Attack +AGI dmg, -2HP"
+      "Effect": "Attack +AGI damage, -2HP"
     },
     "Buckler": {
       "Type": "Small",
@@ -1560,7 +1560,7 @@
     "Penitent's Clogs": {
       "Type": "Feet",
       "DisplayName": "Penitent's Clogs",
-      "Effect": "-1 diff"
+      "Effect": "-1 difficulty"
     },
     "Incense": {
       "Type": "Hand",
@@ -1568,7 +1568,7 @@
       "Keywords": [
         "Alchemy"
       ],
-      "Effect": "AOE heal and dmg"
+      "Effect": "AOE heal and damage"
     },
     "Tome of Omu": {
       "Type": "Small",

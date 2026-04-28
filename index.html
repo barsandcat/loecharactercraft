@@ -385,6 +385,9 @@
     }
 
     .list-item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
       padding: 6px 9px;
       background: rgba(255, 255, 255, 0.32);
       border: 1px solid rgba(70, 48, 12, 0.1);
@@ -394,9 +397,15 @@
       color: var(--ink);
     }
 
+    .item-name {
+      flex: 1;
+      min-width: 0;
+    }
+
     .item-effect {
+      flex-shrink: 0;
+      width: 260px;
       padding: 6px 9px;
-      margin-top: 6px;
       background: rgba(201, 168, 64, 0.08);
       border: 1px solid rgba(201, 168, 64, 0.22);
       font-family: 'EB Garamond', serif;
@@ -1415,20 +1424,29 @@
             const itemLi = document.createElement("li");
             itemLi.className = "list-item";
 
-            // Build item display: DisplayName (Passive) or DisplayName if no passive
+            // Create item name container
+            const nameDiv = document.createElement("div");
+            nameDiv.className = "item-name";
+            // Build item display: DisplayName (Type, Passive) or DisplayName (Type) or DisplayName
             let itemText = item.DisplayName;
+            const details = [];
+            if (item.Type) {
+              details.push(item.Type);
+            }
             if (item.Passive) {
-              itemText += " (" + item.Passive + ")";
+              details.push(item.Passive);
             }
-            itemLi.textContent = itemText;
+            if (details.length > 0) {
+              itemText += " (" + details.join(", ") + ")";
+            }
+            nameDiv.textContent = itemText;
+            itemLi.appendChild(nameDiv);
 
-            // Add Effect as a sub-item if it exists
-            if (item.Effect) {
-              const effectDiv = document.createElement("div");
-              effectDiv.className = "item-effect";
-              effectDiv.textContent = "Effect: " + item.Effect;
-              itemLi.appendChild(effectDiv);
-            }
+            // Always add Effect box
+            const effectDiv = document.createElement("div");
+            effectDiv.className = "item-effect";
+            effectDiv.textContent = item.Effect || "None";
+            itemLi.appendChild(effectDiv);
 
             itemsList.appendChild(itemLi);
           });
