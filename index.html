@@ -394,6 +394,19 @@
       color: var(--ink);
     }
 
+    .item-effect {
+      padding: 6px 9px;
+      margin-top: 6px;
+      background: rgba(201, 168, 64, 0.08);
+      border: 1px solid rgba(201, 168, 64, 0.22);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.88rem;
+      line-height: 1.3;
+      color: var(--muted);
+      font-style: italic;
+      border-radius: 1px;
+    }
+
     /* Action Card Categories */
     .action-category-group {
       margin-bottom: 12px;
@@ -1385,11 +1398,43 @@
           container.appendChild(createListSection("Skills (max 3)", [skillSummary]));
         }
 
-        const itemLines = Array.from(stats.items.values()).map(
-          (item) => item.DisplayName + " (" + item.Type + ")"
-        );
-        if (itemLines.length) {
-          container.appendChild(createListSection("Items", itemLines));
+        // Create items section with Passive and Effect
+        const items = Array.from(stats.items.values());
+        if (items.length) {
+          const itemsSection = document.createElement("section");
+          itemsSection.className = "summary-card";
+
+          const itemsTitle = document.createElement("h3");
+          itemsTitle.textContent = "Items";
+          itemsSection.appendChild(itemsTitle);
+
+          const itemsList = document.createElement("ul");
+          itemsList.className = "list-block";
+
+          items.forEach((item) => {
+            const itemLi = document.createElement("li");
+            itemLi.className = "list-item";
+
+            // Build item display: DisplayName (Passive) or DisplayName if no passive
+            let itemText = item.DisplayName;
+            if (item.Passive) {
+              itemText += " (" + item.Passive + ")";
+            }
+            itemLi.textContent = itemText;
+
+            // Add Effect as a sub-item if it exists
+            if (item.Effect) {
+              const effectDiv = document.createElement("div");
+              effectDiv.className = "item-effect";
+              effectDiv.textContent = "Effect: " + item.Effect;
+              itemLi.appendChild(effectDiv);
+            }
+
+            itemsList.appendChild(itemLi);
+          });
+
+          itemsSection.appendChild(itemsList);
+          container.appendChild(itemsSection);
         }
 
         const actionLines = Array.from(stats.actions.values()).map((card) => {
@@ -2121,6 +2166,11 @@
         if (!itemObj) {
           console.warn('Item not found:', itemName);
           return;
+        }
+
+        // Extract keywords from items and add to common keyword pool
+        if (itemObj.Keywords) {
+          incrementCountMap(stats.keywordCounts, itemObj.Keywords);
         }
 
         const key = itemName + "::" + itemObj.Type;
