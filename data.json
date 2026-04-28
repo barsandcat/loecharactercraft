@@ -290,10 +290,7 @@
         "Investigation"
       ],
       "Items": [
-        {
-          "Name": "Spellbook",
-          "Type": "Small"
-        }
+        "Spellbook"
       ],
       "Brill": 1
     },
@@ -305,10 +302,7 @@
         "Outlandish"
       ],
       "Items": [
-        {
-          "Name": "Iron Mask",
-          "Type": "Head"
-        }
+        "Iron Mask"
       ],
       "Brill": 0
     },
@@ -320,10 +314,7 @@
         "Medicine"
       ],
       "Items": [
-        {
-          "Name": "Highlander's Belt",
-          "Type": "Chest"
-        }
+        "Highlander's Belt"
       ],
       "Brill": 1
     },
@@ -335,10 +326,7 @@
         "Wild"
       ],
       "Items": [
-        {
-          "Name": "Lantern",
-          "Type": "Hand"
-        }
+        "Lantern"
       ],
       "Brill": 2
     },
@@ -350,10 +338,7 @@
         "Deception"
       ],
       "Items": [
-        {
-          "Name": "Sunbreaker Pendant",
-          "Type": "Small"
-        }
+        "Sunbreaker Pendant"
       ],
       "Brill": 1
     },
@@ -365,10 +350,7 @@
         "Wild"
       ],
       "Items": [
-        {
-          "Name": "Drysea Strider Hatchling",
-          "Type": "Small"
-        }
+        "Drysea Strider Hatchling"
       ],
       "Brill": 0
     },
@@ -380,10 +362,7 @@
         "Stealth"
       ],
       "Items": [
-        {
-          "Name": "High Realm Collar",
-          "Type": "Head"
-        }
+        "High Realm Collar"
       ],
       "Brill": 0
     },
@@ -395,10 +374,7 @@
         "Rural"
       ],
       "Items": [
-        {
-          "Name": "Straw Hat",
-          "Type": "Head"
-        }
+        "Straw Hat"
       ],
       "Brill": 1
     },
@@ -410,10 +386,7 @@
         "Engineering"
       ],
       "Items": [
-        {
-          "Name": "Leather Apron",
-          "Type": "Chest"
-        }
+        "Leather Apron"
       ],
       "Brill": 1
     },
@@ -425,10 +398,7 @@
         "Wild"
       ],
       "Items": [
-        {
-          "Name": "Puffshroom Bomb",
-          "Type": "Small"
-        }
+        "Puffshroom Bomb"
       ],
       "Brill": 1
     },
@@ -440,10 +410,7 @@
         "Resilience"
       ],
       "Items": [
-        {
-          "Name": "Poisoned Needle",
-          "Type": "Small"
-        }
+        "Poisoned Needle"
       ],
       "Brill": 1
     },
@@ -455,10 +422,7 @@
         "Noble"
       ],
       "Items": [
-        {
-          "Name": "Heirloom",
-          "Type": "Small"
-        }
+        "Heirloom"
       ],
       "Brill": 1
     },
@@ -470,10 +434,7 @@
         "Midlands"
       ],
       "Items": [
-        {
-          "Name": "Fancy Poulaines",
-          "Type": "Feet"
-        }
+        "Fancy Poulaines"
       ],
       "Brill": 3
     },
@@ -485,10 +446,7 @@
         "Midlands"
       ],
       "Items": [
-        {
-          "Name": "Poleyn",
-          "Type": "Feet"
-        }
+        "Poleyn"
       ],
       "Brill": 2
     },
@@ -500,10 +458,7 @@
         "Rural"
       ],
       "Items": [
-        {
-          "Name": "Moon Pendant",
-          "Type": "Small"
-        }
+        "Moon Pendant"
       ],
       "Brill": 1
     },
@@ -515,10 +470,7 @@
         "Forlorn Sea"
       ],
       "Items": [
-        {
-          "Name": "Crystal Glasses",
-          "Type": "Head"
-        }
+        "Crystal Glasses"
       ],
       "Brill": 2
     },
@@ -530,10 +482,7 @@
         "Survival"
       ],
       "Items": [
-        {
-          "Name": "Warden's Greaves",
-          "Type": "Feet"
-        }
+        "Warden's Greaves"
       ],
       "Brill": 1
     },
@@ -545,10 +494,7 @@
         "Subterranean"
       ],
       "Items": [
-        {
-          "Name": "Survival Kit",
-          "Type": "Small"
-        }
+        "Survival Kit"
       ],
       "Brill": 1
     },
@@ -560,10 +506,7 @@
         "Survival"
       ],
       "Items": [
-        {
-          "Name": "Lucky Charm",
-          "Type": "Small"
-        }
+        "Lucky Charm"
       ],
       "Brill": 1
     },
@@ -575,10 +518,7 @@
         "Performer"
       ],
       "Items": [
-        {
-          "Name": "Lute",
-          "Type": "Hand"
-        }
+        "Lute"
       ],
       "Brill": 2
     },
@@ -590,10 +530,7 @@
         "Wild"
       ],
       "Items": [
-        {
-          "Name": "Reliable Boots",
-          "Type": "Feet"
-        }
+        "Reliable Boots"
       ],
       "Brill": 1
     },
@@ -605,10 +542,7 @@
         "Heart"
       ],
       "Items": [
-        {
-          "Name": "Censer",
-          "Type": "Hand"
-        }
+        "Censer"
       ],
       "Brill": 1
     }
@@ -632,10 +566,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Death Whistle",
-              "Type": "Small"
-            }
+            "Death Whistle"
           ],
           "Action cards": [
             "PP07"
@@ -649,10 +580,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Notram's Ring",
-              "Type": "Small"
-            }
+            "Notram's Ring"
           ],
           "Action cards": [
             "PP08"
@@ -666,10 +594,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Glowjuice",
-              "Type": "Small"
-            }
+            "Glowjuice"
           ],
           "Action cards": [
             "PP09"
@@ -695,10 +620,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Throwing Dagger",
-              "Type": "Hand"
-            }
+            "Throwing Dagger"
           ],
           "Action cards": [
             "PP13"
@@ -712,10 +634,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Smoke Bomb",
-              "Type": "Small"
-            }
+            "Smoke Bomb"
           ],
           "Action cards": [
             "PP14"
@@ -729,10 +648,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Book of Sagas",
-              "Type": "Small"
-            }
+            "Book of Sagas"
           ],
           "Action cards": [
             "PP15"
@@ -758,10 +674,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Anchor Chain",
-              "Type": "Hand"
-            }
+            "Anchor Chain"
           ],
           "Action cards": [
             "PP31"
@@ -775,10 +688,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Whispering Box",
-              "Type": "Small"
-            }
+            "Whispering Box"
           ],
           "Action cards": [
             "PP32"
@@ -792,10 +702,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Codex Vestigium",
-              "Type": "Small"
-            }
+            "Codex Vestigium"
           ],
           "Action cards": [
             "PP33"
@@ -821,10 +728,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Curing Leaves",
-              "Type": "Small"
-            }
+            "Curing Leaves"
           ],
           "Action cards": [
             "PP04"
@@ -834,10 +738,7 @@
           "Name": "Soothsayer",
           "DIV": "Upgrade",
           "Items": [
-            {
-              "Name": "Stone of Nivar",
-              "Type": "Small"
-            }
+            "Stone of Nivar"
           ],
           "Action cards": [
             "PP05"
@@ -851,10 +752,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Calling Reed",
-              "Type": "Small"
-            }
+            "Calling Reed"
           ],
           "Action cards": [
             "PP06"
@@ -880,10 +778,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Garrote",
-              "Type": "Hand"
-            }
+            "Garrote"
           ],
           "Action cards": [
             "PP22"
@@ -897,10 +792,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Evidence",
-              "Type": "Small"
-            }
+            "Evidence"
           ],
           "Action cards": [
             "PP23"
@@ -914,10 +806,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Weighted Net",
-              "Type": "Hand"
-            }
+            "Weighted Net"
           ],
           "Action cards": [
             "PP24"
@@ -943,10 +832,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Lucky Pommel",
-              "Type": "Hand"
-            }
+            "Lucky Pommel"
           ],
           "Action cards": [
             "PP19"
@@ -960,10 +846,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "War Horn",
-              "Type": "Small"
-            }
+            "War Horn"
           ],
           "Action cards": [
             "PP20"
@@ -977,10 +860,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Parrying Cape",
-              "Type": "Chest"
-            }
+            "Parrying Cape"
           ],
           "Action cards": [
             "PP21"
@@ -1006,10 +886,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Prayer Bell",
-              "Type": "Small"
-            }
+            "Prayer Bell"
           ],
           "Action cards": [
             "PP01"
@@ -1023,10 +900,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Peliago's Coin",
-              "Type": "Small"
-            }
+            "Peliago's Coin"
           ],
           "Action cards": [
             "PP02"
@@ -1040,10 +914,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Grisly Trophy",
-              "Type": "Small"
-            }
+            "Grisly Trophy"
           ],
           "Action cards": [
             "PP03"
@@ -1069,10 +940,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Rootstalk",
-              "Type": "Small"
-            }
+            "Rootstalk"
           ],
           "Action cards": [
             "PP34"
@@ -1086,10 +954,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Homunculus",
-              "Type": "Small"
-            }
+            "Homunculus"
           ],
           "Action cards": [
             "PP35"
@@ -1099,10 +964,7 @@
           "Name": "Evolver",
           "DIV": "Upgrade",
           "Items": [
-            {
-              "Name": "Fleshcraft Toolkit",
-              "Type": "Small"
-            }
+            "Fleshcraft Toolkit"
           ],
           "Action cards": [
             "PP36"
@@ -1124,10 +986,7 @@
           "Name": "Conjurer",
           "DIV": "Upgrade",
           "Items": [
-            {
-              "Name": "Grimoire",
-              "Type": "Small"
-            }
+            "Grimoire"
           ],
           "Action cards": [
             "PP10"
@@ -1141,10 +1000,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Orb",
-              "Type": "Small"
-            }
+            "Orb"
           ],
           "Action cards": [
             "PP11"
@@ -1158,10 +1014,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Runic Chisel",
-              "Type": "Small"
-            }
+            "Runic Chisel"
           ],
           "Action cards": [
             "PP12"
@@ -1187,10 +1040,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Buckler",
-              "Type": "Small"
-            }
+            "Buckler"
           ],
           "Action cards": [
             "PP16"
@@ -1204,10 +1054,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Blessed Charm",
-              "Type": "Small"
-            }
+            "Blessed Charm"
           ],
           "Action cards": [
             "PP17"
@@ -1221,10 +1068,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Spyglass",
-              "Type": "Small"
-            }
+            "Spyglass"
           ],
           "Action cards": [
             "PP18"
@@ -1250,10 +1094,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Penitent's Clogs",
-              "Type": "Feet"
-            }
+            "Penitent's Clogs"
           ],
           "Action cards": [
             "PP25"
@@ -1267,10 +1108,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Incense",
-              "Type": "Hand"
-            }
+            "Incense"
           ],
           "Action cards": [
             "PP26"
@@ -1284,10 +1122,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Tome of Omu",
-              "Type": "Small"
-            }
+            "Tome of Omu"
           ],
           "Action cards": [
             "PP27"
@@ -1313,10 +1148,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Thief's Gloves",
-              "Type": "Hand"
-            }
+            "Thief's Gloves"
           ],
           "Action cards": [
             "PP28"
@@ -1330,10 +1162,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "Needle Dart",
-              "Type": "Small"
-            }
+            "Needle Dart"
           ],
           "Action cards": [
             "PP29"
@@ -1347,10 +1176,7 @@
             }
           ],
           "Items": [
-            {
-              "Name": "False Documents",
-              "Type": "Small"
-            }
+            "False Documents"
           ],
           "Action cards": [
             "PP30"
@@ -1359,6 +1185,240 @@
       ]
     }
   ],
+  "Items": {
+    "Spellbook": {
+      "Type": "Small",
+      "DisplayName": "Spellbook"
+    },
+    "Iron Mask": {
+      "Type": "Head",
+      "DisplayName": "Iron Mask"
+    },
+    "Highlander's Belt": {
+      "Type": "Chest",
+      "DisplayName": "Highlander's Belt"
+    },
+    "Lantern": {
+      "Type": "Hand",
+      "DisplayName": "Lantern"
+    },
+    "Sunbreaker Pendant": {
+      "Type": "Small",
+      "DisplayName": "Sunbreaker Pendant"
+    },
+    "Drysea Strider Hatchling": {
+      "Type": "Small",
+      "DisplayName": "Drysea Strider Hatchling"
+    },
+    "High Realm Collar": {
+      "Type": "Head",
+      "DisplayName": "High Realm Collar"
+    },
+    "Straw Hat": {
+      "Type": "Head",
+      "DisplayName": "Straw Hat"
+    },
+    "Leather Apron": {
+      "Type": "Chest",
+      "DisplayName": "Leather Apron"
+    },
+    "Puffshroom Bomb": {
+      "Type": "Small",
+      "DisplayName": "Puffshroom Bomb"
+    },
+    "Poisoned Needle": {
+      "Type": "Small",
+      "DisplayName": "Poisoned Needle"
+    },
+    "Heirloom": {
+      "Type": "Small",
+      "DisplayName": "Heirloom"
+    },
+    "Fancy Poulaines": {
+      "Type": "Feet",
+      "DisplayName": "Fancy Poulaines"
+    },
+    "Poleyn": {
+      "Type": "Feet",
+      "DisplayName": "Poleyn"
+    },
+    "Moon Pendant": {
+      "Type": "Small",
+      "DisplayName": "Moon Pendant"
+    },
+    "Crystal Glasses": {
+      "Type": "Head",
+      "DisplayName": "Crystal Glasses"
+    },
+    "Warden's Greaves": {
+      "Type": "Feet",
+      "DisplayName": "Warden's Greaves"
+    },
+    "Survival Kit": {
+      "Type": "Small",
+      "DisplayName": "Survival Kit"
+    },
+    "Lucky Charm": {
+      "Type": "Small",
+      "DisplayName": "Lucky Charm"
+    },
+    "Lute": {
+      "Type": "Hand",
+      "DisplayName": "Lute"
+    },
+    "Reliable Boots": {
+      "Type": "Feet",
+      "DisplayName": "Reliable Boots"
+    },
+    "Censer": {
+      "Type": "Hand",
+      "DisplayName": "Censer"
+    },
+    "Death Whistle": {
+      "Type": "Small",
+      "DisplayName": "Death Whistle"
+    },
+    "Notram's Ring": {
+      "Type": "Small",
+      "DisplayName": "Notram's Ring"
+    },
+    "Glowjuice": {
+      "Type": "Small",
+      "DisplayName": "Glowjuice"
+    },
+    "Throwing Dagger": {
+      "Type": "Hand",
+      "DisplayName": "Throwing Dagger"
+    },
+    "Smoke Bomb": {
+      "Type": "Small",
+      "DisplayName": "Smoke Bomb"
+    },
+    "Book of Sagas": {
+      "Type": "Small",
+      "DisplayName": "Book of Sagas"
+    },
+    "Anchor Chain": {
+      "Type": "Hand",
+      "DisplayName": "Anchor Chain"
+    },
+    "Whispering Box": {
+      "Type": "Small",
+      "DisplayName": "Whispering Box"
+    },
+    "Codex Vestigium": {
+      "Type": "Small",
+      "DisplayName": "Codex Vestigium"
+    },
+    "Curing Leaves": {
+      "Type": "Small",
+      "DisplayName": "Curing Leaves"
+    },
+    "Stone of Nivar": {
+      "Type": "Small",
+      "DisplayName": "Stone of Nivar"
+    },
+    "Calling Reed": {
+      "Type": "Small",
+      "DisplayName": "Calling Reed"
+    },
+    "Garrote": {
+      "Type": "Hand",
+      "DisplayName": "Garrote"
+    },
+    "Evidence": {
+      "Type": "Small",
+      "DisplayName": "Evidence"
+    },
+    "Weighted Net": {
+      "Type": "Hand",
+      "DisplayName": "Weighted Net"
+    },
+    "Lucky Pommel": {
+      "Type": "Hand",
+      "DisplayName": "Lucky Pommel"
+    },
+    "War Horn": {
+      "Type": "Small",
+      "DisplayName": "War Horn"
+    },
+    "Parrying Cape": {
+      "Type": "Chest",
+      "DisplayName": "Parrying Cape"
+    },
+    "Prayer Bell": {
+      "Type": "Small",
+      "DisplayName": "Prayer Bell"
+    },
+    "Peliago's Coin": {
+      "Type": "Small",
+      "DisplayName": "Peliago's Coin"
+    },
+    "Grisly Trophy": {
+      "Type": "Small",
+      "DisplayName": "Grisly Trophy"
+    },
+    "Rootstalk": {
+      "Type": "Small",
+      "DisplayName": "Rootstalk"
+    },
+    "Homunculus": {
+      "Type": "Small",
+      "DisplayName": "Homunculus"
+    },
+    "Fleshcraft Toolkit": {
+      "Type": "Small",
+      "DisplayName": "Fleshcraft Toolkit"
+    },
+    "Grimoire": {
+      "Type": "Small",
+      "DisplayName": "Grimoire"
+    },
+    "Orb": {
+      "Type": "Small",
+      "DisplayName": "Orb"
+    },
+    "Runic Chisel": {
+      "Type": "Small",
+      "DisplayName": "Runic Chisel"
+    },
+    "Buckler": {
+      "Type": "Small",
+      "DisplayName": "Buckler"
+    },
+    "Blessed Charm": {
+      "Type": "Small",
+      "DisplayName": "Blessed Charm"
+    },
+    "Spyglass": {
+      "Type": "Small",
+      "DisplayName": "Spyglass"
+    },
+    "Penitent's Clogs": {
+      "Type": "Feet",
+      "DisplayName": "Penitent's Clogs"
+    },
+    "Incense": {
+      "Type": "Hand",
+      "DisplayName": "Incense"
+    },
+    "Tome of Omu": {
+      "Type": "Small",
+      "DisplayName": "Tome of Omu"
+    },
+    "Thief's Gloves": {
+      "Type": "Hand",
+      "DisplayName": "Thief's Gloves"
+    },
+    "Needle Dart": {
+      "Type": "Small",
+      "DisplayName": "Needle Dart"
+    },
+    "False Documents": {
+      "Type": "Small",
+      "DisplayName": "False Documents"
+    }
+  },
   "Advancement Trees": [
     {
       "Name": "Barbarian",

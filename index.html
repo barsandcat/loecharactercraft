@@ -1386,7 +1386,7 @@
         }
 
         const itemLines = Array.from(stats.items.values()).map(
-          (item) => item.Name + " (" + item.Type + ")"
+          (item) => item.DisplayName + " (" + item.Type + ")"
         );
         if (itemLines.length) {
           container.appendChild(createListSection("Items", itemLines));
@@ -2116,10 +2116,16 @@
         });
       }
 
-      function addItem(stats, item) {
-        const key = item.Name + "::" + item.Type;
+      function addItem(stats, itemName) {
+        const itemObj = state.data.Items[itemName];
+        if (!itemObj) {
+          console.warn('Item not found:', itemName);
+          return;
+        }
+
+        const key = itemName + "::" + itemObj.Type;
         if (!stats.items.has(key)) {
-          stats.items.set(key, item);
+          stats.items.set(key, itemObj);
         }
       }
 
@@ -2239,8 +2245,11 @@
         parts.push(...(entry.Keywords || []));
         parts.push(...(entry.Skills || []));
 
-        (entry.Items || []).forEach((item) => {
-          parts.push(item.Name + " (" + item.Type + ")");
+        (entry.Items || []).forEach((itemName) => {
+          const itemObj = state.data.Items[itemName];
+          if (itemObj) {
+            parts.push(itemObj.DisplayName + " (" + itemObj.Type + ")");
+          }
         });
 
         (entry["Action cards"] || []).forEach((action) => {
