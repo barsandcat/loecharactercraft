@@ -4300,6 +4300,9 @@
     },
     "PP19": {
       "Name": "Adamant Stance",
+      "Type": "Reaction",
+      "Category": "Support",
+      "CardDescription": "Roll +1 die per enemy in R2",
       "Level": 1
     },
     "PP20": {
