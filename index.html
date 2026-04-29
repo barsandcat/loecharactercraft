@@ -983,6 +983,8 @@
           ui.copyLinkButton.disabled = false;
           clearError();
           restoreStateFromUrl();
+          tryAutoSelect();
+          pushStateToUrl();
           render();
         } catch (error) {
           setLoadStatus("Data unavailable");
@@ -1113,6 +1115,7 @@
       }
 
       function commitSelection() {
+        tryAutoSelect();
         pushStateToUrl();
         render();
       }
@@ -1891,13 +1894,11 @@
         commitSelection();
       }
 
-      function refreshLevelUpStates() {
-        const levelUpMeta = [];
+      function tryAutoSelect() {
         const priorSelectedOptions = [];
         let unlocked = state.selectedProf !== null;
 
         for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
-          const slotNumber = slotIndex + 1;
           const slotState = state.levelUps[slotIndex];
           const treeOptions = unlocked
             ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
@@ -1921,11 +1922,10 @@
             }
           }
 
-          let versionOptions = [];
           let selectedVersion = null;
 
           if (selectedTree) {
-            versionOptions = getVersionOptions(selectedTree);
+            const versionOptions = getVersionOptions(selectedTree);
             if (versionOptions.length === 1) {
               slotState.versionIndex = 0;
             }
@@ -1940,6 +1940,37 @@
             slotState.versionIndex = null;
           }
 
+          const isComplete = Boolean(selectedTree && selectedVersion);
+          if (isComplete) {
+            priorSelectedOptions.push(selectedTree);
+          }
+
+          unlocked = unlocked && isComplete;
+        }
+      }
+
+      function refreshLevelUpStates() {
+        const levelUpMeta = [];
+        const priorSelectedOptions = [];
+        let unlocked = state.selectedProf !== null;
+
+        for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
+          const slotNumber = slotIndex + 1;
+          const slotState = state.levelUps[slotIndex];
+          const treeOptions = unlocked
+            ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
+            : [];
+
+          const selectedTree =
+            treeOptions.find(
+              (option) =>
+                slotState.treeName === option.treeName && slotState.level === option.level
+            ) || null;
+
+          const versionOptions = selectedTree ? getVersionOptions(selectedTree) : [];
+          const selectedVersion = selectedTree
+            ? versionOptions.find((option) => option.index === slotState.versionIndex) || null
+            : null;
           const isComplete = Boolean(selectedTree && selectedVersion);
 
           if (isComplete) {
