@@ -4264,6 +4264,9 @@
     },
     "PP12": {
       "Name": "Runic Projectile",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll AGI+DIV",
       "Level": 1
     },
     "PP13": {
@@ -4290,6 +4293,9 @@
     },
     "PP18": {
       "Name": "Moondisc",
+      "Type": "Action",
+      "Category": "Offensive",
+      "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "PP19": {
