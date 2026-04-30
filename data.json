@@ -3835,6 +3835,7 @@
       "Name": "Combat Insight",
       "Type": "Reaction",
       "Category": "Support",
+      "CardDescription": "Support with a die",
       "Level": 2,
       "DisplayName": "Combat Insight"
     },
@@ -3843,6 +3844,7 @@
       "Type": "Reaction",
       "Category": "Support",
       "Level": 3,
+      "CardDescription": "Support with a die",
       "DisplayName": "Crucial Combat Insight"
     },
     "B10": {

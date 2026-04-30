@@ -321,6 +321,27 @@
       border-bottom: 1px solid rgba(201, 168, 64, 0.22);
     }
 
+    .summary-stat-group {
+      display: grid;
+      gap: 6px;
+    }
+
+    .summary-stat-group + .summary-stat-group {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(201, 168, 64, 0.16);
+    }
+
+    .summary-subtitle {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--label);
+      font-weight: 600;
+    }
+
     /* Stat grid */
     .stat-grid {
       display: grid;
@@ -1371,8 +1392,11 @@
         const attributeCard = document.createElement("section");
         attributeCard.className = "summary-card";
         const attributeTitle = document.createElement("h3");
-        attributeTitle.textContent = "Attributes";
+        attributeTitle.textContent = "Attributes & Stats";
         attributeCard.appendChild(attributeTitle);
+
+        const attributeGroup = document.createElement("div");
+        attributeGroup.className = "summary-stat-group";
 
         const attributeGrid = document.createElement("div");
         attributeGrid.className = "stat-grid";
@@ -1382,14 +1406,11 @@
             createStatCard(attribute, String(stats.attributes[attribute] || 0), ATTRIBUTE_LIMIT)
           );
         });
-        attributeCard.appendChild(attributeGrid);
-        container.appendChild(attributeCard);
+        attributeGroup.appendChild(attributeGrid);
+        attributeCard.appendChild(attributeGroup);
 
-        const statCard = document.createElement("section");
-        statCard.className = "summary-card";
-        const statTitle = document.createElement("h3");
-        statTitle.textContent = "Stats";
-        statCard.appendChild(statTitle);
+        const statGroup = document.createElement("div");
+        statGroup.className = "summary-stat-group";
 
         const statGrid = document.createElement("div");
         statGrid.className = "stat-grid";
@@ -1397,8 +1418,9 @@
         statGrid.appendChild(createStatCard("HP", String(stats.hp), 16));
         statGrid.appendChild(createStatCard("DIV", stats.divDie || "-"));
         statGrid.appendChild(createStatCard("Brill", String(stats.brill)));
-        statCard.appendChild(statGrid);
-        container.appendChild(statCard);
+        statGroup.appendChild(statGrid);
+        attributeCard.appendChild(statGroup);
+        container.appendChild(attributeCard);
 
         const keywordSummary = formatKeywordSummary(stats.keywordCounts);
         if (keywordSummary) {
@@ -2410,7 +2432,7 @@
           return "";
         }
         const displayName = card.DisplayName || card.Name;
-        const desc = card.CardDescription ? " (" + card.CardDescription + ")" : "";
+        const desc = card.CardDescription ? " (" + card.CardDescription + ")" : ' (????)';
         return displayName + desc;
       }
 
