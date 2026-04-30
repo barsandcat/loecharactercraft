@@ -1410,7 +1410,7 @@
           container.appendChild(createListSection("Skills (max 3)", [skillSummary]));
         }
 
-        // Create items section with Passive and Effect
+        // Create items section grouped by type, with Passive and Effect
         const items = Array.from(stats.items.values());
         if (items.length) {
           const itemsSection = document.createElement("section");
@@ -1420,41 +1420,69 @@
           itemsTitle.textContent = "Items";
           itemsSection.appendChild(itemsTitle);
 
-          const itemsList = document.createElement("ul");
-          itemsList.className = "list-block";
-
+          const itemsByType = new Map();
           items.forEach((item) => {
-            const itemLi = document.createElement("li");
-            itemLi.className = "list-item";
-
-            // Create item name container
-            const nameDiv = document.createElement("div");
-            nameDiv.className = "item-name";
-            // Build item display: DisplayName (Type, Passive) or DisplayName (Type) or DisplayName
-            let itemText = item.DisplayName;
-            const details = [];
-            if (item.Type) {
-              details.push(item.Type);
+            const type = item.Type || "Other";
+            if (!itemsByType.has(type)) {
+              itemsByType.set(type, []);
             }
-            if (item.Passive) {
-              details.push(item.Passive);
-            }
-            if (details.length > 0) {
-              itemText += " (" + details.join(", ") + ")";
-            }
-            nameDiv.textContent = itemText;
-            itemLi.appendChild(nameDiv);
-
-            // Always add Effect box
-            const effectDiv = document.createElement("div");
-            effectDiv.className = "item-effect";
-            effectDiv.textContent = item.Effect || "None";
-            itemLi.appendChild(effectDiv);
-
-            itemsList.appendChild(itemLi);
+            itemsByType.get(type).push(item);
           });
 
-          itemsSection.appendChild(itemsList);
+          const itemTypeOrder = ["Head", "Chest", "Hand", "Feet", "Small"];
+          const sortedTypes = Array.from(itemsByType.keys()).sort((a, b) => {
+            const indexA = itemTypeOrder.indexOf(a);
+            const indexB = itemTypeOrder.indexOf(b);
+
+            if (indexA !== -1 || indexB !== -1) {
+              if (indexA === -1) return 1;
+              if (indexB === -1) return -1;
+              return indexA - indexB;
+            }
+
+            return a.localeCompare(b);
+          });
+
+          sortedTypes.forEach((type) => {
+            const typeGroup = document.createElement("div");
+            typeGroup.className = "action-category-group";
+
+            const typeTitle = document.createElement("h4");
+            typeTitle.className = "action-category-title";
+            typeTitle.textContent = type;
+            typeGroup.appendChild(typeTitle);
+
+            const itemsList = document.createElement("ul");
+            itemsList.className = "list-block";
+
+            itemsByType
+              .get(type)
+              .sort((a, b) => (a.DisplayName || "").localeCompare(b.DisplayName || ""))
+              .forEach((item) => {
+                const itemLi = document.createElement("li");
+                itemLi.className = "list-item";
+
+                const nameDiv = document.createElement("div");
+                nameDiv.className = "item-name";
+                let itemText = item.DisplayName;
+                if (item.Passive) {
+                  itemText += " (" + item.Passive + ")";
+                }
+                nameDiv.textContent = itemText;
+                itemLi.appendChild(nameDiv);
+
+                const effectDiv = document.createElement("div");
+                effectDiv.className = "item-effect";
+                effectDiv.textContent = item.Effect || "None";
+                itemLi.appendChild(effectDiv);
+
+                itemsList.appendChild(itemLi);
+              });
+
+            typeGroup.appendChild(itemsList);
+            itemsSection.appendChild(typeGroup);
+          });
+
           container.appendChild(itemsSection);
         }
 
