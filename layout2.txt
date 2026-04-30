@@ -1,2 +1,0 @@
-Crystal Glasses (Keywords: Intimidation, Effect: +1 INT die), Erid’s Headband(Effect: prevent 10 dmg), High Realm Collar (Keywords: Brilliance, Effect: +1 Fate -2 hp), Iron Mask (Keywords: Spell, Effect: Prevent 4 spell dmg or 2 terror), Highlander's Belt (Keywords: Brilliance, Passive: +1 melee dmg), Leather Apron (Keywords: Armor, Passive: +1 armor), Parrying Cape (Keywords: Performer, Effect: +2 die agains melee), Protective Raiment
-Straw Hat (Effect: Untargetable)

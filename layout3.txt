@@ -1,2 +1,0 @@
-Anchor Chain (Effect: move anyone in r3), Censer(Keywords: Medecine, Effect: heal 1 terror), Club(Passive: +1 dmg), Garrote (Keywords: Melee, Effect: Defeat a minion), ???
-Incense (Keywords: Alchemy, Effect: AOE heal and dmg), Lantern(Keywords: Light, Effect: prevent 1 terror), Lucky Pommel (Effect: +2 attack die), Lute (Keywords: Performer, Effect: gain ATT boon), Thief’s Gloves (Keywords: Sleight of Hand, Effect: gain 1 brill), Throwing Dagger (Keywords: Ranged, Effect: 4 dmg in r4), Weighted Net (Keywords: Survival, Effect: -1 melee diff)

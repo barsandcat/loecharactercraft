@@ -37,7 +37,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Gold bars — top and bottom of page */
+/* Gold bars */
 body::before,
 body::after {
   content: "";
@@ -54,7 +54,7 @@ body::after  { bottom: 0; }
 
 button, input, textarea, select { font: inherit; }
 
-/* ── App shell ── */
+/* App shell */
 .app-shell {
   position: relative;
   z-index: 1;
@@ -63,7 +63,7 @@ button, input, textarea, select { font: inherit; }
   padding: calc(var(--gold-bar-h) + 14px) clamp(14px, 2.5vw, 28px) calc(var(--gold-bar-h) + 20px);
 }
 
-/* ── Hero ── */
+/* Hero */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -165,7 +165,7 @@ h1 {
   font-family: 'EB Garamond', serif;
 }
 
-/* ── Board ── */
+/* Board */
 .board {
   display: grid;
   grid-template-columns: minmax(300px, 1.08fr) minmax(280px, 0.92fr) minmax(300px, 1fr);
@@ -173,7 +173,7 @@ h1 {
   align-items: start;
 }
 
-/* ── Panel ── */
+/* Panel */
 .panel {
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -202,7 +202,7 @@ h1 {
   padding: 10px 12px 16px;
 }
 
-/* ── Stack & choice grid ── */
+/* Stack and choice grid */
 .stack {
   display: grid;
   gap: 8px;
@@ -287,7 +287,7 @@ h1 {
   border-color: var(--gold);
 }
 
-/* ── Summary ── */
+/* Summary */
 .summary-grid { display: grid; gap: 8px; }
 
 .summary-card,
@@ -320,16 +320,6 @@ h1 {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid rgba(201, 168, 64, 0.16);
-}
-
-.summary-subtitle {
-  margin: 0;
-  font-family: 'Cinzel', serif;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--label);
-  font-weight: 600;
 }
 
 /* Stat grid */
@@ -510,7 +500,7 @@ h1 {
   background: rgba(255, 255, 255, 0.32);
 }
 
-/* ── Trees ── */
+/* Trees */
 .tree-stack { display: grid; gap: 10px; }
 
 
@@ -594,7 +584,7 @@ h1 {
   font-weight: 600;
 }
 
-/* ── Empty state ── */
+/* Empty state */
 .empty-state {
   padding: 14px;
   border: 1px dashed rgba(70, 48, 12, 0.2);
@@ -607,7 +597,7 @@ h1 {
 }
 
 
-/* ── Selector overlay ── */
+/* Selector overlay */
 .selector-overlay {
   position: fixed;
   inset: 0;
@@ -739,15 +729,10 @@ h1 {
   white-space: pre-line;
 }
 
-/* ── Utilities ── */
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px;
-  margin: -1px; padding: 0; overflow: hidden;
-  clip: rect(0 0 0 0); border: 0;
-}
+/* Utilities */
 .hidden { display: none !important; }
 
-/* ── Animations ── */
+/* Animations */
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -761,7 +746,7 @@ h1 {
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 1180px) {
   .board { grid-template-columns: 1fr; }
   .panel { min-width: 0; }
@@ -872,3 +857,5 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+

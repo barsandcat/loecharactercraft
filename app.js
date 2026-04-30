@@ -3,7 +3,7 @@ import { createCharacterBuilder } from "./character.js";
 const ui = {};
 let builder = null;
 
-document.addEventListener("DOMContentLoaded", init);
+init();
 
 async function init() {
   cacheUi();
@@ -104,10 +104,6 @@ function syncUrlHash(encoded) {
 }
 
 function copyLink() {
-  if (!builder) {
-    return;
-  }
-
   syncUrlHash(builder.serializeState());
   navigator.clipboard.writeText(location.href).then(() => {
     const original = ui.copyLinkButton.textContent;

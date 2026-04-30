@@ -11,8 +11,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     selectedOrigin: null,
     selectedProf: null,
     selectedPath: null,
-    levelUps: Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState()),
-    selector: null,
+    levelUps: createEmptyLevelUps(),
   };
 
   function createLevelUpState() {
@@ -23,13 +22,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
+  function createEmptyLevelUps() {
+    return Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+  }
+
   function resetBuild() {
-    state.selectedRace = null;
-    state.selectedAttributeSet = null;
-    state.selectedOrigin = null;
-    state.selectedProf = null;
-    state.selectedPath = null;
-    state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+    resetSelectionState();
     closeSelector();
     commitSelection();
   }
@@ -37,16 +35,18 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function randomBuild() {
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+    resetSelectionState();
+
     const race = pick(state.data.Races);
     state.selectedRace = race;
-    const attrs = race.Attributes || [];
+    const attrs = race.Attributes;
     state.selectedAttributeSet = attrs.length ? pick(attrs) : null;
 
     state.selectedOrigin = pick(state.data.Origins);
 
     const prof = pick(state.data.Professions);
     state.selectedProf = prof;
-    const paths = prof.Paths || [];
+    const paths = prof.Paths;
     state.selectedPath = paths.length ? pick(paths) : null;
 
     commitSelection();
@@ -54,7 +54,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function serializeState() {
     const attrIndex = state.selectedRace && state.selectedAttributeSet
-      ? (state.selectedRace.Attributes || []).indexOf(state.selectedAttributeSet)
+      ? state.selectedRace.Attributes.indexOf(state.selectedAttributeSet)
       : null;
 
     const lu = state.levelUps.map((slot) =>
@@ -104,7 +104,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedOrigin = null;
     state.selectedProf = null;
     state.selectedPath = null;
-    state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+    state.levelUps = createEmptyLevelUps();
   }
 
   function commitSelection() {
@@ -125,7 +125,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (compact.r) {
       state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
       if (state.selectedRace && compact.ai !== null) {
-        state.selectedAttributeSet = (state.selectedRace.Attributes || [])[compact.ai] || null;
+        state.selectedAttributeSet = state.selectedRace.Attributes[compact.ai] || null;
       }
     }
 
@@ -136,7 +136,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (compact.p) {
       state.selectedProf = state.data.Professions.find((profession) => profession.Name === compact.p) || null;
       if (state.selectedProf && compact.pa) {
-        state.selectedPath = (state.selectedProf.Paths || []).find((path) => path.Name === compact.pa) || null;
+        state.selectedPath = state.selectedProf.Paths.find((path) => path.Name === compact.pa) || null;
       }
     }
 
@@ -156,24 +156,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return true;
   }
 
-  function renderLoadingState() {
-    ui.controlsPanel.replaceChildren(
-      createEmptyState("Loading builder data...")
-    );
-    ui.summaryPanel.replaceChildren(
-      createEmptyState("Loading character board...")
-    );
-    ui.treesPanel.replaceChildren(
-      createEmptyState("Loading advancement trees...")
-    );
-  }
-
   function render() {
-    if (!state.data) {
-      renderLoadingState();
-      return;
-    }
-
     const levelMeta = refreshLevelUpStates();
     renderControls(levelMeta);
     renderSummary();
@@ -184,8 +167,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const container = ui.controlsPanel;
     container.replaceChildren();
 
-    const attrOptions = state.selectedRace ? state.selectedRace.Attributes || [] : [];
-    const pathOptions = state.selectedProf ? state.selectedProf.Paths || [] : [];
+    const attrOptions = state.selectedRace ? state.selectedRace.Attributes : [];
+    const pathOptions = state.selectedProf ? state.selectedProf.Paths : [];
 
     container.appendChild(singleChoiceGrid({
       label: "Race",
@@ -405,7 +388,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
       const itemsByType = new Map();
       items.forEach((item) => {
-        const type = item.Type || "Other";
+        const type = item.Type;
         if (!itemsByType.has(type)) {
           itemsByType.set(type, []);
         }
@@ -440,7 +423,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
         itemsByType
           .get(type)
-          .sort((a, b) => (a.DisplayName || "").localeCompare(b.DisplayName || ""))
+          .sort((a, b) => a.DisplayName.localeCompare(b.DisplayName))
           .forEach((item) => {
             const itemLi = document.createElement("li");
             itemLi.className = "list-item";
@@ -469,10 +452,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       container.appendChild(itemsSection);
     }
 
-    const actionLines = Array.from(stats.actions.values()).map((card) => {
-      return formatActionCardLabel(card._cardId, card);
-    });
-    if (actionLines.length) {
+    if (stats.actions.size) {
       const actionSection = document.createElement("section");
       actionSection.className = "summary-card";
 
@@ -487,28 +467,24 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         actionSection.appendChild(upgradeChip);
       }
 
-      // Group action cards by category
       const cardsByCategory = {
         Offensive: [],
         Defensive: [],
-        Support: []
+        Support: [],
       };
 
       Array.from(stats.actions.values()).forEach((card) => {
-        const category = card.Category || "Offensive"; // Default to Offensive if no category
-        const cardType = card.Type || "Action"; // Default to Action if no type
+        const category = cardsByCategory[card.Category] ? card.Category : "Offensive";
+        const cardType = card.Type === "Reaction" ? "Reaction" : "Action";
         const label = formatActionCardLabel(card._cardId, card);
-      
-        if (cardsByCategory[category]) {
-          cardsByCategory[category].push({
-            label: label,
-            cardId: card._cardId,
-            type: cardType
-          });
-        }
+
+        cardsByCategory[category].push({
+          label,
+          cardId: card._cardId,
+          type: cardType,
+        });
       });
 
-      // Render each category
       ["Offensive", "Defensive", "Support"].forEach((category) => {
         const cards = cardsByCategory[category];
         if (cards.length > 0) {
@@ -526,12 +502,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           cards.forEach((cardData) => {
             const li = document.createElement("li");
             li.className = "action-list-item";
-          
-            // Create row container
+
             const row = document.createElement("div");
             row.className = "action-card-row";
-          
-            // Create ID box
+
             const idBox = document.createElement("div");
             idBox.className = "action-card-id";
             if (cardData.type === "Action") {
@@ -541,13 +515,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
             }
             idBox.textContent = cardData.cardId;
             row.appendChild(idBox);
-          
-            // Create label box
+
             const labelBox = document.createElement("div");
             labelBox.className = "action-card-label";
             labelBox.textContent = cardData.label;
             row.appendChild(labelBox);
-          
+
             li.appendChild(row);
             actionList.appendChild(li);
           });
@@ -782,10 +755,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function openSelector(config) {
-    state.selector = config;
     ui.selectorKicker.textContent = config.kicker || "Choose Option";
     ui.selectorTitle.textContent = config.title || "Options";
     ui.selectorDescription.textContent = config.description || "";
+    ui.selectorDescription.classList.toggle("hidden", !config.description);
     ui.selectorOptions.replaceChildren();
 
     if (!config.options.length) {
@@ -841,7 +814,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function closeSelector() {
-    state.selector = null;
     ui.selectorOverlay.classList.add("hidden");
     document.body.style.overflow = "";
   }
@@ -852,7 +824,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     if (raceChanged) {
       state.selectedAttributeSet = null;
-      const attrOptions = race.Attributes || [];
+      const attrOptions = race.Attributes;
       if (attrOptions.length === 1) {
         state.selectedAttributeSet = attrOptions[0];
       }
@@ -877,11 +849,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     if (professionChanged) {
       state.selectedPath = null;
-      const pathOptions = profession.Paths || [];
+      const pathOptions = profession.Paths;
       if (pathOptions.length === 1) {
         state.selectedPath = pathOptions[0];
       }
-      state.levelUps = Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+      state.levelUps = createEmptyLevelUps();
     }
 
     commitSelection();
@@ -1058,7 +1030,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       treeNames.push(primaryTreeName);
     }
 
-    (state.selectedProf["Advancement Trees"] || []).forEach((treeName) => {
+    state.selectedProf["Advancement Trees"].forEach((treeName) => {
       if (state.trees.has(treeName) && !treeNames.includes(treeName)) {
         treeNames.push(treeName);
       }
@@ -1424,7 +1396,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (summary) {
       details.push(summary);
     }
-    if (profession.Paths && profession.Paths.length) {
+    if (profession.Paths.length) {
       details.push("Paths: " + profession.Paths.map((path) => path.Name).join(", "));
     }
     const accessibleTrees = [];
@@ -1432,7 +1404,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (state.trees.has(primaryTree)) {
       accessibleTrees.push(primaryTree);
     }
-    (profession["Advancement Trees"] || []).forEach((treeName) => {
+    profession["Advancement Trees"].forEach((treeName) => {
       if (!accessibleTrees.includes(treeName)) {
         accessibleTrees.push(treeName);
       }
