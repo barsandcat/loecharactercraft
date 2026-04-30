@@ -607,7 +607,7 @@ h1 {
   background: rgba(14, 10, 4, 0.65);
   backdrop-filter: blur(3px);
   padding-left: min(8vw, 64px);
-  animation: fade-in 160ms ease-out both;
+  animation: fade-in 80ms ease-out both;
 }
 
 .selector-sheet {
@@ -618,7 +618,7 @@ h1 {
   border-left: 1px solid rgba(201, 168, 64, 0.22);
   box-shadow: -10px 0 28px rgba(14, 10, 4, 0.3);
   overflow-y: auto;
-  animation: slide-in 200ms ease-out both;
+  animation: slide-in 100ms ease-out both;
 }
 
 .selector-header {
@@ -847,7 +847,7 @@ h1 {
     border-left: 0;
     border-top: 1px solid rgba(201, 168, 64, 0.22);
     box-shadow: 0 -10px 28px rgba(14, 10, 4, 0.3);
-    animation: rise-in 200ms ease-out both;
+    animation: rise-in 100ms ease-out both;
   }
 }
 
