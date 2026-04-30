@@ -3993,6 +3993,9 @@
     },
     "P20": {
       "Name": "Insult",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll CHA",
       "Level": 1
     },
     "P21": {
@@ -4005,6 +4008,9 @@
     },
     "P23": {
       "Name": "Retribution",
+	  "Type": "Reaction",
+	  "Category": "Defensive",
+	  "CardDescription": "Roll AGI",
       "Level": 1
     },
     "P24": {
@@ -4029,6 +4035,9 @@
     },
     "P29": {
       "Name": "Evoke Blizzard",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "P30": {
@@ -4085,6 +4094,9 @@
     },
     "P41": {
       "Name": "Inner Strength",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "CardDescription": "Roll STR or CHA",
       "Level": 1
     },
     "P43": {
@@ -4096,6 +4108,9 @@
     },
     "P44": {
       "Name": "Mighty Blow",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll STR",
       "Level": 1
     },
     "P45": {
@@ -4112,6 +4127,9 @@
     },
     "P48": {
       "Name": "Thousand Cuts",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll highest ATT",
       "Level": 1
     },
     "P49": {
@@ -4131,6 +4149,9 @@
     },
     "P52": {
       "Name": "The Guiding Light",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "P53": {
@@ -4171,10 +4192,16 @@
     },
     "P63": {
       "Name": "Scrapping",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT+AGI",
       "Level": 1
     },
     "P64": {
       "Name": "Divinum Infused Tools",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "CardDescription": "Roll DIV to boost AGI or INT",
       "Level": 1
     },
     "P65": {
@@ -4219,6 +4246,9 @@
     },
     "PP03": {
       "Name": "Heroic Strike",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll STR",
       "Level": 1
     },
     "PP04": {
@@ -4289,6 +4319,9 @@
     },
     "PP17": {
       "Name": "Aura of Justice",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll CHA",
       "Level": 1
     },
     "PP18": {
@@ -4323,6 +4356,9 @@
     },
     "PP24": {
       "Name": "Mark Bounty",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "CardDescription": "Rolld STR",
       "Level": 1
     },
     "PP25": {
@@ -4421,6 +4457,9 @@
     },
     "S08": {
       "Name": "Web of Minds",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT",
       "Level": 1
     },
     "S09": {
@@ -4433,6 +4472,9 @@
     },
     "S11": {
       "Name": "Rain of Divinum",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT",
       "Level": 1
     },
     "S12": {
@@ -4461,6 +4503,9 @@
     },
     "S18": {
       "Name": "Trip",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll STR or AGI",
       "Level": 1
     },
     "S19": {
@@ -4524,10 +4569,16 @@
     },
     "S30": {
       "Name": "Cognitive Enhancement",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll CHA", 
       "Level": 1
     },
     "S31": {
       "Name": "Rejuvenation",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT",
       "Level": 1
     },
     "S32": {
@@ -4536,18 +4587,30 @@
     },
     "S33": {
       "Name": "Shadow Jump",
+	  "Type": "Action",
+	  "Category": "Defensive",
+	  "CardDescription": "Roll AGI",
       "Level": 1
     },
     "S34": {
       "Name": "Veilkin",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "CardDescription": "Roll CHA",
       "Level": 1
     },
     "S35": {
       "Name": "Shadow Blade",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll AGI",
       "Level": 1
     },
     "S36": {
       "Name": "Skilled Imitator",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Copy PMs card",
       "Level": 1
     }
   }
