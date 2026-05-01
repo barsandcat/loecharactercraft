@@ -768,10 +768,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     } else {
       config.options.forEach((option) => {
         const content = config.getOptionContent(option);
+        const isSelected = Boolean(config.isSelected && config.isSelected(option));
         const button = document.createElement("button");
         button.type = "button";
         button.className = "option-card";
-        if (config.isSelected && config.isSelected(option)) {
+        if (isSelected) {
           button.classList.add("active");
         }
 
@@ -780,22 +781,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           closeSelector();
         });
 
-        const titleRow = document.createElement("div");
-        titleRow.className = "option-title-row";
-
         const title = document.createElement("div");
         title.className = "option-title";
         title.textContent = content.title;
-        titleRow.appendChild(title);
-
-        if (config.isSelected && config.isSelected(option)) {
-          const check = document.createElement("div");
-          check.className = "option-check";
-          check.textContent = "OK";
-          titleRow.appendChild(check);
-        }
-
-        button.appendChild(titleRow);
+        button.appendChild(title);
 
         if (content.detail) {
           const detail = document.createElement("div");

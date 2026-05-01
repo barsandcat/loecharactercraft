@@ -3949,6 +3949,9 @@
     },
     "P10": {
       "Name": "Summon Divling",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll STR+DIV or INT+DIV",
       "Level": 1
     },
     "P11": {
@@ -4440,14 +4443,14 @@
       "Name": "Focus Divinum",
       "Type": "Action",
       "Category": "Support",
-      "CardDescription": "Add DIV6",
+      "CardDescription": "INT 5+: +DIV10, INT 3-4: +DIV6, INT 1-2: +DIV4",
       "Level": 1
     },
     "S06": {
       "Name": "Energy Shield",
       "Type": "Reaction",
       "Category": "Defensive",
-      "CardDescription": "Roll INT+DIV",
+      "CardDescription": "Roll STR+DIV",
       "Level": 1
     },
     "S07": {
@@ -4466,10 +4469,16 @@
     },
     "S09": {
       "Name": "Ritual of Haste",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll INT+DIV",
       "Level": 1
     },
     "S10": {
       "Name": "Protective Gestures",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll AGI+DIV",
       "Level": 1
     },
     "S11": {
