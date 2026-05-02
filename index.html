@@ -70,6 +70,27 @@
     </div>
   </div>
 
+  <div id="confirmOverlay" class="selector-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+    <div class="selector-sheet confirm-sheet">
+      <div class="selector-header">
+        <div>
+          <p class="eyebrow">Confirm Action</p>
+          <h2 id="confirmTitle">Erase Current Build?</h2>
+        </div>
+        <button id="confirmClose" class="close-button" type="button" aria-label="Close confirmation">&times;</button>
+      </div>
+      <p id="confirmMessage" class="confirm-message">This will erase all choices!</p>
+      <div class="confirm-actions">
+        <button id="confirmCancel" class="option-card" type="button">
+          <span class="option-title">Cancel</span>
+        </button>
+        <button id="confirmAccept" class="option-card active" type="button">
+          <span class="option-title">Continue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <noscript>
     <div class="app-shell">
       <div class="error-banner">This page needs JavaScript to run the character builder.</div>

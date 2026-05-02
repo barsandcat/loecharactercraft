@@ -658,6 +658,22 @@ h1 {
 
 .selector-options { display: grid; gap: 8px; }
 
+.confirm-sheet {
+  width: min(460px, 100%);
+}
+
+.confirm-message {
+  margin: 0 0 18px;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.confirm-actions {
+  display: grid;
+  gap: 8px;
+}
+
 .option-card {
   display: grid;
   gap: 5px;
@@ -816,6 +832,10 @@ h1 {
     box-shadow: 0 -10px 28px rgba(14, 10, 4, 0.3);
     animation: rise-in 100ms ease-out both;
   }
+
+  .confirm-sheet {
+    padding: 14px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -823,6 +843,7 @@ h1 {
   .stat-grid {
     grid-template-columns: 1fr;
   }
+
 }
 
 

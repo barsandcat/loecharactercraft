@@ -2,6 +2,8 @@ import { createCharacterBuilder } from "./character.js";
 
 const ui = {};
 let builder = null;
+const ERASE_BUILD_MESSAGE = "This will erase all choices!";
+let pendingBuildAction = null;
 
 init();
 
@@ -58,12 +60,16 @@ function cacheUi() {
   ui.selectorDescription = document.getElementById("selectorDescription");
   ui.selectorOptions = document.getElementById("selectorOptions");
   ui.selectorClose = document.getElementById("selectorClose");
+  ui.confirmOverlay = document.getElementById("confirmOverlay");
+  ui.confirmClose = document.getElementById("confirmClose");
+  ui.confirmCancel = document.getElementById("confirmCancel");
+  ui.confirmAccept = document.getElementById("confirmAccept");
 }
 
 function bindEvents() {
   ui.newBuildButton.addEventListener("click", openNewBuild);
-  ui.resetButton.addEventListener("click", () => builder.resetBuild());
-  ui.randomButton.addEventListener("click", () => builder.randomBuild());
+  ui.resetButton.addEventListener("click", () => requestBuildConfirmation(() => builder.resetBuild()));
+  ui.randomButton.addEventListener("click", () => requestBuildConfirmation(() => builder.randomBuild()));
   ui.copyLinkButton.addEventListener("click", copyLink);
   ui.selectorClose.addEventListener("click", () => builder.closeSelector());
   ui.selectorOverlay.addEventListener("click", (event) => {
@@ -71,9 +77,21 @@ function bindEvents() {
       builder.closeSelector();
     }
   });
+  ui.confirmClose.addEventListener("click", closeConfirmDialog);
+  ui.confirmCancel.addEventListener("click", closeConfirmDialog);
+  ui.confirmAccept.addEventListener("click", confirmPendingBuildAction);
+  ui.confirmOverlay.addEventListener("click", (event) => {
+    if (event.target === ui.confirmOverlay) {
+      closeConfirmDialog();
+    }
+  });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      if (isConfirmDialogOpen()) {
+        closeConfirmDialog();
+        return;
+      }
       builder.closeSelector();
     }
   });
@@ -113,6 +131,64 @@ function openNewBuild() {
   const newBuildUrl = new URL(window.location.href);
   newBuildUrl.hash = "";
   window.open(newBuildUrl.toString(), "_blank", "noopener");
+}
+
+function requestBuildConfirmation(action) {
+  if (isBuildEmpty()) {
+    action();
+    return;
+  }
+
+  pendingBuildAction = action;
+  ui.confirmOverlay.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  ui.confirmAccept.focus();
+}
+
+function confirmPendingBuildAction() {
+  const action = pendingBuildAction;
+  closeConfirmDialog();
+  if (action) {
+    action();
+  }
+}
+
+function closeConfirmDialog() {
+  pendingBuildAction = null;
+  ui.confirmOverlay.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function isConfirmDialogOpen() {
+  return !ui.confirmOverlay.classList.contains("hidden");
+}
+
+function isBuildEmpty() {
+  const compact = deserializeSerializedState(builder.serializeState());
+  if (!compact) {
+    return false;
+  }
+
+  const hasLevelUps = Array.isArray(compact.lu) && compact.lu.some((entry) => entry !== null);
+  return !compact.r && compact.ai === null && !compact.o && !compact.p && !compact.pa && !hasLevelUps;
+}
+
+function deserializeSerializedState(encoded) {
+  if (!encoded) {
+    return null;
+  }
+
+  try {
+    const json = decodeURIComponent(
+      atob(encoded)
+        .split("")
+        .map((char) => "%" + char.charCodeAt(0).toString(16).padStart(2, "0"))
+        .join("")
+    );
+    return JSON.parse(json);
+  } catch (_) {
+    return null;
+  }
 }
 
 function showError(message) {

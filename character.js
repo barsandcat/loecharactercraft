@@ -26,6 +26,16 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
   }
 
+  function isBuildEmpty() {
+    return (
+      !state.selectedRace &&
+      !state.selectedOrigin &&
+      !state.selectedProf &&
+      !state.selectedPath &&
+      getFilledLevelCount() === 0
+    );
+  }
+
   function resetBuild() {
     resetSelectionState();
     closeSelector();
@@ -316,13 +326,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const container = ui.summaryPanel;
     container.replaceChildren();
 
-    if (
-      !state.selectedRace &&
-      !state.selectedOrigin &&
-      !state.selectedProf &&
-      !state.selectedPath &&
-      getFilledLevelCount() === 0
-    ) {
+    if (isBuildEmpty()) {
       container.appendChild(
         createEmptyState(
           "Start by choosing a race, origin, and profession. Your attributes, items, keywords, and actions will appear here as the build comes together."
@@ -1445,6 +1449,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   return {
     closeSelector,
+    isBuildEmpty,
     randomBuild,
     render,
     resetBuild,
