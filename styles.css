@@ -119,8 +119,7 @@ h1 {
   min-width: 200px;
 }
 
-/* Status chip & ghost button */
-.status-chip,
+/* Toolbar buttons */
 .ghost-button {
   padding: 6px 14px;
   border: 1px solid rgba(201, 168, 64, 0.38);
@@ -131,11 +130,6 @@ h1 {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: 1px;
-}
-
-.status-chip {
-  font-weight: 600;
-  color: var(--gold);
 }
 
 .ghost-button {
@@ -772,7 +766,6 @@ h1 {
     gap: 8px;
   }
 
-  .status-chip,
   .ghost-button {
     width: 100%;
     min-height: 40px;
@@ -782,10 +775,6 @@ h1 {
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
-  }
-
-  .status-chip {
-    grid-column: 1 / -1;
   }
 
   .panel-header,

@@ -23,14 +23,7 @@ async function init() {
     });
 
     bindEvents();
-    setLoadStatus(
-      data.Races.length +
-        " races | " +
-        data.Professions.length +
-        " professions | " +
-        data["Advancement Trees"].length +
-        " trees"
-    );
+    ui.newBuildButton.disabled = false;
     ui.resetButton.disabled = false;
     ui.randomButton.disabled = false;
     ui.copyLinkButton.disabled = false;
@@ -43,7 +36,6 @@ async function init() {
       syncUrlHash(builder.serializeState());
     }
   } catch (error) {
-    setLoadStatus("Data unavailable");
     showError(
       "Could not load data.json. If you opened this file directly from disk, serve the folder over HTTP or open the GitHub Pages version instead. " +
         error.message
@@ -52,7 +44,7 @@ async function init() {
 }
 
 function cacheUi() {
-  ui.loadStatus = document.getElementById("loadStatus");
+  ui.newBuildButton = document.getElementById("newBuildButton");
   ui.randomButton = document.getElementById("randomButton");
   ui.copyLinkButton = document.getElementById("copyLinkButton");
   ui.resetButton = document.getElementById("resetButton");
@@ -69,6 +61,7 @@ function cacheUi() {
 }
 
 function bindEvents() {
+  ui.newBuildButton.addEventListener("click", openNewBuild);
   ui.resetButton.addEventListener("click", () => builder.resetBuild());
   ui.randomButton.addEventListener("click", () => builder.randomBuild());
   ui.copyLinkButton.addEventListener("click", copyLink);
@@ -116,8 +109,10 @@ function copyLink() {
   });
 }
 
-function setLoadStatus(text) {
-  ui.loadStatus.textContent = text;
+function openNewBuild() {
+  const newBuildUrl = new URL(window.location.href);
+  newBuildUrl.hash = "";
+  window.open(newBuildUrl.toString(), "_blank", "noopener");
 }
 
 function showError(message) {
