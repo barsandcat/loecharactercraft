@@ -4197,7 +4197,7 @@
     },
     "P63": {
       "Name": "Scrapping",
-	  "Type": "Reaction",
+	  "Type": "Action",
 	  "Category": "Support",
 	  "CardDescription": "Roll INT+AGI",
       "Level": 1
