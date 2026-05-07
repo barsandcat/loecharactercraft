@@ -4506,10 +4506,16 @@
     },
     "S16": {
       "Name": "Backstab",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll for AGI and INT",
       "Level": 1
     },
     "S17": {
       "Name": "Parry",
+	  "Type": "Reaction",
+	  "Category": "Defensive",
+	  "CardDescription": "Roll for STR or AGI",
       "Level": 1
     },
     "S18": {
@@ -4545,7 +4551,7 @@
       "Name": "Arrow Rain",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI+DIV",
+      "CardDescription": "Roll AGI and DIV",
       "Level": 1
     },
     "S24": {
