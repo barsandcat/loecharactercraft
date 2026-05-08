@@ -3951,7 +3951,7 @@
       "Name": "Summon Divling",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll STR+DIV or INT+DIV",
+	  "CardDescription": "Roll STR+DIV or INT+DIV. Divling has onwers STR",
       "Level": 1
     },
     "P11": {
@@ -3962,7 +3962,7 @@
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI+DIV or INT+DIV",
+      "CardDescription": "Roll AGI or INT and DIV (10), +1 die: Brilliance, -2 dice: Armor",
       "Level": 1
     },
     "P13": {
@@ -3975,6 +3975,9 @@
     },
     "P15": {
       "Name": "Fireball",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "At range AGI+INT, damage all in STR radius, roll DIV",
       "Level": 1
     },
     "P16": {
@@ -4353,6 +4356,9 @@
     },
     "PP22": {
       "Name": "Eliminate",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "CardDescription": "Roll AGI and DIV(10), +1: Deception, +1: agains Small",
       "Level": 1
     },
     "PP23": {
