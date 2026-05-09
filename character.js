@@ -434,11 +434,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
             const nameDiv = document.createElement("div");
             nameDiv.className = "item-name";
-            let itemText = item.DisplayName;
-            if (item.Passive) {
-              itemText += " (" + item.Passive + ")";
-            }
-            nameDiv.textContent = itemText;
+            nameDiv.textContent = formatItemDisplayName(item);
             itemLi.appendChild(nameDiv);
 
             const effectDiv = document.createElement("div");
@@ -1193,11 +1189,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       return;
     }
 
-    // Extract keywords from items and add to common keyword pool
-    if (itemObj.Keywords) {
-      incrementCountMap(stats.keywordCounts, itemObj.Keywords);
-    }
-
     const key = itemName + "::" + itemObj.Type;
     if (!stats.items.has(key)) {
       stats.items.set(key, itemObj);
@@ -1323,7 +1314,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     (entry.Items || []).forEach((itemName) => {
       const itemObj = state.data.Items[itemName];
       if (itemObj) {
-        parts.push(itemObj.DisplayName + " (" + itemObj.Type + ")");
+        parts.push(formatItemDisplayName(itemObj));
       }
     });
 
@@ -1348,6 +1339,23 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function formatAttributeSummary(attributeSet) {
     return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
+  }
+
+  function formatItemDisplayName(item) {
+    debugger;
+    let itemText = item.DisplayName || "";
+    const details = [];
+    if (item.Passive) {
+      details.push(item.Passive);
+    }
+    const keywords = item.Keywords || [];
+    if (keywords.length) {
+      details.push(...keywords);
+    }
+    if (details.length) {
+      itemText += " (" + details.join(", ") + ")";
+    }
+    return itemText;
   }
 
   function formatActionCardLabel(cardId, card) {
