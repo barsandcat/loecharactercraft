@@ -4210,10 +4210,10 @@
           }
         ],
         "Successes": {
-          "1": "Pull the target py {successes} spaces (+2 spaces: agains :Large). If the target is Elite or Boss, place your Effect token on Enemy."
+          "1": "Pull the target py {successes} spaces (+2 spaces: against Large). If the target is Elite or Boss, place your Effect token on Enemy."
         }
       },
-	  "Back": "The {damage} {successes} enemy with your Effect token always chooses you as a target.",
+	  "Back": "The enemy with your Effect token always chooses you as a target.",
       "Level": 1
     },
     "P21": {
