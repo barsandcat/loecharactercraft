@@ -1,3 +1,60 @@
+const PROB_DICE = 3;
+const PROB_EN_DIFFICULTIES = [6, 8, 10];
+
+function computeSuccessDist(numDice, difficulty) {
+  const p0 = (difficulty - 1) / 12;
+  const p1 = Math.max(0, 12 - difficulty) / 12;
+  const p2 = 1 / 12;
+  const maxS = 2 * numDice;
+  let dp = new Float64Array(maxS + 1);
+  dp[0] = 1.0;
+  for (let i = 0; i < numDice; i++) {
+    const next = new Float64Array(maxS + 1);
+    for (let s = 0; s <= maxS; s++) {
+      if (dp[s] === 0) continue;
+      next[s]     += dp[s] * p0;
+      if (s + 1 <= maxS) next[s + 1] += dp[s] * p1;
+      if (s + 2 <= maxS) next[s + 2] += dp[s] * p2;
+    }
+    dp = next;
+  }
+  return dp;
+}
+
+function probAtLeast(dist, k) {
+  if (k <= 0) return 1;
+  let sum = 0;
+  for (let s = Math.max(0, k); s < dist.length; s++) sum += dist[s];
+  return sum;
+}
+
+function bandProb(dist, sortedNumKeys, index) {
+  const lo = sortedNumKeys[index];
+  const hi = index > 0 ? sortedNumKeys[index - 1] : null;
+  return probAtLeast(dist, lo) - (hi !== null ? probAtLeast(dist, hi) : 0);
+}
+
+function pct(p) { return Math.round(p * 100) + "%"; }
+
+function computeAppliedModifiers(modifiers, keywordCounts) {
+  const applied = [];
+  for (const mod of modifiers) {
+    let bestTrigger = null;
+    let bestCount = 0;
+    for (const trigger of mod.Triggers) {
+      const count = keywordCounts.get(trigger) || 0;
+      if (count > bestCount) {
+        bestCount = count;
+        bestTrigger = trigger;
+      }
+    }
+    if (bestTrigger && bestCount > 0) {
+      applied.push({ trigger: bestTrigger, count: bestCount, totalDice: mod.Dice * bestCount });
+    }
+  }
+  return applied;
+}
+
 export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   const LEVEL_UP_SLOTS = 12;
   const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
@@ -324,6 +381,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     const stats = collectCharacterStats();
+    const allKeywordCounts = new Map(stats.keywordCounts);
+    for (const itemObj of stats.items.values()) {
+      incrementCountMap(allKeywordCounts, itemObj.Keywords || []);
+    }
 
     const attributeCard = document.createElement("section");
     attributeCard.className = "summary-card";
@@ -482,7 +543,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           cards.forEach(({ cardId, card }) => {
             const li = document.createElement("li");
             li.className = "action-list-item";
-            li.appendChild(buildActionCardElement(cardId, card));
+            li.appendChild(buildActionCardElement(cardId, card, stats.attributes, allKeywordCounts));
             actionList.appendChild(li);
           });
 
@@ -1352,7 +1413,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return rollLineEl;
   }
 
-  function buildActionCardElement(cardId, card) {
+  function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
     const wrapper = document.createElement("div");
     wrapper.className = "action-card-full";
 
@@ -1401,10 +1462,59 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
       if (card.Roll.Successes) {
         const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
-        for (const key of sortedKeys) {
+        const sortedNum = sortedKeys.map(Number);
+        const attDice = attrs
+          ? card.Roll.ATT.reduce((sum, att) => sum + (attrs[att] || 0), 0)
+          : 0;
+        const baseDice = attDice > 0 ? attDice : PROB_DICE;
+        const appliedMods = (keywordCounts && card.Roll.Modifiers)
+          ? computeAppliedModifiers(card.Roll.Modifiers, keywordCounts)
+          : [];
+        const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
+        const effectiveDice = Math.max(0, baseDice + modDiceTotal);
+        let probLabel;
+        if (card.Roll.Difficulty != null) {
+          const dist = computeSuccessDist(effectiveDice, card.Roll.Difficulty);
+          probLabel = (i) => "(" + pct(bandProb(dist, sortedNum, i)) + ")";
+        } else {
+          const dists = PROB_EN_DIFFICULTIES.map(d => computeSuccessDist(effectiveDice, d));
+          probLabel = (i) => "(" + PROB_EN_DIFFICULTIES.map((d, di) =>
+            d + ":" + pct(bandProb(dists[di], sortedNum, i))
+          ).join(" ") + ")";
+        }
+        for (let i = 0; i < sortedKeys.length; i++) {
+          const key = sortedKeys[i];
           const outEl = document.createElement("div");
           outEl.className = "action-card-outcome";
-          outEl.textContent = key + ": " + card.Roll.Successes[key];
+          outEl.appendChild(document.createTextNode(key + ": " + card.Roll.Successes[key] + " "));
+
+          const probWrap = document.createElement("span");
+          probWrap.className = "action-card-prob";
+          probWrap.appendChild(document.createTextNode(probLabel(i)));
+
+          const tooltip = document.createElement("div");
+          tooltip.className = "action-card-prob-tooltip";
+          const totalLine = document.createElement("div");
+          totalLine.className = "action-card-prob-tooltip-total";
+          totalLine.textContent = "Rolling " + effectiveDice + " dice";
+          tooltip.appendChild(totalLine);
+          if (attrs) {
+            card.Roll.ATT.forEach(att => {
+              const line = document.createElement("div");
+              line.textContent = att + ": " + (attrs[att] || 0);
+              tooltip.appendChild(line);
+            });
+          }
+          for (const m of appliedMods) {
+            const sign = m.totalDice > 0 ? "+" : "";
+            const dieWord = Math.abs(m.totalDice) === 1 ? "die" : "dice";
+            const countLabel = m.count > 1 ? " ×" + m.count : "";
+            const line = document.createElement("div");
+            line.textContent = m.trigger + countLabel + ": " + sign + m.totalDice + " " + dieWord;
+            tooltip.appendChild(line);
+          }
+          probWrap.appendChild(tooltip);
+          outEl.appendChild(probWrap);
           body.appendChild(outEl);
         }
       }

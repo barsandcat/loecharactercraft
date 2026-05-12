@@ -4817,7 +4817,7 @@
       "Name": "Web of Minds",
       "Type": "Action",
       "Category": "Support",
-      "Keywords": "Spell",
+      "Keywords": ["Spell"],
       "Target": "PM in any range",
       "Roll": {
         "ATT": [
