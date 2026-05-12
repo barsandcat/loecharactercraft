@@ -3958,7 +3958,7 @@
       "Name": "Magic Circle",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll AGI [8]; +2: Artistry, +1: Lore. ",
+	  "CardDescription": "Roll AGI [8]; +2: Artistry, +1: Lore",
       "Level": 1
     },
     "P12": {
