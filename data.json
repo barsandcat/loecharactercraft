@@ -4495,13 +4495,41 @@
       "Name": "Chain Lightning",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll INT, DIV",
+	  "Keywords": ["Attack", "Ranged", "Spell"],
+	  "Target": "1 in R2+",
+      "Roll": {
+		  "DIV": true,
+		  "ATT": ["INT"],
+		  "Difficulty": 8,
+		  "Modifiers": [
+			{ "Dice": -2, "Triggers": ["Armor"] },
+			{ "Dice": 1, "Triggers": ["Thunder"] } 
+		  ],
+		  "Successes": {
+			  "3": "Resolve effects on the back",
+			  "1": "You loose 2 HP, resolve effects on the back",
+			  "0": "You gain 1 terror, do not flip this card"
+		  }
+	  },
       "Level": 1
     },
     "S08": {
       "Name": "Web of Minds",
 	  "Type": "Action",
 	  "Category": "Support",
+	  "Keywords": "Spell",
+	  "Target": "PM in any range",
+	  "Roll": {
+		  "ATT": ["INT"],
+		  "Difficulty": 8,
+		  "Modifiers": [
+			{ "Dice": 1, "Triggers": ["Arcana", "Leadership"] }
+		  ],
+		  "Successes": {
+			"4": "Place a total of 3 tokens",
+			"3": ""
+		  }	
+	  },
 	  "CardDescription": "Roll INT",
       "Level": 1
     },
@@ -4523,6 +4551,8 @@
       "Name": "Rain of Divinum",
 	  "Type": "Action",
 	  "Category": "Support",
+	  "Keywords": ["Spell"],
+	  "Target": "Self",
 	  "CardDescription": "Roll INT",
       "Level": 1
     },

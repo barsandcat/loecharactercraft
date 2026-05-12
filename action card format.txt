@@ -1,0 +1,26 @@
+    "CardId": {
+      "Name": "Card name", # "Required",
+      "DisplayName": "Display name", # "For the basic actions upgrades, if present overrides name",
+      "Type": "Action/Reaction", # Default "Action"
+      "Category": "Offensive/Defensive/Support", # Default "Offensive"
+	  "Keywords": ["Keyword1", "Keyword2"], # Optional
+      "Condition": "Condition description", # Optional
+	  "Target": "Range instructions", # Optional
+      "Roll": {
+		  "DIV": true, # if absent - false, i.e. no DIV rol
+		  "ATT": ["INT"], # Required
+		  "Difficulty": 8, # if absent, means difficulty of the enemy
+		  "Modifiers": [
+			{ "Dice": -2, "Triggers": ["Trigger1"] },
+			{ "Dice": 1, "Triggers": ["Trigger2"] } 
+		  ], # Optional
+		  "Successes": {
+			  "3": "Best result",
+			  "1": "Ok result",
+			  "0": "Failure"
+		  } # "Required"
+	  } # Optional
+      "Front": "Front instructions", # Optional
+      "Back": "Back instructions", # Optional
+      "Level": 1 # Only relevant for basic action cards, if absent = 1
+    },
