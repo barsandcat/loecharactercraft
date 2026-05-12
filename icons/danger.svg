@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 31.136026 83.340477"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="danger.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   width="31.136026"
+   height="83.340477"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="12.13"
+     inkscape:cx="17.97197"
+     inkscape:cy="28.153339"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     transform="translate(-32,-8.6595218)" />
+  <path
+     d="M 24.591921,0 31.136026,43.422918 18,43.340478 l 8,40 -26,-46 14.702391,0.329761 L 5.261336,0.038747 Z"
+     fill="#1c1c1c"
+     id="path1"
+     sodipodi:nodetypes="cccccccc" />
+</svg>

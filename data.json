@@ -4173,11 +4173,21 @@
       "Name": "Furious Attacks",
       "Type": "Action",
       "Category": "Offensive",
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Range": "All in R1",
       "Roll": {
         "DIV": true,
         "ATT": [
           "STR"
-        ]
+        ],
+        "Difficulty": 8,
+        "Successes": {
+          "1": "Deal *successes* *damage* to *half DIV* targets."
+        }
       },
       "Level": 1
     },
@@ -4185,10 +4195,23 @@
       "Name": "Insult",
       "Type": "Action",
       "Category": "Offensive",
+      "Moon": 1,
+      "Target": "1 in any range",
       "Roll": {
         "ATT": [
           "CHA"
-        ]
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Intimidation"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Target discards 1 random card or suffers 1 stress"
+        }
       },
       "Level": 1
     },

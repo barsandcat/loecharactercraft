@@ -529,19 +529,16 @@ h1 {
   line-height: 1.2;
 }
 
-.action-card-difficulty-emoji {
-  filter: brightness(0) invert(1);
-  font-size: 0.7em;
+.action-card-difficulty {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
 }
 
-.action-card-difficulty {
-  background: var(--dark);
-  color: var(--dark-text);
-  padding: 0 3px;
-  border-radius: 2px;
-  font-size: 0.82em;
-  letter-spacing: 0.02em;
-  margin-left: 4px;
+.action-card-difficulty-icon {
+  display: block;
+  width: 1rem;
+  height: auto;
 }
 
 .action-card-modifiers {

@@ -1410,14 +1410,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     rollLineEl.appendChild(document.createTextNode(rollText));
     const diffBadge = document.createElement("span");
     diffBadge.className = "action-card-difficulty";
-    if (roll.Difficulty != null) {
-      diffBadge.textContent = String(roll.Difficulty);
-    } else {
-      const emojiSpan = document.createElement("span");
-      emojiSpan.className = "action-card-difficulty-emoji";
-      emojiSpan.textContent = "\u{1F464}";
-      diffBadge.appendChild(emojiSpan);
-    }
+    const diffIcon = document.createElement("img");
+    const difficultyIconName = roll.Difficulty != null ? String(roll.Difficulty) : "en";
+    diffIcon.className = "action-card-difficulty-icon";
+    diffIcon.src = "icons/" + difficultyIconName + ".svg";
+    diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
+    diffBadge.appendChild(diffIcon);
     rollLineEl.appendChild(diffBadge);
     return rollLineEl;
   }
