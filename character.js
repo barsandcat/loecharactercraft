@@ -475,14 +475,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
       Array.from(stats.actions.values()).forEach((card) => {
         const category = cardsByCategory[card.Category] ? card.Category : "Offensive";
-        const cardType = card.Type === "Reaction" ? "Reaction" : "Action";
-        const label = formatActionCardLabel(card._cardId, card);
-
-        cardsByCategory[category].push({
-          label,
-          cardId: card._cardId,
-          type: cardType,
-        });
+        cardsByCategory[category].push({ cardId: card._cardId, card });
       });
 
       ["Offensive", "Defensive", "Support"].forEach((category) => {
@@ -499,29 +492,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           const actionList = document.createElement("ul");
           actionList.className = "action-list";
 
-          cards.forEach((cardData) => {
+          cards.forEach(({ cardId, card }) => {
             const li = document.createElement("li");
             li.className = "action-list-item";
-
-            const row = document.createElement("div");
-            row.className = "action-card-row";
-
-            const idBox = document.createElement("div");
-            idBox.className = "action-card-id";
-            if (cardData.type === "Action") {
-              idBox.classList.add("is-action");
-            } else if (cardData.type === "Reaction") {
-              idBox.classList.add("is-reaction");
-            }
-            idBox.textContent = cardData.cardId;
-            row.appendChild(idBox);
-
-            const labelBox = document.createElement("div");
-            labelBox.className = "action-card-label";
-            labelBox.textContent = cardData.label;
-            row.appendChild(labelBox);
-
-            li.appendChild(row);
+            li.appendChild(createActionCardCard(cardId, card));
             actionList.appendChild(li);
           });
 
@@ -633,7 +607,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
             versionLine.classList.add("selected");
           }
 
-          versionLine.textContent = summarizeEntry(entry) || "No changes";
+          renderEntryToElement(versionLine, entry);
           versionList.appendChild(versionLine);
         });
 
@@ -1342,7 +1316,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function formatItemDisplayName(item) {
-    debugger;
     let itemText = item.DisplayName || "";
     const details = [];
     if (item.Passive) {
@@ -1366,8 +1339,119 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       return "";
     }
     const displayName = card.DisplayName || card.Name;
-    const desc = card.CardDescription ? " (" + card.CardDescription + ")" : ' (????)';
-    return displayName + desc;
+    const parts = [...(card.Keywords || [])];
+    if (card.Condition) parts.push(card.Condition);
+    parts.push(card.Type);
+    return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
+  }
+
+  function createActionCardCard(cardId, card) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "action-card-full";
+
+    const idBox = document.createElement("div");
+    idBox.className = "action-card-id " + (card.Type === "Reaction" ? "is-reaction" : "is-action");
+    idBox.textContent = cardId;
+    wrapper.appendChild(idBox);
+
+    const body = document.createElement("div");
+    body.className = "action-card-body";
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "action-card-name";
+    nameEl.textContent = card.DisplayName || card.Name;
+    body.appendChild(nameEl);
+
+    const metaParts = [...(card.Keywords || [])];
+    if (card.Condition) metaParts.push(card.Condition);
+    if (metaParts.length) {
+      const metaEl = document.createElement("div");
+      metaEl.className = "action-card-meta";
+      metaEl.textContent = metaParts.join(", ");
+      body.appendChild(metaEl);
+    }
+
+    if (card.Target) {
+      const targetEl = document.createElement("div");
+      targetEl.className = "action-card-target";
+      targetEl.textContent = card.Target;
+      body.appendChild(targetEl);
+    }
+
+    if (card.CardDescription) {
+      const descEl = document.createElement("div");
+      descEl.className = "action-card-desc";
+      descEl.textContent = card.CardDescription;
+      body.appendChild(descEl);
+    }
+
+    wrapper.appendChild(body);
+    return wrapper;
+  }
+
+  function createActionCardMention(cardId, card) {
+    const span = document.createElement("span");
+    span.className = "action-card-mention";
+    span.textContent = formatActionCardLabel(cardId, card);
+
+    const tooltipEl = document.createElement("div");
+    tooltipEl.className = "action-card-mention-tooltip";
+    tooltipEl.appendChild(createActionCardCard(cardId, card));
+    span.appendChild(tooltipEl);
+
+    return span;
+  }
+
+  function renderEntryToElement(element, entry) {
+    const parts = [];
+
+    (entry.Attributes || []).forEach((attributeSet) => {
+      Object.entries(attributeSet).forEach(([key, value]) => {
+        parts.push({ text: value + " " + key });
+      });
+    });
+
+    if (entry.HP) parts.push({ text: entry.HP + " HP" });
+    if (entry.MOB) parts.push({ text: entry.MOB + " MOB" });
+    if (entry.Brill) parts.push({ text: entry.Brill + " Brill" });
+
+    const divValue = entry.DIV;
+    if (divValue === "Upgrade") parts.push({ text: "DIV Upgrade" });
+    else if (divValue) parts.push({ text: "DIV " + divValue });
+
+    (entry.Keywords || []).forEach((k) => parts.push({ text: k }));
+    (entry.Skills || []).forEach((s) => parts.push({ text: s }));
+
+    (entry.Items || []).forEach((itemName) => {
+      const itemObj = state.data.Items[itemName];
+      if (itemObj) parts.push({ text: formatItemDisplayName(itemObj) });
+    });
+
+    (entry["Action cards"] || []).forEach((cardId) => {
+      const card = state.data["Action Cards"][cardId];
+      parts.push({ cardId, card: card || null });
+    });
+
+    if (!parts.length) {
+      element.textContent = "No changes";
+      return;
+    }
+
+    element.replaceChildren();
+    parts.forEach((part, index) => {
+      if (index > 0) {
+        element.appendChild(document.createTextNode(", "));
+      }
+      if (part.cardId !== undefined) {
+        if (part.card) {
+          element.appendChild(createActionCardMention(part.cardId, part.card));
+        } else {
+          element.appendChild(document.createTextNode(part.cardId));
+        }
+      } else {
+        element.appendChild(document.createTextNode(part.text));
+      }
+    });
   }
 
   function describeRaceOption(race) {

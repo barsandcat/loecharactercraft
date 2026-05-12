@@ -171,7 +171,6 @@ h1 {
 .panel {
   background: var(--panel);
   border: 1px solid var(--panel-border);
-  overflow: hidden;
   box-shadow: var(--shadow);
   animation: rise-in 580ms ease-out both;
 }
@@ -446,23 +445,23 @@ h1 {
   padding: 0;
 }
 
-/* Action Card ID Box */
-.action-card-row {
+/* Action card full layout (inline in Action Cards list) */
+.action-card-full {
   display: flex;
-  gap: 6px;
-  align-items: stretch;
+  border: 1px solid rgba(70, 48, 12, 0.1);
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.32);
+  overflow: hidden;
 }
 
 .action-card-id {
   flex-shrink: 0;
-  padding: 7px 8px;
-  border: 1px solid rgba(70, 48, 12, 0.1);
+  padding: 8px;
   font-family: 'Cinzel', serif;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  border-radius: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -472,29 +471,85 @@ h1 {
 
 .action-card-id.is-action {
   background: var(--dark);
-  border-color: rgba(201, 168, 64, 0.32);
+  border-right: 1px solid rgba(201, 168, 64, 0.32);
   color: var(--gold);
 }
 
 .action-card-id.is-reaction {
-  background: rgba(255, 255, 255, 0.32);
-  border-color: rgba(70, 48, 12, 0.1);
+  background: rgba(255, 255, 255, 0.18);
+  border-right: 1px solid rgba(70, 48, 12, 0.12);
   color: var(--ink);
 }
 
-.action-card-label {
+.action-card-body {
   flex: 1;
   padding: 7px 10px;
-  border: 1px solid rgba(70, 48, 12, 0.1);
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.action-card-name {
   font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
-  line-height: 1.35;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
   color: var(--ink);
-  border-radius: 1px;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.32);
-  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+
+.action-card-meta {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.action-card-target {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.action-card-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Action card mention with tooltip (in tree version lines) */
+.action-card-mention {
+  position: relative;
+  display: inline;
+  cursor: default;
+  border-bottom: 1px dotted currentColor;
+}
+
+.action-card-mention-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  z-index: 50;
+  min-width: 200px;
+  max-width: 300px;
+  background: var(--panel);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 120ms ease, transform 120ms ease;
+  box-shadow: var(--shadow-lg);
+}
+
+.action-card-mention:hover .action-card-mention-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Trees */
