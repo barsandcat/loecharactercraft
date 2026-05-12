@@ -4218,25 +4218,66 @@
     },
     "P21": {
       "Name": "Dual Wielding",
+	  "Type": "Reaction",
+	  "Category": "Offensive",
+	  "Condition": "Before your Melee Attack",
+	  "Target": "Self",
+	  "Front": "During this Melee Attack, deal {damage} from 2 Melee Items instead of 1.",
       "Level": 1
     },
     "P22": {
       "Name": "Charging Bull",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Sun": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "Self",
+	  "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: Large. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against Small).",
       "Level": 1
     },
     "P23": {
       "Name": "Retribution",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Sun": 1,
+	  "Mun": 1,
+	  "Condition": "Against Melee",
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics"
+            ]
+          }
+        ],
+		"Successes": {
+          "3": "Prevent 2 {successes} {damage}. Deal STR {damage} to active Enemy in R1",
+		  "1": "Deal STR {damage} to active Enemy in R1"
+        }
       },
       "Level": 1
     },
     "P24": {
       "Name": "Follow Through",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Sun": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
+	  "Roll": {
+		  "ATT": [ "STR" ],
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Athletics"] } ],
+		  "Successes": {
+			  "2": "Deal {successes} {damage}. If target is defeated, you move by AGi, then resolve this card again, or resolve 0",
+			  "0": "Place this card in your Pouch"
+		  }
+	  },
       "Level": 1
     },
     "P25": {
@@ -4972,6 +5013,12 @@
     },
     "S20": {
       "Name": "Into the Fray",
+	  "Type": "Reaction",
+	  "Category": "Offensive",
+	  "Sun": 2,
+	  "Condition": "After dealing at least 3 damage with Melee",
+	  "Target": "Self",
+	  "Front": "Move by your AGI. Gain 1 {fate}",
       "Level": 1
     },
     "S21": {
