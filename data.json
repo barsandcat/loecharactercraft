@@ -4186,7 +4186,7 @@
         ],
         "Difficulty": 8,
         "Successes": {
-          "1": "Deal *successes* *damage* to *half DIV* targets."
+          "1": "Deal {successes} {damage} to {half div} targets."
         }
       },
       "Level": 1

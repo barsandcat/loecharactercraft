@@ -1402,6 +1402,31 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
   }
 
+  function appendIconTextContent(parent, text) {
+    const iconPattern = /\{([^}]+)\}/g;
+    let lastIndex = 0;
+    let match;
+    while ((match = iconPattern.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const iconName = match[1].trim();
+      if (iconName) {
+        const iconEl = document.createElement("img");
+        iconEl.className = "action-card-inline-icon";
+        iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
+        iconEl.alt = iconName;
+        parent.appendChild(iconEl);
+      } else {
+        parent.appendChild(document.createTextNode(match[0]));
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) {
+      parent.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+  }
+
   function buildRollElement(roll) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
@@ -1413,7 +1438,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const diffIcon = document.createElement("img");
     const difficultyIconName = roll.Difficulty != null ? String(roll.Difficulty) : "en";
     diffIcon.className = "action-card-difficulty-icon";
-    diffIcon.src = "icons/" + difficultyIconName + ".svg";
+    diffIcon.src = "icons/" + encodeURIComponent(difficultyIconName) + ".svg";
     diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
     diffBadge.appendChild(diffIcon);
     rollLineEl.appendChild(diffBadge);
@@ -1493,7 +1518,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           const key = sortedKeys[i];
           const outEl = document.createElement("div");
           outEl.className = "action-card-outcome";
-          outEl.appendChild(document.createTextNode(key + ": " + card.Roll.Successes[key] + " "));
+          outEl.appendChild(document.createTextNode(key + ": "));
+          appendIconTextContent(outEl, card.Roll.Successes[key]);
+          outEl.appendChild(document.createTextNode(" "));
 
           const probWrap = document.createElement("span");
           probWrap.className = "action-card-prob";
@@ -1530,14 +1557,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (card.Front) {
       const frontEl = document.createElement("div");
       frontEl.className = "action-card-desc";
-      frontEl.textContent = card.Front;
+      appendIconTextContent(frontEl, card.Front);
       body.appendChild(frontEl);
     }
 
     if (card.Back) {
       const backEl = document.createElement("div");
       backEl.className = "action-card-desc";
-      backEl.textContent = card.Back;
+      appendIconTextContent(backEl, card.Back);
       body.appendChild(backEl);
     }
 

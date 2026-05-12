@@ -541,6 +541,14 @@ h1 {
   height: auto;
 }
 
+.action-card-inline-icon {
+  display: inline-block;
+  height: 0.95em;
+  width: auto;
+  vertical-align: -0.12em;
+  margin: 0 0.08em;
+}
+
 .action-card-modifiers {
   font-family: 'EB Garamond', serif;
   font-size: 0.88rem;
