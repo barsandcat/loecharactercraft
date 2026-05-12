@@ -467,14 +467,14 @@ h1 {
 
 .action-card-id.is-action {
   background: var(--dark);
-  border-right: 1px solid rgba(201, 168, 64, 0.32);
   color: var(--gold);
+  box-shadow: inset 2px 0 0 var(--gold);
 }
 
 .action-card-id.is-reaction {
   background: rgba(255, 255, 255, 0.18);
-  border-right: 1px solid rgba(70, 48, 12, 0.12);
   color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--ink);
 }
 
 .action-card-body {
