@@ -4605,6 +4605,10 @@
     },
     "S26": {
       "Name": "Relieving Aura",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "Self",
+	  "CardDescription": "Roll INT [8]; +1: Medicine; -2: Armor",
       "Level": 1
     },
     "S27": {
