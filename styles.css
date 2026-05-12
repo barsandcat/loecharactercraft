@@ -445,7 +445,7 @@ h1 {
   border: 1px solid rgba(70, 48, 12, 0.1);
   border-radius: 1px;
   background: rgba(255, 255, 255, 0.32);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .action-card-id {
