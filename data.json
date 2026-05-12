@@ -3779,8 +3779,11 @@
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
       "Level": 1,
-      "CardDescription": "Roll STR",
+      "CardDescription": "Roll STR [EN]",
       "DisplayName": "Bash"
     },
     "B01": {
@@ -3788,23 +3791,29 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 2,
-      "CardDescription": "Roll STR",
+	  "Condition": "Against Attack",
+	  "Target": "Self",
+      "CardDescription": "Roll STR [EN]",
       "DisplayName": "Endurance"
     },
     "B02": {
       "Name": "Endurance",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Condition": "Against Attack",
+	  "Target": "Self",
       "Level": 3,
-      "CardDescription": "Roll STR",
+      "CardDescription": "Roll STR [EN]",
       "DisplayName": "Exceptional Endurance"
     },
     "B03": {
       "Name": "Endurance",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Condition": "Against Attack",
+	  "Target": "Self",
       "Level": 1,
-      "CardDescription": "Roll STR",
+      "CardDescription": "Roll STR [EN]",
       "DisplayName": "Limited Endurance"
     },
     "B04": {
@@ -3812,7 +3821,8 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 2,
-      "CardDescription": "Roll AGI",
+      "CardDescription": "Roll AGI [EN]",
+	  "Target": "Self",
       "DisplayName": "Dodge"
     },
     "B05": {
@@ -3820,22 +3830,26 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 3,
-      "CardDescription": "Roll AGI",
+	  "Target": "Self",
+      "CardDescription": "Roll AGI [EN]; -1: Armor",
       "DisplayName": "Nimble Dodge"
     },
     "B06": {
       "Name": "Dodge",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Target": "Self",
       "Level": 1,
-      "CardDescription": "Roll AGI",
+      "CardDescription": "Roll AGI [EN]",
       "DisplayName": "Clumsy Dodge"
     },
     "B07": {
       "Name": "Combat Insight",
       "Type": "Reaction",
       "Category": "Support",
-      "CardDescription": "Support with a die",
+	  "Condition": "During a Roll",
+	  "Target": "PM in any range",
+      "CardDescription": "Support with 1 die",
       "Level": 2,
       "DisplayName": "Combat Insight"
     },
@@ -3852,7 +3866,8 @@
       "Type": "Action",
       "Category": "Support",
       "Level": 2,
-      "CardDescription": "Roll CHA",
+      "CardDescription": "Roll CHA [8]; +1:Leadership",
+	  "Target": "CH in R4",
       "DisplayName": "Command"
     },
     "B11": {
@@ -3875,7 +3890,9 @@
       "Name": "Bite",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll STR",
+	  "Keywords": ["Attack", "Melee"],
+	  "Target": "1 in R1",
+      "CardDescription": "Roll STR [EN]",
       "Level": 1
     },
     "B14": {
@@ -3890,8 +3907,11 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Ranged",
+	  "Target": "1 in R2+",
       "Level": 1,
-      "CardDescription": "Roll AGI",
+      "CardDescription": "Roll AGI [EN]",
       "DisplayName": "Shoot"
     },
     "B16": {
@@ -3918,14 +3938,17 @@
       "Name": "Counter",
       "Type": "Reaction",
       "Category": "Defensive",
-      "CardDescription": "Roll AGI",
+	  "Condition": "Against Melee",
+	  "Target": "Self",
+      "CardDescription": "Roll AGI [EN], +1: Vigilance",
       "Level": 1
     },
     "P05": {
       "Name": "Battle Prayer",
       "Type": "Action",
       "Category": "Support",
-      "CardDescription": "Roll CHA, DIV",
+	  "Keywords": ["Spell"],
+      "CardDescription": "Roll CHA, DIV [8]",
       "Level": 1
     },
     "P06": {
@@ -3965,6 +3988,8 @@
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
+	  "Target": "1 in R2+",
+	  "Keywords": ["Attack", "Spell", "Ranged"],
       "CardDescription": "Roll AGI or INT, DIV [10]; +1: Brilliance; -2: Armor",
       "Level": 1
     },
@@ -4293,7 +4318,9 @@
       "Name": "Unleash Divinum",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll STR",
+	  "Keywords": ["Attack", "Melee", "Spell"],
+	  "Traget": "All in R2",
+      "CardDescription": "Roll STR, DIV [8]; +1: Arcana; -1: Armor",
       "Level": 1
     },
     "PP11": {
@@ -4326,6 +4353,8 @@
       "Name": "Taunt",
       "Type": "Reaction",
       "Category": "Support",
+	  "Condition": "After revealling EN activation card",
+	  "Target": "Self",
       "Level": 1
     },
     "PP17": {
