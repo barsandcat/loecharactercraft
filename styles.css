@@ -575,8 +575,7 @@ h1 {
   left: 0;
   top: calc(100% + 4px);
   z-index: 50;
-  min-width: 200px;
-  max-width: 300px;
+  width: var(--action-card-width, 280px);
   background: var(--panel);
   pointer-events: none;
   opacity: 0;

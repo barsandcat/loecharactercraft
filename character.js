@@ -553,6 +553,15 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       });
 
       container.appendChild(actionSection);
+
+      const syncCardWidth = () => {
+        const firstCard = actionSection.querySelector('.action-card-full');
+        if (firstCard) {
+          document.documentElement.style.setProperty('--action-card-width', firstCard.offsetWidth + 'px');
+        }
+      };
+      requestAnimationFrame(syncCardWidth);
+      new ResizeObserver(syncCardWidth).observe(actionSection);
     }
   }
 
