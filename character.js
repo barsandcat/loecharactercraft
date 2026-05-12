@@ -1332,6 +1332,26 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
   }
 
+  function buildRollElement(roll) {
+    const rollLineEl = document.createElement("div");
+    rollLineEl.className = "action-card-roll";
+    let rollText = "Roll for " + roll.ATT.join("+");
+    if (roll.DIV) rollText += " and DIV";
+    rollLineEl.appendChild(document.createTextNode(rollText));
+    const diffBadge = document.createElement("span");
+    diffBadge.className = "action-card-difficulty";
+    if (roll.Difficulty != null) {
+      diffBadge.textContent = String(roll.Difficulty);
+    } else {
+      const emojiSpan = document.createElement("span");
+      emojiSpan.className = "action-card-difficulty-emoji";
+      emojiSpan.textContent = "\u{1F464}";
+      diffBadge.appendChild(emojiSpan);
+    }
+    rollLineEl.appendChild(diffBadge);
+    return rollLineEl;
+  }
+
   function buildActionCardElement(cardId, card) {
     const wrapper = document.createElement("div");
     wrapper.className = "action-card-full";
@@ -1365,11 +1385,43 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       body.appendChild(targetEl);
     }
 
-    if (card.CardDescription) {
-      const descEl = document.createElement("div");
-      descEl.className = "action-card-desc";
-      descEl.textContent = card.CardDescription;
-      body.appendChild(descEl);
+    if (card.Roll) {
+      body.appendChild(buildRollElement(card.Roll));
+
+      if (card.Roll.Modifiers && card.Roll.Modifiers.length) {
+        const modEl = document.createElement("div");
+        modEl.className = "action-card-modifiers";
+        modEl.textContent = card.Roll.Modifiers.map(mod => {
+          const sign = mod.Dice > 0 ? "+" : "";
+          const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
+          return `${sign}${mod.Dice} ${dieWord}: ${mod.Triggers.join(", ")}`;
+        }).join("  ");
+        body.appendChild(modEl);
+      }
+
+      if (card.Roll.Successes) {
+        const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
+        for (const key of sortedKeys) {
+          const outEl = document.createElement("div");
+          outEl.className = "action-card-outcome";
+          outEl.textContent = key + ": " + card.Roll.Successes[key];
+          body.appendChild(outEl);
+        }
+      }
+    }
+
+    if (card.Front) {
+      const frontEl = document.createElement("div");
+      frontEl.className = "action-card-desc";
+      frontEl.textContent = card.Front;
+      body.appendChild(frontEl);
+    }
+
+    if (card.Back) {
+      const backEl = document.createElement("div");
+      backEl.className = "action-card-desc";
+      backEl.textContent = card.Back;
+      body.appendChild(backEl);
     }
 
     wrapper.appendChild(body);

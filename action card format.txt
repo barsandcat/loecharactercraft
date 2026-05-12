@@ -1,3 +1,5 @@
+New card data structure
+
     "CardId": {
       "Name": "Card name", # "Required",
       "DisplayName": "Display name", # "For the basic actions upgrades, if present overrides name",
@@ -9,7 +11,7 @@
       "Roll": {
 		  "DIV": true, # if absent - false, i.e. no DIV rol
 		  "ATT": ["INT"], # Required
-		  "Difficulty": 8, # if absent, means difficulty of the enemy
+		  "Difficulty": 8, # if absent, means difficulty of the enemy [EN]
 		  "Modifiers": [
 			{ "Dice": -2, "Triggers": ["Trigger1"] },
 			{ "Dice": 1, "Triggers": ["Trigger2"] } 
@@ -18,9 +20,12 @@
 			  "3": "Best result",
 			  "1": "Ok result",
 			  "0": "Failure"
-		  } # "Required"
+		  } # "Optional"
 	  } # Optional
       "Front": "Front instructions", # Optional
       "Back": "Back instructions", # Optional
       "Level": 1 # Only relevant for basic action cards, if absent = 1
     },
+	
+	
+Old roll format: "Roll ATT and ATT, DIV [Number/EN]; +1: Trigger1, Trigger2; -2: Trigger3"
