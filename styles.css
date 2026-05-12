@@ -496,7 +496,7 @@ h1 {
 
 .action-card-meta {
   font-family: 'EB Garamond', serif;
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   color: var(--muted);
   font-style: italic;
   text-align: center;
@@ -546,7 +546,7 @@ h1 {
 
 .action-card-modifiers {
   font-family: 'EB Garamond', serif;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: var(--muted);
   text-align: left;
   line-height: 1.2;
@@ -554,7 +554,7 @@ h1 {
 
 .action-card-outcome {
   font-family: 'EB Garamond', serif;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--ink);
   text-align: left;
   line-height: 1.2;
