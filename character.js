@@ -14,16 +14,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     levelUps: createEmptyLevelUps(),
   };
 
-  function createLevelUpState() {
-    return {
-      treeName: null,
-      level: null,
-      versionIndex: null,
-    };
-  }
-
   function createEmptyLevelUps() {
-    return Array.from({ length: LEVEL_UP_SLOTS }, () => createLevelUpState());
+    return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
   }
 
   function isBuildEmpty() {
@@ -104,10 +96,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
   }
 
-  function notifyStateChange() {
-    onStateChange(serializeState());
-  }
-
   function resetSelectionState() {
     state.selectedRace = null;
     state.selectedAttributeSet = null;
@@ -119,7 +107,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function commitSelection() {
     tryAutoSelect();
-    notifyStateChange();
+    onStateChange(serializeState());
     render();
   }
 
@@ -209,7 +197,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         title: "Choose Attributes",
         options: attrOptions,
         getOptionContent: describeAttributeOption,
-        onSelect: selectAttr,
+        onSelect: selectAttributeSet,
         isSelected: (option) => state.selectedAttributeSet === option,
       }),
     }));
@@ -380,7 +368,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       container.appendChild(createListSection("Skills (max 3)", [skillSummary]));
     }
 
-    // Create items section grouped by type, with Passive and Effect
     const items = Array.from(stats.items.values());
     if (items.length) {
       const itemsSection = document.createElement("section");
@@ -495,7 +482,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           cards.forEach(({ cardId, card }) => {
             const li = document.createElement("li");
             li.className = "action-list-item";
-            li.appendChild(createActionCardCard(cardId, card));
+            li.appendChild(buildActionCardElement(cardId, card));
             actionList.appendChild(li);
           });
 
@@ -796,7 +783,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     commitSelection();
   }
 
-  function selectAttr(attr) {
+  function selectAttributeSet(attr) {
     state.selectedAttributeSet = attr;
     commitSelection();
   }
@@ -1345,7 +1332,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
   }
 
-  function createActionCardCard(cardId, card) {
+  function buildActionCardElement(cardId, card) {
     const wrapper = document.createElement("div");
     wrapper.className = "action-card-full";
 
@@ -1396,7 +1383,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     const tooltipEl = document.createElement("div");
     tooltipEl.className = "action-card-mention-tooltip";
-    tooltipEl.appendChild(createActionCardCard(cardId, card));
+    tooltipEl.appendChild(buildActionCardElement(cardId, card));
     span.appendChild(tooltipEl);
 
     return span;

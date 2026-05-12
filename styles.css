@@ -78,8 +78,6 @@ button, input, textarea, select { font: inherit; }
   animation: rise-in 500ms ease-out both;
 }
 
-
-
 .eyebrow {
   margin: 0 0 3px;
   font-family: 'Cinzel', serif;
@@ -130,9 +128,6 @@ h1 {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: 1px;
-}
-
-.ghost-button {
   cursor: pointer;
   transition: background 130ms ease, border-color 130ms ease;
 }
@@ -180,7 +175,6 @@ h1 {
   background: var(--dark);
   border-bottom: 1px solid rgba(201, 168, 64, 0.18);
 }
-
 
 .panel-header h2 {
   font-size: 0.82rem;
@@ -555,7 +549,6 @@ h1 {
 /* Trees */
 .tree-stack { display: grid; gap: 10px; }
 
-
 .tree-card { padding: 11px 12px; }
 
 .tree-title-row {
@@ -647,7 +640,6 @@ h1 {
   line-height: 1.5;
   font-style: italic;
 }
-
 
 /* Selector overlay */
 .selector-overlay {
@@ -915,7 +907,4 @@ h1 {
   .stat-grid {
     grid-template-columns: 1fr;
   }
-
 }
-
-
