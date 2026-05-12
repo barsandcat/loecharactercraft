@@ -1563,7 +1563,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     if (card.Back) {
       const backEl = document.createElement("div");
-      backEl.className = "action-card-desc";
+      backEl.className = "action-card-desc action-card-back";
       appendIconTextContent(backEl, card.Back);
       body.appendChild(backEl);
     }

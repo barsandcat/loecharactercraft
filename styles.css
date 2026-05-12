@@ -520,6 +520,14 @@ h1 {
   line-height: 1.2;
 }
 
+.action-card-back {
+  background: var(--dark);
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 64, 0.36);
+  padding: 4px 6px;
+  margin-top: 2px;
+}
+
 .action-card-roll {
   font-family: 'EB Garamond', serif;
   font-size: 0.88rem;
@@ -547,6 +555,10 @@ h1 {
   width: auto;
   vertical-align: -0.12em;
   margin: 0 0.08em;
+}
+
+.action-card-back .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
 
 .action-card-modifiers {
