@@ -3925,14 +3925,14 @@
       "Name": "Battle Prayer",
       "Type": "Action",
       "Category": "Support",
-      "CardDescription": "Roll CHA+DIV",
+      "CardDescription": "Roll CHA, DIV",
       "Level": 1
     },
     "P06": {
       "Name": "Guided Smite",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll STR+DIV",
+      "CardDescription": "Roll STR, DIV",
       "Level": 1
     },
     "P07": {
@@ -3951,18 +3951,21 @@
       "Name": "Summon Divling",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll STR+DIV or INT+DIV. Divling has onwers STR",
+	  "CardDescription": "Roll STR or INT, DIV. Divling has onwers STR",
       "Level": 1
     },
     "P11": {
       "Name": "Magic Circle",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "CardDescription": "Roll AGI [8]; +2: Artistry, +1: Lore. ",
       "Level": 1
     },
     "P12": {
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI or INT and DIV (10), +1 die: Brilliance, -2 dice: Armor",
+      "CardDescription": "Roll AGI or INT, DIV [10]; +1: Brilliance; -2: Armor",
       "Level": 1
     },
     "P13": {
@@ -3996,7 +3999,7 @@
       "Name": "Furious Attacks",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll STR+DIV",
+      "CardDescription": "Roll STR, DIV",
       "Level": 1
     },
     "P20": {
@@ -4045,7 +4048,7 @@
       "Name": "Evoke Blizzard",
 	  "Type": "Action",
 	  "Category": "Offensive",
-	  "CardDescription": "Roll INT+DIV",
+	  "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "P30": {
@@ -4089,7 +4092,7 @@
       "Name": "Target Weak Spot",
       "Type": "Action",
       "Category": "Support",
-      "CardDescription": "Roll INT+DIV",
+      "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "P39": {
@@ -4148,7 +4151,7 @@
       "Name": "Shield of Omu",
       "Type": "Reaction",
       "Category": "Defensive",
-      "CardDescription": "Roll STR+DIV",
+      "CardDescription": "Roll STR, DIV",
       "Level": 1
     },
     "P51": {
@@ -4159,7 +4162,7 @@
       "Name": "The Guiding Light",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll INT+DIV",
+	  "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "P53": {
@@ -4202,7 +4205,7 @@
       "Name": "Scrapping",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll INT+AGI",
+	  "CardDescription": "Roll INT, AGI",
       "Level": 1
     },
     "P64": {
@@ -4304,7 +4307,7 @@
       "Name": "Runic Projectile",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI+DIV",
+      "CardDescription": "Roll AGI, DIV",
       "Level": 1
     },
     "PP13": {
@@ -4336,7 +4339,7 @@
       "Name": "Moondisc",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll INT+DIV",
+      "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "PP19": {
@@ -4358,7 +4361,7 @@
       "Name": "Eliminate",
 	  "Type": "Action",
 	  "Category": "Offensive",
-	  "CardDescription": "Roll AGI and DIV(10), +1: Deception, +1: agains Small",
+	  "CardDescription": "Roll AGI, DIV [10]; +1: Deception; +1: agains Small",
       "Level": 1
     },
     "PP23": {
@@ -4427,7 +4430,7 @@
       "Name": "Coordinated Advance",
       "Type": "Action",
       "Category": "Support",
-      "CardDescription": "Roll CHA+DIV",
+      "CardDescription": "Roll CHA, DIV",
       "Level": 1
     },
     "S02": {
@@ -4456,14 +4459,14 @@
       "Name": "Energy Shield",
       "Type": "Reaction",
       "Category": "Defensive",
-      "CardDescription": "Roll STR+DIV",
+      "CardDescription": "Roll STR, DIV",
       "Level": 1
     },
     "S07": {
       "Name": "Chain Lightning",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll INT+DIV",
+      "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "S08": {
@@ -4477,14 +4480,14 @@
       "Name": "Ritual of Haste",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll INT+DIV",
+	  "CardDescription": "Roll INT, DIV [9]; +1: Alchemy, Lore",
       "Level": 1
     },
     "S10": {
       "Name": "Protective Gestures",
 	  "Type": "Action",
 	  "Category": "Support",
-	  "CardDescription": "Roll AGI+DIV",
+	  "CardDescription": "Roll AGI, DIV [9]; +1: Artistry; +1: Sleight of Hand",
       "Level": 1
     },
     "S11": {
@@ -4514,14 +4517,14 @@
       "Name": "Backstab",
 	  "Type": "Action",
 	  "Category": "Offensive",
-	  "CardDescription": "Roll for AGI and INT",
+	  "CardDescription": "Roll AGI and INT",
       "Level": 1
     },
     "S17": {
       "Name": "Parry",
 	  "Type": "Reaction",
 	  "Category": "Defensive",
-	  "CardDescription": "Roll for STR or AGI",
+	  "CardDescription": "Roll STR or AGI",
       "Level": 1
     },
     "S18": {
@@ -4543,7 +4546,7 @@
       "Name": "Shoot and Dash",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI+DIV",
+      "CardDescription": "Roll AGI, DIV",
       "Level": 1
     },
     "S22": {
@@ -4557,7 +4560,7 @@
       "Name": "Arrow Rain",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll AGI and DIV",
+      "CardDescription": "Roll AGI, DIV",
       "Level": 1
     },
     "S24": {
@@ -4583,7 +4586,7 @@
       "Name": "Entangle",
       "Type": "Action",
       "Category": "Offensive",
-      "CardDescription": "Roll INT+DIV",
+      "CardDescription": "Roll INT, DIV",
       "Level": 1
     },
     "S29": {
