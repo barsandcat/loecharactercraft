@@ -1445,6 +1445,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return rollLineEl;
   }
 
+  function appendDifficultyIcon(parent, difficulty) {
+    const iconEl = document.createElement("img");
+    iconEl.className = "action-card-inline-icon";
+    iconEl.src = "icons/" + encodeURIComponent(String(difficulty)) + ".svg";
+    iconEl.alt = "Difficulty " + difficulty;
+    parent.appendChild(iconEl);
+  }
+
   function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
     const wrapper = document.createElement("div");
     wrapper.className = "action-card-full";
@@ -1504,15 +1512,25 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           : [];
         const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
         const effectiveDice = Math.max(0, baseDice + modDiceTotal);
-        let probLabel;
+        let appendProbLabel;
         if (card.Roll.Difficulty != null) {
           const dist = computeSuccessDist(effectiveDice, card.Roll.Difficulty);
-          probLabel = (i) => "(" + pct(bandProb(dist, sortedNum, i)) + ")";
+          appendProbLabel = (parent, i) => {
+            parent.appendChild(document.createTextNode("(" + pct(bandProb(dist, sortedNum, i)) + ")"));
+          };
         } else {
           const dists = PROB_EN_DIFFICULTIES.map(d => computeSuccessDist(effectiveDice, d));
-          probLabel = (i) => "(" + PROB_EN_DIFFICULTIES.map((d, di) =>
-            d + ":" + pct(bandProb(dists[di], sortedNum, i))
-          ).join(" ") + ")";
+          appendProbLabel = (parent, i) => {
+            parent.appendChild(document.createTextNode("("));
+            PROB_EN_DIFFICULTIES.forEach((d, di) => {
+              if (di > 0) {
+                parent.appendChild(document.createTextNode(" "));
+              }
+              appendDifficultyIcon(parent, d);
+              parent.appendChild(document.createTextNode(":" + pct(bandProb(dists[di], sortedNum, i))));
+            });
+            parent.appendChild(document.createTextNode(")"));
+          };
         }
         for (let i = 0; i < sortedKeys.length; i++) {
           const key = sortedKeys[i];
@@ -1524,7 +1542,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
           const probWrap = document.createElement("span");
           probWrap.className = "action-card-prob";
-          probWrap.appendChild(document.createTextNode(probLabel(i)));
+          appendProbLabel(probWrap, i);
 
           const tooltip = document.createElement("div");
           tooltip.className = "action-card-prob-tooltip";

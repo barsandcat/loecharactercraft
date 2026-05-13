@@ -3779,6 +3779,8 @@
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
+	  "Sun": 1,
+	  "BackSun": 2,
       "Keywords": [
         "Attack"
       ],
@@ -3788,7 +3790,10 @@
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": {
+			"1": "Deal {successes} {damage}."
+		}
       },
       "DisplayName": "Bash"
     },
