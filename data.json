@@ -4057,14 +4057,56 @@
     },
     "P01": {
       "Name": "Soothing Voice",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "1 in R4",
+	  "Roll": {
+		  "ATT": [ "CHA" ],
+		  "DIV": true,
+		  "Difficulty": 8,
+		  "Modifiers": [{ "Dice": 1, "Triggers": ["Charm"]}],
+		  "Successes": {
+			  "1": "Heal {half div} {terror} or Stabilize"
+		  }
+	  },
       "Level": 1
     },
     "P02": {
       "Name": "Hymn of Malady",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Moon": 1,
+	  "Keywords": ["Attack", "Ranged"],
+	  "Target": "ENs in R2",
+	  "Roll": {
+		  "ATT": ["INT"],
+		  "DIV": true,
+		  "Modifiers": [
+			{ "Dice": 1, "Triggers": [ "Cityborn" ] },
+			{ "Dice": -1, "Triggers": [ "Armor" ] }		  
+		  ],
+		  "Successes": {
+			  "4": "Deal {div} Divinum {damage} ignoring 2 {armor}",
+			  "1": "Deal {half div} Divinum {damage} ignoring 3 {armor}"
+		  }
+	  },
       "Level": 1
     },
     "P03": {
       "Name": "Rousing Ballad",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "PMs in R4",
+	  "Roll": {
+		  "ATT": ["CHA"],
+		  "Difficulty": 9,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"] } ],
+		  "Successes": {
+			  "2": "Each target agains 2 ATT Boons",
+			  "0": "Do not flip this card"
+		  }
+	  },
+	  "Back": "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV",
       "Level": 1
     },
     "P04": {
@@ -4282,6 +4324,20 @@
     },
     "P18": {
       "Name": "Applause",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "Self",
+	  "Roll": {
+		  "Difficulty": 8,
+		  "ATT": [],
+		  "Successes": {
+			  "1": "For each {half characters} {successes} place 1 marker on this card",
+			  "0": "Gain 4 {terror}. Place this card in your Pouch."
+		  }
+	  },
+	  "Front": "Each other Character in R4 supports you with a number of dice equal to their highest ATT.",
+	  "Back": "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card inoring its refresh costs or restrictions. 3: Gain 1 Action.",
+	  "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch",
       "Level": 1
     },
     "P19": {
