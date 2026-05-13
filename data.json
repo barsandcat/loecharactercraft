@@ -3807,7 +3807,8 @@
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": { "1": "Prevent {successes} {damage} or 1 {terror}." }
       },
       "DisplayName": "Endurance"
     },
@@ -3837,7 +3838,7 @@
         "ATT": [
           "STR"
         ],
-		"Successes": { "1": "Prevent {successes} {damage} or 1 {terror}." }
+		"Successes": { "1": "Prevent 1 {damage} or 1 {terror}." }
       },
       "DisplayName": "Limited Endurance"
     },
@@ -3845,11 +3846,21 @@
       "Name": "Dodge",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Moon": 2,
       "Level": 2,
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+        "Modifiers": [
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+		"Successes": { "1": "Prevent 3 {damage}" }
       },
       "Target": "Self",
       "DisplayName": "Dodge"
@@ -3913,6 +3924,7 @@
       "Name": "Command",
       "Type": "Action",
       "Category": "Support",
+	  "Target": "CH in R4",
       "Level": 2,
       "Roll": {
         "ATT": [
@@ -3926,7 +3938,8 @@
               "Leadership"
             ]
           }
-        ]
+        ],
+		"Successes": { "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character." }
       },
       "Target": "CH in R4",
       "DisplayName": "Command"
@@ -4601,6 +4614,7 @@
       "Name": "Unleash Divinum",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 1,
       "Keywords": [
         "Attack",
         "Melee",
@@ -4626,7 +4640,11 @@
               "Armor"
             ]
           }
-        ]
+        ],
+		"Successes": { 
+			"1": "Deal ({successes}+{half div}) Divinum {damage}. You loose {half div} HP.",
+			"5": "Deal ({successes}+{div}) Divinum {damage}. You loose {half div} HP." 
+		}
       },
       "Level": 1
     },
