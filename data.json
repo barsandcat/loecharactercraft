@@ -4197,10 +4197,36 @@
     },
     "P16": {
       "Name": "Song of Protection",
+	  "Type": "Action",
+	  "Category": "Defensive",
+	  "Target": "Self",
+	  "BackMoon": 2,
+	  "Roll": {
+		  "ATT": ["CHA"],
+		  "Difficulty": 7,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Resilience", "Vigilance" ] } ],
+		  "Successes": { "2": "Flip this card", "0": "Do not flip this card" }
+	  },
+	  "Back": "Each time a Party Member in R4 uses their Defensive Reaction, you may support them with 3 dice.",
       "Level": 1
     },
     "P17": {
       "Name": "Sly Tongue",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Target": "1 in R4",
+	  "Roll": {
+		  "ATT": [ "AGI" ],
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Diplomacy"] }, { "Dice": 1, "Triggers": ["against Small"] }, { "Dice": -1, "Triggers": ["against Automaton"] } ],
+		  "Successes": {
+			"3": "Deal {successes} {damage} ignoring 3 {armor}. Place 2 your Effect tokens on the Enemy",
+			"1": "Deal {successes} {damage} ignoring 3 {armor}. Place your Effect token on the Enemy"
+		  }
+	  },
+	  "Back": "Reduce all {damage} dealt by the Enemy with your Effect token by 2 per Effect token, and their {en} by  2 per Effect token. When Enemy with your Effect token is dealt {damage}, discard 1 Effect token from it.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card.",
+	  "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
       "Level": 1
     },
     "P18": {
@@ -4614,15 +4640,46 @@
       "Name": "Rage",
       "Type": "Reaction",
       "Category": "Support",
-      "Front": "Add STR to damage",
+	  "Condition": "When you deal at leas 6 damage",
+	  "Target": "Self",
+      "Front": "Flip this card",
+	  "Back": "Add STR to damage",
       "Level": 1
     },
     "PP08": {
       "Name": "Weapon Throw",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Sun": 1,
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R2+",
+	  "Roll": {
+		  "ATT": [ "AGI" ],
+		  "Modifiers": [ 
+			{"Dice": 1, "Triggers": ["Athletics"] },
+			{"Dice": 1, "Triggers": ["against Large"] }
+		  ],
+		  "Successes": {
+			  "3": "Deal 2{successes} {damage}. Place youre Melee item in your Pouch",
+			  "1": "Deal {successes} {damage}. Place youre Melee item in your Pouch"
+		  }
+	  },
       "Level": 1
     },
     "PP09": {
       "Name": "Manic Laugh",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Traget": "ENs in R1",
+	  "Roll": {
+		  "ATT": [ "CHA" ],
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Intimidation"] } ],
+		  "Successes": { 
+			"2": "Push all targets by {successes} and place your Effect token on each of them",
+			"1": "Push target Minions by {successes} and place your Effect token on each of them"
+		  }
+	  },
+	  "Back": "???",
       "Level": 1
     },
     "PP10": {
