@@ -71,6 +71,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     levelUps: createEmptyLevelUps(),
   };
 
+  let cardWidthObserver = null;
+
   function createEmptyLevelUps() {
     return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
   }
@@ -263,7 +265,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       label: "Origin",
       main: state.selectedOrigin ? state.selectedOrigin.Name : "Choose origin",
       detail: state.selectedOrigin
-        ? summarizeEntry(state.selectedOrigin) || "No changes"
+        ? summarizeEntry(state.selectedOrigin)
         : state.data.Origins.length + " available options",
       complete: Boolean(state.selectedOrigin),
       onClick: () => openSelector({
@@ -279,7 +281,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       label: "Profession",
       main: state.selectedProf ? state.selectedProf.Name : "Choose profession",
       detail: state.selectedProf
-        ? summarizeEntry(state.selectedProf) || "No changes"
+        ? summarizeEntry(state.selectedProf)
         : state.data.Professions.length + " available options",
       complete: Boolean(state.selectedProf),
       onClick: () => openSelector({
@@ -297,7 +299,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       detail: !state.selectedProf
         ? "Pick a profession first."
         : state.selectedPath
-          ? summarizeEntry(state.selectedPath) || "No changes"
+          ? summarizeEntry(state.selectedPath)
           : pathOptions.length + " available options",
       complete: Boolean(state.selectedPath),
       empty: !state.selectedPath,
@@ -343,7 +345,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         secondButton: {
           label: "Reward",
           main: slotMeta.selectedVersion
-            ? summarizeEntry(slotMeta.selectedVersion.entry) || "No changes"
+            ? summarizeEntry(slotMeta.selectedVersion.entry)
             : "Choose reward",
           detail: !slotMeta.selectedTree
             ? "Choose a tree level first."
@@ -554,14 +556,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
       container.appendChild(actionSection);
 
-      const syncCardWidth = () => {
-        const firstCard = actionSection.querySelector('.action-card-full');
-        if (firstCard) {
-          document.documentElement.style.setProperty('--action-card-width', firstCard.offsetWidth + 'px');
-        }
-      };
-      requestAnimationFrame(syncCardWidth);
-      new ResizeObserver(syncCardWidth).observe(actionSection);
+      if (!cardWidthObserver) {
+        const syncCardWidth = () => {
+          const firstCard = ui.summaryPanel.querySelector('.action-card-full');
+          if (firstCard) {
+            document.documentElement.style.setProperty('--action-card-width', firstCard.offsetWidth + 'px');
+          }
+        };
+        requestAnimationFrame(syncCardWidth);
+        cardWidthObserver = new ResizeObserver(syncCardWidth);
+        cardWidthObserver.observe(ui.summaryPanel);
+      }
     }
   }
 
@@ -822,6 +827,15 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           detail.className = "option-detail";
           detail.textContent = content.detail;
           button.appendChild(detail);
+        }
+
+        if (content.actionCards && content.actionCards.length) {
+          const cardsEl = document.createElement("div");
+          cardsEl.className = "option-action-cards";
+          content.actionCards.forEach(({ cardId, card }) => {
+            cardsEl.appendChild(buildActionCardElement(cardId, card));
+          });
+          button.appendChild(cardsEl);
         }
 
         ui.selectorOptions.appendChild(button);
@@ -1313,7 +1327,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return selectedByTree;
   }
 
-  function summarizeEntry(entry) {
+  function summarizeEntry(entry, { excludeActionCards = false } = {}) {
     const parts = [];
 
     (entry.Attributes || []).forEach((attributeSet) => {
@@ -1349,9 +1363,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       }
     });
 
-    (entry["Action cards"] || []).forEach((action) => {
-      parts.push(formatActionCardLabel(action));
-    });
+    if (!excludeActionCards) {
+      (entry["Action cards"] || []).forEach((action) => {
+        parts.push(formatActionCardLabel(action));
+      });
+    }
 
     return parts.join(", ");
   }
@@ -1650,7 +1666,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
 
     if (!parts.length) {
-      element.textContent = "No changes";
       return;
     }
 
@@ -1686,9 +1701,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function describeEntryOption(entry) {
+    const actionCards = (entry["Action cards"] || [])
+      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
+      .filter(({ card }) => card !== null);
     return {
       title: entry.Name,
-      detail: summarizeEntry(entry) || "No changes",
+      detail: summarizeEntry(entry, { excludeActionCards: true }),
+      actionCards,
     };
   }
 
@@ -1724,15 +1743,20 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return {
       title: option.treeName + " - Level " + option.level,
       detail: option.versions
-        .map((entry) => summarizeEntry(entry) || "No changes")
+        .map((entry) => summarizeEntry(entry))
+        .filter(Boolean)
         .join("\nOR\n"),
     };
   }
 
   function describeVersionOption(option) {
+    const actionCards = (option.entry["Action cards"] || [])
+      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
+      .filter(({ card }) => card !== null);
     return {
-      title: summarizeEntry(option.entry) || "No changes",
+      title: summarizeEntry(option.entry, { excludeActionCards: true }),
       detail: "",
+      actionCards,
     };
   }
 
