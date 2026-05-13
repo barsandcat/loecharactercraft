@@ -18,18 +18,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   let cardWidthObserver = null;
 
-  function createEmptyLevelUps() {
-    return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
-  }
-
-  function isBuildEmpty() {
-    return (
-      !state.selectedRace &&
-      !state.selectedOrigin &&
-      !state.selectedProf &&
-      !state.selectedPath &&
-      getFilledLevelCount() === 0
-    );
+  function render() {
+    const levelMeta = refreshLevelUpStates();
+    renderControls(levelMeta);
+    renderSummary();
+    renderTrees(levelMeta);
   }
 
   function resetBuild() {
@@ -56,6 +49,65 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedPath = paths.length ? pick(paths) : null;
 
     commitSelection();
+  }
+
+  function restoreStateFromEncoded(encoded) {
+    const compact = deserializeState(encoded);
+    if (!compact) {
+      console.warn("Could not restore state from URL hash.");
+      return false;
+    }
+
+    resetSelectionState();
+
+    if (compact.r) {
+      state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
+      if (state.selectedRace && compact.ai !== null) {
+        state.selectedAttributeSet = state.selectedRace.Attributes[compact.ai] || null;
+      }
+    }
+
+    if (compact.o) {
+      state.selectedOrigin = state.data.Origins.find((origin) => origin.Name === compact.o) || null;
+    }
+
+    if (compact.p) {
+      state.selectedProf = state.data.Professions.find((profession) => profession.Name === compact.p) || null;
+      if (state.selectedProf && compact.pa) {
+        state.selectedPath = state.selectedProf.Paths.find((path) => path.Name === compact.pa) || null;
+      }
+    }
+
+    if (compact.lu) {
+      compact.lu.forEach((entry, index) => {
+        if (entry && index < LEVEL_UP_SLOTS) {
+          state.levelUps[index] = {
+            treeName: entry[0],
+            level: entry[1],
+            versionIndex: entry[2],
+          };
+        }
+      });
+    }
+
+    commitSelection();
+    return true;
+  }
+
+  function isBuildEmpty() {
+    return (
+      !state.selectedRace &&
+      !state.selectedOrigin &&
+      !state.selectedProf &&
+      !state.selectedPath &&
+      getFilledLevelCount() === 0
+    );
+  }
+
+  function commitSelection() {
+    tryAutoSelect();
+    onStateChange(serializeState());
+    render();
   }
 
   function serializeState() {
@@ -109,60 +161,489 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.levelUps = createEmptyLevelUps();
   }
 
-  function commitSelection() {
-    tryAutoSelect();
-    onStateChange(serializeState());
-    render();
+  function createEmptyLevelUps() {
+    return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
   }
 
-  function restoreStateFromEncoded(encoded) {
-    const compact = deserializeState(encoded);
-    if (!compact) {
-      console.warn("Could not restore state from URL hash.");
-      return false;
-    }
+  function getFilledLevelCount() {
+    return state.levelUps.reduce((count, slotState) => {
+      return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
+    }, 0);
+  }
 
-    resetSelectionState();
+  function selectRace(race) {
+    const raceChanged = state.selectedRace !== race;
+    state.selectedRace = race;
 
-    if (compact.r) {
-      state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
-      if (state.selectedRace && compact.ai !== null) {
-        state.selectedAttributeSet = state.selectedRace.Attributes[compact.ai] || null;
+    if (raceChanged) {
+      state.selectedAttributeSet = null;
+      const attrOptions = race.Attributes;
+      if (attrOptions.length === 1) {
+        state.selectedAttributeSet = attrOptions[0];
       }
-    }
-
-    if (compact.o) {
-      state.selectedOrigin = state.data.Origins.find((origin) => origin.Name === compact.o) || null;
-    }
-
-    if (compact.p) {
-      state.selectedProf = state.data.Professions.find((profession) => profession.Name === compact.p) || null;
-      if (state.selectedProf && compact.pa) {
-        state.selectedPath = state.selectedProf.Paths.find((path) => path.Name === compact.pa) || null;
-      }
-    }
-
-    if (compact.lu) {
-      compact.lu.forEach((entry, index) => {
-        if (entry && index < LEVEL_UP_SLOTS) {
-          state.levelUps[index] = {
-            treeName: entry[0],
-            level: entry[1],
-            versionIndex: entry[2],
-          };
-        }
-      });
     }
 
     commitSelection();
-    return true;
   }
 
-  function render() {
-    const levelMeta = refreshLevelUpStates();
-    renderControls(levelMeta);
-    renderSummary();
-    renderTrees(levelMeta);
+  function selectAttributeSet(attr) {
+    state.selectedAttributeSet = attr;
+    commitSelection();
+  }
+
+  function selectOrigin(origin) {
+    state.selectedOrigin = origin;
+    commitSelection();
+  }
+
+  function selectProfession(profession) {
+    const professionChanged = state.selectedProf !== profession;
+    state.selectedProf = profession;
+
+    if (professionChanged) {
+      state.selectedPath = null;
+      const pathOptions = profession.Paths;
+      if (pathOptions.length === 1) {
+        state.selectedPath = pathOptions[0];
+      }
+      state.levelUps = createEmptyLevelUps();
+    }
+
+    commitSelection();
+  }
+
+  function selectPath(path) {
+    state.selectedPath = path;
+    commitSelection();
+  }
+
+  function selectLevelUpTree(slotIndex, treeLevelOption) {
+    const slot = state.levelUps[slotIndex];
+    slot.treeName = treeLevelOption.treeName;
+    slot.level = treeLevelOption.level;
+    slot.versionIndex = null;
+    commitSelection();
+  }
+
+  function selectLevelUpVersion(slotIndex, versionOption) {
+    state.levelUps[slotIndex].versionIndex = versionOption.index;
+    commitSelection();
+  }
+
+  function tryAutoSelect() {
+    const priorSelectedOptions = [];
+    let unlocked = state.selectedProf !== null;
+
+    for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
+      const slotState = state.levelUps[slotIndex];
+      const treeOptions = unlocked
+        ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
+        : [];
+
+      let selectedTree =
+        treeOptions.find(
+          (option) =>
+            slotState.treeName === option.treeName && slotState.level === option.level
+        ) || null;
+
+      if (!selectedTree) {
+        if (treeOptions.length === 1) {
+          selectedTree = treeOptions[0];
+          slotState.treeName = selectedTree.treeName;
+          slotState.level = selectedTree.level;
+        } else {
+          slotState.treeName = null;
+          slotState.level = null;
+          slotState.versionIndex = null;
+        }
+      }
+
+      let selectedVersion = null;
+
+      if (selectedTree) {
+        const versionOptions = getVersionOptions(selectedTree);
+        if (versionOptions.length === 1) {
+          slotState.versionIndex = 0;
+        }
+
+        selectedVersion =
+          versionOptions.find((option) => option.index === slotState.versionIndex) || null;
+
+        if (!selectedVersion && versionOptions.length !== 1) {
+          slotState.versionIndex = null;
+        }
+      } else {
+        slotState.versionIndex = null;
+      }
+
+      const isComplete = Boolean(selectedTree && selectedVersion);
+      if (isComplete) {
+        priorSelectedOptions.push(selectedTree);
+      }
+
+      unlocked = unlocked && isComplete;
+    }
+  }
+
+  function refreshLevelUpStates() {
+    const levelUpMeta = [];
+    const priorSelectedOptions = [];
+    let unlocked = state.selectedProf !== null;
+
+    for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
+      const slotNumber = slotIndex + 1;
+      const slotState = state.levelUps[slotIndex];
+      const treeOptions = unlocked
+        ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
+        : [];
+
+      const selectedTree =
+        treeOptions.find(
+          (option) =>
+            slotState.treeName === option.treeName && slotState.level === option.level
+        ) || null;
+
+      const versionOptions = selectedTree ? getVersionOptions(selectedTree) : [];
+      const selectedVersion = selectedTree
+        ? versionOptions.find((option) => option.index === slotState.versionIndex) || null
+        : null;
+      const isComplete = Boolean(selectedTree && selectedVersion);
+
+      if (isComplete) {
+        priorSelectedOptions.push(selectedTree);
+      }
+
+      levelUpMeta.push({
+        slotIndex,
+        slotNumber,
+        unlocked,
+        treeOptions,
+        selectedTree,
+        versionOptions,
+        selectedVersion,
+        isComplete,
+      });
+
+      unlocked = unlocked && isComplete;
+    }
+
+    return levelUpMeta;
+  }
+
+  function getAvailableLevelUpOptions(slotIndex, priorSelectedOptions) {
+    const slotNumber = slotIndex + 1;
+    const treeNames = getAccessibleAdvancementTreeNames();
+    const takenLevelsByTree = new Map();
+
+    priorSelectedOptions.forEach((option) => {
+      if (!takenLevelsByTree.has(option.treeName)) {
+        takenLevelsByTree.set(option.treeName, new Set());
+      }
+      takenLevelsByTree.get(option.treeName).add(option.level);
+    });
+
+    const options = [];
+    treeNames.forEach((treeName) => {
+      const tree = state.trees.get(treeName);
+      if (!tree) {
+        return;
+      }
+
+      const takenLevels = takenLevelsByTree.get(treeName) || new Set();
+      Object.keys(tree.Levels)
+        .map((value) => Number(value))
+        .sort((a, b) => a - b)
+        .forEach((level) => {
+          if (takenLevels.has(level)) {
+            return;
+          }
+
+          if (isAdvancementLevelUnlocked(level, takenLevels, slotNumber)) {
+            options.push({
+              treeName,
+              level,
+              versions: tree.Levels[String(level)],
+            });
+          }
+        });
+    });
+
+    return options;
+  }
+
+  function getSelectedAdvancementEntries() {
+    const entries = [];
+
+    state.levelUps.forEach((slotState) => {
+      if (
+        slotState.treeName === null ||
+        slotState.level === null ||
+        slotState.versionIndex === null
+      ) {
+        return;
+      }
+
+      const option = getTreeLevelOption(slotState.treeName, slotState.level);
+      if (!option) {
+        return;
+      }
+
+      const versionOptions = getVersionOptions(option);
+      if (
+        slotState.versionIndex >= 0 &&
+        slotState.versionIndex < versionOptions.length
+      ) {
+        entries.push(versionOptions[slotState.versionIndex].entry);
+      }
+    });
+
+    return entries;
+  }
+
+  function buildSelectedByTree() {
+    const selectedByTree = {};
+
+    state.levelUps.forEach((slotState) => {
+      if (
+        slotState.treeName === null ||
+        slotState.level === null ||
+        slotState.versionIndex === null
+      ) {
+        return;
+      }
+
+      const option = getTreeLevelOption(slotState.treeName, slotState.level);
+      if (!option) {
+        return;
+      }
+
+      if (!selectedByTree[option.treeName]) {
+        selectedByTree[option.treeName] = {};
+      }
+      selectedByTree[option.treeName][option.level] = slotState.versionIndex;
+    });
+
+    return selectedByTree;
+  }
+
+  function getAccessibleAdvancementTreeNames() {
+    if (!state.selectedProf) {
+      return [];
+    }
+
+    const treeNames = [];
+    const primaryTreeName = resolvePrimaryTreeName(state.selectedProf.Name);
+
+    if (state.trees.has(primaryTreeName)) {
+      treeNames.push(primaryTreeName);
+    }
+
+    state.selectedProf["Advancement Trees"].forEach((treeName) => {
+      if (state.trees.has(treeName) && !treeNames.includes(treeName)) {
+        treeNames.push(treeName);
+      }
+    });
+
+    return treeNames;
+  }
+
+  function resolvePrimaryTreeName(professionName) {
+    if (state.trees.has(professionName)) {
+      return professionName;
+    }
+
+    const normalizedProfession = normalizeName(professionName);
+    let bestMatch = null;
+
+    state.trees.forEach((_, treeName) => {
+      const normalizedTree = normalizeName(treeName);
+      if (
+        normalizedProfession.startsWith(normalizedTree) ||
+        normalizedTree.startsWith(normalizedProfession)
+      ) {
+        if (
+          !bestMatch ||
+          normalizedTree.length > normalizeName(bestMatch).length
+        ) {
+          bestMatch = treeName;
+        }
+      }
+    });
+
+    return bestMatch || professionName;
+  }
+
+  function normalizeName(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function isAdvancementLevelUnlocked(level, takenLevels, slotNumber) {
+    if (level === 1) {
+      return true;
+    }
+    if (level === 2 || level === 3) {
+      return takenLevels.has(1);
+    }
+    if (level === 4) {
+      return takenLevels.has(3);
+    }
+    if (level === 5) {
+      return takenLevels.has(3) && slotNumber > 4;
+    }
+    if (level === 6) {
+      return takenLevels.has(5);
+    }
+    if (level === 7) {
+      return takenLevels.has(5) && slotNumber > 6;
+    }
+    if (level === 8) {
+      return takenLevels.has(7);
+    }
+    return false;
+  }
+
+  function getTreeLevelOption(treeName, level) {
+    const tree = state.trees.get(treeName);
+    if (!tree) {
+      return null;
+    }
+
+    const versions = tree.Levels[String(level)];
+    if (!versions) {
+      return null;
+    }
+
+    return {
+      treeName,
+      level,
+      versions,
+    };
+  }
+
+  function getVersionOptions(treeLevelOption) {
+    return treeLevelOption.versions.map((entry, index) => ({
+      index,
+      entry,
+    }));
+  }
+
+  function collectCharacterStats() {
+    const stats = {
+      attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
+      mob: 0,
+      hp: 0,
+      divDie: null,
+      brill: 0,
+      keywordCounts: new Map(),
+      skillCounts: new Map(),
+      items: new Map(),
+      actions: new Map(),
+      freeUpgrades: 0,
+    };
+
+    if (state.selectedRace) {
+      applyRace(stats, state.selectedRace, state.selectedAttributeSet);
+    }
+
+    if (state.selectedOrigin) {
+      incrementCountMap(stats.keywordCounts, state.selectedOrigin.Keywords || []);
+      (state.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
+      stats.brill += state.selectedOrigin.Brill || 0;
+    }
+
+    if (state.selectedProf) {
+      incrementCountMap(stats.keywordCounts, state.selectedProf.Keywords || []);
+    }
+
+    if (state.selectedPath) {
+      applyEntry(stats, state.selectedPath);
+    }
+
+    getSelectedAdvancementEntries().forEach((entry) => {
+      applyEntry(stats, entry);
+      incrementCountMap(stats.skillCounts, entry.Skills || []);
+    });
+    return stats;
+  }
+
+  function applyRace(stats, race, attributes) {
+    if (attributes) {
+      Object.keys(attributes).forEach((key) => {
+        stats.attributes[key] += attributes[key];
+      });
+    }
+
+    stats.mob = race.MOB || 0;
+    stats.hp = race.HP || 0;
+    stats.divDie = race.DIV || null;
+    incrementCountMap(stats.keywordCounts, race.Keywords || []);
+    incrementCountMap(stats.skillCounts, race.Skills || []);
+    (race["Action cards"] || []).forEach((action) => addAction(stats, action));
+  }
+
+  function applyEntry(stats, entry) {
+    (entry.Attributes || []).forEach((attributeSet) => {
+      Object.keys(attributeSet).forEach((key) => {
+        stats.attributes[key] += attributeSet[key];
+      });
+    });
+
+    stats.mob += entry.MOB || 0;
+    stats.hp += entry.HP || 0;
+    stats.brill += entry.Brill || 0;
+    incrementCountMap(stats.keywordCounts, entry.Keywords || []);
+
+    const divValue = entry.DIV;
+    if (divValue === "Upgrade") {
+      stats.divDie = upgradeDivDie(stats.divDie);
+    } else if (divValue) {
+      stats.divDie = divValue;
+    }
+
+    (entry.Items || []).forEach((item) => addItem(stats, item));
+    (entry["Action cards"] || []).forEach((action) => addAction(stats, action));
+  }
+
+  function addItem(stats, itemName) {
+    const itemObj = state.data.Items[itemName];
+    if (!itemObj) {
+      console.warn('Item not found:', itemName);
+      return;
+    }
+
+    const key = itemName + "::" + itemObj.Type;
+    if (!stats.items.has(key)) {
+      stats.items.set(key, itemObj);
+    }
+  }
+
+  function addAction(stats, cardId) {
+    const card = state.data["Action Cards"][cardId];
+    if (!card) {
+      return;
+    }
+    const current = stats.actions.get(card.Name);
+    if (!current) {
+      stats.actions.set(card.Name, { ...card, _cardId: cardId });
+    } else if (card.Level === current.Level) {
+      stats.freeUpgrades += 1;
+    } else if (card.Level > current.Level) {
+      stats.actions.set(card.Name, { ...card, _cardId: cardId });
+    }
+  }
+
+  function incrementCountMap(map, values) {
+    values.forEach((value) => {
+      map.set(value, (map.get(value) || 0) + 1);
+    });
+  }
+
+  function upgradeDivDie(divDie) {
+    const currentIndex = DICE_PROGRESSION.indexOf(divDie);
+    if (currentIndex === -1 || currentIndex === DICE_PROGRESSION.length - 1) {
+      return divDie;
+    }
+    return DICE_PROGRESSION[currentIndex + 1];
   }
 
   function renderControls(levelMeta) {
@@ -629,6 +1110,68 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
+  function openSelector(config) {
+    ui.selectorKicker.textContent = config.kicker || "Choose Option";
+    ui.selectorTitle.textContent = config.title || "Options";
+    ui.selectorDescription.textContent = config.description || "";
+    ui.selectorDescription.classList.toggle("hidden", !config.description);
+    ui.selectorOptions.replaceChildren();
+
+    if (!config.options.length) {
+      ui.selectorOptions.appendChild(
+        createEmptyState("No options are available here yet.")
+      );
+    } else {
+      config.options.forEach((option) => {
+        const content = config.getOptionContent(option);
+        const isSelected = Boolean(config.isSelected && config.isSelected(option));
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-card";
+        if (isSelected) {
+          button.classList.add("active");
+        }
+
+        button.addEventListener("click", () => {
+          config.onSelect(option);
+          closeSelector();
+        });
+
+        const title = document.createElement("div");
+        title.className = "option-title";
+        title.textContent = content.title;
+        button.appendChild(title);
+
+        if (content.detail) {
+          const detail = document.createElement("div");
+          detail.className = "option-detail";
+          detail.textContent = content.detail;
+          button.appendChild(detail);
+        }
+
+        if (content.actionCards && content.actionCards.length) {
+          const cardsEl = document.createElement("div");
+          cardsEl.className = "option-action-cards";
+          content.actionCards.forEach(({ cardId, card }) => {
+            cardsEl.appendChild(buildActionCardElement(cardId, card));
+          });
+          button.appendChild(cardsEl);
+        }
+
+        ui.selectorOptions.appendChild(button);
+      });
+    }
+
+    ui.selectorOverlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    ui.selectorClose.focus();
+  }
+
+  function closeSelector() {
+    ui.selectorOverlay.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
   function singleChoiceGrid(config) {
     const grid = document.createElement("div");
     grid.className = "choice-grid";
@@ -736,684 +1279,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     box.className = "empty-state";
     box.textContent = text;
     return box;
-  }
-
-  function openSelector(config) {
-    ui.selectorKicker.textContent = config.kicker || "Choose Option";
-    ui.selectorTitle.textContent = config.title || "Options";
-    ui.selectorDescription.textContent = config.description || "";
-    ui.selectorDescription.classList.toggle("hidden", !config.description);
-    ui.selectorOptions.replaceChildren();
-
-    if (!config.options.length) {
-      ui.selectorOptions.appendChild(
-        createEmptyState("No options are available here yet.")
-      );
-    } else {
-      config.options.forEach((option) => {
-        const content = config.getOptionContent(option);
-        const isSelected = Boolean(config.isSelected && config.isSelected(option));
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "option-card";
-        if (isSelected) {
-          button.classList.add("active");
-        }
-
-        button.addEventListener("click", () => {
-          config.onSelect(option);
-          closeSelector();
-        });
-
-        const title = document.createElement("div");
-        title.className = "option-title";
-        title.textContent = content.title;
-        button.appendChild(title);
-
-        if (content.detail) {
-          const detail = document.createElement("div");
-          detail.className = "option-detail";
-          detail.textContent = content.detail;
-          button.appendChild(detail);
-        }
-
-        if (content.actionCards && content.actionCards.length) {
-          const cardsEl = document.createElement("div");
-          cardsEl.className = "option-action-cards";
-          content.actionCards.forEach(({ cardId, card }) => {
-            cardsEl.appendChild(buildActionCardElement(cardId, card));
-          });
-          button.appendChild(cardsEl);
-        }
-
-        ui.selectorOptions.appendChild(button);
-      });
-    }
-
-    ui.selectorOverlay.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-    ui.selectorClose.focus();
-  }
-
-  function closeSelector() {
-    ui.selectorOverlay.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
-
-  function selectRace(race) {
-    const raceChanged = state.selectedRace !== race;
-    state.selectedRace = race;
-
-    if (raceChanged) {
-      state.selectedAttributeSet = null;
-      const attrOptions = race.Attributes;
-      if (attrOptions.length === 1) {
-        state.selectedAttributeSet = attrOptions[0];
-      }
-    }
-
-    commitSelection();
-  }
-
-  function selectAttributeSet(attr) {
-    state.selectedAttributeSet = attr;
-    commitSelection();
-  }
-
-  function selectOrigin(origin) {
-    state.selectedOrigin = origin;
-    commitSelection();
-  }
-
-  function selectProfession(profession) {
-    const professionChanged = state.selectedProf !== profession;
-    state.selectedProf = profession;
-
-    if (professionChanged) {
-      state.selectedPath = null;
-      const pathOptions = profession.Paths;
-      if (pathOptions.length === 1) {
-        state.selectedPath = pathOptions[0];
-      }
-      state.levelUps = createEmptyLevelUps();
-    }
-
-    commitSelection();
-  }
-
-  function selectPath(path) {
-    state.selectedPath = path;
-    commitSelection();
-  }
-
-  function selectLevelUpTree(slotIndex, treeLevelOption) {
-    const slot = state.levelUps[slotIndex];
-    slot.treeName = treeLevelOption.treeName;
-    slot.level = treeLevelOption.level;
-    slot.versionIndex = null;
-    commitSelection();
-  }
-
-  function selectLevelUpVersion(slotIndex, versionOption) {
-    state.levelUps[slotIndex].versionIndex = versionOption.index;
-    commitSelection();
-  }
-
-  function tryAutoSelect() {
-    const priorSelectedOptions = [];
-    let unlocked = state.selectedProf !== null;
-
-    for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
-      const slotState = state.levelUps[slotIndex];
-      const treeOptions = unlocked
-        ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
-        : [];
-
-      let selectedTree =
-        treeOptions.find(
-          (option) =>
-            slotState.treeName === option.treeName && slotState.level === option.level
-        ) || null;
-
-      if (!selectedTree) {
-        if (treeOptions.length === 1) {
-          selectedTree = treeOptions[0];
-          slotState.treeName = selectedTree.treeName;
-          slotState.level = selectedTree.level;
-        } else {
-          slotState.treeName = null;
-          slotState.level = null;
-          slotState.versionIndex = null;
-        }
-      }
-
-      let selectedVersion = null;
-
-      if (selectedTree) {
-        const versionOptions = getVersionOptions(selectedTree);
-        if (versionOptions.length === 1) {
-          slotState.versionIndex = 0;
-        }
-
-        selectedVersion =
-          versionOptions.find((option) => option.index === slotState.versionIndex) || null;
-
-        if (!selectedVersion && versionOptions.length !== 1) {
-          slotState.versionIndex = null;
-        }
-      } else {
-        slotState.versionIndex = null;
-      }
-
-      const isComplete = Boolean(selectedTree && selectedVersion);
-      if (isComplete) {
-        priorSelectedOptions.push(selectedTree);
-      }
-
-      unlocked = unlocked && isComplete;
-    }
-  }
-
-  function refreshLevelUpStates() {
-    const levelUpMeta = [];
-    const priorSelectedOptions = [];
-    let unlocked = state.selectedProf !== null;
-
-    for (let slotIndex = 0; slotIndex < LEVEL_UP_SLOTS; slotIndex += 1) {
-      const slotNumber = slotIndex + 1;
-      const slotState = state.levelUps[slotIndex];
-      const treeOptions = unlocked
-        ? getAvailableLevelUpOptions(slotIndex, priorSelectedOptions)
-        : [];
-
-      const selectedTree =
-        treeOptions.find(
-          (option) =>
-            slotState.treeName === option.treeName && slotState.level === option.level
-        ) || null;
-
-      const versionOptions = selectedTree ? getVersionOptions(selectedTree) : [];
-      const selectedVersion = selectedTree
-        ? versionOptions.find((option) => option.index === slotState.versionIndex) || null
-        : null;
-      const isComplete = Boolean(selectedTree && selectedVersion);
-
-      if (isComplete) {
-        priorSelectedOptions.push(selectedTree);
-      }
-
-      levelUpMeta.push({
-        slotIndex,
-        slotNumber,
-        unlocked,
-        treeOptions,
-        selectedTree,
-        versionOptions,
-        selectedVersion,
-        isComplete,
-      });
-
-      unlocked = unlocked && isComplete;
-    }
-
-    return levelUpMeta;
-  }
-
-  function getAvailableLevelUpOptions(slotIndex, priorSelectedOptions) {
-    const slotNumber = slotIndex + 1;
-    const treeNames = getAccessibleAdvancementTreeNames();
-    const takenLevelsByTree = new Map();
-
-    priorSelectedOptions.forEach((option) => {
-      if (!takenLevelsByTree.has(option.treeName)) {
-        takenLevelsByTree.set(option.treeName, new Set());
-      }
-      takenLevelsByTree.get(option.treeName).add(option.level);
-    });
-
-    const options = [];
-    treeNames.forEach((treeName) => {
-      const tree = state.trees.get(treeName);
-      if (!tree) {
-        return;
-      }
-
-      const takenLevels = takenLevelsByTree.get(treeName) || new Set();
-      Object.keys(tree.Levels)
-        .map((value) => Number(value))
-        .sort((a, b) => a - b)
-        .forEach((level) => {
-          if (takenLevels.has(level)) {
-            return;
-          }
-
-          if (isAdvancementLevelUnlocked(level, takenLevels, slotNumber)) {
-            options.push({
-              treeName,
-              level,
-              versions: tree.Levels[String(level)],
-            });
-          }
-        });
-    });
-
-    return options;
-  }
-
-  function getAccessibleAdvancementTreeNames() {
-    if (!state.selectedProf) {
-      return [];
-    }
-
-    const treeNames = [];
-    const primaryTreeName = resolvePrimaryTreeName(state.selectedProf.Name);
-
-    if (state.trees.has(primaryTreeName)) {
-      treeNames.push(primaryTreeName);
-    }
-
-    state.selectedProf["Advancement Trees"].forEach((treeName) => {
-      if (state.trees.has(treeName) && !treeNames.includes(treeName)) {
-        treeNames.push(treeName);
-      }
-    });
-
-    return treeNames;
-  }
-
-  function resolvePrimaryTreeName(professionName) {
-    if (state.trees.has(professionName)) {
-      return professionName;
-    }
-
-    const normalizedProfession = normalizeName(professionName);
-    let bestMatch = null;
-
-    state.trees.forEach((_, treeName) => {
-      const normalizedTree = normalizeName(treeName);
-      if (
-        normalizedProfession.startsWith(normalizedTree) ||
-        normalizedTree.startsWith(normalizedProfession)
-      ) {
-        if (
-          !bestMatch ||
-          normalizedTree.length > normalizeName(bestMatch).length
-        ) {
-          bestMatch = treeName;
-        }
-      }
-    });
-
-    return bestMatch || professionName;
-  }
-
-  function normalizeName(value) {
-    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
-
-  function isAdvancementLevelUnlocked(level, takenLevels, slotNumber) {
-    if (level === 1) {
-      return true;
-    }
-    if (level === 2 || level === 3) {
-      return takenLevels.has(1);
-    }
-    if (level === 4) {
-      return takenLevels.has(3);
-    }
-    if (level === 5) {
-      return takenLevels.has(3) && slotNumber > 4;
-    }
-    if (level === 6) {
-      return takenLevels.has(5);
-    }
-    if (level === 7) {
-      return takenLevels.has(5) && slotNumber > 6;
-    }
-    if (level === 8) {
-      return takenLevels.has(7);
-    }
-    return false;
-  }
-
-  function getSelectedAdvancementEntries() {
-    const entries = [];
-
-    state.levelUps.forEach((slotState) => {
-      if (
-        slotState.treeName === null ||
-        slotState.level === null ||
-        slotState.versionIndex === null
-      ) {
-        return;
-      }
-
-      const option = getTreeLevelOption(slotState.treeName, slotState.level);
-      if (!option) {
-        return;
-      }
-
-      const versionOptions = getVersionOptions(option);
-      if (
-        slotState.versionIndex >= 0 &&
-        slotState.versionIndex < versionOptions.length
-      ) {
-        entries.push(versionOptions[slotState.versionIndex].entry);
-      }
-    });
-
-    return entries;
-  }
-
-  function getTreeLevelOption(treeName, level) {
-    const tree = state.trees.get(treeName);
-    if (!tree) {
-      return null;
-    }
-
-    const versions = tree.Levels[String(level)];
-    if (!versions) {
-      return null;
-    }
-
-    return {
-      treeName,
-      level,
-      versions,
-    };
-  }
-
-  function getVersionOptions(treeLevelOption) {
-    return treeLevelOption.versions.map((entry, index) => ({
-      index,
-      entry,
-    }));
-  }
-
-  function collectCharacterStats() {
-    const stats = {
-      attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
-      mob: 0,
-      hp: 0,
-      divDie: null,
-      brill: 0,
-      keywordCounts: new Map(),
-      skillCounts: new Map(),
-      items: new Map(),
-      actions: new Map(),
-      freeUpgrades: 0,
-    };
-
-    if (state.selectedRace) {
-      applyRace(stats, state.selectedRace, state.selectedAttributeSet);
-    }
-
-    if (state.selectedOrigin) {
-      incrementCountMap(stats.keywordCounts, state.selectedOrigin.Keywords || []);
-      (state.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
-      stats.brill += state.selectedOrigin.Brill || 0;
-    }
-
-    if (state.selectedProf) {
-      incrementCountMap(stats.keywordCounts, state.selectedProf.Keywords || []);
-    }
-
-    if (state.selectedPath) {
-      applyEntry(stats, state.selectedPath);
-    }
-
-    getSelectedAdvancementEntries().forEach((entry) => {
-      applyEntry(stats, entry);
-      incrementCountMap(stats.skillCounts, entry.Skills || []);
-    });
-    return stats;
-  }
-
-  function incrementCountMap(map, values) {
-    values.forEach((value) => {
-      map.set(value, (map.get(value) || 0) + 1);
-    });
-  }
-
-  function addItem(stats, itemName) {
-    const itemObj = state.data.Items[itemName];
-    if (!itemObj) {
-      console.warn('Item not found:', itemName);
-      return;
-    }
-
-    const key = itemName + "::" + itemObj.Type;
-    if (!stats.items.has(key)) {
-      stats.items.set(key, itemObj);
-    }
-  }
-
-  function addAction(stats, cardId) {
-    const card = state.data["Action Cards"][cardId];
-    if (!card) {
-      return;
-    }
-    const current = stats.actions.get(card.Name);
-    if (!current) {
-      stats.actions.set(card.Name, { ...card, _cardId: cardId });
-    } else if (card.Level === current.Level) {
-      stats.freeUpgrades += 1;
-    } else if (card.Level > current.Level) {
-      stats.actions.set(card.Name, { ...card, _cardId: cardId });
-    }
-  }
-
-  function applyRace(stats, race, attributes) {
-    if (attributes) {
-      Object.keys(attributes).forEach((key) => {
-        stats.attributes[key] += attributes[key];
-      });
-    }
-
-    stats.mob = race.MOB || 0;
-    stats.hp = race.HP || 0;
-    stats.divDie = race.DIV || null;
-    incrementCountMap(stats.keywordCounts, race.Keywords || []);
-    incrementCountMap(stats.skillCounts, race.Skills || []);
-    (race["Action cards"] || []).forEach((action) => addAction(stats, action));
-  }
-
-  function applyEntry(stats, entry) {
-    (entry.Attributes || []).forEach((attributeSet) => {
-      Object.keys(attributeSet).forEach((key) => {
-        stats.attributes[key] += attributeSet[key];
-      });
-    });
-
-    stats.mob += entry.MOB || 0;
-    stats.hp += entry.HP || 0;
-    stats.brill += entry.Brill || 0;
-    incrementCountMap(stats.keywordCounts, entry.Keywords || []);
-
-    const divValue = entry.DIV;
-    if (divValue === "Upgrade") {
-      stats.divDie = upgradeDivDie(stats.divDie);
-    } else if (divValue) {
-      stats.divDie = divValue;
-    }
-
-    (entry.Items || []).forEach((item) => addItem(stats, item));
-    (entry["Action cards"] || []).forEach((action) => addAction(stats, action));
-  }
-
-  function upgradeDivDie(divDie) {
-    const currentIndex = DICE_PROGRESSION.indexOf(divDie);
-    if (currentIndex === -1 || currentIndex === DICE_PROGRESSION.length - 1) {
-      return divDie;
-    }
-    return DICE_PROGRESSION[currentIndex + 1];
-  }
-
-  function buildSelectedByTree() {
-    const selectedByTree = {};
-
-    state.levelUps.forEach((slotState) => {
-      if (
-        slotState.treeName === null ||
-        slotState.level === null ||
-        slotState.versionIndex === null
-      ) {
-        return;
-      }
-
-      const option = getTreeLevelOption(slotState.treeName, slotState.level);
-      if (!option) {
-        return;
-      }
-
-      if (!selectedByTree[option.treeName]) {
-        selectedByTree[option.treeName] = {};
-      }
-      selectedByTree[option.treeName][option.level] = slotState.versionIndex;
-    });
-
-    return selectedByTree;
-  }
-
-  function summarizeEntry(entry, { excludeActionCards = false } = {}) {
-    const parts = [];
-
-    (entry.Attributes || []).forEach((attributeSet) => {
-      Object.entries(attributeSet).forEach(([key, value]) => {
-        parts.push(value + " " + key);
-      });
-    });
-
-    if (entry.HP) {
-      parts.push(entry.HP + " HP");
-    }
-    if (entry.MOB) {
-      parts.push(entry.MOB + " MOB");
-    }
-    if (entry.Brill) {
-      parts.push(entry.Brill + " Brill");
-    }
-
-    const divValue = entry.DIV;
-    if (divValue === "Upgrade") {
-      parts.push("DIV Upgrade");
-    } else if (divValue) {
-      parts.push("DIV " + divValue);
-    }
-
-    parts.push(...(entry.Keywords || []));
-    parts.push(...(entry.Skills || []));
-
-    (entry.Items || []).forEach((itemName) => {
-      const itemObj = state.data.Items[itemName];
-      if (itemObj) {
-        parts.push(formatItemDisplayName(itemObj));
-      }
-    });
-
-    if (!excludeActionCards) {
-      (entry["Action cards"] || []).forEach((action) => {
-        parts.push(formatActionCardLabel(action));
-      });
-    }
-
-    return parts.join(", ");
-  }
-
-
-  function formatAttributeSummary(attributeSet) {
-    return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
-  }
-
-  function formatItemDisplayName(item) {
-    let itemText = item.DisplayName || "";
-    const details = [];
-    if (item.Passive) {
-      details.push(item.Passive);
-    }
-    const keywords = item.Keywords || [];
-    if (keywords.length) {
-      details.push(...keywords);
-    }
-    if (details.length) {
-      itemText += " (" + details.join(", ") + ")";
-    }
-    return itemText;
-  }
-
-  function formatActionCardLabel(cardId, card) {
-    if (!card) {
-      card = state.data["Action Cards"][cardId];
-    }
-    if (!card) {
-      return "";
-    }
-    const displayName = card.DisplayName || card.Name;
-    const parts = [...(card.Keywords || [])];
-    if (card.Condition) parts.push(card.Condition);
-    parts.push(card.Type);
-    return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
-  }
-
-  function appendIconTextContent(parent, text) {
-    const iconPattern = /\{([^}]+)\}/g;
-    let lastIndex = 0;
-    let match;
-    while ((match = iconPattern.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const iconName = match[1].trim();
-      if (iconName) {
-        const iconEl = document.createElement("img");
-        iconEl.className = "action-card-inline-icon";
-        iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
-        iconEl.alt = iconName;
-        parent.appendChild(iconEl);
-      } else {
-        parent.appendChild(document.createTextNode(match[0]));
-      }
-      lastIndex = match.index + match[0].length;
-    }
-    if (lastIndex < text.length) {
-      parent.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
-  }
-
-  function buildRollElement(roll) {
-    const rollLineEl = document.createElement("div");
-    rollLineEl.className = "action-card-roll";
-    const mode = roll.Mode || "Highest";
-    const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
-    let rollText;
-    if (mode === "Sum") {
-      const attList = hasSpecificATT ? roll.ATT : ATTRIBUTES;
-      rollText = "Roll sum of " + attList.join(" + ");
-    } else if (hasSpecificATT) {
-      rollText = "Roll for " + roll.ATT.join(" or ");
-    } else {
-      rollText = "Roll the highest ATT";
-    }
-    if (roll.DIV) rollText += " and DIV";
-    rollLineEl.appendChild(document.createTextNode(rollText));
-    const diffBadge = document.createElement("span");
-    diffBadge.className = "action-card-difficulty";
-    const diffIcon = document.createElement("img");
-    const difficultyIconName = roll.Difficulty != null ? String(roll.Difficulty) : "en";
-    diffIcon.className = "action-card-difficulty-icon";
-    diffIcon.src = "icons/" + encodeURIComponent(difficultyIconName) + ".svg";
-    diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
-    diffBadge.appendChild(diffIcon);
-    rollLineEl.appendChild(diffBadge);
-    return rollLineEl;
-  }
-
-  function appendDifficultyIcon(parent, difficulty) {
-    const iconEl = document.createElement("img");
-    iconEl.className = "action-card-inline-icon";
-    iconEl.src = "icons/" + encodeURIComponent(String(difficulty)) + ".svg";
-    iconEl.alt = "Difficulty " + difficulty;
-    parent.appendChild(iconEl);
   }
 
   function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
@@ -1648,6 +1513,71 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
+  function buildRollElement(roll) {
+    const rollLineEl = document.createElement("div");
+    rollLineEl.className = "action-card-roll";
+    const mode = roll.Mode || "Highest";
+    const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
+    let rollText;
+    if (mode === "Sum") {
+      const attList = hasSpecificATT ? roll.ATT : ATTRIBUTES;
+      rollText = "Roll sum of " + attList.join(" + ");
+    } else if (hasSpecificATT) {
+      rollText = "Roll for " + roll.ATT.join(" or ");
+    } else {
+      rollText = "Roll the highest ATT";
+    }
+    if (roll.DIV) rollText += " and DIV";
+    rollLineEl.appendChild(document.createTextNode(rollText));
+    const diffBadge = document.createElement("span");
+    diffBadge.className = "action-card-difficulty";
+    const diffIcon = document.createElement("img");
+    const difficultyIconName = roll.Difficulty != null ? String(roll.Difficulty) : "en";
+    diffIcon.className = "action-card-difficulty-icon";
+    diffIcon.src = "icons/" + encodeURIComponent(difficultyIconName) + ".svg";
+    diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
+    diffBadge.appendChild(diffIcon);
+    rollLineEl.appendChild(diffBadge);
+    return rollLineEl;
+  }
+
+  function appendIconTextContent(parent, text) {
+    const iconPattern = /\{([^}]+)\}/g;
+    let lastIndex = 0;
+    let match;
+    while ((match = iconPattern.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const iconName = match[1].trim();
+      if (iconName) {
+        const iconEl = document.createElement("img");
+        iconEl.className = "action-card-inline-icon";
+        iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
+        iconEl.alt = iconName;
+        parent.appendChild(iconEl);
+      } else {
+        parent.appendChild(document.createTextNode(match[0]));
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) {
+      parent.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+  }
+
+  function appendDifficultyIcon(parent, difficulty) {
+    const iconEl = document.createElement("img");
+    iconEl.className = "action-card-inline-icon";
+    iconEl.src = "icons/" + encodeURIComponent(String(difficulty)) + ".svg";
+    iconEl.alt = "Difficulty " + difficulty;
+    parent.appendChild(iconEl);
+  }
+
+  function describeRaceOption(race) {
+    return { title: race.Name, detail: raceDetail(race) };
+  }
+
   function raceDetail(race) {
     const extras = [];
     if (race.Keywords?.length) extras.push(race.Keywords.join(", "));
@@ -1657,25 +1587,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return extras.join(", ");
   }
 
-  function describeRaceOption(race) {
-    return { title: race.Name, detail: raceDetail(race) };
-  }
-
   function describeAttributeOption(attributeSet) {
     return {
       title: formatAttributeSummary(attributeSet),
       detail: "Race attribute spread",
-    };
-  }
-
-  function describeEntryOption(entry) {
-    const actionCards = (entry["Action cards"] || [])
-      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
-      .filter(({ card }) => card !== null);
-    return {
-      title: entry.Name,
-      detail: summarizeEntry(entry, { excludeActionCards: true }),
-      actionCards,
     };
   }
 
@@ -1707,6 +1622,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
+  function describeEntryOption(entry) {
+    const actionCards = (entry["Action cards"] || [])
+      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
+      .filter(({ card }) => card !== null);
+    return {
+      title: entry.Name,
+      detail: summarizeEntry(entry, { excludeActionCards: true }),
+      actionCards,
+    };
+  }
+
   function describeTreeLevelOption(option) {
     return {
       title: option.treeName + " - Level " + option.level,
@@ -1728,6 +1654,55 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
+  function summarizeEntry(entry, { excludeActionCards = false } = {}) {
+    const parts = [];
+
+    (entry.Attributes || []).forEach((attributeSet) => {
+      Object.entries(attributeSet).forEach(([key, value]) => {
+        parts.push(value + " " + key);
+      });
+    });
+
+    if (entry.HP) {
+      parts.push(entry.HP + " HP");
+    }
+    if (entry.MOB) {
+      parts.push(entry.MOB + " MOB");
+    }
+    if (entry.Brill) {
+      parts.push(entry.Brill + " Brill");
+    }
+
+    const divValue = entry.DIV;
+    if (divValue === "Upgrade") {
+      parts.push("DIV Upgrade");
+    } else if (divValue) {
+      parts.push("DIV " + divValue);
+    }
+
+    parts.push(...(entry.Keywords || []));
+    parts.push(...(entry.Skills || []));
+
+    (entry.Items || []).forEach((itemName) => {
+      const itemObj = state.data.Items[itemName];
+      if (itemObj) {
+        parts.push(formatItemDisplayName(itemObj));
+      }
+    });
+
+    if (!excludeActionCards) {
+      (entry["Action cards"] || []).forEach((action) => {
+        parts.push(formatActionCardLabel(action));
+      });
+    }
+
+    return parts.join(", ");
+  }
+
+  function formatAttributeSummary(attributeSet) {
+    return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
+  }
+
   function formatKeywordSummary(keywordCounts) {
     if (!keywordCounts.size) {
       return "";
@@ -1742,10 +1717,34 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       .join(", ");
   }
 
-  function getFilledLevelCount() {
-    return state.levelUps.reduce((count, slotState) => {
-      return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
-    }, 0);
+  function formatItemDisplayName(item) {
+    let itemText = item.DisplayName || "";
+    const details = [];
+    if (item.Passive) {
+      details.push(item.Passive);
+    }
+    const keywords = item.Keywords || [];
+    if (keywords.length) {
+      details.push(...keywords);
+    }
+    if (details.length) {
+      itemText += " (" + details.join(", ") + ")";
+    }
+    return itemText;
+  }
+
+  function formatActionCardLabel(cardId, card) {
+    if (!card) {
+      card = state.data["Action Cards"][cardId];
+    }
+    if (!card) {
+      return "";
+    }
+    const displayName = card.DisplayName || card.Name;
+    const parts = [...(card.Keywords || [])];
+    if (card.Condition) parts.push(card.Condition);
+    parts.push(card.Type);
+    return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
   }
 
   return {
