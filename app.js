@@ -9,7 +9,12 @@ init();
 
 async function init() {
   cacheUi();
-  renderLoadingState();
+  for (const panel of [ui.controlsPanel, ui.summaryPanel, ui.treesPanel]) {
+    const box = document.createElement("div");
+    box.className = "empty-state";
+    box.textContent = "Loading...";
+    panel.replaceChildren(box);
+  }
 
   try {
     const response = await fetch("data.json", { cache: "no-store" });
@@ -97,18 +102,6 @@ function bindEvents() {
   });
 }
 
-function renderLoadingState() {
-  ui.controlsPanel.replaceChildren(createEmptyState("Loading builder data..."));
-  ui.summaryPanel.replaceChildren(createEmptyState("Loading character board..."));
-  ui.treesPanel.replaceChildren(createEmptyState("Loading advancement trees..."));
-}
-
-function createEmptyState(text) {
-  const box = document.createElement("div");
-  box.className = "empty-state";
-  box.textContent = text;
-  return box;
-}
 
 function syncUrlHash(encoded) {
   history.replaceState(null, "", encoded ? "#" + encoded : location.pathname + location.search);
@@ -134,7 +127,7 @@ function openNewBuild() {
 }
 
 function requestBuildConfirmation(action) {
-  if (isBuildEmpty()) {
+  if (builder.isBuildEmpty()) {
     action();
     return;
   }
@@ -163,33 +156,6 @@ function isConfirmDialogOpen() {
   return !ui.confirmOverlay.classList.contains("hidden");
 }
 
-function isBuildEmpty() {
-  const compact = deserializeSerializedState(builder.serializeState());
-  if (!compact) {
-    return false;
-  }
-
-  const hasLevelUps = Array.isArray(compact.lu) && compact.lu.some((entry) => entry !== null);
-  return !compact.r && compact.ai === null && !compact.o && !compact.p && !compact.pa && !hasLevelUps;
-}
-
-function deserializeSerializedState(encoded) {
-  if (!encoded) {
-    return null;
-  }
-
-  try {
-    const json = decodeURIComponent(
-      atob(encoded)
-        .split("")
-        .map((char) => "%" + char.charCodeAt(0).toString(16).padStart(2, "0"))
-        .join("")
-    );
-    return JSON.parse(json);
-  } catch (_) {
-    return null;
-  }
-}
 
 function showError(message) {
   ui.errorBanner.textContent = message;

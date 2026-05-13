@@ -1375,17 +1375,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return parts.join(", ");
   }
 
-  function raceDetail(race) {
-    const extras = [];
-    const keywords = (race.Keywords || []).join(", ");
-    if (keywords) {
-      extras.push(keywords);
-    }
-    extras.push("MOB: " + (race.MOB || 0));
-    extras.push("HP: " + (race.HP || 0));
-    extras.push("DIV: " + (race.DIV || "-"));
-    return extras.join(", ");
-  }
 
   function formatAttributeSummary(attributeSet) {
     return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
@@ -1714,11 +1703,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
+  function raceDetail(race) {
+    const extras = [];
+    if (race.Keywords?.length) extras.push(race.Keywords.join(", "));
+    extras.push("MOB: " + (race.MOB || 0));
+    extras.push("HP: " + (race.HP || 0));
+    extras.push("DIV: " + (race.DIV || "-"));
+    return extras.join(", ");
+  }
+
   function describeRaceOption(race) {
-    return {
-      title: race.Name,
-      detail: raceDetail(race),
-    };
+    return { title: race.Name, detail: raceDetail(race) };
   }
 
   function describeAttributeOption(attributeSet) {
