@@ -1430,7 +1430,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function buildRollElement(roll) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
-    let rollText = "Roll for " + roll.ATT.join("+");
+    let rollText = "Roll for " + roll.ATT.join(" or ");
     if (roll.DIV) rollText += " and DIV";
     rollLineEl.appendChild(document.createTextNode(rollText));
     const diffBadge = document.createElement("span");
@@ -1579,17 +1579,25 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       body.appendChild(frontEl);
     }
 
-    if (card.Back || card.Refresh) {
+    if (card.Back || card.Note || card.Warning) {
       const backEl = document.createElement("div");
-      backEl.className = "action-card-desc action-card-back";
+      backEl.className = "action-card-back";
       if (card.Back) {
-        appendIconTextContent(backEl, card.Back);
+        const backTextEl = document.createElement("div");
+        appendIconTextContent(backTextEl, card.Back);
+        backEl.appendChild(backTextEl);
       }
-      if (card.Refresh) {
-        const refreshEl = document.createElement("div");
-        refreshEl.className = "action-card-refresh";
-        appendIconTextContent(refreshEl, card.Refresh);
-        backEl.appendChild(refreshEl);
+      if (card.Note) {
+        const noteEl = document.createElement("div");
+        noteEl.className = "action-card-note";
+        appendIconTextContent(noteEl, card.Note);
+        backEl.appendChild(noteEl);
+      }
+      if (card.Warning) {
+        const warningEl = document.createElement("div");
+        warningEl.className = "action-card-refresh";
+        appendIconTextContent(warningEl, card.Warning);
+        backEl.appendChild(warningEl);
       }
       body.appendChild(backEl);
     }

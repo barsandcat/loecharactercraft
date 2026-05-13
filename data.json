@@ -4705,7 +4705,7 @@
       "Condition": "After revealling Enemy activation card",
 	  "Front": "Change the target of current Enemy Activation card to yoursefl. Resolve the effect on the back",
 	  "Back": "Gain 1 {armor} (+1 {armor}: Vigilance) until the end of current Enemy card Activation",
-	  "Refresh": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}.",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}.",
       "Target": "Self",
       "Level": 1
     },
@@ -5033,11 +5033,15 @@
       "Name": "Parry",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Sun": 2,
+	  "Condition": "Against Melee",
+	  "Target": "Self",
       "Roll": {
         "ATT": [
           "STR",
           "AGI"
-        ]
+        ],
+		"Successes": { "2": "Prevent {successes} {damage} (+2 {damage}: Melee)" }
       },
       "Level": 1
     },
@@ -5045,16 +5049,26 @@
       "Name": "Trip",
       "Type": "Action",
       "Category": "Offensive",
+	  "Sun": 2,
+	  "Target": "Elite or Boss in R1",
       "Roll": {
         "ATT": [
           "STR",
           "AGI"
-        ]
+        ],
+		"Modifiers": [ { "Dice": 1, "Triggers": [ "Athletics" ] }, { "Dice": -2, "Triggers": ["against Large"]} ],
+		"Successes": { "5": "Place your Effect token on Elite or Boss", "3": "Place your Effect token on Elite" }
       },
+	  "Back": "???",
       "Level": 1
     },
     "S19": {
       "Name": "Follow-up",
+	  "Type": "Reaction",
+	  "Category": "Offensive",
+	  "Condition": "After you Push an Enemy",
+	  "Target": "Self",
+	  "Front": "Move by 3(+2 spaces: Pathfinding). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
       "Level": 1
     },
     "S20": {
@@ -5071,11 +5085,17 @@
       "Name": "Shoot and Dash",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Ranged",
+	  "Target": "1 in R2+",
       "Roll": {
         "DIV": true,
         "ATT": [
           "AGI"
-        ]
+        ],
+		"Modifiers": [ { "Dice": 1, "Triggers": ["against Large"] } ],
+		"Successes": { "1": "Deal ({successes}-1) {damage}. You move by {div}"}
       },
       "Level": 1
     },
@@ -5083,28 +5103,59 @@
       "Name": "Take Aim",
       "Type": "Action",
       "Category": "Support",
+	  "Moon": 1,
+	  "Target": "Self",
       "Roll": {
         "ATT": [
           "INT"
-        ]
+        ],
+		"Difficulty": 8,
+		"Modifiers": [ { "Dice": 1, "Triggers": ["Survival", "Vigilance"] } ],
+		"Successes": { "2": "Flip this card", "0": "Do not flip this card unless you pay 1 {fate}" }
       },
+	  "Back": "During Ranged Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Level": 1
     },
     "S23": {
       "Name": "Arrow Rain",
       "Type": "Action",
       "Category": "Offensive",
+	  "Sun": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Ranged",
+	  "Target": "EN in R2+",
       "Roll": {
         "DIV": true,
         "ATT": [
           "AGI"
-        ]
+        ],
+		"Difficulty": 10,
+		"Successes": { "1": "Deal {successes} {damage}. Then deal ({successes}-2) {damage} to {half div} other Enemies in R2 from the target." }
       },
       "Level": 1
     },
     "S24": {
       "Name": "Frost Shot",
-      "Level": 1
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Moon": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Ranged",
+	  "Target": "All in 1 line",
+      "Roll": {
+        "ATT": [
+          "STR",
+		  "AGI"
+        ],
+		"Difficulty": 8,
+		"Modifiers": [ { "Dice": 1, "Triggers": ["Ice"] } ],
+		"Successes": { 
+			"4": "Deal ({successes}+2) Ice {damage} ignoring 5 {armor}", 
+			"2": "Deal {successes} Ice {damage} ignoring 5 {armor}"
+		}
+      },
+	  "Level": 1
     },
     "S25": {
       "Name": "Sense Danger",
