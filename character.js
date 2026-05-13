@@ -1521,7 +1521,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     let rollText;
     if (mode === "Sum") {
       const attList = hasSpecificATT ? roll.ATT : ATTRIBUTES;
-      rollText = "Roll sum of " + attList.join(" + ");
+      rollText = "Roll for " + attList.join(" and ");
     } else if (hasSpecificATT) {
       rollText = "Roll for " + roll.ATT.join(" or ");
     } else {

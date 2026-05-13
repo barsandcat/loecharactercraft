@@ -5185,7 +5185,7 @@
       "Name": "Ritual of Haste",
       "Type": "Action",
       "Category": "Support",
-	  "keywords": ["Spell"],
+	  "Keywords": ["Spell"],
 	  "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
@@ -5210,7 +5210,7 @@
       "Name": "Protective Gestures",
       "Type": "Action",
       "Category": "Support",
-	  "keywords": ["Spell"],
+	  "Keywords": ["Spell"],
 	  "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
@@ -5273,25 +5273,93 @@
     },
     "S13": {
       "Name": "Swerve",
+	  "Type": "Action",
+	  "Category": "Defensive",
+	  "Target": "Self",
+	  "Roll": {
+		  "ATT": ["AGI"],
+		  "DIV": true,
+		  "Difficulty": 6,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Athletics", "Stealth"] } ],
+		  "Successes": {
+			  "3": "Move by {div}. Flip this card and place 3 markers on it",
+			  "1": "Move by {half div}. Flip this card and place 1 markers on it"
+		  }
+	  },
+	  "Back": "You gain {armor} against Ranged equal to the number of markers on this card",
+	  "BackMoon": 3,
       "Level": 1
     },
     "S14": {
       "Name": "Sucker Punch",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
+	  "Roll": {
+		  "ATT": ["INT"],
+		  "Modifiers": [
+		  { "Dice": 1, "Triggers": ["Sleight of Hand"] },
+		  { "Dice": 1, "Triggers": ["against Small"] }
+		  ],
+		  "Successes": {
+			  "3": "Deal ({successes}-2) {damage}. Place your Effect token on the Enemy", 
+			  "1": "Deal ({successes}-2) {damage} or place your Effect token on the Enemy"
+		  }
+	  },
+	  "BackSun": 2,
+	  "Back": "The Enemy with your Effect token has their {en} reduced by 2. When Enemy with your token is dealt {damage}, discard your Effect token from them.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card.",
+	  "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
       "Level": 1
     },
     "S15": {
       "Name": "Feint",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
+	  "Roll": {
+		  "ATT": ["AGI"],
+		  "Modifiers": [
+		  { "Dice": 1, "Triggers": ["Deception"] },
+		  { "Dice": 1, "Triggers": ["against Small"] }
+		  ],
+		  "Successes": {
+			  "3": "Deal {successes} {damage}. Place your Effect token on the Enemy", 
+			  "1": "Deal {successes} {damage} or place your Effect token on the Enemy"
+		  }
+	  },
+	  "BackMoon": 3,
+	  "BackSun": 3,
+	  "Back": "When you are attacked by an Enemy with your Effect token, gain 2 {armor}. After the attack, discard the Effect token and deal them AGI {damage} ignoring 5 {armor}",
       "Level": 1
     },
     "S16": {
       "Name": "Backstab",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 1,
+	  "Target": "1 in R1",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee and PM in R1 from the target",
       "Roll": {
+		"Mode": "Sum",
         "ATT": [
           "AGI",
           "INT"
-        ]
+        ],
+		"Difficulty": 6,
+		"Modifiers": [
+		  { "Dice": 1, "Triggers": ["Stealth", "Subterfuge"] },
+		  { "Dice": 1, "Triggers": ["against Large"] },
+		  { "Dice": -3, "Triggers": ["PM in R1"] }
+		  ],
+		  "Successes": {
+			  "1": "Deal {successes} {damage} ingoring 5 {armor}"
+		  }
       },
       "Level": 1
     },
