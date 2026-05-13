@@ -4886,14 +4886,58 @@
     },
     "PP13": {
       "Name": "Inspire",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "Self",
+	  "Roll": {
+		  "ATT": ["CHA"],
+		  "Difficulty": 9,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"] } ],
+		  "Successes": {
+			  "1": "Flip this card and place {successes} markers on it",
+			  "0": "Do not flip this card"
+		  }
+	  },
+	  "Back": "Anytime: Discard all markers from thsi card to support a PM in R3 with a number of dice equal to the number ot these markers.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "Warning": "When you refresh thsi card, discard all markers from it.",
       "Level": 1
     },
     "PP14": {
       "Name": "Smoke and Mirrors",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Target": "Self",
+	  "Roll": {
+		  "ATT": ["AGI"],
+		  "DIV": true,
+		  "Difficulty": 8,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Sleight of Hand"]}],
+		  "Successes": {
+			  "3": "Place your Effect token in R6. Add 1 Effect token to the same space if {div} is 4 or more",
+			  "1": "Place your Effect token in R4. Add 1 Effect token to the same space if {div} is 6 or more",
+			  "0": "Do not flip the card"
+		  }
+	  },
+	  "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by Minions (and Elites and Bosses if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
+	  "Warning": "Start of your Activation: Do not refresh this cad, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
       "Level": 1
     },
     "PP15": {
       "Name": "Weak Point",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "Moon": 1,
+	  "Target": "Elite or boss in R4",
+	  "Roll": {
+		  "ATT": ["INT"],
+		  "Modifiers": [ { "Dice": 2, "Triggers": ["Medicine"]}],
+		  "Successes": {
+			  "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
+		  }
+	  },
+	  "Back": "When the Enemy with your Effect tokein is attacked with Melee, you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy.",
       "Level": 1
     },
     "PP16": {
@@ -5141,6 +5185,8 @@
       "Name": "Ritual of Haste",
       "Type": "Action",
       "Category": "Support",
+	  "keywords": ["Spell"],
+	  "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -5155,7 +5201,8 @@
               "Lore"
             ]
           }
-        ]
+        ],
+		"Successes": { "1": "Add {half div} white tokens to the Initiaitve bag or move 2 targets by ({div}+2)" }
       },
       "Level": 1
     },
@@ -5163,6 +5210,8 @@
       "Name": "Protective Gestures",
       "Type": "Action",
       "Category": "Support",
+	  "keywords": ["Spell"],
+	  "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -5182,8 +5231,13 @@
               "Sleight of Hand"
             ]
           }
-        ]
+        ],
+		"Successes": {
+			"3": "Each target heals {half div} {terror} or Stabilizes",
+			"1": "Do not flip this card"
+		}
       },
+	  "Back": "???",
       "Level": 1
     },
     "S11": {
@@ -5197,12 +5251,24 @@
       "Roll": {
         "ATT": [
           "INT"
-        ]
+        ],
+		"Difficulty": 10,
+		"Modifiers": [
+			{ "Dice": 1, "Triggers": ["Divinum", "Elder"] },
+			{ "Dice": -1, "Triggers": ["Armor"] }
+		],
+		"Successes": { "1": "Flip this card and place {successes} markers on it (max 4)" }
       },
+	  "Back": "???",
       "Level": 1
     },
     "S12": {
       "Name": "Healing Burst",
+	  "Type": "Action",
+	  "Category": "Support",
+	  "Keywords": ["Spell"],
+	  "Target": "Self and PMs in R4",
+	  "Front": "Roll for DIV. Stabilize all targets. Heal ({div}+2) HP distributed in any way among targets. Then place this card in your Pouch.",
       "Level": 1
     },
     "S13": {
