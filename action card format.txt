@@ -10,7 +10,8 @@ New card data structure
 	  "Target": "Range instructions", # Optional
       "Roll": {
 		  "DIV": true, # if absent - false, i.e. no DIV rol
-		  "ATT": ["INT"], # Required
+		  "Mode": "Sum", # if ablest - "Highest"
+		  "ATT": ["INT"], # If absent, means all stats
 		  "Difficulty": 8, # if absent, means difficulty of the enemy [EN]
 		  "Modifiers": [
 			{ "Dice": -2, "Triggers": ["Trigger1"] },
@@ -24,7 +25,8 @@ New card data structure
 	  } # Optional
 	      "Front": "Front instructions", # Optional
 	      "Back": "Back instructions", # Optional
-	      "Refresh": "Refresh instructions", # Optional, renders under Back
+	      "Note": "Back instructions in blue", # Optional
+	      "Warning": "Back instructions in red", # Optional
 	      "Level": 1 # Only relevant for basic action cards, if absent = 1
 	    },
 	

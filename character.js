@@ -1446,7 +1446,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function buildRollElement(roll) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
-    let rollText = "Roll for " + roll.ATT.join(" or ");
+    const mode = roll.Mode || "Highest";
+    const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
+    let rollText;
+    if (mode === "Sum") {
+      const attList = hasSpecificATT ? roll.ATT : ATTRIBUTES;
+      rollText = "Roll sum of " + attList.join(" + ");
+    } else if (hasSpecificATT) {
+      rollText = "Roll for " + roll.ATT.join(" or ");
+    } else {
+      rollText = "Roll the highest ATT";
+    }
     if (roll.DIV) rollText += " and DIV";
     rollLineEl.appendChild(document.createTextNode(rollText));
     const diffBadge = document.createElement("span");
@@ -1519,8 +1529,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       if (card.Roll.Successes) {
         const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
         const sortedNum = sortedKeys.map(Number);
+        const rollMode = card.Roll.Mode || "Highest";
+        const hasSpecificATT = card.Roll.ATT && card.Roll.ATT.length > 0;
+        const rollATTList = hasSpecificATT ? card.Roll.ATT : ATTRIBUTES;
         const attDice = attrs
-          ? card.Roll.ATT.reduce((sum, att) => sum + (attrs[att] || 0), 0)
+          ? (rollMode === "Sum"
+              ? rollATTList.reduce((sum, att) => sum + (attrs[att] || 0), 0)
+              : rollATTList.reduce((max, att) => Math.max(max, attrs[att] || 0), 0))
           : 0;
         const baseDice = attDice > 0 ? attDice : PROB_DICE;
         const appliedMods = (keywordCounts && card.Roll.Modifiers)
@@ -1567,11 +1582,21 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           totalLine.textContent = "Rolling " + effectiveDice + " dice";
           tooltip.appendChild(totalLine);
           if (attrs) {
-            card.Roll.ATT.forEach(att => {
-              const line = document.createElement("div");
-              line.textContent = att + ": " + (attrs[att] || 0);
-              tooltip.appendChild(line);
-            });
+            if (rollMode === "Sum") {
+              rollATTList.forEach(att => {
+                const line = document.createElement("div");
+                line.textContent = att + ": " + (attrs[att] || 0);
+                tooltip.appendChild(line);
+              });
+            } else {
+              const maxVal = rollATTList.reduce((max, att) => Math.max(max, attrs[att] || 0), 0);
+              const usedAtt = rollATTList.find(att => (attrs[att] || 0) === maxVal);
+              if (usedAtt) {
+                const line = document.createElement("div");
+                line.textContent = usedAtt + ": " + maxVal;
+                tooltip.appendChild(line);
+              }
+            }
           }
           for (const m of appliedMods) {
             const sign = m.totalDice > 0 ? "+" : "";
