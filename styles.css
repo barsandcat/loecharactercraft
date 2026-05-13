@@ -914,6 +914,7 @@ h1 {
 }
 .option-card.active .option-title  { color: var(--dark-text); }
 .option-card.active .option-detail { color: rgba(240, 234, 216, 0.6); }
+.option-card.active .action-card-full { background: var(--panel); color: var(--ink); }
 
 .option-title {
   font-family: 'EB Garamond', serif;
