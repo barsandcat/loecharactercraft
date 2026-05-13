@@ -3822,7 +3822,8 @@
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": { "1": "Prevent ({successes}+1) {damage} or 1 {terror}." }
       },
       "DisplayName": "Exceptional Endurance"
     },
@@ -3916,8 +3917,10 @@
       "Name": "Combat Insight",
       "Type": "Reaction",
       "Category": "Support",
+	  "Condition": "During a Roll",
+	  "Target": "PM in any range",
       "Level": 3,
-      "Front": "Support with a die",
+      "Front": "Support with 2 dice",
       "DisplayName": "Crucial Combat Insight"
     },
     "B10": {
@@ -3960,11 +3963,22 @@
       "Name": "Command",
       "Type": "Action",
       "Category": "Support",
+	  "Target": "CH in R1",
       "Level": 1,
       "Roll": {
         "ATT": [
           "CHA"
-        ]
+        ],
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Leadership"
+            ]
+          }
+        ],
+		"Successes": { "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character." }
       },
       "DisplayName": "Pitiful Command"
     },
@@ -4009,7 +4023,8 @@
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+		"Successes": { "1": "Deal {successes} {damage}" }
       },
       "DisplayName": "Shoot"
     },
@@ -4233,7 +4248,7 @@
           }
         ],
         "Successes": {
-          "1": "Pull the target py {successes} spaces (+2 spaces: against Large). If the target is Elite or Boss, place your Effect token on Enemy."
+          "1": "Pull the target by {successes} spaces (+2 spaces: against Large). If the target is Elite or Boss, place your Effect token on Enemy."
         }
       },
 	  "Back": "The enemy with your Effect token always chooses you as a target.",
