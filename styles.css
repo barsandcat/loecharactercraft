@@ -24,6 +24,7 @@
 
 * { box-sizing: border-box; }
 html {
+  overflow-x: hidden;
   color-scheme: light;
   -webkit-text-size-adjust: 100%;
 }
@@ -652,6 +653,7 @@ h1 {
   top: calc(100% + 4px);
   z-index: 50;
   width: var(--action-card-width, 280px);
+  max-width: calc(100vw - 24px);
   background: var(--panel);
   color: var(--ink);
   font-family: 'EB Garamond', serif;
@@ -813,6 +815,7 @@ h1 {
   z-index: 10;
   display: flex;
   justify-content: flex-end;
+  overflow: hidden;
   background: rgba(14, 10, 4, 0.65);
   backdrop-filter: blur(3px);
   padding-left: min(8vw, 64px);
@@ -826,6 +829,7 @@ h1 {
   background: var(--panel);
   border-left: 1px solid rgba(201, 168, 64, 0.22);
   box-shadow: -10px 0 28px rgba(14, 10, 4, 0.3);
+  overflow-x: hidden;
   overflow-y: auto;
   animation: slide-in 100ms ease-out both;
 }
@@ -893,6 +897,7 @@ h1 {
   display: grid;
   gap: 5px;
   width: 100%;
+  min-width: 0;
   padding: 12px 14px;
   text-align: left;
   border: 1px solid var(--panel-border);
@@ -937,7 +942,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: var(--action-card-width);
+  width: 100%;
   margin-top: 4px;
   pointer-events: none;
 }
