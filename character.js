@@ -387,6 +387,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     for (const itemObj of stats.items.values()) {
       incrementCountMap(allKeywordCounts, itemObj.Keywords || []);
     }
+    for (const [skill, count] of stats.skillCounts) {
+      allKeywordCounts.set(skill, (allKeywordCounts.get(skill) || 0) + count);
+    }
 
     const attributeCard = document.createElement("section");
     attributeCard.className = "summary-card";
