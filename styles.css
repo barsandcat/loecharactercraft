@@ -534,6 +534,14 @@ h1 {
   margin-top: 2px;
 }
 
+.action-card-refresh {
+  margin-top: 4px;
+  color: #da402f;
+}
+
+.action-card-refresh:first-child {
+  margin-top: 0;
+}
 .action-card-back::before {
   content: "";
   position: absolute;
@@ -590,6 +598,9 @@ h1 {
   filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
 
+.action-card-refresh .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(28%) saturate(2913%) hue-rotate(309deg) brightness(69%) contrast(187%);
+}
 .action-card-modifiers {
   font-family: 'EB Garamond', serif;
   font-size: 0.88rem;

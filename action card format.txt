@@ -22,10 +22,11 @@ New card data structure
 			  "0": "Failure"
 		  } # "Optional"
 	  } # Optional
-      "Front": "Front instructions", # Optional
-      "Back": "Back instructions", # Optional
-      "Level": 1 # Only relevant for basic action cards, if absent = 1
-    },
+	      "Front": "Front instructions", # Optional
+	      "Back": "Back instructions", # Optional
+	      "Refresh": "Refresh instructions", # Optional, renders under Back
+	      "Level": 1 # Only relevant for basic action cards, if absent = 1
+	    },
 	
 	
 Old roll format: "Roll ATT and ATT, DIV [Number/EN]; +1: Trigger1, Trigger2; -2: Trigger3"

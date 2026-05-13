@@ -1579,10 +1579,18 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       body.appendChild(frontEl);
     }
 
-    if (card.Back) {
+    if (card.Back || card.Refresh) {
       const backEl = document.createElement("div");
       backEl.className = "action-card-desc action-card-back";
-      appendIconTextContent(backEl, card.Back);
+      if (card.Back) {
+        appendIconTextContent(backEl, card.Back);
+      }
+      if (card.Refresh) {
+        const refreshEl = document.createElement("div");
+        refreshEl.className = "action-card-refresh";
+        appendIconTextContent(refreshEl, card.Refresh);
+        backEl.appendChild(refreshEl);
+      }
       body.appendChild(backEl);
     }
 

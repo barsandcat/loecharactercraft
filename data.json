@@ -3830,12 +3830,14 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Condition": "Against Attack",
+	  "Sun": 2,
       "Target": "Self",
       "Level": 1,
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": { "1": "Prevent {successes} {damage} or 1 {terror}." }
       },
       "DisplayName": "Limited Endurance"
     },
@@ -3857,6 +3859,8 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 3,
+	  "Moon": 2,
+	  "Condition": "Against Attack",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -3869,7 +3873,8 @@
               "Armor"
             ]
           }
-        ]
+        ],
+		"Successes": { "1": "Prevent 5 {damage}" }
       },
       "DisplayName": "Nimble Dodge"
     },
@@ -4664,7 +4669,10 @@
       "Name": "Taunt",
       "Type": "Reaction",
       "Category": "Support",
-      "Condition": "After revealling EN activation card",
+      "Condition": "After revealling Enemy activation card",
+	  "Front": "Change the target of current Enemy Activation card to yoursefl. Resolve the effect on the back",
+	  "Back": "Gain 1 {armor} (+1 {armor}: Vigilance) until the end of current Enemy card Activation",
+	  "Refresh": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}.",
       "Target": "Self",
       "Level": 1
     },
