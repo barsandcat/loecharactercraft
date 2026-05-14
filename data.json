@@ -5489,20 +5489,44 @@
     },
     "S05": {
       "Name": "Focus Divinum",
-      "Type": "Action",
+      "Type": "Reaction",
       "Category": "Support",
-      "Front": "INT 5+: +DIV10, INT 3-4: +DIV6, INT 1-2: +DIV4",
+	  "Moon": 1,
+      "Keywords": [
+        "Spell"
+      ],
+      "Condition": "During DIV Roll",
+      "Target": "Self or PM in R4",
+      "Front": "If you INT is: 5+: Roll and additional D10 DIV die. 3-4: Roll and additional D6 DIV die. 1-2: Roll and additional D4 DIV die.",
       "Level": 1
     },
     "S06": {
       "Name": "Energy Shield",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Moon": 2,
+      "Keywords": [
+        "Spell"
+      ],
+      "Condition": "Against Attack",
+      "Target": "Self or PM in R4",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "STR"
-        ]
+			"STR"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Prevent {div} {damage}"
+        }
       },
       "Level": 1
     },
@@ -5510,6 +5534,7 @@
       "Name": "Chain Lightning",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 1,
       "Keywords": [
         "Attack",
         "Ranged",
@@ -5539,9 +5564,10 @@
         "Successes": {
           "3": "Resolve effects on the back",
           "1": "You loose 2 HP, resolve effects on the back",
-          "0": "You gain 1 terror, do not flip this card"
+          "0": "You gain 1 {terror}, do not flip this card"
         }
       },
+	  "Back": "???",
       "Level": 1
     },
     "S08": {
@@ -5551,12 +5577,29 @@
       "Keywords": [
         "Spell"
       ],
-      "Target": "PM in any range",
+      "Target": "PMs in any range",
       "Roll": {
         "ATT": [
-          "INT"
-        ]
+			"INT"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana",
+			  "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+          "4": "Place a total of 3 of your Effect tokesn on Party Members",
+		  "3": "Place a total of 2 of your Effect tokesn on Party Members",
+		  "2": "You gain 1 {terror}. Resolve 3"
+        }
       },
+	  "Back": "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}.",
+	  "Warning": "Start of your activation: Do not refresh this card, inless you pay 1 {fate}",
       "Level": 1
     },
     "S09": {
