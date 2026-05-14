@@ -1,4 +1,4 @@
 PP09 Manic Laugh, Back
-PP07 Rage, Back
 
 P62 Ticking Vestigial, Back
+S32 Stratagem, Back

@@ -5741,32 +5741,69 @@
     },
     "S29": {
       "Name": "Academic Magic",
+	  "Moon": 1,
+	  "Category": "Offensive",
+	  "Type": "Action",
+	  "Keywords": ["Attack", "Ranged", "Spell"],
+	  "Target": "1 in R5",
+	  "Roll": {
+        "ATT": [
+          "INT"
+        ],
+		"DIV": true,
+		"Modifiers": [ {"Dice": 2, "Triggers": ["against Automaton or Vestigial"]}, {"Dice": 1, "Triggers": ["Arcana", "Artifact"]} ],
+		"Successes": {
+			"1": "Deal ({successes}+{half div}) Divinum {damage}. Then you may gain 2 {terror} to deal {half div} Divinum {damage} to the same target."
+		}
+	  },
       "Level": 1
     },
     "S30": {
       "Name": "Cognitive Enhancement",
       "Type": "Action",
+	  "Keywords": ["Spell"],
       "Category": "Support",
-      "Roll": {
+	  "Target": "Self or PM in R4",
+	  "Roll": {
         "ATT": [
           "CHA"
-        ]
-      },
+        ],
+		"Difficulty": 8,
+		"Modifiers": [ {"Dice": 1, "Triggers": ["Charm", "Leadership"]} ],
+		"Successes": {
+			"1": "Target gains {successes} ATT Boons (max 3 Boons) of their highest ATT."
+		}
+	  },
       "Level": 1
     },
     "S31": {
       "Name": "Rejuvenation",
+	  "Moon": 1,
+	  "Sun": 1,
       "Type": "Action",
       "Category": "Support",
-      "Roll": {
+	  "Target": "Self or PM in R2",
+	  "Roll": {
         "ATT": [
           "INT"
-        ]
-      },
+        ],
+		"Difficulty": 10,
+		"Modifiers": [ {"Dice": 1, "Triggers": ["Lore", "Medicine"]} ],
+		"Successes": {
+			"3": "Discard 1 Injury or Trauma Condition. Resolve 1",
+			"1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Puch."
+		}
+	  },
       "Level": 1
     },
     "S32": {
       "Name": "Stratagem",
+	  "Moon": 1,
+      "Type": "Action",
+      "Category": "Support",
+	  "Target": "Self",
+	  "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
+	  "Back": "???",
       "Level": 1
     },
     "S33": {
@@ -5805,7 +5842,7 @@
 		"Difficulty": 8,
 		"Modifiers": [ {"Dice": 1, "Triggers": ["Deception", "Performer"]} ],
 		"Successes": {
-			"3": "You gain 1 {fate}. Teh enemy targets only This PM during this Activation. Place this card in your Pouch",
+			"3": "You gain 1 {fate}. Then enemy targets only This PM during this Activation. Place this card in your Pouch",
 			"0": "You gain 1 {terror}. Do not flip this card"
 		}
 	  },
