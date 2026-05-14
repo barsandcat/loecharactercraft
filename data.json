@@ -4729,6 +4729,7 @@
 	  "Target": "Self",
 	  "Roll": {
 		  "ATT": ["AGI", "INT"],
+		  "Difficulty": 10,
 		  "Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering", "Vestigial"]}],
 		  "Successes": {
 			  "1": "Place 2 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0",
@@ -5164,14 +5165,46 @@
     },
     "PP31": {
       "Name": "Pike Strike",
+	  "Category": "Offensive",
+	  "Type": "Action",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
+	  "Roll": {
+		  "ATT": ["AGI"],
+		  "Modifiers": [ { "Dice": 2, "Triggers": ["against Vestigial"]}, { "Dice": 1, "Triggers": ["Athletics", "Performer"]} ],
+		  "Successes": {
+			  "1": "Deal {successes} {damage} (+3 {damage} if the target was Pulled during thsi Activation)."
+		  }
+	  },
       "Level": 1
     },
     "PP32": {
       "Name": "Bright Mind",
+	  "Category": "Support",
+	  "Type": "Action",
+	  "Target": "Self",
+	  "Roll": {
+		  "ATT": ["INT"],
+		  "Difficulty": 8,
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Lore", "Vigilance"]}, { "Dice": -1, "Triggers": ["each PM in R2"]} ],
+		  "Successes": {
+			  "1": "Flip this card in place {successes} markers on it"
+		  }
+	  },
+	  "Back": "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from thsi card to Support with that many dice.",
+	  "Note": "You may pay 1 {fate} to not refresh this card.",
+	  "Warning": "When you refresh this card, discard all markers from it.",
       "Level": 1
     },
     "PP33": {
       "Name": "Applied Knowledge",
+	  "Category": "Support",
+	  "Type": "Reaction",
+	  "Moon": 1,
+	  "Condition": "Before Offensive Action or Item Action",
+	  "Target": "Self",
+	  "Front": "Roll DIV. Ignore {half DIV} {armor} during this Action.",
       "Level": 1
     },
     "PP34": {
