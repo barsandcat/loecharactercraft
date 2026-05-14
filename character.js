@@ -677,7 +677,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         : attrOptions.length + " available spread" + (attrOptions.length === 1 ? "" : "s"),
       complete: Boolean(state.selectedAttributeSet),
       empty: !state.selectedAttributeSet,
-      disabled: !state.selectedRace || attrOptions.length <= 1,
+      disabled: !state.selectedRace || attrOptions.length === 0,
       onClick: () => openSelector({
         title: "Choose Attributes",
         options: attrOptions,
@@ -729,7 +729,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           : pathOptions.length + " available options",
       complete: Boolean(state.selectedPath),
       empty: !state.selectedPath,
-      disabled: !state.selectedProf || pathOptions.length <= 1,
+      disabled: !state.selectedProf || pathOptions.length === 0,
       onClick: () => openSelector({
         title: "Choose Path",
         options: pathOptions,
@@ -776,7 +776,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           detail: !slotMeta.selectedTree
             ? "Choose a tree level first."
             : slotMeta.versionOptions.length + " available reward" + (slotMeta.versionOptions.length === 1 ? "" : "s"),
-          disabled: !slotMeta.selectedTree || slotMeta.versionOptions.length <= 1,
+          disabled: !slotMeta.selectedTree || slotMeta.versionOptions.length === 0,
           accent: slotMeta.selectedVersion !== null,
           empty: slotMeta.selectedVersion === null,
           onClick: () =>
