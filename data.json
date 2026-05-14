@@ -4741,11 +4741,19 @@
       "Name": "Scrapping",
       "Type": "Action",
       "Category": "Support",
+	  "Moon": 1,
+	  "Sun": 1,
+	  "Target": "Self and PM in R1",
       "Roll": {
         "ATT": [
           "INT",
           "AGI"
-        ]
+        ],
+		"Difficulty": 10,
+		"Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering"]} ],
+		"Successes": {
+			"2": "You and one PM in R1 may place 1 itme withou and Action card from their Pouch in an empty slot."
+		}
       },
       "Level": 1
     },
@@ -4753,15 +4761,52 @@
       "Name": "Divinum Infused Tools",
       "Type": "Reaction",
       "Category": "Support",
-      "Front": "Roll DIV to boost AGI or INT",
+	  "Condition": "During AGI or INT Roll",
+	  "Target": "Self",
+      "Front": "Roll for DIV: 12+: Add 4 {successes} to the Roll, 8-11: Add 2 {successes} to the Roll.",
       "Level": 1
     },
     "P65": {
       "Name": "Quick Reflexes",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "Condition": "After revealing Enmey Activation card",
+	  "Target": "Self",
+	  "Sun": 1,
+	  "Moon": 1,
+	  "Roll": {
+        "ATT": [
+          "AGI"
+        ],
+		"Difficulty": 10,
+		"Modifiers": [ { "Dice": 1, "Triggers": ["Athletics", "Vigilance"]} ],
+		"Successes": {
+			"1": "Move by {successes}. You cannot enter {danger} spaces during this move."
+		}
+      },
       "Level": 1
     },
     "P66": {
       "Name": "Final Enhancement",
+	  "Category": "Support",
+	  "Type": "Action",
+	  "Target": "Self or PM in R1",
+	  "BackSun": 3,
+	  "BackMoon": 3,
+	  "Roll": {
+        "ATT": [
+          "INT",
+          "AGI"
+        ],
+		"Difficulty": 10,
+		"Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering"]} ],
+		"Successes": {
+			"2": "Choose a Melee or Ranged item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
+		}
+      },
+	  "Back": "Increase the {damage} modifier of the Item with your Effect tokesn by 3 for each token.",
+	  "Note": "Start of your Activation: You may pay 2 {fate} to not refresh this card",
+	  "Warning": "When you refresh this card, discard your Effect tokens from the Item and place this card in your Pouch.",
       "Level": 1
     },
     "P67": {
