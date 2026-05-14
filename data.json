@@ -5926,12 +5926,28 @@
       "Name": "Sense Danger",
       "Type": "Reaction",
       "Category": "Support",
+	  "Moon": 2,
+      "Condition": "Before drawing from the Initiative bag",
+      "Target": "Self",
       "Roll": {
         "ATT": [
           "INT"
-        ]
-      },
-      "Level": 1
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Survival",
+			  "Vigilance"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Draw {successes} tokens from the bag instead. Choos and reslove one of them, retur nthe rest to the bag",
+          "0": "Gain 1 {terror}"
+        }
+      }
     },
     "S26": {
       "Name": "Relieving Aura",
@@ -5956,25 +5972,70 @@
               "Armor"
             ]
           }
-        ]
+        ],
+		"Successes": {
+          "2": "Flip this card",
+          "0": "Do not flip this card"
+        }
       },
-      "Level": 1
+      "Back": "When a PM end their Activation in R1 from you, they may heal 2 HP or gain 1 ATT Boon."
     },
     "S27": {
       "Name": "Nature's Revenge",
-      "Level": 1
+	  "Category": "Support",
+	  "Type": "Reaction",	
+	  "Moon": 1,
+      "Condition": "After Enemy Attack",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "STR",
+		  "INT"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Survival"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "The Enemy loses HP equal to the number of HP you lost during this attack. Heal by {successes} HP",
+          "1": "The Enemy loses 1 HP. Heal by 1 HP."
+        }
+      }
     },
     "S28": {
       "Name": "Entangle",
-      "Type": "Action",
-      "Category": "Offensive",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "ENs in any range",
       "Roll": {
-        "DIV": true,
         "ATT": [
           "INT"
-        ]
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Place a total of {half div} of your Effect tokesn on Enemies",
+          "1": "You gain 1 {terror}. Resolve 2"
+        }
       },
-      "Level": 1
+	  "Back": "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3.",
+	  "Warning": "This card cannot be refreshed. When you discard the last Effect token, palce thsi card in your Pouch."
     },
     "S29": {
       "Name": "Academic Magic",
