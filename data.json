@@ -3904,12 +3904,25 @@
       "Name": "Dodge",
       "Type": "Reaction",
       "Category": "Defensive",
-      "Target": "Self",
       "Level": 1,
+      "Moon": 2,
+      "Condition": "Against Attack",
+      "Target": "Self",
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+        "Modifiers": [
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Prevent 3 {damage}"
+        }
       },
       "DisplayName": "Clumsy Dodge"
     },
@@ -3963,10 +3976,23 @@
       "Type": "Action",
       "Category": "Support",
       "Level": 3,
+      "Target": "CH in any range",
       "Roll": {
         "ATT": [
           "CHA"
-        ]
+        ],
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character."
+        }
       },
       "DisplayName": "Inspiring Command"
     },
@@ -4021,11 +4047,16 @@
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
+	  "Sun": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
       "Level": 2,
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": { "1": "Deal ({successes}+1) {damage} ignoring AGI {armor}." }
       },
       "DisplayName": "Mighty Bash"
     },
@@ -4053,11 +4084,20 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
-      "Level": 2,
+	  "Moon": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Ranged",
+      "Target": "1 in R2+",
+      "Level": 1,
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+        "Successes": {
+          "1": "Deal ({successes}+2) {damage}"
+        }
       },
       "DisplayName": "Powerful Shot"
     },
@@ -4674,10 +4714,27 @@
     },
     "P61": {
       "Name": "Adventurer's Luck",
+	  "Type": "Reaction",
+	  "Category": "Support",
+	  "Sun": 1,
+	  "Condition": "Before a Roll",
+	  "Target": "Self",
+	  "Front": "During this Roll if you have at least on 12 result, add one {successes} to your Roll. If you have at least one 1 result, gain one additional {fate}.",
       "Level": 1
     },
     "P62": {
       "Name": "Ticking Vestigial",
+	  "Type": "Action",
+	  "Category": "Offensive",
+	  "Target": "Self",
+	  "Roll": {
+		  "ATT": ["AGI", "INT"],
+		  "Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering", "Vestigial"]}],
+		  "Successes": {
+			  "1": "Place 2 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0",
+			  "3": "Place 1 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0"
+		  }
+	  },
       "Level": 1
     },
     "P63": {
