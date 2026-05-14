@@ -4872,7 +4872,7 @@
       "Condition": "When you deal at leas 6 damage",
       "Target": "Self",
       "Front": "Flip this card",
-      "Back": "Add STR to damage",
+      "Back": "Party Members support you with 1 die fewer. When you deal {damage} with Melee, add STR {damage} and gain 1 {terror}",
       "Level": 1
     },
     "PP08": {
@@ -5773,32 +5773,61 @@
       "Name": "Shadow Jump",
       "Type": "Action",
       "Category": "Defensive",
+	  "Moon": 2,
+	  "Target": "Self",
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+		"Difficulty": 8,
+		"Modifiers": [ {"Dice": 1, "Triggers": ["Darkness"]}, {"Dice": 1, "Triggers": ["Pathfinding"]} ],
+		"Successes": {
+			"1": "Move by {successes}. Then if you are adjacent to and impassble border flip this card. Otherwise resolve 0",
+			"0": "Do not flip this card"
+		}
       },
+	  "Back": "Gain 2 {armor}. Roll 2 additional dice during your Offensive Actions.",
+	  "Warning": "Start of your Activation: Do not frefresh thsi card. When you move or are dealt {damage}, refresh this card.",
+	  "BackMoon": 1,
       "Level": 1
     },
     "S34": {
       "Name": "Veilkin",
       "Type": "Reaction",
       "Category": "Support",
+	  "Moon": 1,
+	  "Condition": "After revealing Enemy Activation card",
+	  "Target": "PM in any range",
       "Roll": {
         "ATT": [
           "CHA"
-        ]
-      },
+        ],
+		"Difficulty": 8,
+		"Modifiers": [ {"Dice": 1, "Triggers": ["Deception", "Performer"]} ],
+		"Successes": {
+			"3": "You gain 1 {fate}. Teh enemy targets only This PM during this Activation. Place this card in your Pouch",
+			"0": "You gain 1 {terror}. Do not flip this card"
+		}
+	  },
       "Level": 1
     },
     "S35": {
       "Name": "Shadow Blade",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 2,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
       "Roll": {
         "ATT": [
           "AGI"
-        ]
+        ],
+		"Modifiers": [ {"Dice": 1, "Triggers": ["Stealth", "Darkness"]}, {"Dice": 1, "Triggers": ["against Small"]} ],
+		"Successes": {
+			"3": "Deal ({successes}+3) {damage}. Reduce this {damage} by 1 for each space connected to the target's space.",
+			"1": "Deal ({successes}+2) {damage}. Reduce this {damage} by 1 for each space connected to the target's space."
+		}
       },
       "Level": 1
     },
@@ -5806,7 +5835,9 @@
       "Name": "Skilled Imitator",
       "Type": "Action",
       "Category": "Support",
-      "Front": "Copy PMs card",
+	  "Moon": 3,
+	  "Sun": 3,
+      "Front": "Copy PMs Action card. Use the Skilled Imitator Action card as if it was an exact copy of that chosen Action card (you must fulfil its requirements). After resolving it, place the Skilled Imitator card in your Pouch.",
       "Level": 1
     }
   }
