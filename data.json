@@ -4895,7 +4895,7 @@
           }
         ],
         "Successes": {
-          "3": "Move by your MOB (including through Enemies). Then, deal each Enemy you moved through {damage} equal to the number of different Enemy models you moved trhough",
+          "3": "Move by your MOB (including through Enemies). Then, deal each Enemy you moved through {damage} equal to the number of different Enemy models you moved through",
           "1": "You may lose 3 HP to reslove 3"
         }
       },
@@ -5480,7 +5480,7 @@
           }
         ],
         "Successes": {
-          "2": "Choose an empty sapce in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."        
+          "2": "Choose an empty space in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."        
 		}
       },
       "Level": 1
@@ -5978,7 +5978,8 @@
           "3": "Place your Effect token on Elite"
         }
       },
-      "Back": "???",
+      "Back": "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch.",
+	  "Warning": "This card can not be refereshed",
       "Level": 1
     },
     "S19": {
