@@ -5425,6 +5425,9 @@
       "Name": "Eliminate",
       "Type": "Action",
       "Category": "Offensive",
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -5444,19 +5447,76 @@
               "agains Small"
             ]
           }
-        ]
+        ],
+		"Successes": {
+		  "2": "If the target has {div} or less HP, defeat it. Otherwise resolve 1",
+		  "1": "Deal {successes} Divinum {damage}"
+	    }
       },
       "Level": 1
     },
     "PP23": {
       "Name": "Impose Your Will",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Sun": 1,
+      "Target": "Minion in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Intimidation"
+            ]
+          },
+          {
+            "Dice": -2,
+            "Triggers": [
+              "Elite or Boss in R4"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Choose an empty sapce in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."        
+		}
+      },
       "Level": 1
     },
     "PP24": {
       "Name": "Mark Bounty",
       "Type": "Reaction",
       "Category": "Support",
-      "Front": "Rolld STR",
+      "Sun": 1,
+      "Condition": "Before or after Action",
+      "Target": "1 in R4",
+      "Roll": {
+        "ATT": [
+		"STR"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Small"
+            ]
+          }        
+		],
+        "Successes": {
+          "2": "Place 1 Effect torken on a Minion, spend 1 {fate} to place it on Elite, or spend 2 {fate} to place it on a Boss."
+        }
+      },
+	  "Back": "You and Party Memebers roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
+	  "Warning": "This card cannot be refershe. When all enemies whith The Effect token are defeated, place this card in your Pouch.",
       "Level": 1
     },
     "PP25": {
