@@ -2,3 +2,4 @@ PP09 Manic Laugh, Back
 
 P62 Ticking Vestigial, Back
 S32 Stratagem, Back
+PP05 Cure And Poison

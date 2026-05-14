@@ -5018,15 +5018,89 @@
     },
     "PP04": {
       "Name": "Freezing Smash",
-      "Level": 1
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R2",
+      "Roll": {
+        "ATT": [
+          "STR"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics",
+			  "Ice"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal {successes} Ice {damage} (+1 {damage} against Large). Place your Effect token on the Enemy",
+          "1": "Deal {successes} Ice {damage} (+1 {damage} against Large)"
+        }
+      },
+	  "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
+	  "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
+	  "BackMoon": 1,
+	  "BackSun": 1
     },
     "PP05": {
       "Name": "Cure and Poison",
-      "Level": 1
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Medicine",
+			  "Poison"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Draw {successes} Activation tokens from the bag. Resolve the effect on the back."
+        }
+      },
+	  "Back": "???"
     },
     "PP06": {
       "Name": "Summon Swarm",
-      "Level": 1
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Animal Handling"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place your {successes} Effect tokens in a stak in R1 (they are refferd to as Hive). Gain Hive card (O03)"
+        }
+      },
+      "Warning": "Start of your Activation: Do not refresh thsi card if Hive is on the Sheet.",
+	  "BackMoon": 1,
+	  "BackSun": 1
     },
     "PP07": {
       "Name": "Rage",
