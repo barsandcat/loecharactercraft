@@ -4512,34 +4512,197 @@
     },
     "P25": {
       "Name": "Spikes",
+	  "Category": "Offensive",
+	  "Type": "Action",
+      "Keywords": [
+        "Ranged",
+		"Spell"
+      ],
+      "Target": "1 in any range",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+		"DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Fiendish"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} Divinum {damage} to the target and to all other (including you) in {half div} range from it."
+        }
+      },
       "Level": 1
     },
     "P26": {
       "Name": "Earth Shell",
+	  "Category": "Defensive",
+	  "Type": "Action",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "STR"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Flip this card and place {half div} markers on it",
+          "0": "Gain 1 {terror}"
+        }
+      },
+	  "Back": "Gain 1 {armor} and lose 1 MOB for each marker on this card.",
+	  "Note": "Instead of refreshing this card you may discard any number of markers from it.",
+	  "Warning": "When you refresh this card, discard all markers from it.",
       "Level": 1
     },
     "P27": {
       "Name": "Cauldron of Wonders",
+	  "Moon": 1,
+	  "Category": "Support",
+	  "Type": "Action",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "INT",
+		  "CHA"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Alchemy"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place {successes} Effect tokens in a stack in R1 (they are reffered to as Cauldron)",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higer. They discard Effect token at the end of their Activation.",
+	  "Warning": "This card cannot be refreshed. End of each Activation: If there are no more Cauldron Effect tokens on the Sheet, place thsi card in your Pouch",
       "Level": 1
     },
     "P28": {
       "Name": "Animal Form",
+      "Sun": 1,
+	  "Moon": 1,
+	  "Type": "Action",
+	  "Category": "Support",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self",
+      "Roll": {
+        "ATT": [],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Animal Handling"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Gain 1 {fate}. Resolve 1",
+          "1": "Flip this card and place {successes} ATT Boons on it."
+        }
+      },
+	  "Back": "You may use Boons on this card as if they were yours, but you must use all of them at once.",
+	  "Warning": "When you refresh this card, discard all Boons from it.",
+	  "BackSun": 1,
+	  "BackMoon": 1,
       "Level": 1
     },
     "P29": {
       "Name": "Evoke Blizzard",
       "Type": "Action",
       "Category": "Offensive",
+      "Keywords": [
+        "Ranged",
+		"Spell"
+      ],
+      "Target": "Self",
       "Roll": {
-        "DIV": true,
         "ATT": [
           "INT"
-        ]
+        ],
+		"DIV": true,
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Ice"
+            ]
+          } 
+	    ],
+        "Successes": {
+          "2": "Resolve effect on the back",
+          "1": "Gain 1 {terror}, resolve 2",
+		  "0": "Do not flip this card"
+        }
       },
+	  "Back": "Push all Enemies by 1 in one chosen direction and deal them {half div} Ice {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
+	  "Warning": "Instead of refreshing this card, place it in your Pouch",
       "Level": 1
     },
     "P30": {
       "Name": "True Bond",
+	  "Type": "Action",
+	  "Category": "Support",
+      "Target": "CH in R4",
+      "Roll": {
+        "ATT": [
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana",
+			  "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Place your Effect token on a Character",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "When you end your Activation, the Character with your Effect token may perform 1 Action. When that character ends their Activation, you may perfrom 1 Action",
+	  "Warning": "This card cannot be refreshed. Any time: if the Character with your Effect token is not in R4 from you, place this card in your Pouch.",
+	  "BackMoon": 1,
+	  "BackSun": 1,
       "Level": 1
     },
     "P31": {
