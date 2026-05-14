@@ -4776,43 +4776,129 @@
     },
     "P43": {
       "Name": "Poisoned Darts",
-      "Type": "Action",
-      "Category": "Offensive",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Keywords": [
+        "Attack",
+		"Ranged"
+      ],
+      "Target": "1 in R4",
       "Roll": {
         "ATT": [
-          "AGI"
-        ]
+		"AGI"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Alchemy"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Large"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your Effect token on the Enemy.",
+		  "4": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your 2 Effect tokens on the Enemy."
+        }
       },
+	  "Back": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
+	  "Note": "Start of your Activation: You may choose not to refresh thsi card.",
+	  "Warning": "When you refresh thsi card, discard your Effect tokens from the Enemy",
       "Level": 1
     },
     "P44": {
       "Name": "Mighty Blow",
-      "Type": "Action",
-      "Category": "Offensive",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "ATT": [
-          "STR"
-        ]
+		"STR"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics",
+			  "Large"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} {damage}. Push by 3 (+1 space: against Small)."
+        }
       },
       "Level": 1
     },
     "P45": {
       "Name": "Executor's Insight",
+	  "Category": "Support",
+	  "Type": "Reaction",	
+	  "Moon": 1,
+      "Condition": "During a Roll",
+      "Target": "Self or PM in R4",
+	  "Front": "Roll an additional CHA dice or support with CHA dice. Place this card in your Pouch",
       "Level": 1
     },
     "P46": {
       "Name": "Know your Enemy",
+	  "Category": "Defensive",
+	  "Type": "Reaction",	
+      "Sun": 2,
+	  "Moon": 2,
+      "Condition": "Against Melee, Ranged or Spell",
+      "Target": "Self",
+	  "Front": "Roll for CHA (against Spell) or AGI (against Ranged) or STR (against Melee) {en}, +1 die: Investigation, Vigilance, 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
       "Level": 1
     },
     "P47": {
       "Name": "Personal Style",
+	  "Category": "Offensive",
+	  "Type": "Reaction",	
+      "Sun": 2,
+	  "Moon": 2,
+      "Condition": "During Offensive Action",
+      "Target": "Self",
+	  "Front": "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2",
       "Level": 1
     },
     "P48": {
       "Name": "Thousand Cuts",
-      "Type": "Action",
-      "Category": "Offensive",
-      "Front": "Roll highest ATT",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Keywords": [
+        "Attack"
+      ],
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Deception",
+			  "Stealth"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Move by your MOB (including through Enemies). Then, deal each Enemy you moved through {damage} equal to the number of different Enemy models you moved trhough",
+          "1": "You may lose 3 HP to reslove 3"
+        }
+      },
       "Level": 1
     },
     "P49": {
