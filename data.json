@@ -4007,8 +4007,14 @@
       "Roll": {
         "ATT": [
           "STR"
-        ]
+        ],
+		"Successes": {
+			"2": "Deal {successes} {damage}. If the target is Elite or Boss, place your Effect token on the Enemy",
+			"1": "Dela {successes} {damage}."
+		}
       },
+	  "Back": "Start of your Activation: The Enemy with your effect token loses 2HP.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Level": 1
     },
     "B14": {

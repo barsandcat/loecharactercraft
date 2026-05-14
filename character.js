@@ -1422,25 +1422,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       body.appendChild(frontEl);
     }
 
-    if (card.Back || card.Note || card.Warning) {
+    if (card.Back) {
       const backEl = document.createElement("div");
       backEl.className = "action-card-back";
       if (card.Back) {
         const backTextEl = document.createElement("div");
         appendIconTextContent(backTextEl, card.Back);
         backEl.appendChild(backTextEl);
-      }
-      if (card.Note) {
-        const noteEl = document.createElement("div");
-        noteEl.className = "action-card-note";
-        appendIconTextContent(noteEl, card.Note);
-        backEl.appendChild(noteEl);
-      }
-      if (card.Warning) {
-        const warningEl = document.createElement("div");
-        warningEl.className = "action-card-refresh";
-        appendIconTextContent(warningEl, card.Warning);
-        backEl.appendChild(warningEl);
       }
       body.appendChild(backEl);
     }
