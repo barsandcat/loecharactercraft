@@ -5296,33 +5296,138 @@
     },
     "P49": {
       "Name": "Hand of Retribution",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+	  "Moon": 1,
+      "Keywords": [
+        "Attack", "Spell"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
+      "Roll": {
+        "ATT": [
+		"STR",
+		"INT"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana", "Lore", "Clergy"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Fiendish"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} {damage}. Add 3 {damage} if {en} is 6 or less OR 5 {damage} if {en} is 2"
+        }
+      },
       "Level": 1
     },
     "P50": {
       "Name": "Shield of Omu",
       "Type": "Reaction",
       "Category": "Defensive",
+      "Sun": 2,
+	  "Moon": 2,
+      "Condition": "Against Attack",
+      "Target": "Self",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "STR"
-        ]
+		"STR"
+        ],
+		"DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana", "Brilliance", "Resilience"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Prevent {half div} {damage} and place your Effect token on the attacking Enemy",
+          "1": "Prevent {half div} {damage}"
+        }
       },
+	  "Back": "The Enemy with your Effect token has their {en} reduced by 2",
+	  "Note": "Start of your Activation: You may choose not to refresh thsi card.",
+	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
       "Level": 1
     },
     "P51": {
       "Name": "Divine Brew",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Target": "Self or PM in R1",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"DIV": true,
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Alchemy", "Clergy"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana", "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+          "4": "Stabilize or heal {div} HP",
+          "1": "Stabilize or heal {half div} HP"
+        }
+      },
       "Level": 1
     },
     "P52": {
       "Name": "The Guiding Light",
-      "Type": "Action",
       "Category": "Support",
+	  "Type": "Action",	
+      "Target": "Self",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "INT"
-        ]
+		"INT"
+        ],
+		"DIV": true,
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Light"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Diplomacy", "Lore", "Clergy"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Flip this card and place {half div} markers on it",
+          "0": "Do not flip this card"
+        }
       },
 	  "BackMoon": 1,
 	  "BackSun": 1,
@@ -5332,10 +5437,26 @@
     },
     "P53": {
       "Name": "Wrathful Decree",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 2,
+      "Keywords": [
+        "Ranged",
+		"Spell"
+      ],
+      "Target": "ENs in R4",
+	  "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} Divinum {damage}. Place this card in your Pouch.",
       "Level": 1
     },
     "P54": {
       "Name": "Ascension",
+	  "Category": "Support",
+	  "Type": "Reaction",	
+      "Sun": 1,
+	  "Moon": 1,
+      "Condition": "When you have a 12 result during Roll",
+      "Target": "Self",
+	  "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
 	  "BackMoon": 6,
 	  "BackSun": 6,
 	  "Back": "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}",
@@ -6311,11 +6432,70 @@
       "Name": "Divine Justice",
       "Type": "Reaction",
       "Category": "Offensive",
-      "Front": "Roll INT+DIV",
+	  "Moon": 1,
+      "Keywords": [
+        "Spell"
+      ],
+      "Condition": "When the targeted Enemy deals at least 1 damage to you or PM in any range",
+      "Target": "EN in any Range",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+		"DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Fiendish"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana", "Lore"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal {div} Divinum {damage}",
+          "1": "Deal {half div} Divinum {damage}"
+        }
+      },
       "Level": 1
     },
     "PP26": {
       "Name": "Swing of Incense",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R2",
+      "Roll": {
+        "ATT": [
+		"STR"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Fiendish"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics", "Clergy"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal {successes} {damage}. Place your Effect token on the Enemy",
+          "1": "Deal {successes} {damage}"
+        }
+      },
 	  "BackSun": 2,
 	  "Back": "The enmey with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it",
 	  "Note": "Start of your Activaition: You may choose not to refresh this card",
@@ -6324,6 +6504,35 @@
     },
     "PP27": {
       "Name": "Summoned for Trial",
+	  "Category": "Support",
+	  "Type": "Action",	
+	  "Moon": 2,
+      "Target": "ENs in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Investigation"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Diplomacy",
+			  "Lore"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Pull {successes} Enemies in R4 by 2",
+          "1": "Pull 1 Enemy in R4 by 2"
+        }
+      },
 	  "Back": "Enemies in R1 have their {en} refuced by 2",
 	  "Warning": "When you move immediatley refresh this card",
       "Level": 1
