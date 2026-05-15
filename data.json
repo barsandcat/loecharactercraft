@@ -5511,15 +5511,32 @@
       "Name": "Adamant Stance",
       "Type": "Reaction",
       "Category": "Support",
-      "Front": "Roll +1 die per enemy in R2",
+      "Condition": "During Offensive Action using Melee",
+      "Target": "Self",
+	  "Front": "Roll 1 additional die for each Enemy in R2 (max 3 dice).",
+	  "Back": "Gain 1 {armor} against Melee",
       "Level": 1
     },
     "PP20": {
       "Name": "Guidance",
+      "Type": "Reaction",
+      "Category": "Support",
+      "Condition": "During Offensive Action or Defensive Reaction",
+      "Target": "PM in R4",
+	  "Front": "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead",
       "Level": 1
     },
     "PP21": {
       "Name": "Riposte",
+	  "Category": "Offensive",
+	  "Type": "Reaction",	
+      "Sun": 2,
+      "Keywords": [
+        "Attack", "Melee"
+      ],
+      "Condition": "After preventing Melee damage",
+      "Target": "Self",
+	  "Front": "Deal {damage} (-2 {damage}: Armor) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}",
       "Level": 1
     },
     "PP22": {
