@@ -3966,7 +3966,7 @@
           }
         ],
         "Successes": {
-          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character."
+          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
         }
       },
       "DisplayName": "Command"
@@ -3991,7 +3991,7 @@
           }
         ],
         "Successes": {
-          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character."
+          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
         }
       },
       "DisplayName": "Inspiring Command"
@@ -4016,7 +4016,7 @@
           }
         ],
         "Successes": {
-          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activatin, then Activate that Character."
+          "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
         }
       },
       "DisplayName": "Pitiful Command"
@@ -5238,6 +5238,9 @@
     },
     "P55": {
       "Name": "Caltrops",
+	  "BackSun": 3,
+	  "Back": "When an Enemy moves to aspace with your Effect token, discard that token and deal them 4{damage}. If it is a Minion, also end its move.",
+	  "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
       "Level": 1
     },
     "P56": {
@@ -5250,6 +5253,8 @@
     },
     "P58": {
       "Name": "Shadow Form",
+	  "BackMoon": 2,
+	  "Back": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} Divinum {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move.",
       "Level": 1
     },
     "P59": {
@@ -5258,6 +5263,9 @@
     },
 	"P60": {
 		"Name": "Entangled by Shadows"
+		"BackMoon": 5,
+		"Back": "After placing an Activation token on the Enemy with your Effect token, roll for DIV if the result is higher that {en} skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon",
+		"Warning": "Wehn you refresh this card, discard your Effect token from the Enemy",
 	},
     "P61": {
       "Name": "Adventurer's Luck",
@@ -6170,14 +6178,24 @@
     },
     "PP26": {
       "Name": "Swing of Incense",
+	  "BackSun": 2,
+	  "Back": "The enmey with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it",
+	  "Note": "Start of your Activaition: You may choose not to refresh this card",
+	  "Warning": "When you refresh thsi card, discard your Effect token from teh Enemy",
       "Level": 1
     },
     "PP27": {
       "Name": "Summoned for Trial",
+	  "Back": "Enemies in R1 have their {en} refuced by 2",
+	  "Warning": "When you move immediatley refresh this card",
       "Level": 1
     },
     "PP28": {
       "Name": "Weapon Steal",
+	  "BackSun": 2,
+	  "BackMoon": 2,
+	  "Back": "When the Enemy with your Effect token deals {damage}, reduce that {damage} by 2",
+	  "Warning": "Start of your Activation: Do not refersh this card. When the Enemy with your Effect token is defeated or ends its move in R1 from you, refresh this card",
       "Level": 1
     },
     "PP29": {
@@ -6186,6 +6204,8 @@
     },
     "PP30": {
       "Name": "Becoming the Role",
+	  "Back": "After reveraling an Enemy Activation card, but before resolving it you may: *Discard 3 markers - you cannot be targeted as PM during this Activation. *Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded.",
+	  "Warning": "When you refresh this card, discard all markers from it",
       "Level": 1
     },
     "PP31": {
