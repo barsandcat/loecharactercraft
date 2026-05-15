@@ -1,6 +1,5 @@
 P07 Bulwark of Hope, Back
 P08 Beacon of Hope, Back
-P10 Summon Divling, Back
 P13 Outburst of Divinum, Back
 P31 Sneak, Back
 P32 Focus, Back
@@ -10,4 +9,3 @@ PP05 Cure And Poison, Back
 PP09 Manic Laugh, Back
 S03 Coordinated Attack, Back
 S07 Chain Lightning, Back
-S32 Stratagem, Back

@@ -4356,7 +4356,7 @@
           }
         ],
         "Successes": {
-          "16": "Heal 16 HP and 4 {terror}. Place this card in your Pouch",
+          "4": "Heal 16 HP and 4 {terror}. Place this card in your Pouch",
           "1": "Heal 6 HP and 2 {terror}. Place this card in your Pouch"
         }
       },
@@ -4398,7 +4398,10 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "Gain a Divling card (O02) and set the HP to {div} (+2HP: Artifact). Spawn Divling in R1",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "Warning": "When you refresh this card, discard Divling",
+	  "BackSun": 2,
       "Level": 1
     },
     "P11": {
@@ -7928,7 +7931,8 @@
       "Category": "Support",
       "Target": "Self",
       "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
-      "Back": "???",
+      "Back": "For each marker on this card, the {en} of each Enemy is lowered by 1",
+	  "Warning": "Instead of refreshing this card, discard 1 marker (2 markers if {characters} is 4 or more) from this card. Then, if there are no markers on this card, place it in your Pouch",
       "Level": 1
     },
     "S33": {
