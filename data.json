@@ -3097,7 +3097,7 @@
             ],
             "MOB": 2,
             "Action cards": [
-              "P54"
+              "P60"
             ]
           },
           {
@@ -3108,7 +3108,7 @@
             ],
             "MOB": 2,
             "Action cards": [
-              "P54"
+              "P60"
             ]
           }
         ]
@@ -5218,6 +5218,10 @@
           "INT"
         ]
       },
+	  "BackMoon": 1,
+	  "BackSun": 1,
+	  "Back": "During any Roll: Discard a marker from this card to set a die with a result of 8 or higer to 12.",
+	  "Warning": "You cannot refresh this card if there is at least 1 marker on it",
       "Level": 1
     },
     "P53": {
@@ -5226,6 +5230,10 @@
     },
     "P54": {
       "Name": "Ascension",
+	  "BackMoon": 6,
+	  "BackSun": 6,
+	  "Back": "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}",
+	  "Warning": "Thsi card cannot be refreshed. Start of your Activation: if there is 1 or frewer makers on this card, place it in your Pouch. Otherwise, discard 3 markers from this card.",
       "Level": 1
     },
     "P55": {
@@ -5248,6 +5256,9 @@
       "Name": "Shadowsteps",
       "Level": 1
     },
+	"P60": {
+		"Name": "Entangled by Shadows"
+	},
     "P61": {
       "Name": "Adventurer's Luck",
 	  "Type": "Reaction",
@@ -6002,6 +6013,10 @@
           "CHA"
         ]
       },
+	  "Back": "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker.",
+	  "Warning": "Start of your Activation: Discard 1 marker from this card. Then if there is at least 1 markrer on this card, do not rerfresh this card.",
+	  "BackMoon": 1,
+	  "BackSun": 1,
       "Level": 1
     },
     "PP18": {
@@ -6615,7 +6630,8 @@
 		],
 		"Successes": { "1": "Flip this card and place {successes} markers on it (max 4)" }
       },
-	  "Back": "???",
+	  "Back": "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 gains DIV rolls). You and Party Memebers in this range may roll an additional D6 DIV die during DIV rolls.",
+	  "Warning": "Start of your Activation: Instead of refreshing this card, discard i markers from it. Then if there are no markers on this card place it in your Pouch",
       "Level": 1
     },
     "S12": {
