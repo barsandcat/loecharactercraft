@@ -6065,14 +6065,94 @@
     },
     "PP34": {
       "Name": "Release Pollen",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Survival"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place {successes} of your Effect tokens in R2 (max 1 per space)",
+          "0": "Lose 1 HP. Do not flip this card"
+        }
+      },
+	  "Back": "Enemies in R2 from you Effect tokens have their {en} lowered by 1. You and PMs in R2 of the Effect tokesn, roll 1 additional die during Rolls.",
+	  "Warning": "Start of your Activation: Discard 1 Effect token. Then if there are no Effect tokens, refresh this card.",
+	  "BackMoon": 2,
       "Level": 1
     },
     "PP35": {
       "Name": "Guardian Spirits",
+	  "Category": "Defensive",
+	  "Type": "Action",	
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self and PMs in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place a total of {successes} of your Effect tokens on the targets",
+          "0": "Gain 1 {terror}. Do not flip this card."
+        }
+      },
+	  "BackMoon": 2,
+	  "Back": "Anytime: you and Party Memebers may discard 1 Effect token to prevent 2 {damage}",
+	  "Warning": "Start of your Activation: So not refresh this card, unless you pay 1 {fate}. When you referesh this card, discard all your Effect tokens from Party Memebers.",
       "Level": 1
     },
     "PP36": {
       "Name": "Tumorous Growth",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Keywords": [
+        "Attack",
+		"Spell"
+      ],
+      "Target": "1 in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Medicine"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Large"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Deal {half div} Divinum {damage} ignoring 4 {armor}. You gain 1 {terror}"
+        }
+      },
       "Level": 1
     },
     "S01": {
