@@ -5707,11 +5707,24 @@
       "Name": "Coordinated Advance",
       "Type": "Action",
       "Category": "Support",
+      "Target": "Self and PM in R4",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "CHA"
-        ]
+		"CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "You and one PM move by 8",
+          "1": "You and one PM move by 4"
+        }
       },
       "Level": 1
     },
@@ -5719,19 +5732,88 @@
       "Name": "Flank Attack",
       "Type": "Action",
       "Category": "Offensive",
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "ATT": [
-          "STR"
-        ]
+		"STR"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Vigilance"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Small"
+            ]
+          }
+		  ],
+        "Successes": {
+          "1": "Deal {successes} {damage}. Add 2 {damage} for each PM in R1 from the target."
+        }
       },
       "Level": 1
     },
     "S03": {
       "Name": "Coordinated Attack",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Target": "Self and PMs in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Resolve the effect on the back",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "S04": {
       "Name": "Indomitable Presence",
+	  "Category": "Defensive",
+	  "Type": "Reaction",
+      "Sun": 1,
+      "Target": "Self and PMs in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Intimidation"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Flip this card and place {successes} markers on it",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "You and PMs in R4 gain {armor} for each marker on this card.",
+	  "Warning": "This card cannot be refreshed. Start of your Activation: Discard 1 marker from this card. Then if there are no markers on this card place it in your Pouch",
       "Level": 1
     },
     "S05": {
@@ -6380,7 +6462,7 @@
 		"Modifiers": [ {"Dice": 1, "Triggers": ["Lore", "Medicine"]} ],
 		"Successes": {
 			"3": "Discard 1 Injury or Trauma Condition. Resolve 1",
-			"1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Puch."
+			"1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Pouch."
 		}
 	  },
       "Level": 1
