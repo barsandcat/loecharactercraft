@@ -5262,10 +5262,10 @@
       "Level": 1
     },
 	"P60": {
-		"Name": "Entangled by Shadows"
+		"Name": "Entangled by Shadows",
 		"BackMoon": 5,
 		"Back": "After placing an Activation token on the Enemy with your Effect token, roll for DIV if the result is higher that {en} skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon",
-		"Warning": "Wehn you refresh this card, discard your Effect token from the Enemy",
+		"Warning": "Wehn you refresh this card, discard your Effect token from the Enemy"
 	},
     "P61": {
       "Name": "Adventurer's Luck",
