@@ -5054,7 +5054,7 @@
 			"2": "Choose a Melee or Ranged item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
 		}
       },
-	  "Back": "Increase the {damage} modifier of the Item with your Effect tokesn by 3 for each token.",
+	  "Back": "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token.",
 	  "Note": "Start of your Activation: You may pay 2 {fate} to not refresh this card",
 	  "Warning": "When you refresh this card, discard your Effect tokens from the Item and place this card in your Pouch.",
       "Level": 1
@@ -5739,8 +5739,8 @@
           }
         ],
         "Successes": {
-          "4": "Place a total of 3 of your Effect tokesn on Party Members",
-		  "3": "Place a total of 2 of your Effect tokesn on Party Members",
+          "4": "Place a total of 3 of your Effect tokens on Party Members",
+		  "3": "Place a total of 2 of your Effect tokens on Party Members",
 		  "2": "You gain 1 {terror}. Resolve 3"
         }
       },
@@ -6134,7 +6134,7 @@
           }
         ],
         "Successes": {
-          "2": "Draw {successes} tokens from the bag instead. Choos and reslove one of them, retur nthe rest to the bag",
+          "2": "Draw {successes} tokens from the bag instead. Choose and resolve one of them, return the rest to the bag",
           "0": "Gain 1 {terror}"
         }
       }
@@ -6220,7 +6220,7 @@
           }
         ],
         "Successes": {
-          "2": "Place a total of {half div} of your Effect tokesn on Enemies",
+          "2": "Place a total of {half div} of your Effect tokens on Enemies",
           "1": "You gain 1 {terror}. Resolve 2"
         }
       },
