@@ -371,10 +371,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return options;
   }
 
-  function getSelectedAdvancementEntries() {
+  function getSelectedAdvancementEntries(levelUps = state.levelUps) {
     const entries = [];
 
-    state.levelUps.forEach((slotState) => {
+    levelUps.forEach((slotState) => {
       if (
         slotState.treeName === null ||
         slotState.level === null ||
@@ -527,7 +527,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }));
   }
 
-  function collectCharacterStats() {
+  function collectCharacterStats(selection = state) {
     const stats = {
       attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
       mob: 0,
@@ -541,29 +541,78 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       freeUpgrades: 0,
     };
 
-    if (state.selectedRace) {
-      applyRace(stats, state.selectedRace, state.selectedAttributeSet);
+    if (selection.selectedRace) {
+      applyRace(stats, selection.selectedRace, selection.selectedAttributeSet);
     }
 
-    if (state.selectedOrigin) {
-      incrementCountMap(stats.keywordCounts, state.selectedOrigin.Keywords || []);
-      (state.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
-      stats.brill += state.selectedOrigin.Brill || 0;
+    if (selection.selectedOrigin) {
+      incrementCountMap(stats.keywordCounts, selection.selectedOrigin.Keywords || []);
+      (selection.selectedOrigin.Items || []).forEach((item) => addItem(stats, item));
+      stats.brill += selection.selectedOrigin.Brill || 0;
     }
 
-    if (state.selectedProf) {
-      incrementCountMap(stats.keywordCounts, state.selectedProf.Keywords || []);
+    if (selection.selectedProf) {
+      incrementCountMap(stats.keywordCounts, selection.selectedProf.Keywords || []);
     }
 
-    if (state.selectedPath) {
-      applyEntry(stats, state.selectedPath);
+    if (selection.selectedPath) {
+      applyEntry(stats, selection.selectedPath);
     }
 
-    getSelectedAdvancementEntries().forEach((entry) => {
+    getSelectedAdvancementEntries(selection.levelUps).forEach((entry) => {
       applyEntry(stats, entry);
       incrementCountMap(stats.skillCounts, entry.Skills || []);
     });
     return stats;
+  }
+
+  function buildActionCardPreviewStats(stats) {
+    const keywordCounts = new Map(stats.keywordCounts);
+    for (const itemObj of stats.items.values()) {
+      incrementCountMap(keywordCounts, itemObj.Keywords || []);
+    }
+    for (const [skill, count] of stats.skillCounts) {
+      keywordCounts.set(skill, (keywordCounts.get(skill) || 0) + count);
+    }
+    return {
+      attributes: { ...stats.attributes },
+      keywordCounts,
+    };
+  }
+
+  function createSelectionPreview(overrides = {}) {
+    return {
+      selectedRace: overrides.selectedRace !== undefined ? overrides.selectedRace : state.selectedRace,
+      selectedAttributeSet: overrides.selectedAttributeSet !== undefined ? overrides.selectedAttributeSet : state.selectedAttributeSet,
+      selectedOrigin: overrides.selectedOrigin !== undefined ? overrides.selectedOrigin : state.selectedOrigin,
+      selectedProf: overrides.selectedProf !== undefined ? overrides.selectedProf : state.selectedProf,
+      selectedPath: overrides.selectedPath !== undefined ? overrides.selectedPath : state.selectedPath,
+      levelUps: overrides.levelUps !== undefined ? overrides.levelUps : state.levelUps,
+    };
+  }
+
+  function buildPreviewStatsForSelection(overrides = {}) {
+    return buildActionCardPreviewStats(collectCharacterStats(createSelectionPreview(overrides)));
+  }
+
+  function buildLevelUpPreview(slotIndex, slotPatch) {
+    return state.levelUps.map((slot, index) => (
+      index === slotIndex ? { ...slot, ...slotPatch } : { ...slot }
+    ));
+  }
+
+  function buildActionCardPreviews(cardIds, previewStats = null) {
+    return (cardIds || [])
+      .map((cardId) => {
+        const card = state.data["Action Cards"][cardId];
+        if (!card) {
+          return null;
+        }
+        return previewStats
+          ? { cardId, card, previewStats }
+          : { cardId, card };
+      })
+      .filter(Boolean);
   }
 
   function applyRace(stats, race, attributes) {
@@ -697,7 +746,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       onClick: () => openSelector({
         title: "Choose Origin",
         options: state.data.Origins,
-        getOptionContent: describeEntryOption,
+        getOptionContent: (option) =>
+          describeEntryOption(option, buildPreviewStatsForSelection({ selectedOrigin: option })),
         onSelect: selectOrigin,
         isSelected: (option) => state.selectedOrigin === option,
       }),
@@ -733,7 +783,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       onClick: () => openSelector({
         title: "Choose Path",
         options: pathOptions,
-        getOptionContent: describeEntryOption,
+        getOptionContent: (option) =>
+          describeEntryOption(option, buildPreviewStatsForSelection({ selectedPath: option })),
         onSelect: selectPath,
         isSelected: (option) => state.selectedPath === option,
       }),
@@ -785,7 +836,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
               title: "Choose Reward",
               description: "Pick the reward version for this tree level.",
               options: slotMeta.versionOptions,
-              getOptionContent: describeVersionOption,
+              getOptionContent: (option) => describeVersionOption(option, slotMeta.slotIndex),
               onSelect: (option) => selectLevelUpVersion(slotMeta.slotIndex, option),
               isSelected: (option) =>
                 Boolean(slotMeta.selectedVersion && slotMeta.selectedVersion.index === option.index),
@@ -809,13 +860,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     const stats = collectCharacterStats();
-    const allKeywordCounts = new Map(stats.keywordCounts);
-    for (const itemObj of stats.items.values()) {
-      incrementCountMap(allKeywordCounts, itemObj.Keywords || []);
-    }
-    for (const [skill, count] of stats.skillCounts) {
-      allKeywordCounts.set(skill, (allKeywordCounts.get(skill) || 0) + count);
-    }
+    const actionCardPreviewStats = buildActionCardPreviewStats(stats);
+    const allKeywordCounts = actionCardPreviewStats.keywordCounts;
 
     const attributeCard = document.createElement("section");
     attributeCard.className = "summary-card";
@@ -974,7 +1020,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           cards.forEach(({ cardId, card }) => {
             const li = document.createElement("li");
             li.className = "action-list-item";
-            li.appendChild(buildActionCardElement(cardId, card, stats.attributes, allKeywordCounts));
+            li.appendChild(
+              buildActionCardElement(
+                cardId,
+                card,
+                actionCardPreviewStats.attributes,
+                actionCardPreviewStats.keywordCounts
+              )
+            );
             actionList.appendChild(li);
           });
 
@@ -1020,6 +1073,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     const selectedByTree = buildSelectedByTree();
+    const actionCardPreviewStats = buildActionCardPreviewStats(collectCharacterStats());
     treeNames.forEach((treeName, index) => {
       const tree = state.trees.get(treeName);
       if (!tree) {
@@ -1098,7 +1152,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
             versionLine.classList.add("selected");
           }
 
-          renderEntryToElement(versionLine, entry);
+          renderEntryToElement(versionLine, entry, actionCardPreviewStats);
           versionList.appendChild(versionLine);
         });
 
@@ -1152,8 +1206,15 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         if (content.actionCards && content.actionCards.length) {
           const cardsEl = document.createElement("div");
           cardsEl.className = "option-action-cards";
-          content.actionCards.forEach(({ cardId, card }) => {
-            cardsEl.appendChild(buildActionCardElement(cardId, card));
+          content.actionCards.forEach(({ cardId, card, previewStats }) => {
+            cardsEl.appendChild(
+              buildActionCardElement(
+                cardId,
+                card,
+                previewStats ? previewStats.attributes : null,
+                previewStats ? previewStats.keywordCounts : null
+              )
+            );
           });
           button.appendChild(cardsEl);
         }
@@ -1422,20 +1483,27 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return wrapper;
   }
 
-  function createActionCardMention(cardId, card) {
+  function createActionCardMention(cardId, card, previewStats = null) {
     const span = document.createElement("span");
     span.className = "action-card-mention";
     span.textContent = formatActionCardLabel(cardId, card);
 
     const tooltipEl = document.createElement("div");
     tooltipEl.className = "action-card-mention-tooltip";
-    tooltipEl.appendChild(buildActionCardElement(cardId, card));
+    tooltipEl.appendChild(
+      buildActionCardElement(
+        cardId,
+        card,
+        previewStats ? previewStats.attributes : null,
+        previewStats ? previewStats.keywordCounts : null
+      )
+    );
     span.appendChild(tooltipEl);
 
     return span;
   }
 
-  function renderEntryToElement(element, entry) {
+  function renderEntryToElement(element, entry, previewStats = null) {
     const parts = [];
 
     (entry.Attributes || []).forEach((attributeSet) => {
@@ -1476,7 +1544,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       }
       if (part.cardId !== undefined) {
         if (part.card) {
-          element.appendChild(createActionCardMention(part.cardId, part.card));
+          element.appendChild(createActionCardMention(part.cardId, part.card, previewStats));
         } else {
           element.appendChild(document.createTextNode(part.cardId));
         }
@@ -1641,10 +1709,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
-  function describeEntryOption(entry) {
-    const actionCards = (entry["Action cards"] || [])
-      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
-      .filter(({ card }) => card !== null);
+  function describeEntryOption(entry, previewStats = null) {
+    const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
     return {
       title: entry.Name,
       detail: summarizeEntry(entry, { excludeActionCards: true }),
@@ -1662,10 +1728,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
-  function describeVersionOption(option) {
-    const actionCards = (option.entry["Action cards"] || [])
-      .map((cardId) => ({ cardId, card: state.data["Action Cards"][cardId] || null }))
-      .filter(({ card }) => card !== null);
+  function describeVersionOption(option, slotIndex) {
+    const actionCards = buildActionCardPreviews(
+      option.entry["Action cards"] || [],
+      buildPreviewStatsForSelection({
+        levelUps: buildLevelUpPreview(slotIndex, { versionIndex: option.index }),
+      })
+    );
     return {
       title: summarizeEntry(option.entry, { excludeActionCards: true }),
       detail: "",
