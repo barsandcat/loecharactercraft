@@ -4148,7 +4148,7 @@
 		  "Difficulty": 9,
 		  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"] } ],
 		  "Successes": {
-			  "2": "Each target agains 2 ATT Boons",
+			  "2": "Each target gains 2 ATT Boons",
 			  "0": "Do not flip this card"
 		  }
 	  },
@@ -5267,20 +5267,99 @@
     },
     "PP01": {
       "Name": "Precise Shot",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Ranged",
+      "Target": "1 in R2+",
+      "Roll": {
+        "ATT": [
+		"AGI"
+        ],
+		"DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Large"
+            ]
+          }
+		  ],
+        "Successes": {
+          "3": "Deal {successes} {damage}. Ignore {half div} {armor}. Do not flip thsi card",
+          "1": "Deal {successes} {damage}. Ignore {half div} {armor}"
+        }
+      },
       "Level": 1
     },
     "PP02": {
       "Name": "Freezing Traps",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Ice"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Place up to 2 of your Effect tokens in R2 (max 1 per space)",
+          "1": "Place your Effect token in R1"
+        }
+      },
+	  "Back": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} Ice {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet.",
       "Level": 1
     },
     "PP03": {
       "Name": "Heroic Strike",
-      "Type": "Action",
-      "Category": "Offensive",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "ATT": [
-          "STR"
-        ]
+		"STR"
+        ],
+      "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Elite or Boss"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} {damage}. If the target is Elite or Boss and there is no other Enemy in R4 from you, add 3 {damage}. If you defeated the Elite or Boss, gain 2 {fate}"
+        }
       },
       "Level": 1
     },
@@ -5643,7 +5722,7 @@
           {
             "Dice": 1,
             "Triggers": [
-              "agains Small"
+              "against Small"
             ]
           }
         ],
