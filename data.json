@@ -5078,7 +5078,7 @@
         ],
         "Successes": {
           "3": "Move by your MOB (including through Enemies). Then, deal each Enemy you moved through {damage} equal to the number of different Enemy models you moved through",
-          "1": "You may lose 3 HP to reslove 3"
+          "1": "You may lose 3 HP to resolve 3"
         }
       },
       "Level": 1
@@ -5243,26 +5243,221 @@
     },
     "P67": {
       "Name": "Osteoporosis",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Elite or Boss in R4",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Medicine"
+            ]
+          },
+          {
+            "Dice": -2,
+            "Triggers": [
+              "againt Automaton or Vestigial"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Place 2 of your Effect tokens on the Enemy",
+          "1": "Place your Effect token on the Enemy"
+        }
+      },
+	  "Back": "Each time the Enemy moves at least 2 spaces, it loses 2 HP for each of your Effect tokens on them",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "Warning": "When you refresh thsi card, discard your Effect token from the Enemy",
+	  "BackMoon": 2,
+	  "BackSun": 2,
       "Level": 1
     },
     "P68": {
       "Name": "Mind Parasite",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Sun": 1,
+	  "Moon": 1,
+      "Keywords": [
+        "Ranged",
+		"Spell"
+      ],
+      "Target": "1 in R2+",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Animal Handling"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Large"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal ({successes}-2) {damage} ignoring 5 {armor}. Place {successes} of your Effect tokens (-2 tokens: Elite, -3 tokens: Boss) on the Enemy",
+          "0": "Gain 1 {terror}. Do not flip this card"
+        }
+      },
+	  "Back": "During the Activation of the Enemy with your Effect token, you may discard 1 token to reduce all its {damage} by 2 during this Activation OR reduce all its moves by 2 during this Activation",
+	  "Warning": "Start of your Activation: Do not refresh thsi card, unless you gain 3 {terror}. When you refresh this card, discard your Effect token from the Enemy",
+	  "BackMoon": 2,
+	  "BackSun": 2,
       "Level": 1
     },
     "P69": {
       "Name": "Artificial Life",
+	  "Category": "Support",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"AGI"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Artifact",
+			  "Brilliance"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Gain a Rot Golem card (O04) and set the HP to 10. Spawn Rot Golem in R1. Flip this card and place {half div} markers on it",
+          "1": "Gain 2 {terror}. Gain a Rot Golem card (O04) and set the HP to 10. Spawn Rot Golem in R1. Flip this card and place {half div} markers on it",
+          "0": "Do not flip this card"
+        }
+      },
       "Level": 1
     },
     "P70": {
       "Name": "Leeching Seedlings",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Keywords": [
+        "Attack",
+		"Spell"
+      ],
+      "Target": "1 in R2",
+      "Roll": {
+        "ATT": [
+		"AGI"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Animal Handling",
+			  "Lore",
+			  "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+		  "4": "Deal ({successes}+2) {damage} ignoring 3 {armor}. You heal by {damage} dealt",
+          "1": "Deal ({successes}+2) {damage}. You heal by {damage} dealt"
+        }
+      },
       "Level": 1
     },
     "P71": {
       "Name": "Proliferation",
+	  "Category": "Support",
+	  "Type": "Action",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self or PM in R4",
+      "Roll": {
+        "ATT": [
+		"CHA"
+        ],
+		"DIV": true,
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Dimrot"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+          "4": "Place your Effect token on the target. Resolve 1",
+          "1": "Heal {half div}. Heal 1 {terror}"
+        }
+      },
+	  "BackMoon": 2,
+	  "Back": "The character with your Effect token treats each of their ATTs as 1 higher. At the start of your Activation, that Character gains 1 {terror}",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {terror}. When you refresh this card, discard your Effect token from the Character",
       "Level": 1
     },
     "P72": {
       "Name": "Blossom",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 2,
+      "Keywords": [
+        "Ranged",
+		"Spell"
+      ],
+      "Target": "All in any range",
+      "Roll": {
+        "ATT": [
+		"INT",
+		"CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Dimrot"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Lore",
+			  "Medicine"
+            ]
+          }
+
+        ],
+        "Successes": {
+          "3": "Resolve effect on the back",
+          "0": "Do not flip thsi card"
+        }
+      },
+	  "Back": "Roll for DIV. Target all in any range. Defeat {half div} Minions with your Effect tokens. Each Elite and Boss with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch",
       "Level": 1
     },
     "PP01": {
