@@ -9,3 +9,5 @@ P32 Focus, Back
 P36 Become Predator, Back
 P10 Summon Divling, Back
 P13 Outburst of Divinum, Back
+P07 Bulwark of Hope, Back
+P08 Beacon of Hope, Back

@@ -1317,17 +1317,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (card.Roll) {
       body.appendChild(buildRollElement(card.Roll));
 
-      if (card.Roll.Modifiers && card.Roll.Modifiers.length) {
-        const modEl = document.createElement("div");
-        modEl.className = "action-card-modifiers";
-        modEl.textContent = card.Roll.Modifiers.map(mod => {
-          const sign = mod.Dice > 0 ? "+" : "";
-          const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
-          return `${sign}${mod.Dice} ${dieWord}: ${mod.Triggers.join(", ")}`;
-        }).join("  ");
-        body.appendChild(modEl);
-      }
-
       if (card.Roll.Successes) {
         const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
         const sortedNum = sortedKeys.map(Number);
@@ -1526,6 +1515,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       : null;
   }
 
+  function formatRollModifiers(modifiers) {
+    return modifiers.map((mod) => {
+      const sign = mod.Dice > 0 ? "+" : "";
+      const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
+      return `${sign}${mod.Dice} ${dieWord}: ${mod.Triggers.join(", ")}`;
+    }).join(", ");
+  }
+
   function buildRollElement(roll) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
@@ -1547,7 +1544,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       rollText = "Roll the highest ATT";
     }
     if (roll.DIV) rollText += " and DIV";
-    rollLineEl.appendChild(document.createTextNode(rollText));
+    appendIconTextContent(rollLineEl, rollText);
     const diffBadge = document.createElement("span");
     diffBadge.className = "action-card-difficulty";
     const diffIcon = document.createElement("img");
@@ -1557,6 +1554,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
     diffBadge.appendChild(diffIcon);
     rollLineEl.appendChild(diffBadge);
+    if (roll.Modifiers && roll.Modifiers.length) {
+      appendIconTextContent(rollLineEl, ", " + formatRollModifiers(roll.Modifiers));
+    }
     return rollLineEl;
   }
 

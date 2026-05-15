@@ -594,14 +594,6 @@ h1 {
 .action-card-back .action-card-inline-icon {
   filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
-.action-card-modifiers {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.88rem;
-  color: var(--muted);
-  text-align: left;
-  line-height: 1.2;
-}
-
 .action-card-outcome {
   color: var(--ink);
   margin-top: 2px;

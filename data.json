@@ -4036,7 +4036,7 @@
         ],
 		"Successes": {
 			"2": "Deal {successes} {damage}. If the target is Elite or Boss, place your Effect token on the Enemy",
-			"1": "Dela {successes} {damage}."
+			"1": "Deal {successes} {damage}."
 		}
       },
 	  "Back": "Start of your Activation: The Enemy with your effect token loses 2HP.",
@@ -4159,6 +4159,7 @@
       "Name": "Counter",
       "Type": "Reaction",
       "Category": "Defensive",
+	  "Sun": 2,
       "Condition": "Against Melee",
       "Target": "Self",
       "Roll": {
@@ -4172,7 +4173,10 @@
               "Vigilance"
             ]
           }
-        ]
+        ],
+        "Successes": {
+          "1": "Prevent {successes} {damage}. Deal ({successes}-1) {damage} to the attacking Enemy"
+        }
       },
       "Level": 1
     },
@@ -4180,6 +4184,7 @@
       "Name": "Battle Prayer",
       "Type": "Action",
       "Category": "Support",
+	  "Target": "Self and CHs in R4",
       "Keywords": [
         "Spell"
       ],
@@ -4188,7 +4193,18 @@
         "ATT": [
           "CHA"
         ],
-        "Difficulty": 8
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana", "Clergy"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Add {successes} and {half div}. Distribute that many ATT Boons among targets in R4 (max 4 per target). One Character cannot gain same Boon twice."
+        }
       },
       "Level": 1
     },
@@ -4196,24 +4212,114 @@
       "Name": "Guided Smite",
       "Type": "Action",
       "Category": "Offensive",
+	  "Sun": 1,
+	  "Keywords": ["Attack"],
+	  "Condition": "Requires Melee",
+	  "Target": "1 in R1",
       "Roll": {
         "DIV": true,
         "ATT": [
           "STR"
-        ]
+        ],
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Fiendish"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Clergy"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Discard 1 Boon to deal ({successes}+{half div}) Divinum {damage} OR you gain 1 ATT Boon and deal {successes} {damage}",
+          "1": "Deal {successes} {damage}"
+        }
       },
       "Level": 1
     },
     "P07": {
       "Name": "Bulwark of Hope",
+	  "Category": "Defensive",
+	  "Type": "Reaction",	
+      "Sun": 3,
+      "Condition": "Against Attack",
+      "Target": "Self or PM in R2",
+      "Roll": {
+        "ATT": [
+		"STR"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Resilience"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Prevent 16 {damage} and 4 {terror}",
+          "1": "Prevent 5 {damage} and 2 {terror}"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P08": {
       "Name": "Beacon of Hope",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Clergy", "Lore"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Gain 2 ATT Boons",
+          "2": "Gain 1 ATT Boons",
+		  "1": "Do not flip this card"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P09": {
       "Name": "Divine Intervention",
+	  "Category": "Support",
+	  "Type": "Reaction",	
+      "Condition": "When you or a PM would be Knocked Out",
+      "Target": "Self or PM in R4",
+      "Roll": {
+        "ATT": [
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Arcana",
+			  "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+		  "16": "Heal 16 HP and 4 {terror}. Place this card in your Pouch",
+          "1": "Heal 6 HP and 2 {terror}. Place this card in your Pouch"
+        }
+      },
       "Level": 1
     },
     "P10": {
@@ -6016,10 +6122,25 @@
       "Name": "Aura of Justice",
       "Type": "Action",
       "Category": "Support",
+      "Target": "Self",
       "Roll": {
         "ATT": [
-          "CHA"
-        ]
+		"CHA"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Intimidation"
+            ]
+          }
+        ],
+        "Successes": {
+		  "3": "Flip this card and place 2 markers on it",
+          "1": "Flip this card and place 1 marker on it",
+          "0": "Do not flip this card"
+        }
       },
 	  "Back": "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker.",
 	  "Warning": "Start of your Activation: Discard 1 marker from this card. Then if there is at least 1 markrer on this card, do not rerfresh this card.",
@@ -6031,11 +6152,28 @@
       "Name": "Moondisc",
       "Type": "Action",
       "Category": "Offensive",
+      "Keywords": [
+        "Attack", "Ranged", "Spell"
+      ],
+      "Target": "1 in R4",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "INT"
-        ]
+		"INT"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal ({successes}+{half div} Divinum {damage}",
+          "0": "Deal {half div} Divinum {damage}"
+        }
       },
       "Level": 1
     },
