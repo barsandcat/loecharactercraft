@@ -4707,33 +4707,114 @@
     },
     "P31": {
       "Name": "Sneak",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"AGI"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Move by {successes}"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P32": {
       "Name": "Focus",
       "Type": "Action",
       "Category": "Support",
+      "Target": "Self",
       "Roll": {
         "ATT": [
-          "INT"
-        ]
+		"INT"
+        ],
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Survival"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Flip this card and place {successes} markers on it",
+          "0": "Do not flip this card"
+        }
       },
+	  "Back": "???",
       "Level": 1
     },
     "P33": {
       "Name": "Blend In",
+	  "Category": "Support",
+	  "Type": "Reaction",
+      "Condition": "At the start of Enemy Activation",
+      "Target": "Self",
+	  "Front": "You may flip this card",
+	  "Back": "When an Enemy chooses a target you can reduce your {sun} and {moon} by 3 (+1{sun} and {moon}: Stealth)",
+	  "Warning": "Instead of refreshing this card, place it in your Pouch",
       "Level": 1
     },
     "P34": {
       "Name": "Inhale Divinum",
+	  "Category": "Support",
+	  "Type": "Reaction",
+	  "Condition": "When you defeat and Enemy",
+	  "Target": "Self",
+	  "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
+	  "Back": "Anytime: You may discard a marker from this card to reroll any number of dice.",
+	  "Warning": "Instead of refreshing this card, discard 1 marker from it. If there are no makrers on this card, refresh it.",
       "Level": 1
     },
     "P35": {
       "Name": "Scent of Blood",
+	  "Category": "Offensive",
+	  "Type": "Reaction",
+	  "Moon": 2,
+	  "Condition": "At the start of your activation",
+	  "Front": "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below theri starting HP, you roll and additional D4 DIV during your DIV rolls",
+	  "Back": "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice",
+	  "Note": "Start of your Activation: You may choose not to refresh thsi card",
       "Level": 1
     },
     "P36": {
       "Name": "Become Predator",
+	  "Category": "Offensive",
+	  "Type": "Action",
+	  "Sun": 1,
+	  "Moon": 1,
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+        ],
+		"Mode": "Lowest",
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Animal Handling"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Gain {successes} {fate}",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P37": {

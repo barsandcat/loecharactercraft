@@ -1331,13 +1331,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       if (card.Roll.Successes) {
         const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
         const sortedNum = sortedKeys.map(Number);
-        const rollMode = card.Roll.Mode || "Highest";
-        const hasSpecificATT = card.Roll.ATT && card.Roll.ATT.length > 0;
-        const rollATTList = hasSpecificATT ? card.Roll.ATT : ATTRIBUTES;
+        const rollMode = normalizeRollMode(card.Roll.Mode);
+        const rollATTList = getRollAttributeList(card.Roll);
         const attDice = attrs
-          ? (rollMode === "Sum"
-              ? rollATTList.reduce((sum, att) => sum + (attrs[att] || 0), 0)
-              : rollATTList.reduce((max, att) => Math.max(max, attrs[att] || 0), 0))
+          ? getRollAttributeDice(attrs, rollATTList, rollMode)
           : 0;
         const baseDice = attDice > 0 ? attDice : PROB_DICE;
         const appliedMods = (keywordCounts && card.Roll.Modifiers)
@@ -1391,11 +1388,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
                 tooltip.appendChild(line);
               });
             } else {
-              const maxVal = rollATTList.reduce((max, att) => Math.max(max, attrs[att] || 0), 0);
-              const usedAtt = rollATTList.find(att => (attrs[att] || 0) === maxVal);
+              const usedAtt = getRollAttributeSelection(attrs, rollATTList, rollMode);
               if (usedAtt) {
                 const line = document.createElement("div");
-                line.textContent = usedAtt + ": " + maxVal;
+                line.textContent = usedAtt.attribute + ": " + usedAtt.value;
                 tooltip.appendChild(line);
               }
             }
@@ -1501,17 +1497,52 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
+  function normalizeRollMode(mode) {
+    return mode === "Sum" || mode === "Lowest" ? mode : "Highest";
+  }
+
+  function getRollAttributeList(roll) {
+    return roll.ATT && roll.ATT.length > 0 ? roll.ATT : ATTRIBUTES;
+  }
+
+  function getRollAttributeDice(attrs, attList, mode) {
+    if (mode === "Sum") {
+      return attList.reduce((sum, att) => sum + (attrs[att] || 0), 0);
+    }
+    if (mode === "Lowest") {
+      return attList.reduce((min, att) => Math.min(min, attrs[att] || 0), Number.POSITIVE_INFINITY);
+    }
+    return attList.reduce((max, att) => Math.max(max, attrs[att] || 0), 0);
+  }
+
+  function getRollAttributeSelection(attrs, attList, mode) {
+    if (mode === "Sum") {
+      return null;
+    }
+    const targetValue = getRollAttributeDice(attrs, attList, mode);
+    const usedAtt = attList.find((att) => (attrs[att] || 0) === targetValue);
+    return usedAtt
+      ? { attribute: usedAtt, value: targetValue }
+      : null;
+  }
+
   function buildRollElement(roll) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
-    const mode = roll.Mode || "Highest";
+    const mode = normalizeRollMode(roll.Mode);
     const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
+    const attList = getRollAttributeList(roll);
     let rollText;
     if (mode === "Sum") {
-      const attList = hasSpecificATT ? roll.ATT : ATTRIBUTES;
       rollText = "Roll for " + attList.join(" and ");
+    } else if (mode === "Lowest") {
+      if (hasSpecificATT) {
+        rollText = "Roll for the lowest of " + attList.join(" or ");
+      } else {
+        rollText = "Roll the lowest ATT";
+      }
     } else if (hasSpecificATT) {
-      rollText = "Roll for " + roll.ATT.join(" or ");
+      rollText = "Roll for " + attList.join(" or ");
     } else {
       rollText = "Roll the highest ATT";
     }

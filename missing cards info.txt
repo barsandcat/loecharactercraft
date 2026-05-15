@@ -5,3 +5,6 @@ S32 Stratagem, Back
 PP05 Cure And Poison, Back
 S07 Chain Lightning, Back
 S03 Coordinated Attack, Back
+P31 Sneak, Back
+P32 Focus, Back
+P36 Become Predator, Back

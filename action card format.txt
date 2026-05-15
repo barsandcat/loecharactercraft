@@ -10,7 +10,7 @@ New card data structure
 	  "Target": "Range instructions", # Optional
       "Roll": {
 		  "DIV": true, # if absent - false, i.e. no DIV rol
-		  "Mode": "Sum", # if ablest - "Highest"
+		  "Mode": "Sum", # Optional: "Highest" (default), "Lowest", or "Sum"
 		  "ATT": ["INT"], # If absent, means all stats
 		  "Difficulty": 8, # if absent, means difficulty of the enemy [EN]
 		  "Modifiers": [
