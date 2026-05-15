@@ -5856,24 +5856,73 @@
     },
     "PP11": {
       "Name": "Premonition",
-      "Type": "Action",
       "Category": "Support",
+      "Type": "Reaction",
+      "Keywords": [
+        "Spell"
+      ],
+      "Condition": "Before drawing from the initiative bag",
+      "Target": "Self",
       "Roll": {
         "ATT": [
-          "INT"
-        ]
+		"INT"
+        ],
+		"DIV":true,
+		"Difficulty": 9,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Vigilance"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Draw {half div} tokens from the bag instead of 1. Choose and resolve one of them, return rest to the bag"
+        }
       },
       "Level": 1
     },
     "PP12": {
       "Name": "Runic Projectile",
-      "Type": "Action",
-      "Category": "Offensive",
+	  "Category": "Offensive",
+	  "Type": "Action",	
+	  "Moon": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Ranged",
+      "Target": "1 in R2+",
       "Roll": {
-        "DIV": true,
         "ATT": [
-          "AGI"
-        ]
+		"AGI"
+        ],
+		"DIV": true,
+		"Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Vestigial"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Artistry"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal ({successes}+{div}) Divinum {damage} to the target and all others in R1 from the target",
+		  "1": "Deal ({successes}+{half div}) Divinum {damage}"
+        }
       },
       "Level": 1
     },
