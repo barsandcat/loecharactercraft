@@ -104,7 +104,7 @@ def convert_card(card):
 
 
 def main():
-    path = r'C:\Users\TsakhilovD\Documents\loecharactercraft\data.json'
+    path = r'data.json'
     with open(path, encoding='utf-8') as f:
         data = json.load(f)
 

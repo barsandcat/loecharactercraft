@@ -4034,29 +4034,33 @@
         "ATT": [
           "STR"
         ],
-		"Successes": {
-			"2": "Deal {successes} {damage}. If the target is Elite or Boss, place your Effect token on the Enemy",
-			"1": "Deal {successes} {damage}."
-		}
+        "Successes": {
+          "2": "Deal {successes} {damage}. If the target is Elite or Boss, place your Effect token on the Enemy",
+          "1": "Deal {successes} {damage}."
+        }
       },
-	  "Back": "Start of your Activation: The Enemy with your effect token loses 2HP.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Back": "Start of your Activation: The Enemy with your effect token loses 2HP.",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Level": 1
     },
     "B14": {
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
-	  "Sun": 1,
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Level": 2,
       "Roll": {
         "ATT": [
           "STR"
         ],
-		"Successes": { "1": "Deal ({successes}+1) {damage} ignoring AGI {armor}." }
+        "Successes": {
+          "1": "Deal ({successes}+1) {damage} ignoring AGI {armor}."
+        }
       },
       "DisplayName": "Mighty Bash"
     },
@@ -4084,7 +4088,7 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
         "Attack"
       ],
@@ -4103,63 +4107,96 @@
     },
     "P01": {
       "Name": "Soothing Voice",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Target": "1 in R4",
-	  "Roll": {
-		  "ATT": [ "CHA" ],
-		  "DIV": true,
-		  "Difficulty": 8,
-		  "Modifiers": [{ "Dice": 1, "Triggers": ["Charm"]}],
-		  "Successes": {
-			  "1": "Heal {half div} {terror} or Stabilize"
-		  }
-	  },
+      "Type": "Action",
+      "Category": "Support",
+      "Target": "1 in R4",
+      "Roll": {
+        "ATT": [
+          "CHA"
+        ],
+        "DIV": true,
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Charm"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Heal {half div} {terror} or Stabilize"
+        }
+      },
       "Level": 1
     },
     "P02": {
       "Name": "Hymn of Malady",
-	  "Type": "Action",
-	  "Category": "Offensive",
-	  "Moon": 1,
-	  "Keywords": ["Attack", "Ranged"],
-	  "Target": "ENs in R2",
-	  "Roll": {
-		  "ATT": ["INT"],
-		  "DIV": true,
-		  "Modifiers": [
-			{ "Dice": 1, "Triggers": [ "Cityborn" ] },
-			{ "Dice": -1, "Triggers": [ "Armor" ] }		  
-		  ],
-		  "Successes": {
-			  "4": "Deal {div} Divinum {damage} ignoring 2 {armor}",
-			  "1": "Deal {half div} Divinum {damage} ignoring 3 {armor}"
-		  }
-	  },
+      "Type": "Action",
+      "Category": "Offensive",
+      "Moon": 1,
+      "Keywords": [
+        "Attack",
+        "Ranged"
+      ],
+      "Target": "ENs in R2",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+        "DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Cityborn"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "4": "Deal {div} Divinum {damage} ignoring 2 {armor}",
+          "1": "Deal {half div} Divinum {damage} ignoring 3 {armor}"
+        }
+      },
       "Level": 1
     },
     "P03": {
       "Name": "Rousing Ballad",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Target": "PMs in R4",
-	  "Roll": {
-		  "ATT": ["CHA"],
-		  "Difficulty": 9,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"] } ],
-		  "Successes": {
-			  "2": "Each target gains 2 ATT Boons",
-			  "0": "Do not flip this card"
-		  }
-	  },
-	  "Back": "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV",
+      "Type": "Action",
+      "Category": "Support",
+      "Target": "PMs in R4",
+      "Roll": {
+        "ATT": [
+          "CHA"
+        ],
+        "Difficulty": 9,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Performer"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Each target gains 2 ATT Boons",
+          "0": "Do not flip this card"
+        }
+      },
+      "Back": "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV",
       "Level": 1
     },
     "P04": {
       "Name": "Counter",
       "Type": "Reaction",
       "Category": "Defensive",
-	  "Sun": 2,
+      "Sun": 2,
       "Condition": "Against Melee",
       "Target": "Self",
       "Roll": {
@@ -4184,7 +4221,7 @@
       "Name": "Battle Prayer",
       "Type": "Action",
       "Category": "Support",
-	  "Target": "Self and CHs in R4",
+      "Target": "Self and CHs in R4",
       "Keywords": [
         "Spell"
       ],
@@ -4193,12 +4230,13 @@
         "ATT": [
           "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Arcana", "Clergy"
+              "Arcana",
+              "Clergy"
             ]
           }
         ],
@@ -4212,10 +4250,12 @@
       "Name": "Guided Smite",
       "Type": "Action",
       "Category": "Offensive",
-	  "Sun": 1,
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
+      "Sun": 1,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -4244,14 +4284,14 @@
     },
     "P07": {
       "Name": "Bulwark of Hope",
-	  "Category": "Defensive",
-	  "Type": "Reaction",	
+      "Category": "Defensive",
+      "Type": "Reaction",
       "Sun": 3,
       "Condition": "Against Attack",
       "Target": "Self or PM in R2",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
         "Modifiers": [
           {
@@ -4266,57 +4306,57 @@
           "1": "Prevent 5 {damage} and 2 {terror}"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P08": {
       "Name": "Beacon of Hope",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Clergy", "Lore"
+              "Clergy",
+              "Lore"
             ]
           }
         ],
         "Successes": {
           "3": "Gain 2 ATT Boons",
           "2": "Gain 1 ATT Boons",
-		  "1": "Do not flip this card"
+          "1": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P09": {
       "Name": "Divine Intervention",
-	  "Category": "Support",
-	  "Type": "Reaction",	
+      "Category": "Support",
+      "Type": "Reaction",
       "Condition": "When you or a PM would be Knocked Out",
       "Target": "Self or PM in R4",
       "Roll": {
-        "ATT": [
-        ],
-		"Difficulty": 10,
+        "ATT": [],
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
             "Triggers": [
               "Arcana",
-			  "Leadership"
+              "Leadership"
             ]
           }
         ],
         "Successes": {
-		  "16": "Heal 16 HP and 4 {terror}. Place this card in your Pouch",
+          "16": "Heal 16 HP and 4 {terror}. Place this card in your Pouch",
           "1": "Heal 6 HP and 2 {terror}. Place this card in your Pouch"
         }
       },
@@ -4333,11 +4373,11 @@
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"STR",
-		"INT"
+          "STR",
+          "INT"
         ],
-		"DIV": true,
-		"Difficulty": 9,
+        "DIV": true,
+        "Difficulty": 9,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4355,10 +4395,10 @@
         "Successes": {
           "2": "Resolve effect on the back",
           "1": "If rolled for STR, lose 2 HP. If you rolled for INT, gain 1 {terror}. Resolve effect on the back",
-		  "0": "Do not flip this card"
+          "0": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P11": {
@@ -4384,22 +4424,22 @@
             ]
           }
         ],
-		"Successes": {
-			"2": "Place 2 of your Effect tokens in your space",
-			"1": "Place your Effect token in your space"
-		}
+        "Successes": {
+          "2": "Place 2 of your Effect tokens in your space",
+          "1": "Place your Effect token in your space"
+        }
       },
-	  "Back": "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
-	  "BackMoon": 2,
+      "Back": "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token.",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
+      "BackMoon": 2,
       "Level": 1
     },
     "P12": {
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 1,
+      "Moon": 1,
       "Target": "1 in R2+",
       "Keywords": [
         "Attack",
@@ -4427,17 +4467,17 @@
             ]
           }
         ],
-		"Successes": {
-			"1": "Deal {half div} Ice {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} Ice {damage} to {successes} other Enemies in any range."
-		}
+        "Successes": {
+          "1": "Deal {half div} Ice {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} Ice {damage} to {successes} other Enemies in any range."
+        }
       },
       "Level": 1
     },
     "P13": {
       "Name": "Outburst of Divinum",
-	  "Category": "Defensive",
-	  "Type": "Reaction",	
-	  "Moon": 2,
+      "Category": "Defensive",
+      "Type": "Reaction",
+      "Moon": 2,
       "Keywords": [
         "Spell"
       ],
@@ -4445,9 +4485,9 @@
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"DIV": true,
+        "DIV": true,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4467,20 +4507,20 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P14": {
       "Name": "Evoke Nightmares",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Sun": 2,
       "Target": "Elite or Boss in R5",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
@@ -4491,22 +4531,26 @@
         ],
         "Successes": {
           "3": "Place your Effect token on the Enemy",
-		  "1": "You gain 2 {terror}. Resolve 3",
+          "1": "You gain 2 {terror}. Resolve 3",
           "0": "You gain 1 {terror}. Do not flip this card"
         }
       },
-	  "Back": "When the Enemy with your Effect token ends their Activation: Roll for DIV. The Enemy loses {half div} HP",
-	  "Note": "Start of your Activation: Your may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
+      "Back": "When the Enemy with your Effect token ends their Activation: Roll for DIV. The Enemy loses {half div} HP",
+      "Note": "Start of your Activation: Your may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy",
       "Level": 1
     },
     "P15": {
       "Name": "Fireball",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 2,
-	  "Keywords": ["Attack", "Ranged", "Spell"],
-	  "Front": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} Fire {damage} (if you have Armor, {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch",
+      "Moon": 2,
+      "Keywords": [
+        "Attack",
+        "Ranged",
+        "Spell"
+      ],
+      "Front": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} Fire {damage} (if you have Armor, {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch",
       "Level": 1
     },
     "P16": {
@@ -4581,20 +4625,20 @@
     },
     "P18": {
       "Name": "Applause",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Target": "Self",
-	  "Roll": {
-		  "Difficulty": 8,
-		  "ATT": [],
-		  "Successes": {
-			  "1": "For each {half characters} {successes} place 1 marker on this card",
-			  "0": "Gain 4 {terror}. Place this card in your Pouch."
-		  }
-	  },
-	  "Front": "Each other Character in R4 supports you with a number of dice equal to their highest ATT.",
-	  "Back": "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card ignoring its refresh costs or restrictions. 3: Gain 1 Action.",
-	  "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch",
+      "Type": "Action",
+      "Category": "Support",
+      "Target": "Self",
+      "Roll": {
+        "Difficulty": 8,
+        "ATT": [],
+        "Successes": {
+          "1": "For each {half characters} {successes} place 1 marker on this card",
+          "0": "Gain 4 {terror}. Place this card in your Pouch."
+        }
+      },
+      "Front": "Each other Character in R4 supports you with a number of dice equal to their highest ATT.",
+      "Back": "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card ignoring its refresh costs or restrictions. 3: Gain 1 Action.",
+      "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch",
       "Level": 1
     },
     "P19": {
@@ -4723,18 +4767,18 @@
     },
     "P25": {
       "Name": "Spikes",
-	  "Category": "Offensive",
-	  "Type": "Action",
+      "Category": "Offensive",
+      "Type": "Action",
       "Keywords": [
         "Ranged",
-		"Spell"
+        "Spell"
       ],
       "Target": "1 in any range",
       "Roll": {
         "ATT": [
           "INT"
         ],
-		"DIV": true,
+        "DIV": true,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4757,8 +4801,8 @@
     },
     "P26": {
       "Name": "Earth Shell",
-	  "Category": "Defensive",
-	  "Type": "Action",
+      "Category": "Defensive",
+      "Type": "Action",
       "Keywords": [
         "Spell"
       ],
@@ -4767,8 +4811,8 @@
         "ATT": [
           "STR"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4782,23 +4826,23 @@
           "0": "Gain 1 {terror}"
         }
       },
-	  "Back": "Gain 1 {armor} and lose 1 MOB for each marker on this card.",
-	  "Note": "Instead of refreshing this card you may discard any number of markers from it.",
-	  "Warning": "When you refresh this card, discard all markers from it.",
+      "Back": "Gain 1 {armor} and lose 1 MOB for each marker on this card.",
+      "Note": "Instead of refreshing this card you may discard any number of markers from it.",
+      "Warning": "When you refresh this card, discard all markers from it.",
       "Level": 1
     },
     "P27": {
       "Name": "Cauldron of Wonders",
-	  "Moon": 1,
-	  "Category": "Support",
-	  "Type": "Action",
+      "Moon": 1,
+      "Category": "Support",
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
           "INT",
-		  "CHA"
+          "CHA"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4812,23 +4856,23 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation.",
-	  "Warning": "This card cannot be refreshed. End of each Activation: If there are no more Cauldron Effect tokens on the Sheet, place this card in your Pouch",
+      "Back": "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation.",
+      "Warning": "This card cannot be refreshed. End of each Activation: If there are no more Cauldron Effect tokens on the Sheet, place this card in your Pouch",
       "Level": 1
     },
     "P28": {
       "Name": "Animal Form",
       "Sun": 1,
-	  "Moon": 1,
-	  "Type": "Action",
-	  "Category": "Support",
+      "Moon": 1,
+      "Type": "Action",
+      "Category": "Support",
       "Keywords": [
         "Spell"
       ],
       "Target": "Self",
       "Roll": {
         "ATT": [],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4842,10 +4886,10 @@
           "1": "Flip this card and place {successes} ATT Boons on it."
         }
       },
-	  "Back": "You may use Boons on this card as if they were yours, but you must use all of them at once.",
-	  "Warning": "When you refresh this card, discard all Boons from it.",
-	  "BackSun": 1,
-	  "BackMoon": 1,
+      "Back": "You may use Boons on this card as if they were yours, but you must use all of them at once.",
+      "Warning": "When you refresh this card, discard all Boons from it.",
+      "BackSun": 1,
+      "BackMoon": 1,
       "Level": 1
     },
     "P29": {
@@ -4854,15 +4898,15 @@
       "Category": "Offensive",
       "Keywords": [
         "Ranged",
-		"Spell"
+        "Spell"
       ],
       "Target": "Self",
       "Roll": {
         "ATT": [
           "INT"
         ],
-		"DIV": true,
-		"Difficulty": 10,
+        "DIV": true,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4875,33 +4919,32 @@
             "Triggers": [
               "Ice"
             ]
-          } 
-	    ],
+          }
+        ],
         "Successes": {
           "2": "Resolve effect on the back",
           "1": "Gain 1 {terror}, resolve 2",
-		  "0": "Do not flip this card"
+          "0": "Do not flip this card"
         }
       },
-	  "Back": "Push all Enemies by 1 in one chosen direction and deal them {half div} Ice {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
-	  "Warning": "Instead of refreshing this card, place it in your Pouch",
+      "Back": "Push all Enemies by 1 in one chosen direction and deal them {half div} Ice {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
+      "Warning": "Instead of refreshing this card, place it in your Pouch",
       "Level": 1
     },
     "P30": {
       "Name": "True Bond",
-	  "Type": "Action",
-	  "Category": "Support",
+      "Type": "Action",
+      "Category": "Support",
       "Target": "CH in R4",
       "Roll": {
-        "ATT": [
-        ],
-		"Difficulty": 10,
+        "ATT": [],
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Arcana",
-			  "Medicine"
+              "Medicine"
             ]
           }
         ],
@@ -4910,22 +4953,22 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "When you end your Activation, the Character with your Effect token may perform 1 Action. When that character ends their Activation, you may perform 1 Action",
-	  "Warning": "This card cannot be refreshed. Any time: if the Character with your Effect token is not in R4 from you, place this card in your Pouch.",
-	  "BackMoon": 1,
-	  "BackSun": 1,
+      "Back": "When you end your Activation, the Character with your Effect token may perform 1 Action. When that character ends their Activation, you may perform 1 Action",
+      "Warning": "This card cannot be refreshed. Any time: if the Character with your Effect token is not in R4 from you, place this card in your Pouch.",
+      "BackMoon": 1,
+      "BackSun": 1,
       "Level": 1
     },
     "P31": {
       "Name": "Sneak",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4938,7 +4981,7 @@
           "1": "Move by {successes}"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P32": {
@@ -4948,9 +4991,9 @@
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4964,54 +5007,53 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P33": {
       "Name": "Blend In",
-	  "Category": "Support",
-	  "Type": "Reaction",
+      "Category": "Support",
+      "Type": "Reaction",
       "Condition": "At the start of Enemy Activation",
       "Target": "Self",
-	  "Front": "You may flip this card",
-	  "Back": "When an Enemy chooses a target you can reduce your {sun} and {moon} by 3 (+1{sun} and {moon}: Stealth)",
-	  "Warning": "Instead of refreshing this card, place it in your Pouch",
+      "Front": "You may flip this card",
+      "Back": "When an Enemy chooses a target you can reduce your {sun} and {moon} by 3 (+1{sun} and {moon}: Stealth)",
+      "Warning": "Instead of refreshing this card, place it in your Pouch",
       "Level": 1
     },
     "P34": {
       "Name": "Inhale Divinum",
-	  "Category": "Support",
-	  "Type": "Reaction",
-	  "Condition": "When you defeat and Enemy",
-	  "Target": "Self",
-	  "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
-	  "Back": "Anytime: You may discard a marker from this card to reroll any number of dice.",
-	  "Warning": "Instead of refreshing this card, discard 1 marker from it. If there are no markers on this card, refresh it.",
+      "Category": "Support",
+      "Type": "Reaction",
+      "Condition": "When you defeat and Enemy",
+      "Target": "Self",
+      "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
+      "Back": "Anytime: You may discard a marker from this card to reroll any number of dice.",
+      "Warning": "Instead of refreshing this card, discard 1 marker from it. If there are no markers on this card, refresh it.",
       "Level": 1
     },
     "P35": {
       "Name": "Scent of Blood",
-	  "Category": "Offensive",
-	  "Type": "Reaction",
-	  "Moon": 2,
-	  "Condition": "At the start of your activation",
-	  "Front": "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls",
-	  "Back": "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Category": "Offensive",
+      "Type": "Reaction",
+      "Moon": 2,
+      "Condition": "At the start of your activation",
+      "Front": "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls",
+      "Back": "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
       "Level": 1
     },
     "P36": {
       "Name": "Become Predator",
-	  "Category": "Offensive",
-	  "Type": "Action",
-	  "Sun": 1,
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Sun": 1,
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
-        "ATT": [
-        ],
-		"Mode": "Lowest",
-		"Difficulty": 8,
+        "ATT": [],
+        "Mode": "Lowest",
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 2,
@@ -5025,15 +5067,15 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "P37": {
       "Name": "Charge",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Target": "Self",
-	  "Front": "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action.",
+      "Front": "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action.",
       "Level": 1
     },
     "P38": {
@@ -5043,14 +5085,14 @@
       "Target": "EN in R4",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Medicine",
-			  "Vigilance"
+              "Vigilance"
             ]
           },
           {
@@ -5059,35 +5101,35 @@
               "against Large"
             ]
           }
-		],
+        ],
         "Successes": {
           "3": "Place {successes} of your Effect tokens on the Enemy",
-		  "1": "Place your Effect token on the Enemy"
+          "1": "Place your Effect token on the Enemy"
         }
       },
-	  "Back": "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
-	  "Warning": "When you refresh this card, discard your Effect tokens from the Enemy.",
+      "Back": "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them.",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Warning": "When you refresh this card, discard your Effect tokens from the Enemy.",
       "Level": 1
     },
     "P39": {
       "Name": "Vengeful Stance",
-	  "Category": "Defensive",
-	  "Type": "Action",	
+      "Category": "Defensive",
+      "Type": "Action",
       "Sun": 1,
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"STR",
-		"AGI"
+          "STR",
+          "AGI"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Resilience",
-			  "Vigilance"
+              "Vigilance"
             ]
           }
         ],
@@ -5096,37 +5138,37 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation",
+      "Back": "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation",
       "Level": 1
     },
     "P40": {
       "Name": "Strength of Heart",
-	  "Category": "Support",
-	  "Type": "Reaction",	
-	  "Moon": 1,
+      "Category": "Support",
+      "Type": "Reaction",
+      "Moon": 1,
       "Condition": "After revealing Enemy Activation card",
       "Target": "Self and PMs in R4",
-	  "Front": "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}",
+      "Front": "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}",
       "Level": 1
     },
     "P41": {
       "Name": "Inner Strength",
       "Type": "Reaction",
       "Category": "Support",
-	  "Moon": 1,
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"STR",
-		"CHA"
+          "STR",
+          "CHA"
         ],
-		"Difficulty": 9,
+        "Difficulty": 9,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Intimidation",
-			  "Resilience"
+              "Resilience"
             ]
           }
         ],
@@ -5135,28 +5177,27 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When there are no markers on this card, refresh it",
+      "Back": "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When there are no markers on this card, refresh it",
       "Level": 1
     },
-	"P42": {
-	  "Name": "Dance of War",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+    "P42": {
+      "Name": "Dance of War",
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
-	  "Moon": 1,
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
-        "ATT": [
-        ],
-		"Difficulty": 10,
+        "ATT": [],
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Intimidation",
-			  "Leadership"
+              "Leadership"
             ]
           }
         ],
@@ -5164,22 +5205,22 @@
           "1": "Place {successes} of your Effect tokens on your Action cards (max 1 per card)"
         }
       },
-	  "Back": "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it.",
-	  "Warning": "Instead of refreshing this card, discard your Effect tokens from cards and place this card in your Pouch."
-	},
+      "Back": "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it.",
+      "Warning": "Instead of refreshing this card, discard your Effect tokens from cards and place this card in your Pouch."
+    },
     "P43": {
       "Name": "Poisoned Darts",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Keywords": [
         "Attack",
-		"Ranged"
+        "Ranged"
       ],
       "Target": "1 in R4",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
         "Modifiers": [
           {
@@ -5197,18 +5238,18 @@
         ],
         "Successes": {
           "1": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your Effect token on the Enemy.",
-		  "4": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your 2 Effect tokens on the Enemy."
+          "4": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your 2 Effect tokens on the Enemy."
         }
       },
-	  "Back": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
-	  "Warning": "When you refresh this card, discard your Effect tokens from the Enemy",
+      "Back": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Warning": "When you refresh this card, discard your Effect tokens from the Enemy",
       "Level": 1
     },
     "P44": {
       "Name": "Mighty Blow",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
       "Keywords": [
         "Attack"
@@ -5217,14 +5258,14 @@
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Athletics",
-			  "Large"
+              "Large"
             ]
           }
         ],
@@ -5236,54 +5277,53 @@
     },
     "P45": {
       "Name": "Executor's Insight",
-	  "Category": "Support",
-	  "Type": "Reaction",	
-	  "Moon": 1,
+      "Category": "Support",
+      "Type": "Reaction",
+      "Moon": 1,
       "Condition": "During a Roll",
       "Target": "Self or PM in R4",
-	  "Front": "Roll an additional CHA dice or support with CHA dice. Place this card in your Pouch",
+      "Front": "Roll an additional CHA dice or support with CHA dice. Place this card in your Pouch",
       "Level": 1
     },
     "P46": {
       "Name": "Know your Enemy",
-	  "Category": "Defensive",
-	  "Type": "Reaction",	
+      "Category": "Defensive",
+      "Type": "Reaction",
       "Sun": 2,
-	  "Moon": 2,
+      "Moon": 2,
       "Condition": "Against Melee, Ranged or Spell",
       "Target": "Self",
-	  "Front": "Roll for CHA (against Spell) or AGI (against Ranged) or STR (against Melee) {en}, +1 die: Investigation, Vigilance, 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
+      "Front": "Roll for CHA (against Spell) or AGI (against Ranged) or STR (against Melee) {en}, +1 die: Investigation, Vigilance, 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
       "Level": 1
     },
     "P47": {
       "Name": "Personal Style",
-	  "Category": "Offensive",
-	  "Type": "Reaction",	
+      "Category": "Offensive",
+      "Type": "Reaction",
       "Sun": 2,
-	  "Moon": 2,
+      "Moon": 2,
       "Condition": "During Offensive Action",
       "Target": "Self",
-	  "Front": "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2",
+      "Front": "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2",
       "Level": 1
     },
     "P48": {
       "Name": "Thousand Cuts",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Keywords": [
         "Attack"
       ],
       "Target": "Self",
       "Roll": {
-        "ATT": [
-        ],
-		"Difficulty": 10,
+        "ATT": [],
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Deception",
-			  "Stealth"
+              "Stealth"
             ]
           }
         ],
@@ -5296,25 +5336,28 @@
     },
     "P49": {
       "Name": "Hand of Retribution",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
-        "Attack", "Spell"
+        "Attack",
+        "Spell"
       ],
       "Condition": "Requires Melee",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
-		"STR",
-		"INT"
+          "STR",
+          "INT"
         ],
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Arcana", "Lore", "Clergy"
+              "Arcana",
+              "Lore",
+              "Clergy"
             ]
           },
           {
@@ -5341,19 +5384,21 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Sun": 2,
-	  "Moon": 2,
+      "Moon": 2,
       "Condition": "Against Attack",
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
-		"DIV": true,
+        "DIV": true,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Arcana", "Brilliance", "Resilience"
+              "Arcana",
+              "Brilliance",
+              "Resilience"
             ]
           }
         ],
@@ -5362,33 +5407,35 @@
           "1": "Prevent {half div} {damage}"
         }
       },
-	  "Back": "The Enemy with your Effect token has their {en} reduced by 2",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
+      "Back": "The Enemy with your Effect token has their {en} reduced by 2",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy",
       "Level": 1
     },
     "P51": {
       "Name": "Divine Brew",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Target": "Self or PM in R1",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"DIV": true,
-		"Difficulty": 10,
+        "DIV": true,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
             "Triggers": [
-              "Alchemy", "Clergy"
+              "Alchemy",
+              "Clergy"
             ]
           },
           {
             "Dice": 1,
             "Triggers": [
-              "Arcana", "Medicine"
+              "Arcana",
+              "Medicine"
             ]
           }
         ],
@@ -5402,14 +5449,14 @@
     "P52": {
       "Name": "The Guiding Light",
       "Category": "Support",
-	  "Type": "Action",	
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"DIV": true,
-		"Difficulty": 10,
+        "DIV": true,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
@@ -5420,7 +5467,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "Diplomacy", "Lore", "Clergy"
+              "Diplomacy",
+              "Lore",
+              "Clergy"
             ]
           }
         ],
@@ -5429,56 +5478,57 @@
           "0": "Do not flip this card"
         }
       },
-	  "BackMoon": 1,
-	  "BackSun": 1,
-	  "Back": "During any Roll: Discard a marker from this card to set a die with a result of 8 or higher to 12.",
-	  "Warning": "You cannot refresh this card if there is at least 1 marker on it",
+      "BackMoon": 1,
+      "BackSun": 1,
+      "Back": "During any Roll: Discard a marker from this card to set a die with a result of 8 or higher to 12.",
+      "Warning": "You cannot refresh this card if there is at least 1 marker on it",
       "Level": 1
     },
     "P53": {
       "Name": "Wrathful Decree",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 2,
       "Keywords": [
         "Ranged",
-		"Spell"
+        "Spell"
       ],
       "Target": "ENs in R4",
-	  "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} Divinum {damage}. Place this card in your Pouch.",
+      "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} Divinum {damage}. Place this card in your Pouch.",
       "Level": 1
     },
     "P54": {
       "Name": "Ascension",
-	  "Category": "Support",
-	  "Type": "Reaction",	
+      "Category": "Support",
+      "Type": "Reaction",
       "Sun": 1,
-	  "Moon": 1,
+      "Moon": 1,
       "Condition": "When you have a 12 result during Roll",
       "Target": "Self",
-	  "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
-	  "BackMoon": 6,
-	  "BackSun": 6,
-	  "Back": "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}",
-	  "Warning": "This card cannot be refreshed. Start of your Activation: if there is 1 or fewer markers on this card, place it in your Pouch. Otherwise, discard 3 markers from this card.",
+      "Front": "Roll for DIV. Flip this card and place {half div} markers on it",
+      "BackMoon": 6,
+      "BackSun": 6,
+      "Back": "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}",
+      "Warning": "This card cannot be refreshed. Start of your Activation: if there is 1 or fewer markers on this card, place it in your Pouch. Otherwise, discard 3 markers from this card.",
       "Level": 1
     },
     "P55": {
       "Name": "Caltrops",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Pathfinding", "Stealth"
+              "Pathfinding",
+              "Stealth"
             ]
           }
         ],
@@ -5486,56 +5536,57 @@
           "1": "Place {successes} of your Effect tokens in R2 (max 1 per space)"
         }
       },
-	  "BackSun": 3,
-	  "Back": "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a Minion, also end its move.",
-	  "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
+      "BackSun": 3,
+      "Back": "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a Minion, also end its move.",
+      "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
       "Level": 1
     },
     "P56": {
       "Name": "Ventriloquism",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Target": "1 in any range",
       "Roll": {
         "ATT": [
-		"INT",
-		"CHA"
+          "INT",
+          "CHA"
         ],
-		"Difficulty": 9,
+        "Difficulty": 9,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Artistry", "Deception", "Performer"
+              "Artistry",
+              "Deception",
+              "Performer"
             ]
           }
         ],
         "Successes": {
           "3": "Resolve 1 but you may target Elite instead and Pull that Elite by 2 instead of {successes}",
-		  "1": "Choose a Minion and an empty space in any range. Pull the Minion by {successes} toward that space"
+          "1": "Choose a Minion and an empty space in any range. Pull the Minion by {successes} toward that space"
         }
       },
       "Level": 1
     },
     "P57": {
       "Name": "Gaining Advantage",
-	  "Category": "Support",
-	  "Type": "Reaction",	
+      "Category": "Support",
+      "Type": "Reaction",
       "Condition": "Before drawing from the Initiative bag",
       "Target": "Self",
-	  "Front": "If a dual token is drawn, choose which side of this token to resolve. Otherwise gain 1 {fate}",
+      "Front": "If a dual token is drawn, choose which side of this token to resolve. Otherwise gain 1 {fate}",
       "Level": 1
     },
     "P58": {
       "Name": "Shadow Form",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 2,
       "Target": "Self",
       "Roll": {
-        "ATT": [
-        ],
-		"Difficulty": 10,
+        "ATT": [],
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
@@ -5546,7 +5597,8 @@
           {
             "Dice": 1,
             "Triggers": [
-              "Deception", "Intimidation"
+              "Deception",
+              "Intimidation"
             ]
           }
         ],
@@ -5555,27 +5607,26 @@
           "0": "Do not flip this card"
         }
       },
-	  "BackMoon": 2,
-	  "Back": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} Divinum {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move.",
+      "BackMoon": 2,
+      "Back": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} Divinum {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move.",
       "Level": 1
     },
     "P59": {
       "Name": "Shadowsteps",
-	  "Category": "Support",
-	  "Type": "Reaction",	
+      "Category": "Support",
+      "Type": "Reaction",
       "Condition": "Before or after Action",
       "Target": "Self",
-	  "Front": "Move by your MOB. Then move by your MOB",
+      "Front": "Move by your MOB. Then move by your MOB",
       "Level": 1
     },
-	"P60": {
-		"Name": "Entangled by Shadows",
-	  "Category": "Support",
-	  "Type": "Action",	
+    "P60": {
+      "Name": "Entangled by Shadows",
+      "Category": "Support",
+      "Type": "Action",
       "Target": "EN in any range",
       "Roll": {
-        "ATT": [
-        ],
+        "ATT": [],
         "Modifiers": [
           {
             "Dice": 3,
@@ -5586,7 +5637,8 @@
           {
             "Dice": 1,
             "Triggers": [
-              "Deception", "Intimidation"
+              "Deception",
+              "Intimidation"
             ]
           }
         ],
@@ -5595,53 +5647,73 @@
           "0": "Do not flip this card"
         }
       },
-		"BackMoon": 5,
-		"Back": "After placing an Activation token on the Enemy with your Effect token, roll for DIV. If the result is higher than {en}, skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon",
-		"Warning": "When you refresh this card, discard your Effect token from the Enemy"
-	},
+      "BackMoon": 5,
+      "Back": "After placing an Activation token on the Enemy with your Effect token, roll for DIV. If the result is higher than {en}, skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy"
+    },
     "P61": {
       "Name": "Adventurer's Luck",
-	  "Type": "Reaction",
-	  "Category": "Support",
-	  "Sun": 1,
-	  "Condition": "Before a Roll",
-	  "Target": "Self",
-	  "Front": "During this Roll, if you have at least one result of 12, add one {successes} to your Roll. If you have at least one result of 1, gain one additional {fate}.",
+      "Type": "Reaction",
+      "Category": "Support",
+      "Sun": 1,
+      "Condition": "Before a Roll",
+      "Target": "Self",
+      "Front": "During this Roll, if you have at least one result of 12, add one {successes} to your Roll. If you have at least one result of 1, gain one additional {fate}.",
       "Level": 1
     },
     "P62": {
       "Name": "Ticking Vestigial",
-	  "Type": "Action",
-	  "Category": "Offensive",
-	  "Target": "Self",
-	  "Roll": {
-		  "ATT": ["AGI", "INT"],
-		  "Difficulty": 10,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering", "Vestigial"]}],
-		  "Successes": {
-			  "1": "Place 2 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0",
-			  "3": "Place 1 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0"
-		  }
-	  },
+      "Type": "Action",
+      "Category": "Offensive",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "AGI",
+          "INT"
+        ],
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Artistry",
+              "Engineering",
+              "Vestigial"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place 2 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0",
+          "3": "Place 1 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0"
+        }
+      },
       "Level": 1
     },
     "P63": {
       "Name": "Scrapping",
       "Type": "Action",
       "Category": "Support",
-	  "Moon": 1,
-	  "Sun": 1,
-	  "Target": "Self and PM in R1",
+      "Moon": 1,
+      "Sun": 1,
+      "Target": "Self and PM in R1",
       "Roll": {
         "ATT": [
           "INT",
           "AGI"
         ],
-		"Difficulty": 10,
-		"Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering"]} ],
-		"Successes": {
-			"2": "You and one PM in R1 may place 1 item without an Action card from their Pouch into an empty slot."
-		}
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Artistry",
+              "Engineering"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "You and one PM in R1 may place 1 item without an Action card from their Pouch into an empty slot."
+        }
       },
       "Level": 1
     },
@@ -5649,65 +5721,81 @@
       "Name": "Divinum Infused Tools",
       "Type": "Reaction",
       "Category": "Support",
-	  "Condition": "During AGI or INT Roll",
-	  "Target": "Self",
+      "Condition": "During AGI or INT Roll",
+      "Target": "Self",
       "Front": "Roll for DIV: 12+: Add 4 {successes} to the Roll, 8-11: Add 2 {successes} to the Roll.",
       "Level": 1
     },
     "P65": {
       "Name": "Quick Reflexes",
-	  "Type": "Reaction",
-	  "Category": "Support",
+      "Type": "Reaction",
+      "Category": "Support",
       "Condition": "After revealing Enemy Activation card",
-	  "Target": "Self",
-	  "Sun": 1,
-	  "Moon": 1,
-	  "Roll": {
+      "Target": "Self",
+      "Sun": 1,
+      "Moon": 1,
+      "Roll": {
         "ATT": [
           "AGI"
         ],
-		"Difficulty": 10,
-		"Modifiers": [ { "Dice": 1, "Triggers": ["Athletics", "Vigilance"]} ],
-		"Successes": {
-			"1": "Move by {successes}. You cannot enter {danger} spaces during this move."
-		}
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics",
+              "Vigilance"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Move by {successes}. You cannot enter {danger} spaces during this move."
+        }
       },
       "Level": 1
     },
     "P66": {
       "Name": "Final Enhancement",
-	  "Category": "Support",
-	  "Type": "Action",
-	  "Target": "Self or PM in R1",
-	  "BackSun": 3,
-	  "BackMoon": 3,
-	  "Roll": {
+      "Category": "Support",
+      "Type": "Action",
+      "Target": "Self or PM in R1",
+      "BackSun": 3,
+      "BackMoon": 3,
+      "Roll": {
         "ATT": [
           "INT",
           "AGI"
         ],
-		"Difficulty": 10,
-		"Modifiers": [ { "Dice": 1, "Triggers": ["Artistry", "Engineering"]} ],
-		"Successes": {
-			"2": "Choose a Melee or Ranged item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
-		}
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Artistry",
+              "Engineering"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Choose a Melee or Ranged item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
+        }
       },
-	  "Back": "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token.",
-	  "Note": "Start of your Activation: You may pay 2 {fate} to not refresh this card",
-	  "Warning": "When you refresh this card, discard your Effect tokens from the Item and place this card in your Pouch.",
+      "Back": "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token.",
+      "Note": "Start of your Activation: You may pay 2 {fate} to not refresh this card",
+      "Warning": "When you refresh this card, discard your Effect tokens from the Item and place this card in your Pouch.",
       "Level": 1
     },
     "P67": {
       "Name": "Osteoporosis",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Keywords": [
         "Spell"
       ],
       "Target": "Elite or Boss in R4",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
         "Modifiers": [
           {
@@ -5728,27 +5816,27 @@
           "1": "Place your Effect token on the Enemy"
         }
       },
-	  "Back": "Each time the Enemy moves at least 2 spaces, it loses 2 HP for each of your Effect tokens on them",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
-	  "BackMoon": 2,
-	  "BackSun": 2,
+      "Back": "Each time the Enemy moves at least 2 spaces, it loses 2 HP for each of your Effect tokens on them",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy",
+      "BackMoon": 2,
+      "BackSun": 2,
       "Level": 1
     },
     "P68": {
       "Name": "Mind Parasite",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
         "Ranged",
-		"Spell"
+        "Spell"
       ],
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
         "Modifiers": [
           {
@@ -5769,33 +5857,33 @@
           "0": "Gain 1 {terror}. Do not flip this card"
         }
       },
-	  "Back": "During the Activation of the Enemy with your Effect token, you may discard 1 token to reduce all its {damage} by 2 during this Activation OR reduce all its moves by 2 during this Activation",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you gain 3 {terror}. When you refresh this card, discard your Effect token from the Enemy",
-	  "BackMoon": 2,
-	  "BackSun": 2,
+      "Back": "During the Activation of the Enemy with your Effect token, you may discard 1 token to reduce all its {damage} by 2 during this Activation OR reduce all its moves by 2 during this Activation",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you gain 3 {terror}. When you refresh this card, discard your Effect token from the Enemy",
+      "BackMoon": 2,
+      "BackSun": 2,
       "Level": 1
     },
     "P69": {
       "Name": "Artificial Life",
-	  "Category": "Support",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Support",
+      "Type": "Action",
+      "Moon": 1,
       "Keywords": [
         "Spell"
       ],
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Artifact",
-			  "Brilliance"
+              "Brilliance"
             ]
           }
         ],
@@ -5809,30 +5897,30 @@
     },
     "P70": {
       "Name": "Leeching Seedlings",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Keywords": [
         "Attack",
-		"Spell"
+        "Spell"
       ],
       "Target": "1 in R2",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Animal Handling",
-			  "Lore",
-			  "Medicine"
+              "Lore",
+              "Medicine"
             ]
           }
         ],
         "Successes": {
-		  "4": "Deal ({successes}+2) {damage} ignoring 3 {armor}. You heal by {damage} dealt",
+          "4": "Deal ({successes}+2) {damage} ignoring 3 {armor}. You heal by {damage} dealt",
           "1": "Deal ({successes}+2) {damage}. You heal by {damage} dealt"
         }
       },
@@ -5840,18 +5928,18 @@
     },
     "P71": {
       "Name": "Proliferation",
-	  "Category": "Support",
-	  "Type": "Action",
+      "Category": "Support",
+      "Type": "Action",
       "Keywords": [
         "Spell"
       ],
       "Target": "Self or PM in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"DIV": true,
-		"Difficulty": 10,
+        "DIV": true,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
@@ -5871,27 +5959,27 @@
           "1": "Heal {half div}. Heal 1 {terror}"
         }
       },
-	  "BackMoon": 2,
-	  "Back": "The character with your Effect token treats each of their ATTs as 1 higher. At the start of your Activation, that Character gains 1 {terror}",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {terror}. When you refresh this card, discard your Effect token from the Character",
+      "BackMoon": 2,
+      "Back": "The character with your Effect token treats each of their ATTs as 1 higher. At the start of your Activation, that Character gains 1 {terror}",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {terror}. When you refresh this card, discard your Effect token from the Character",
       "Level": 1
     },
     "P72": {
       "Name": "Blossom",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 2,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 2,
       "Keywords": [
         "Ranged",
-		"Spell"
+        "Spell"
       ],
       "Target": "All in any range",
       "Roll": {
         "ATT": [
-		"INT",
-		"CHA"
+          "INT",
+          "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 2,
@@ -5903,23 +5991,22 @@
             "Dice": 1,
             "Triggers": [
               "Lore",
-			  "Medicine"
+              "Medicine"
             ]
           }
-
         ],
         "Successes": {
           "3": "Resolve effect on the back",
           "0": "Do not flip this card"
         }
       },
-	  "Back": "Roll for DIV. Target all in any range. Defeat {half div} Minions with your Effect tokens. Each Elite and Boss with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch",
+      "Back": "Roll for DIV. Target all in any range. Defeat {half div} Minions with your Effect tokens. Each Elite and Boss with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch",
       "Level": 1
     },
     "PP01": {
       "Name": "Precise Shot",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
       "Keywords": [
         "Attack"
@@ -5928,9 +6015,9 @@
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
-		"DIV": true,
+        "DIV": true,
         "Modifiers": [
           {
             "Dice": 1,
@@ -5944,7 +6031,7 @@
               "against Large"
             ]
           }
-		  ],
+        ],
         "Successes": {
           "3": "Deal {successes} {damage}. Ignore {half div} {armor}. Do not flip this card",
           "1": "Deal {successes} {damage}. Ignore {half div} {armor}"
@@ -5954,15 +6041,15 @@
     },
     "PP02": {
       "Name": "Freezing Traps",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -5982,14 +6069,14 @@
           "1": "Place your Effect token in R1"
         }
       },
-	  "Back": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} Ice {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet.",
+      "Back": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} Ice {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet.",
       "Level": 1
     },
     "PP03": {
       "Name": "Heroic Strike",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
       "Keywords": [
         "Attack"
@@ -5998,9 +6085,9 @@
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
-      "Modifiers": [
+        "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
@@ -6016,8 +6103,8 @@
     },
     "PP04": {
       "Name": "Freezing Smash",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Sun": 1,
       "Keywords": [
         "Attack"
@@ -6033,7 +6120,7 @@
             "Dice": 1,
             "Triggers": [
               "Athletics",
-			  "Ice"
+              "Ice"
             ]
           }
         ],
@@ -6042,29 +6129,29 @@
           "1": "Deal {successes} Ice {damage} (+1 {damage} against Large)"
         }
       },
-	  "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
-	  "BackMoon": 1,
-	  "BackSun": 1
+      "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
+      "BackMoon": 1,
+      "BackSun": 1
     },
     "PP05": {
       "Name": "Cure and Poison",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Target": "Self",
       "Roll": {
         "ATT": [
           "INT"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Medicine",
-			  "Poison"
+              "Poison"
             ]
           }
         ],
@@ -6072,18 +6159,18 @@
           "1": "Draw {successes} Activation tokens from the bag. Resolve the effect on the back."
         }
       },
-	  "Back": "???"
+      "Back": "???"
     },
     "PP06": {
       "Name": "Summon Swarm",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
           "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6097,8 +6184,8 @@
         }
       },
       "Warning": "Start of your Activation: Do not refresh this card if Hive is on the Sheet.",
-	  "BackMoon": 1,
-	  "BackSun": 1
+      "BackMoon": 1,
+      "BackSun": 1
     },
     "PP07": {
       "Name": "Rage",
@@ -6216,10 +6303,10 @@
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"DIV":true,
-		"Difficulty": 9,
+        "DIV": true,
+        "Difficulty": 9,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6242,9 +6329,9 @@
     },
     "PP12": {
       "Name": "Runic Projectile",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Keywords": [
         "Attack"
       ],
@@ -6252,10 +6339,10 @@
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 2,
@@ -6272,65 +6359,92 @@
         ],
         "Successes": {
           "3": "Deal ({successes}+{div}) Divinum {damage} to the target and all others in R1 from the target",
-		  "1": "Deal ({successes}+{half div}) Divinum {damage}"
+          "1": "Deal ({successes}+{half div}) Divinum {damage}"
         }
       },
       "Level": 1
     },
     "PP13": {
       "Name": "Inspire",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Target": "Self",
-	  "Roll": {
-		  "ATT": ["CHA"],
-		  "Difficulty": 9,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"] } ],
-		  "Successes": {
-			  "1": "Flip this card and place {successes} markers on it",
-			  "0": "Do not flip this card"
-		  }
-	  },
-	  "Back": "Anytime: Discard all markers from this card to support a PM in R3 with a number of dice equal to the number of these markers.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard all markers from it.",
+      "Type": "Action",
+      "Category": "Support",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "CHA"
+        ],
+        "Difficulty": 9,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Performer"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Flip this card and place {successes} markers on it",
+          "0": "Do not flip this card"
+        }
+      },
+      "Back": "Anytime: Discard all markers from this card to support a PM in R3 with a number of dice equal to the number of these markers.",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard all markers from it.",
       "Level": 1
     },
     "PP14": {
       "Name": "Smoke and Mirrors",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Target": "Self",
-	  "Roll": {
-		  "ATT": ["AGI"],
-		  "DIV": true,
-		  "Difficulty": 8,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Sleight of Hand"]}],
-		  "Successes": {
-			  "3": "Place your Effect token in R6. Add 1 Effect token to the same space if {div} is 4 or more",
-			  "1": "Place your Effect token in R4. Add 1 Effect token to the same space if {div} is 6 or more",
-			  "0": "Do not flip the card"
-		  }
-	  },
-	  "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by Minions (and Elites and Bosses if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
-	  "Warning": "Start of your Activation: Do not refresh this cad, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
+      "Type": "Action",
+      "Category": "Support",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "AGI"
+        ],
+        "DIV": true,
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Sleight of Hand"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Place your Effect token in R6. Add 1 Effect token to the same space if {div} is 4 or more",
+          "1": "Place your Effect token in R4. Add 1 Effect token to the same space if {div} is 6 or more",
+          "0": "Do not flip the card"
+        }
+      },
+      "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by Minions (and Elites and Bosses if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
+      "Warning": "Start of your Activation: Do not refresh this cad, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
       "Level": 1
     },
     "PP15": {
       "Name": "Weak Point",
-	  "Type": "Reaction",
-	  "Category": "Support",
-	  "Moon": 1,
-	  "Target": "Elite or boss in R4",
-	  "Roll": {
-		  "ATT": ["INT"],
-		  "Modifiers": [ { "Dice": 2, "Triggers": ["Medicine"]}],
-		  "Successes": {
-			  "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
-		  }
-	  },
-	  "Back": "When the Enemy with your Effect token is attacked with Melee, you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy.",
+      "Type": "Reaction",
+      "Category": "Support",
+      "Moon": 1,
+      "Target": "Elite or boss in R4",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
+        }
+      },
+      "Back": "When the Enemy with your Effect token is attacked with Melee, you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy.",
       "Level": 1
     },
     "PP16": {
@@ -6351,9 +6465,9 @@
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6363,15 +6477,15 @@
           }
         ],
         "Successes": {
-		  "3": "Flip this card and place 2 markers on it",
+          "3": "Flip this card and place 2 markers on it",
           "1": "Flip this card and place 1 marker on it",
           "0": "Do not flip this card"
         }
       },
-	  "Back": "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker.",
-	  "Warning": "Start of your Activation: Discard 1 marker from this card. Then if there is at least 1 marker on this card, do not refresh this card.",
-	  "BackMoon": 1,
-	  "BackSun": 1,
+      "Back": "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker.",
+      "Warning": "Start of your Activation: Discard 1 marker from this card. Then if there is at least 1 marker on this card, do not refresh this card.",
+      "BackMoon": 1,
+      "BackSun": 1,
       "Level": 1
     },
     "PP18": {
@@ -6379,15 +6493,17 @@
       "Type": "Action",
       "Category": "Offensive",
       "Keywords": [
-        "Attack", "Ranged", "Spell"
+        "Attack",
+        "Ranged",
+        "Spell"
       ],
       "Target": "1 in R4",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6409,8 +6525,8 @@
       "Category": "Support",
       "Condition": "During Offensive Action using Melee",
       "Target": "Self",
-	  "Front": "Roll 1 additional die for each Enemy in R2 (max 3 dice).",
-	  "Back": "Gain 1 {armor} against Melee",
+      "Front": "Roll 1 additional die for each Enemy in R2 (max 3 dice).",
+      "Back": "Gain 1 {armor} against Melee",
       "Level": 1
     },
     "PP20": {
@@ -6419,29 +6535,32 @@
       "Category": "Support",
       "Condition": "During Offensive Action or Defensive Reaction",
       "Target": "PM in R4",
-	  "Front": "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead",
+      "Front": "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead",
       "Level": 1
     },
     "PP21": {
       "Name": "Riposte",
-	  "Category": "Offensive",
-	  "Type": "Reaction",	
+      "Category": "Offensive",
+      "Type": "Reaction",
       "Sun": 2,
       "Keywords": [
-        "Attack", "Melee"
+        "Attack",
+        "Melee"
       ],
       "Condition": "After preventing Melee damage",
       "Target": "Self",
-	  "Front": "Deal {damage} (-2 {damage}: Armor) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}",
+      "Front": "Deal {damage} (-2 {damage}: Armor) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}",
       "Level": 1
     },
     "PP22": {
       "Name": "Eliminate",
       "Type": "Action",
       "Category": "Offensive",
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -6462,22 +6581,22 @@
             ]
           }
         ],
-		"Successes": {
-		  "2": "If the target has {div} or less HP, defeat it. Otherwise resolve 1",
-		  "1": "Deal {successes} Divinum {damage}"
-	    }
+        "Successes": {
+          "2": "If the target has {div} or less HP, defeat it. Otherwise resolve 1",
+          "1": "Deal {successes} Divinum {damage}"
+        }
       },
       "Level": 1
     },
     "PP23": {
       "Name": "Impose Your Will",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Sun": 1,
       "Target": "Minion in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
         "Modifiers": [
           {
@@ -6494,8 +6613,8 @@
           }
         ],
         "Successes": {
-          "2": "Choose an empty space in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."        
-		}
+          "2": "Choose an empty space in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."
+        }
       },
       "Level": 1
     },
@@ -6508,9 +6627,9 @@
       "Target": "1 in R4",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6523,21 +6642,21 @@
             "Triggers": [
               "against Small"
             ]
-          }        
-		],
+          }
+        ],
         "Successes": {
           "2": "Place 1 Effect token on a Minion, spend 1 {fate} to place it on Elite, or spend 2 {fate} to place it on a Boss."
         }
       },
-	  "Back": "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
-	  "Warning": "This card cannot be refreshed. When all enemies with the Effect token are defeated, place this card in your Pouch.",
+      "Back": "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
+      "Warning": "This card cannot be refreshed. When all enemies with the Effect token are defeated, place this card in your Pouch.",
       "Level": 1
     },
     "PP25": {
       "Name": "Divine Justice",
       "Type": "Reaction",
       "Category": "Offensive",
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
         "Spell"
       ],
@@ -6545,9 +6664,9 @@
       "Target": "EN in any Range",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"DIV": true,
+        "DIV": true,
         "Modifiers": [
           {
             "Dice": 2,
@@ -6558,7 +6677,8 @@
           {
             "Dice": 1,
             "Triggers": [
-              "Arcana", "Lore"
+              "Arcana",
+              "Lore"
             ]
           }
         ],
@@ -6571,8 +6691,8 @@
     },
     "PP26": {
       "Name": "Swing of Incense",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Keywords": [
         "Attack"
       ],
@@ -6580,7 +6700,7 @@
       "Target": "1 in R2",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
         "Modifiers": [
           {
@@ -6592,7 +6712,8 @@
           {
             "Dice": 1,
             "Triggers": [
-              "Athletics", "Clergy"
+              "Athletics",
+              "Clergy"
             ]
           }
         ],
@@ -6601,23 +6722,23 @@
           "1": "Deal {successes} {damage}"
         }
       },
-	  "BackSun": 2,
-	  "Back": "The Enemy with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
+      "BackSun": 2,
+      "Back": "The Enemy with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it",
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy",
       "Level": 1
     },
     "PP27": {
       "Name": "Summoned for Trial",
-	  "Category": "Support",
-	  "Type": "Action",	
-	  "Moon": 2,
+      "Category": "Support",
+      "Type": "Action",
+      "Moon": 2,
       "Target": "ENs in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 2,
@@ -6629,7 +6750,7 @@
             "Dice": 1,
             "Triggers": [
               "Diplomacy",
-			  "Lore"
+              "Lore"
             ]
           }
         ],
@@ -6638,21 +6759,21 @@
           "1": "Pull 1 Enemy in R4 by 2"
         }
       },
-	  "Back": "Enemies in R1 have their {en} reduced by 2",
-	  "Warning": "When you move, immediately refresh this card",
+      "Back": "Enemies in R1 have their {en} reduced by 2",
+      "Warning": "When you move, immediately refresh this card",
       "Level": 1
     },
     "PP28": {
       "Name": "Weapon Steal",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Keywords": [
         "Attack"
       ],
       "Target": "EN in R1",
       "Roll": {
         "ATT": [
-		"AGI"
+          "AGI"
         ],
         "Modifiers": [
           {
@@ -6661,13 +6782,14 @@
               "Sleight of Hand"
             ]
           },
-		  {
+          {
             "Dice": 1,
             "Triggers": [
-              "Deception", "Stealth"
+              "Deception",
+              "Stealth"
             ]
           },
-		  {
+          {
             "Dice": 1,
             "Triggers": [
               "against Large"
@@ -6676,32 +6798,35 @@
         ],
         "Successes": {
           "3": "Place your Effect token on the Enemy",
-		  "1": "Lose 2 HP. Resolve 3",
+          "1": "Lose 2 HP. Resolve 3",
           "0": "Do not flip this card"
         }
       },
-	  "BackSun": 2,
-	  "BackMoon": 2,
-	  "Back": "When the Enemy with your Effect token deals {damage}, reduce that {damage} by 2",
-	  "Warning": "Start of your Activation: Do not refresh this card. When the Enemy with your Effect token is defeated or ends its move in R1 from you, refresh this card",
+      "BackSun": 2,
+      "BackMoon": 2,
+      "Back": "When the Enemy with your Effect token deals {damage}, reduce that {damage} by 2",
+      "Warning": "Start of your Activation: Do not refresh this card. When the Enemy with your Effect token is defeated or ends its move in R1 from you, refresh this card",
       "Level": 1
     },
     "PP29": {
       "Name": "Inside Information",
-	  "Category": "Support",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Support",
+      "Type": "Action",
+      "Moon": 1,
       "Target": "ENs in any range",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
-              "Deception", "Investigation", "Lore", "Vigilance"
+              "Deception",
+              "Investigation",
+              "Lore",
+              "Vigilance"
             ]
           }
         ],
@@ -6714,16 +6839,16 @@
     },
     "PP30": {
       "Name": "Becoming the Role",
-	  "Category": "Defensive",
-	  "Type": "Action",	
+      "Category": "Defensive",
+      "Type": "Action",
       "Sun": 2,
-	  "Moon": 2,
+      "Moon": 2,
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 9,
+        "Difficulty": 9,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6734,9 +6859,9 @@
           {
             "Dice": 1,
             "Triggers": [
-			  "Artistry",
-			  "Deception",
-			  "Performer"
+              "Artistry",
+              "Deception",
+              "Performer"
             ]
           }
         ],
@@ -6744,64 +6869,98 @@
           "1": "Flip this card and place {successes} markers on it"
         }
       },
-	  "Back": "After revealing an Enemy Activation card, but before resolving it you may: *Discard 3 markers - you cannot be targeted as PM during this Activation. *Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded.",
-	  "Warning": "When you refresh this card, discard all markers from it",
+      "Back": "After revealing an Enemy Activation card, but before resolving it you may: *Discard 3 markers - you cannot be targeted as PM during this Activation. *Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded.",
+      "Warning": "When you refresh this card, discard all markers from it",
       "Level": 1
     },
     "PP31": {
       "Name": "Pike Strike",
-	  "Category": "Offensive",
-	  "Type": "Action",
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
-	  "Roll": {
-		  "ATT": ["AGI"],
-		  "Modifiers": [ { "Dice": 2, "Triggers": ["against Vestigial"]}, { "Dice": 1, "Triggers": ["Athletics", "Performer"]} ],
-		  "Successes": {
-			  "1": "Deal {successes} {damage} (+3 {damage} if the target was Pulled during this Activation)."
-		  }
-	  },
+      "Category": "Offensive",
+      "Type": "Action",
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
+      "Roll": {
+        "ATT": [
+          "AGI"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Vestigial"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics",
+              "Performer"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} {damage} (+3 {damage} if the target was Pulled during this Activation)."
+        }
+      },
       "Level": 1
     },
     "PP32": {
       "Name": "Bright Mind",
-	  "Category": "Support",
-	  "Type": "Action",
-	  "Target": "Self",
-	  "Roll": {
-		  "ATT": ["INT"],
-		  "Difficulty": 8,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Lore", "Vigilance"]}, { "Dice": -1, "Triggers": ["each PM in R2"]} ],
-		  "Successes": {
-			  "1": "Flip this card in place {successes} markers on it"
-		  }
-	  },
-	  "Back": "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice.",
-	  "Note": "You may pay 1 {fate} to not refresh this card.",
-	  "Warning": "When you refresh this card, discard all markers from it.",
+      "Category": "Support",
+      "Type": "Action",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Lore",
+              "Vigilance"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "each PM in R2"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Flip this card in place {successes} markers on it"
+        }
+      },
+      "Back": "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice.",
+      "Note": "You may pay 1 {fate} to not refresh this card.",
+      "Warning": "When you refresh this card, discard all markers from it.",
       "Level": 1
     },
     "PP33": {
       "Name": "Applied Knowledge",
-	  "Category": "Support",
-	  "Type": "Reaction",
-	  "Moon": 1,
-	  "Condition": "Before Offensive Action or Item Action",
-	  "Target": "Self",
-	  "Front": "Roll DIV. Ignore {half DIV} {armor} during this Action.",
+      "Category": "Support",
+      "Type": "Reaction",
+      "Moon": 1,
+      "Condition": "Before Offensive Action or Item Action",
+      "Target": "Self",
+      "Front": "Roll DIV. Ignore {half DIV} {armor} during this Action.",
       "Level": 1
     },
     "PP34": {
       "Name": "Release Pollen",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Target": "Self",
       "Roll": {
         "ATT": [
-		"INT"
+          "INT"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6815,24 +6974,24 @@
           "0": "Lose 1 HP. Do not flip this card"
         }
       },
-	  "Back": "Enemies in R2 from your Effect tokens have their {en} lowered by 1. You and PMs in R2 of the Effect tokens roll 1 additional die during Rolls.",
-	  "Warning": "Start of your Activation: Discard 1 Effect token. Then if there are no Effect tokens, refresh this card.",
-	  "BackMoon": 2,
+      "Back": "Enemies in R2 from your Effect tokens have their {en} lowered by 1. You and PMs in R2 of the Effect tokens roll 1 additional die during Rolls.",
+      "Warning": "Start of your Activation: Discard 1 Effect token. Then if there are no Effect tokens, refresh this card.",
+      "BackMoon": 2,
       "Level": 1
     },
     "PP35": {
       "Name": "Guardian Spirits",
-	  "Category": "Defensive",
-	  "Type": "Action",	
+      "Category": "Defensive",
+      "Type": "Action",
       "Keywords": [
         "Spell"
       ],
       "Target": "Self and PMs in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6846,23 +7005,23 @@
           "0": "Gain 1 {terror}. Do not flip this card."
         }
       },
-	  "BackMoon": 2,
-	  "Back": "Anytime: You and Party Members may discard 1 Effect token to prevent 2 {damage}",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all your Effect tokens from Party Members.",
+      "BackMoon": 2,
+      "Back": "Anytime: You and Party Members may discard 1 Effect token to prevent 2 {damage}",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all your Effect tokens from Party Members.",
       "Level": 1
     },
     "PP36": {
       "Name": "Tumorous Growth",
-	  "Category": "Offensive",
-	  "Type": "Action",	
+      "Category": "Offensive",
+      "Type": "Action",
       "Keywords": [
         "Attack",
-		"Spell"
+        "Spell"
       ],
       "Target": "1 in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
         "Modifiers": [
           {
@@ -6891,9 +7050,9 @@
       "Target": "Self and PM in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6921,7 +7080,7 @@
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
-		"STR"
+          "STR"
         ],
         "Modifiers": [
           {
@@ -6936,7 +7095,7 @@
               "against Small"
             ]
           }
-		  ],
+        ],
         "Successes": {
           "1": "Deal {successes} {damage}. Add 2 {damage} for each PM in R1 from the target."
         }
@@ -6945,14 +7104,14 @@
     },
     "S03": {
       "Name": "Coordinated Attack",
-	  "Category": "Support",
-	  "Type": "Action",	
+      "Category": "Support",
+      "Type": "Action",
       "Target": "Self and PMs in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6966,20 +7125,20 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "S04": {
       "Name": "Indomitable Presence",
-	  "Category": "Defensive",
-	  "Type": "Reaction",
+      "Category": "Defensive",
+      "Type": "Reaction",
       "Sun": 1,
       "Target": "Self and PMs in R4",
       "Roll": {
         "ATT": [
-		"CHA"
+          "CHA"
         ],
-		"Difficulty": 10,
+        "Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -6993,15 +7152,15 @@
           "0": "Do not flip this card"
         }
       },
-	  "Back": "You and PMs in R4 gain {armor} for each marker on this card.",
-	  "Warning": "This card cannot be refreshed. Start of your Activation: Discard 1 marker from this card. Then if there are no markers on this card place it in your Pouch",
+      "Back": "You and PMs in R4 gain {armor} for each marker on this card.",
+      "Warning": "This card cannot be refreshed. Start of your Activation: Discard 1 marker from this card. Then if there are no markers on this card place it in your Pouch",
       "Level": 1
     },
     "S05": {
       "Name": "Focus Divinum",
       "Type": "Reaction",
       "Category": "Support",
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
         "Spell"
       ],
@@ -7014,7 +7173,7 @@
       "Name": "Energy Shield",
       "Type": "Reaction",
       "Category": "Defensive",
-	  "Moon": 2,
+      "Moon": 2,
       "Keywords": [
         "Spell"
       ],
@@ -7022,10 +7181,10 @@
       "Target": "Self or PM in R4",
       "Roll": {
         "ATT": [
-			"STR"
+          "STR"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
@@ -7044,7 +7203,7 @@
       "Name": "Chain Lightning",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 1,
+      "Moon": 1,
       "Keywords": [
         "Attack",
         "Ranged",
@@ -7077,7 +7236,7 @@
           "0": "You gain 1 {terror}, do not flip this card"
         }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "S08": {
@@ -7090,34 +7249,36 @@
       "Target": "PMs in any range",
       "Roll": {
         "ATT": [
-			"INT"
+          "INT"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Arcana",
-			  "Leadership"
+              "Leadership"
             ]
           }
         ],
         "Successes": {
           "4": "Place a total of 3 of your Effect tokens on Party Members",
-		  "3": "Place a total of 2 of your Effect tokens on Party Members",
-		  "2": "You gain 1 {terror}. Resolve 3"
+          "3": "Place a total of 2 of your Effect tokens on Party Members",
+          "2": "You gain 1 {terror}. Resolve 3"
         }
       },
-	  "Back": "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}.",
-	  "Warning": "Start of your activation: Do not refresh this card, unless you pay 1 {fate}",
+      "Back": "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}.",
+      "Warning": "Start of your activation: Do not refresh this card, unless you pay 1 {fate}",
       "Level": 1
     },
     "S09": {
       "Name": "Ritual of Haste",
       "Type": "Action",
       "Category": "Support",
-	  "Keywords": ["Spell"],
-	  "Target": "Self and PMs in R4",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -7133,7 +7294,9 @@
             ]
           }
         ],
-		"Successes": { "1": "Add {half div} white tokens to the Initiative bag or move 2 targets by ({div}+2)" }
+        "Successes": {
+          "1": "Add {half div} white tokens to the Initiative bag or move 2 targets by ({div}+2)"
+        }
       },
       "Level": 1
     },
@@ -7141,8 +7304,10 @@
       "Name": "Protective Gestures",
       "Type": "Action",
       "Category": "Support",
-	  "Keywords": ["Spell"],
-	  "Target": "Self and PMs in R4",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self and PMs in R4",
       "Roll": {
         "DIV": true,
         "ATT": [
@@ -7163,12 +7328,12 @@
             ]
           }
         ],
-		"Successes": {
-			"3": "Each target heals {half div} {terror} or Stabilizes",
-			"1": "Do not flip this card"
-		}
+        "Successes": {
+          "3": "Each target heals {half div} {terror} or Stabilizes",
+          "1": "Do not flip this card"
+        }
       },
-	  "Back": "???",
+      "Back": "???",
       "Level": 1
     },
     "S11": {
@@ -7183,115 +7348,186 @@
         "ATT": [
           "INT"
         ],
-		"Difficulty": 10,
-		"Modifiers": [
-			{ "Dice": 1, "Triggers": ["Divinum", "Elder"] },
-			{ "Dice": -1, "Triggers": ["Armor"] }
-		],
-		"Successes": { "1": "Flip this card and place {successes} markers on it (max 4)" }
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Divinum",
+              "Elder"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Flip this card and place {successes} markers on it (max 4)"
+        }
       },
-	  "Back": "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 during DIV rolls). You and Party Members in this range may roll an additional D6 DIV die during DIV rolls.",
-	  "Warning": "Start of your Activation: Instead of refreshing this card, discard 1 marker from it. Then, if there are no markers on this card, place it in your Pouch",
+      "Back": "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 during DIV rolls). You and Party Members in this range may roll an additional D6 DIV die during DIV rolls.",
+      "Warning": "Start of your Activation: Instead of refreshing this card, discard 1 marker from it. Then, if there are no markers on this card, place it in your Pouch",
       "Level": 1
     },
     "S12": {
       "Name": "Healing Burst",
-	  "Type": "Action",
-	  "Category": "Support",
-	  "Keywords": ["Spell"],
-	  "Target": "Self and PMs in R4",
-	  "Front": "Roll for DIV. Stabilize all targets. Heal ({div}+2) HP distributed in any way among targets. Then place this card in your Pouch.",
+      "Type": "Action",
+      "Category": "Support",
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self and PMs in R4",
+      "Front": "Roll for DIV. Stabilize all targets. Heal ({div}+2) HP distributed in any way among targets. Then place this card in your Pouch.",
       "Level": 1
     },
     "S13": {
       "Name": "Swerve",
-	  "Type": "Action",
-	  "Category": "Defensive",
-	  "Target": "Self",
-	  "Roll": {
-		  "ATT": ["AGI"],
-		  "DIV": true,
-		  "Difficulty": 6,
-		  "Modifiers": [ { "Dice": 1, "Triggers": ["Athletics", "Stealth"] } ],
-		  "Successes": {
-			  "3": "Move by {div}. Flip this card and place 3 markers on it",
-			  "1": "Move by {half div}. Flip this card and place 1 markers on it"
-		  }
-	  },
-	  "Back": "You gain {armor} against Ranged equal to the number of markers on this card",
-	  "BackMoon": 3,
+      "Type": "Action",
+      "Category": "Defensive",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+          "AGI"
+        ],
+        "DIV": true,
+        "Difficulty": 6,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Athletics",
+              "Stealth"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Move by {div}. Flip this card and place 3 markers on it",
+          "1": "Move by {half div}. Flip this card and place 1 markers on it"
+        }
+      },
+      "Back": "You gain {armor} against Ranged equal to the number of markers on this card",
+      "BackMoon": 3,
       "Level": 1
     },
     "S14": {
       "Name": "Sucker Punch",
-	  "Type": "Action",
-	  "Category": "Offensive",
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
-	  "Roll": {
-		  "ATT": ["INT"],
-		  "Modifiers": [
-		  { "Dice": 1, "Triggers": ["Sleight of Hand"] },
-		  { "Dice": 1, "Triggers": ["against Small"] }
-		  ],
-		  "Successes": {
-			  "3": "Deal ({successes}-2) {damage}. Place your Effect token on the Enemy", 
-			  "1": "Deal ({successes}-2) {damage} or place your Effect token on the Enemy"
-		  }
-	  },
-	  "BackSun": 2,
-	  "Back": "The Enemy with your Effect token has their {en} reduced by 2. When Enemy with your token is dealt {damage}, discard your Effect token from them.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
-	  "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
+      "Type": "Action",
+      "Category": "Offensive",
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
+      "Roll": {
+        "ATT": [
+          "INT"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Sleight of Hand"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Small"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal ({successes}-2) {damage}. Place your Effect token on the Enemy",
+          "1": "Deal ({successes}-2) {damage} or place your Effect token on the Enemy"
+        }
+      },
+      "BackSun": 2,
+      "Back": "The Enemy with your Effect token has their {en} reduced by 2. When Enemy with your token is dealt {damage}, discard your Effect token from them.",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Warning": "When you refresh this card, discard your Effect token from the Enemy.",
       "Level": 1
     },
     "S15": {
       "Name": "Feint",
-	  "Type": "Action",
-	  "Category": "Offensive",
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
-	  "Roll": {
-		  "ATT": ["AGI"],
-		  "Modifiers": [
-		  { "Dice": 1, "Triggers": ["Deception"] },
-		  { "Dice": 1, "Triggers": ["against Small"] }
-		  ],
-		  "Successes": {
-			  "3": "Deal {successes} {damage}. Place your Effect token on the Enemy", 
-			  "1": "Deal {successes} {damage} or place your Effect token on the Enemy"
-		  }
-	  },
-	  "BackMoon": 3,
-	  "BackSun": 3,
-	  "Back": "When you are attacked by an Enemy with your Effect token, gain 2 {armor}. After the attack, discard the Effect token and deal them AGI {damage} ignoring 5 {armor}",
+      "Type": "Action",
+      "Category": "Offensive",
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
+      "Roll": {
+        "ATT": [
+          "AGI"
+        ],
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Deception"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Small"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal {successes} {damage}. Place your Effect token on the Enemy",
+          "1": "Deal {successes} {damage} or place your Effect token on the Enemy"
+        }
+      },
+      "BackMoon": 3,
+      "BackSun": 3,
+      "Back": "When you are attacked by an Enemy with your Effect token, gain 2 {armor}. After the attack, discard the Effect token and deal them AGI {damage} ignoring 5 {armor}",
       "Level": 1
     },
     "S16": {
       "Name": "Backstab",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 1,
-	  "Target": "1 in R1",
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee and PM in R1 from the target",
+      "Moon": 1,
+      "Target": "1 in R1",
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee and PM in R1 from the target",
       "Roll": {
-		"Mode": "Sum",
+        "Mode": "Sum",
         "ATT": [
           "AGI",
           "INT"
         ],
-		"Difficulty": 6,
-		"Modifiers": [
-		  { "Dice": 1, "Triggers": ["Stealth", "Subterfuge"] },
-		  { "Dice": 1, "Triggers": ["against Large"] },
-		  { "Dice": -3, "Triggers": ["PM in R1"] }
-		  ],
-		  "Successes": {
-		  "1": "Deal {successes} {damage} ignoring 5 {armor}"
-		  }
+        "Difficulty": 6,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth",
+              "Subterfuge"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Large"
+            ]
+          },
+          {
+            "Dice": -3,
+            "Triggers": [
+              "PM in R1"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal {successes} {damage} ignoring 5 {armor}"
+        }
       },
       "Level": 1
     },
@@ -7344,7 +7580,7 @@
         }
       },
       "Back": "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch.",
-	  "Warning": "This card cannot be refreshed",
+      "Warning": "This card cannot be refreshed",
       "Level": 1
     },
     "S19": {
@@ -7481,20 +7717,20 @@
       "Name": "Sense Danger",
       "Type": "Reaction",
       "Category": "Support",
-	  "Moon": 2,
+      "Moon": 2,
       "Condition": "Before drawing from the Initiative bag",
       "Target": "Self",
       "Roll": {
         "ATT": [
           "INT"
         ],
-		"Difficulty": 8,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": 1,
             "Triggers": [
               "Survival",
-			  "Vigilance"
+              "Vigilance"
             ]
           }
         ],
@@ -7528,7 +7764,7 @@
             ]
           }
         ],
-		"Successes": {
+        "Successes": {
           "2": "Flip this card",
           "0": "Do not flip this card"
         }
@@ -7537,15 +7773,15 @@
     },
     "S27": {
       "Name": "Nature's Revenge",
-	  "Category": "Support",
-	  "Type": "Reaction",	
-	  "Moon": 1,
+      "Category": "Support",
+      "Type": "Reaction",
+      "Moon": 1,
       "Condition": "After Enemy Attack",
       "Target": "Self",
       "Roll": {
         "ATT": [
           "STR",
-		  "INT"
+          "INT"
         ],
         "Modifiers": [
           {
@@ -7563,9 +7799,9 @@
     },
     "S28": {
       "Name": "Entangle",
-	  "Category": "Offensive",
-	  "Type": "Action",	
-	  "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Moon": 1,
       "Keywords": [
         "Spell"
       ],
@@ -7574,8 +7810,8 @@
         "ATT": [
           "INT"
         ],
-		"DIV": true,
-		"Difficulty": 8,
+        "DIV": true,
+        "Difficulty": 8,
         "Modifiers": [
           {
             "Dice": -1,
@@ -7589,135 +7825,208 @@
           "1": "You gain 1 {terror}. Resolve 2"
         }
       },
-	  "Back": "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3.",
-	  "Warning": "This card cannot be refreshed. When you discard the last Effect token, place this card in your Pouch."
+      "Back": "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3.",
+      "Warning": "This card cannot be refreshed. When you discard the last Effect token, place this card in your Pouch."
     },
     "S29": {
       "Name": "Academic Magic",
-	  "Moon": 1,
-	  "Category": "Offensive",
-	  "Type": "Action",
-	  "Keywords": ["Attack", "Ranged", "Spell"],
-	  "Target": "1 in R5",
-	  "Roll": {
+      "Moon": 1,
+      "Category": "Offensive",
+      "Type": "Action",
+      "Keywords": [
+        "Attack",
+        "Ranged",
+        "Spell"
+      ],
+      "Target": "1 in R5",
+      "Roll": {
         "ATT": [
           "INT"
         ],
-		"DIV": true,
-		"Modifiers": [ {"Dice": 2, "Triggers": ["against Automaton or Vestigial"]}, {"Dice": 1, "Triggers": ["Arcana", "Artifact"]} ],
-		"Successes": {
-			"1": "Deal ({successes}+{half div}) Divinum {damage}. Then you may gain 2 {terror} to deal {half div} Divinum {damage} to the same target."
-		}
-	  },
+        "DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "against Automaton or Vestigial"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Arcana",
+              "Artifact"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Deal ({successes}+{half div}) Divinum {damage}. Then you may gain 2 {terror} to deal {half div} Divinum {damage} to the same target."
+        }
+      },
       "Level": 1
     },
     "S30": {
       "Name": "Cognitive Enhancement",
       "Type": "Action",
-	  "Keywords": ["Spell"],
+      "Keywords": [
+        "Spell"
+      ],
       "Category": "Support",
-	  "Target": "Self or PM in R4",
-	  "Roll": {
+      "Target": "Self or PM in R4",
+      "Roll": {
         "ATT": [
           "CHA"
         ],
-		"Difficulty": 8,
-		"Modifiers": [ {"Dice": 1, "Triggers": ["Charm", "Leadership"]} ],
-		"Successes": {
-			"1": "Target gains {successes} ATT Boons (max 3 Boons) of their highest ATT."
-		}
-	  },
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Charm",
+              "Leadership"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Target gains {successes} ATT Boons (max 3 Boons) of their highest ATT."
+        }
+      },
       "Level": 1
     },
     "S31": {
       "Name": "Rejuvenation",
-	  "Moon": 1,
-	  "Sun": 1,
+      "Moon": 1,
+      "Sun": 1,
       "Type": "Action",
       "Category": "Support",
-	  "Target": "Self or PM in R2",
-	  "Roll": {
+      "Target": "Self or PM in R2",
+      "Roll": {
         "ATT": [
           "INT"
         ],
-		"Difficulty": 10,
-		"Modifiers": [ {"Dice": 1, "Triggers": ["Lore", "Medicine"]} ],
-		"Successes": {
-			"3": "Discard 1 Injury or Trauma Condition. Resolve 1",
-			"1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Pouch."
-		}
-	  },
+        "Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Lore",
+              "Medicine"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Discard 1 Injury or Trauma Condition. Resolve 1",
+          "1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Pouch."
+        }
+      },
       "Level": 1
     },
     "S32": {
       "Name": "Stratagem",
-	  "Moon": 1,
+      "Moon": 1,
       "Type": "Action",
       "Category": "Support",
-	  "Target": "Self",
-	  "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
-	  "Back": "???",
+      "Target": "Self",
+      "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
+      "Back": "???",
       "Level": 1
     },
     "S33": {
       "Name": "Shadow Jump",
       "Type": "Action",
       "Category": "Defensive",
-	  "Moon": 2,
-	  "Target": "Self",
+      "Moon": 2,
+      "Target": "Self",
       "Roll": {
         "ATT": [
           "AGI"
         ],
-		"Difficulty": 8,
-		"Modifiers": [ {"Dice": 1, "Triggers": ["Darkness"]}, {"Dice": 1, "Triggers": ["Pathfinding"]} ],
-		"Successes": {
-			"1": "Move by {successes}. Then if you are adjacent to an impassable border, flip this card. Otherwise resolve 0",
-			"0": "Do not flip this card"
-		}
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Darkness"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Pathfinding"
+            ]
+          }
+        ],
+        "Successes": {
+          "1": "Move by {successes}. Then if you are adjacent to an impassable border, flip this card. Otherwise resolve 0",
+          "0": "Do not flip this card"
+        }
       },
-	  "Back": "Gain 2 {armor}. Roll 2 additional dice during your Offensive Actions.",
-	  "Warning": "Start of your Activation: Do not refresh this card. When you move or are dealt {damage}, refresh this card.",
-	  "BackMoon": 1,
+      "Back": "Gain 2 {armor}. Roll 2 additional dice during your Offensive Actions.",
+      "Warning": "Start of your Activation: Do not refresh this card. When you move or are dealt {damage}, refresh this card.",
+      "BackMoon": 1,
       "Level": 1
     },
     "S34": {
       "Name": "Veilkin",
       "Type": "Reaction",
       "Category": "Support",
-	  "Moon": 1,
-	  "Condition": "After revealing Enemy Activation card",
-	  "Target": "PM in any range",
+      "Moon": 1,
+      "Condition": "After revealing Enemy Activation card",
+      "Target": "PM in any range",
       "Roll": {
         "ATT": [
           "CHA"
         ],
-		"Difficulty": 8,
-		"Modifiers": [ {"Dice": 1, "Triggers": ["Deception", "Performer"]} ],
-		"Successes": {
-			"3": "You gain 1 {fate}. Then enemy targets only This PM during this Activation. Place this card in your Pouch",
-			"0": "You gain 1 {terror}. Do not flip this card"
-		}
-	  },
+        "Difficulty": 8,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Deception",
+              "Performer"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "You gain 1 {fate}. Then enemy targets only This PM during this Activation. Place this card in your Pouch",
+          "0": "You gain 1 {terror}. Do not flip this card"
+        }
+      },
       "Level": 1
     },
     "S35": {
       "Name": "Shadow Blade",
       "Type": "Action",
       "Category": "Offensive",
-	  "Moon": 2,
-	  "Keywords": ["Attack"],
-	  "Condition": "Requires Melee",
-	  "Target": "1 in R1",
+      "Moon": 2,
+      "Keywords": [
+        "Attack"
+      ],
+      "Condition": "Requires Melee",
+      "Target": "1 in R1",
       "Roll": {
         "ATT": [
           "AGI"
         ],
-		"Modifiers": [ {"Dice": 1, "Triggers": ["Stealth", "Darkness"]}, {"Dice": 1, "Triggers": ["against Small"]} ],
-		"Successes": {
-			"3": "Deal ({successes}+3) {damage}. Reduce this {damage} by 1 for each space connected to the target's space.",
-			"1": "Deal ({successes}+2) {damage}. Reduce this {damage} by 1 for each space connected to the target's space."
-		}
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Stealth",
+              "Darkness"
+            ]
+          },
+          {
+            "Dice": 1,
+            "Triggers": [
+              "against Small"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Deal ({successes}+3) {damage}. Reduce this {damage} by 1 for each space connected to the target's space.",
+          "1": "Deal ({successes}+2) {damage}. Reduce this {damage} by 1 for each space connected to the target's space."
+        }
       },
       "Level": 1
     },
@@ -7725,8 +8034,8 @@
       "Name": "Skilled Imitator",
       "Type": "Action",
       "Category": "Support",
-	  "Moon": 3,
-	  "Sun": 3,
+      "Moon": 3,
+      "Sun": 3,
       "Front": "Copy PMs Action card. Use the Skilled Imitator Action card as if it was an exact copy of that chosen Action card (you must fulfil its requirements). After resolving it, place the Skilled Imitator card in your Pouch.",
       "Level": 1
     }
