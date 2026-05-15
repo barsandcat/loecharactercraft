@@ -1,5 +1,4 @@
 PP09 Manic Laugh, Back
-
 P62 Ticking Vestigial, Back
 S32 Stratagem, Back
 PP05 Cure And Poison, Back
@@ -8,3 +7,5 @@ S03 Coordinated Attack, Back
 P31 Sneak, Back
 P32 Focus, Back
 P36 Become Predator, Back
+P10 Summon Divling, Back
+P13 Outburst of Divinum, Back

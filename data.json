@@ -4220,7 +4220,39 @@
       "Name": "Summon Divling",
       "Type": "Action",
       "Category": "Support",
-      "Front": "Roll STR or INT, DIV. Divling has onwers STR",
+      "Sun": 1,
+      "Keywords": [
+        "Spell"
+      ],
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"STR",
+		"INT"
+        ],
+		"DIV": true,
+		"Difficulty": 9,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Divinum"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Resolve effect on the back",
+          "1": "If yolled for STR lose 2HP. If you rolled for INT gain 1 {terror}. Resolve effect on the back",
+		  "0": "Do not flip this card"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P11": {
@@ -4245,14 +4277,23 @@
               "Lore"
             ]
           }
-        ]
+        ],
+		"Successes": {
+			"2": "Place 2 of your Effect tokens in your space",
+			"1": "Place your Effect token in your space"
+		}
       },
+	  "Back": "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
+	  "BackMoon": 2,
       "Level": 1
     },
     "P12": {
       "Name": "Ice Bolts",
       "Type": "Action",
       "Category": "Offensive",
+	  "Moon": 1,
       "Target": "1 in R2+",
       "Keywords": [
         "Attack",
@@ -4279,23 +4320,87 @@
               "Armor"
             ]
           }
-        ]
+        ],
+		"Successes": {
+			"1": "Deal {half div} Ice {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} Ice {damage} to {successes} other Enemies in any range."
+		}
       },
       "Level": 1
     },
     "P13": {
       "Name": "Outburst of Divinum",
+	  "Category": "Defensive",
+	  "Type": "Reaction",	
+	  "Moon": 2,
+      "Keywords": [
+        "Spell"
+      ],
+      "Condition": "Against Attack",
+      "Target": "Self",
+      "Roll": {
+        "ATT": [
+		"INT"
+        ],
+		"DIV": true,
+        "Modifiers": [
+          {
+            "Dice": 1,
+            "Triggers": [
+              "Divinum"
+            ]
+          },
+          {
+            "Dice": -1,
+            "Triggers": [
+              "Armor"
+            ]
+          }
+        ],
+        "Successes": {
+          "2": "Prevent{successes} {damage}. Push all in R1 by {half div}",
+          "0": "Do not flip this card"
+        }
+      },
+	  "Back": "???",
       "Level": 1
     },
     "P14": {
       "Name": "Evoke Nightmares",
+	  "Category": "Support",
+	  "Type": "Action",	
+      "Sun": 2,
+      "Target": "Elite or Boss in R5",
+      "Roll": {
+        "ATT": [
+		"STR"
+        ],
+		"Difficulty": 10,
+        "Modifiers": [
+          {
+            "Dice": 2,
+            "Triggers": [
+              "Alchemy"
+            ]
+          }
+        ],
+        "Successes": {
+          "3": "Place your Effect token on the Enemy",
+		  "1": "You gain 2 {terror}. Resolve 3",
+          "0": "You gain 1 {terror}. Do not flip this card"
+        }
+      },
+	  "Back": "When the Enemy with your Effect token ends their Activation: Roll for DIV. The Enemy loses {half div} HP",
+	  "Note": "Start of your Activation: Your may choose not to refresh this card",
+	  "Warning": "When you refresh this card, discard your Effect token from the Enemy",
       "Level": 1
     },
     "P15": {
       "Name": "Fireball",
       "Type": "Action",
       "Category": "Offensive",
-      "Front": "At range AGI+INT, damage all in STR radius, roll DIV",
+	  "Moon": 2,
+	  "Keywords": ["Attack", "Ranged", "Spell"],
+      "Front": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} Fire {damage} (if you have Armor, {hald div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch",
       "Level": 1
     },
     "P16": {

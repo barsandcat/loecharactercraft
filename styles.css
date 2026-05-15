@@ -518,13 +518,20 @@ h1 {
   line-height: 1.2;
 }
 
-.action-card-desc {
+.action-card-roll,
+.action-card-desc,
+.action-card-back,
+.action-card-outcome {
   font-family: 'EB Garamond', serif;
-  font-size: 0.88rem;
-  color: var(--ink);
-  font-weight: 600;
-  text-align: center;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
   line-height: 1.2;
+}
+
+.action-card-desc {
+  color: var(--ink);
 }
 
 .action-card-back {
@@ -535,10 +542,6 @@ h1 {
   border: 1px solid rgba(201, 168, 64, 0.36);
   padding: 6px 6px 6px 12px;
   margin-top: 2px;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  line-height: 1.2;
 }
 
 .action-card-back::before {
@@ -565,12 +568,7 @@ h1 {
 }
 
 .action-card-roll {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.88rem;
   color: var(--ink);
-  font-weight: 600;
-  text-align: left;
-  line-height: 1.2;
 }
 
 .action-card-difficulty {
@@ -605,11 +603,7 @@ h1 {
 }
 
 .action-card-outcome {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
   color: var(--ink);
-  text-align: left;
-  line-height: 1.2;
   margin-top: 2px;
   padding-left: 10px;
 }
