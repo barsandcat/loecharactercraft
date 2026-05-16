@@ -4306,7 +4306,9 @@
           "1": "Prevent 5 {damage} and 2 {terror}"
         }
       },
-      "Back": "???",
+      "Back": "Each time you are attacked gain 1 ATT Boon",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you discard 2 Boons",
+	  "BackSun": 3,
       "Level": 1
     },
     "P08": {
@@ -4334,7 +4336,9 @@
           "1": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "When a Party Memeber in R4 begins their Activation, roll DIV: 8+: They gain 1 ATT Boon and heal 2 HP. 4+: They gain 1 ATT Boon or heal 1 HP",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "BackMoon": 2,
       "Level": 1
     },
     "P09": {
@@ -4510,7 +4514,7 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Warning": "Star of your Activation: Do not refresh this card, unless you pay 1 {fate}",
       "Level": 1
     },
     "P14": {
@@ -4984,7 +4988,8 @@
           "1": "Move by {successes}"
         }
       },
-      "Back": "???",
+      "Back": "During Melee Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice",
+	  "Warning": "When you move immediately refresh this card",
       "Level": 1
     },
     "P32": {
@@ -5010,7 +5015,10 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "For each 2 markers on this card roll 1 additional die during your Offensive Actions. When you move or are attacked, discard 1 marker from this card.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card",
+	  "Warning": "When you refresh this card, discard all markers from it",
+	  "BackMoon": 3,
       "Level": 1
     },
     "P33": {
@@ -5070,7 +5078,10 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "Treat your STR and AGI as the sum of them both. Treat your INT and CHA as sum of them both.",
+	  "Warining": "Instead of refreshing this card, place it in your Pouch",
+	  "BackSun": 4,
+	  "BackMoon": 4,
       "Level": 1
     },
     "P37": {
@@ -5690,6 +5701,11 @@
           "3": "Place 1 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0"
         }
       },
+	  "Back": "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1.",
+	  "Note": "Start of your Activation: You may choose not to refresh this card.",
+	  "Warning": "When you refresh this card, discard Ticking Vestigial",
+	  "BackMoon": 2,
+	  "BackSun": 2,
       "Level": 1
     },
     "P63": {
@@ -6162,7 +6178,8 @@
           "1": "Draw {successes} Activation tokens from the bag. Resolve the effect on the back."
         }
       },
-      "Back": "???"
+      "Back": "For each drawn black Activation token, deal {half div} Divinum {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the dranw tokens to the bag",
+	  "BackMoon": 2
     },
     "PP06": {
       "Name": "Summon Swarm",
@@ -6254,7 +6271,10 @@
           "1": "Push target Minions by {successes} and place your Effect token on each of them"
         }
       },
-      "Back": "???",
+      "Back": "During your Activation: Enemies with your Effect tokens have their {en} reduced by half of you CHA (rounded down).",
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you gain 1 {terror}. When you refresh this card discard all your Effect tokens from the Enemies",
+	  "BackSun": 1,
+	  "BackMoon": 1,
       "Level": 1
     },
     "PP10": {
@@ -6421,7 +6441,7 @@
         }
       },
       "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by Minions (and Elites and Bosses if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
-      "Warning": "Start of your Activation: Do not refresh this cad, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
+      "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
       "Level": 1
     },
     "PP15": {
@@ -7128,7 +7148,9 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "You may treat yourself as PM for this effect. 3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die. 1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die.",
+	  "BackMoon": 1,
+	  "BackSun": 1,
       "Level": 1
     },
     "S04": {
@@ -7239,7 +7261,8 @@
           "0": "You gain 1 {terror}, do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "Deal {half div} Thunder {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once.",
+	  "BackMoon": 3,
       "Level": 1
     },
     "S08": {
@@ -7933,6 +7956,7 @@
       "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
       "Back": "For each marker on this card, the {en} of each Enemy is lowered by 1",
 	  "Warning": "Instead of refreshing this card, discard 1 marker (2 markers if {characters} is 4 or more) from this card. Then, if there are no markers on this card, place it in your Pouch",
+	  "BackMoon": 3,
       "Level": 1
     },
     "S33": {
