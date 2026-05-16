@@ -134,7 +134,29 @@
         "Human"
       ],
       "Skills": [
-        "Any skill"
+      ],
+      "FreeSkills": [
+        "Alchemy",
+        "Animal Handling",
+        "Arcana",
+        "Artistry",
+        "Athletics",
+        "Charm",
+        "Deception",
+        "Diplomacy",
+        "Engineering",
+        "Intimidation",
+        "Investigation",
+        "Leadership",
+        "Lore",
+        "Medicine",
+        "Pathfinding",
+        "Performer",
+        "Resilience",
+        "Sleight of Hand",
+        "Stealth",
+        "Survival",
+        "Vigilance"
       ],
       "Attributes": [
         {

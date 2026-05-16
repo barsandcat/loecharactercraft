@@ -206,6 +206,10 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.choice-grid.three-one {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+}
+
 /* Choice buttons */
 .choice-button {
   display: grid;
@@ -995,7 +999,8 @@ h1 {
     padding-right: 10px;
   }
 
-  .choice-grid.two-up { grid-template-columns: 1fr; }
+  .choice-grid.two-up,
+  .choice-grid.three-one { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .list-item {

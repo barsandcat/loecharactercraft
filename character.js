@@ -10,6 +10,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     trees: new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree])),
     selectedRace: null,
     selectedAttributeSet: null,
+    selectedFreeSkill: null,
     selectedOrigin: null,
     selectedProf: null,
     selectedPath: null,
@@ -40,6 +41,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedRace = race;
     const attrs = race.Attributes;
     state.selectedAttributeSet = attrs.length ? pick(attrs) : null;
+    const freeSkills = getRaceFreeSkills(race);
+    state.selectedFreeSkill = freeSkills.length ? pick(freeSkills) : null;
 
     state.selectedOrigin = pick(state.data.Origins);
 
@@ -64,6 +67,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
       if (state.selectedRace && compact.ai !== null) {
         state.selectedAttributeSet = state.selectedRace.Attributes[compact.ai] || null;
+      }
+      if (state.selectedRace && compact.fi != null) {
+        state.selectedFreeSkill = getRaceFreeSkills(state.selectedRace)[compact.fi] || null;
       }
     }
 
@@ -114,6 +120,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const attrIndex = state.selectedRace && state.selectedAttributeSet
       ? state.selectedRace.Attributes.indexOf(state.selectedAttributeSet)
       : null;
+    const freeSkillIndex = state.selectedRace && state.selectedFreeSkill
+      ? getRaceFreeSkills(state.selectedRace).indexOf(state.selectedFreeSkill)
+      : null;
 
     const lu = state.levelUps.map((slot) =>
       slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
@@ -127,6 +136,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const compact = {
       r: state.selectedRace ? state.selectedRace.Name : null,
       ai: attrIndex !== null && attrIndex !== -1 ? attrIndex : null,
+      fi: freeSkillIndex !== null && freeSkillIndex !== -1 ? freeSkillIndex : null,
       o: state.selectedOrigin ? state.selectedOrigin.Name : null,
       p: state.selectedProf ? state.selectedProf.Name : null,
       pa: state.selectedPath ? state.selectedPath.Name : null,
@@ -155,6 +165,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function resetSelectionState() {
     state.selectedRace = null;
     state.selectedAttributeSet = null;
+    state.selectedFreeSkill = null;
     state.selectedOrigin = null;
     state.selectedProf = null;
     state.selectedPath = null;
@@ -163,6 +174,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function createEmptyLevelUps() {
     return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
+  }
+
+  function getRaceFreeSkills(race = state.selectedRace) {
+    return Array.isArray(race?.FreeSkills) ? race.FreeSkills : [];
   }
 
   function getFilledLevelCount() {
@@ -177,6 +192,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     if (raceChanged) {
       state.selectedAttributeSet = null;
+      state.selectedFreeSkill = null;
       const attrOptions = race.Attributes;
       if (attrOptions.length === 1) {
         state.selectedAttributeSet = attrOptions[0];
@@ -188,6 +204,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function selectAttributeSet(attr) {
     state.selectedAttributeSet = attr;
+    commitSelection();
+  }
+
+  function selectFreeSkill(skill) {
+    state.selectedFreeSkill = skill;
     commitSelection();
   }
 
@@ -544,6 +565,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (selection.selectedRace) {
       applyRace(stats, selection.selectedRace, selection.selectedAttributeSet);
     }
+    if (selection.selectedFreeSkill) {
+      incrementCountMap(stats.skillCounts, [selection.selectedFreeSkill]);
+    }
 
     if (selection.selectedOrigin) {
       incrementCountMap(stats.keywordCounts, selection.selectedOrigin.Keywords || []);
@@ -584,6 +608,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return {
       selectedRace: overrides.selectedRace !== undefined ? overrides.selectedRace : state.selectedRace,
       selectedAttributeSet: overrides.selectedAttributeSet !== undefined ? overrides.selectedAttributeSet : state.selectedAttributeSet,
+      selectedFreeSkill: overrides.selectedFreeSkill !== undefined ? overrides.selectedFreeSkill : state.selectedFreeSkill,
       selectedOrigin: overrides.selectedOrigin !== undefined ? overrides.selectedOrigin : state.selectedOrigin,
       selectedProf: overrides.selectedProf !== undefined ? overrides.selectedProf : state.selectedProf,
       selectedPath: overrides.selectedPath !== undefined ? overrides.selectedPath : state.selectedPath,
@@ -700,6 +725,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     container.replaceChildren();
 
     const attrOptions = state.selectedRace ? state.selectedRace.Attributes : [];
+    const freeSkillOptions = getRaceFreeSkills();
     const pathOptions = state.selectedProf ? state.selectedProf.Paths : [];
 
     container.appendChild(singleChoiceGrid({
@@ -718,22 +744,48 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       }),
     }));
 
-    container.appendChild(singleChoiceGrid({
-      label: "Attributes",
-      main: state.selectedAttributeSet ? formatAttributeSummary(state.selectedAttributeSet) : "Choose attributes",
-      detail: !state.selectedRace
-        ? "Pick a race first."
-        : attrOptions.length + " available spread" + (attrOptions.length === 1 ? "" : "s"),
-      complete: Boolean(state.selectedAttributeSet),
-      empty: !state.selectedAttributeSet,
-      disabled: !state.selectedRace || attrOptions.length === 0,
-      onClick: () => openSelector({
-        title: "Choose Attributes",
-        options: attrOptions,
-        getOptionContent: describeAttributeOption,
-        onSelect: selectAttributeSet,
-        isSelected: (option) => state.selectedAttributeSet === option,
-      }),
+    container.appendChild(dualChoiceGrid({
+      className: "three-one",
+      firstButton: {
+        label: "Attributes",
+        main: state.selectedAttributeSet ? formatAttributeSummary(state.selectedAttributeSet) : "Choose attributes",
+        detail: !state.selectedRace
+          ? "Pick a race first."
+          : attrOptions.length + " available spread" + (attrOptions.length === 1 ? "" : "s"),
+        accent: Boolean(state.selectedAttributeSet),
+        empty: !state.selectedAttributeSet,
+        disabled: !state.selectedRace || attrOptions.length === 0,
+        onClick: () => openSelector({
+          title: "Choose Attributes",
+          options: attrOptions,
+          getOptionContent: describeAttributeOption,
+          onSelect: selectAttributeSet,
+          isSelected: (option) => state.selectedAttributeSet === option,
+        }),
+      },
+      secondButton: {
+        label: "Skill",
+        main: state.selectedFreeSkill
+          ? state.selectedFreeSkill
+          : freeSkillOptions.length
+            ? "Choose skill"
+            : "Unavaliable",
+        detail: !state.selectedRace
+          ? "Pick a race first."
+          : freeSkillOptions.length
+            ? freeSkillOptions.length + " option" + (freeSkillOptions.length === 1 ? "" : "s")
+            : "This race has no free skill choice.",
+        accent: Boolean(state.selectedFreeSkill),
+        empty: freeSkillOptions.length > 0 && !state.selectedFreeSkill,
+        disabled: freeSkillOptions.length === 0,
+        onClick: () => openSelector({
+          title: "Choose Skill",
+          options: freeSkillOptions,
+          getOptionContent: describeFreeSkillOption,
+          onSelect: selectFreeSkill,
+          isSelected: (option) => state.selectedFreeSkill === option,
+        }),
+      },
     }));
 
     container.appendChild(singleChoiceGrid({
@@ -1252,7 +1304,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function dualChoiceGrid(config) {
     const grid = document.createElement("div");
-    grid.className = "choice-grid two-up";
+    grid.className = "choice-grid " + (config.className || "two-up");
     grid.appendChild(createChoiceButton(config.firstButton));
     grid.appendChild(createChoiceButton(config.secondButton));
     return grid;
@@ -1678,6 +1730,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return {
       title: formatAttributeSummary(attributeSet),
       detail: "Race attribute spread",
+    };
+  }
+
+  function describeFreeSkillOption(skill) {
+    return {
+      title: skill,
+      detail: "Free racial skill",
     };
   }
 
