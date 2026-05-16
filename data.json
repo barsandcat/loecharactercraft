@@ -4068,6 +4068,7 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
+	  "Level": 1,
       "Keywords": [
         "Attack"
       ],
@@ -4088,6 +4089,7 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
+	  "Level": 2,
       "Moon": 1,
       "Keywords": [
         "Attack"
@@ -6281,6 +6283,7 @@
       "Name": "Unleash Divinum",
       "Type": "Action",
       "Category": "Offensive",
+	  "Target": "All in R2",
       "Moon": 1,
       "Keywords": [
         "Attack",
