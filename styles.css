@@ -933,8 +933,7 @@ h1 {
 @media (max-width: 1180px) {
   .board { grid-template-columns: 1fr; }
   .panel { min-width: 0; }
-  .choice-grid.two-up,
-  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid.two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 900px) {
@@ -1001,7 +1000,6 @@ h1 {
 
   .choice-grid.two-up { grid-template-columns: 1fr; }
   .choice-grid.three-one { grid-template-columns: minmax(0, 2fr) minmax(110px, 1fr); }
-  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .list-item {
     flex-direction: column;
@@ -1049,8 +1047,5 @@ h1 {
 }
 
 @media (max-width: 520px) {
-  .hero-actions,
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
+  .hero-actions { grid-template-columns: 1fr; }
 }
