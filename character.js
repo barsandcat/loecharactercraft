@@ -774,7 +774,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           ? "Pick a race first."
           : freeSkillOptions.length
             ? freeSkillOptions.length + " option" + (freeSkillOptions.length === 1 ? "" : "s")
-            : "This race has no free skill choice.",
+            : "",
         accent: Boolean(state.selectedFreeSkill),
         empty: freeSkillOptions.length > 0 && !state.selectedFreeSkill,
         disabled: freeSkillOptions.length === 0,
