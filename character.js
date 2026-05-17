@@ -1526,7 +1526,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function createActionCardMention(cardId, card, previewStats = null) {
     const span = document.createElement("span");
     span.className = "action-card-mention";
-    span.textContent = formatActionCardLabel(cardId, card);
+    span.textContent = getActionCardDisplayName(card);
 
     const tooltipEl = document.createElement("div");
     tooltipEl.className = "action-card-mention-tooltip";
@@ -1817,13 +1817,18 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       })
     );
     return {
-      title: summarizeEntry(option.entry, { excludeActionCards: true }),
+      title: summarizeEntry(option.entry),
       detail: "",
       actionCards,
     };
   }
 
-  function summarizeEntry(entry, { excludeActionCards = false } = {}) {
+  function summarizeEntry(
+    entry,
+    {
+      excludeActionCards = false,
+    } = {}
+  ) {
     const parts = [];
 
     (entry.Attributes || []).forEach((attributeSet) => {
@@ -1855,13 +1860,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     (entry.Items || []).forEach((itemName) => {
       const itemObj = state.data.Items[itemName];
       if (itemObj) {
-        parts.push(formatItemDisplayName(itemObj));
+        parts.push(getItemDisplayName(itemObj));
       }
     });
 
     if (!excludeActionCards) {
       (entry["Action cards"] || []).forEach((action) => {
-        parts.push(formatActionCardLabel(action));
+        parts.push(getActionCardDisplayName(state.data["Action Cards"][action]));
       });
     }
 
@@ -1906,18 +1911,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return itemText;
   }
 
-  function formatActionCardLabel(cardId, card) {
-    if (!card) {
-      card = state.data["Action Cards"][cardId];
-    }
-    if (!card) {
-      return "";
-    }
-    const displayName = card.DisplayName || card.Name;
-    const parts = [...(card.Keywords || [])];
-    if (card.Condition) parts.push(card.Condition);
-    parts.push(card.Type);
-    return displayName + (parts.length ? " (" + parts.join(", ") + ")" : "");
+  function getActionCardDisplayName(card) {
+    return card ? card.DisplayName || card.Name : "";
   }
 
   return {
