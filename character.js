@@ -2036,7 +2036,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       })
     );
     return {
-      renderTitle: (parent) => appendDisplayParts(parent, buildEntryParts(option.entry)),
+      renderTitle: (parent) => appendDisplayParts(parent, buildEntryParts(option.entry, { excludeActionCards: true })),
       actionCards,
     };
   }
