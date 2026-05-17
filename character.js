@@ -1936,7 +1936,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function describeFreeSkillOption(skill) {
     return {
       title: skill,
-      detail: "Free racial skill",
     };
   }
 
