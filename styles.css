@@ -528,7 +528,7 @@ h1 {
 .action-card-meta {
   font-family: 'EB Garamond', serif;
   font-size: 0.86rem;
-  color: var(--muted);
+  color: var(--ink);
   text-align: center;
   line-height: 1.2;
 }
