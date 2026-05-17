@@ -1004,15 +1004,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
         itemsByType
           .get(type)
-          .sort((a, b) => a.DisplayName.localeCompare(b.DisplayName))
+          .sort((a, b) => getItemDisplayName(a).localeCompare(getItemDisplayName(b)))
           .forEach((item) => {
             const itemLi = document.createElement("li");
             itemLi.className = "list-item";
 
-            const nameDiv = document.createElement("div");
-            nameDiv.className = "item-name";
-            nameDiv.textContent = formatItemDisplayName(item);
-            itemLi.appendChild(nameDiv);
+            itemLi.appendChild(buildItemDetailsElement(item));
 
             const effectDiv = buildFoldedEffectText(item.Effect || "None", "item-effect");
             itemLi.appendChild(effectDiv);
@@ -1671,6 +1668,33 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return rollLineEl;
   }
 
+  function buildItemDetailsElement(item) {
+    const detailsEl = document.createElement("div");
+    detailsEl.className = "item-details";
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "item-name action-card-name";
+    appendIconTextContent(nameEl, getItemDisplayName(item));
+    detailsEl.appendChild(nameEl);
+
+    if (item.Passive) {
+      const passiveEl = document.createElement("div");
+      passiveEl.className = "item-passive";
+      appendIconTextContent(passiveEl, item.Passive);
+      detailsEl.appendChild(passiveEl);
+    }
+
+    const keywords = item.Keywords || [];
+    if (keywords.length) {
+      const keywordsEl = document.createElement("div");
+      keywordsEl.className = "item-keywords action-card-meta";
+      appendIconTextContent(keywordsEl, keywords.join(", "));
+      detailsEl.appendChild(keywordsEl);
+    }
+
+    return detailsEl;
+  }
+
   function buildFoldedEffectText(text, className = "") {
     const effectEl = document.createElement("div");
     effectEl.className = "folded-effect-text" + (className ? " " + className : "");
@@ -1862,8 +1886,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       .join(", ");
   }
 
+  function getItemDisplayName(item) {
+    return item.DisplayName || "";
+  }
+
   function formatItemDisplayName(item) {
-    let itemText = item.DisplayName || "";
+    let itemText = getItemDisplayName(item);
     const details = [];
     if (item.Passive) {
       details.push(item.Passive);

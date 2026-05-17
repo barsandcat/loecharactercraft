@@ -391,9 +391,28 @@ h1 {
   color: var(--ink);
 }
 
-.item-name {
+.item-details {
   flex: 1;
   min-width: 0;
+  display: grid;
+  gap: 3px;
+  align-content: center;
+}
+
+.item-name,
+.item-keywords {
+  overflow-wrap: anywhere;
+}
+
+.item-passive {
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(70, 48, 12, 0.12);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.84rem;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 

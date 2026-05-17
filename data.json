@@ -1266,7 +1266,8 @@
       "Keywords": [
         "Armor"
       ],
-      "Passive": "+1 armor"
+      "Passive": "1 {armor}",
+	  "Effect": "Passive: Gain 1 {armor}"
     },
     "Puffshroom Bomb": {
       "Type": "Small",
@@ -1446,7 +1447,7 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "+1 fate in R1"
+      "Effect": "+1 {fate} in R1"
     },
     "Calling Reed": {
       "Type": "Small",
