@@ -738,8 +738,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       label: "Race",
       main: state.selectedRace ? state.selectedRace.Name : "Choose race",
       detail: state.selectedRace
-        ? raceDetail(state.selectedRace)
+        ? ""
         : state.data.Races.length + " available options",
+      renderDetail: state.selectedRace
+        ? (parent) => appendDisplayParts(parent, buildRaceDetailParts(state.selectedRace))
+        : null,
       complete: Boolean(state.selectedRace),
       onClick: () => openSelector({
         title: "Choose Race",
@@ -798,8 +801,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       label: "Origin",
       main: state.selectedOrigin ? state.selectedOrigin.Name : "Choose origin",
       detail: state.selectedOrigin
-        ? summarizeEntry(state.selectedOrigin)
+        ? ""
         : state.data.Origins.length + " available options",
+      renderDetail: state.selectedOrigin
+        ? (parent) => appendDisplayParts(parent, buildEntryParts(state.selectedOrigin))
+        : null,
       complete: Boolean(state.selectedOrigin),
       onClick: () => openSelector({
         title: "Choose Origin",
@@ -815,8 +821,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       label: "Profession",
       main: state.selectedProf ? state.selectedProf.Name : "Choose profession",
       detail: state.selectedProf
-        ? summarizeEntry(state.selectedProf)
+        ? ""
         : state.data.Professions.length + " available options",
+      renderDetail: state.selectedProf
+        ? (parent) => appendDisplayParts(parent, buildEntryParts(state.selectedProf))
+        : null,
       complete: Boolean(state.selectedProf),
       onClick: () => openSelector({
         title: "Choose Profession",
@@ -833,8 +842,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       detail: !state.selectedProf
         ? "Pick a profession first."
         : state.selectedPath
-          ? summarizeEntry(state.selectedPath)
+          ? ""
           : pathOptions.length + " available options",
+      renderDetail: state.selectedPath
+        ? (parent) => appendDisplayParts(parent, buildEntryParts(state.selectedPath))
+        : null,
       complete: Boolean(state.selectedPath),
       empty: !state.selectedPath,
       disabled: !state.selectedProf || pathOptions.length === 0,
@@ -879,9 +891,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         },
         secondButton: {
           label: "Reward",
-          main: slotMeta.selectedVersion
-            ? summarizeEntry(slotMeta.selectedVersion.entry)
-            : "Choose reward",
+          main: slotMeta.selectedVersion ? "" : "Choose reward",
+          renderMain: slotMeta.selectedVersion
+            ? (parent) => appendDisplayParts(parent, buildEntryParts(slotMeta.selectedVersion.entry))
+            : null,
           detail: !slotMeta.selectedTree
             ? "Choose a tree level first."
             : slotMeta.versionOptions.length + " available reward" + (slotMeta.versionOptions.length === 1 ? "" : "s"),
@@ -954,14 +967,16 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     attributeCard.appendChild(statGroup);
     container.appendChild(attributeCard);
 
-    const keywordSummary = formatKeywordSummary(stats.keywordCounts);
-    if (keywordSummary) {
-      container.appendChild(createListSection("Keywords", [keywordSummary]));
+    if (stats.keywordCounts.size) {
+      container.appendChild(createListSection("Keywords", [{
+        render: (parent) => appendCountSummary(parent, stats.keywordCounts, "keyword"),
+      }]));
     }
 
-    const skillSummary = formatKeywordSummary(stats.skillCounts);
-    if (skillSummary) {
-      container.appendChild(createListSection("Skills (max 3)", [skillSummary]));
+    if (stats.skillCounts.size) {
+      container.appendChild(createListSection("Skills (max 3)", [{
+        render: (parent) => appendCountSummary(parent, stats.skillCounts, "skill"),
+      }]));
     }
 
     const items = Array.from(stats.items.values());
@@ -1242,13 +1257,21 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
         const title = document.createElement("div");
         title.className = "option-title";
-        title.textContent = content.title;
+        if (typeof content.renderTitle === "function") {
+          content.renderTitle(title);
+        } else {
+          title.textContent = content.title || "";
+        }
         button.appendChild(title);
 
-        if (content.detail) {
+        if (typeof content.renderDetail === "function" || content.detail) {
           const detail = document.createElement("div");
           detail.className = "option-detail";
-          detail.textContent = content.detail;
+          if (typeof content.renderDetail === "function") {
+            content.renderDetail(detail);
+          } else {
+            detail.textContent = content.detail;
+          }
           button.appendChild(detail);
         }
 
@@ -1299,6 +1322,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         label: config.label,
         main: config.main,
         detail: config.detail,
+        renderMain: config.renderMain,
+        renderDetail: config.renderDetail,
         onClick: config.onClick,
         disabled: config.disabled,
         empty: config.empty,
@@ -1339,12 +1364,20 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     const main = document.createElement("span");
     main.className = "choice-main";
-    main.textContent = config.main;
+    if (typeof config.renderMain === "function") {
+      config.renderMain(main);
+    } else {
+      main.textContent = config.main || "";
+    }
     button.appendChild(main);
 
     const detail = document.createElement("span");
     detail.className = "choice-detail";
-    detail.textContent = config.detail || "";
+    if (typeof config.renderDetail === "function") {
+      config.renderDetail(detail);
+    } else {
+      detail.textContent = config.detail || "";
+    }
     button.appendChild(detail);
 
     return button;
@@ -1385,7 +1418,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     items.forEach((item) => {
       const li = document.createElement("li");
       li.className = "list-item";
-      li.textContent = item;
+      if (item && typeof item.render === "function") {
+        item.render(li);
+      } else {
+        li.textContent = item;
+      }
       list.appendChild(li);
     });
 
@@ -1417,12 +1454,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     nameEl.textContent = card.DisplayName || card.Name;
     body.appendChild(nameEl);
 
-    const metaParts = [...(card.Keywords || [])];
-    if (card.Condition) metaParts.push(card.Condition);
+    const metaParts = [
+      ...(card.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
+    ];
+    if (card.Condition) metaParts.push({ text: card.Condition });
     if (metaParts.length) {
       const metaEl = document.createElement("div");
       metaEl.className = "action-card-meta";
-      metaEl.textContent = metaParts.join(", ");
+      appendDisplayParts(metaEl, metaParts);
       body.appendChild(metaEl);
     }
 
@@ -1555,33 +1594,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function renderEntryToElement(element, entry, previewStats = null) {
-    const parts = [];
-
-    (entry.Attributes || []).forEach((attributeSet) => {
-      Object.entries(attributeSet).forEach(([key, value]) => {
-        parts.push({ text: value + " " + key });
-      });
-    });
-
-    if (entry.HP) parts.push({ text: entry.HP + " HP" });
-    if (entry.MOB) parts.push({ text: entry.MOB + " MOB" });
-    if (entry.Brill) parts.push({ text: entry.Brill + " Brill" });
-
-    const divValue = entry.DIV;
-    if (divValue === "Upgrade") parts.push({ text: "DIV Upgrade" });
-    else if (divValue) parts.push({ text: "DIV " + divValue });
-
-    (entry.Keywords || []).forEach((k) => parts.push({ text: k }));
-    (entry.Skills || []).forEach((s) => parts.push({ text: s }));
-
-    (entry.Items || []).forEach((itemName) => {
-      const itemObj = state.data.Items[itemName];
-      if (itemObj) parts.push({ text: formatItemDisplayName(itemObj) });
-    });
-
-    (entry["Action cards"] || []).forEach((cardId) => {
-      const card = state.data["Action Cards"][cardId];
-      parts.push({ cardId, card: card || null });
+    const parts = buildEntryParts(entry, {
+      inlineItemDetails: true,
+      includeActionCardMentions: true,
     });
 
     if (!parts.length) {
@@ -1589,20 +1604,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     element.replaceChildren();
-    parts.forEach((part, index) => {
-      if (index > 0) {
-        element.appendChild(document.createTextNode(", "));
-      }
-      if (part.cardId !== undefined) {
-        if (part.card) {
-          element.appendChild(createActionCardMention(part.cardId, part.card, previewStats));
-        } else {
-          element.appendChild(document.createTextNode(part.cardId));
-        }
-      } else {
-        element.appendChild(document.createTextNode(part.text));
-      }
-    });
+    appendDisplayParts(element, parts, previewStats);
   }
 
   function normalizeRollMode(mode) {
@@ -1632,14 +1634,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return usedAtt
       ? { attribute: usedAtt, value: targetValue }
       : null;
-  }
-
-  function formatRollModifiers(modifiers) {
-    return modifiers.map((mod) => {
-      const sign = mod.Dice > 0 ? "+" : "";
-      const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
-      return `${sign}${mod.Dice} ${dieWord}: ${mod.Triggers.join(", ")}`;
-    }).join(", ");
   }
 
   function buildRollElement(roll) {
@@ -1674,7 +1668,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     diffBadge.appendChild(diffIcon);
     rollLineEl.appendChild(diffBadge);
     if (roll.Modifiers && roll.Modifiers.length) {
-      appendIconTextContent(rollLineEl, ", " + formatRollModifiers(roll.Modifiers));
+      appendRollModifiers(rollLineEl, roll.Modifiers);
     }
     return rollLineEl;
   }
@@ -1699,7 +1693,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (keywords.length) {
       const keywordsEl = document.createElement("div");
       keywordsEl.className = "item-keywords action-card-meta";
-      appendIconTextContent(keywordsEl, keywords.join(", "));
+      appendDisplayParts(
+        keywordsEl,
+        keywords.map((keyword) => buildTokenPart(keyword, "keyword"))
+      );
       detailsEl.appendChild(keywordsEl);
     }
 
@@ -1754,17 +1751,177 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     parent.appendChild(iconEl);
   }
 
-  function describeRaceOption(race) {
-    return { title: race.Name, detail: raceDetail(race) };
+  function appendDisplayParts(parent, parts, previewStats = null, separator = ", ") {
+    parts.forEach((part, index) => {
+      if (index > 0) {
+        parent.appendChild(document.createTextNode(separator));
+      }
+      appendDisplayPart(parent, part, previewStats);
+    });
   }
 
-  function raceDetail(race) {
-    const extras = [];
-    if (race.Keywords?.length) extras.push(race.Keywords.join(", "));
-    extras.push("MOB: " + (race.MOB || 0));
-    extras.push("HP: " + (race.HP || 0));
-    extras.push("DIV: " + (race.DIV || "-"));
-    return extras.join(", ");
+  function appendDisplayPart(parent, part, previewStats = null) {
+    if (!part) {
+      return;
+    }
+
+    if (typeof part.render === "function") {
+      part.render(parent);
+      return;
+    }
+
+    if (part.cardId !== undefined) {
+      if (part.card) {
+        parent.appendChild(createActionCardMention(part.cardId, part.card, previewStats));
+      } else {
+        parent.appendChild(document.createTextNode(part.cardId));
+      }
+      return;
+    }
+
+    if (part.kind === "keyword" || part.kind === "skill") {
+      const tokenEl = document.createElement("em");
+      tokenEl.className = part.kind === "skill" ? "skill-token" : "keyword-token";
+      tokenEl.textContent = part.text;
+      parent.appendChild(tokenEl);
+      if (part.count > 1) {
+        parent.appendChild(document.createTextNode(" x" + part.count));
+      }
+      return;
+    }
+
+    parent.appendChild(document.createTextNode(part.text));
+  }
+
+  function buildTokenPart(text, kind) {
+    return { text, kind };
+  }
+
+  function appendCountSummary(parent, counts, kind) {
+    const parts = Array.from(counts.keys())
+      .sort((a, b) => a.localeCompare(b))
+      .map((text) => ({
+        text,
+        kind,
+        count: counts.get(text),
+      }));
+    appendDisplayParts(parent, parts);
+  }
+
+  function appendRollModifiers(parent, modifiers) {
+    modifiers.forEach((mod) => {
+      const sign = mod.Dice > 0 ? "+" : "";
+      const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
+      parent.appendChild(document.createTextNode(", " + sign + mod.Dice + " " + dieWord + ": "));
+      appendDisplayParts(
+        parent,
+        mod.Triggers.map((trigger) => buildTokenPart(trigger, "keyword"))
+      );
+    });
+  }
+
+  function appendInlineItemDetails(parent, item) {
+    parent.appendChild(document.createTextNode(getItemDisplayName(item)));
+
+    const details = [];
+    if (item.Passive) {
+      details.push({ text: item.Passive });
+    }
+    (item.Keywords || []).forEach((keyword) => {
+      details.push(buildTokenPart(keyword, "keyword"));
+    });
+
+    if (details.length) {
+      parent.appendChild(document.createTextNode(" ("));
+      appendDisplayParts(parent, details);
+      parent.appendChild(document.createTextNode(")"));
+    }
+  }
+
+  function buildRaceDetailParts(race) {
+    const parts = [];
+    (race.Keywords || []).forEach((keyword) => {
+      parts.push(buildTokenPart(keyword, "keyword"));
+    });
+    parts.push({ text: "MOB: " + (race.MOB || 0) });
+    parts.push({ text: "HP: " + (race.HP || 0) });
+    parts.push({ text: "DIV: " + (race.DIV || "-") });
+    return parts;
+  }
+
+  function buildEntryParts(
+    entry,
+    {
+      excludeActionCards = false,
+      excludeItems = false,
+      inlineItemDetails = false,
+      includeActionCardMentions = false,
+    } = {}
+  ) {
+    const parts = [];
+
+    (entry.Attributes || []).forEach((attributeSet) => {
+      Object.entries(attributeSet).forEach(([key, value]) => {
+        parts.push({ text: value + " " + key });
+      });
+    });
+
+    if (entry.HP) {
+      parts.push({ text: entry.HP + " HP" });
+    }
+    if (entry.MOB) {
+      parts.push({ text: entry.MOB + " MOB" });
+    }
+    if (entry.Brill) {
+      parts.push({ text: entry.Brill + " Brill" });
+    }
+
+    const divValue = entry.DIV;
+    if (divValue === "Upgrade") {
+      parts.push({ text: "DIV Upgrade" });
+    } else if (divValue) {
+      parts.push({ text: "DIV " + divValue });
+    }
+
+    (entry.Keywords || []).forEach((keyword) => {
+      parts.push(buildTokenPart(keyword, "keyword"));
+    });
+    (entry.Skills || []).forEach((skill) => {
+      parts.push(buildTokenPart(skill, "skill"));
+    });
+
+    if (!excludeItems) {
+      (entry.Items || []).forEach((itemName) => {
+        const itemObj = state.data.Items[itemName];
+        if (itemObj) {
+          parts.push(
+            inlineItemDetails
+              ? { render: (parent) => appendInlineItemDetails(parent, itemObj) }
+              : { text: getItemDisplayName(itemObj) }
+          );
+        }
+      });
+    }
+
+    if (!excludeActionCards) {
+      (entry["Action cards"] || []).forEach((cardId) => {
+        const card = state.data["Action Cards"][cardId];
+        if (includeActionCardMentions) {
+          parts.push({ cardId, card: card || null });
+        } else {
+          parts.push({ text: getActionCardDisplayName(card) });
+        }
+      });
+    }
+
+    return parts;
+  }
+
+  function describeRaceOption(race) {
+    return {
+      title: race.Name,
+      renderDetail: (parent) => appendDisplayParts(parent, buildRaceDetailParts(race)),
+    };
   }
 
   function describeAttributeOption(attributeSet) {
@@ -1782,14 +1939,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function describeProfessionOption(profession) {
-    const details = [];
-    const summary = summarizeEntry(profession);
-    if (summary) {
-      details.push(summary);
-    }
-    if (profession.Paths.length) {
-      details.push("Paths: " + profession.Paths.map((path) => path.Name).join(", "));
-    }
+    const summaryParts = buildEntryParts(profession);
     const accessibleTrees = [];
     const primaryTree = resolvePrimaryTreeName(profession.Name);
     if (state.trees.has(primaryTree)) {
@@ -1800,12 +1950,30 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         accessibleTrees.push(treeName);
       }
     });
-    if (accessibleTrees.length) {
-      details.push("Trees: " + accessibleTrees.join(", "));
-    }
     return {
       title: profession.Name,
-      detail: details.join("\n"),
+      renderDetail: (parent) => {
+        let hasLine = false;
+        if (summaryParts.length) {
+          appendDisplayParts(parent, summaryParts);
+          hasLine = true;
+        }
+        if (profession.Paths.length) {
+          if (hasLine) {
+            parent.appendChild(document.createElement("br"));
+          }
+          parent.appendChild(
+            document.createTextNode("Paths: " + profession.Paths.map((path) => path.Name).join(", "))
+          );
+          hasLine = true;
+        }
+        if (accessibleTrees.length) {
+          if (hasLine) {
+            parent.appendChild(document.createElement("br"));
+          }
+          parent.appendChild(document.createTextNode("Trees: " + accessibleTrees.join(", ")));
+        }
+      },
     };
   }
 
@@ -1814,19 +1982,29 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
     return {
       title: entry.Name,
-      detail: summarizeEntry(entry, { excludeActionCards: true, excludeItems: true }),
+      renderDetail: (parent) =>
+        appendDisplayParts(parent, buildEntryParts(entry, { excludeActionCards: true, excludeItems: true })),
       items,
       actionCards,
     };
   }
 
   function describeTreeLevelOption(option) {
+    const versionParts = option.versions
+      .map((entry) => buildEntryParts(entry))
+      .filter((parts) => parts.length);
     return {
       title: option.treeName + " - Level " + option.level,
-      detail: option.versions
-        .map((entry) => summarizeEntry(entry))
-        .filter(Boolean)
-        .join("\nOR\n"),
+      renderDetail: (parent) => {
+        versionParts.forEach((parts, index) => {
+          if (index > 0) {
+            parent.appendChild(document.createElement("br"));
+            parent.appendChild(document.createTextNode("OR"));
+            parent.appendChild(document.createElement("br"));
+          }
+          appendDisplayParts(parent, parts);
+        });
+      },
     };
   }
 
@@ -1838,101 +2016,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       })
     );
     return {
-      title: summarizeEntry(option.entry),
-      detail: "",
+      renderTitle: (parent) => appendDisplayParts(parent, buildEntryParts(option.entry)),
       actionCards,
     };
-  }
-
-  function summarizeEntry(
-    entry,
-    {
-      excludeActionCards = false,
-      excludeItems = false,
-    } = {}
-  ) {
-    const parts = [];
-
-    (entry.Attributes || []).forEach((attributeSet) => {
-      Object.entries(attributeSet).forEach(([key, value]) => {
-        parts.push(value + " " + key);
-      });
-    });
-
-    if (entry.HP) {
-      parts.push(entry.HP + " HP");
-    }
-    if (entry.MOB) {
-      parts.push(entry.MOB + " MOB");
-    }
-    if (entry.Brill) {
-      parts.push(entry.Brill + " Brill");
-    }
-
-    const divValue = entry.DIV;
-    if (divValue === "Upgrade") {
-      parts.push("DIV Upgrade");
-    } else if (divValue) {
-      parts.push("DIV " + divValue);
-    }
-
-    parts.push(...(entry.Keywords || []));
-    parts.push(...(entry.Skills || []));
-
-    if (!excludeItems) {
-      (entry.Items || []).forEach((itemName) => {
-        const itemObj = state.data.Items[itemName];
-        if (itemObj) {
-          parts.push(getItemDisplayName(itemObj));
-        }
-      });
-    }
-
-    if (!excludeActionCards) {
-      (entry["Action cards"] || []).forEach((action) => {
-        parts.push(getActionCardDisplayName(state.data["Action Cards"][action]));
-      });
-    }
-
-    return parts.join(", ");
   }
 
   function formatAttributeSummary(attributeSet) {
     return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
   }
 
-  function formatKeywordSummary(keywordCounts) {
-    if (!keywordCounts.size) {
-      return "";
-    }
-
-    return Array.from(keywordCounts.keys())
-      .sort((a, b) => a.localeCompare(b))
-      .map((keyword) => {
-        const count = keywordCounts.get(keyword);
-        return count > 1 ? keyword + " x" + count : keyword;
-      })
-      .join(", ");
-  }
-
   function getItemDisplayName(item) {
     return item.DisplayName || "";
-  }
-
-  function formatItemDisplayName(item) {
-    let itemText = getItemDisplayName(item);
-    const details = [];
-    if (item.Passive) {
-      details.push(item.Passive);
-    }
-    const keywords = item.Keywords || [];
-    if (keywords.length) {
-      details.push(...keywords);
-    }
-    if (details.length) {
-      itemText += " (" + details.join(", ") + ")";
-    }
-    return itemText;
   }
 
   function getActionCardDisplayName(card) {

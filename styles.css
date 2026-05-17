@@ -529,11 +529,14 @@ h1 {
   font-family: 'EB Garamond', serif;
   font-size: 0.86rem;
   color: var(--muted);
-  font-style: italic;
   text-align: center;
   line-height: 1.2;
 }
 
+.keyword-token,
+.skill-token {
+  font-style: italic;
+}
 .action-card-target {
   font-family: 'EB Garamond', serif;
   font-size: 0.82rem;
