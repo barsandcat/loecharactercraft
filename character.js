@@ -1014,9 +1014,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
             nameDiv.textContent = formatItemDisplayName(item);
             itemLi.appendChild(nameDiv);
 
-            const effectDiv = document.createElement("div");
-            effectDiv.className = "item-effect";
-            effectDiv.textContent = item.Effect || "None";
+            const effectDiv = buildFoldedEffectText(item.Effect || "None", "item-effect");
             itemLi.appendChild(effectDiv);
 
             itemsList.appendChild(itemLi);
@@ -1521,14 +1519,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     if (card.Back) {
-      const backEl = document.createElement("div");
-      backEl.className = "action-card-back";
-      if (card.Back) {
-        const backTextEl = document.createElement("div");
-        appendIconTextContent(backTextEl, card.Back);
-        backEl.appendChild(backTextEl);
-      }
-      body.appendChild(backEl);
+      body.appendChild(buildFoldedEffectText(card.Back, "action-card-back"));
     }
 
     wrapper.appendChild(body);
@@ -1678,6 +1669,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       appendIconTextContent(rollLineEl, ", " + formatRollModifiers(roll.Modifiers));
     }
     return rollLineEl;
+  }
+
+  function buildFoldedEffectText(text, className = "") {
+    const effectEl = document.createElement("div");
+    effectEl.className = "folded-effect-text" + (className ? " " + className : "");
+    appendIconTextContent(effectEl, text);
+    return effectEl;
   }
 
   function appendIconTextContent(parent, text) {
