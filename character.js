@@ -640,6 +640,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       .filter(Boolean);
   }
 
+  function buildItemPreviews(itemNames) {
+    return (itemNames || [])
+      .map((itemName) => state.data.Items[itemName] || null)
+      .filter(Boolean);
+  }
+
   function applyRace(stats, race, attributes) {
     if (attributes) {
       Object.keys(attributes).forEach((key) => {
@@ -1007,12 +1013,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           .sort((a, b) => getItemDisplayName(a).localeCompare(getItemDisplayName(b)))
           .forEach((item) => {
             const itemLi = document.createElement("li");
-            itemLi.className = "list-item";
-
-            itemLi.appendChild(buildItemDetailsElement(item));
-
-            const effectDiv = buildFoldedEffectText(item.Effect || "None", "item-effect");
-            itemLi.appendChild(effectDiv);
+            itemLi.className = "action-list-item";
+            itemLi.appendChild(buildItemElement(item));
 
             itemsList.appendChild(itemLi);
           });
@@ -1248,6 +1250,15 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           detail.className = "option-detail";
           detail.textContent = content.detail;
           button.appendChild(detail);
+        }
+
+        if (content.items && content.items.length) {
+          const itemsEl = document.createElement("div");
+          itemsEl.className = "option-items";
+          content.items.forEach((item) => {
+            itemsEl.appendChild(buildItemElement(item));
+          });
+          button.appendChild(itemsEl);
         }
 
         if (content.actionCards && content.actionCards.length) {
@@ -1695,6 +1706,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return detailsEl;
   }
 
+  function buildItemElement(item) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "item-preview";
+    wrapper.appendChild(buildItemDetailsElement(item));
+    wrapper.appendChild(buildFoldedEffectText(item.Effect || "None", "item-effect"));
+    return wrapper;
+  }
+
   function buildFoldedEffectText(text, className = "") {
     const effectEl = document.createElement("div");
     effectEl.className = "folded-effect-text" + (className ? " " + className : "");
@@ -1791,10 +1810,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function describeEntryOption(entry, previewStats = null) {
+    const items = buildItemPreviews(entry.Items || []);
     const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
     return {
       title: entry.Name,
-      detail: summarizeEntry(entry, { excludeActionCards: true }),
+      detail: summarizeEntry(entry, { excludeActionCards: true, excludeItems: true }),
+      items,
       actionCards,
     };
   }
@@ -1827,6 +1848,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     entry,
     {
       excludeActionCards = false,
+      excludeItems = false,
     } = {}
   ) {
     const parts = [];
@@ -1857,12 +1879,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     parts.push(...(entry.Keywords || []));
     parts.push(...(entry.Skills || []));
 
-    (entry.Items || []).forEach((itemName) => {
-      const itemObj = state.data.Items[itemName];
-      if (itemObj) {
-        parts.push(getItemDisplayName(itemObj));
-      }
-    });
+    if (!excludeItems) {
+      (entry.Items || []).forEach((itemName) => {
+        const itemObj = state.data.Items[itemName];
+        if (itemObj) {
+          parts.push(getItemDisplayName(itemObj));
+        }
+      });
+    }
 
     if (!excludeActionCards) {
       (entry["Action cards"] || []).forEach((action) => {
