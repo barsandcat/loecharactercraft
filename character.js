@@ -1798,6 +1798,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function appendCountSummary(parent, counts, kind) {
+    const wrapper = document.createElement("span");
     const parts = Array.from(counts.keys())
       .sort((a, b) => a.localeCompare(b))
       .map((text) => ({
@@ -1805,7 +1806,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         kind,
         count: counts.get(text),
       }));
-    appendDisplayParts(parent, parts);
+    appendDisplayParts(wrapper, parts);
+    parent.appendChild(wrapper);
   }
 
   function appendRollModifiers(parent, modifiers) {
