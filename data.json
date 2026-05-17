@@ -1211,15 +1211,12 @@
     "Spellbook": {
       "Type": "Small",
       "DisplayName": "Spellbook",
-      "Effect": "Spell: +2 dice"
+      "Effect": "During your [Spell] Roll: Roll 2 additional dice"
     },
     "Iron Mask": {
       "Type": "Head",
       "DisplayName": "Iron Mask",
-      "Keywords": [
-        "Spell"
-      ],
-      "Effect": "Spell: Prevent 4 damage or 2 terror"
+      "Effect": "Agains [Spell]: Prevent 4 {damage} or 2 {terror}"
     },
     "Highlander's Belt": {
       "Type": "Chest",
@@ -1227,7 +1224,8 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Passive": "Melee: +1 damage"
+      "Passive": "[Melee]: +1{damage}",
+	  "Effect": "Passive: During [Melee] [Attack]: Add 1 {damage}"
     },
     "Lantern": {
       "Type": "Hand",
@@ -1235,17 +1233,17 @@
       "Keywords": [
         "Light"
       ],
-      "Effect": "Prevent 2 terror"
+      "Effect": "When you gain {terror}: Prevent 2 {terror}"
     },
     "Sunbreaker Pendant": {
       "Type": "Small",
       "DisplayName": "Sunbreaker Pendant",
-      "Effect": "Against spell: 3 damage"
+      "Effect": "Against [Spell]: After [Attack], deal 3 {damage} to the attacking Enemy"
     },
     "Drysea Strider Hatchling": {
       "Type": "Small",
       "DisplayName": "Drysea Strider Hatchling",
-      "Effect": "Switch with PM in R4"
+      "Effect": "Switch places with a PM in R4"
     },
     "High Realm Collar": {
       "Type": "Head",
@@ -1253,12 +1251,12 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Effect": "+1 Fate, -2 HP"
+      "Effect": "Gain 1 {fate}, Lose 2 HP"
     },
     "Straw Hat": {
       "Type": "Head",
       "DisplayName": "Straw Hat",
-      "Effect": "Untargetable"
+      "Effect": "During EN Activation: You cannot be targeted"
     },
     "Leather Apron": {
       "Type": "Chest",
@@ -1275,7 +1273,7 @@
       "Keywords": [
         "Poison"
       ],
-      "Effect": "3 damage in R4"
+      "Effect": "Deal 3 {damage} to anyone in R4"
     },
     "Poisoned Needle": {
       "Type": "Small",
@@ -1283,7 +1281,7 @@
       "Keywords": [
         "Poison"
       ],
-      "Effect": "Ranged: +2 damage"
+      "Effect": "During your [Ranged] [Attack]: Add 2 {damage}"
     },
     "Heirloom": {
       "Type": "Small",
@@ -1291,7 +1289,7 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Effect": "+D4 DIV"
+      "Effect": "During your DIV Roll: Roll an additional D4 DIV die"
     },
     "Fancy Poulaines": {
       "Type": "Feet",
@@ -1299,7 +1297,7 @@
       "Keywords": [
         "Diplomacy"
       ],
-      "Effect": "CHA Roll: +1 die"
+      "Effect": "During you CHA Roll: Roll 1 additional die"
     },
     "Poleyn": {
       "Type": "Feet",
@@ -1307,7 +1305,7 @@
       "Keywords": [
         "Armor"
       ],
-      "Effect": "Attack: +2 armor"
+      "Effect": "Against [Attack]: Gain 2 {armor}"
     },
     "Moon Pendant": {
       "Type": "Small",
@@ -1315,15 +1313,15 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Heal 2 terror"
+      "Effect": "You or PM in R1 heal 2 {terror}"
     },
     "Crystal Glasses": {
       "Type": "Head",
       "DisplayName": "Crystal Glasses",
       "Keywords": [
-        "Intimidation"
+        "Investigation"
       ],
-      "Effect": "INT Roll +1 die"
+      "Effect": "During you INT Roll: Roll 1 additional die"
     },
     "Warden's Greaves": {
       "Type": "Feet",
@@ -1331,7 +1329,7 @@
       "Keywords": [
         "Vigilance"
       ],
-      "Effect": "STR or AGI Roll: +1 die"
+      "Effect": "During you STR or AGI Roll: Roll 1 additional die"
     },
     "Survival Kit": {
       "Type": "Small",
@@ -1339,7 +1337,7 @@
       "Keywords": [
         "Survival"
       ],
-      "Effect": "Heal 2 HP in R1"
+      "Effect": "Your PM in R1 heal 2 HP"
     },
     "Lucky Charm": {
       "Type": "Small",
@@ -1347,7 +1345,7 @@
       "Keywords": [
         "Charm"
       ],
-      "Effect": "Reroll all dice"
+      "Effect": "During your Roll: Reroll all dice"
     },
     "Lute": {
       "Type": "Hand",
@@ -1355,7 +1353,7 @@
       "Keywords": [
         "Performer"
       ],
-      "Effect": "ATT Boon for you and PM in R2"
+      "Effect": "You adn a PM in R2 gain 1 ATT Boon"
     },
     "Reliable Boots": {
       "Type": "Feet",
@@ -1371,12 +1369,12 @@
       "Keywords": [
         "Medicine"
       ],
-      "Effect": "Stabilize in R1. Heal 1 terror in R1"
+      "Effect": "Stabilize a PM in R1. You or a PM in R1 heal 1 {terror}"
     },
     "Death Whistle": {
       "Type": "Small",
       "DisplayName": "Death Whistle",
-      "Effect": "Pull by 2 in R3"
+      "Effect": "Pull anyone in R3 by 2"
     },
     "Notram's Ring": {
       "Type": "Small",
@@ -1389,7 +1387,7 @@
     "Glowjuice": {
       "Type": "Small",
       "DisplayName": "Glowjuice",
-      "Effect": "+1 die, gain 1 terror"
+      "Effect": "During your Roll: Roll 1 additional die. Gain 1 {terror}"
     },
     "Throwing Dagger": {
       "Type": "Hand",
@@ -1397,12 +1395,12 @@
       "Keywords": [
         "Ranged"
       ],
-      "Effect": "4 damage in R4"
+      "Effect": "Deal 4 {damage} to anyone in R4"
     },
     "Smoke Bomb": {
       "Type": "Small",
       "DisplayName": "Smoke Bomb",
-      "Effect": "Ranged: Prevent 4 damage"
+      "Effect": "Against [Ranged]: Prevent 4 {damage}"
     },
     "Book of Sagas": {
       "Type": "Small",
@@ -1410,12 +1408,12 @@
       "Keywords": [
         "Lore"
       ],
-      "Effect": "Any keyword"
+      "Effect": "During your Roll: Gain 1 choosen [Keyword]"
     },
     "Anchor Chain": {
       "Type": "Hand",
       "DisplayName": "Anchor Chain",
-      "Effect": "Pull by 2 in R3"
+      "Effect": "Pull anyone in R3 by 2"
     },
     "Whispering Box": {
       "Type": "Small",
@@ -1423,7 +1421,7 @@
       "Keywords": [
         "Vestigial"
       ],
-      "Effect": "+3 dice, +2 terror"
+      "Effect": "During your Roll: Roll 3 additional dice, Gain 2 {terror}"
     },
     "Codex Vestigium": {
       "Type": "Small",
@@ -1431,7 +1429,7 @@
       "Keywords": [
         "Vestigial"
       ],
-      "Effect": "1 damage to all in R1"
+      "Effect": "Deal 1 {damage} to all in R1"
     },
     "Curing Leaves": {
       "Type": "Small",
@@ -1439,7 +1437,7 @@
       "Keywords": [
         "Medicine"
       ],
-      "Effect": "Heal 2 HP in R1"
+      "Effect": "You or PM in R1 heal 2 HP"
     },
     "Stone of Nivar": {
       "Type": "Small",
@@ -1447,12 +1445,12 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "+1 {fate} in R1"
+      "Effect": "You or another PM in R1 gain 1 {fate}"
     },
     "Calling Reed": {
       "Type": "Small",
       "DisplayName": "Calling Reed",
-      "Effect": "Move PM by 2"
+      "Effect": "Move PM in any range by 2"
     },
     "Garrote": {
       "Type": "Hand",
@@ -1460,7 +1458,7 @@
       "Keywords": [
         "Melee"
       ],
-      "Effect": "Defeat a minion in R1"
+      "Effect": "Defeat a [Minion] in R1"
     },
     "Evidence": {
       "Type": "Small",
@@ -1476,12 +1474,12 @@
       "Keywords": [
         "Survival"
       ],
-      "Effect": "Melee: reduce difficulty by 1"
+      "Effect": "During your [Melee] Roll: reduce {en} by 1"
     },
     "Lucky Pommel": {
       "Type": "Hand",
       "DisplayName": "Lucky Pommel",
-      "Effect": "Melee: +2 dice"
+      "Effect": "During your [Melee] Roll: Roll 2 additional dice"
     },
     "War Horn": {
       "Type": "Small",
@@ -1489,7 +1487,7 @@
       "Keywords": [
         "Leadership"
       ],
-      "Effect": "Choose dual token side"
+      "Effect": "After drawing a dual token: Choose which side to resolve"
     },
     "Parrying Cape": {
       "Type": "Chest",
@@ -1497,7 +1495,7 @@
       "Keywords": [
         "Performer"
       ],
-      "Effect": "Against melee: +2 dice"
+      "Effect": "During Defensive Reaction Roll against [Melee]: Roll 2 additional dice"
     },
     "Prayer Bell": {
       "Type": "Small",
@@ -1505,7 +1503,7 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Refresh: Ignore 1 fate"
+      "Effect": "When refreshing your Action card with {fate} cost, ignore paying {fate}"
     },
     "Peliago's Coin": {
       "Type": "Small",
@@ -1513,7 +1511,7 @@
       "Keywords": [
         "Brilliance"
       ],
-      "Effect": "Move: +4 MOB"
+      "Effect": "When you Move: Treat your MOB as 4 higher"
     },
     "Grisly Trophy": {
       "Type": "Small",
@@ -1521,22 +1519,22 @@
       "Keywords": [
         "Intimidation"
       ],
-      "Effect": "Push by 2 in R2"
+      "Effect": "Push anyone in R2 by 2"
     },
     "Rootstalk": {
       "Type": "Small",
       "DisplayName": "Rootstalk",
-      "Effect": "Support with 2 dice in R2"
+      "Effect": "Support a PM in R2 with 2 dice"
     },
     "Homunculus": {
       "Type": "Small",
       "DisplayName": "Homunculus",
-      "Effect": "+2 Fate, +2 terror"
+      "Effect": "Gain 2 {fate} and 2 {terror}"
     },
     "Fleshcraft Toolkit": {
       "Type": "Small",
       "DisplayName": "Fleshcraft Toolkit",
-      "Effect": "Heal 3 HP in R1"
+      "Effect": "You or PM in R1 heal 3 HP"
     },
     "Grimoire": {
       "Type": "Small",
@@ -1544,7 +1542,7 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Spell: + 1 die"
+      "Effect": "During your [Spell] Roll: roll 1 additional die"
     },
     "Orb": {
       "Type": "Small",
@@ -1552,7 +1550,7 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Heal 1 terror in R6"
+      "Effect": "You or PM in R6 heal 1 {terror}"
     },
     "Runic Chisel": {
       "Type": "Small",
@@ -1560,12 +1558,12 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Attack: +AGI damage, -2HP"
+      "Effect": "During [Attack]: Add AGI {damage}, Lose 2HP"
     },
     "Buckler": {
       "Type": "Small",
       "DisplayName": "Buckler",
-      "Effect": "Against Attack: +3 armor"
+      "Effect": "Against [Attack]: gain 3 {armor}"
     },
     "Blessed Charm": {
       "Type": "Small",
@@ -1573,17 +1571,17 @@
       "Keywords": [
         "Artifact"
       ],
-      "Effect": "Support with 2 dice"
+      "Effect": "Support a PM in any range with 2 dice"
     },
     "Spyglass": {
       "Type": "Small",
       "DisplayName": "Spyglass",
-      "Effect": "Div Roll: +D6 DIV, +2 terror"
+      "Effect": "During your DIV Roll: Roll an additional D6 DIV die. Gain 2 {terror}"
     },
     "Penitent's Clogs": {
       "Type": "Feet",
       "DisplayName": "Penitent's Clogs",
-      "Effect": "-1 difficulty"
+      "Effect": "Druing your Roll: Reduce {en} by 1"
     },
     "Incense": {
       "Type": "Hand",
@@ -1591,12 +1589,12 @@
       "Keywords": [
         "Alchemy"
       ],
-      "Effect": "Heal 2 HP or 2 damage in R2"
+      "Effect": "You or PM in R2 heal 2 HP or deal 2 {damage} to anyone in R2"
     },
     "Tome of Omu": {
       "Type": "Small",
       "DisplayName": "Tome of Omu",
-      "Effect": "Heal 2 HP for EN in R1"
+      "Effect": "Heal 2 HP for each Enemy in R1"
     },
     "Thief's Gloves": {
       "Type": "Hand",
@@ -1604,12 +1602,12 @@
       "Keywords": [
         "Sleight of Hand"
       ],
-      "Effect": "Elite in R1: Gain 1 brill"
+      "Effect": "When in R1 of an [Elite]: Gain 1 brill"
     },
     "Needle Dart": {
       "Type": "Small",
       "DisplayName": "Needle Dart",
-      "Effect": "Ranged: Ignore 3 armor"
+      "Effect": "During your [Ranged] [Attack]: Ignore 3 {armor}"
     },
     "False Documents": {
       "Type": "Small",
@@ -1617,7 +1615,7 @@
       "Keywords": [
         "Deception"
       ],
-      "Effect": "CHA Roll: +1 die"
+      "Effect": "During your CHA Roll: Roll 1 additional die"
     }
   },
   "Advancement Trees": [
