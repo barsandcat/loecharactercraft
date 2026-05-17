@@ -3807,7 +3807,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Level": 1,
       "Roll": {
@@ -3825,7 +3825,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Level": 2,
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -3841,7 +3841,7 @@
       "Name": "Endurance",
       "Type": "Reaction",
       "Category": "Defensive",
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Level": 3,
       "Roll": {
@@ -3858,7 +3858,7 @@
       "Name": "Endurance",
       "Type": "Reaction",
       "Category": "Defensive",
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Sun": 2,
       "Target": "Self",
       "Level": 1,
@@ -3903,7 +3903,7 @@
       "Category": "Defensive",
       "Level": 3,
       "Moon": 2,
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -3929,7 +3929,7 @@
       "Category": "Defensive",
       "Level": 1,
       "Moon": 2,
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -4074,7 +4074,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Level": 2,
       "Roll": {
@@ -4095,7 +4095,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
       "Level": 1,
       "Roll": {
@@ -4117,7 +4117,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
       "Level": 1,
       "Roll": {
@@ -4185,8 +4185,8 @@
           }
         ],
         "Successes": {
-          "4": "Deal {div} Divinum {damage} ignoring 2 {armor}",
-          "1": "Deal {half div} Divinum {damage} ignoring 3 {armor}"
+          "4": "Deal {div} [Divinum] {damage} ignoring 2 {armor}",
+          "1": "Deal {half div} [Divinum] {damage} ignoring 3 {armor}"
         }
       },
       "Level": 1
@@ -4222,7 +4222,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Sun": 2,
-      "Condition": "Against Melee",
+      "Condition": "Against [Melee]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -4279,7 +4279,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "DIV": true,
@@ -4301,7 +4301,7 @@
           }
         ],
         "Successes": {
-          "2": "Discard 1 Boon to deal ({successes}+{half div}) Divinum {damage} OR you gain 1 ATT Boon and deal {successes} {damage}",
+          "2": "Discard 1 Boon to deal ({successes}+{half div}) [Divinum] {damage} OR you gain 1 ATT Boon and deal {successes} {damage}",
           "1": "Deal {successes} {damage}"
         }
       },
@@ -4312,7 +4312,7 @@
       "Category": "Defensive",
       "Type": "Reaction",
       "Sun": 3,
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self or PM in R2",
       "Roll": {
         "ATT": [
@@ -4500,7 +4500,7 @@
           }
         ],
         "Successes": {
-          "1": "Deal {half div} Ice {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} Ice {damage} to {successes} other Enemies in any range."
+          "1": "Deal {half div} [Ice] {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} [Ice] {damage} to {successes} other Enemies in any range."
         }
       },
       "Level": 1
@@ -4513,7 +4513,7 @@
       "Keywords": [
         "Spell"
       ],
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -4582,7 +4582,7 @@
         "Ranged",
         "Spell"
       ],
-      "Front": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} Fire {damage} (if you have Armor, {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch",
+      "Front": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch",
       "Level": 1
     },
     "P16": {
@@ -4681,7 +4681,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "All in R1",
       "Roll": {
         "DIV": true,
@@ -4724,9 +4724,9 @@
       "Name": "Dual Wielding",
       "Type": "Reaction",
       "Category": "Offensive",
-      "Condition": "Before your Melee Attack",
+      "Condition": "Before your [Melee] [Attack]",
       "Target": "Self",
-      "Front": "During this Melee Attack, deal {damage} from 2 Melee Items instead of 1.",
+      "Front": "During this [Melee] Attack, deal {damage} from 2 [Melee] Items instead of 1.",
       "Level": 1
     },
     "P22": {
@@ -4737,7 +4737,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "Self",
       "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: Large. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against Small).",
       "Level": 1
@@ -4748,7 +4748,7 @@
       "Category": "Defensive",
       "Sun": 1,
       "Mun": 1,
-      "Condition": "Against Melee",
+      "Condition": "Against [Melee]",
       "Roll": {
         "ATT": [
           "AGI"
@@ -4776,7 +4776,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -4826,7 +4826,7 @@
           }
         ],
         "Successes": {
-          "1": "Deal {successes} Divinum {damage} to the target and to all other (including you) in {half div} range from it."
+          "1": "Deal {successes} [Divinum] {damage} to the target and to all other (including you) in {half div} range from it."
         }
       },
       "Level": 1
@@ -4959,7 +4959,7 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "Push all Enemies by 1 in one chosen direction and deal them {half div} Ice {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
+      "Back": "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
       "Warning": "Instead of refreshing this card, place it in your Pouch",
       "Level": 1
     },
@@ -5013,7 +5013,7 @@
           "1": "Move by {successes}"
         }
       },
-      "Back": "During Melee Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice",
+      "Back": "During [Melee] Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice",
 	  "Warning": "When you move immediately refresh this card",
       "Level": 1
     },
@@ -5073,7 +5073,7 @@
       "Category": "Offensive",
       "Type": "Reaction",
       "Moon": 2,
-      "Condition": "At the start of your activation",
+      "Condition": "At the start of your Activation",
       "Front": "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls",
       "Back": "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice",
       "Note": "Start of your Activation: You may choose not to refresh this card",
@@ -5293,7 +5293,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -5330,9 +5330,9 @@
       "Type": "Reaction",
       "Sun": 2,
       "Moon": 2,
-      "Condition": "Against Melee, Ranged or Spell",
+      "Condition": "Against [Melee], [Ranged] or [Spell]",
       "Target": "Self",
-      "Front": "Roll for CHA (against Spell) or AGI (against Ranged) or STR (against Melee) {en}, +1 die: Investigation, Vigilance, 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
+      "Front": "Roll for CHA (against [Spell]) or AGI (against [Ranged]) or STR (against [Melee]) {en}, +1 die: [Investigation], [Vigilance], 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
       "Level": 1
     },
     "P47": {
@@ -5383,7 +5383,7 @@
         "Attack",
         "Spell"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -5424,7 +5424,7 @@
       "Category": "Defensive",
       "Sun": 2,
       "Moon": 2,
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -5533,7 +5533,7 @@
         "Spell"
       ],
       "Target": "ENs in R4",
-      "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} Divinum {damage}. Place this card in your Pouch.",
+      "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch.",
       "Level": 1
     },
     "P54": {
@@ -5647,7 +5647,7 @@
         }
       },
       "BackMoon": 2,
-      "Back": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} Divinum {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move.",
+      "Back": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} [Divinum] {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move.",
       "Level": 1
     },
     "P59": {
@@ -5821,7 +5821,7 @@
           }
         ],
         "Successes": {
-          "2": "Choose a Melee or Ranged item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
+          "2": "Choose a [Melee] or [Ranged] item with a {damage} modifier. Place 1 of your Effect tokens on it for each 2 {successes} (max 3 tokens)"
         }
       },
       "Back": "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token.",
@@ -6055,7 +6055,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
@@ -6113,7 +6113,7 @@
           "1": "Place your Effect token in R1"
         }
       },
-      "Back": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} Ice {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
+      "Back": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} [Ice] {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
       "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet.",
       "Level": 1
     },
@@ -6125,7 +6125,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -6153,7 +6153,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R2",
       "Roll": {
         "ATT": [
@@ -6169,8 +6169,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal {successes} Ice {damage} (+1 {damage} against Large). Place your Effect token on the Enemy",
-          "1": "Deal {successes} Ice {damage} (+1 {damage} against Large)"
+          "3": "Deal {successes} [Ice] {damage} (+1 {damage} against Large). Place your Effect token on the Enemy",
+          "1": "Deal {successes} [Ice] {damage} (+1 {damage} against Large)"
         }
       },
       "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
@@ -6203,7 +6203,7 @@
           "1": "Draw {successes} Activation tokens from the bag. Resolve the effect on the back."
         }
       },
-      "Back": "For each drawn black Activation token, deal {half div} Divinum {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the dranw tokens to the bag",
+      "Back": "For each drawn black Activation token, deal {half div} [Divinum] {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the drawn tokens to the bag",
 	  "BackMoon": 2
     },
     "PP06": {
@@ -6236,10 +6236,10 @@
       "Name": "Rage",
       "Type": "Reaction",
       "Category": "Support",
-      "Condition": "When you deal at least 6 damage",
+      "Condition": "When you deal at least 6 {damage}",
       "Target": "Self",
       "Front": "Flip this card",
-      "Back": "Party Members support you with 1 die fewer. When you deal {damage} with Melee, add STR {damage} and gain 1 {terror}",
+      "Back": "Party Members support you with 1 die fewer. When you deal {damage} with [Melee], add STR {damage} and gain 1 {terror}",
       "Level": 1
     },
     "PP08": {
@@ -6247,7 +6247,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Sun": 1,
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
@@ -6268,8 +6268,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal 2{successes} {damage}. Place your Melee item in your Pouch",
-          "1": "Deal {successes} {damage}. Place your Melee item in your Pouch"
+          "3": "Deal 2{successes} {damage}. Place your [Melee] item in your Pouch",
+          "1": "Deal {successes} {damage}. Place your [Melee] item in your Pouch"
         }
       },
       "Level": 1
@@ -6335,8 +6335,8 @@
           }
         ],
         "Successes": {
-          "1": "Deal ({successes}+{half div}) Divinum {damage}. You loose {half div} HP.",
-          "5": "Deal ({successes}+{div}) Divinum {damage}. You loose {half div} HP."
+          "1": "Deal ({successes}+{half div}) [Divinum] {damage}. You loose {half div} HP.",
+          "5": "Deal ({successes}+{div}) [Divinum] {damage}. You loose {half div} HP."
         }
       },
       "Level": 1
@@ -6384,7 +6384,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
       "Roll": {
         "ATT": [
@@ -6407,8 +6407,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal ({successes}+{div}) Divinum {damage} to the target and all others in R1 from the target",
-          "1": "Deal ({successes}+{half div}) Divinum {damage}"
+          "3": "Deal ({successes}+{div}) [Divinum] {damage} to the target and all others in R1 from the target",
+          "1": "Deal ({successes}+{half div}) [Divinum] {damage}"
         }
       },
       "Level": 1
@@ -6492,7 +6492,7 @@
           "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
         }
       },
-      "Back": "When the Enemy with your Effect token is attacked with Melee, you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
+      "Back": "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
       "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy.",
       "Level": 1
     },
@@ -6500,7 +6500,7 @@
       "Name": "Taunt",
       "Type": "Reaction",
       "Category": "Support",
-      "Condition": "After revealing Enemy activation card",
+      "Condition": "After revealing Enemy Activation card",
       "Front": "Change the target of current Enemy Activation card to yourself. Resolve the effect on the back",
       "Back": "Gain 1 {armor} (+1 {armor}: Vigilance) until the end of current Enemy card Activation",
       "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}.",
@@ -6562,8 +6562,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal ({successes}+{half div} Divinum {damage}",
-          "0": "Deal {half div} Divinum {damage}"
+          "3": "Deal ({successes}+{half div} [Divinum] {damage}",
+          "0": "Deal {half div} [Divinum] {damage}"
         }
       },
       "Level": 1
@@ -6572,10 +6572,10 @@
       "Name": "Adamant Stance",
       "Type": "Reaction",
       "Category": "Support",
-      "Condition": "During Offensive Action using Melee",
+      "Condition": "During Offensive Action using [Melee]",
       "Target": "Self",
       "Front": "Roll 1 additional die for each Enemy in R2 (max 3 dice).",
-      "Back": "Gain 1 {armor} against Melee",
+      "Back": "Gain 1 {armor} against [Melee]",
       "Level": 1
     },
     "PP20": {
@@ -6596,9 +6596,9 @@
         "Attack",
         "Melee"
       ],
-      "Condition": "After preventing Melee damage",
+      "Condition": "After preventing [Melee] {damage}",
       "Target": "Self",
-      "Front": "Deal {damage} (-2 {damage}: Armor) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}",
+      "Front": "Deal {damage} (-2 {damage}: [Armor]) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}",
       "Level": 1
     },
     "PP22": {
@@ -6608,7 +6608,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "DIV": true,
@@ -6632,7 +6632,7 @@
         ],
         "Successes": {
           "2": "If the target has {div} or less HP, defeat it. Otherwise resolve 1",
-          "1": "Deal {successes} Divinum {damage}"
+          "1": "Deal {successes} [Divinum] {damage}"
         }
       },
       "Level": 1
@@ -6709,7 +6709,7 @@
       "Keywords": [
         "Spell"
       ],
-      "Condition": "When the targeted Enemy deals at least 1 damage to you or PM in any range",
+      "Condition": "When the targeted Enemy deals at least 1 {damage} to you or PM in any range",
       "Target": "EN in any Range",
       "Roll": {
         "ATT": [
@@ -6732,8 +6732,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal {div} Divinum {damage}",
-          "1": "Deal {half div} Divinum {damage}"
+          "3": "Deal {div} [Divinum] {damage}",
+          "1": "Deal {half div} [Divinum] {damage}"
         }
       },
       "Level": 1
@@ -6745,7 +6745,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R2",
       "Roll": {
         "ATT": [
@@ -6929,7 +6929,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -7087,7 +7087,7 @@
           }
         ],
         "Successes": {
-          "2": "Deal {half div} Divinum {damage} ignoring 4 {armor}. You gain 1 {terror}"
+          "2": "Deal {half div} [Divinum] {damage} ignoring 4 {armor}. You gain 1 {terror}"
         }
       },
       "Level": 1
@@ -7125,7 +7125,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -7228,7 +7228,7 @@
       "Keywords": [
         "Spell"
       ],
-      "Condition": "Against Attack",
+      "Condition": "Against [Attack]",
       "Target": "Self or PM in R4",
       "Roll": {
         "ATT": [
@@ -7287,7 +7287,7 @@
           "0": "You gain 1 {terror}, do not flip this card"
         }
       },
-      "Back": "Deal {half div} Thunder {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once.",
+      "Back": "Deal {half div} [Thunder] {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once.",
 	  "BackMoon": 3,
       "Level": 1
     },
@@ -7471,7 +7471,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -7509,7 +7509,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [
@@ -7548,7 +7548,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee and PM in R1 from the target",
+      "Condition": "Requires {Melee} and PM in R1 from the target",
       "Roll": {
         "Mode": "Sum",
         "ATT": [
@@ -7588,7 +7588,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Sun": 2,
-      "Condition": "Against Melee",
+      "Condition": "Against [Melee]",
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -7596,7 +7596,7 @@
           "AGI"
         ],
         "Successes": {
-          "2": "Prevent {successes} {damage} (+2 {damage}: Melee)"
+          "2": "Prevent {successes} {damage} (+2 {damage}: [Melee])"
         }
       },
       "Level": 1
@@ -7649,7 +7649,7 @@
       "Type": "Reaction",
       "Category": "Offensive",
       "Sun": 2,
-      "Condition": "After dealing at least 3 damage with Melee",
+      "Condition": "After dealing at least 3 {damage} with [Melee]",
       "Target": "Self",
       "Front": "Move by your AGI. Gain 1 {fate}",
       "Level": 1
@@ -7662,7 +7662,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
       "Roll": {
         "DIV": true,
@@ -7708,7 +7708,7 @@
           "0": "Do not flip this card unless you pay 1 {fate}"
         }
       },
-      "Back": "During Ranged Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die.",
+      "Back": "During [Ranged] Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die.",
       "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Level": 1
     },
@@ -7720,7 +7720,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "EN in R2+",
       "Roll": {
         "DIV": true,
@@ -7742,7 +7742,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Ranged",
+      "Condition": "Requires [Ranged]",
       "Target": "All in 1 line",
       "Roll": {
         "ATT": [
@@ -7759,8 +7759,8 @@
           }
         ],
         "Successes": {
-          "4": "Deal ({successes}+2) Ice {damage} ignoring 5 {armor}",
-          "2": "Deal {successes} Ice {damage} ignoring 5 {armor}"
+          "4": "Deal ({successes}+2) [Ice] {damage} ignoring 5 {armor}",
+          "2": "Deal {successes} [Ice] {damage} ignoring 5 {armor}"
         }
       },
       "Level": 1
@@ -7912,7 +7912,7 @@
           }
         ],
         "Successes": {
-          "1": "Deal ({successes}+{half div}) Divinum {damage}. Then you may gain 2 {terror} to deal {half div} Divinum {damage} to the same target."
+          "1": "Deal ({successes}+{half div}) [Divinum] {damage}. Then you may gain 2 {terror} to deal {half div} [Divinum] {damage} to the same target."
         }
       },
       "Level": 1
@@ -8056,7 +8056,7 @@
       "Keywords": [
         "Attack"
       ],
-      "Condition": "Requires Melee",
+      "Condition": "Requires [Melee]",
       "Target": "1 in R1",
       "Roll": {
         "ATT": [

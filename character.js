@@ -1457,7 +1457,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const metaParts = [
       ...(card.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
     ];
-    if (card.Condition) metaParts.push({ text: card.Condition });
+    if (card.Condition) {
+      metaParts.push({
+        render: (parent) => appendFormattedText(parent, card.Condition),
+      });
+    }
     if (metaParts.length) {
       const metaEl = document.createElement("div");
       metaEl.className = "action-card-meta";
@@ -1514,7 +1518,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
           const outEl = document.createElement("div");
           outEl.className = "action-card-outcome";
           outEl.appendChild(document.createTextNode(key + ": "));
-          appendIconTextContent(outEl, card.Roll.Successes[key]);
+          appendFormattedText(outEl, card.Roll.Successes[key]);
           outEl.appendChild(document.createTextNode(" "));
 
           const probWrap = document.createElement("span");
@@ -1561,7 +1565,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (card.Front) {
       const frontEl = document.createElement("div");
       frontEl.className = "action-card-desc";
-      appendIconTextContent(frontEl, card.Front);
+      appendFormattedText(frontEl, card.Front);
       body.appendChild(frontEl);
     }
 
@@ -1657,7 +1661,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       rollText = "Roll the highest ATT";
     }
     if (roll.DIV) rollText += " and DIV";
-    appendIconTextContent(rollLineEl, rollText);
+    appendFormattedText(rollLineEl, rollText);
     const diffBadge = document.createElement("span");
     diffBadge.className = "action-card-difficulty";
     const diffIcon = document.createElement("img");
@@ -1679,13 +1683,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     const nameEl = document.createElement("div");
     nameEl.className = "item-name action-card-name";
-    appendIconTextContent(nameEl, getItemDisplayName(item));
+    appendFormattedText(nameEl, getItemDisplayName(item));
     detailsEl.appendChild(nameEl);
 
     if (item.Passive) {
       const passiveEl = document.createElement("div");
       passiveEl.className = "item-passive";
-      appendIconTextContent(passiveEl, item.Passive);
+      appendFormattedText(passiveEl, item.Passive);
       detailsEl.appendChild(passiveEl);
     }
 
@@ -1714,27 +1718,42 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function buildFoldedEffectText(text, className = "") {
     const effectEl = document.createElement("div");
     effectEl.className = "folded-effect-text" + (className ? " " + className : "");
-    appendIconTextContent(effectEl, text);
+    appendFormattedText(effectEl, text);
     return effectEl;
   }
 
-  function appendIconTextContent(parent, text) {
-    const iconPattern = /\{([^}]+)\}/g;
+  function appendFormattedText(parent, text) {
+    const pattern = /\{([^}]+)\}|\[([^\]]+)\]/g;
     let lastIndex = 0;
     let match;
-    while ((match = iconPattern.exec(text)) !== null) {
+    while ((match = pattern.exec(text)) !== null) {
       if (match.index > lastIndex) {
         parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
       }
-      const iconName = match[1].trim();
-      if (iconName) {
-        const iconEl = document.createElement("img");
-        iconEl.className = "action-card-inline-icon";
-        iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
-        iconEl.alt = iconName;
-        parent.appendChild(iconEl);
-      } else {
-        parent.appendChild(document.createTextNode(match[0]));
+      
+      if (match[1] !== undefined) {
+        // Icon: {iconName}
+        const iconName = match[1].trim();
+        if (iconName) {
+          const iconEl = document.createElement("img");
+          iconEl.className = "action-card-inline-icon";
+          iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
+          iconEl.alt = iconName;
+          parent.appendChild(iconEl);
+        } else {
+          parent.appendChild(document.createTextNode(match[0]));
+        }
+      } else if (match[2] !== undefined) {
+        // Keyword: [keywordName]
+        const keywordName = match[2].trim();
+        if (keywordName) {
+          const keywordEl = document.createElement("em");
+          keywordEl.className = "keyword-token";
+          keywordEl.textContent = keywordName;
+          parent.appendChild(keywordEl);
+        } else {
+          parent.appendChild(document.createTextNode(match[0]));
+        }
       }
       lastIndex = match.index + match[0].length;
     }
