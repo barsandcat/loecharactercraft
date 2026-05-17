@@ -4498,7 +4498,7 @@
           }
         ],
         "Successes": {
-          "1": "Deal {half div} [Ice] {damage} (+2 {damage} against Vestigial). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} [Ice] {damage} to {successes} other Enemies in any range."
+          "1": "Deal {half div} [Ice] {damage} (+2 {damage} against [Vestigial]). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} [Ice] {damage} to {successes} other Enemies in any range."
         }
       },
       "Level": 1
@@ -5720,8 +5720,8 @@
           }
         ],
         "Successes": {
-          "1": "Place 2 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0",
-          "3": "Place 1 of your Vestigial Items in your Pouch and resolve the effect on the back OR resolve 0"
+          "1": "Place 2 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0",
+          "3": "Place 1 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0"
         }
       },
 	  "Back": "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1.",
