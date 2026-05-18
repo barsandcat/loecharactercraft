@@ -4712,7 +4712,7 @@
           }
         ],
         "Successes": {
-          "1": "Pull the target by {successes} spaces (+2 spaces: against Large). If the target is Elite or Boss, place your Effect token on Enemy."
+          "1": "Pull the target by {successes} spaces (+2 spaces: against [Large]). If the target is Elite or Boss, place your Effect token on Enemy."
         }
       },
       "Back": "The enemy with your Effect token always chooses you as a target.",
@@ -4737,7 +4737,7 @@
       ],
       "Condition": "Requires [Melee]",
       "Target": "Self",
-      "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against Small).",
+      "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small]).",
       "Level": 1
     },
     "P23": {
@@ -6177,8 +6177,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal {successes} [Ice] {damage} (+1 {damage} against Large). Place your Effect token on the Enemy",
-          "1": "Deal {successes} [Ice] {damage} (+1 {damage} against Large)"
+          "3": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large]). Place your Effect token on the Enemy",
+          "1": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large])"
         }
       },
       "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
@@ -6499,7 +6499,7 @@
           }
         ],
         "Successes": {
-          "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
+          "1": "Place your {successes} Effect tokens (+1 token: against [Large]) on the Enemy."
         }
       },
       "Back": "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
@@ -7478,7 +7478,7 @@
           "1": "Move by {half div}. Flip this card and place 1 markers on it"
         }
       },
-      "Back": "You gain {armor} against Ranged equal to the number of markers on this card",
+      "Back": "You gain {armor} against [Ranged] equal to the number of markers on this card",
       "BackMoon": 3,
       "Level": 1
     },
