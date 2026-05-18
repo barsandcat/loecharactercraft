@@ -8062,7 +8062,7 @@
         ],
         "Modifiers": [
           {
-            "Dice": 1,
+            "Dice": 2,
             "Triggers": [
               "Stealth",
               "Darkness"
