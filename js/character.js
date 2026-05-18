@@ -473,18 +473,18 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       return professionName;
     }
 
-    const normalizedProfession = normalizeName(professionName);
+    const normalizedProfession = normalizeForMatch(professionName);
     let bestMatch = null;
 
     state.trees.forEach((_, treeName) => {
-      const normalizedTree = normalizeName(treeName);
+      const normalizedTree = normalizeForMatch(treeName);
       if (
         normalizedProfession.startsWith(normalizedTree) ||
         normalizedTree.startsWith(normalizedProfession)
       ) {
         if (
           !bestMatch ||
-          normalizedTree.length > normalizeName(bestMatch).length
+          normalizedTree.length > normalizeForMatch(bestMatch).length
         ) {
           bestMatch = treeName;
         }
@@ -494,7 +494,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return bestMatch || professionName;
   }
 
-  function normalizeName(value) {
+  function normalizeForMatch(value) {
     return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 

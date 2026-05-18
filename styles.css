@@ -1234,18 +1234,6 @@ h1 {
   gap: 16px;
 }
 
-.card-database-item {
-  list-style: none;
-}
-
-.card-meta-info {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin: 8px 0 0 0;
-  font-family: 'Cinzel', serif;
-  font-weight: 600;
-}
-
 .card-database-meta {
   display: flex;
   justify-content: space-between;
@@ -1254,7 +1242,7 @@ h1 {
   padding: 0 2px;
 }
 
-.card-meta-profession {
+.card-meta-tree {
   font-size: 0.8rem;
   font-family: 'Cinzel', serif;
   font-weight: 600;

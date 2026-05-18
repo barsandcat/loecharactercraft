@@ -2,7 +2,6 @@ import { createCharacterBuilder } from "./character.js";
 
 const ui = {};
 let builder = null;
-const ERASE_BUILD_MESSAGE = "This will erase all choices!";
 let pendingBuildAction = null;
 
 init();

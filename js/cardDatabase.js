@@ -214,15 +214,15 @@ function createCardDatabase(data) {
   function resolvePrimaryTreeName(professionName, trees) {
     if (trees.has(professionName)) return professionName;
 
-    const normalizedProfession = normalizeName(professionName);
+    const normalizedProfession = normalizeForMatch(professionName);
     let bestMatch = null;
     trees.forEach((_, treeName) => {
-      const normalizedTree = normalizeName(treeName);
+      const normalizedTree = normalizeForMatch(treeName);
       if (
         normalizedProfession.startsWith(normalizedTree) ||
         normalizedTree.startsWith(normalizedProfession)
       ) {
-        if (!bestMatch || normalizedTree.length > normalizeName(bestMatch).length) {
+        if (!bestMatch || normalizedTree.length > normalizeForMatch(bestMatch).length) {
           bestMatch = treeName;
         }
       }
@@ -230,7 +230,7 @@ function createCardDatabase(data) {
     return bestMatch || professionName;
   }
 
-  function normalizeName(value) {
+  function normalizeForMatch(value) {
     return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
@@ -315,7 +315,7 @@ function createCardDatabase(data) {
       metaEl.className = "card-database-meta";
 
       const treeEl = document.createElement("span");
-      treeEl.className = "card-meta-profession";
+      treeEl.className = "card-meta-tree";
       treeEl.textContent = card._tree;
       metaEl.appendChild(treeEl);
 

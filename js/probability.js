@@ -1,4 +1,3 @@
-export const PROB_DICE = 3;
 export const PROB_EN_DIFFICULTIES = [6, 8, 10];
 
 export function computeSuccessDist(numDice, difficulty) {
