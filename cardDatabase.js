@@ -11,7 +11,7 @@ const LOCK_LEVEL_MAP = {
   8: 8,
 };
 
-const BASIC_PROFESSION = "Basic";
+const BASIC_TREE = "Basic";
 
 let cardDatabase = null;
 const ui = {};
@@ -38,7 +38,7 @@ async function init() {
 }
 
 function cacheUi() {
-  ui.filterProfession = document.getElementById("filterProfession");
+  ui.filterTree = document.getElementById("filterTree");
   ui.filterType = document.getElementById("filterType");
   ui.filterCategory = document.getElementById("filterCategory");
   ui.filterRollType = document.getElementById("filterRollType");
@@ -52,7 +52,7 @@ function cacheUi() {
 }
 
 function bindEvents() {
-  ui.filterProfession.addEventListener("change", () => cardDatabase.render());
+  ui.filterTree.addEventListener("change", () => cardDatabase.render());
   ui.filterType.addEventListener("change", () => cardDatabase.render());
   ui.filterCategory.addEventListener("change", () => cardDatabase.render());
   ui.filterRollType.addEventListener("change", () => cardDatabase.render());
@@ -61,7 +61,7 @@ function bindEvents() {
   ui.sortBy.addEventListener("change", () => cardDatabase.render());
   ui.sortOrder.addEventListener("change", () => cardDatabase.render());
   ui.resetFiltersButton.addEventListener("click", () => {
-    ui.filterProfession.value = "";
+    ui.filterTree.value = "";
     ui.filterType.value = "";
     ui.filterCategory.value = "";
     ui.filterRollType.value = "";
@@ -97,37 +97,30 @@ function populateFilters(db) {
     modifierSelect.appendChild(option);
   });
 
-  const professions = new Set();
-  db.getAllCards().forEach((card) => {
-    card._professions.forEach((prof) => professions.add(prof));
-  });
+  const treeNames = new Set();
+  db.getAllCards().forEach((card) => treeNames.add(card._tree));
 
-  const profSelect = ui.filterProfession;
+  const treeSelect = ui.filterTree;
   // "Basic" first, then the rest sorted
-  if (professions.has(BASIC_PROFESSION)) {
+  if (treeNames.has(BASIC_TREE)) {
     const opt = document.createElement("option");
-    opt.value = BASIC_PROFESSION;
-    opt.textContent = BASIC_PROFESSION;
-    profSelect.appendChild(opt);
-    professions.delete(BASIC_PROFESSION);
+    opt.value = BASIC_TREE;
+    opt.textContent = BASIC_TREE;
+    treeSelect.appendChild(opt);
+    treeNames.delete(BASIC_TREE);
   }
-  Array.from(professions).sort().forEach((profession) => {
+  Array.from(treeNames).sort().forEach((name) => {
     const option = document.createElement("option");
-    option.value = profession;
-    option.textContent = profession;
-    profSelect.appendChild(option);
+    option.value = name;
+    option.textContent = name;
+    treeSelect.appendChild(option);
   });
 }
 
 function createCardDatabase(data) {
   const trees = new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree]));
 
-  const state = {
-    data,
-    trees,
-    cards: null,
-  };
-
+  const state = { data, trees, cards: null };
   state.cards = buildCardCache(data, trees);
 
   function render() {
@@ -144,114 +137,68 @@ function createCardDatabase(data) {
   function buildCardCache(data, trees) {
     const cards = [];
     const actionCardsMap = data["Action Cards"] || {};
-
-    const professionsByCard = new Map();
+    const treeByCard = new Map();
     const lockLevelByCard = new Map();
 
+    // Path cards: assign to profession's primary tree at lock level 0
     data.Professions.forEach((profession) => {
-      // Scan path cards
+      const primaryTreeName = resolvePrimaryTreeName(profession.Name, trees);
       (profession.Paths || []).forEach((path) => {
         (path["Action cards"] || []).forEach((cardId) => {
-          if (!professionsByCard.has(cardId)) {
-            professionsByCard.set(cardId, []);
-          }
-          if (!professionsByCard.get(cardId).includes(profession.Name)) {
-            professionsByCard.get(cardId).push(profession.Name);
-          }
-          if (!lockLevelByCard.has(cardId)) {
+          if (!treeByCard.has(cardId)) {
+            treeByCard.set(cardId, primaryTreeName);
             lockLevelByCard.set(cardId, 0);
           }
         });
       });
+    });
 
-      const primaryTreeName = resolvePrimaryTreeName(profession.Name, trees);
-      const accessibleTrees = [];
-
-      if (trees.has(primaryTreeName)) {
-        accessibleTrees.push(primaryTreeName);
-      }
-
-      (profession["Advancement Trees"] || []).forEach((treeName) => {
-        if (!accessibleTrees.includes(treeName)) {
-          accessibleTrees.push(treeName);
-        }
-      });
-
-      accessibleTrees.forEach((treeName) => {
-        const tree = trees.get(treeName);
-        if (!tree) return;
-
-        Object.entries(tree.Levels || {}).forEach(([levelStr, versions]) => {
-          const level = Number(levelStr);
-          const lockLevel = LOCK_LEVEL_MAP[level] || 0;
-
-          (versions || []).forEach((entry) => {
-            const cardIds = entry["Action cards"] || [];
-            cardIds.forEach((cardId) => {
-              if (!professionsByCard.has(cardId)) {
-                professionsByCard.set(cardId, []);
-              }
-              if (!professionsByCard.get(cardId).includes(profession.Name)) {
-                professionsByCard.get(cardId).push(profession.Name);
-              }
-
-              if (!lockLevelByCard.has(cardId)) {
-                lockLevelByCard.set(cardId, lockLevel);
-              } else {
-                lockLevelByCard.set(cardId, Math.min(lockLevelByCard.get(cardId), lockLevel));
-              }
-            });
+    // Tree cards: assign directly by tree name
+    trees.forEach((tree, treeName) => {
+      Object.entries(tree.Levels || {}).forEach(([levelStr, versions]) => {
+        const level = Number(levelStr);
+        const lockLevel = LOCK_LEVEL_MAP[level] || 0;
+        (versions || []).forEach((entry) => {
+          (entry["Action cards"] || []).forEach((cardId) => {
+            if (!treeByCard.has(cardId)) {
+              treeByCard.set(cardId, treeName);
+              lockLevelByCard.set(cardId, lockLevel);
+            }
           });
         });
       });
     });
 
-    // Race cards get lock level 0
-    data.Races.forEach((race) => {
-      (race["Action cards"] || []).forEach((cardId) => {
-        if (!lockLevelByCard.has(cardId)) {
-          lockLevelByCard.set(cardId, 0);
-        }
-      });
-    });
-
     Object.entries(actionCardsMap).forEach(([cardId, card]) => {
-      const professions = professionsByCard.get(cardId) || [];
-      const cardWithMeta = {
+      const isBasic = cardId.startsWith("B");
+      const tree = isBasic ? BASIC_TREE : (treeByCard.get(cardId) || BASIC_TREE);
+      cards.push({
         ...card,
         _cardId: cardId,
-        _professions: professions.length > 0 ? professions : [BASIC_PROFESSION],
-        _lockLevel: lockLevelByCard.get(cardId) || 0,
-      };
-      cards.push(cardWithMeta);
+        _tree: tree,
+        _lockLevel: isBasic ? 0 : (lockLevelByCard.get(cardId) ?? 0),
+      });
     });
 
     return cards;
   }
 
   function resolvePrimaryTreeName(professionName, trees) {
-    if (trees.has(professionName)) {
-      return professionName;
-    }
+    if (trees.has(professionName)) return professionName;
 
     const normalizedProfession = normalizeName(professionName);
     let bestMatch = null;
-
     trees.forEach((_, treeName) => {
       const normalizedTree = normalizeName(treeName);
       if (
         normalizedProfession.startsWith(normalizedTree) ||
         normalizedTree.startsWith(normalizedProfession)
       ) {
-        if (
-          !bestMatch ||
-          normalizedTree.length > normalizeName(bestMatch).length
-        ) {
+        if (!bestMatch || normalizedTree.length > normalizeName(bestMatch).length) {
           bestMatch = treeName;
         }
       }
     });
-
     return bestMatch || professionName;
   }
 
@@ -261,15 +208,9 @@ function createCardDatabase(data) {
 
   function filterCards(cards, filters) {
     return cards.filter((card) => {
-      if (filters.profession && !card._professions.includes(filters.profession)) {
-        return false;
-      }
-      if (filters.type && card.Type !== filters.type) {
-        return false;
-      }
-      if (filters.category && card.Category !== filters.category) {
-        return false;
-      }
+      if (filters.tree && card._tree !== filters.tree) return false;
+      if (filters.type && card.Type !== filters.type) return false;
+      if (filters.category && card.Category !== filters.category) return false;
       if (filters.rollType) {
         const hasRoll = Boolean(card.Roll);
         const hasDIV = hasRoll && card.Roll.DIV;
@@ -284,10 +225,7 @@ function createCardDatabase(data) {
       }
       if (filters.modifier) {
         if (!card.Roll || !card.Roll.Modifiers) return false;
-        const hasModifier = card.Roll.Modifiers.some((mod) =>
-          mod.Triggers.includes(filters.modifier)
-        );
-        if (!hasModifier) return false;
+        if (!card.Roll.Modifiers.some((mod) => mod.Triggers.includes(filters.modifier))) return false;
       }
       return true;
     });
@@ -306,16 +244,20 @@ function createCardDatabase(data) {
         break;
       case "lockLevel":
         sorted.sort((a, b) => {
-          const diff = (b._lockLevel || 0) - (a._lockLevel || 0);
-          return descending ? diff : -diff;
+          const lockDiff = (a._lockLevel || 0) - (b._lockLevel || 0);
+          if (lockDiff !== 0) return descending ? -lockDiff : lockDiff;
+          const nameCmp = (a.Name || "").localeCompare(b.Name || "");
+          if (nameCmp !== 0) return descending ? -nameCmp : nameCmp;
+          const levelDiff = (a.Level || 0) - (b.Level || 0);
+          return descending ? -levelDiff : levelDiff;
         });
         break;
-      case "profession":
+      case "tree":
         sorted.sort((a, b) => {
-          const profA = (a._professions[0] || "");
-          const profB = (b._professions[0] || "");
-          const cmp = profA.localeCompare(profB);
-          return descending ? -cmp : cmp;
+          const cmp = a._tree.localeCompare(b._tree);
+          if (cmp !== 0) return descending ? -cmp : cmp;
+          const lockDiff = (a._lockLevel || 0) - (b._lockLevel || 0);
+          return descending ? -lockDiff : lockDiff;
         });
         break;
     }
@@ -344,10 +286,10 @@ function createCardDatabase(data) {
       const metaEl = document.createElement("div");
       metaEl.className = "card-database-meta";
 
-      const profEl = document.createElement("span");
-      profEl.className = "card-meta-profession";
-      profEl.textContent = card._professions.join(", ");
-      metaEl.appendChild(profEl);
+      const treeEl = document.createElement("span");
+      treeEl.className = "card-meta-profession";
+      treeEl.textContent = card._tree;
+      metaEl.appendChild(treeEl);
 
       const lockEl = document.createElement("span");
       lockEl.className = "card-meta-lock";
@@ -362,15 +304,12 @@ function createCardDatabase(data) {
     ui.cardList.appendChild(list);
   }
 
-  return {
-    render,
-    getAllCards,
-  };
+  return { render, getAllCards };
 }
 
 function getActiveFilters() {
   return {
-    profession: ui.filterProfession.value || null,
+    tree: ui.filterTree.value || null,
     type: ui.filterType.value || null,
     category: ui.filterCategory.value || null,
     rollType: ui.filterRollType.value || null,
