@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Database - Lands of Evershade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card-database-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Lands of Evershade</p>
+        <h1>Card Database</h1>
+      </div>
+      <nav class="hero-nav">
+        <a href="index.html" class="nav-link">Back to Builder</a>
+      </nav>
+    </header>
+
+    <section class="card-database-controls">
+      <div class="controls-section">
+        <h2>Filter</h2>
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="filterProfession">Profession:</label>
+            <select id="filterProfession">
+              <option value="">Any</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterType">Type:</label>
+            <select id="filterType">
+              <option value="">Any</option>
+              <option value="Action">Action</option>
+              <option value="Reaction">Reaction</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterCategory">Category:</label>
+            <select id="filterCategory">
+              <option value="">Any</option>
+              <option value="Offensive">Offensive</option>
+              <option value="Defensive">Defensive</option>
+              <option value="Support">Support</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterRollType">Roll Type:</label>
+            <select id="filterRollType">
+              <option value="">Any</option>
+              <option value="div">DIV Roll</option>
+              <option value="regular">Regular Roll</option>
+              <option value="none">Not a Roll</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterATT">ATT Roll:</label>
+            <select id="filterATT">
+              <option value="">Any</option>
+              <option value="STR">STR</option>
+              <option value="AGI">AGI</option>
+              <option value="INT">INT</option>
+              <option value="CHA">CHA</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterModifier">Roll Modifier:</label>
+            <select id="filterModifier">
+              <option value="">Any</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-section">
+        <h2>Sort</h2>
+        <div class="sort-group">
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option value="name">Name</option>
+            <option value="level">Level</option>
+            <option value="lockLevel">Lock Level</option>
+          </select>
+          <label for="sortOrder">
+            <input type="checkbox" id="sortOrder" checked>
+            Ascending
+          </label>
+        </div>
+      </div>
+
+      <button id="resetFiltersButton" class="ghost-button">Reset Filters</button>
+    </section>
+
+    <section class="card-database-content">
+      <div id="cardList" class="card-list"></div>
+    </section>
+
+    <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+  </main>
+
+  <script type="module" src="cardDatabase.js"></script>
+</body>
+</html>

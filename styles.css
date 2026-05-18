@@ -1092,3 +1092,156 @@ h1 {
 @media (max-width: 520px) {
   .hero-actions { grid-template-columns: 1fr; }
 }
+
+/* Card Database Styles */
+.card-database-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: calc(var(--gold-bar-h) + 14px) clamp(14px, 2.5vw, 28px) calc(var(--gold-bar-h) + 20px);
+}
+
+.hero-nav {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-link {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border: 1px solid rgba(201, 168, 64, 0.28);
+  border-radius: 1px;
+  transition: all 200ms ease;
+  display: inline-block;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: rgba(201, 168, 64, 0.12);
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.card-database-controls {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+}
+
+.controls-section {
+  margin-bottom: 16px;
+}
+
+.controls-section > h2 {
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  color: var(--gold-text);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-group label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-group select {
+  padding: 6px 8px;
+  background: var(--panel-strong);
+  border: 1px solid var(--panel-border);
+  color: var(--ink);
+  font-size: 0.95rem;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+.filter-group select:hover,
+.filter-group select:focus {
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.sort-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.sort-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--gold-text);
+  cursor: pointer;
+}
+
+.sort-group select {
+  padding: 6px 8px;
+  background: var(--panel-strong);
+  border: 1px solid var(--panel-border);
+  color: var(--ink);
+  font-size: 0.95rem;
+  border-radius: 1px;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.sort-group select:hover,
+.sort-group select:focus {
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.sort-group input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.card-database-content {
+  margin-top: 20px;
+}
+
+.card-database-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.card-database-item {
+  list-style: none;
+}
+
+.card-meta-info {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 8px 0 0 0;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+}
