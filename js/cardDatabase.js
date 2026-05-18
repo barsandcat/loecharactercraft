@@ -101,6 +101,7 @@ function populateFilters(db) {
 
     if (card.Roll && card.Roll.Modifiers) {
       card.Roll.Modifiers.forEach((mod) => {
+        if (mod.against) return;
         if (mod.Dice < 0) {
           mod.Triggers.forEach((t) => negatives.add(t));
         } else {
@@ -325,7 +326,7 @@ function createCardDatabase(data) {
       metaEl.appendChild(lockEl);
 
       li.appendChild(metaEl);
-      li.appendChild(buildActionCardElement(card._cardId, card));
+      li.appendChild(buildActionCardElement(card._cardId, card, null, null, true));
       list.appendChild(li);
     });
 

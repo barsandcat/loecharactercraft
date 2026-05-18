@@ -625,6 +625,30 @@ h1 {
 .folded-effect-text .action-card-inline-icon {
   filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
+
+.action-card-note {
+  margin-top: 4px;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #4a90d9;
+}
+
+.action-card-note .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(52%) sepia(59%) saturate(600%) hue-rotate(185deg) brightness(105%) contrast(90%);
+}
+
+.action-card-warning {
+  margin-top: 4px;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #da402f;
+}
+
+.action-card-warning .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(28%) saturate(2913%) hue-rotate(309deg) brightness(69%) contrast(187%);
+}
 .action-card-outcome {
   color: var(--ink);
   margin-top: 2px;

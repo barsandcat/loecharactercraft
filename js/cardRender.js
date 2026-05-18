@@ -113,7 +113,8 @@ export function appendRollModifiers(parent, modifiers) {
   modifiers.forEach((mod) => {
     const sign = mod.Dice > 0 ? "+" : "";
     const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
-    parent.appendChild(document.createTextNode(", " + sign + mod.Dice + " " + dieWord + ": "));
+    const prefix = mod.against ? "against " : "";
+    parent.appendChild(document.createTextNode(", " + sign + mod.Dice + " " + dieWord + ": " + prefix));
     appendDisplayParts(
       parent,
       mod.Triggers.map((trigger) => buildTokenPart(trigger, "keyword"))
@@ -241,7 +242,7 @@ export function buildRollElement(roll, attrs = null, keywordCounts = null) {
   return rollLineEl;
 }
 
-export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
+export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null, showNoteWarning = false) {
   const wrapper = document.createElement("div");
   wrapper.className = "action-card-full";
 
@@ -381,8 +382,31 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     body.appendChild(frontEl);
   }
 
-  if (card.Back) {
-    body.appendChild(buildFoldedEffectText(card.Back, "action-card-back"));
+  const hasNote = showNoteWarning && Boolean(card.Note);
+  const hasWarning = showNoteWarning && Boolean(card.Warning);
+
+  if (card.Back || hasNote || hasWarning) {
+    const boxEl = document.createElement("div");
+    boxEl.className = "folded-effect-text action-card-back";
+
+    if (card.Back) {
+      const backTextEl = document.createElement("div");
+      appendFormattedText(backTextEl, card.Back);
+      boxEl.appendChild(backTextEl);
+    }
+    if (hasNote) {
+      const noteEl = document.createElement("div");
+      noteEl.className = "action-card-note";
+      appendFormattedText(noteEl, card.Note);
+      boxEl.appendChild(noteEl);
+    }
+    if (hasWarning) {
+      const warningEl = document.createElement("div");
+      warningEl.className = "action-card-warning";
+      appendFormattedText(warningEl, card.Warning);
+      boxEl.appendChild(warningEl);
+    }
+    body.appendChild(boxEl);
   }
 
   wrapper.appendChild(body);
