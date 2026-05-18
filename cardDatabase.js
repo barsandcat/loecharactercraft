@@ -67,53 +67,81 @@ function bindEvents() {
     ui.filterRollType.value = "";
     ui.filterATT.value = "";
     ui.filterModifier.value = "";
-    ui.sortBy.value = "name";
+    ui.sortBy.value = "tree";
     ui.sortOrder.checked = true;
     cardDatabase.render();
   });
 }
 
 function populateFilters(db) {
+  const treeCounts = new Map();
+  const typeCounts = new Map();
+  const categoryCounts = new Map();
+  const rollTypeCounts = { div: 0, regular: 0, none: 0 };
+  const attCounts = new Map();
   const negatives = new Set();
-  const modifiers = new Set();
+  const modifierCounts = new Map();
+
   db.getAllCards().forEach((card) => {
+    treeCounts.set(card._tree, (treeCounts.get(card._tree) || 0) + 1);
+
+    if (card.Type) typeCounts.set(card.Type, (typeCounts.get(card.Type) || 0) + 1);
+    if (card.Category) categoryCounts.set(card.Category, (categoryCounts.get(card.Category) || 0) + 1);
+
+    const hasRoll = Boolean(card.Roll);
+    const hasDIV = hasRoll && card.Roll.DIV;
+    if (!hasRoll) rollTypeCounts.none++;
+    else if (hasDIV) rollTypeCounts.div++;
+    else rollTypeCounts.regular++;
+
+    if (card.Roll) {
+      const attList = card.Roll.ATT && card.Roll.ATT.length > 0 ? card.Roll.ATT : ["STR", "AGI", "INT", "CHA"];
+      attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
+    }
+
     if (card.Roll && card.Roll.Modifiers) {
       card.Roll.Modifiers.forEach((mod) => {
         if (mod.Dice < 0) {
-          mod.Triggers.forEach((trigger) => negatives.add(trigger));
+          mod.Triggers.forEach((t) => negatives.add(t));
         } else {
-          mod.Triggers.forEach((trigger) => modifiers.add(trigger));
+          mod.Triggers.forEach((t) => modifierCounts.set(t, (modifierCounts.get(t) || 0) + 1));
         }
       });
     }
   });
-  negatives.forEach((trigger) => modifiers.delete(trigger));
+  negatives.forEach((t) => modifierCounts.delete(t));
 
-  const modifierSelect = ui.filterModifier;
-  Array.from(modifiers).sort().forEach((modifier) => {
-    const option = document.createElement("option");
-    option.value = modifier;
-    option.textContent = modifier;
-    modifierSelect.appendChild(option);
+  // Static options: update text with counts
+  ui.filterType.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
+    opt.textContent = opt.value + " (" + (typeCounts.get(opt.value) || 0) + ")";
+  });
+  ui.filterCategory.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
+    opt.textContent = opt.value + " (" + (categoryCounts.get(opt.value) || 0) + ")";
+  });
+  ui.filterRollType.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
+    opt.textContent = opt.textContent + " (" + (rollTypeCounts[opt.value] || 0) + ")";
+  });
+  ui.filterATT.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
+    opt.textContent = opt.value + " (" + (attCounts.get(opt.value) || 0) + ")";
   });
 
-  const treeNames = new Set();
-  db.getAllCards().forEach((card) => treeNames.add(card._tree));
-
+  // Dynamic options: Tree
   const treeSelect = ui.filterTree;
-  // "Basic" first, then the rest sorted
-  if (treeNames.has(BASIC_TREE)) {
+  const addTreeOption = (name) => {
     const opt = document.createElement("option");
-    opt.value = BASIC_TREE;
-    opt.textContent = BASIC_TREE;
+    opt.value = name;
+    opt.textContent = name + " (" + (treeCounts.get(name) || 0) + ")";
     treeSelect.appendChild(opt);
-    treeNames.delete(BASIC_TREE);
-  }
-  Array.from(treeNames).sort().forEach((name) => {
-    const option = document.createElement("option");
-    option.value = name;
-    option.textContent = name;
-    treeSelect.appendChild(option);
+  };
+  if (treeCounts.has(BASIC_TREE)) addTreeOption(BASIC_TREE);
+  Array.from(treeCounts.keys()).filter((n) => n !== BASIC_TREE).sort().forEach(addTreeOption);
+
+  // Dynamic options: Modifier
+  Array.from(modifierCounts.keys()).sort().forEach((modifier) => {
+    const opt = document.createElement("option");
+    opt.value = modifier;
+    opt.textContent = modifier + " (" + modifierCounts.get(modifier) + ")";
+    ui.filterModifier.appendChild(opt);
   });
 }
 
