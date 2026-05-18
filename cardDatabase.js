@@ -1,15 +1,17 @@
-// Shared constants
-const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
+import { buildActionCardElement } from "./cardRender.js";
+
 const LOCK_LEVEL_MAP = {
-  1: 0,
-  2: 1,
-  3: 1,
-  4: 2,
-  5: 4,
-  6: 5,
-  7: 6,
-  8: 7,
+  1: 1,
+  2: 2,
+  3: 2,
+  4: 3,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
 };
+
+const BASIC_PROFESSION = "Basic";
 
 let cardDatabase = null;
 const ui = {};
@@ -26,14 +28,9 @@ async function init() {
 
     const data = await response.json();
     cardDatabase = createCardDatabase(data);
-    
-    // Populate filter dropdowns
+
     populateFilters(cardDatabase);
-    
-    // Initial render
     cardDatabase.render();
-    
-    // Bind events
     bindEvents();
   } catch (error) {
     showError("Could not load data.json. " + error.message);
@@ -77,17 +74,20 @@ function bindEvents() {
 }
 
 function populateFilters(db) {
-  // Get all unique modifiers
+  const negatives = new Set();
   const modifiers = new Set();
   db.getAllCards().forEach((card) => {
     if (card.Roll && card.Roll.Modifiers) {
       card.Roll.Modifiers.forEach((mod) => {
-        mod.Triggers.forEach((trigger) => {
-          modifiers.add(trigger);
-        });
+        if (mod.Dice < 0) {
+          mod.Triggers.forEach((trigger) => negatives.add(trigger));
+        } else {
+          mod.Triggers.forEach((trigger) => modifiers.add(trigger));
+        }
       });
     }
   });
+  negatives.forEach((trigger) => modifiers.delete(trigger));
 
   const modifierSelect = ui.filterModifier;
   Array.from(modifiers).sort().forEach((modifier) => {
@@ -97,17 +97,20 @@ function populateFilters(db) {
     modifierSelect.appendChild(option);
   });
 
-  // Populate profession filter
   const professions = new Set();
   db.getAllCards().forEach((card) => {
-    if (card._professions) {
-      card._professions.forEach((prof) => {
-        professions.add(prof);
-      });
-    }
+    card._professions.forEach((prof) => professions.add(prof));
   });
 
   const profSelect = ui.filterProfession;
+  // "Basic" first, then the rest sorted
+  if (professions.has(BASIC_PROFESSION)) {
+    const opt = document.createElement("option");
+    opt.value = BASIC_PROFESSION;
+    opt.textContent = BASIC_PROFESSION;
+    profSelect.appendChild(opt);
+    professions.delete(BASIC_PROFESSION);
+  }
   Array.from(professions).sort().forEach((profession) => {
     const option = document.createElement("option");
     option.value = profession;
@@ -118,14 +121,13 @@ function populateFilters(db) {
 
 function createCardDatabase(data) {
   const trees = new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree]));
-  
+
   const state = {
     data,
     trees,
     cards: null,
   };
-  
-  // Build cards after state is initialized
+
   state.cards = buildCardCache(data, trees);
 
   function render() {
@@ -143,11 +145,25 @@ function createCardDatabase(data) {
     const cards = [];
     const actionCardsMap = data["Action Cards"] || {};
 
-    // Build profession cache
     const professionsByCard = new Map();
     const lockLevelByCard = new Map();
 
     data.Professions.forEach((profession) => {
+      // Scan path cards
+      (profession.Paths || []).forEach((path) => {
+        (path["Action cards"] || []).forEach((cardId) => {
+          if (!professionsByCard.has(cardId)) {
+            professionsByCard.set(cardId, []);
+          }
+          if (!professionsByCard.get(cardId).includes(profession.Name)) {
+            professionsByCard.get(cardId).push(profession.Name);
+          }
+          if (!lockLevelByCard.has(cardId)) {
+            lockLevelByCard.set(cardId, 0);
+          }
+        });
+      });
+
       const primaryTreeName = resolvePrimaryTreeName(profession.Name, trees);
       const accessibleTrees = [];
 
@@ -190,7 +206,7 @@ function createCardDatabase(data) {
       });
     });
 
-    // Also check race cards
+    // Race cards get lock level 0
     data.Races.forEach((race) => {
       (race["Action cards"] || []).forEach((cardId) => {
         if (!lockLevelByCard.has(cardId)) {
@@ -200,10 +216,11 @@ function createCardDatabase(data) {
     });
 
     Object.entries(actionCardsMap).forEach(([cardId, card]) => {
+      const professions = professionsByCard.get(cardId) || [];
       const cardWithMeta = {
         ...card,
         _cardId: cardId,
-        _professions: professionsByCard.get(cardId) || [],
+        _professions: professions.length > 0 ? professions : [BASIC_PROFESSION],
         _lockLevel: lockLevelByCard.get(cardId) || 0,
       };
       cards.push(cardWithMeta);
@@ -262,7 +279,7 @@ function createCardDatabase(data) {
       }
       if (filters.att) {
         if (!card.Roll) return false;
-        const attList = getRollAttributeList(card.Roll);
+        const attList = card.Roll.ATT && card.Roll.ATT.length > 0 ? card.Roll.ATT : ["STR", "AGI", "INT", "CHA"];
         if (!attList.includes(filters.att)) return false;
       }
       if (filters.modifier) {
@@ -278,7 +295,7 @@ function createCardDatabase(data) {
 
   function sortCards(cards, sortBy, descending) {
     const sorted = [...cards];
-    
+
     switch (sortBy) {
       case "name":
         sorted.sort((a, b) => {
@@ -287,20 +304,22 @@ function createCardDatabase(data) {
           return descending ? nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
         });
         break;
-      case "level":
-        sorted.sort((a, b) => {
-          const diff = (b.Level || 0) - (a.Level || 0);
-          return descending ? diff : -diff;
-        });
-        break;
       case "lockLevel":
         sorted.sort((a, b) => {
           const diff = (b._lockLevel || 0) - (a._lockLevel || 0);
           return descending ? diff : -diff;
         });
         break;
+      case "profession":
+        sorted.sort((a, b) => {
+          const profA = (a._professions[0] || "");
+          const profB = (b._professions[0] || "");
+          const cmp = profA.localeCompare(profB);
+          return descending ? -cmp : cmp;
+        });
+        break;
     }
-    
+
     return sorted;
   }
 
@@ -321,7 +340,22 @@ function createCardDatabase(data) {
     cards.forEach((card) => {
       const li = document.createElement("li");
       li.className = "card-database-item";
-      li.appendChild(buildCardElement(card));
+
+      const metaEl = document.createElement("div");
+      metaEl.className = "card-database-meta";
+
+      const profEl = document.createElement("span");
+      profEl.className = "card-meta-profession";
+      profEl.textContent = card._professions.join(", ");
+      metaEl.appendChild(profEl);
+
+      const lockEl = document.createElement("span");
+      lockEl.className = "card-meta-lock";
+      lockEl.textContent = "Level: " + card._lockLevel;
+      metaEl.appendChild(lockEl);
+
+      li.appendChild(metaEl);
+      li.appendChild(buildActionCardElement(card._cardId, card));
       list.appendChild(li);
     });
 
@@ -332,231 +366,6 @@ function createCardDatabase(data) {
     render,
     getAllCards,
   };
-}
-
-function buildCardElement(card) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "action-card-full";
-
-  const idBox = document.createElement("div");
-  idBox.className = "action-card-id " + (card.Type === "Reaction" ? "is-reaction" : "is-action");
-  idBox.textContent = card._cardId;
-  wrapper.appendChild(idBox);
-
-  const body = document.createElement("div");
-  body.className = "action-card-body";
-
-  const nameEl = document.createElement("div");
-  nameEl.className = "action-card-name";
-  nameEl.textContent = card.DisplayName || card.Name;
-  body.appendChild(nameEl);
-
-  // Profession and Level info
-  if (card._professions && card._professions.length > 0) {
-    const metaInfo = document.createElement("div");
-    metaInfo.className = "card-meta-info";
-    metaInfo.textContent = "Professions: " + card._professions.join(", ");
-    body.appendChild(metaInfo);
-  }
-
-  if (card._lockLevel !== undefined) {
-    const lockInfo = document.createElement("div");
-    lockInfo.className = "card-meta-info";
-    lockInfo.textContent = "Lock Level: " + card._lockLevel;
-    body.appendChild(lockInfo);
-  }
-
-  const metaParts = [
-    ...(card.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
-  ];
-  if (card.Condition) {
-    metaParts.push({
-      render: (parent) => appendFormattedText(parent, card.Condition),
-    });
-  }
-  if (metaParts.length) {
-    const metaEl = document.createElement("div");
-    metaEl.className = "action-card-meta";
-    appendDisplayParts(metaEl, metaParts);
-    body.appendChild(metaEl);
-  }
-
-  if (card.Target) {
-    const targetEl = document.createElement("div");
-    targetEl.className = "action-card-target";
-    targetEl.textContent = card.Target;
-    body.appendChild(targetEl);
-  }
-
-  if (card.Roll) {
-    body.appendChild(buildRollElement(card.Roll));
-
-    if (card.Roll.Successes) {
-      const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
-      sortedKeys.forEach((key) => {
-        const outEl = document.createElement("div");
-        outEl.className = "action-card-outcome";
-        outEl.appendChild(document.createTextNode(key + ": "));
-        appendFormattedText(outEl, card.Roll.Successes[key]);
-        body.appendChild(outEl);
-      });
-    }
-  }
-
-  if (card.Front) {
-    const frontEl = document.createElement("div");
-    frontEl.className = "action-card-desc";
-    appendFormattedText(frontEl, card.Front);
-    body.appendChild(frontEl);
-  }
-
-  if (card.Back) {
-    body.appendChild(buildFoldedEffectText(card.Back, "action-card-back"));
-  }
-
-  wrapper.appendChild(body);
-  return wrapper;
-}
-
-function buildRollElement(roll) {
-  const rollLineEl = document.createElement("div");
-  rollLineEl.className = "action-card-roll";
-  const mode = normalizeRollMode(roll.Mode);
-  const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
-  const attList = getRollAttributeList(roll);
-  let rollText;
-  if (mode === "Sum") {
-    rollText = "Roll for " + attList.join(" and ");
-  } else if (mode === "Lowest") {
-    if (hasSpecificATT) {
-      rollText = "Roll for the lowest of " + attList.join(" or ");
-    } else {
-      rollText = "Roll the lowest ATT";
-    }
-  } else if (hasSpecificATT) {
-    rollText = "Roll for " + attList.join(" or ");
-  } else {
-    rollText = "Roll the highest ATT";
-  }
-  if (roll.DIV) rollText += " and DIV";
-  appendFormattedText(rollLineEl, rollText);
-  const diffBadge = document.createElement("span");
-  diffBadge.className = "action-card-difficulty";
-  const diffIcon = document.createElement("img");
-  const difficultyIconName = roll.Difficulty != null ? String(roll.Difficulty) : "en";
-  diffIcon.className = "action-card-difficulty-icon";
-  diffIcon.src = "icons/" + encodeURIComponent(difficultyIconName) + ".svg";
-  diffIcon.alt = roll.Difficulty != null ? "Difficulty " + roll.Difficulty : "Enemy difficulty";
-  diffBadge.appendChild(diffIcon);
-  rollLineEl.appendChild(diffBadge);
-  if (roll.Modifiers && roll.Modifiers.length) {
-    appendRollModifiers(rollLineEl, roll.Modifiers);
-  }
-  return rollLineEl;
-}
-
-function normalizeRollMode(mode) {
-  return mode === "Sum" || mode === "Lowest" ? mode : "Highest";
-}
-
-function getRollAttributeList(roll) {
-  return roll.ATT && roll.ATT.length > 0 ? roll.ATT : ATTRIBUTES;
-}
-
-function buildFoldedEffectText(text, className = "") {
-  const effectEl = document.createElement("div");
-  effectEl.className = "folded-effect-text" + (className ? " " + className : "");
-  appendFormattedText(effectEl, text);
-  return effectEl;
-}
-
-function appendFormattedText(parent, text) {
-  const pattern = /\{([^}]+)\}|\[([^\]]+)\]/g;
-  let lastIndex = 0;
-  let match;
-  while ((match = pattern.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-    }
-    
-    if (match[1] !== undefined) {
-      // Icon: {iconName}
-      const iconName = match[1].trim();
-      if (iconName) {
-        const iconEl = document.createElement("img");
-        iconEl.className = "action-card-inline-icon";
-        iconEl.src = "icons/" + encodeURIComponent(iconName) + ".svg";
-        iconEl.alt = iconName;
-        parent.appendChild(iconEl);
-      } else {
-        parent.appendChild(document.createTextNode(match[0]));
-      }
-    } else if (match[2] !== undefined) {
-      // Keyword: [keywordName]
-      const keywordName = match[2].trim();
-      if (keywordName) {
-        const keywordEl = document.createElement("em");
-        keywordEl.className = "keyword-token";
-        keywordEl.textContent = keywordName;
-        parent.appendChild(keywordEl);
-      } else {
-        parent.appendChild(document.createTextNode(match[0]));
-      }
-    }
-    lastIndex = match.index + match[0].length;
-  }
-  if (lastIndex < text.length) {
-    parent.appendChild(document.createTextNode(text.slice(lastIndex)));
-  }
-}
-
-function appendDisplayParts(parent, parts, separator = ", ") {
-  parts.forEach((part, index) => {
-    if (index > 0) {
-      parent.appendChild(document.createTextNode(separator));
-    }
-    appendDisplayPart(parent, part);
-  });
-}
-
-function appendDisplayPart(parent, part) {
-  if (!part) {
-    return;
-  }
-
-  if (typeof part.render === "function") {
-    part.render(parent);
-    return;
-  }
-
-  if (part.kind === "keyword" || part.kind === "skill") {
-    const tokenEl = document.createElement("em");
-    tokenEl.className = part.kind === "skill" ? "skill-token" : "keyword-token";
-    tokenEl.textContent = part.text;
-    parent.appendChild(tokenEl);
-    if (part.count > 1) {
-      parent.appendChild(document.createTextNode(" x" + part.count));
-    }
-    return;
-  }
-
-  parent.appendChild(document.createTextNode(part.text));
-}
-
-function buildTokenPart(text, kind) {
-  return { text, kind };
-}
-
-function appendRollModifiers(parent, modifiers) {
-  modifiers.forEach((mod) => {
-    const sign = mod.Dice > 0 ? "+" : "";
-    const dieWord = Math.abs(mod.Dice) === 1 ? "die" : "dice";
-    parent.appendChild(document.createTextNode(", " + sign + mod.Dice + " " + dieWord + ": "));
-    appendDisplayParts(
-      parent,
-      mod.Triggers.map((trigger) => buildTokenPart(trigger, "keyword"))
-    );
-  });
 }
 
 function getActiveFilters() {

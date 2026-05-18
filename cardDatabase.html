@@ -16,9 +16,9 @@
         <p class="eyebrow">Lands of Evershade</p>
         <h1>Card Database</h1>
       </div>
-      <nav class="hero-nav">
-        <a href="index.html" class="nav-link">Back to Builder</a>
-      </nav>
+      <div class="hero-actions">
+        <button id="resetFiltersButton" class="ghost-button" type="button">Reset Filters</button>
+      </div>
     </header>
 
     <section class="card-database-controls">
@@ -82,8 +82,8 @@
           <label for="sortBy">Sort by:</label>
           <select id="sortBy">
             <option value="name">Name</option>
-            <option value="level">Level</option>
-            <option value="lockLevel">Lock Level</option>
+            <option value="lockLevel">Level</option>
+            <option value="profession">Profession</option>
           </select>
           <label for="sortOrder">
             <input type="checkbox" id="sortOrder" checked>
@@ -92,7 +92,6 @@
         </div>
       </div>
 
-      <button id="resetFiltersButton" class="ghost-button">Reset Filters</button>
     </section>
 
     <section class="card-database-content">
