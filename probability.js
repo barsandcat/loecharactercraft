@@ -36,6 +36,14 @@ export function bandProb(dist, sortedNumKeys, index) {
 
 export function pct(p) { return Math.round(p * 100) + "%"; }
 
+export function avgSuccesses(dist) {
+  let sum = 0;
+  for (let s = 0; s < dist.length; s++) {
+    sum += s * dist[s];
+  }
+  return sum;
+}
+
 export function computeAppliedModifiers(modifiers, keywordCounts) {
   const applied = [];
   for (const mod of modifiers) {

@@ -1,4 +1,4 @@
-import { PROB_DICE, PROB_EN_DIFFICULTIES, computeSuccessDist, probAtLeast, bandProb, pct, computeAppliedModifiers } from "./probability.js";
+import { PROB_DICE, PROB_EN_DIFFICULTIES, computeSuccessDist, probAtLeast, bandProb, pct, avgSuccesses, computeAppliedModifiers } from "./probability.js";
 
 export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   const LEVEL_UP_SLOTS = 12;
@@ -1477,7 +1477,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     if (card.Roll) {
-      body.appendChild(buildRollElement(card.Roll));
+      body.appendChild(buildRollElement(card.Roll, attrs, keywordCounts));
 
       if (card.Roll.Successes) {
         const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
@@ -1505,7 +1505,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
             parent.appendChild(document.createTextNode("("));
             PROB_EN_DIFFICULTIES.forEach((d, di) => {
               if (di > 0) {
-                parent.appendChild(document.createTextNode(" "));
+                parent.appendChild(document.createTextNode(", "));
               }
               appendDifficultyIcon(parent, d);
               parent.appendChild(document.createTextNode(":" + pct(bandProb(dists[di], sortedNum, i))));
@@ -1640,7 +1640,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       : null;
   }
 
-  function buildRollElement(roll) {
+  function buildRollElement(roll, attrs = null, keywordCounts = null) {
     const rollLineEl = document.createElement("div");
     rollLineEl.className = "action-card-roll";
     const mode = normalizeRollMode(roll.Mode);
@@ -1674,6 +1674,87 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (roll.Modifiers && roll.Modifiers.length) {
       appendRollModifiers(rollLineEl, roll.Modifiers);
     }
+    
+    // Add average successes statistics
+    const attDice = attrs
+      ? getRollAttributeDice(attrs, attList, mode)
+      : 0;
+    const baseDice = attDice > 0 ? attDice : PROB_DICE;
+    const appliedMods = (keywordCounts && roll.Modifiers)
+      ? computeAppliedModifiers(roll.Modifiers, keywordCounts)
+      : [];
+    const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
+    const effectiveDice = Math.max(0, baseDice + modDiceTotal);
+    
+    const avgWrap = document.createElement("span");
+    avgWrap.className = "action-card-prob";
+    
+    avgWrap.appendChild(document.createTextNode(" ("));
+    
+    if (roll.Difficulty != null) {
+      const dist = computeSuccessDist(effectiveDice, roll.Difficulty);
+      const avgSucc = avgSuccesses(dist);
+      avgWrap.appendChild(document.createTextNode(avgSucc.toFixed(1)));
+      const avgIcon = document.createElement("img");
+      avgIcon.className = "action-card-inline-icon";
+      avgIcon.src = "icons/successes.svg";
+      avgIcon.alt = "successes";
+      avgWrap.appendChild(avgIcon);
+    } else {
+      PROB_EN_DIFFICULTIES.forEach((d, di) => {
+        if (di > 0) {
+          avgWrap.appendChild(document.createTextNode(", "));
+        }
+        appendDifficultyIcon(avgWrap, d);
+        avgWrap.appendChild(document.createTextNode(": "));
+        const dist = computeSuccessDist(effectiveDice, d);
+        const avgSucc = avgSuccesses(dist);
+        avgWrap.appendChild(document.createTextNode(avgSucc.toFixed(1)));
+        const avgIcon = document.createElement("img");
+        avgIcon.className = "action-card-inline-icon";
+        avgIcon.src = "icons/successes.svg";
+        avgIcon.alt = "successes";
+        avgWrap.appendChild(avgIcon);
+      });
+    }
+    
+    avgWrap.appendChild(document.createTextNode(")"));
+    
+    // Create tooltip
+    const tooltip = document.createElement("div");
+    tooltip.className = "action-card-prob-tooltip";
+    const totalLine = document.createElement("div");
+    totalLine.className = "action-card-prob-tooltip-total";
+    totalLine.textContent = "Rolling " + effectiveDice + " dice";
+    tooltip.appendChild(totalLine);
+    if (attrs) {
+      if (mode === "Sum") {
+        attList.forEach(att => {
+          const line = document.createElement("div");
+          line.textContent = att + ": " + (attrs[att] || 0);
+          tooltip.appendChild(line);
+        });
+      } else {
+        const usedAtt = getRollAttributeSelection(attrs, attList, mode);
+        if (usedAtt) {
+          const line = document.createElement("div");
+          line.textContent = usedAtt.attribute + ": " + usedAtt.value;
+          tooltip.appendChild(line);
+        }
+      }
+    }
+    for (const m of appliedMods) {
+      const sign = m.totalDice > 0 ? "+" : "";
+      const dieWord = Math.abs(m.totalDice) === 1 ? "die" : "dice";
+      const countLabel = m.count > 1 ? " ×" + m.count : "";
+      const line = document.createElement("div");
+      line.textContent = m.trigger + countLabel + ": " + sign + m.totalDice + " " + dieWord;
+      tooltip.appendChild(line);
+    }
+    avgWrap.appendChild(tooltip);
+    
+    rollLineEl.appendChild(avgWrap);
+    
     return rollLineEl;
   }
 
