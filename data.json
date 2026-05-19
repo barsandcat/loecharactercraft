@@ -3799,7 +3799,6 @@
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
-	  "Level": 1,
       "Sun": 1,
       "BackSun": 2,
       "Keywords": [
