@@ -4165,6 +4165,7 @@
           "INT"
         ],
         "DIV": true,
+		"Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
