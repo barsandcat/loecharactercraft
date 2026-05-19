@@ -3799,6 +3799,7 @@
       "Name": "Bash",
       "Type": "Action",
       "Category": "Offensive",
+	  "Level": 1,
       "Sun": 1,
       "BackSun": 2,
       "Keywords": [
@@ -4108,7 +4109,7 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
-      "Level": 1,
+      "Level": 2,
       "Moon": 1,
       "Keywords": [
         "Attack"
