@@ -7663,7 +7663,7 @@
       "Category": "Offensive",
       "Condition": "After you Push an Enemy",
       "Target": "Self",
-      "Front": "Move by 3(+2 spaces: Pathfinding). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
+      "Front": "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
       "Level": 1
     },
     "S20": {
