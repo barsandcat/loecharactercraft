@@ -254,10 +254,56 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
   const body = document.createElement("div");
   body.className = "action-card-body";
 
+  const nameRowEl = document.createElement("div");
+  nameRowEl.className = "action-card-name-row";
+  
+  const sunMoonEl = document.createElement("div");
+  sunMoonEl.className = "action-card-sun-moon";
+  
+  let hasSunMoon = false;
+  
+  if (card.Sun && card.Sun > 0) {
+    const sunIcon = document.createElement("img");
+    sunIcon.className = "action-card-inline-icon";
+    sunIcon.src = "icons/sun.svg";
+    sunIcon.alt = "Sun";
+    sunMoonEl.appendChild(sunIcon);
+    
+    const sunText = document.createElement("span");
+    sunText.textContent = card.Sun;
+    sunMoonEl.appendChild(sunText);
+    
+    hasSunMoon = true;
+  }
+  
+  if ((card.Sun && card.Sun > 0) && (card.Moon && card.Moon > 0)) {
+    sunMoonEl.appendChild(document.createTextNode(" "));
+  }
+  
+  if (card.Moon && card.Moon > 0) {
+    const moonIcon = document.createElement("img");
+    moonIcon.className = "action-card-inline-icon";
+    moonIcon.src = "icons/moon.svg";
+    moonIcon.alt = "Moon";
+    sunMoonEl.appendChild(moonIcon);
+    
+    const moonText = document.createElement("span");
+    moonText.textContent = card.Moon;
+    sunMoonEl.appendChild(moonText);
+    
+    hasSunMoon = true;
+  }
+  
+  if (hasSunMoon) {
+    nameRowEl.appendChild(sunMoonEl);
+  }
+  
   const nameEl = document.createElement("div");
   nameEl.className = "action-card-name";
   nameEl.textContent = card.DisplayName || card.Name;
-  body.appendChild(nameEl);
+  nameRowEl.appendChild(nameEl);
+  
+  body.appendChild(nameRowEl);
 
   const metaParts = [
     ...(card.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),

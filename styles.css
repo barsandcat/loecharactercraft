@@ -516,13 +516,38 @@ h1 {
   min-width: 0;
 }
 
+.action-card-name-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 1.4em;
+}
+
 .action-card-name {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: 'EB Garamond', serif;
   font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
   color: var(--ink);
   line-height: 1.2;
+}
+
+.action-card-sun-moon {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.action-card-sun-moon img {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
 }
 
 .action-card-meta {

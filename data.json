@@ -5104,7 +5104,7 @@
         }
       },
       "Back": "Treat your STR and AGI as the sum of them both. Treat your INT and CHA as sum of them both.",
-      "Warining": "Instead of refreshing this card, place it in your Pouch",
+      "Warning": "Instead of refreshing this card, place it in your Pouch",
       "BackSun": 4,
       "BackMoon": 4,
       "Level": 1
@@ -5285,6 +5285,7 @@
       "Back": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
       "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Warning": "When you refresh this card, discard your Effect tokens from the Enemy",
+	  "BackMoon": 2,
       "Level": 1
     },
     "P44": {
@@ -5314,10 +5315,12 @@
           "1": "Deal {successes} {damage}. Push by 3 (+1 space: against Small)."
         }
       },
+	  "BackSun": 2,
       "Level": 1
     },
     "P45": {
       "Name": "Executor's Insight",
+	  "Moon": 1,
       "Category": "Support",
       "Type": "Reaction",
       "Moon": 1,
@@ -5335,6 +5338,8 @@
       "Condition": "Against [Melee], [Ranged] or [Spell]",
       "Target": "Self",
       "Front": "Roll for CHA (against [Spell]) or AGI (against [Ranged]) or STR (against [Melee]) {en}, +1 die: [Investigation], [Vigilance], 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}.",
+	  "Note": "Anytime: Pay 2 {fate} to refresh this card.",
+	  "BackSun": 0,
       "Level": 1
     },
     "P47": {
@@ -5346,10 +5351,13 @@
       "Condition": "During Offensive Action",
       "Target": "Self",
       "Front": "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2",
+	  "BackMoon": 3,
+	  "BackSun": 3,
       "Level": 1
     },
     "P48": {
       "Name": "Thousand Cuts",
+	  "Sun": 0,
       "Category": "Offensive",
       "Type": "Action",
       "Keywords": [
@@ -5373,10 +5381,13 @@
           "1": "You may lose 3 HP to resolve 3"
         }
       },
+	  "Warning": "Do not refresh this card at the start of your Activation, unless you pay 2 {fate}",
+	  "BackSun": 4,
       "Level": 1
     },
     "P49": {
       "Name": "Hand of Retribution",
+	  "Sun": 0,
       "Category": "Offensive",
       "Type": "Action",
       "Sun": 1,
@@ -5419,6 +5430,8 @@
           "1": "Deal {successes} {damage}. Add 3 {damage} if {en} is 6 or less OR 5 {damage} if {en} is 2"
         }
       },
+	  "BackSun": 2,
+	  "BackMoon": 2,
       "Level": 1
     },
     "P50": {
@@ -5452,10 +5465,12 @@
       "Back": "The Enemy with your Effect token has their {en} reduced by 2",
       "Note": "Start of your Activation: You may choose not to refresh this card.",
       "Warning": "When you refresh this card, discard your Effect token from the Enemy",
+	  "BackSun": 0,
       "Level": 1
     },
     "P51": {
       "Name": "Divine Brew",
+	  "Sun": 0,
       "Category": "Support",
       "Type": "Action",
       "Target": "Self or PM in R1",
@@ -5486,10 +5501,14 @@
           "1": "Stabilize or heal {half div} HP"
         }
       },
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2{fate}",
+	  "BackSun": 2,
+	  "BackMoon": 2,
       "Level": 1
     },
     "P52": {
       "Name": "The Guiding Light",
+	  "Sun": 0,
       "Category": "Support",
       "Type": "Action",
       "Target": "Self",
@@ -7314,6 +7333,7 @@
     "S08": {
       "Name": "Web of Minds",
       "Type": "Action",
+	  "Sun": 0,
       "Category": "Support",
       "Keywords": [
         "Spell"
@@ -7347,6 +7367,7 @@
     "S09": {
       "Name": "Ritual of Haste",
       "Type": "Action",
+	  "Sun": 0,
       "Category": "Support",
       "Keywords": [
         "Spell"
@@ -7380,6 +7401,7 @@
       "Name": "Protective Gestures",
       "Type": "Action",
       "Category": "Support",
+	  "Sun": 0,
       "Keywords": [
         "Spell"
       ],
@@ -7411,12 +7433,14 @@
       },
       "Back": "When you or PMs in R2 gain {terror}, gain 1 less",
 	  "Note": "Start of your Activation: You man choose not to refresh this card",
+	  "BackMoon": 3,
       "Level": 1
     },
     "S11": {
       "Name": "Rain of Divinum",
       "Type": "Action",
       "Category": "Support",
+	  "Sun": 0,
       "Keywords": [
         "Spell"
       ],
@@ -7447,12 +7471,15 @@
       },
       "Back": "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 during DIV rolls). You and Party Members in this range may roll an additional D6 DIV die during DIV rolls.",
       "Warning": "Start of your Activation: Instead of refreshing this card, discard 1 marker from it. Then, if there are no markers on this card, place it in your Pouch",
+	  "BackMoon": 2,
       "Level": 1
     },
     "S12": {
       "Name": "Healing Burst",
       "Type": "Action",
       "Category": "Support",
+	  "Sun": 0,
+	  "BackSun": 0,
       "Keywords": [
         "Spell"
       ],
@@ -7464,6 +7491,7 @@
       "Name": "Swerve",
       "Type": "Action",
       "Category": "Defensive",
+	  "Sun": 0,
       "Target": "Self",
       "Roll": {
         "ATT": [
@@ -7492,6 +7520,7 @@
     "S14": {
       "Name": "Sucker Punch",
       "Type": "Action",
+	  "Sun": 0,
       "Category": "Offensive",
       "Keywords": [
         "Attack"
@@ -7530,6 +7559,7 @@
     },
     "S15": {
       "Name": "Feint",
+	  "Sun": 0,
       "Type": "Action",
       "Category": "Offensive",
       "Keywords": [
@@ -7610,6 +7640,7 @@
         }
       },
 	  "Warning": "Do not refresh this card, unless you pay 2 {fate}",
+	  "BackMoon": 4,
       "Level": 1
     },
     "S17": {
@@ -7629,6 +7660,7 @@
         }
       },
 	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
+	  "BackSun": 0,
       "Level": 1
     },
     "S18": {
@@ -7664,16 +7696,21 @@
       },
       "Back": "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch.",
       "Warning": "This card cannot be refreshed",
+	  "BackSun": 1,
+	  "BackMoon": 1,
       "Level": 1
     },
     "S19": {
       "Name": "Follow-up",
+	  "Sun": 0,
       "Type": "Reaction",
       "Category": "Offensive",
       "Condition": "After you Push an Enemy",
       "Target": "Self",
       "Front": "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
 	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
+	  "BackSun": 1,
+	  "BackMoon": 1,
       "Level": 1
     },
     "S20": {
@@ -7685,6 +7722,7 @@
       "Target": "Self",
       "Front": "Move by your AGI. Gain 1 {fate}",
 	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
+	  "BackSun": 0,
       "Level": 1
     },
     "S21": {
@@ -7715,6 +7753,7 @@
           "1": "Deal ({successes}-1) {damage}. You move by {div}"
         }
       },
+	  "BackMoon": 2,
       "Level": 1
     },
     "S22": {
@@ -7744,6 +7783,8 @@
       },
       "Back": "During [Ranged] Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die.",
       "Note": "Start of your Activation: You may choose not to refresh this card.",
+	  "BackSun": 1,
+	  "BackMoon": 1,
       "Level": 1
     },
     "S23": {
@@ -7766,6 +7807,7 @@
           "1": "Deal {successes} {damage}. Then deal ({successes}-2) {damage} to {half div} other Enemies in R2 from the target."
         }
       },
+	  "BackMoon": 1, 
       "Level": 1
     },
     "S24": {
@@ -7797,6 +7839,7 @@
           "2": "Deal {successes} [Ice] {damage} ignoring 5 {armor}"
         }
       },
+	  "BackMoon": 2,
       "Level": 1
     },
     "S25": {
@@ -7824,10 +7867,12 @@
           "2": "Draw {successes} tokens from the bag instead. Choose and resolve one of them, return the rest to the bag",
           "0": "Gain 1 {terror}"
         }
-      }
+      },
+	  "BackSun": 0
     },
     "S26": {
       "Name": "Relieving Aura",
+	  "Sun": 0,
       "Type": "Action",
       "Category": "Support",
       "Target": "Self",
@@ -7855,7 +7900,8 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "When a PM end their Activation in R1 from you, they may heal 2 HP or gain 1 ATT Boon."
+      "Back": "When a PM end their Activation in R1 from you, they may heal 2 HP or gain 1 ATT Boon.",
+	  "BackMoon": 3
     },
     "S27": {
       "Name": "Nature's Revenge",
@@ -7882,7 +7928,8 @@
           "1": "The Enemy loses 1 HP. Heal by 1 HP."
         }
       },
-	  "Warning": "Do not refresh this card, unless you pay 1 {fate}"
+	  "Warning": "Do not refresh this card, unless you pay 1 {fate}",
+	  "BackMoon": 2
     },
     "S28": {
       "Name": "Entangle",
@@ -7913,7 +7960,8 @@
         }
       },
       "Back": "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3.",
-      "Warning": "This card cannot be refreshed. When you discard the last Effect token, place this card in your Pouch."
+      "Warning": "This card cannot be refreshed. When you discard the last Effect token, place this card in your Pouch.",
+	  "BackMoon": 2
     },
     "S29": {
       "Name": "Academic Magic",
@@ -7952,10 +8000,12 @@
           "1": "Deal ({successes}+{half div}) [Divinum] {damage}. Then you may gain 2 {terror} to deal {half div} [Divinum] {damage} to the same target."
         }
       },
+	  "BackMoon": 2,
       "Level": 1
     },
     "S30": {
       "Name": "Cognitive Enhancement",
+	  "Sun": 0,
       "Type": "Action",
       "Keywords": [
         "Spell"
@@ -7980,6 +8030,7 @@
           "1": "Target gains {successes} ATT Boons (max 3 Boons) of their highest ATT."
         }
       },
+	  "BackMoon": 1,
       "Level": 1
     },
     "S31": {
@@ -8008,6 +8059,7 @@
           "1": "Target may refresh any of their Action cards and heal by {successes} HP. Place this card in your Pouch."
         }
       },
+	  "BackMoon": 0,
       "Level": 1
     },
     "S32": {
@@ -8083,6 +8135,7 @@
           "0": "You gain 1 {terror}. Do not flip this card"
         }
       },
+	  "BackMoon": 2,
       "Level": 1
     },
     "S35": {
@@ -8120,10 +8173,13 @@
           "1": "Deal ({successes}+2) {damage}. Reduce this {damage} by 1 for each space connected to the target's space."
         }
       },
+	  "BackMoon": 4,
       "Level": 1
     },
     "S36": {
       "Name": "Skilled Imitator",
+	  "Sun": 3,
+	  "Moon": 3,
       "Type": "Action",
       "Category": "Support",
       "Moon": 3,
