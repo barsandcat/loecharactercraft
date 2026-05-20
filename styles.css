@@ -550,6 +550,43 @@ h1 {
   margin-right: 2px;
 }
 
+.action-card-back-sun-moon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--gold);
+  white-space: nowrap;
+  background: var(--dark);
+  border: 1px solid rgba(201, 168, 64, 0.36);
+  padding: 2px 6px;
+  margin-left: auto;
+  overflow: hidden;
+}
+
+.action-card-back-sun-moon::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 13px;
+  height: 13px;
+  background: linear-gradient(315deg, rgba(201, 168, 64, 0.14) 0 46%, var(--panel-strong) 52% 100%);
+  clip-path: polygon(0 0, 0 100%, 100% 0);
+  pointer-events: none;
+}
+
+.action-card-back-sun-moon img {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
+}
+
 .action-card-meta {
   font-family: 'EB Garamond', serif;
   font-size: 0.86rem;

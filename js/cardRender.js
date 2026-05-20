@@ -302,6 +302,47 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
   nameEl.className = "action-card-name";
   nameEl.textContent = card.DisplayName || card.Name;
   nameRowEl.appendChild(nameEl);
+
+  const backSunMoonEl = document.createElement("div");
+  backSunMoonEl.className = "action-card-back-sun-moon";
+  
+  let hasBackSunMoon = false;
+  
+  if (card.BackSun && card.BackSun > 0) {
+    const sunIcon = document.createElement("img");
+    sunIcon.className = "action-card-inline-icon";
+    sunIcon.src = "icons/sun.svg";
+    sunIcon.alt = "Sun";
+    backSunMoonEl.appendChild(sunIcon);
+    
+    const sunText = document.createElement("span");
+    sunText.textContent = card.BackSun;
+    backSunMoonEl.appendChild(sunText);
+    
+    hasBackSunMoon = true;
+  }
+  
+  if ((card.BackSun && card.BackSun > 0) && (card.BackMoon && card.BackMoon > 0)) {
+    backSunMoonEl.appendChild(document.createTextNode(" "));
+  }
+  
+  if (card.BackMoon && card.BackMoon > 0) {
+    const moonIcon = document.createElement("img");
+    moonIcon.className = "action-card-inline-icon";
+    moonIcon.src = "icons/moon.svg";
+    moonIcon.alt = "Moon";
+    backSunMoonEl.appendChild(moonIcon);
+    
+    const moonText = document.createElement("span");
+    moonText.textContent = card.BackMoon;
+    backSunMoonEl.appendChild(moonText);
+    
+    hasBackSunMoon = true;
+  }
+  
+  if (hasBackSunMoon) {
+    nameRowEl.appendChild(backSunMoonEl);
+  }
   
   body.appendChild(nameRowEl);
 
@@ -452,6 +493,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
       appendFormattedText(warningEl, card.Warning);
       boxEl.appendChild(warningEl);
     }
+    
     body.appendChild(boxEl);
   }
 

@@ -7668,7 +7668,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Sun": 2,
-      "Target": "[Elite] or [Boss] in R1",
+      "Target": "Elite or Boss in R1",
       "Roll": {
         "ATT": [
           "STR",
