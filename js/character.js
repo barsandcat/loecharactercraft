@@ -1089,7 +1089,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
                 cardId,
                 card,
                 actionCardPreviewStats.attributes,
-                actionCardPreviewStats.keywordCounts
+                actionCardPreviewStats.keywordCounts,
+                true
               )
             );
             actionList.appendChild(li);
@@ -1293,7 +1294,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
                 cardId,
                 card,
                 previewStats ? previewStats.attributes : null,
-                previewStats ? previewStats.keywordCounts : null
+                previewStats ? previewStats.keywordCounts : null,
+                true
               )
             );
           });
@@ -1449,7 +1451,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         cardId,
         card,
         previewStats ? previewStats.attributes : null,
-        previewStats ? previewStats.keywordCounts : null
+        previewStats ? previewStats.keywordCounts : null,
+        true
       )
     );
     span.appendChild(tooltipEl);
