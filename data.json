@@ -133,8 +133,7 @@
       "Keywords": [
         "Human"
       ],
-      "Skills": [
-      ],
+      "Skills": [],
       "FreeSkills": [
         "Alchemy",
         "Animal Handling",
@@ -1225,7 +1224,7 @@
         "Brilliance"
       ],
       "Passive": "[Melee]: +1{damage}",
-	  "Effect": "Passive: During [Melee] [Attack]: Add 1 {damage}"
+      "Effect": "Passive: During [Melee] [Attack]: Add 1 {damage}"
     },
     "Lantern": {
       "Type": "Hand",
@@ -1265,7 +1264,7 @@
         "Armor"
       ],
       "Passive": "1 {armor}",
-	  "Effect": "Passive: Gain 1 {armor}"
+      "Effect": "Passive: Gain 1 {armor}"
     },
     "Puffshroom Bomb": {
       "Type": "Small",
@@ -4056,7 +4055,7 @@
           "STR"
         ],
         "Successes": {
-          "2": "Deal {successes} {damage}. If the target is Elite or Boss, place your Effect token on the Enemy",
+          "2": "Deal {successes} {damage}. If the target is [Elite] or [Boss], place your Effect token on the Enemy",
           "1": "Deal {successes} {damage}."
         }
       },
@@ -4089,13 +4088,12 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
-	  "Level": 1,
+      "Level": 1,
       "Keywords": [
         "Attack"
       ],
       "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
-      "Level": 1,
       "Roll": {
         "ATT": [
           "AGI"
@@ -4110,14 +4108,13 @@
       "Name": "Shoot",
       "Type": "Action",
       "Category": "Offensive",
-	  "Level": 2,
+      "Level": 2,
       "Moon": 1,
       "Keywords": [
         "Attack"
       ],
       "Condition": "Requires [Ranged]",
       "Target": "1 in R2+",
-      "Level": 1,
       "Roll": {
         "ATT": [
           "AGI"
@@ -4168,6 +4165,7 @@
           "INT"
         ],
         "DIV": true,
+		"Difficulty": 10,
         "Modifiers": [
           {
             "Dice": 1,
@@ -4288,8 +4286,9 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Fiendish"
-            ]
+              "Fiendish"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -4330,8 +4329,8 @@
         }
       },
       "Back": "Each time you are attacked gain 1 ATT Boon",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you discard 2 Boons",
-	  "BackSun": 3,
+      "Warning": "Start of your Activation: Do not refresh this card, unless you discard 2 Boons",
+      "BackSun": 3,
       "Level": 1
     },
     "P08": {
@@ -4360,8 +4359,8 @@
         }
       },
       "Back": "When a Party Memeber in R4 begins their Activation, roll DIV: 8+: They gain 1 ATT Boon and heal 2 HP. 4+: They gain 1 ATT Boon or heal 1 HP",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "BackMoon": 2,
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "BackMoon": 2,
       "Level": 1
     },
     "P09": {
@@ -4426,9 +4425,9 @@
         }
       },
       "Back": "Gain a Divling card (O02) and set the HP to {div} (+2HP: Artifact). Spawn Divling in R1",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard Divling",
-	  "BackSun": 2,
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard Divling",
+      "BackSun": 2,
       "Level": 1
     },
     "P11": {
@@ -4545,7 +4544,7 @@
       "Category": "Support",
       "Type": "Action",
       "Sun": 2,
-      "Target": "Elite or Boss in R5",
+      "Target": "[Elite] or [Boss] in R5",
       "Roll": {
         "ATT": [
           "STR"
@@ -4633,14 +4632,16 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           },
           {
             "Dice": -1,
             "Triggers": [
-              "against Automaton"
-            ]
+              "Automaton"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -4712,7 +4713,7 @@
           }
         ],
         "Successes": {
-          "1": "Pull the target by {successes} spaces (+2 spaces: against Large). If the target is Elite or Boss, place your Effect token on Enemy."
+          "1": "Pull the target by {successes} spaces (+2 spaces: against [Large]). If the target is [Elite] or [Boss], place your Effect token on Enemy."
         }
       },
       "Back": "The enemy with your Effect token always chooses you as a target.",
@@ -4737,7 +4738,7 @@
       ],
       "Condition": "Requires [Melee]",
       "Target": "Self",
-      "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: Large. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against Small).",
+      "Front": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small]).",
       "Level": 1
     },
     "P23": {
@@ -4819,8 +4820,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Fiendish"
-            ]
+              "Fiendish"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -5012,7 +5014,7 @@
         }
       },
       "Back": "During [Melee] Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice",
-	  "Warning": "When you move immediately refresh this card",
+      "Warning": "When you move immediately refresh this card",
       "Level": 1
     },
     "P32": {
@@ -5039,9 +5041,9 @@
         }
       },
       "Back": "For each 2 markers on this card roll 1 additional die during your Offensive Actions. When you move or are attacked, discard 1 marker from this card.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card",
-	  "Warning": "When you refresh this card, discard all markers from it",
-	  "BackMoon": 3,
+      "Note": "Start of your Activation: You may choose not to refresh this card",
+      "Warning": "When you refresh this card, discard all markers from it",
+      "BackMoon": 3,
       "Level": 1
     },
     "P33": {
@@ -5102,9 +5104,9 @@
         }
       },
       "Back": "Treat your STR and AGI as the sum of them both. Treat your INT and CHA as sum of them both.",
-	  "Warining": "Instead of refreshing this card, place it in your Pouch",
-	  "BackSun": 4,
-	  "BackMoon": 4,
+      "Warining": "Instead of refreshing this card, place it in your Pouch",
+      "BackSun": 4,
+      "BackMoon": 4,
       "Level": 1
     },
     "P37": {
@@ -5135,8 +5137,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -5269,13 +5272,14 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
-          "1": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your Effect token on the Enemy.",
-          "4": "Deal ({successes}-1) {damage}. If the target is Elite or Boss, place your 2 Effect tokens on the Enemy."
+          "1": "Deal ({successes}-1) {damage}. If the target is [Elite] or [Boss], place your Effect token on the Enemy.",
+          "4": "Deal ({successes}-1) {damage}. If the target is [Elite] or [Boss], place your 2 Effect tokens on the Enemy."
         }
       },
       "Back": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
@@ -5400,8 +5404,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Fiendish"
-            ]
+              "Fiendish"
+            ],
+            "against": true
           },
           {
             "Dice": -1,
@@ -5531,7 +5536,7 @@
         "Spell"
       ],
       "Target": "ENs in R4",
-      "Front": "Target all Minions with {en} equal to or lower than your CHA, and all Elites with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch.",
+      "Front": "Target all [Minions] with {en} equal to or lower than your CHA, and all [Elites] with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch.",
       "Level": 1
     },
     "P54": {
@@ -5574,7 +5579,7 @@
         }
       },
       "BackSun": 3,
-      "Back": "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a Minion, also end its move.",
+      "Back": "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a [Minion], also end its move.",
       "Warning": "When you refresh this card, discard your Effect tokens from the Sheet",
       "Level": 1
     },
@@ -5600,8 +5605,8 @@
           }
         ],
         "Successes": {
-          "3": "Resolve 1 but you may target Elite instead and Pull that Elite by 2 instead of {successes}",
-          "1": "Choose a Minion and an empty space in any range. Pull the Minion by {successes} toward that space"
+          "3": "Resolve 1 but you may target [Elite] instead and Pull that [Elite] by 2 instead of {successes}",
+          "1": "Choose a [Minion] and an empty space in any range. Pull the [Minion] by {successes} toward that space"
         }
       },
       "Level": 1
@@ -5724,11 +5729,11 @@
           "3": "Place 1 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0"
         }
       },
-	  "Back": "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1.",
-	  "Note": "Start of your Activation: You may choose not to refresh this card.",
-	  "Warning": "When you refresh this card, discard Ticking Vestigial",
-	  "BackMoon": 2,
-	  "BackSun": 2,
+      "Back": "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1.",
+      "Note": "Start of your Activation: You may choose not to refresh this card.",
+      "Warning": "When you refresh this card, discard Ticking Vestigial",
+      "BackMoon": 2,
+      "BackSun": 2,
       "Level": 1
     },
     "P63": {
@@ -5834,7 +5839,7 @@
       "Keywords": [
         "Spell"
       ],
-      "Target": "Elite or Boss in R4",
+      "Target": "[Elite] or [Boss] in R4",
       "Roll": {
         "ATT": [
           "INT"
@@ -5849,8 +5854,10 @@
           {
             "Dice": -2,
             "Triggers": [
-              "against Automaton or Vestigial"
-            ]
+              "Automaton",
+              "Vestigial"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -5890,12 +5897,13 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
-          "1": "Deal ({successes}-2) {damage} ignoring 5 {armor}. Place {successes} of your Effect tokens (-2 tokens: Elite, -3 tokens: Boss) on the Enemy",
+          "1": "Deal ({successes}-2) {damage} ignoring 5 {armor}. Place {successes} of your Effect tokens (-2 tokens: [Elite], -3 tokens: [Boss]) on the Enemy",
           "0": "Gain 1 {terror}. Do not flip this card"
         }
       },
@@ -6042,7 +6050,7 @@
           "0": "Do not flip this card"
         }
       },
-      "Back": "Roll for DIV. Target all in any range. Defeat {half div} Minions with your Effect tokens. Each Elite and Boss with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch",
+      "Back": "Roll for DIV. Target all in any range. Defeat {half div} [Minions] with your Effect tokens. Each [Elite] and [Boss] with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch",
       "Level": 1
     },
     "PP01": {
@@ -6070,8 +6078,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -6133,12 +6142,14 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Elite or Boss"
-            ]
+              "Elite",
+              "Boss"
+            ],
+            "against": true
           }
         ],
         "Successes": {
-          "1": "Deal {successes} {damage}. If the target is Elite or Boss and there is no other Enemy in R4 from you, add 3 {damage}. If you defeated the Elite or Boss, gain 2 {fate}"
+          "1": "Deal {successes} {damage}. If the target is [Elite] or [Boss] and there is no other Enemy in R4 from you, add 3 {damage}. If you defeated the [Elite] or [Boss], gain 2 {fate}"
         }
       },
       "Level": 1
@@ -6167,8 +6178,8 @@
           }
         ],
         "Successes": {
-          "3": "Deal {successes} [Ice] {damage} (+1 {damage} against Large). Place your Effect token on the Enemy",
-          "1": "Deal {successes} [Ice] {damage} (+1 {damage} against Large)"
+          "3": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large]). Place your Effect token on the Enemy",
+          "1": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large])"
         }
       },
       "Back": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
@@ -6202,7 +6213,7 @@
         }
       },
       "Back": "For each drawn black Activation token, deal {half div} [Divinum] {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the drawn tokens to the bag",
-	  "BackMoon": 2
+      "BackMoon": 2
     },
     "PP06": {
       "Name": "Summon Swarm",
@@ -6261,8 +6272,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -6295,16 +6307,16 @@
         }
       },
       "Back": "During your Activation: Enemies with your Effect tokens have their {en} reduced by half of you CHA (rounded down).",
-	  "Warning": "Start of your Activation: Do not refresh this card, unless you gain 1 {terror}. When you refresh this card discard all your Effect tokens from the Enemies",
-	  "BackSun": 1,
-	  "BackMoon": 1,
+      "Warning": "Start of your Activation: Do not refresh this card, unless you gain 1 {terror}. When you refresh this card discard all your Effect tokens from the Enemies",
+      "BackSun": 1,
+      "BackMoon": 1,
       "Level": 1
     },
     "PP10": {
       "Name": "Unleash Divinum",
       "Type": "Action",
       "Category": "Offensive",
-	  "Target": "All in R2",
+      "Target": "All in R2",
       "Moon": 1,
       "Keywords": [
         "Attack",
@@ -6394,8 +6406,9 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Vestigial"
-            ]
+              "Vestigial"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -6464,7 +6477,7 @@
           "0": "Do not flip the card"
         }
       },
-      "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by Minions (and Elites and Bosses if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
+      "Back": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by [Minion] (and [Elite] and [Bosse] if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
       "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet.",
       "Level": 1
     },
@@ -6487,7 +6500,7 @@
           }
         ],
         "Successes": {
-          "1": "Place your {successes} Effect tokens (+1 token: against Large) on the Enemy."
+          "1": "Place your {successes} Effect tokens (+1 token: against [Large]) on the Enemy."
         }
       },
       "Back": "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
@@ -6624,8 +6637,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -6655,7 +6669,7 @@
           {
             "Dice": -2,
             "Triggers": [
-              "Elite or Boss in R4"
+              "[Elite] or [Boss] in R4"
             ]
           }
         ],
@@ -6687,12 +6701,13 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {
-          "2": "Place 1 Effect token on a Minion, spend 1 {fate} to place it on Elite, or spend 2 {fate} to place it on a Boss."
+          "2": "Place 1 Effect token on a [Minion], spend 1 {fate} to place it on [Elite], or spend 2 {fate} to place it on a [Boss]."
         }
       },
       "Back": "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
@@ -6718,8 +6733,9 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Fiendish"
-            ]
+              "Fiendish"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -6753,8 +6769,9 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Fiendish"
-            ]
+              "Fiendish"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -6839,8 +6856,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -6937,8 +6955,9 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Vestigial"
-            ]
+              "Vestigial"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -7080,8 +7099,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -7139,8 +7159,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -7173,8 +7194,8 @@
         }
       },
       "Back": "You may treat yourself as PM for this effect. 3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die. 1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die.",
-	  "BackMoon": 1,
-	  "BackSun": 1,
+      "BackMoon": 1,
+      "BackSun": 1,
       "Level": 1
     },
     "S04": {
@@ -7286,7 +7307,7 @@
         }
       },
       "Back": "Deal {half div} [Thunder] {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once.",
-	  "BackMoon": 3,
+      "BackMoon": 3,
       "Level": 1
     },
     "S08": {
@@ -7458,7 +7479,7 @@
           "1": "Move by {half div}. Flip this card and place 1 markers on it"
         }
       },
-      "Back": "You gain {armor} against Ranged equal to the number of markers on this card",
+      "Back": "You gain {armor} against [Ranged] equal to the number of markers on this card",
       "BackMoon": 3,
       "Level": 1
     },
@@ -7485,8 +7506,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -7523,8 +7545,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -7565,8 +7588,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           },
           {
             "Dice": -3,
@@ -7604,7 +7628,7 @@
       "Type": "Action",
       "Category": "Offensive",
       "Sun": 2,
-      "Target": "Elite or Boss in R1",
+      "Target": "[Elite] or [Boss] in R1",
       "Roll": {
         "ATT": [
           "STR",
@@ -7620,13 +7644,14 @@
           {
             "Dice": -2,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
-          "5": "Place your Effect token on Elite or Boss",
-          "3": "Place your Effect token on Elite"
+          "5": "Place your Effect token on [Elite] or [Boss]",
+          "3": "Place your Effect token on [Elite]"
         }
       },
       "Back": "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch.",
@@ -7639,7 +7664,7 @@
       "Category": "Offensive",
       "Condition": "After you Push an Enemy",
       "Target": "Self",
-      "Front": "Move by 3(+2 spaces: Pathfinding). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
+      "Front": "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
       "Level": 1
     },
     "S20": {
@@ -7671,8 +7696,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Large"
-            ]
+              "Large"
+            ],
+            "against": true
           }
         ],
         "Successes": {
@@ -7898,8 +7924,10 @@
           {
             "Dice": 2,
             "Triggers": [
-              "against Automaton or Vestigial"
-            ]
+              "Automaton",
+              "Vestigial"
+            ],
+            "against": true
           },
           {
             "Dice": 1,
@@ -7979,8 +8007,8 @@
       "Target": "Self",
       "Front": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it.",
       "Back": "For each marker on this card, the {en} of each Enemy is lowered by 1",
-	  "Warning": "Instead of refreshing this card, discard 1 marker (2 markers if {characters} is 4 or more) from this card. Then, if there are no markers on this card, place it in your Pouch",
-	  "BackMoon": 3,
+      "Warning": "Instead of refreshing this card, discard 1 marker (2 markers if {characters} is 4 or more) from this card. Then, if there are no markers on this card, place it in your Pouch",
+      "BackMoon": 3,
       "Level": 1
     },
     "S33": {
@@ -8071,8 +8099,9 @@
           {
             "Dice": 1,
             "Triggers": [
-              "against Small"
-            ]
+              "Small"
+            ],
+            "against": true
           }
         ],
         "Successes": {

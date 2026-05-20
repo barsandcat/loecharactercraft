@@ -625,6 +625,30 @@ h1 {
 .folded-effect-text .action-card-inline-icon {
   filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
+
+.action-card-note {
+  margin-top: 4px;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #4a90d9;
+}
+
+.action-card-note .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(52%) sepia(59%) saturate(600%) hue-rotate(185deg) brightness(105%) contrast(90%);
+}
+
+.action-card-warning {
+  margin-top: 4px;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #da402f;
+}
+
+.action-card-warning .action-card-inline-icon {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(28%) saturate(2913%) hue-rotate(309deg) brightness(69%) contrast(187%);
+}
 .action-card-outcome {
   color: var(--ink);
   margin-top: 2px;
@@ -1091,4 +1115,167 @@ h1 {
 
 @media (max-width: 520px) {
   .hero-actions { grid-template-columns: 1fr; }
+}
+
+/* Card Database Styles */
+.card-database-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: calc(var(--gold-bar-h) + 14px) clamp(14px, 2.5vw, 28px) calc(var(--gold-bar-h) + 20px);
+}
+
+.hero-nav {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-link {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border: 1px solid rgba(201, 168, 64, 0.28);
+  border-radius: 1px;
+  transition: all 200ms ease;
+  display: inline-block;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: rgba(201, 168, 64, 0.12);
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.card-database-controls {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+}
+
+.controls-section {
+  margin-bottom: 16px;
+}
+
+.controls-section > h2 {
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  color: var(--gold-text);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-group label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-group select {
+  padding: 6px 8px;
+  background: var(--panel-strong);
+  border: 1px solid var(--panel-border);
+  color: var(--ink);
+  font-size: 0.95rem;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+.filter-group select:hover,
+.filter-group select:focus {
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.sort-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.sort-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--gold-text);
+  cursor: pointer;
+}
+
+.sort-group select {
+  padding: 6px 8px;
+  background: var(--panel-strong);
+  border: 1px solid var(--panel-border);
+  color: var(--ink);
+  font-size: 0.95rem;
+  border-radius: 1px;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.sort-group select:hover,
+.sort-group select:focus {
+  border-color: rgba(201, 168, 64, 0.48);
+  outline: none;
+}
+
+.sort-group input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.card-database-content {
+  margin-top: 20px;
+}
+
+.card-database-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.card-database-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+  padding: 0 2px;
+}
+
+.card-meta-tree {
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.card-meta-lock {
+  font-size: 0.75rem;
+  font-family: 'EB Garamond', serif;
+  color: var(--muted);
+  opacity: 0.8;
 }
