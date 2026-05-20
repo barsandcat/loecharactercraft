@@ -7341,6 +7341,7 @@
       },
       "Back": "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}.",
       "Warning": "Start of your activation: Do not refresh this card, unless you pay 1 {fate}",
+	  "BackMoon": 2,
       "Level": 1
     },
     "S09": {
@@ -7370,6 +7371,9 @@
           "1": "Add {half div} white tokens to the Initiative bag or move 2 targets by ({div}+2)"
         }
       },
+	  "BackMoon": 1,
+	  "BackSun": 1,
+	  "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}",
       "Level": 1
     },
     "S10": {
@@ -7405,7 +7409,8 @@
           "1": "Do not flip this card"
         }
       },
-      "Back": "???",
+      "Back": "When you or PMs in R2 gain {terror}, gain 1 less",
+	  "Note": "Start of your Activation: You man choose not to refresh this card",
       "Level": 1
     },
     "S11": {
@@ -7604,6 +7609,7 @@
           "1": "Deal {successes} {damage} ignoring 5 {armor}"
         }
       },
+	  "Warning": "Do not refresh this card, unless you pay 2 {fate}",
       "Level": 1
     },
     "S17": {
@@ -7622,6 +7628,7 @@
           "2": "Prevent {successes} {damage} (+2 {damage}: [Melee])"
         }
       },
+	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
       "Level": 1
     },
     "S18": {
@@ -7666,6 +7673,7 @@
       "Condition": "After you Push an Enemy",
       "Target": "Self",
       "Front": "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}",
+	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
       "Level": 1
     },
     "S20": {
@@ -7676,6 +7684,7 @@
       "Condition": "After dealing at least 3 {damage} with [Melee]",
       "Target": "Self",
       "Front": "Move by your AGI. Gain 1 {fate}",
+	  "Note": "Anytime: Pay 1 {fate} to refresh this card.",
       "Level": 1
     },
     "S21": {
@@ -7872,7 +7881,8 @@
           "3": "The Enemy loses HP equal to the number of HP you lost during this attack. Heal by {successes} HP",
           "1": "The Enemy loses 1 HP. Heal by 1 HP."
         }
-      }
+      },
+	  "Warning": "Do not refresh this card, unless you pay 1 {fate}"
     },
     "S28": {
       "Name": "Entangle",
