@@ -6276,7 +6276,7 @@
       "Name": "Manic Laugh",
       "Type": "Action",
       "Category": "Offensive",
-      "Traget": "ENs in R1",
+      "Target": "ENs in R1",
       "Roll": {
         "ATT": [
           "CHA"
