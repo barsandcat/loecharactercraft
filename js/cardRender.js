@@ -74,7 +74,7 @@ export function appendDifficultyIcon(parent, difficulty) {
   parent.appendChild(iconEl);
 }
 
-export function appendDisplayParts(parent, parts, separator = ", ") {
+function appendDisplayParts(parent, parts, separator = ", ") {
   parts.forEach((part, index) => {
     if (index > 0) {
       parent.appendChild(document.createTextNode(separator));
@@ -83,7 +83,7 @@ export function appendDisplayParts(parent, parts, separator = ", ") {
   });
 }
 
-export function appendDisplayPart(parent, part) {
+function appendDisplayPart(parent, part) {
   if (!part) return;
 
   if (typeof part.render === "function") {

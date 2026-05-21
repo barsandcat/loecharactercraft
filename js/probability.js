@@ -20,7 +20,7 @@ export function computeSuccessDist(numDice, difficulty) {
   return dp;
 }
 
-export function probAtLeast(dist, k) {
+function probAtLeast(dist, k) {
   if (k <= 0) return 1;
   let sum = 0;
   for (let s = Math.max(0, k); s < dist.length; s++) sum += dist[s];
