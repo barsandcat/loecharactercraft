@@ -17,7 +17,7 @@
       "MOB": 6,
       "DIV": "D4",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B03",
         "B04",
@@ -42,7 +42,7 @@
       "MOB": 6,
       "DIV": "D6",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B01",
         "B06",
@@ -68,7 +68,7 @@
       "MOB": 6,
       "DIV": "D4",
       "HP": 8,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B02",
         "B06",
@@ -94,7 +94,7 @@
       "MOB": 4,
       "DIV": "D4",
       "HP": 8,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B02",
         "B04",
@@ -119,7 +119,7 @@
       "MOB": 6,
       "DIV": "D6",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B03",
         "B05",
@@ -234,7 +234,7 @@
       "MOB": 6,
       "DIV": "D4",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B01",
         "B04",
@@ -260,7 +260,7 @@
       "MOB": 8,
       "DIV": "D4",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B03",
         "B05",
@@ -292,7 +292,7 @@
       "MOB": 6,
       "DIV": "D4",
       "HP": 6,
-      "Action cards": [
+      "ActionCards": [
         "B00",
         "B03",
         "B06",
@@ -574,7 +574,7 @@
       "Keywords": [
         "Athletics"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Close Combat",
         "Marksmanship"
       ],
@@ -589,7 +589,7 @@
           "Items": [
             "Death Whistle"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP07"
           ]
         },
@@ -603,7 +603,7 @@
           "Items": [
             "Notram's Ring"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP08"
           ]
         },
@@ -617,7 +617,7 @@
           "Items": [
             "Glowjuice"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP09"
           ]
         }
@@ -628,7 +628,7 @@
       "Keywords": [
         "Performer"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Support Magic",
         "Thiefcraft"
       ],
@@ -643,7 +643,7 @@
           "Items": [
             "Throwing Dagger"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP13"
           ]
         },
@@ -657,7 +657,7 @@
           "Items": [
             "Smoke Bomb"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP14"
           ]
         },
@@ -671,7 +671,7 @@
           "Items": [
             "Book of Sagas"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP15"
           ]
         }
@@ -682,7 +682,7 @@
       "Keywords": [
         "Investigation"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Subterfuge",
         "Scholarship"
       ],
@@ -697,7 +697,7 @@
           "Items": [
             "Anchor Chain"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP31"
           ]
         },
@@ -711,7 +711,7 @@
           "Items": [
             "Whispering Box"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP32"
           ]
         },
@@ -725,7 +725,7 @@
           "Items": [
             "Codex Vestigium"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP33"
           ]
         }
@@ -736,7 +736,7 @@
       "Keywords": [
         "Survival"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Nature",
         "Battle Magic"
       ],
@@ -751,7 +751,7 @@
           "Items": [
             "Curing Leaves"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP04"
           ]
         },
@@ -761,7 +761,7 @@
           "Items": [
             "Stone of Nivar"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP05"
           ]
         },
@@ -775,7 +775,7 @@
           "Items": [
             "Calling Reed"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP06"
           ]
         }
@@ -786,7 +786,7 @@
       "Keywords": [
         "Stealth"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Subterfuge",
         "Close Combat"
       ],
@@ -801,7 +801,7 @@
           "Items": [
             "Garrote"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP22"
           ]
         },
@@ -815,7 +815,7 @@
           "Items": [
             "Evidence"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP23"
           ]
         },
@@ -829,7 +829,7 @@
           "Items": [
             "Weighted Net"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP24"
           ]
         }
@@ -840,7 +840,7 @@
       "Keywords": [
         "Intimidation"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Warfare",
         "Close Combat"
       ],
@@ -855,7 +855,7 @@
           "Items": [
             "Lucky Pommel"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP19"
           ]
         },
@@ -869,7 +869,7 @@
           "Items": [
             "War Horn"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP20"
           ]
         },
@@ -883,7 +883,7 @@
           "Items": [
             "Parrying Cape"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP21"
           ]
         }
@@ -894,7 +894,7 @@
       "Keywords": [
         "Vigilance"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Marksmanship",
         "Nature"
       ],
@@ -909,7 +909,7 @@
           "Items": [
             "Prayer Bell"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP01"
           ]
         },
@@ -923,7 +923,7 @@
           "Items": [
             "Peliago's Coin"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP02"
           ]
         },
@@ -937,7 +937,7 @@
           "Items": [
             "Grisly Trophy"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP03"
           ]
         }
@@ -948,7 +948,7 @@
       "Keywords": [
         "Medicine"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Scholarship",
         "Nature"
       ],
@@ -963,7 +963,7 @@
           "Items": [
             "Rootstalk"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP34"
           ]
         },
@@ -977,7 +977,7 @@
           "Items": [
             "Homunculus"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP35"
           ]
         },
@@ -987,7 +987,7 @@
           "Items": [
             "Fleshcraft Toolkit"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP36"
           ]
         }
@@ -998,7 +998,7 @@
       "Keywords": [
         "Arcana"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Battle Magic",
         "Support Magic"
       ],
@@ -1009,7 +1009,7 @@
           "Items": [
             "Grimoire"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP10"
           ]
         },
@@ -1023,7 +1023,7 @@
           "Items": [
             "Orb"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP11"
           ]
         },
@@ -1037,7 +1037,7 @@
           "Items": [
             "Runic Chisel"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP12"
           ]
         }
@@ -1048,7 +1048,7 @@
       "Keywords": [
         "Leadership"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Battle Magic",
         "Warfare"
       ],
@@ -1063,7 +1063,7 @@
           "Items": [
             "Buckler"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP16"
           ]
         },
@@ -1077,7 +1077,7 @@
           "Items": [
             "Blessed Charm"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP17"
           ]
         },
@@ -1091,7 +1091,7 @@
           "Items": [
             "Spyglass"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP18"
           ]
         }
@@ -1102,7 +1102,7 @@
       "Keywords": [
         "Lore"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Support Magic",
         "Scholarship"
       ],
@@ -1117,7 +1117,7 @@
           "Items": [
             "Penitent's Clogs"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP25"
           ]
         },
@@ -1131,7 +1131,7 @@
           "Items": [
             "Incense"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP26"
           ]
         },
@@ -1145,7 +1145,7 @@
           "Items": [
             "Tome of Omu"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP27"
           ]
         }
@@ -1156,7 +1156,7 @@
       "Keywords": [
         "Deception"
       ],
-      "Advancement Trees": [
+      "AdvancementTrees": [
         "Thiefcraft",
         "Subterfuge"
       ],
@@ -1171,7 +1171,7 @@
           "Items": [
             "Thief's Gloves"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP28"
           ]
         },
@@ -1185,7 +1185,7 @@
           "Items": [
             "Needle Dart"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP29"
           ]
         },
@@ -1199,7 +1199,7 @@
           "Items": [
             "False Documents"
           ],
-          "Action cards": [
+          "ActionCards": [
             "PP30"
           ]
         }
@@ -1617,18 +1617,18 @@
       "Effect": "During your CHA Roll: Roll 1 additional die"
     }
   },
-  "Advancement Trees": [
+  "AdvancementTrees": [
     {
       "Name": "Barbarian",
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P19"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P20"
             ]
           }
@@ -1645,7 +1645,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P21"
             ],
             "Skills": [
@@ -1672,7 +1672,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -1685,7 +1685,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -1700,14 +1700,14 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P23"
             ]
           }
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P22"
             ],
             "MOB": 2
@@ -1721,7 +1721,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P24"
             ]
           },
@@ -1732,7 +1732,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P24"
             ]
           }
@@ -1744,12 +1744,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P16"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P01"
             ]
           }
@@ -1779,7 +1779,7 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P02"
             ]
           }
@@ -1804,7 +1804,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "B11"
             ]
           },
@@ -1815,7 +1815,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "B11"
             ]
           }
@@ -1845,7 +1845,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P03"
             ]
           },
@@ -1855,7 +1855,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P17"
             ]
           }
@@ -1863,7 +1863,7 @@
         "8": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P18"
             ]
           }
@@ -1875,12 +1875,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P61"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P62"
             ]
           }
@@ -1897,7 +1897,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P63"
             ],
             "Skills": [
@@ -1934,7 +1934,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -1947,7 +1947,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -1958,14 +1958,14 @@
         "6": [
           {
             "DIV": "Upgrade",
-            "Action cards": [
+            "ActionCards": [
               "P64"
             ]
           }
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P65"
             ],
             "HP": 2
@@ -1979,14 +1979,14 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P66"
             ]
           },
           {
             "DIV": "Upgrade",
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P66"
             ]
           }
@@ -1998,12 +1998,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P25"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P26"
             ]
           }
@@ -2020,7 +2020,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P27"
             ],
             "Skills": [
@@ -2047,7 +2047,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -2060,7 +2060,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -2070,7 +2070,7 @@
         ],
         "6": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P29"
             ],
             "DIV": "Upgrade"
@@ -2078,7 +2078,7 @@
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P28"
             ],
             "MOB": 2
@@ -2092,7 +2092,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P30"
             ]
           },
@@ -2103,7 +2103,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P30"
             ]
           }
@@ -2115,12 +2115,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P43"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P44"
             ]
           }
@@ -2142,7 +2142,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P45"
             ],
             "Skills": [
@@ -2170,7 +2170,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2184,7 +2184,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2198,7 +2198,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2212,7 +2212,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2240,12 +2240,12 @@
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P46"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P47"
             ]
           }
@@ -2253,7 +2253,7 @@
         "8": [
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P48"
             ]
           }
@@ -2265,12 +2265,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P37"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P38"
             ]
           }
@@ -2290,7 +2290,7 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P39"
             ]
           }
@@ -2325,7 +2325,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ]
           }
@@ -2337,7 +2337,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P40"
             ]
           },
@@ -2347,7 +2347,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P40"
             ]
           }
@@ -2359,14 +2359,14 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P41"
             ]
           }
         ],
         "8": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P42"
             ],
             "Skills": [
@@ -2374,7 +2374,7 @@
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P42"
             ],
             "Skills": [
@@ -2389,12 +2389,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P31"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P32"
             ]
           }
@@ -2411,7 +2411,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P33"
             ],
             "Skills": [
@@ -2438,7 +2438,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -2451,7 +2451,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -2461,7 +2461,7 @@
         ],
         "6": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P34"
             ],
             "DIV": "Upgrade"
@@ -2469,7 +2469,7 @@
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P35"
             ],
             "MOB": 2
@@ -2483,7 +2483,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P36"
             ]
           },
@@ -2494,7 +2494,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P36"
             ]
           }
@@ -2506,12 +2506,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P67"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P68"
             ]
           }
@@ -2529,7 +2529,7 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P69"
             ]
           }
@@ -2554,7 +2554,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2568,7 +2568,7 @@
               }
             ],
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ],
             "Skills": [
@@ -2601,7 +2601,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P70"
             ]
           },
@@ -2611,7 +2611,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P71"
             ]
           },
@@ -2621,7 +2621,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P70"
             ]
           },
@@ -2631,7 +2631,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P71"
             ]
           }
@@ -2639,7 +2639,7 @@
         "8": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P72"
             ]
           }
@@ -2651,12 +2651,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P10"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P12"
             ]
           }
@@ -2678,7 +2678,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P11"
             ]
           }
@@ -2733,7 +2733,7 @@
         ],
         "6": [
           {
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -2743,19 +2743,19 @@
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P13"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P14"
             ]
           }
         ],
         "8": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P15"
             ],
             "DIV": "Upgrade"
@@ -2768,12 +2768,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P04"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P05"
             ]
           }
@@ -2793,7 +2793,7 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P06"
             ]
           }
@@ -2829,7 +2829,7 @@
             ],
             "HP": 2,
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           },
@@ -2841,7 +2841,7 @@
             ],
             "HP": 2,
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           }
@@ -2856,12 +2856,12 @@
         ],
         "7": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P07"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P08"
             ]
           }
@@ -2873,7 +2873,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P09"
             ]
           },
@@ -2883,7 +2883,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "P09"
             ]
           }
@@ -2895,12 +2895,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P49"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P50"
             ]
           }
@@ -2917,7 +2917,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P51"
             ],
             "Skills": [
@@ -2954,7 +2954,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B11"
             ],
             "Skills": [
@@ -2967,7 +2967,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B11"
             ],
             "Skills": [
@@ -2978,7 +2978,7 @@
         "6": [
           {
             "DIV": "Upgrade",
-            "Action cards": [
+            "ActionCards": [
               "P52"
             ]
           }
@@ -2986,7 +2986,7 @@
         "7": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "P53"
             ]
           }
@@ -2999,7 +2999,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P54"
             ]
           },
@@ -3010,7 +3010,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P54"
             ]
           }
@@ -3022,12 +3022,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P55"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "P56"
             ]
           }
@@ -3044,7 +3044,7 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "P57"
             ],
             "Skills": [
@@ -3071,7 +3071,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -3084,7 +3084,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ],
             "Skills": [
@@ -3095,7 +3095,7 @@
         "6": [
           {
             "DIV": "Upgrade",
-            "Action cards": [
+            "ActionCards": [
               "P58"
             ]
           }
@@ -3103,7 +3103,7 @@
         "7": [
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P59"
             ]
           }
@@ -3116,7 +3116,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P60"
             ]
           },
@@ -3127,7 +3127,7 @@
               }
             ],
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "P60"
             ]
           }
@@ -3139,12 +3139,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S17"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S18"
             ]
           }
@@ -3178,7 +3178,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ]
           },
@@ -3188,7 +3188,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B14"
             ]
           }
@@ -3196,13 +3196,13 @@
         "4": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S19"
             ]
           },
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S20"
             ]
           }
@@ -3214,12 +3214,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S01"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S02"
             ]
           }
@@ -3244,25 +3244,25 @@
         ],
         "3": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S03",
               "B11"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S03",
               "B14"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S04",
               "B11"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S04",
               "B14"
             ]
@@ -3287,12 +3287,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S21"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S22"
             ]
           }
@@ -3326,7 +3326,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           },
@@ -3336,7 +3336,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B16"
             ]
           }
@@ -3344,13 +3344,13 @@
         "4": [
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S23"
             ]
           },
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S24"
             ]
           }
@@ -3362,12 +3362,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S25"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S26"
             ]
           }
@@ -3379,7 +3379,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ]
           }
@@ -3429,13 +3429,13 @@
         "4": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S27"
             ]
           },
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S28"
             ]
           }
@@ -3447,12 +3447,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S05"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S06"
             ]
           }
@@ -3464,7 +3464,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B02"
             ]
           }
@@ -3472,13 +3472,13 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S07"
             ]
           },
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S08"
             ]
           }
@@ -3508,12 +3508,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S09"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S10"
             ]
           }
@@ -3543,13 +3543,13 @@
         "3": [
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S11"
             ]
           },
           {
             "HP": 2,
-            "Action cards": [
+            "ActionCards": [
               "S12"
             ]
           }
@@ -3561,7 +3561,7 @@
                 "INT": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           }
@@ -3573,12 +3573,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S13"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S14"
             ]
           }
@@ -3590,7 +3590,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ]
           },
@@ -3600,7 +3600,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B16"
             ]
           },
@@ -3610,7 +3610,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ]
           },
@@ -3620,7 +3620,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B16"
             ]
           }
@@ -3628,13 +3628,13 @@
         "3": [
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S15"
             ]
           },
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S16"
             ]
           }
@@ -3658,12 +3658,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S33"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S34"
             ]
           }
@@ -3697,7 +3697,7 @@
                 "AGI": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B05"
             ]
           }
@@ -3705,13 +3705,13 @@
         "4": [
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S36"
             ]
           },
           {
             "MOB": 2,
-            "Action cards": [
+            "ActionCards": [
               "S35"
             ]
           }
@@ -3723,12 +3723,12 @@
       "Levels": {
         "1": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S29"
             ]
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S30"
             ]
           }
@@ -3740,7 +3740,7 @@
                 "STR": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           },
@@ -3750,7 +3750,7 @@
                 "CHA": 1
               }
             ],
-            "Action cards": [
+            "ActionCards": [
               "B08"
             ]
           }
@@ -3779,13 +3779,13 @@
         ],
         "4": [
           {
-            "Action cards": [
+            "ActionCards": [
               "S32"
             ],
             "HP": 2
           },
           {
-            "Action cards": [
+            "ActionCards": [
               "S31"
             ],
             "HP": 2
@@ -3794,7 +3794,7 @@
       }
     }
   ],
-  "Action Cards": {
+  "ActionCards": {
     "B00": {
       "Name": "Bash",
       "Type": "Action",
@@ -4746,7 +4746,7 @@
       "Type": "Reaction",
       "Category": "Defensive",
       "Sun": 1,
-      "Mun": 1,
+      "Moon": 1,
       "Condition": "Against [Melee]",
       "Roll": {
         "ATT": [
@@ -6342,7 +6342,6 @@
         "Melee",
         "Spell"
       ],
-      "Traget": "All in R2",
       "Roll": {
         "DIV": true,
         "ATT": [

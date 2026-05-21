@@ -1,13 +1,16 @@
 import { buildActionCardElement, appendFormattedText, buildFoldedEffectText, buildTokenPart } from "./cardRender.js";
+import { resolvePrimaryTreeName, normalizeForMatch } from "./dataUtils.js";
 
 export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   const LEVEL_UP_SLOTS = 12;
   const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
   const DICE_PROGRESSION = ["D4", "D6", "D8", "D10", "D12", "D12+D4", "D20", "D20+D6"];
+  const ACTION_CATEGORIES = ["Offensive", "Defensive", "Support"];
+  const ITEM_TYPE_ORDER = ["Head", "Chest", "Hand", "Feet", "Small"];
 
   const state = {
     data,
-    trees: new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree])),
+    trees: new Map(data.AdvancementTrees.map((tree) => [tree.Name, tree])),
     selectedRace: null,
     selectedAttributeSet: null,
     selectedFreeSkill: null,
@@ -446,45 +449,19 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     const treeNames = [];
-    const primaryTreeName = resolvePrimaryTreeName(state.selectedProf.Name);
+    const primaryTreeName = resolvePrimaryTreeName(state.selectedProf.Name, state.trees);
 
     if (state.trees.has(primaryTreeName)) {
       treeNames.push(primaryTreeName);
     }
 
-    state.selectedProf["Advancement Trees"].forEach((treeName) => {
+    state.selectedProf.AdvancementTrees.forEach((treeName) => {
       if (state.trees.has(treeName) && !treeNames.includes(treeName)) {
         treeNames.push(treeName);
       }
     });
 
     return treeNames;
-  }
-
-  function resolvePrimaryTreeName(professionName) {
-    if (state.trees.has(professionName)) {
-      return professionName;
-    }
-
-    const normalizedProfession = normalizeForMatch(professionName);
-    let bestMatch = null;
-
-    state.trees.forEach((_, treeName) => {
-      const normalizedTree = normalizeForMatch(treeName);
-      if (
-        normalizedProfession.startsWith(normalizedTree) ||
-        normalizedTree.startsWith(normalizedProfession)
-      ) {
-        if (
-          !bestMatch ||
-          normalizedTree.length > normalizeForMatch(bestMatch).length
-        ) {
-          bestMatch = treeName;
-        }
-      }
-    });
-
-    return bestMatch || professionName;
   }
 
   function isAdvancementLevelUnlocked(level, takenLevels, slotNumber) {
@@ -535,10 +512,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       index,
       entry,
     }));
-  }
-
-  function normalizeForMatch(value) {
-    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
   // Character stats
@@ -623,7 +596,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function buildActionCardPreviews(cardIds, previewStats = null) {
     return (cardIds || [])
       .map((cardId) => {
-        const card = state.data["Action Cards"][cardId];
+        const card = state.data.ActionCards[cardId];
         if (!card) {
           return null;
         }
@@ -652,7 +625,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     stats.divDie = race.DIV || null;
     incrementCountMap(stats.keywordCounts, race.Keywords || []);
     incrementCountMap(stats.skillCounts, race.Skills || []);
-    (race["Action cards"] || []).forEach((action) => addAction(stats, action));
+    (race.ActionCards || []).forEach((action) => addAction(stats, action));
   }
 
   function applyEntry(stats, entry) {
@@ -675,7 +648,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     (entry.Items || []).forEach((item) => addItem(stats, item));
-    (entry["Action cards"] || []).forEach((action) => addAction(stats, action));
+    (entry.ActionCards || []).forEach((action) => addAction(stats, action));
   }
 
   function addItem(stats, itemName) {
@@ -692,7 +665,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function addAction(stats, cardId) {
-    const card = state.data["Action Cards"][cardId];
+    const card = state.data.ActionCards[cardId];
     if (!card) {
       return;
     }
@@ -992,10 +965,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         itemsByType.get(type).push(item);
       });
 
-      const itemTypeOrder = ["Head", "Chest", "Hand", "Feet", "Small"];
       const sortedTypes = Array.from(itemsByType.keys()).sort((a, b) => {
-        const indexA = itemTypeOrder.indexOf(a);
-        const indexB = itemTypeOrder.indexOf(b);
+        const indexA = ITEM_TYPE_ORDER.indexOf(a);
+        const indexB = ITEM_TYPE_ORDER.indexOf(b);
 
         if (indexA !== -1 || indexB !== -1) {
           if (indexA === -1) return 1;
@@ -1062,7 +1034,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         cardsByCategory[category].push({ cardId: card._cardId, card });
       });
 
-      ["Offensive", "Defensive", "Support"].forEach((category) => {
+      ACTION_CATEGORIES.forEach((category) => {
         const cards = cardsByCategory[category];
         if (cards.length > 0) {
           const categoryGroup = document.createElement("div");
@@ -1566,8 +1538,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
 
     if (!excludeActionCards) {
-      (entry["Action cards"] || []).forEach((cardId) => {
-        const card = state.data["Action Cards"][cardId];
+      (entry.ActionCards || []).forEach((cardId) => {
+        const card = state.data.ActionCards[cardId];
         if (includeActionCardMentions) {
           parts.push({ cardId, card: card || null });
         } else {
@@ -1666,7 +1638,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   // Selector descriptors
   function describeVersionOption(option, slotIndex) {
     const actionCards = buildActionCardPreviews(
-      option.entry["Action cards"] || [],
+      option.entry.ActionCards || [],
       buildPreviewStatsForSelection({
         levelUps: buildLevelUpPreview(slotIndex, { versionIndex: option.index }),
       })
@@ -1698,7 +1670,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function describeEntryOption(entry, previewStats = null) {
     const items = buildItemPreviews(entry.Items || []);
-    const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
+    const actionCards = buildActionCardPreviews(entry.ActionCards || [], previewStats);
     return {
       title: entry.Name,
       renderDetail: (parent) =>
@@ -1711,11 +1683,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function describeProfessionOption(profession) {
     const summaryParts = buildEntryParts(profession);
     const accessibleTrees = [];
-    const primaryTree = resolvePrimaryTreeName(profession.Name);
+    const primaryTree = resolvePrimaryTreeName(profession.Name, state.trees);
     if (state.trees.has(primaryTree)) {
       accessibleTrees.push(primaryTree);
     }
-    profession["Advancement Trees"].forEach((treeName) => {
+    profession.AdvancementTrees.forEach((treeName) => {
       if (!accessibleTrees.includes(treeName)) {
         accessibleTrees.push(treeName);
       }

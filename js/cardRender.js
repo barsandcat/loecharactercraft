@@ -20,44 +20,10 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
 
   const sunMoonEl = document.createElement("div");
   sunMoonEl.className = "action-card-sun-moon";
-
-  let hasSunMoon = false;
-
-  if (card.Sun && card.Sun > 0) {
-    const sunIcon = document.createElement("img");
-    sunIcon.className = "action-card-inline-icon";
-    sunIcon.src = "icons/sun.svg";
-    sunIcon.alt = "Sun";
-    sunMoonEl.appendChild(sunIcon);
-
-    const sunText = document.createElement("span");
-    sunText.textContent = card.Sun;
-    sunMoonEl.appendChild(sunText);
-
-    hasSunMoon = true;
-  }
-
-  if ((card.Sun && card.Sun > 0) && (card.Moon && card.Moon > 0)) {
-    sunMoonEl.appendChild(document.createTextNode(" "));
-  }
-
-  if (card.Moon && card.Moon > 0) {
-    const moonIcon = document.createElement("img");
-    moonIcon.className = "action-card-inline-icon";
-    moonIcon.src = "icons/moon.svg";
-    moonIcon.alt = "Moon";
-    sunMoonEl.appendChild(moonIcon);
-
-    const moonText = document.createElement("span");
-    moonText.textContent = card.Moon;
-    sunMoonEl.appendChild(moonText);
-
-    hasSunMoon = true;
-  }
-
-  if (hasSunMoon) {
-    nameRowEl.appendChild(sunMoonEl);
-  }
+  const hasSun = appendSunMoonIcon(sunMoonEl, card.Sun, "sun");
+  if (hasSun && card.Moon > 0) sunMoonEl.appendChild(document.createTextNode(" "));
+  const hasMoon = appendSunMoonIcon(sunMoonEl, card.Moon, "moon");
+  if (hasSun || hasMoon) nameRowEl.appendChild(sunMoonEl);
 
   const nameEl = document.createElement("div");
   nameEl.className = "action-card-name";
@@ -66,44 +32,10 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
 
   const backSunMoonEl = document.createElement("div");
   backSunMoonEl.className = "action-card-back-sun-moon";
-
-  let hasBackSunMoon = false;
-
-  if (card.BackSun && card.BackSun > 0) {
-    const sunIcon = document.createElement("img");
-    sunIcon.className = "action-card-inline-icon";
-    sunIcon.src = "icons/sun.svg";
-    sunIcon.alt = "Sun";
-    backSunMoonEl.appendChild(sunIcon);
-
-    const sunText = document.createElement("span");
-    sunText.textContent = card.BackSun;
-    backSunMoonEl.appendChild(sunText);
-
-    hasBackSunMoon = true;
-  }
-
-  if ((card.BackSun && card.BackSun > 0) && (card.BackMoon && card.BackMoon > 0)) {
-    backSunMoonEl.appendChild(document.createTextNode(" "));
-  }
-
-  if (card.BackMoon && card.BackMoon > 0) {
-    const moonIcon = document.createElement("img");
-    moonIcon.className = "action-card-inline-icon";
-    moonIcon.src = "icons/moon.svg";
-    moonIcon.alt = "Moon";
-    backSunMoonEl.appendChild(moonIcon);
-
-    const moonText = document.createElement("span");
-    moonText.textContent = card.BackMoon;
-    backSunMoonEl.appendChild(moonText);
-
-    hasBackSunMoon = true;
-  }
-
-  if (hasBackSunMoon) {
-    nameRowEl.appendChild(backSunMoonEl);
-  }
+  const hasBackSun = appendSunMoonIcon(backSunMoonEl, card.BackSun, "sun");
+  if (hasBackSun && card.BackMoon > 0) backSunMoonEl.appendChild(document.createTextNode(" "));
+  const hasBackMoon = appendSunMoonIcon(backSunMoonEl, card.BackMoon, "moon");
+  if (hasBackSun || hasBackMoon) nameRowEl.appendChild(backSunMoonEl);
 
   body.appendChild(nameRowEl);
 
@@ -424,6 +356,19 @@ export function normalizeRollMode(mode) {
 }
 
 // Text and icon rendering
+function appendSunMoonIcon(parent, value, iconName) {
+  if (!value || value <= 0) return false;
+  const icon = document.createElement("img");
+  icon.className = "action-card-inline-icon";
+  icon.src = "icons/" + iconName + ".svg";
+  icon.alt = iconName.charAt(0).toUpperCase() + iconName.slice(1);
+  parent.appendChild(icon);
+  const text = document.createElement("span");
+  text.textContent = value;
+  parent.appendChild(text);
+  return true;
+}
+
 export function appendFormattedText(parent, text) {
   const pattern = /\{([^}]+)\}|\[([^\]]+)\]/g;
   let lastIndex = 0;

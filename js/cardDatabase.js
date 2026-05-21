@@ -1,4 +1,5 @@
-import { buildActionCardElement } from "./cardRender.js";
+import { buildActionCardElement, getRollAttributeList } from "./cardRender.js";
+import { resolvePrimaryTreeName } from "./dataUtils.js";
 
 const LOCK_LEVEL_MAP = {
   1: 1,
@@ -97,7 +98,7 @@ function populateFilters(db) {
     else rollTypeCounts.regular++;
 
     if (card.Roll) {
-      const attList = card.Roll.ATT && card.Roll.ATT.length > 0 ? card.Roll.ATT : ["STR", "AGI", "INT", "CHA"];
+      const attList = getRollAttributeList(card.Roll);
       attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
     }
 
@@ -161,7 +162,7 @@ function getActiveFilters() {
 
 // Card database
 function createCardDatabase(data) {
-  const trees = new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree]));
+  const trees = new Map(data.AdvancementTrees.map((tree) => [tree.Name, tree]));
 
   const state = { data, trees, cards: null };
   state.cards = buildCardCache(data, trees);
@@ -216,7 +217,7 @@ function createCardDatabase(data) {
   // Data loading
   function buildCardCache(data, trees) {
     const cards = [];
-    const actionCardsMap = data["Action Cards"] || {};
+    const actionCardsMap = data.ActionCards || {};
     const treeByCard = new Map();
     const lockLevelByCard = new Map();
 
@@ -224,7 +225,7 @@ function createCardDatabase(data) {
     data.Professions.forEach((profession) => {
       const primaryTreeName = resolvePrimaryTreeName(profession.Name, trees);
       (profession.Paths || []).forEach((path) => {
-        (path["Action cards"] || []).forEach((cardId) => {
+        (path.ActionCards || []).forEach((cardId) => {
           if (!treeByCard.has(cardId)) {
             treeByCard.set(cardId, primaryTreeName);
             lockLevelByCard.set(cardId, 0);
@@ -239,7 +240,7 @@ function createCardDatabase(data) {
         const level = Number(levelStr);
         const lockLevel = LOCK_LEVEL_MAP[level] || 0;
         (versions || []).forEach((entry) => {
-          (entry["Action cards"] || []).forEach((cardId) => {
+          (entry.ActionCards || []).forEach((cardId) => {
             if (!treeByCard.has(cardId)) {
               treeByCard.set(cardId, treeName);
               lockLevelByCard.set(cardId, lockLevel);
@@ -263,29 +264,6 @@ function createCardDatabase(data) {
     return cards;
   }
 
-  function resolvePrimaryTreeName(professionName, trees) {
-    if (trees.has(professionName)) return professionName;
-
-    const normalizedProfession = normalizeForMatch(professionName);
-    let bestMatch = null;
-    trees.forEach((_, treeName) => {
-      const normalizedTree = normalizeForMatch(treeName);
-      if (
-        normalizedProfession.startsWith(normalizedTree) ||
-        normalizedTree.startsWith(normalizedProfession)
-      ) {
-        if (!bestMatch || normalizedTree.length > normalizeForMatch(bestMatch).length) {
-          bestMatch = treeName;
-        }
-      }
-    });
-    return bestMatch || professionName;
-  }
-
-  function normalizeForMatch(value) {
-    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
-
   // Filtering and sorting
   function filterCards(cards, filters) {
     return cards.filter((card) => {
@@ -301,7 +279,7 @@ function createCardDatabase(data) {
       }
       if (filters.att) {
         if (!card.Roll) return false;
-        const attList = card.Roll.ATT && card.Roll.ATT.length > 0 ? card.Roll.ATT : ["STR", "AGI", "INT", "CHA"];
+        const attList = getRollAttributeList(card.Roll);
         if (!attList.includes(filters.att)) return false;
       }
       if (filters.modifier) {
