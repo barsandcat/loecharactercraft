@@ -3,7 +3,7 @@ import { PROB_EN_DIFFICULTIES, computeSuccessDist, bandProb, pct, avgSuccesses, 
 export const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
 
 // Action card rendering
-export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null, showNoteWarning = false) {
+export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
   const front = card.Front || {};
   const back = card.Back || null;
 
@@ -64,134 +64,25 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     body.appendChild(targetEl);
   }
 
-  if (front.Roll) {
-    body.appendChild(buildRollElement(front.Roll, attrs, keywordCounts));
+  // Render front
+  renderCardContent(body, front, {
+    attrs,
+    keywordCounts,
+    containerClassName: "action-card-desc",
+    textClassName: "action-card-desc",
+    noteClassName: "action-card-note",
+    warningClassName: "action-card-warning",
+  });
 
-    if (front.Roll.Successes) {
-      const sortedKeys = Object.keys(front.Roll.Successes).sort((a, b) => Number(b) - Number(a));
-      const rollMode = normalizeRollMode(front.Roll.Mode);
-      const rollATTList = getRollAttributeList(front.Roll);
-      const attDice = attrs ? getRollAttributeDice(attrs, rollATTList, rollMode) : 0;
-
-      if (attDice > 0) {
-        const sortedNum = sortedKeys.map(Number);
-        const appliedMods = (keywordCounts && front.Roll.Modifiers)
-          ? computeAppliedModifiers(front.Roll.Modifiers, keywordCounts)
-          : [];
-        const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
-        const effectiveDice = Math.max(0, attDice + modDiceTotal);
-
-        let appendProbLabel;
-        if (front.Roll.Difficulty != null) {
-          const dist = computeSuccessDist(effectiveDice, front.Roll.Difficulty);
-          appendProbLabel = (parent, i) => {
-            parent.appendChild(document.createTextNode("(" + pct(bandProb(dist, sortedNum, i)) + ")"));
-          };
-        } else {
-          const dists = PROB_EN_DIFFICULTIES.map((d) => computeSuccessDist(effectiveDice, d));
-          appendProbLabel = (parent, i) => {
-            parent.appendChild(document.createTextNode("("));
-            PROB_EN_DIFFICULTIES.forEach((d, di) => {
-              if (di > 0) {
-                parent.appendChild(document.createTextNode(", "));
-              }
-              appendDifficultyIcon(parent, d);
-              parent.appendChild(document.createTextNode(":" + pct(bandProb(dists[di], sortedNum, i))));
-            });
-            parent.appendChild(document.createTextNode(")"));
-          };
-        }
-
-        for (let i = 0; i < sortedKeys.length; i++) {
-          const key = sortedKeys[i];
-          const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome";
-          outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, front.Roll.Successes[key]);
-          outEl.appendChild(document.createTextNode(" "));
-
-          const probWrap = document.createElement("span");
-          probWrap.className = "action-card-prob";
-          appendProbLabel(probWrap, i);
-
-          const tooltip = document.createElement("div");
-          tooltip.className = "action-card-prob-tooltip";
-          const totalLine = document.createElement("div");
-          totalLine.className = "action-card-prob-tooltip-total";
-          totalLine.textContent = "Rolling " + effectiveDice + " dice";
-          tooltip.appendChild(totalLine);
-          if (rollMode === "Sum") {
-            rollATTList.forEach((att) => {
-              const line = document.createElement("div");
-              line.textContent = att + ": " + (attrs[att] || 0);
-              tooltip.appendChild(line);
-            });
-          } else {
-            const usedAtt = getRollAttributeSelection(attrs, rollATTList, rollMode);
-            if (usedAtt) {
-              const line = document.createElement("div");
-              line.textContent = usedAtt.attribute + ": " + usedAtt.value;
-              tooltip.appendChild(line);
-            }
-          }
-          for (const m of appliedMods) {
-            const sign = m.totalDice > 0 ? "+" : "";
-            const dieWord = Math.abs(m.totalDice) === 1 ? "die" : "dice";
-            const countLabel = m.count > 1 ? " ×" + m.count : "";
-            const line = document.createElement("div");
-            line.textContent = m.trigger + countLabel + ": " + sign + m.totalDice + " " + dieWord;
-            tooltip.appendChild(line);
-          }
-          probWrap.appendChild(tooltip);
-          outEl.appendChild(probWrap);
-          body.appendChild(outEl);
-        }
-      } else {
-        sortedKeys.forEach((key) => {
-          const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome";
-          outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, front.Roll.Successes[key]);
-          body.appendChild(outEl);
-        });
-      }
-    }
-  }
-
-  if (front.Text) {
-    const frontEl = document.createElement("div");
-    frontEl.className = "action-card-desc";
-    appendFormattedText(frontEl, front.Text);
-    body.appendChild(frontEl);
-  }
-
-  const hasNote = showNoteWarning && Boolean(back?.Note);
-  const hasWarning = showNoteWarning && Boolean(back?.Warning);
-
-  if (back?.Text || hasNote || hasWarning) {
-    const boxEl = document.createElement("div");
-    boxEl.className = "folded-effect-text action-card-back";
-
-    if (back?.Text) {
-      const backTextEl = document.createElement("div");
-      appendFormattedText(backTextEl, back.Text);
-      boxEl.appendChild(backTextEl);
-    }
-    if (hasNote) {
-      const noteEl = document.createElement("div");
-      noteEl.className = "action-card-note";
-      appendFormattedText(noteEl, back.Note);
-      boxEl.appendChild(noteEl);
-    }
-    if (hasWarning) {
-      const warningEl = document.createElement("div");
-      warningEl.className = "action-card-warning";
-      appendFormattedText(warningEl, back.Warning);
-      boxEl.appendChild(warningEl);
-    }
-
-    body.appendChild(boxEl);
-  }
+  // Render back
+  renderCardContent(body, back, {
+    attrs,
+    keywordCounts,
+    containerClassName: "folded-effect-text action-card-back",
+    textClassName: "action-card-text",
+    noteClassName: "action-card-note",
+    warningClassName: "action-card-warning",
+  });
 
   wrapper.appendChild(body);
   return wrapper;
@@ -308,6 +199,150 @@ export function buildRollElement(roll, attrs = null, keywordCounts = null) {
   }
 
   return rollLineEl;
+}
+
+function renderCardContent(parent, block, options = {}) {
+  const {
+    attrs,
+    keywordCounts,
+    containerClassName,
+    textClassName,
+    noteClassName,
+    warningClassName,
+  } = options;
+
+  const roll = block?.Roll || null;
+  const text = block?.Text || null;
+  const note = block?.Note || null;
+  const warning = block?.Warning || null;
+
+  if (!roll && !text && !note && !warning) {
+    return;
+  }
+
+  const container = document.createElement("div");
+  container.className = containerClassName;
+
+  // Render Roll + Outcomes
+  if (roll) {
+    container.appendChild(buildRollElement(roll, attrs, keywordCounts));
+
+    if (roll.Successes) {
+      const sortedKeys = Object.keys(roll.Successes).sort((a, b) => Number(b) - Number(a));
+      const rollMode = normalizeRollMode(roll.Mode);
+      const rollATTList = getRollAttributeList(roll);
+      const attDice = attrs ? getRollAttributeDice(attrs, rollATTList, rollMode) : 0;
+
+      if (attDice > 0) {
+        const sortedNum = sortedKeys.map(Number);
+        const appliedMods = (keywordCounts && roll.Modifiers)
+          ? computeAppliedModifiers(roll.Modifiers, keywordCounts)
+          : [];
+        const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
+        const effectiveDice = Math.max(0, attDice + modDiceTotal);
+
+        let appendProbLabel;
+        if (roll.Difficulty != null) {
+          const dist = computeSuccessDist(effectiveDice, roll.Difficulty);
+          appendProbLabel = (parent, i) => {
+            parent.appendChild(document.createTextNode("(" + pct(bandProb(dist, sortedNum, i)) + ")"));
+          };
+        } else {
+          const dists = PROB_EN_DIFFICULTIES.map((d) => computeSuccessDist(effectiveDice, d));
+          appendProbLabel = (parent, i) => {
+            parent.appendChild(document.createTextNode("("));
+            PROB_EN_DIFFICULTIES.forEach((d, di) => {
+              if (di > 0) {
+                parent.appendChild(document.createTextNode(", "));
+              }
+              appendDifficultyIcon(parent, d);
+              parent.appendChild(document.createTextNode(":" + pct(bandProb(dists[di], sortedNum, i))));
+            });
+            parent.appendChild(document.createTextNode(")"));
+          };
+        }
+
+        for (let i = 0; i < sortedKeys.length; i++) {
+          const key = sortedKeys[i];
+          const outEl = document.createElement("div");
+          outEl.className = "action-card-outcome";
+          outEl.appendChild(document.createTextNode(key + ": "));
+          appendFormattedText(outEl, roll.Successes[key]);
+          outEl.appendChild(document.createTextNode(" "));
+
+          const probWrap = document.createElement("span");
+          probWrap.className = "action-card-prob";
+          appendProbLabel(probWrap, i);
+
+          const tooltip = document.createElement("div");
+          tooltip.className = "action-card-prob-tooltip";
+          const totalLine = document.createElement("div");
+          totalLine.className = "action-card-prob-tooltip-total";
+          totalLine.textContent = "Rolling " + effectiveDice + " dice";
+          tooltip.appendChild(totalLine);
+          if (rollMode === "Sum") {
+            rollATTList.forEach((att) => {
+              const line = document.createElement("div");
+              line.textContent = att + ": " + (attrs[att] || 0);
+              tooltip.appendChild(line);
+            });
+          } else {
+            const usedAtt = getRollAttributeSelection(attrs, rollATTList, rollMode);
+            if (usedAtt) {
+              const line = document.createElement("div");
+              line.textContent = usedAtt.attribute + ": " + usedAtt.value;
+              tooltip.appendChild(line);
+            }
+          }
+          for (const m of appliedMods) {
+            const sign = m.totalDice > 0 ? "+" : "";
+            const dieWord = Math.abs(m.totalDice) === 1 ? "die" : "dice";
+            const countLabel = m.count > 1 ? " ×" + m.count : "";
+            const line = document.createElement("div");
+            line.textContent = m.trigger + countLabel + ": " + sign + m.totalDice + " " + dieWord;
+            tooltip.appendChild(line);
+          }
+          probWrap.appendChild(tooltip);
+          outEl.appendChild(probWrap);
+          container.appendChild(outEl);
+        }
+      } else {
+        sortedKeys.forEach((key) => {
+          const outEl = document.createElement("div");
+          outEl.className = "action-card-outcome";
+          outEl.appendChild(document.createTextNode(key + ": "));
+          appendFormattedText(outEl, roll.Successes[key]);
+          container.appendChild(outEl);
+        });
+      }
+    }
+  }
+
+  // Render Text
+  if (text) {
+    const textEl = document.createElement("div");
+    textEl.className = textClassName;
+    appendFormattedText(textEl, text);
+    container.appendChild(textEl);
+  }
+
+  // Render Note
+  if (note) {
+    const noteEl = document.createElement("div");
+    noteEl.className = noteClassName;
+    appendFormattedText(noteEl, note);
+    container.appendChild(noteEl);
+  }
+
+  // Render Warning
+  if (warning) {
+    const warningEl = document.createElement("div");
+    warningEl.className = warningClassName;
+    appendFormattedText(warningEl, warning);
+    container.appendChild(warningEl);
+  }
+
+  parent.appendChild(container);
 }
 
 export function buildFoldedEffectText(text, className = "") {

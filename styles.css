@@ -632,6 +632,16 @@ h1 {
   color: var(--ink);
 }
 
+.action-card-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.2;
+  color: var(--gold);
+}
+
 .folded-effect-text {
   position: relative;
   overflow: hidden;
