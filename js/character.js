@@ -1403,7 +1403,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     detailsEl.className = "item-details";
 
     const nameEl = document.createElement("div");
-    nameEl.className = "item-name action-card-name";
+    nameEl.className = "item-name";
     appendFormattedText(nameEl, getItemDisplayName(item));
     detailsEl.appendChild(nameEl);
 
