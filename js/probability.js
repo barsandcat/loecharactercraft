@@ -1,5 +1,6 @@
 export const PROB_EN_DIFFICULTIES = [6, 8, 10];
 
+// Distribution math
 export function computeSuccessDist(numDice, difficulty) {
   const p0 = (difficulty - 1) / 12;
   const p1 = Math.max(0, 12 - difficulty) / 12;
@@ -20,20 +21,11 @@ export function computeSuccessDist(numDice, difficulty) {
   return dp;
 }
 
-function probAtLeast(dist, k) {
-  if (k <= 0) return 1;
-  let sum = 0;
-  for (let s = Math.max(0, k); s < dist.length; s++) sum += dist[s];
-  return sum;
-}
-
 export function bandProb(dist, sortedNumKeys, index) {
   const lo = sortedNumKeys[index];
   const hi = index > 0 ? sortedNumKeys[index - 1] : null;
   return probAtLeast(dist, lo) - (hi !== null ? probAtLeast(dist, hi) : 0);
 }
-
-export function pct(p) { return Math.round(p * 100) + "%"; }
 
 export function avgSuccesses(dist) {
   let sum = 0;
@@ -43,6 +35,16 @@ export function avgSuccesses(dist) {
   return sum;
 }
 
+export function pct(p) { return Math.round(p * 100) + "%"; }
+
+function probAtLeast(dist, k) {
+  if (k <= 0) return 1;
+  let sum = 0;
+  for (let s = Math.max(0, k); s < dist.length; s++) sum += dist[s];
+  return sum;
+}
+
+// Modifier resolution
 export function computeAppliedModifiers(modifiers, keywordCounts) {
   const applied = [];
   for (const mod of modifiers) {

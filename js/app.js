@@ -6,6 +6,7 @@ let pendingBuildAction = null;
 
 init();
 
+// Startup
 async function init() {
   cacheUi();
   for (const panel of [ui.controlsPanel, ui.summaryPanel, ui.treesPanel]) {
@@ -101,7 +102,7 @@ function bindEvents() {
   });
 }
 
-
+// URL and clipboard
 function syncUrlHash(encoded) {
   history.replaceState(null, "", encoded ? "#" + encoded : location.pathname + location.search);
 }
@@ -125,6 +126,7 @@ function openNewBuild() {
   window.open(newBuildUrl.toString(), "_blank", "noopener");
 }
 
+// Confirmation dialog
 function requestBuildConfirmation(action) {
   if (builder.isBuildEmpty()) {
     action();
@@ -155,7 +157,7 @@ function isConfirmDialogOpen() {
   return !ui.confirmOverlay.classList.contains("hidden");
 }
 
-
+// Error banner
 function showError(message) {
   ui.errorBanner.textContent = message;
   ui.errorBanner.classList.remove("hidden");

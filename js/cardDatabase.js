@@ -18,6 +18,7 @@ const ui = {};
 
 init();
 
+// Startup
 async function init() {
   cacheUi();
   try {
@@ -73,6 +74,7 @@ function bindEvents() {
   });
 }
 
+// Filter controls
 function populateFilters(db) {
   const treeCounts = new Map();
   const typeCounts = new Map();
@@ -146,12 +148,25 @@ function populateFilters(db) {
   });
 }
 
+function getActiveFilters() {
+  return {
+    tree: ui.filterTree.value || null,
+    type: ui.filterType.value || null,
+    category: ui.filterCategory.value || null,
+    rollType: ui.filterRollType.value || null,
+    att: ui.filterATT.value || null,
+    modifier: ui.filterModifier.value || null,
+  };
+}
+
+// Card database
 function createCardDatabase(data) {
   const trees = new Map(data["Advancement Trees"].map((tree) => [tree.Name, tree]));
 
   const state = { data, trees, cards: null };
   state.cards = buildCardCache(data, trees);
 
+  // Rendering
   function render() {
     const filters = getActiveFilters();
     const filteredCards = filterCards(state.cards, filters);
@@ -159,10 +174,46 @@ function createCardDatabase(data) {
     renderCardList(sortedCards);
   }
 
-  function getAllCards() {
-    return state.cards;
+  function renderCardList(cards) {
+    ui.cardList.replaceChildren();
+
+    if (cards.length === 0) {
+      const emptyState = document.createElement("div");
+      emptyState.className = "empty-state";
+      emptyState.textContent = "No action cards match the selected filters.";
+      ui.cardList.appendChild(emptyState);
+      return;
+    }
+
+    const list = document.createElement("ul");
+    list.className = "card-database-list";
+
+    cards.forEach((card) => {
+      const li = document.createElement("li");
+      li.className = "card-database-item";
+
+      const metaEl = document.createElement("div");
+      metaEl.className = "card-database-meta";
+
+      const treeEl = document.createElement("span");
+      treeEl.className = "card-meta-tree";
+      treeEl.textContent = card._tree;
+      metaEl.appendChild(treeEl);
+
+      const lockEl = document.createElement("span");
+      lockEl.className = "card-meta-lock";
+      lockEl.textContent = "Level: " + card._lockLevel;
+      metaEl.appendChild(lockEl);
+
+      li.appendChild(metaEl);
+      li.appendChild(buildActionCardElement(card._cardId, card, null, null, true));
+      list.appendChild(li);
+    });
+
+    ui.cardList.appendChild(list);
   }
 
+  // Data loading
   function buildCardCache(data, trees) {
     const cards = [];
     const actionCardsMap = data["Action Cards"] || {};
@@ -235,6 +286,7 @@ function createCardDatabase(data) {
     return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
+  // Filtering and sorting
   function filterCards(cards, filters) {
     return cards.filter((card) => {
       if (filters.tree && card._tree !== filters.tree) return false;
@@ -294,59 +346,14 @@ function createCardDatabase(data) {
     return sorted;
   }
 
-  function renderCardList(cards) {
-    ui.cardList.replaceChildren();
-
-    if (cards.length === 0) {
-      const emptyState = document.createElement("div");
-      emptyState.className = "empty-state";
-      emptyState.textContent = "No action cards match the selected filters.";
-      ui.cardList.appendChild(emptyState);
-      return;
-    }
-
-    const list = document.createElement("ul");
-    list.className = "card-database-list";
-
-    cards.forEach((card) => {
-      const li = document.createElement("li");
-      li.className = "card-database-item";
-
-      const metaEl = document.createElement("div");
-      metaEl.className = "card-database-meta";
-
-      const treeEl = document.createElement("span");
-      treeEl.className = "card-meta-tree";
-      treeEl.textContent = card._tree;
-      metaEl.appendChild(treeEl);
-
-      const lockEl = document.createElement("span");
-      lockEl.className = "card-meta-lock";
-      lockEl.textContent = "Level: " + card._lockLevel;
-      metaEl.appendChild(lockEl);
-
-      li.appendChild(metaEl);
-      li.appendChild(buildActionCardElement(card._cardId, card, null, null, true));
-      list.appendChild(li);
-    });
-
-    ui.cardList.appendChild(list);
+  function getAllCards() {
+    return state.cards;
   }
 
   return { render, getAllCards };
 }
 
-function getActiveFilters() {
-  return {
-    tree: ui.filterTree.value || null,
-    type: ui.filterType.value || null,
-    category: ui.filterCategory.value || null,
-    rollType: ui.filterRollType.value || null,
-    att: ui.filterATT.value || null,
-    modifier: ui.filterModifier.value || null,
-  };
-}
-
+// Error display
 function showError(message) {
   ui.errorBanner.textContent = message;
   ui.errorBanner.classList.remove("hidden");

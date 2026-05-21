@@ -19,6 +19,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   let cardWidthObserver = null;
 
+  // Build lifecycle
   function render() {
     const levelMeta = refreshLevelUpStates();
     renderControls(levelMeta);
@@ -176,16 +177,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
   }
 
-  function getRaceFreeSkills(race = state.selectedRace) {
-    return Array.isArray(race?.FreeSkills) ? race.FreeSkills : [];
-  }
-
-  function getFilledLevelCount() {
-    return state.levelUps.reduce((count, slotState) => {
-      return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
-    }, 0);
-  }
-
+  // Selection
   function selectRace(race) {
     const raceChanged = state.selectedRace !== race;
     state.selectedRace = race;
@@ -251,6 +243,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     commitSelection();
   }
 
+  // Level-up logic
   function tryAutoSelect() {
     const priorSelectedOptions = [];
     let unlocked = state.selectedProf !== null;
@@ -494,10 +487,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return bestMatch || professionName;
   }
 
-  function normalizeForMatch(value) {
-    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
-
   function isAdvancementLevelUnlocked(level, takenLevels, slotNumber) {
     if (level === 1) {
       return true;
@@ -548,6 +537,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }));
   }
 
+  function normalizeForMatch(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  // Character stats
   function collectCharacterStats(selection = state) {
     const stats = {
       attributes: Object.fromEntries(ATTRIBUTES.map((attribute) => [attribute, 0])),
@@ -590,6 +584,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return stats;
   }
 
+  function buildPreviewStatsForSelection(overrides = {}) {
+    return buildActionCardPreviewStats(collectCharacterStats(createSelectionPreview(overrides)));
+  }
+
   function buildActionCardPreviewStats(stats) {
     const keywordCounts = new Map(stats.keywordCounts);
     for (const itemObj of stats.items.values()) {
@@ -614,10 +612,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       selectedPath: overrides.selectedPath !== undefined ? overrides.selectedPath : state.selectedPath,
       levelUps: overrides.levelUps !== undefined ? overrides.levelUps : state.levelUps,
     };
-  }
-
-  function buildPreviewStatsForSelection(overrides = {}) {
-    return buildActionCardPreviewStats(collectCharacterStats(createSelectionPreview(overrides)));
   }
 
   function buildLevelUpPreview(slotIndex, slotPatch) {
@@ -712,12 +706,6 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     }
   }
 
-  function incrementCountMap(map, values) {
-    values.forEach((value) => {
-      map.set(value, (map.get(value) || 0) + 1);
-    });
-  }
-
   function upgradeDivDie(divDie) {
     const currentIndex = DICE_PROGRESSION.indexOf(divDie);
     if (currentIndex === -1 || currentIndex === DICE_PROGRESSION.length - 1) {
@@ -726,6 +714,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return DICE_PROGRESSION[currentIndex + 1];
   }
 
+  function incrementCountMap(map, values) {
+    values.forEach((value) => {
+      map.set(value, (map.get(value) || 0) + 1);
+    });
+  }
+
+  // Panel rendering
   function renderControls(levelMeta) {
     const container = ui.controlsPanel;
     container.replaceChildren();
@@ -1229,6 +1224,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
+  // Selector overlay
   function openSelector(config) {
     ui.selectorKicker.textContent = config.kicker || "Choose Option";
     ui.selectorTitle.textContent = config.title || "Options";
@@ -1316,6 +1312,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     document.body.style.overflow = "";
   }
 
+  // Choice grid
   function singleChoiceGrid(config) {
     const grid = document.createElement("div");
     grid.className = "choice-grid";
@@ -1385,58 +1382,19 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return button;
   }
 
-  function createStatCard(label, value, limit) {
-    const card = document.createElement("div");
-    card.className = "stat-card";
-
-    const numericValue = parseFloat(value);
-    if (limit !== undefined && !isNaN(numericValue) && numericValue > limit) {
-      card.classList.add("is-over-limit");
-    }
-
-    const statValue = document.createElement("div");
-    statValue.className = "stat-value";
-    statValue.textContent = value;
-    card.appendChild(statValue);
-
-    const statLabel = document.createElement("div");
-    statLabel.className = "stat-label";
-    statLabel.textContent = label;
-    card.appendChild(statLabel);
-
-    return card;
-  }
-
-  function createListSection(title, items) {
-    const section = document.createElement("section");
-    section.className = "summary-card";
-
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    section.appendChild(heading);
-
-    const list = document.createElement("ul");
-    list.className = "list-block";
-    items.forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "list-item";
-      if (item && typeof item.render === "function") {
-        item.render(li);
-      } else {
-        li.textContent = item;
-      }
-      list.appendChild(li);
+  // UI components
+  function renderEntryToElement(element, entry, previewStats = null) {
+    const parts = buildEntryParts(entry, {
+      inlineItemDetails: true,
+      includeActionCardMentions: true,
     });
 
-    section.appendChild(list);
-    return section;
-  }
+    if (!parts.length) {
+      return;
+    }
 
-  function createEmptyState(text) {
-    const box = document.createElement("div");
-    box.className = "empty-state";
-    box.textContent = text;
-    return box;
+    element.replaceChildren();
+    appendDisplayParts(element, parts, previewStats);
   }
 
   function createActionCardMention(cardId, card, previewStats = null) {
@@ -1460,18 +1418,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return span;
   }
 
-  function renderEntryToElement(element, entry, previewStats = null) {
-    const parts = buildEntryParts(entry, {
-      inlineItemDetails: true,
-      includeActionCardMentions: true,
-    });
-
-    if (!parts.length) {
-      return;
-    }
-
-    element.replaceChildren();
-    appendDisplayParts(element, parts, previewStats);
+  function buildItemElement(item) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "item-preview";
+    wrapper.appendChild(buildItemDetailsElement(item));
+    wrapper.appendChild(buildFoldedEffectText(item.Effect || "None", "item-effect"));
+    return wrapper;
   }
 
   function buildItemDetailsElement(item) {
@@ -1504,98 +1456,61 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return detailsEl;
   }
 
-  function buildItemElement(item) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "item-preview";
-    wrapper.appendChild(buildItemDetailsElement(item));
-    wrapper.appendChild(buildFoldedEffectText(item.Effect || "None", "item-effect"));
-    return wrapper;
-  }
+  function createListSection(title, items) {
+    const section = document.createElement("section");
+    section.className = "summary-card";
 
-  function appendDisplayParts(parent, parts, previewStats = null, separator = ", ") {
-    parts.forEach((part, index) => {
-      if (index > 0) {
-        parent.appendChild(document.createTextNode(separator));
-      }
-      appendDisplayPart(parent, part, previewStats);
-    });
-  }
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    section.appendChild(heading);
 
-  function appendDisplayPart(parent, part, previewStats = null) {
-    if (!part) {
-      return;
-    }
-
-    if (typeof part.render === "function") {
-      part.render(parent);
-      return;
-    }
-
-    if (part.cardId !== undefined) {
-      if (part.card) {
-        parent.appendChild(createActionCardMention(part.cardId, part.card, previewStats));
+    const list = document.createElement("ul");
+    list.className = "list-block";
+    items.forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "list-item";
+      if (item && typeof item.render === "function") {
+        item.render(li);
       } else {
-        parent.appendChild(document.createTextNode(part.cardId));
+        li.textContent = item;
       }
-      return;
-    }
-
-    if (part.kind === "keyword" || part.kind === "skill") {
-      const tokenEl = document.createElement("em");
-      tokenEl.className = part.kind === "skill" ? "skill-token" : "keyword-token";
-      tokenEl.textContent = part.text;
-      parent.appendChild(tokenEl);
-      if (part.count > 1) {
-        parent.appendChild(document.createTextNode(" x" + part.count));
-      }
-      return;
-    }
-
-    parent.appendChild(document.createTextNode(part.text));
-  }
-
-  function appendCountSummary(parent, counts, kind) {
-    const wrapper = document.createElement("span");
-    const parts = Array.from(counts.keys())
-      .sort((a, b) => a.localeCompare(b))
-      .map((text) => ({
-        text,
-        kind,
-        count: counts.get(text),
-      }));
-    appendDisplayParts(wrapper, parts);
-    parent.appendChild(wrapper);
-  }
-
-  function appendInlineItemDetails(parent, item) {
-    parent.appendChild(document.createTextNode(getItemDisplayName(item)));
-
-    const details = [];
-    if (item.Passive) {
-      details.push({ text: item.Passive });
-    }
-    (item.Keywords || []).forEach((keyword) => {
-      details.push(buildTokenPart(keyword, "keyword"));
+      list.appendChild(li);
     });
 
-    if (details.length) {
-      parent.appendChild(document.createTextNode(" ("));
-      appendDisplayParts(parent, details);
-      parent.appendChild(document.createTextNode(")"));
+    section.appendChild(list);
+    return section;
+  }
+
+  function createStatCard(label, value, limit) {
+    const card = document.createElement("div");
+    card.className = "stat-card";
+
+    const numericValue = parseFloat(value);
+    if (limit !== undefined && !isNaN(numericValue) && numericValue > limit) {
+      card.classList.add("is-over-limit");
     }
+
+    const statValue = document.createElement("div");
+    statValue.className = "stat-value";
+    statValue.textContent = value;
+    card.appendChild(statValue);
+
+    const statLabel = document.createElement("div");
+    statLabel.className = "stat-label";
+    statLabel.textContent = label;
+    card.appendChild(statLabel);
+
+    return card;
   }
 
-  function buildRaceDetailParts(race) {
-    const parts = [];
-    (race.Keywords || []).forEach((keyword) => {
-      parts.push(buildTokenPart(keyword, "keyword"));
-    });
-    parts.push({ text: "MOB: " + (race.MOB || 0) });
-    parts.push({ text: "HP: " + (race.HP || 0) });
-    parts.push({ text: "DIV: " + (race.DIV || "-") });
-    return parts;
+  function createEmptyState(text) {
+    const box = document.createElement("div");
+    box.className = "empty-state";
+    box.textContent = text;
+    return box;
   }
 
+  // Display parts
   function buildEntryParts(
     entry,
     {
@@ -1664,23 +1579,132 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return parts;
   }
 
-  function describeRaceOption(race) {
+  function buildRaceDetailParts(race) {
+    const parts = [];
+    (race.Keywords || []).forEach((keyword) => {
+      parts.push(buildTokenPart(keyword, "keyword"));
+    });
+    parts.push({ text: "MOB: " + (race.MOB || 0) });
+    parts.push({ text: "HP: " + (race.HP || 0) });
+    parts.push({ text: "DIV: " + (race.DIV || "-") });
+    return parts;
+  }
+
+  function appendCountSummary(parent, counts, kind) {
+    const wrapper = document.createElement("span");
+    const parts = Array.from(counts.keys())
+      .sort((a, b) => a.localeCompare(b))
+      .map((text) => ({
+        text,
+        kind,
+        count: counts.get(text),
+      }));
+    appendDisplayParts(wrapper, parts);
+    parent.appendChild(wrapper);
+  }
+
+  function appendInlineItemDetails(parent, item) {
+    parent.appendChild(document.createTextNode(getItemDisplayName(item)));
+
+    const details = [];
+    if (item.Passive) {
+      details.push({ text: item.Passive });
+    }
+    (item.Keywords || []).forEach((keyword) => {
+      details.push(buildTokenPart(keyword, "keyword"));
+    });
+
+    if (details.length) {
+      parent.appendChild(document.createTextNode(" ("));
+      appendDisplayParts(parent, details);
+      parent.appendChild(document.createTextNode(")"));
+    }
+  }
+
+  function appendDisplayParts(parent, parts, previewStats = null, separator = ", ") {
+    parts.forEach((part, index) => {
+      if (index > 0) {
+        parent.appendChild(document.createTextNode(separator));
+      }
+      appendDisplayPart(parent, part, previewStats);
+    });
+  }
+
+  function appendDisplayPart(parent, part, previewStats = null) {
+    if (!part) {
+      return;
+    }
+
+    if (typeof part.render === "function") {
+      part.render(parent);
+      return;
+    }
+
+    if (part.cardId !== undefined) {
+      if (part.card) {
+        parent.appendChild(createActionCardMention(part.cardId, part.card, previewStats));
+      } else {
+        parent.appendChild(document.createTextNode(part.cardId));
+      }
+      return;
+    }
+
+    if (part.kind === "keyword" || part.kind === "skill") {
+      const tokenEl = document.createElement("em");
+      tokenEl.className = part.kind === "skill" ? "skill-token" : "keyword-token";
+      tokenEl.textContent = part.text;
+      parent.appendChild(tokenEl);
+      if (part.count > 1) {
+        parent.appendChild(document.createTextNode(" x" + part.count));
+      }
+      return;
+    }
+
+    parent.appendChild(document.createTextNode(part.text));
+  }
+
+  // Selector descriptors
+  function describeVersionOption(option, slotIndex) {
+    const actionCards = buildActionCardPreviews(
+      option.entry["Action cards"] || [],
+      buildPreviewStatsForSelection({
+        levelUps: buildLevelUpPreview(slotIndex, { versionIndex: option.index }),
+      })
+    );
     return {
-      title: race.Name,
-      renderDetail: (parent) => appendDisplayParts(parent, buildRaceDetailParts(race)),
+      renderTitle: (parent) => appendDisplayParts(parent, buildEntryParts(option.entry, { excludeActionCards: true })),
+      actionCards,
     };
   }
 
-  function describeAttributeOption(attributeSet) {
+  function describeTreeLevelOption(option) {
+    const versionParts = option.versions
+      .map((entry) => buildEntryParts(entry))
+      .filter((parts) => parts.length);
     return {
-      title: formatAttributeSummary(attributeSet),
-      detail: "Race attribute spread",
+      title: option.treeName + " - Level " + option.level,
+      renderDetail: (parent) => {
+        versionParts.forEach((parts, index) => {
+          if (index > 0) {
+            parent.appendChild(document.createElement("br"));
+            parent.appendChild(document.createTextNode("OR"));
+            parent.appendChild(document.createElement("br"));
+          }
+          appendDisplayParts(parent, parts);
+        });
+      },
     };
   }
 
-  function describeFreeSkillOption(skill) {
+  function describeEntryOption(entry, previewStats = null) {
+    const items = buildItemPreviews(entry.Items || []);
+    const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
     return {
-      title: skill,
+      title: entry.Name,
+      renderDetail: (parent) =>
+        appendDisplayParts(parent, buildEntryParts(entry, { excludeActionCards: true, excludeItems: true })),
+      items,
+      actionCards,
     };
   }
 
@@ -1723,52 +1747,39 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     };
   }
 
-  function describeEntryOption(entry, previewStats = null) {
-    const items = buildItemPreviews(entry.Items || []);
-    const actionCards = buildActionCardPreviews(entry["Action cards"] || [], previewStats);
+  function describeRaceOption(race) {
     return {
-      title: entry.Name,
-      renderDetail: (parent) =>
-        appendDisplayParts(parent, buildEntryParts(entry, { excludeActionCards: true, excludeItems: true })),
-      items,
-      actionCards,
+      title: race.Name,
+      renderDetail: (parent) => appendDisplayParts(parent, buildRaceDetailParts(race)),
     };
   }
 
-  function describeTreeLevelOption(option) {
-    const versionParts = option.versions
-      .map((entry) => buildEntryParts(entry))
-      .filter((parts) => parts.length);
+  function describeAttributeOption(attributeSet) {
     return {
-      title: option.treeName + " - Level " + option.level,
-      renderDetail: (parent) => {
-        versionParts.forEach((parts, index) => {
-          if (index > 0) {
-            parent.appendChild(document.createElement("br"));
-            parent.appendChild(document.createTextNode("OR"));
-            parent.appendChild(document.createElement("br"));
-          }
-          appendDisplayParts(parent, parts);
-        });
-      },
+      title: formatAttributeSummary(attributeSet),
+      detail: "Race attribute spread",
     };
   }
 
-  function describeVersionOption(option, slotIndex) {
-    const actionCards = buildActionCardPreviews(
-      option.entry["Action cards"] || [],
-      buildPreviewStatsForSelection({
-        levelUps: buildLevelUpPreview(slotIndex, { versionIndex: option.index }),
-      })
-    );
+  function describeFreeSkillOption(skill) {
     return {
-      renderTitle: (parent) => appendDisplayParts(parent, buildEntryParts(option.entry, { excludeActionCards: true })),
-      actionCards,
+      title: skill,
     };
   }
 
+  // Display helpers
   function formatAttributeSummary(attributeSet) {
     return ATTRIBUTES.map((key) => key + " " + (attributeSet[key] || 0)).join(", ");
+  }
+
+  function getRaceFreeSkills(race = state.selectedRace) {
+    return Array.isArray(race?.FreeSkills) ? race.FreeSkills : [];
+  }
+
+  function getFilledLevelCount() {
+    return state.levelUps.reduce((count, slotState) => {
+      return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
+    }, 0);
   }
 
   function getItemDisplayName(item) {
