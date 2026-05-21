@@ -108,7 +108,7 @@ def main():
     with open(path, encoding='utf-8') as f:
         data = json.load(f)
 
-    cards = data['Action Cards']
+    cards = data['ActionCards']
     converted_to_roll = []
     converted_to_front = []
 

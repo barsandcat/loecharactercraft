@@ -4,11 +4,14 @@ export const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
 
 // Action card rendering
 export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null, showNoteWarning = false) {
+  const front = card.Front || {};
+  const back = card.Back || null;
+
   const wrapper = document.createElement("div");
   wrapper.className = "action-card-full";
 
   const idBox = document.createElement("div");
-  idBox.className = "action-card-id " + (card.Type === "Reaction" ? "is-reaction" : "is-action");
+  idBox.className = "action-card-id " + (front.Type === "Reaction" ? "is-reaction" : "is-action");
   idBox.textContent = cardId;
   wrapper.appendChild(idBox);
 
@@ -20,31 +23,31 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
 
   const sunMoonEl = document.createElement("div");
   sunMoonEl.className = "action-card-sun-moon";
-  const hasSun = appendSunMoonIcon(sunMoonEl, card.Sun, "sun");
-  if (hasSun && card.Moon > 0) sunMoonEl.appendChild(document.createTextNode(" "));
-  const hasMoon = appendSunMoonIcon(sunMoonEl, card.Moon, "moon");
+  const hasSun = appendSunMoonIcon(sunMoonEl, front.Sun, "sun");
+  if (hasSun && front.Moon > 0) sunMoonEl.appendChild(document.createTextNode(" "));
+  const hasMoon = appendSunMoonIcon(sunMoonEl, front.Moon, "moon");
   if (hasSun || hasMoon) nameRowEl.appendChild(sunMoonEl);
 
   const nameEl = document.createElement("div");
   nameEl.className = "action-card-name";
-  nameEl.textContent = card.DisplayName || card.Name;
+  nameEl.textContent = front.DisplayName || front.Name;
   nameRowEl.appendChild(nameEl);
 
   const backSunMoonEl = document.createElement("div");
   backSunMoonEl.className = "action-card-back-sun-moon";
-  const hasBackSun = appendSunMoonIcon(backSunMoonEl, card.BackSun, "sun");
-  if (hasBackSun && card.BackMoon > 0) backSunMoonEl.appendChild(document.createTextNode(" "));
-  const hasBackMoon = appendSunMoonIcon(backSunMoonEl, card.BackMoon, "moon");
+  const hasBackSun = appendSunMoonIcon(backSunMoonEl, back?.Sun, "sun");
+  if (hasBackSun && back?.Moon > 0) backSunMoonEl.appendChild(document.createTextNode(" "));
+  const hasBackMoon = appendSunMoonIcon(backSunMoonEl, back?.Moon, "moon");
   if (hasBackSun || hasBackMoon) nameRowEl.appendChild(backSunMoonEl);
 
   body.appendChild(nameRowEl);
 
   const metaParts = [
-    ...(card.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
+    ...(front.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
   ];
-  if (card.Condition) {
+  if (front.Condition) {
     metaParts.push({
-      render: (parent) => appendFormattedText(parent, card.Condition),
+      render: (parent) => appendFormattedText(parent, front.Condition),
     });
   }
   if (metaParts.length) {
@@ -54,33 +57,33 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     body.appendChild(metaEl);
   }
 
-  if (card.Target) {
+  if (front.Target) {
     const targetEl = document.createElement("div");
     targetEl.className = "action-card-target";
-    targetEl.textContent = card.Target;
+    targetEl.textContent = front.Target;
     body.appendChild(targetEl);
   }
 
-  if (card.Roll) {
-    body.appendChild(buildRollElement(card.Roll, attrs, keywordCounts));
+  if (front.Roll) {
+    body.appendChild(buildRollElement(front.Roll, attrs, keywordCounts));
 
-    if (card.Roll.Successes) {
-      const sortedKeys = Object.keys(card.Roll.Successes).sort((a, b) => Number(b) - Number(a));
-      const rollMode = normalizeRollMode(card.Roll.Mode);
-      const rollATTList = getRollAttributeList(card.Roll);
+    if (front.Roll.Successes) {
+      const sortedKeys = Object.keys(front.Roll.Successes).sort((a, b) => Number(b) - Number(a));
+      const rollMode = normalizeRollMode(front.Roll.Mode);
+      const rollATTList = getRollAttributeList(front.Roll);
       const attDice = attrs ? getRollAttributeDice(attrs, rollATTList, rollMode) : 0;
 
       if (attDice > 0) {
         const sortedNum = sortedKeys.map(Number);
-        const appliedMods = (keywordCounts && card.Roll.Modifiers)
-          ? computeAppliedModifiers(card.Roll.Modifiers, keywordCounts)
+        const appliedMods = (keywordCounts && front.Roll.Modifiers)
+          ? computeAppliedModifiers(front.Roll.Modifiers, keywordCounts)
           : [];
         const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
         const effectiveDice = Math.max(0, attDice + modDiceTotal);
 
         let appendProbLabel;
-        if (card.Roll.Difficulty != null) {
-          const dist = computeSuccessDist(effectiveDice, card.Roll.Difficulty);
+        if (front.Roll.Difficulty != null) {
+          const dist = computeSuccessDist(effectiveDice, front.Roll.Difficulty);
           appendProbLabel = (parent, i) => {
             parent.appendChild(document.createTextNode("(" + pct(bandProb(dist, sortedNum, i)) + ")"));
           };
@@ -104,7 +107,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
           const outEl = document.createElement("div");
           outEl.className = "action-card-outcome";
           outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, card.Roll.Successes[key]);
+          appendFormattedText(outEl, front.Roll.Successes[key]);
           outEl.appendChild(document.createTextNode(" "));
 
           const probWrap = document.createElement("span");
@@ -148,42 +151,42 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
           const outEl = document.createElement("div");
           outEl.className = "action-card-outcome";
           outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, card.Roll.Successes[key]);
+          appendFormattedText(outEl, front.Roll.Successes[key]);
           body.appendChild(outEl);
         });
       }
     }
   }
 
-  if (card.Front) {
+  if (front.Text) {
     const frontEl = document.createElement("div");
     frontEl.className = "action-card-desc";
-    appendFormattedText(frontEl, card.Front);
+    appendFormattedText(frontEl, front.Text);
     body.appendChild(frontEl);
   }
 
-  const hasNote = showNoteWarning && Boolean(card.Note);
-  const hasWarning = showNoteWarning && Boolean(card.Warning);
+  const hasNote = showNoteWarning && Boolean(back?.Note);
+  const hasWarning = showNoteWarning && Boolean(back?.Warning);
 
-  if (card.Back || hasNote || hasWarning) {
+  if (back?.Text || hasNote || hasWarning) {
     const boxEl = document.createElement("div");
     boxEl.className = "folded-effect-text action-card-back";
 
-    if (card.Back) {
+    if (back?.Text) {
       const backTextEl = document.createElement("div");
-      appendFormattedText(backTextEl, card.Back);
+      appendFormattedText(backTextEl, back.Text);
       boxEl.appendChild(backTextEl);
     }
     if (hasNote) {
       const noteEl = document.createElement("div");
       noteEl.className = "action-card-note";
-      appendFormattedText(noteEl, card.Note);
+      appendFormattedText(noteEl, back.Note);
       boxEl.appendChild(noteEl);
     }
     if (hasWarning) {
       const warningEl = document.createElement("div");
       warningEl.className = "action-card-warning";
-      appendFormattedText(warningEl, card.Warning);
+      appendFormattedText(warningEl, back.Warning);
       boxEl.appendChild(warningEl);
     }
 

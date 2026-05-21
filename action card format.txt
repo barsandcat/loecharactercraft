@@ -1,9 +1,11 @@
-New card data structure
+Current card format.
 
     "CardId": {
       "Name": "Card name", # "Required",
       "DisplayName": "Display name", # "For the basic actions upgrades, if present overrides name",
       "Type": "Action/Reaction", # Default "Action"
+	  "Sun": number,
+	  "Moon": number,
       "Category": "Offensive/Defensive/Support", # Default "Offensive"
 	  "Keywords": ["Keyword1", "Keyword2"], # Optional
       "Condition": "Condition description", # Optional
@@ -14,8 +16,8 @@ New card data structure
 		  "ATT": ["INT"], # If absent, means all stats
 		  "Difficulty": 8, # if absent, means difficulty of the enemy [EN]
 		  "Modifiers": [
-			{ "Dice": -2, "Triggers": ["Trigger1"] },
-			{ "Dice": 1, "Triggers": ["Trigger2"] } 
+			{ "Dice": -2, "Triggers": ["Trigger1"], "Against": bool},
+			{ "Dice": 1, "Triggers": ["Trigger2"], "Against": bool} 
 		  ], # Optional
 		  "Successes": {
 			  "3": "Best result",
@@ -27,8 +29,49 @@ New card data structure
 	      "Back": "Back instructions", # Optional
 	      "Note": "Back instructions in blue", # Optional
 	      "Warning": "Back instructions in red", # Optional
+		  "BackSun": number,
+		  "BackMoon": number,
 	      "Level": 1 # Only relevant for basic action cards, if absent = 1
 	    },
 	
 	
-Old roll format: "Roll ATT and ATT, DIV [Number/EN]; +1: Trigger1, Trigger2; -2: Trigger3"
+New card format:
+
+    "CardId": {
+	  "Level": 1 # Only relevant for basic action cards, if absent = 1,
+	  "Front": { 
+		  "Name": "Card name", # "Required",
+		  "DisplayName": "Display name", # "For the basic actions upgrades, if present overrides name",
+		  "Type": "Action/Reaction", # Default "Action"
+		  "Sun": number,
+		  "Moon": number,
+		  "Category": "Offensive/Defensive/Support", # Default "Offensive"
+		  "Keywords": ["Keyword1", "Keyword2"], # Optional
+		  "Condition": "Condition description", # Optional
+		  "Target": "Range instructions", # Optional
+		  "Effect": "Effect instructions", # Optional
+		  "Note": "Back instructions in blue", # Optional
+		  "Warning": "Back instructions in red", # Optional
+		  "Roll": {
+			  "DIV": true, # if absent - false, i.e. no DIV rol
+			  "Mode": "Sum", # Optional: "Highest" (default), "Lowest", or "Sum"
+			  "ATT": ["INT"], # If absent, means all stats
+			  "Difficulty": 8, # if absent, means difficulty of the enemy [EN]
+			  "Modifiers": [
+				{ "Dice": -2, "Triggers": ["Trigger1"], "Against": bool },
+				{ "Dice": 1, "Triggers": ["Trigger2"], "Against": bool } 
+			  ], # Optional
+			  "Successes": {
+				  "3": "Best result",
+				  "1": "Ok result",
+				  "0": "Failure"
+			  } # "Optional"
+		  }
+		}
+	"Back" { #same data structure as front }
+	
+	BackSun - > Back.Sun
+	Note -> Back.Note
+	Front -> Front.Effect
+	Back -> Back.Effect
+	

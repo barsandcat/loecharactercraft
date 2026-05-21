@@ -669,13 +669,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (!card) {
       return;
     }
-    const current = stats.actions.get(card.Name);
+    const current = stats.actions.get(card.Front.Name);
     if (!current) {
-      stats.actions.set(card.Name, { ...card, _cardId: cardId });
+      stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
     } else if (card.Level === current.Level) {
       stats.freeUpgrades += 1;
     } else if (card.Level > current.Level) {
-      stats.actions.set(card.Name, { ...card, _cardId: cardId });
+      stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
     }
   }
 
@@ -1030,7 +1030,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       };
 
       Array.from(stats.actions.values()).forEach((card) => {
-        const category = cardsByCategory[card.Category] ? card.Category : "Offensive";
+        const category = cardsByCategory[card.Front.Category] ? card.Front.Category : "Offensive";
         cardsByCategory[category].push({ cardId: card._cardId, card });
       });
 
@@ -1759,7 +1759,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function getActionCardDisplayName(card) {
-    return card ? card.DisplayName || card.Name : "";
+    return card ? card.Front.DisplayName || card.Front.Name : "";
   }
 
   return {

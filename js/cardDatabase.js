@@ -88,22 +88,22 @@ function populateFilters(db) {
   db.getAllCards().forEach((card) => {
     treeCounts.set(card._tree, (treeCounts.get(card._tree) || 0) + 1);
 
-    if (card.Type) typeCounts.set(card.Type, (typeCounts.get(card.Type) || 0) + 1);
-    if (card.Category) categoryCounts.set(card.Category, (categoryCounts.get(card.Category) || 0) + 1);
+    if (card.Front.Type) typeCounts.set(card.Front.Type, (typeCounts.get(card.Front.Type) || 0) + 1);
+    if (card.Front.Category) categoryCounts.set(card.Front.Category, (categoryCounts.get(card.Front.Category) || 0) + 1);
 
-    const hasRoll = Boolean(card.Roll);
-    const hasDIV = hasRoll && card.Roll.DIV;
+    const hasRoll = Boolean(card.Front.Roll);
+    const hasDIV = hasRoll && card.Front.Roll.DIV;
     if (!hasRoll) rollTypeCounts.none++;
     else if (hasDIV) rollTypeCounts.div++;
     else rollTypeCounts.regular++;
 
-    if (card.Roll) {
-      const attList = getRollAttributeList(card.Roll);
+    if (card.Front.Roll) {
+      const attList = getRollAttributeList(card.Front.Roll);
       attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
     }
 
-    if (card.Roll && card.Roll.Modifiers) {
-      card.Roll.Modifiers.forEach((mod) => {
+    if (card.Front.Roll && card.Front.Roll.Modifiers) {
+      card.Front.Roll.Modifiers.forEach((mod) => {
         if (mod.against) return;
         if (mod.Dice < 0) {
           mod.Triggers.forEach((t) => negatives.add(t));
@@ -268,23 +268,23 @@ function createCardDatabase(data) {
   function filterCards(cards, filters) {
     return cards.filter((card) => {
       if (filters.tree && card._tree !== filters.tree) return false;
-      if (filters.type && card.Type !== filters.type) return false;
-      if (filters.category && card.Category !== filters.category) return false;
+      if (filters.type && card.Front.Type !== filters.type) return false;
+      if (filters.category && card.Front.Category !== filters.category) return false;
       if (filters.rollType) {
-        const hasRoll = Boolean(card.Roll);
-        const hasDIV = hasRoll && card.Roll.DIV;
+        const hasRoll = Boolean(card.Front.Roll);
+        const hasDIV = hasRoll && card.Front.Roll.DIV;
         if (filters.rollType === "div" && !hasDIV) return false;
         if (filters.rollType === "regular" && (!hasRoll || hasDIV)) return false;
         if (filters.rollType === "none" && hasRoll) return false;
       }
       if (filters.att) {
-        if (!card.Roll) return false;
-        const attList = getRollAttributeList(card.Roll);
+        if (!card.Front.Roll) return false;
+        const attList = getRollAttributeList(card.Front.Roll);
         if (!attList.includes(filters.att)) return false;
       }
       if (filters.modifier) {
-        if (!card.Roll || !card.Roll.Modifiers) return false;
-        if (!card.Roll.Modifiers.some((mod) => mod.Triggers.includes(filters.modifier))) return false;
+        if (!card.Front.Roll || !card.Front.Roll.Modifiers) return false;
+        if (!card.Front.Roll.Modifiers.some((mod) => mod.Triggers.includes(filters.modifier))) return false;
       }
       return true;
     });
@@ -296,8 +296,8 @@ function createCardDatabase(data) {
     switch (sortBy) {
       case "name":
         sorted.sort((a, b) => {
-          const nameA = a.DisplayName || a.Name || "";
-          const nameB = b.DisplayName || b.Name || "";
+          const nameA = a.Front.DisplayName || a.Front.Name || "";
+          const nameB = b.Front.DisplayName || b.Front.Name || "";
           return descending ? nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
         });
         break;
@@ -305,7 +305,7 @@ function createCardDatabase(data) {
         sorted.sort((a, b) => {
           const lockDiff = (a._lockLevel || 0) - (b._lockLevel || 0);
           if (lockDiff !== 0) return descending ? -lockDiff : lockDiff;
-          const nameCmp = (a.Name || "").localeCompare(b.Name || "");
+          const nameCmp = (a.Front.Name || "").localeCompare(b.Front.Name || "");
           if (nameCmp !== 0) return descending ? -nameCmp : nameCmp;
           const levelDiff = (a.Level || 0) - (b.Level || 0);
           return descending ? -levelDiff : levelDiff;

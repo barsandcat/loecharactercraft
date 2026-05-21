@@ -29,8 +29,8 @@ def main():
         data = json.load(f)
 
     changed = []
-    for card_id, card in data["Action Cards"].items():
-        roll = card.get("Roll")
+    for card_id, card in data["ActionCards"].items():
+        roll = card.get("Roll") or card.get("Front", {}).get("Roll")
         if not roll or not roll.get("Modifiers"):
             continue
         new_mods = []
