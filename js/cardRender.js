@@ -18,51 +18,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
   const body = document.createElement("div");
   body.className = "action-card-body";
 
-  const nameRowEl = document.createElement("div");
-  nameRowEl.className = "action-card-name-row";
 
-  const sunMoonEl = document.createElement("div");
-  sunMoonEl.className = "action-card-sun-moon";
-  const hasSun = appendSunMoonIcon(sunMoonEl, front.Sun, "sun");
-  if (hasSun && front.Moon > 0) sunMoonEl.appendChild(document.createTextNode(" "));
-  const hasMoon = appendSunMoonIcon(sunMoonEl, front.Moon, "moon");
-  if (hasSun || hasMoon) nameRowEl.appendChild(sunMoonEl);
-
-  const nameEl = document.createElement("div");
-  nameEl.className = "action-card-name";
-  nameEl.textContent = front.DisplayName || front.Name;
-  nameRowEl.appendChild(nameEl);
-
-  const backSunMoonEl = document.createElement("div");
-  backSunMoonEl.className = "action-card-back-sun-moon";
-  const hasBackSun = appendSunMoonIcon(backSunMoonEl, back?.Sun, "sun");
-  if (hasBackSun && back?.Moon > 0) backSunMoonEl.appendChild(document.createTextNode(" "));
-  const hasBackMoon = appendSunMoonIcon(backSunMoonEl, back?.Moon, "moon");
-  if (hasBackSun || hasBackMoon) nameRowEl.appendChild(backSunMoonEl);
-
-  body.appendChild(nameRowEl);
-
-  const metaParts = [
-    ...(front.Keywords || []).map((keyword) => buildTokenPart(keyword, "keyword")),
-  ];
-  if (front.Condition) {
-    metaParts.push({
-      render: (parent) => appendFormattedText(parent, front.Condition),
-    });
-  }
-  if (metaParts.length) {
-    const metaEl = document.createElement("div");
-    metaEl.className = "action-card-meta";
-    appendDisplayParts(metaEl, metaParts);
-    body.appendChild(metaEl);
-  }
-
-  if (front.Target) {
-    const targetEl = document.createElement("div");
-    targetEl.className = "action-card-target";
-    targetEl.textContent = front.Target;
-    body.appendChild(targetEl);
-  }
 
   // Render front
   renderCardContent(body, front, {
@@ -72,6 +28,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     textClassName: "action-card-desc",
     noteClassName: "action-card-note",
     warningClassName: "action-card-warning",
+    headerElementClass: "",
   });
 
   // Render back
@@ -82,15 +39,16 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     textClassName: "action-card-text",
     noteClassName: "action-card-note",
     warningClassName: "action-card-warning",
+    headerElementClass: "action-card-back-text",
   });
 
   wrapper.appendChild(body);
   return wrapper;
 }
 
-export function buildRollElement(roll, attrs = null, keywordCounts = null) {
+export function buildRollElement(roll, attrs = null, keywordCounts = null, headerElementClass = "") {
   const rollLineEl = document.createElement("div");
-  rollLineEl.className = "action-card-roll";
+  rollLineEl.className = "action-card-roll" + (headerElementClass ? " " + headerElementClass : "");
   const mode = normalizeRollMode(roll.Mode);
   const hasSpecificATT = roll.ATT && roll.ATT.length > 0;
   const attList = getRollAttributeList(roll);
@@ -209,6 +167,7 @@ function renderCardContent(parent, block, options = {}) {
     textClassName,
     noteClassName,
     warningClassName,
+    headerElementClass,
   } = options;
 
   const roll = block?.Roll || null;
@@ -223,9 +182,65 @@ function renderCardContent(parent, block, options = {}) {
   const container = document.createElement("div");
   container.className = containerClassName;
 
+  // Render Name, Sun/Moon header
+  const hasName = block?.DisplayName || block?.Name;
+  const hasSun = block?.Sun > 0;
+  const hasMoon = block?.Moon > 0;
+  if (hasName || hasSun || hasMoon) {
+    const nameRowEl = document.createElement("div");
+    nameRowEl.className = "action-card-name-row" + (headerElementClass ? " " + headerElementClass : "");
+
+    const sunMoonEl = document.createElement("div");
+    sunMoonEl.className = "action-card-sun-moon" + (headerElementClass ? " " + headerElementClass : "");
+    if (hasSun) {
+      appendSunMoonIcon(sunMoonEl, block.Sun, "sun");
+      if (hasMoon) sunMoonEl.appendChild(document.createTextNode(" "));
+    }
+    if (hasMoon) {
+      appendSunMoonIcon(sunMoonEl, block.Moon, "moon");
+    }
+    if (hasSun || hasMoon) nameRowEl.appendChild(sunMoonEl);
+
+    if (hasName) {
+      const nameEl = document.createElement("div");
+      nameEl.className = "action-card-name" + (headerElementClass ? " " + headerElementClass : "");
+      nameEl.textContent = block.DisplayName || block.Name;
+      nameRowEl.appendChild(nameEl);
+    }
+
+    container.appendChild(nameRowEl);
+  }
+
+  // Render Keywords and Condition
+  const hasKeywords = block?.Keywords && block.Keywords.length > 0;
+  const hasCondition = block?.Condition;
+  if (hasKeywords || hasCondition) {
+    const metaEl = document.createElement("div");
+    metaEl.className = "action-card-meta" + (headerElementClass ? " " + headerElementClass : "");
+    const metaParts = [];
+    if (hasKeywords) {
+      metaParts.push(...block.Keywords.map((keyword) => buildTokenPart(keyword, "keyword")));
+    }
+    if (hasCondition) {
+      metaParts.push({
+        render: (parent) => appendFormattedText(parent, block.Condition),
+      });
+    }
+    appendDisplayParts(metaEl, metaParts);
+    container.appendChild(metaEl);
+  }
+
+  // Render Target
+  if (block?.Target) {
+    const targetEl = document.createElement("div");
+    targetEl.className = "action-card-target" + (headerElementClass ? " " + headerElementClass : "");
+    targetEl.textContent = block.Target;
+    container.appendChild(targetEl);
+  }
+
   // Render Roll + Outcomes
   if (roll) {
-    container.appendChild(buildRollElement(roll, attrs, keywordCounts));
+    container.appendChild(buildRollElement(roll, attrs, keywordCounts, headerElementClass));
 
     if (roll.Successes) {
       const sortedKeys = Object.keys(roll.Successes).sort((a, b) => Number(b) - Number(a));
@@ -265,7 +280,7 @@ function renderCardContent(parent, block, options = {}) {
         for (let i = 0; i < sortedKeys.length; i++) {
           const key = sortedKeys[i];
           const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome";
+          outEl.className = "action-card-outcome" + (headerElementClass ? " " + headerElementClass : "");
           outEl.appendChild(document.createTextNode(key + ": "));
           appendFormattedText(outEl, roll.Successes[key]);
           outEl.appendChild(document.createTextNode(" "));
@@ -309,7 +324,7 @@ function renderCardContent(parent, block, options = {}) {
       } else {
         sortedKeys.forEach((key) => {
           const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome";
+          outEl.className = "action-card-outcome" + (headerElementClass ? " " + headerElementClass : "");
           outEl.appendChild(document.createTextNode(key + ": "));
           appendFormattedText(outEl, roll.Successes[key]);
           container.appendChild(outEl);

@@ -5704,6 +5704,7 @@
     "P53": {
       "Front": {
         "Name": "Wrathful Decree",
+		"Sun": 2,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -5711,7 +5712,6 @@
           "Spell"
         ],
         "Target": "ENs in R4",
-        "Sun": 2,
         "Text": "Target all [Minions] with {en} equal to or lower than your CHA, and all [Elites] with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch."
       }
     },
@@ -5768,6 +5768,7 @@
     "P56": {
       "Front": {
         "Name": "Ventriloquism",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "1 in any range",
@@ -5792,17 +5793,20 @@
             "1": "Choose a [Minion] and an empty space in any range. Pull the [Minion] by {successes} toward that space"
           }
         }
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "P57": {
       "Front": {
         "Name": "Gaining Advantage",
+		"Sun": 1,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "Before drawing from the Initiative bag",
         "Target": "Self",
         "Text": "If a dual token is drawn, choose which side of this token to resolve. Otherwise gain 1 {fate}"
-      }
+      },
+	  "Back": { "Moon": 1, "Sun": 1 }
     },
     "P58": {
       "Front": {
@@ -5843,12 +5847,24 @@
     "P59": {
       "Front": {
         "Name": "Shadowsteps",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "Before or after Action",
         "Target": "Self",
         "Text": "Move by your MOB. Then move by your MOB"
-      }
+      },
+	  "Back": {
+		  "Moon": 1,
+		  "Name": "Shadowstrike",
+		  "Type": "Reaction",
+		  "Target": "1 in R1",
+		  "Category": "Offensive",
+		  "Keywords": ["Attack", "Melee"],
+		  "Condition": "Before or after Action",
+		  "Text": "Deal AGI {damage} (+2: against: [Small]) ignoring 5 {armor}. Place this card in your Pouch",
+		  "Warning": "This card cannot be refreshed"
+	  }
     },
     "P60": {
       "Front": {

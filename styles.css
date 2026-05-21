@@ -642,6 +642,10 @@ h1 {
   color: var(--gold);
 }
 
+.action-card-back-text {
+  color: var(--gold);
+}
+
 .folded-effect-text {
   position: relative;
   overflow: hidden;
