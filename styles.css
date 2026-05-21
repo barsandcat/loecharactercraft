@@ -687,6 +687,16 @@ h1 {
   color: var(--ink);
 }
 
+.action-card-back-text .action-card-roll,
+.action-card-roll.action-card-back-text {
+  color: var(--gold);
+}
+
+.action-card-back-text .action-card-outcome,
+.action-card-outcome.action-card-back-text {
+  color: var(--gold);
+}
+
 .action-card-difficulty {
   display: inline-flex;
   align-items: center;
@@ -697,6 +707,10 @@ h1 {
   display: block;
   width: 1rem;
   height: auto;
+}
+
+.action-card-roll.action-card-back-text .action-card-difficulty-icon {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(31%) saturate(642%) hue-rotate(7deg) brightness(95%) contrast(89%);
 }
 
 .action-card-inline-icon {

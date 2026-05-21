@@ -5869,6 +5869,7 @@
     "P60": {
       "Front": {
         "Name": "Entangled by Shadows",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "EN in any range",
@@ -5910,11 +5911,15 @@
         "Target": "Self",
         "Sun": 1,
         "Text": "During this Roll, if you have at least one result of 12, add one {successes} to your Roll. If you have at least one result of 1, gain one additional {fate}."
-      }
+      },
+	  "Back": {
+		  "Moon": 1
+	  }
     },
     "P62": {
       "Front": {
         "Name": "Ticking Vestigial",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -5980,12 +5985,14 @@
     "P64": {
       "Front": {
         "Name": "Divinum Infused Tools",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During AGI or INT Roll",
         "Target": "Self",
         "Text": "Roll for DIV: 12+: Add 4 {successes} to the Roll, 8-11: Add 2 {successes} to the Roll."
-      }
+      },
+	  "Back": { "Moon": 1, "Sun": 1 }
     },
     "P65": {
       "Front": {
@@ -6014,11 +6021,15 @@
             "1": "Move by {successes}. You cannot enter {danger} spaces during this move."
           }
         }
-      }
+      }, 
+	  "Back": {
+		  "Note": "Anytime: Pay 2 {fate} to refresh this card"
+	  }
     },
     "P66": {
       "Front": {
         "Name": "Final Enhancement",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self or PM in R1",
@@ -6053,6 +6064,7 @@
     "P67": {
       "Front": {
         "Name": "Osteoporosis",
+		"Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6103,8 +6115,8 @@
           "Spell"
         ],
         "Target": "1 in R2+",
-        "Sun": 1,
-        "Moon": 1,
+        "Sun": 0,
+        "Moon": 0,
         "Roll": {
           "ATT": [
             "CHA"
@@ -6168,7 +6180,12 @@
             "0": "Do not flip this card"
           }
         }
-      }
+      },
+	  "Back": {
+		  "Moon": 4,
+		  "Note": "Start of your Acitvation: You may choose not to refresh this card",
+		  "Warning": "When you refresh this card, discard Rot Golem"
+	  }
     },
     "P70": {
       "Front": {
@@ -6200,11 +6217,13 @@
             "1": "Deal ({successes}+2) {damage}. You heal by {damage} dealt"
           }
         }
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "P71": {
       "Front": {
         "Name": "Proliferation",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -6321,7 +6340,8 @@
             "1": "Deal {successes} {damage}. Ignore {half div} {armor}"
           }
         }
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "PP02": {
       "Front": {
@@ -6356,6 +6376,7 @@
         }
       },
       "Back": {
+		  "Moon": 2,
         "Text": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} [Ice] {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet."
       }
@@ -6389,7 +6410,8 @@
             "1": "Deal {successes} {damage}. If the target is [Elite] or [Boss] and there is no other Enemy in R4 from you, add 3 {damage}. If you defeated the [Elite] or [Boss], gain 2 {fate}"
           }
         }
-      }
+      },
+	  "Back": { "Sun": 2 }
     },
     "PP04": {
       "Front": {
@@ -6463,6 +6485,7 @@
     "PP06": {
       "Front": {
         "Name": "Summon Swarm",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -6493,6 +6516,7 @@
     "PP07": {
       "Front": {
         "Name": "Rage",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you deal at least 6 {damage}",
@@ -6500,7 +6524,9 @@
         "Text": "Flip this card"
       },
       "Back": {
-        "Text": "Party Members support you with 1 die fewer. When you deal {damage} with [Melee], add STR {damage} and gain 1 {terror}"
+		  "Sun": 2,
+        "Text": "Party Members support you with 1 die fewer. When you deal {damage} with [Melee], add STR {damage} and gain 1 {terror}",
+		"Note": "Start of your Acitvation: You may gain 1 {terror} to not refresh this card"
       }
     },
     "PP08": {
@@ -6535,11 +6561,13 @@
             "1": "Deal {successes} {damage}. Place your [Melee] item in your Pouch"
           }
         }
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "PP09": {
       "Front": {
         "Name": "Manic Laugh",
+		"Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "ENs in R1",
@@ -6605,11 +6633,13 @@
             "5": "Deal ({successes}+{div}) [Divinum] {damage}. You loose {half div} HP."
           }
         }
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "PP11": {
       "Front": {
         "Name": "Premonition",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Keywords": [
@@ -6641,7 +6671,7 @@
             "1": "Draw {half div} tokens from the bag instead of 1. Choose and resolve one of them, return rest to the bag"
           }
         }
-      }
+      }, "Back": { "Moon": 1 }
     },
     "PP12": {
       "Front": {
@@ -6680,11 +6710,12 @@
             "1": "Deal ({successes}+{half div}) [Divinum] {damage}"
           }
         }
-      }
+      }, "Back": { "Moon": 2 }
     },
     "PP13": {
       "Front": {
         "Name": "Inspire",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6708,6 +6739,7 @@
         }
       },
       "Back": {
+		  "Moon": 2,
         "Text": "Anytime: Discard all markers from this card to support a PM in R3 with a number of dice equal to the number of these markers.",
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard all markers from it."
@@ -6716,6 +6748,7 @@
     "PP14": {
       "Front": {
         "Name": "Smoke and Mirrors",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6770,6 +6803,8 @@
         }
       },
       "Back": {
+		  "Sun": 1,
+		  "Moon": 1,
         "Text": "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy."
       }
@@ -6777,6 +6812,7 @@
     "PP16": {
       "Front": {
         "Name": "Taunt",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "After revealing Enemy Activation card",
@@ -6791,6 +6827,7 @@
     "PP17": {
       "Front": {
         "Name": "Aura of Justice",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6824,6 +6861,7 @@
     "PP18": {
       "Front": {
         "Name": "Moondisc",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6847,11 +6885,30 @@
             }
           ],
           "Successes": {
-            "3": "Deal ({successes}+{half div} [Divinum] {damage}",
+            "3": "Deal ({successes}+{half div}) [Divinum] {damage}",
             "0": "Deal {half div} [Divinum] {damage}"
           }
         }
-      }
+      },
+	  "Back": {
+		  "Moon": 2,
+		  "Name": "Moondisc",
+		  "Keywords": ["Spell"],
+		  "Condition": "Against [Attack]",
+		  "Type": "Reaction",
+		  "Category": "Defensive",
+		  "Range": "Self or PM in R4",
+		  "Roll": {
+			  "ATT": [ "INT" ],
+			  "DIV": true,
+			  "Difficulty": 8,
+			  "Modifiers": [ { "Dice": 1, "Triggers": ["Arcana"]}],
+			  "Successes": {
+				  "3": "Prevent {div} {damage}",
+				  "1": "Prevent {half div} {damage}"
+			  }
+		  }
+	  }
     },
     "PP19": {
       "Front": {
