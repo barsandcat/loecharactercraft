@@ -45,6 +45,7 @@ function cacheUi() {
   ui.filterCategory = document.getElementById("filterCategory");
   ui.filterRollType = document.getElementById("filterRollType");
   ui.filterATT = document.getElementById("filterATT");
+  ui.filterKeywords = document.getElementById("filterKeywords");
   ui.filterModifier = document.getElementById("filterModifier");
   ui.sortBy = document.getElementById("sortBy");
   ui.sortOrder = document.getElementById("sortOrder");
@@ -59,6 +60,7 @@ function bindEvents() {
   ui.filterCategory.addEventListener("change", () => cardDatabase.render());
   ui.filterRollType.addEventListener("change", () => cardDatabase.render());
   ui.filterATT.addEventListener("change", () => cardDatabase.render());
+  ui.filterKeywords.addEventListener("change", () => cardDatabase.render());
   ui.filterModifier.addEventListener("change", () => cardDatabase.render());
   ui.sortBy.addEventListener("change", () => cardDatabase.render());
   ui.sortOrder.addEventListener("change", () => cardDatabase.render());
@@ -68,6 +70,7 @@ function bindEvents() {
     ui.filterCategory.value = "";
     ui.filterRollType.value = "";
     ui.filterATT.value = "";
+    ui.filterKeywords.value = "";
     ui.filterModifier.value = "";
     ui.sortBy.value = "tree";
     ui.sortOrder.checked = true;
@@ -84,6 +87,8 @@ function populateFilters(db) {
   const attCounts = new Map();
   const negatives = new Set();
   const modifierCounts = new Map();
+  const keywordCounts = { has: 0, none: 0 };
+  const individualKeywordCounts = new Map();
 
   db.getAllCards().forEach((card) => {
     treeCounts.set(card._tree, (treeCounts.get(card._tree) || 0) + 1);
@@ -102,6 +107,14 @@ function populateFilters(db) {
       attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
     }
 
+    const hasKeywords = Array.isArray(card.Front.Keywords) && card.Front.Keywords.length > 0;
+    if (hasKeywords) {
+      keywordCounts.has++;
+      card.Front.Keywords.forEach((kw) => individualKeywordCounts.set(kw, (individualKeywordCounts.get(kw) || 0) + 1));
+    } else {
+      keywordCounts.none++;
+    }
+
     if (card.Front.Roll && card.Front.Roll.Modifiers) {
       card.Front.Roll.Modifiers.forEach((mod) => {
         if (mod.against) return;
@@ -115,6 +128,10 @@ function populateFilters(db) {
   });
   negatives.forEach((t) => modifierCounts.delete(t));
 
+  ui.filterKeywords.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
+    opt.textContent = opt.textContent + " (" + (keywordCounts[opt.value] || 0) + ")";
+  });
+
   // Static options: update text with counts
   ui.filterType.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
     opt.textContent = opt.value + " (" + (typeCounts.get(opt.value) || 0) + ")";
@@ -127,6 +144,14 @@ function populateFilters(db) {
   });
   ui.filterATT.querySelectorAll("option[value]:not([value=''])").forEach((opt) => {
     opt.textContent = opt.value + " (" + (attCounts.get(opt.value) || 0) + ")";
+  });
+
+  // Dynamic options: Keywords
+  Array.from(individualKeywordCounts.keys()).sort().forEach((kw) => {
+    const opt = document.createElement("option");
+    opt.value = kw;
+    opt.textContent = kw + " (" + individualKeywordCounts.get(kw) + ")";
+    ui.filterKeywords.appendChild(opt);
   });
 
   // Dynamic options: Tree
@@ -156,6 +181,7 @@ function getActiveFilters() {
     category: ui.filterCategory.value || null,
     rollType: ui.filterRollType.value || null,
     att: ui.filterATT.value || null,
+    keywords: ui.filterKeywords.value || null,
     modifier: ui.filterModifier.value || null,
   };
 }
@@ -281,6 +307,15 @@ function createCardDatabase(data) {
         if (!card.Front.Roll) return false;
         const attList = getRollAttributeList(card.Front.Roll);
         if (!attList.includes(filters.att)) return false;
+      }
+      if (filters.keywords) {
+        const kws = card.Front.Keywords;
+        const hasKeywords = Array.isArray(kws) && kws.length > 0;
+        if (filters.keywords === "has" && !hasKeywords) return false;
+        else if (filters.keywords === "none" && hasKeywords) return false;
+        else if (filters.keywords !== "has" && filters.keywords !== "none") {
+          if (!hasKeywords || !kws.includes(filters.keywords)) return false;
+        }
       }
       if (filters.modifier) {
         if (!card.Front.Roll || !card.Front.Roll.Modifiers) return false;
