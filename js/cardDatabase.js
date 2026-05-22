@@ -110,10 +110,12 @@ function populateFilters(db) {
       attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
     }
 
-    const hasKeywords = Array.isArray(card.Front.Keywords) && card.Front.Keywords.length > 0;
+    // Combine Keywords and Requires arrays
+    const allKeywords = [...(card.Front.Keywords || []), ...(card.Front.Requires || [])];
+    const hasKeywords = allKeywords.length > 0;
     if (hasKeywords) {
       keywordCounts.has++;
-      card.Front.Keywords.forEach((kw) => individualKeywordCounts.set(kw, (individualKeywordCounts.get(kw) || 0) + 1));
+      allKeywords.forEach((kw) => individualKeywordCounts.set(kw, (individualKeywordCounts.get(kw) || 0) + 1));
     } else {
       keywordCounts.none++;
     }
@@ -323,12 +325,13 @@ function createCardDatabase(data) {
         if (!attList.includes(filters.att)) return false;
       }
       if (filters.keywords) {
-        const kws = card.Front.Keywords;
-        const hasKeywords = Array.isArray(kws) && kws.length > 0;
+        // Combine Keywords and Requires arrays for filtering
+        const allKeywords = [...(card.Front.Keywords || []), ...(card.Front.Requires || [])];
+        const hasKeywords = allKeywords.length > 0;
         if (filters.keywords === "has" && !hasKeywords) return false;
         else if (filters.keywords === "none" && hasKeywords) return false;
         else if (filters.keywords !== "has" && filters.keywords !== "none") {
-          if (!hasKeywords || !kws.includes(filters.keywords)) return false;
+          if (!hasKeywords || !allKeywords.includes(filters.keywords)) return false;
         }
       }
       if (filters.modifier) {

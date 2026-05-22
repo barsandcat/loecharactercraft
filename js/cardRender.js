@@ -213,13 +213,31 @@ function renderCardContent(parent, block, options = {}) {
 
   // Render Keywords and Condition
   const hasKeywords = block?.Keywords && block.Keywords.length > 0;
+  const hasRequires = block?.Requires && block.Requires.length > 0;
   const hasCondition = block?.Condition;
-  if (hasKeywords || hasCondition) {
+  if (hasKeywords || hasRequires || hasCondition) {
     const metaEl = document.createElement("div");
     metaEl.className = "action-card-meta" + (headerElementClass ? " " + headerElementClass : "");
     const metaParts = [];
     if (hasKeywords) {
       metaParts.push(...block.Keywords.map((keyword) => buildTokenPart(keyword, "keyword")));
+    }
+    if (hasRequires) {
+      // Add Requires keywords as a single render part, joined by " and "
+      metaParts.push({
+        render: (parent) => {
+          parent.appendChild(document.createTextNode("Requires "));
+          block.Requires.forEach((req, index) => {
+            if (index > 0) {
+              parent.appendChild(document.createTextNode(" and "));
+            }
+            const tokenEl = document.createElement("em");
+            tokenEl.className = "keyword-token";
+            tokenEl.textContent = req;
+            parent.appendChild(tokenEl);
+          });
+        },
+      });
     }
     if (hasCondition) {
       metaParts.push({
