@@ -7519,6 +7519,7 @@
     "PP31": {
       "Front": {
         "Name": "Pike Strike",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -7550,11 +7551,12 @@
             "1": "Deal {successes} {damage} (+3 {damage} if the target was Pulled during this Activation)."
           }
         }
-      }
+      }, "Back": { "Sun": 2 }
     },
     "PP32": {
       "Front": {
         "Name": "Bright Mind",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -7584,6 +7586,12 @@
         }
       },
       "Back": {
+		  "Name": "Mental Embrace",
+		  "Sun": 0,
+		  "Condition": "During a Roll",
+		  "Target": "Self or PM in any range",
+		  "Type": "Reaction",
+		  "Category": "Support",
         "Text": [
           "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice."
         ],
@@ -7602,11 +7610,12 @@
         "Text": [
           "Roll DIV. Ignore {half DIV} {armor} during this Action."
         ]
-      }
+      }, "Back": { "Moon": 1 }
     },
     "PP34": {
       "Front": {
         "Name": "Release Pollen",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -7640,6 +7649,7 @@
     "PP35": {
       "Front": {
         "Name": "Guardian Spirits",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Keywords": [
