@@ -40,6 +40,7 @@ async function init() {
 }
 
 function cacheUi() {
+  ui.filterName = document.getElementById("filterName");
   ui.filterTree = document.getElementById("filterTree");
   ui.filterType = document.getElementById("filterType");
   ui.filterCategory = document.getElementById("filterCategory");
@@ -55,6 +56,7 @@ function cacheUi() {
 }
 
 function bindEvents() {
+  ui.filterName.addEventListener("input", () => cardDatabase.render());
   ui.filterTree.addEventListener("change", () => cardDatabase.render());
   ui.filterType.addEventListener("change", () => cardDatabase.render());
   ui.filterCategory.addEventListener("change", () => cardDatabase.render());
@@ -65,6 +67,7 @@ function bindEvents() {
   ui.sortBy.addEventListener("change", () => cardDatabase.render());
   ui.sortOrder.addEventListener("change", () => cardDatabase.render());
   ui.resetFiltersButton.addEventListener("click", () => {
+    ui.filterName.value = "";
     ui.filterTree.value = "";
     ui.filterType.value = "";
     ui.filterCategory.value = "";
@@ -176,6 +179,7 @@ function populateFilters(db) {
 
 function getActiveFilters() {
   return {
+    name: ui.filterName.value.trim() || null,
     tree: ui.filterTree.value || null,
     type: ui.filterType.value || null,
     category: ui.filterCategory.value || null,
@@ -293,6 +297,16 @@ function createCardDatabase(data) {
   // Filtering and sorting
   function filterCards(cards, filters) {
     return cards.filter((card) => {
+      if (filters.name) {
+        const q = filters.name.toLowerCase();
+        const names = [
+          card.Front.Name,
+          card.Front.DisplayName,
+          card.Back && card.Back.Name,
+          card.Back && card.Back.DisplayName,
+        ];
+        if (!names.some((n) => n && n.toLowerCase().includes(q))) return false;
+      }
       if (filters.tree && card._tree !== filters.tree) return false;
       if (filters.type && card.Front.Type !== filters.type) return false;
       if (filters.category && card.Front.Category !== filters.category) return false;
