@@ -238,6 +238,16 @@ function renderCardContent(parent, block, options = {}) {
     container.appendChild(targetEl);
   }
 
+  // Render Text
+  if (text) {
+    text.forEach((textItem) => {
+      const textEl = document.createElement("div");
+      textEl.className = textClassName;
+      appendFormattedText(textEl, textItem);
+      container.appendChild(textEl);
+    });
+  }
+
   // Render Roll + Outcomes
   if (roll) {
     container.appendChild(buildRollElement(roll, attrs, keywordCounts, headerElementClass));
@@ -331,16 +341,6 @@ function renderCardContent(parent, block, options = {}) {
         });
       }
     }
-  }
-
-  // Render Text
-  if (text) {
-    text.forEach((textItem) => {
-      const textEl = document.createElement("div");
-      textEl.className = textClassName;
-      appendFormattedText(textEl, textItem);
-      container.appendChild(textEl);
-    });
   }
 
   // Render Note

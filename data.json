@@ -4169,6 +4169,7 @@
     "P01": {
       "Front": {
         "Name": "Soothing Voice",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "1 in R4",
@@ -4190,7 +4191,7 @@
             "1": "Heal {half div} {terror} or Stabilize"
           }
         }
-      }
+      }, "Back": { "Moon": 2, "Warning": "Start of your Acitvation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "P02": {
       "Front": {
@@ -4228,11 +4229,12 @@
             "1": "Deal {half div} [Divinum] {damage} ignoring 3 {armor}"
           }
         }
-      }
+      }, "Back": { "Moon": 3, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate} and gain 1 {fate}" }
     },
     "P03": {
       "Front": {
         "Name": "Rousing Ballad",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "PMs in R4",
@@ -4256,6 +4258,7 @@
         }
       },
       "Back": {
+		  "Moon": 2,
         "Text": [
           "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV"
         ]
@@ -4285,11 +4288,12 @@
             "1": "Prevent {successes} {damage}. Deal ({successes}-1) {damage} to the attacking Enemy"
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 2 {fate} to refresh this card." }
     },
     "P05": {
       "Front": {
         "Name": "Battle Prayer",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -4315,7 +4319,7 @@
             "1": "Add {successes} and {half div}. Distribute that many ATT Boons among targets in R4 (max 4 per target). One Character cannot gain same Boon twice."
           }
         }
-      }
+      }, "Back": { "Moon": 2, "Sun": 2, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}" }
     },
     "P06": {
       "Front": {
@@ -4353,7 +4357,7 @@
             "1": "Deal {successes} {damage}"
           }
         }
-      }
+      }, "Back": { "Sun": 2 }
     },
     "P07": {
       "Front": {
@@ -4392,6 +4396,7 @@
     "P08": {
       "Front": {
         "Name": "Beacon of Hope",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -4419,7 +4424,9 @@
       "Back": {
         "Moon": 2,
         "Text": [
-          "When a Party Memeber in R4 begins their Activation, roll DIV: 8+: They gain 1 ATT Boon and heal 2 HP. 4+: They gain 1 ATT Boon or heal 1 HP"
+          "When a Party Memeber in R4 begins their Activation, roll DIV:",
+		  "  8+: They gain 1 ATT Boon and heal 2 HP.",
+		  "  4+: They gain 1 ATT Boon or heal 1 HP"
         ],
         "Note": "Start of your Activation: You may choose not to refresh this card"
       }
@@ -4427,6 +4434,7 @@
     "P09": {
       "Front": {
         "Name": "Divine Intervention",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you or a PM would be Knocked Out",
@@ -4500,6 +4508,7 @@
     "P11": {
       "Front": {
         "Name": "Magic Circle",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Roll": {
@@ -4573,7 +4582,7 @@
             "1": "Deal {half div} [Ice] {damage} (+2 {damage} against [Vestigial]). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} [Ice] {damage} to {successes} other Enemies in any range."
           }
         }
-      }
+      }, "Back": { "Moon": 2, "Warning": "Start of your Activation: Do not refresh thsi card, unless you gain 1 {terror}" }
     },
     "P13": {
       "Front": {
@@ -4662,13 +4671,15 @@
         ],
         "Moon": 2,
         "Text": [
-          "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
+          "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space.",
+		  "Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
         ]
       }
     },
     "P16": {
       "Front": {
         "Name": "Song of Protection",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Target": "Self",
@@ -4702,6 +4713,7 @@
     "P17": {
       "Front": {
         "Name": "Sly Tongue",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4741,6 +4753,7 @@
         }
       },
       "Back": {
+		  "Moon": 2,
         "Text": [
           "Reduce all {damage} dealt by the Enemy with your Effect token by 2 per Effect token, and their {en} by  2 per Effect token. When Enemy with your Effect token is dealt {damage}, discard 1 Effect token from it."
         ],
@@ -4751,6 +4764,7 @@
     "P18": {
       "Front": {
         "Name": "Applause",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -4768,7 +4782,10 @@
       },
       "Back": {
         "Text": [
-          "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card ignoring its refresh costs or restrictions. 3: Gain 1 Action."
+          "You may discard markers from this card at any time:",
+		  "  1: Heal 2HP or 1{terror}",
+		  "  2: Refresh 1 card ignoring its refresh costs or restrictions",
+		  "  3: Gain 1 Action."
         ],
         "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch"
       }
@@ -4794,7 +4811,7 @@
             "1": "Deal {successes} {damage} to {half div} targets."
           }
         }
-      }
+      }, "Back": { "Sun": 2 }
     },
     "P20": {
       "Front": {
@@ -4824,11 +4841,12 @@
         "Text": [
           "The enemy with your Effect token always chooses you as a target."
         ]
-      }
+      }, "Back": { "Moon": 2 }
     },
     "P21": {
       "Front": {
         "Name": "Dual Wielding",
+		"Moon": 0,
         "Type": "Reaction",
         "Category": "Offensive",
         "Condition": "Before your [Melee] [Attack]",
@@ -4836,7 +4854,18 @@
         "Text": [
           "During this [Melee] Attack, deal {damage} from 2 [Melee] Items instead of 1."
         ]
-      }
+      },
+	  "Back": {
+		  "Sun": 1,
+		  "Note": "Start of your Action: You may choose not to refresh this card",
+		  "Text": ["Before you refresh this card"],
+		  "Roll":
+		  {
+			  "ATT": ["AGI"],
+			  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"]}],
+			  "Successes": { "2": "Refresh this card", "0": "Place 1 of your [Melee] Items in your Pouch. Refresh this card" }
+		  }
+	  }
     },
     "P22": {
       "Front": {
@@ -7686,6 +7715,7 @@
     "PP36": {
       "Front": {
         "Name": "Tumorous Growth",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -7716,11 +7746,12 @@
             "2": "Deal {half div} [Divinum] {damage} ignoring 4 {armor}. You gain 1 {terror}"
           }
         }
-      }
+      }, "Back": { "Moon": 2 }
     },
     "S01": {
       "Front": {
         "Name": "Coordinated Advance",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self and PM in R4",
@@ -7742,7 +7773,7 @@
             "1": "You and one PM move by 4"
           }
         }
-      }
+      }, "Back": { "Sun": 1, "Moon": 1 }
     },
     "S02": {
       "Front": {
@@ -7778,11 +7809,12 @@
             "1": "Deal {successes} {damage}. Add 2 {damage} for each PM in R1 from the target."
           }
         }
-      }
+      }, "Back": { "Sun": 2 }
     },
     "S03": {
       "Front": {
         "Name": "Coordinated Attack",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self and PMs in R4",
@@ -7809,7 +7841,9 @@
         "Sun": 1,
         "Moon": 1,
         "Text": [
-          "You may treat yourself as PM for this effect. 3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die. 1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die."
+          "You may treat yourself as PM for this effect.", 
+		  "  3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die.",
+          "  1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die."
         ]
       }
     },
@@ -7840,6 +7874,7 @@
         }
       },
       "Back": {
+		  "Sun": 2,
         "Text": [
           "You and PMs in R4 gain {armor} for each marker on this card."
         ],
@@ -7862,6 +7897,7 @@
         ]
       },
       "Back": {
+		  "Moon": 2,
         "Warning": "Start of your Acitvation: Do not refresh this card unless you pay 1 {fate}"
       }
     },
@@ -7894,7 +7930,7 @@
             "2": "Prevent {div} {damage}"
           }
         }
-      }
+      }, "Back": { "Warning": "Start of you Acitvation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "S07": {
       "Front": {
