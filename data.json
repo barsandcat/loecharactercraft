@@ -3970,7 +3970,9 @@
         "Category": "Support",
         "Condition": "During a Roll",
         "Target": "PM in any range",
-        "Text": "Support with 1 die"
+        "Text": [
+          "Support with 1 die"
+        ]
       }
     },
     "B08": {
@@ -3982,7 +3984,9 @@
         "Category": "Support",
         "Condition": "During a Roll",
         "Target": "PM in any range",
-        "Text": "Support with 2 dice"
+        "Text": [
+          "Support with 2 dice"
+        ]
       }
     },
     "B10": {
@@ -4088,7 +4092,9 @@
         }
       },
       "Back": {
-        "Text": "Start of your Activation: The Enemy with your effect token loses 2HP.",
+        "Text": [
+          "Start of your Activation: The Enemy with your effect token loses 2HP."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card."
       }
     },
@@ -4250,7 +4256,9 @@
         }
       },
       "Back": {
-        "Text": "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV"
+        "Text": [
+          "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV"
+        ]
       }
     },
     "P04": {
@@ -4375,7 +4383,9 @@
       },
       "Back": {
         "Sun": 3,
-        "Text": "Each time you are attacked gain 1 ATT Boon",
+        "Text": [
+          "Each time you are attacked gain 1 ATT Boon"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you discard 2 Boons"
       }
     },
@@ -4408,7 +4418,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "When a Party Memeber in R4 begins their Activation, roll DIV: 8+: They gain 1 ATT Boon and heal 2 HP. 4+: They gain 1 ATT Boon or heal 1 HP",
+        "Text": [
+          "When a Party Memeber in R4 begins their Activation, roll DIV: 8+: They gain 1 ATT Boon and heal 2 HP. 4+: They gain 1 ATT Boon or heal 1 HP"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card"
       }
     },
@@ -4478,7 +4490,9 @@
       },
       "Back": {
         "Sun": 2,
-        "Text": "Gain a Divling card (O02) and set the HP to {div} (+2HP: Artifact). Spawn Divling in R1",
+        "Text": [
+          "Gain a Divling card (O02) and set the HP to {div} (+2HP: Artifact). Spawn Divling in R1"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard Divling"
       }
@@ -4515,7 +4529,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token.",
+        "Text": [
+          "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard your Effect tokens from the Sheet"
       }
@@ -4627,7 +4643,9 @@
         }
       },
       "Back": {
-        "Text": "When the Enemy with your Effect token ends their Activation: Roll for DIV. The Enemy loses {half div} HP",
+        "Text": [
+          "When the Enemy with your Effect token ends their Activation: Roll for DIV. The Enemy loses {half div} HP"
+        ],
         "Note": "Start of your Activation: Your may choose not to refresh this card",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy"
       }
@@ -4643,7 +4661,9 @@
           "Spell"
         ],
         "Moon": 2,
-        "Text": "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
+        "Text": [
+          "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space. Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
+        ]
       }
     },
     "P16": {
@@ -4674,7 +4694,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "Each time a Party Member in R4 uses their Defensive Reaction, you may support them with 3 dice."
+        "Text": [
+          "Each time a Party Member in R4 uses their Defensive Reaction, you may support them with 3 dice."
+        ]
       }
     },
     "P17": {
@@ -4719,7 +4741,9 @@
         }
       },
       "Back": {
-        "Text": "Reduce all {damage} dealt by the Enemy with your Effect token by 2 per Effect token, and their {en} by  2 per Effect token. When Enemy with your Effect token is dealt {damage}, discard 1 Effect token from it.",
+        "Text": [
+          "Reduce all {damage} dealt by the Enemy with your Effect token by 2 per Effect token, and their {en} by  2 per Effect token. When Enemy with your Effect token is dealt {damage}, discard 1 Effect token from it."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy."
       }
@@ -4738,10 +4762,14 @@
             "0": "Gain 4 {terror}. Place this card in your Pouch."
           }
         },
-        "Text": "Each other Character in R4 supports you with a number of dice equal to their highest ATT."
+        "Text": [
+          "Each other Character in R4 supports you with a number of dice equal to their highest ATT."
+        ]
       },
       "Back": {
-        "Text": "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card ignoring its refresh costs or restrictions. 3: Gain 1 Action.",
+        "Text": [
+          "You may discard markers from this card at any time: 1: Heal 2HP or 1{terror} 2: Refresh 1 card ignoring its refresh costs or restrictions. 3: Gain 1 Action."
+        ],
         "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch"
       }
     },
@@ -4793,7 +4821,9 @@
         }
       },
       "Back": {
-        "Text": "The enemy with your Effect token always chooses you as a target."
+        "Text": [
+          "The enemy with your Effect token always chooses you as a target."
+        ]
       }
     },
     "P21": {
@@ -4803,7 +4833,9 @@
         "Category": "Offensive",
         "Condition": "Before your [Melee] [Attack]",
         "Target": "Self",
-        "Text": "During this [Melee] Attack, deal {damage} from 2 [Melee] Items instead of 1."
+        "Text": [
+          "During this [Melee] Attack, deal {damage} from 2 [Melee] Items instead of 1."
+        ]
       }
     },
     "P22": {
@@ -4817,7 +4849,9 @@
         "Condition": "Requires [Melee]",
         "Target": "Self",
         "Sun": 1,
-        "Text": "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
+        "Text": [
+          "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
+        ]
       }
     },
     "P23": {
@@ -4943,7 +4977,9 @@
         }
       },
       "Back": {
-        "Text": "Gain 1 {armor} and lose 1 MOB for each marker on this card.",
+        "Text": [
+          "Gain 1 {armor} and lose 1 MOB for each marker on this card."
+        ],
         "Note": "Instead of refreshing this card you may discard any number of markers from it.",
         "Warning": "When you refresh this card, discard all markers from it."
       }
@@ -4976,7 +5012,9 @@
         }
       },
       "Back": {
-        "Text": "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation.",
+        "Text": [
+          "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation."
+        ],
         "Warning": "This card cannot be refreshed. End of each Activation: If there are no more Cauldron Effect tokens on the Sheet, place this card in your Pouch"
       }
     },
@@ -5011,7 +5049,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "You may use Boons on this card as if they were yours, but you must use all of them at once.",
+        "Text": [
+          "You may use Boons on this card as if they were yours, but you must use all of them at once."
+        ],
         "Warning": "When you refresh this card, discard all Boons from it."
       }
     },
@@ -5053,7 +5093,9 @@
         }
       },
       "Back": {
-        "Text": "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2",
+        "Text": [
+          "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2"
+        ],
         "Warning": "Instead of refreshing this card, place it in your Pouch"
       }
     },
@@ -5084,7 +5126,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "When you end your Activation, the Character with your Effect token may perform 1 Action. When that character ends their Activation, you may perform 1 Action",
+        "Text": [
+          "When you end your Activation, the Character with your Effect token may perform 1 Action. When that character ends their Activation, you may perform 1 Action"
+        ],
         "Warning": "This card cannot be refreshed. Any time: if the Character with your Effect token is not in R4 from you, place this card in your Pouch."
       }
     },
@@ -5113,7 +5157,9 @@
         }
       },
       "Back": {
-        "Text": "During [Melee] Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice",
+        "Text": [
+          "During [Melee] Attack: Refresh this card to set the Roll's Difficulty Level to {6} and roll 2 additional dice"
+        ],
         "Warning": "When you move immediately refresh this card"
       }
     },
@@ -5144,7 +5190,9 @@
       },
       "Back": {
         "Moon": 3,
-        "Text": "For each 2 markers on this card roll 1 additional die during your Offensive Actions. When you move or are attacked, discard 1 marker from this card.",
+        "Text": [
+          "For each 2 markers on this card roll 1 additional die during your Offensive Actions. When you move or are attacked, discard 1 marker from this card."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard all markers from it"
       }
@@ -5156,10 +5204,14 @@
         "Category": "Support",
         "Condition": "At the start of Enemy Activation",
         "Target": "Self",
-        "Text": "You may flip this card"
+        "Text": [
+          "You may flip this card"
+        ]
       },
       "Back": {
-        "Text": "When an Enemy chooses a target you can reduce your {sun} and {moon} by 3 (+1{sun} and {moon}: Stealth)",
+        "Text": [
+          "When an Enemy chooses a target you can reduce your {sun} and {moon} by 3 (+1{sun} and {moon}: Stealth)"
+        ],
         "Warning": "Instead of refreshing this card, place it in your Pouch"
       }
     },
@@ -5170,10 +5222,14 @@
         "Category": "Support",
         "Condition": "When you defeat and Enemy",
         "Target": "Self",
-        "Text": "Roll for DIV. Flip this card and place {half div} markers on it"
+        "Text": [
+          "Roll for DIV. Flip this card and place {half div} markers on it"
+        ]
       },
       "Back": {
-        "Text": "Anytime: You may discard a marker from this card to reroll any number of dice.",
+        "Text": [
+          "Anytime: You may discard a marker from this card to reroll any number of dice."
+        ],
         "Warning": "Instead of refreshing this card, discard 1 marker from it. If there are no markers on this card, refresh it."
       }
     },
@@ -5184,10 +5240,14 @@
         "Category": "Offensive",
         "Condition": "At the start of your Activation",
         "Moon": 2,
-        "Text": "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
+        "Text": [
+          "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
+        ]
       },
       "Back": {
-        "Text": "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice",
+        "Text": [
+          "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card"
       }
     },
@@ -5220,7 +5280,9 @@
       "Back": {
         "Sun": 4,
         "Moon": 4,
-        "Text": "Treat your STR and AGI as the sum of them both. Treat your INT and CHA as sum of them both.",
+        "Text": [
+          "Treat your STR and AGI as the sum of them both. Treat your INT and CHA as sum of them both."
+        ],
         "Warning": "Instead of refreshing this card, place it in your Pouch"
       }
     },
@@ -5230,7 +5292,9 @@
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
-        "Text": "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action."
+        "Text": [
+          "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action."
+        ]
       }
     },
     "P38": {
@@ -5266,7 +5330,9 @@
         }
       },
       "Back": {
-        "Text": "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them.",
+        "Text": [
+          "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard your Effect tokens from the Enemy."
       }
@@ -5300,7 +5366,9 @@
         }
       },
       "Back": {
-        "Text": "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation"
+        "Text": [
+          "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation"
+        ]
       }
     },
     "P40": {
@@ -5311,7 +5379,9 @@
         "Condition": "After revealing Enemy Activation card",
         "Target": "Self and PMs in R4",
         "Moon": 1,
-        "Text": "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}"
+        "Text": [
+          "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}"
+        ]
       }
     },
     "P41": {
@@ -5343,7 +5413,9 @@
         }
       },
       "Back": {
-        "Text": "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers",
+        "Text": [
+          "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When there are no markers on this card, refresh it"
       }
@@ -5374,7 +5446,9 @@
         }
       },
       "Back": {
-        "Text": "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it.",
+        "Text": [
+          "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it."
+        ],
         "Warning": "Instead of refreshing this card, discard your Effect tokens from cards and place this card in your Pouch."
       }
     },
@@ -5416,7 +5490,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens.",
+        "Text": [
+          "Start of your Activation: The Enemy loses 2 HP for each of your Effect tokens."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard your Effect tokens from the Enemy"
       }
@@ -5462,7 +5538,9 @@
         "Condition": "During a Roll",
         "Target": "Self or PM in R4",
         "Moon": 1,
-        "Text": "Roll an additional CHA dice or support with CHA dice. Place this card in your Pouch"
+        "Text": [
+          "Roll an additional CHA dice or support with CHA dice. Place this card in your Pouch"
+        ]
       }
     },
     "P46": {
@@ -5474,7 +5552,9 @@
         "Target": "Self",
         "Sun": 2,
         "Moon": 2,
-        "Text": "Roll for CHA (against [Spell]) or AGI (against [Ranged]) or STR (against [Melee]) {en}, +1 die: [Investigation], [Vigilance], 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}."
+        "Text": [
+          "Roll for CHA (against [Spell]) or AGI (against [Ranged]) or STR (against [Melee]) {en}, +1 die: [Investigation], [Vigilance], 3: Prevent 16 {damage} and 4 {terror}, 1: Prevent 3 {damage} and 1 {terror}."
+        ]
       },
       "Back": {
         "Sun": 0,
@@ -5490,7 +5570,9 @@
         "Target": "Self",
         "Sun": 2,
         "Moon": 2,
-        "Text": "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2"
+        "Text": [
+          "Roll for a chosen ATT instead of listed one. Reduce the difficulty of the Roll by 2"
+        ]
       },
       "Back": {
         "Sun": 3,
@@ -5613,7 +5695,9 @@
       },
       "Back": {
         "Sun": 0,
-        "Text": "The Enemy with your Effect token has their {en} reduced by 2",
+        "Text": [
+          "The Enemy with your Effect token has their {en} reduced by 2"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy"
       }
@@ -5697,14 +5781,16 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "During any Roll: Discard a marker from this card to set a die with a result of 8 or higher to 12.",
+        "Text": [
+          "During any Roll: Discard a marker from this card to set a die with a result of 8 or higher to 12."
+        ],
         "Warning": "You cannot refresh this card if there is at least 1 marker on it"
       }
     },
     "P53": {
       "Front": {
         "Name": "Wrathful Decree",
-		"Sun": 2,
+        "Sun": 2,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -5712,7 +5798,9 @@
           "Spell"
         ],
         "Target": "ENs in R4",
-        "Text": "Target all [Minions] with {en} equal to or lower than your CHA, and all [Elites] with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch."
+        "Text": [
+          "Target all [Minions] with {en} equal to or lower than your CHA, and all [Elites] with {en} equal to or lower than your lowest ATT. Roll for DIV and deal 3 {div} [Divinum] {damage}. Place this card in your Pouch."
+        ]
       }
     },
     "P54": {
@@ -5724,12 +5812,16 @@
         "Target": "Self",
         "Sun": 1,
         "Moon": 1,
-        "Text": "Roll for DIV. Flip this card and place {half div} markers on it"
+        "Text": [
+          "Roll for DIV. Flip this card and place {half div} markers on it"
+        ]
       },
       "Back": {
         "Sun": 6,
         "Moon": 6,
-        "Text": "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}",
+        "Text": [
+          "Treat all your ATTs as equal to your highest ATT. You roll an additional D12 DIV die during your DIV roll. Gain 3 {armor}"
+        ],
         "Warning": "This card cannot be refreshed. Start of your Activation: if there is 1 or fewer markers on this card, place it in your Pouch. Otherwise, discard 3 markers from this card."
       }
     },
@@ -5761,14 +5853,16 @@
       },
       "Back": {
         "Sun": 3,
-        "Text": "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a [Minion], also end its move.",
+        "Text": [
+          "When an Enemy moves to a space with your Effect token, discard that token and deal them 4{damage}. If it is a [Minion], also end its move."
+        ],
         "Warning": "When you refresh this card, discard your Effect tokens from the Sheet"
       }
     },
     "P56": {
       "Front": {
         "Name": "Ventriloquism",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "1 in any range",
@@ -5794,19 +5888,26 @@
           }
         }
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "P57": {
       "Front": {
         "Name": "Gaining Advantage",
-		"Sun": 1,
+        "Sun": 1,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "Before drawing from the Initiative bag",
         "Target": "Self",
-        "Text": "If a dual token is drawn, choose which side of this token to resolve. Otherwise gain 1 {fate}"
+        "Text": [
+          "If a dual token is drawn, choose which side of this token to resolve. Otherwise gain 1 {fate}"
+        ]
       },
-	  "Back": { "Moon": 1, "Sun": 1 }
+      "Back": {
+        "Moon": 1,
+        "Sun": 1
+      }
     },
     "P58": {
       "Front": {
@@ -5841,35 +5942,44 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} [Divinum] {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move."
+        "Text": [
+          "You may move through Enemies. Each time you move through an Enemy, roll DIV and deal them {half div} [Divinum] {damage} ignoring AGI {armor}. Each Enemy can be targeted by this effect only once per move."
+        ]
       }
     },
     "P59": {
       "Front": {
         "Name": "Shadowsteps",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "Before or after Action",
         "Target": "Self",
-        "Text": "Move by your MOB. Then move by your MOB"
+        "Text": [
+          "Move by your MOB. Then move by your MOB"
+        ]
       },
-	  "Back": {
-		  "Moon": 1,
-		  "Name": "Shadowstrike",
-		  "Type": "Reaction",
-		  "Target": "1 in R1",
-		  "Category": "Offensive",
-		  "Keywords": ["Attack", "Melee"],
-		  "Condition": "Before or after Action",
-		  "Text": "Deal AGI {damage} (+2: against: [Small]) ignoring 5 {armor}. Place this card in your Pouch",
-		  "Warning": "This card cannot be refreshed"
-	  }
+      "Back": {
+        "Moon": 1,
+        "Name": "Shadowstrike",
+        "Type": "Reaction",
+        "Target": "1 in R1",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack",
+          "Melee"
+        ],
+        "Condition": "Before or after Action",
+        "Text": [
+          "Deal AGI {damage} (+2: against: [Small]) ignoring 5 {armor}. Place this card in your Pouch"
+        ],
+        "Warning": "This card cannot be refreshed"
+      }
     },
     "P60": {
       "Front": {
         "Name": "Entangled by Shadows",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "EN in any range",
@@ -5898,7 +6008,9 @@
       },
       "Back": {
         "Moon": 5,
-        "Text": "After placing an Activation token on the Enemy with your Effect token, roll for DIV. If the result is higher than {en}, skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon",
+        "Text": [
+          "After placing an Activation token on the Enemy with your Effect token, roll for DIV. If the result is higher than {en}, skip this Enemy's Activation and place this card in your Pouch. Otherwise, gain a DIV Boon"
+        ],
         "Warning": "When you refresh this card, discard your Effect token from the Enemy"
       }
     },
@@ -5910,16 +6022,18 @@
         "Condition": "Before a Roll",
         "Target": "Self",
         "Sun": 1,
-        "Text": "During this Roll, if you have at least one result of 12, add one {successes} to your Roll. If you have at least one result of 1, gain one additional {fate}."
+        "Text": [
+          "During this Roll, if you have at least one result of 12, add one {successes} to your Roll. If you have at least one result of 1, gain one additional {fate}."
+        ]
       },
-	  "Back": {
-		  "Moon": 1
-	  }
+      "Back": {
+        "Moon": 1
+      }
     },
     "P62": {
       "Front": {
         "Name": "Ticking Vestigial",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -5948,7 +6062,9 @@
       "Back": {
         "Sun": 2,
         "Moon": 2,
-        "Text": "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1.",
+        "Text": [
+          "Gain a Ticking Vestigial Card (O01). Spwan Ticking Vestigial in R1."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard Ticking Vestigial"
       }
@@ -5985,14 +6101,19 @@
     "P64": {
       "Front": {
         "Name": "Divinum Infused Tools",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During AGI or INT Roll",
         "Target": "Self",
-        "Text": "Roll for DIV: 12+: Add 4 {successes} to the Roll, 8-11: Add 2 {successes} to the Roll."
+        "Text": [
+          "Roll for DIV: 12+: Add 4 {successes} to the Roll, 8-11: Add 2 {successes} to the Roll."
+        ]
       },
-	  "Back": { "Moon": 1, "Sun": 1 }
+      "Back": {
+        "Moon": 1,
+        "Sun": 1
+      }
     },
     "P65": {
       "Front": {
@@ -6021,15 +6142,15 @@
             "1": "Move by {successes}. You cannot enter {danger} spaces during this move."
           }
         }
-      }, 
-	  "Back": {
-		  "Note": "Anytime: Pay 2 {fate} to refresh this card"
-	  }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 2 {fate} to refresh this card"
+      }
     },
     "P66": {
       "Front": {
         "Name": "Final Enhancement",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self or PM in R1",
@@ -6056,7 +6177,9 @@
       "Back": {
         "Sun": 3,
         "Moon": 3,
-        "Text": "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token.",
+        "Text": [
+          "Increase the {damage} modifier of the Item with your Effect tokens by 3 for each token."
+        ],
         "Note": "Start of your Activation: You may pay 2 {fate} to not refresh this card",
         "Warning": "When you refresh this card, discard your Effect tokens from the Item and place this card in your Pouch."
       }
@@ -6064,7 +6187,7 @@
     "P67": {
       "Front": {
         "Name": "Osteoporosis",
-		"Sun": 1,
+        "Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6100,7 +6223,9 @@
       "Back": {
         "Sun": 2,
         "Moon": 2,
-        "Text": "Each time the Enemy moves at least 2 spaces, it loses 2 HP for each of your Effect tokens on them",
+        "Text": [
+          "Each time the Enemy moves at least 2 spaces, it loses 2 HP for each of your Effect tokens on them"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy"
       }
@@ -6145,7 +6270,9 @@
       "Back": {
         "Sun": 2,
         "Moon": 2,
-        "Text": "During the Activation of the Enemy with your Effect token, you may discard 1 token to reduce all its {damage} by 2 during this Activation OR reduce all its moves by 2 during this Activation",
+        "Text": [
+          "During the Activation of the Enemy with your Effect token, you may discard 1 token to reduce all its {damage} by 2 during this Activation OR reduce all its moves by 2 during this Activation"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you gain 3 {terror}. When you refresh this card, discard your Effect token from the Enemy"
       }
     },
@@ -6181,11 +6308,11 @@
           }
         }
       },
-	  "Back": {
-		  "Moon": 4,
-		  "Note": "Start of your Acitvation: You may choose not to refresh this card",
-		  "Warning": "When you refresh this card, discard Rot Golem"
-	  }
+      "Back": {
+        "Moon": 4,
+        "Note": "Start of your Acitvation: You may choose not to refresh this card",
+        "Warning": "When you refresh this card, discard Rot Golem"
+      }
     },
     "P70": {
       "Front": {
@@ -6218,12 +6345,14 @@
           }
         }
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "P71": {
       "Front": {
         "Name": "Proliferation",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -6258,7 +6387,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "The character with your Effect token treats each of their ATTs as 1 higher. At the start of your Activation, that Character gains 1 {terror}",
+        "Text": [
+          "The character with your Effect token treats each of their ATTs as 1 higher. At the start of your Activation, that Character gains 1 {terror}"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {terror}. When you refresh this card, discard your Effect token from the Character"
       }
     },
@@ -6301,7 +6432,9 @@
         }
       },
       "Back": {
-        "Text": "Roll for DIV. Target all in any range. Defeat {half div} [Minions] with your Effect tokens. Each [Elite] and [Boss] with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch"
+        "Text": [
+          "Roll for DIV. Target all in any range. Defeat {half div} [Minions] with your Effect tokens. Each [Elite] and [Boss] with your Effect token loses {div} HP. Each Party Member, including you with your Effect token heals {div} HP. Place this card in your Pouch"
+        ]
       }
     },
     "PP01": {
@@ -6341,7 +6474,9 @@
           }
         }
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP02": {
       "Front": {
@@ -6376,8 +6511,10 @@
         }
       },
       "Back": {
-		  "Moon": 2,
-        "Text": "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} [Ice] {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token.",
+        "Moon": 2,
+        "Text": [
+          "When an Enemy moves to a space with your Effect token, end their move and roll for DIV. Deal {half div} [Ice] {damage} to that Enemy ignoring 5 {armor}. Then, discard that Effect token."
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard your Effect tokens from the Sheet."
       }
     },
@@ -6411,7 +6548,9 @@
           }
         }
       },
-	  "Back": { "Sun": 2 }
+      "Back": {
+        "Sun": 2
+      }
     },
     "PP04": {
       "Front": {
@@ -6446,7 +6585,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3",
+        "Text": [
+          "When an Enemy with your Effect token moves, you may discard this token to reduce this move by 3"
+        ],
         "Warning": "When you refresh this card, discard your Effect token from the Enemy."
       }
     },
@@ -6479,13 +6620,15 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "For each drawn black Activation token, deal {half div} [Divinum] {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the drawn tokens to the bag"
+        "Text": [
+          "For each drawn black Activation token, deal {half div} [Divinum] {damage} to an Enemy in R1. For each drawn white or dual token heal yourself or PM in R2 by {half div} HP. Return the drawn tokens to the bag"
+        ]
       }
     },
     "PP06": {
       "Front": {
         "Name": "Summon Swarm",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -6516,17 +6659,21 @@
     "PP07": {
       "Front": {
         "Name": "Rage",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you deal at least 6 {damage}",
         "Target": "Self",
-        "Text": "Flip this card"
+        "Text": [
+          "Flip this card"
+        ]
       },
       "Back": {
-		  "Sun": 2,
-        "Text": "Party Members support you with 1 die fewer. When you deal {damage} with [Melee], add STR {damage} and gain 1 {terror}",
-		"Note": "Start of your Acitvation: You may gain 1 {terror} to not refresh this card"
+        "Sun": 2,
+        "Text": [
+          "Party Members support you with 1 die fewer. When you deal {damage} with [Melee], add STR {damage} and gain 1 {terror}"
+        ],
+        "Note": "Start of your Acitvation: You may gain 1 {terror} to not refresh this card"
       }
     },
     "PP08": {
@@ -6562,12 +6709,14 @@
           }
         }
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP09": {
       "Front": {
         "Name": "Manic Laugh",
-		"Sun": 1,
+        "Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "ENs in R1",
@@ -6592,7 +6741,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "During your Activation: Enemies with your Effect tokens have their {en} reduced by half of you CHA (rounded down).",
+        "Text": [
+          "During your Activation: Enemies with your Effect tokens have their {en} reduced by half of you CHA (rounded down)."
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you gain 1 {terror}. When you refresh this card discard all your Effect tokens from the Enemies"
       }
     },
@@ -6634,12 +6785,14 @@
           }
         }
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP11": {
       "Front": {
         "Name": "Premonition",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Keywords": [
@@ -6671,7 +6824,10 @@
             "1": "Draw {half div} tokens from the bag instead of 1. Choose and resolve one of them, return rest to the bag"
           }
         }
-      }, "Back": { "Moon": 1 }
+      },
+      "Back": {
+        "Moon": 1
+      }
     },
     "PP12": {
       "Front": {
@@ -6710,12 +6866,15 @@
             "1": "Deal ({successes}+{half div}) [Divinum] {damage}"
           }
         }
-      }, "Back": { "Moon": 2 }
+      },
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP13": {
       "Front": {
         "Name": "Inspire",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6739,8 +6898,10 @@
         }
       },
       "Back": {
-		  "Moon": 2,
-        "Text": "Anytime: Discard all markers from this card to support a PM in R3 with a number of dice equal to the number of these markers.",
+        "Moon": 2,
+        "Text": [
+          "Anytime: Discard all markers from this card to support a PM in R3 with a number of dice equal to the number of these markers."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard all markers from it."
       }
@@ -6748,7 +6909,7 @@
     "PP14": {
       "Front": {
         "Name": "Smoke and Mirrors",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6774,7 +6935,9 @@
         }
       },
       "Back": {
-        "Text": "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by [Minion] (and [Elite] and [Bosse] if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it.",
+        "Text": [
+          "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by [Minion] (and [Elite] and [Bosse] if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it."
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet."
       }
     },
@@ -6803,31 +6966,37 @@
         }
       },
       "Back": {
-		  "Sun": 1,
-		  "Moon": 1,
-        "Text": "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token.",
+        "Sun": 1,
+        "Moon": 1,
+        "Text": [
+          "When the Enemy with your Effect token is attacked with [Melee], you may discard all your Effect tokens from them. The Enemy loses 2 HP for each discarded token."
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all Effect tokens from the Enemy."
       }
     },
     "PP16": {
       "Front": {
         "Name": "Taunt",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "After revealing Enemy Activation card",
         "Target": "Self",
-        "Text": "Change the target of current Enemy Activation card to yourself. Resolve the effect on the back"
+        "Text": [
+          "Change the target of current Enemy Activation card to yourself. Resolve the effect on the back"
+        ]
       },
       "Back": {
-        "Text": "Gain 1 {armor} (+1 {armor}: Vigilance) until the end of current Enemy card Activation",
+        "Text": [
+          "Gain 1 {armor} (+1 {armor}: Vigilance) until the end of current Enemy card Activation"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}."
       }
     },
     "PP17": {
       "Front": {
         "Name": "Aura of Justice",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -6854,14 +7023,16 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker.",
+        "Text": [
+          "During Defensive Reaction Rolls, reduce {en} of all Enemies in R3 by 1 per marker."
+        ],
         "Warning": "Start of your Activation: Discard 1 marker from this card. Then if there is at least 1 marker on this card, do not refresh this card."
       }
     },
     "PP18": {
       "Front": {
         "Name": "Moondisc",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6890,52 +7061,71 @@
           }
         }
       },
-	  "Back": {
-		  "Moon": 2,
-		  "Name": "Moondisc",
-		  "Keywords": ["Spell"],
-		  "Condition": "Against [Attack]",
-		  "Type": "Reaction",
-		  "Category": "Defensive",
-		  "Target": "Self or PM in R4",
-		  "Roll": {
-			  "ATT": [ "INT" ],
-			  "DIV": true,
-			  "Difficulty": 8,
-			  "Modifiers": [ { "Dice": 1, "Triggers": ["Arcana"]}],
-			  "Successes": {
-				  "3": "Prevent {div} {damage}",
-				  "1": "Prevent {half div} {damage}"
-			  }
-		  }
-	  }
+      "Back": {
+        "Moon": 2,
+        "Name": "Moondisc",
+        "Keywords": [
+          "Spell"
+        ],
+        "Condition": "Against [Attack]",
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Target": "Self or PM in R4",
+        "Roll": {
+          "ATT": [
+            "INT"
+          ],
+          "DIV": true,
+          "Difficulty": 8,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Arcana"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "Prevent {div} {damage}",
+            "1": "Prevent {half div} {damage}"
+          }
+        }
+      }
     },
     "PP19": {
       "Front": {
         "Name": "Adamant Stance",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During Offensive Action using [Melee]",
         "Target": "Self",
-        "Text": "Roll 1 additional die for each Enemy in R2 (max 3 dice)."
+        "Text": [
+          "Roll 1 additional die for each Enemy in R2 (max 3 dice)."
+        ]
       },
       "Back": {
-		  "Sun": 4,
-        "Text": "Gain 1 {armor} against [Melee]"
+        "Sun": 4,
+        "Text": [
+          "Gain 1 {armor} against [Melee]"
+        ]
       }
     },
     "PP20": {
       "Front": {
         "Name": "Guidance",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During Offensive Action or Defensive Reaction",
         "Target": "PM in R4",
-        "Text": "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead"
+        "Text": [
+          "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead"
+        ]
       },
-	  "Back": { "Moon": 2 }
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP21": {
       "Front": {
@@ -6949,13 +7139,15 @@
         "Condition": "After preventing [Melee] {damage}",
         "Target": "Self",
         "Sun": 2,
-        "Text": "Deal {damage} (-2 {damage}: [Armor]) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}"
+        "Text": [
+          "Deal {damage} (-2 {damage}: [Armor]) equal to the number of prevented {damage} to the attacking Enemy, ignoring 5 {armor}"
+        ]
       }
     },
     "PP22": {
       "Front": {
         "Name": "Eliminate",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6990,20 +7182,19 @@
           }
         }
       },
-	  "Back": {
-		  "Moon": 2,
-          "Sun": 2,
-          "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"		  
-	  }
+      "Back": {
+        "Moon": 2,
+        "Sun": 2,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"
+      }
     },
     "PP23": {
       "Front": {
         "Name": "Impose Your Will",
-		"Sun": 0,
+        "Sun": 1,
         "Type": "Action",
         "Category": "Support",
         "Target": "Minion in R4",
-        "Sun": 1,
         "Roll": {
           "ATT": [
             "CHA"
@@ -7026,7 +7217,10 @@
             "2": "Choose an empty space in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."
           }
         }
-      }, "Back": { "Moon": 1 }
+      },
+      "Back": {
+        "Moon": 1
+      }
     },
     "PP24": {
       "Front": {
@@ -7062,8 +7256,10 @@
         }
       },
       "Back": {
-		  "Sun": 2,
-        "Text": "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
+        "Sun": 2,
+        "Text": [
+          "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token."
+        ],
         "Warning": "This card cannot be refreshed. When all enemies with the Effect token are defeated, place this card in your Pouch."
       }
     },
@@ -7104,13 +7300,15 @@
             "1": "Deal {half div} [Divinum] {damage}"
           }
         }
-      }, 
-	  "Back": { "Moon": 2 }
+      },
+      "Back": {
+        "Moon": 2
+      }
     },
     "PP26": {
       "Front": {
         "Name": "Swing of Incense",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -7146,7 +7344,9 @@
       },
       "Back": {
         "Sun": 2,
-        "Text": "The Enemy with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it",
+        "Text": [
+          "The Enemy with your Effect token has their {en} reduced by your lowest ATT. When the Enemy with your Effect token is dealt {damage}, discard the Effect token from it"
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy"
       }
@@ -7185,14 +7385,16 @@
         }
       },
       "Back": {
-        "Text": "Enemies in R1 have their {en} reduced by 2",
+        "Text": [
+          "Enemies in R1 have their {en} reduced by 2"
+        ],
         "Warning": "When you move, immediately refresh this card"
       }
     },
     "PP28": {
       "Front": {
         "Name": "Weapon Steal",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -7235,7 +7437,9 @@
       "Back": {
         "Sun": 2,
         "Moon": 2,
-        "Text": "When the Enemy with your Effect token deals {damage}, reduce that {damage} by 2",
+        "Text": [
+          "When the Enemy with your Effect token deals {damage}, reduce that {damage} by 2"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card. When the Enemy with your Effect token is defeated or ends its move in R1 from you, refresh this card"
       }
     },
@@ -7304,7 +7508,11 @@
         }
       },
       "Back": {
-        "Text": "After revealing an Enemy Activation card, but before resolving it you may: *Discard 3 markers - you cannot be targeted as PM during this Activation. *Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded.",
+        "Text": [
+          "After revealing an Enemy Activation card, but before resolving it you may:",
+		  " * Discard 3 markers - you cannot be targeted as PM during this Activation",
+          " * Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded."
+        ],
         "Warning": "When you refresh this card, discard all markers from it"
       }
     },
@@ -7376,7 +7584,9 @@
         }
       },
       "Back": {
-        "Text": "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice.",
+        "Text": [
+          "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice."
+        ],
         "Note": "You may pay 1 {fate} to not refresh this card.",
         "Warning": "When you refresh this card, discard all markers from it."
       }
@@ -7389,7 +7599,9 @@
         "Condition": "Before Offensive Action or Item Action",
         "Target": "Self",
         "Moon": 1,
-        "Text": "Roll DIV. Ignore {half DIV} {armor} during this Action."
+        "Text": [
+          "Roll DIV. Ignore {half DIV} {armor} during this Action."
+        ]
       }
     },
     "PP34": {
@@ -7419,7 +7631,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "Enemies in R2 from your Effect tokens have their {en} lowered by 1. You and PMs in R2 of the Effect tokens roll 1 additional die during Rolls.",
+        "Text": [
+          "Enemies in R2 from your Effect tokens have their {en} lowered by 1. You and PMs in R2 of the Effect tokens roll 1 additional die during Rolls."
+        ],
         "Warning": "Start of your Activation: Discard 1 Effect token. Then if there are no Effect tokens, refresh this card."
       }
     },
@@ -7453,7 +7667,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "Anytime: You and Party Members may discard 1 Effect token to prevent 2 {damage}",
+        "Text": [
+          "Anytime: You and Party Members may discard 1 Effect token to prevent 2 {damage}"
+        ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}. When you refresh this card, discard all your Effect tokens from Party Members."
       }
     },
@@ -7582,7 +7798,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "You may treat yourself as PM for this effect. 3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die. 1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die."
+        "Text": [
+          "You may treat yourself as PM for this effect. 3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die. 1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die."
+        ]
       }
     },
     "S04": {
@@ -7612,7 +7830,9 @@
         }
       },
       "Back": {
-        "Text": "You and PMs in R4 gain {armor} for each marker on this card.",
+        "Text": [
+          "You and PMs in R4 gain {armor} for each marker on this card."
+        ],
         "Warning": "This card cannot be refreshed. Start of your Activation: Discard 1 marker from this card. Then if there are no markers on this card place it in your Pouch"
       }
     },
@@ -7627,7 +7847,9 @@
         "Condition": "During DIV Roll",
         "Target": "Self or PM in R4",
         "Moon": 1,
-        "Text": "If you INT is: 5+: Roll and additional D10 DIV die. 3-4: Roll and additional D6 DIV die. 1-2: Roll and additional D4 DIV die."
+        "Text": [
+          "If you INT is: 5+: Roll and additional D10 DIV die. 3-4: Roll and additional D6 DIV die. 1-2: Roll and additional D4 DIV die."
+        ]
       },
       "Back": {
         "Warning": "Start of your Acitvation: Do not refresh this card unless you pay 1 {fate}"
@@ -7705,7 +7927,9 @@
       },
       "Back": {
         "Moon": 3,
-        "Text": "Deal {half div} [Thunder] {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once."
+        "Text": [
+          "Deal {half div} [Thunder] {damage} ignoring 2 {armor}. For each {successes} you may repeat this effect for another Enemy in R2 from the previous target. The same Enemy cannot be dealt {damage} more than once."
+        ]
       }
     },
     "S08": {
@@ -7741,7 +7965,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}.",
+        "Text": [
+          "When a PM uses an Offensive Action, they may discard your Effect token. If they do, you Support them with INT dice or roll DIV and add {half div} {damage}."
+        ],
         "Warning": "Start of your activation: Do not refresh this card, unless you pay 1 {fate}"
       }
     },
@@ -7819,7 +8045,9 @@
       },
       "Back": {
         "Moon": 3,
-        "Text": "When you or PMs in R2 gain {terror}, gain 1 less",
+        "Text": [
+          "When you or PMs in R2 gain {terror}, gain 1 less"
+        ],
         "Note": "Start of your Activation: You man choose not to refresh this card"
       }
     },
@@ -7860,7 +8088,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 during DIV rolls). You and Party Members in this range may roll an additional D6 DIV die during DIV rolls.",
+        "Text": [
+          "Enemies in range equal to the number of markers have their {en} reduced by 1 (by 2 during DIV rolls). You and Party Members in this range may roll an additional D6 DIV die during DIV rolls."
+        ],
         "Warning": "Start of your Activation: Instead of refreshing this card, discard 1 marker from it. Then, if there are no markers on this card, place it in your Pouch"
       }
     },
@@ -7874,7 +8104,9 @@
         ],
         "Target": "Self and PMs in R4",
         "Sun": 0,
-        "Text": "Roll for DIV. Stabilize all targets. Heal ({div}+2) HP distributed in any way among targets. Then place this card in your Pouch."
+        "Text": [
+          "Roll for DIV. Stabilize all targets. Heal ({div}+2) HP distributed in any way among targets. Then place this card in your Pouch."
+        ]
       },
       "Back": {
         "Sun": 0
@@ -7910,7 +8142,9 @@
       },
       "Back": {
         "Moon": 3,
-        "Text": "You gain {armor} against [Ranged] equal to the number of markers on this card"
+        "Text": [
+          "You gain {armor} against [Ranged] equal to the number of markers on this card"
+        ]
       }
     },
     "S14": {
@@ -7951,7 +8185,9 @@
       },
       "Back": {
         "Sun": 2,
-        "Text": "The Enemy with your Effect token has their {en} reduced by 2. When Enemy with your token is dealt {damage}, discard your Effect token from them.",
+        "Text": [
+          "The Enemy with your Effect token has their {en} reduced by 2. When Enemy with your token is dealt {damage}, discard your Effect token from them."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card.",
         "Warning": "When you refresh this card, discard your Effect token from the Enemy."
       }
@@ -7995,7 +8231,9 @@
       "Back": {
         "Sun": 3,
         "Moon": 3,
-        "Text": "When you are attacked by an Enemy with your Effect token, gain 2 {armor}. After the attack, discard the Effect token and deal them AGI {damage} ignoring 5 {armor}"
+        "Text": [
+          "When you are attacked by an Enemy with your Effect token, gain 2 {armor}. After the attack, discard the Effect token and deal them AGI {damage} ignoring 5 {armor}"
+        ]
       }
     },
     "S16": {
@@ -8107,7 +8345,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch.",
+        "Text": [
+          "When you or a Party Member deal {damage} to the Enemy with your Effect token, double that {damage}. Then discard that Effect token and place this card in your Pouch."
+        ],
         "Warning": "This card cannot be refreshed"
       }
     },
@@ -8119,7 +8359,9 @@
         "Condition": "After you Push an Enemy",
         "Target": "Self",
         "Sun": 0,
-        "Text": "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}"
+        "Text": [
+          "Move by 3(+2 spaces: [Pathfinding]). Then if you are in R1 from the Pushed Enemy deal them AGI {damage} ignoring 5 {armor} and gain 1 {fate}"
+        ]
       },
       "Back": {
         "Sun": 1,
@@ -8135,7 +8377,9 @@
         "Condition": "After dealing at least 3 {damage} with [Melee]",
         "Target": "Self",
         "Sun": 2,
-        "Text": "Move by your AGI. Gain 1 {fate}"
+        "Text": [
+          "Move by your AGI. Gain 1 {fate}"
+        ]
       },
       "Back": {
         "Sun": 0,
@@ -8206,7 +8450,9 @@
       "Back": {
         "Sun": 1,
         "Moon": 1,
-        "Text": "During [Ranged] Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die.",
+        "Text": [
+          "During [Ranged] Attack: Refresh this card to set the Roll's Difficulty to {6} and roll 1 additional die."
+        ],
         "Note": "Start of your Activation: You may choose not to refresh this card."
       }
     },
@@ -8337,7 +8583,9 @@
       },
       "Back": {
         "Moon": 3,
-        "Text": "When a PM end their Activation in R1 from you, they may heal 2 HP or gain 1 ATT Boon."
+        "Text": [
+          "When a PM end their Activation in R1 from you, they may heal 2 HP or gain 1 ATT Boon."
+        ]
       }
     },
     "S27": {
@@ -8404,7 +8652,9 @@
       },
       "Back": {
         "Moon": 2,
-        "Text": "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3.",
+        "Text": [
+          "When an Enemy with your Effect token moves, you may discard 1 Effect token from this Enemy to reduce this move by 3."
+        ],
         "Warning": "This card cannot be refreshed. When you discard the last Effect token, place this card in your Pouch."
       }
     },
@@ -8523,11 +8773,15 @@
         "Category": "Support",
         "Target": "Self",
         "Moon": 1,
-        "Text": "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it."
+        "Text": [
+          "Spend up to 3 {fate} or Boons (in any configuration) flip this card and place that many markers on it."
+        ]
       },
       "Back": {
         "Moon": 3,
-        "Text": "For each marker on this card, the {en} of each Enemy is lowered by 1",
+        "Text": [
+          "For each marker on this card, the {en} of each Enemy is lowered by 1"
+        ],
         "Warning": "Instead of refreshing this card, discard 1 marker (2 markers if {characters} is 4 or more) from this card. Then, if there are no markers on this card, place it in your Pouch"
       }
     },
@@ -8565,7 +8819,9 @@
       },
       "Back": {
         "Moon": 1,
-        "Text": "Gain 2 {armor}. Roll 2 additional dice during your Offensive Actions.",
+        "Text": [
+          "Gain 2 {armor}. Roll 2 additional dice during your Offensive Actions."
+        ],
         "Warning": "Start of your Activation: Do not refresh this card. When you move or are dealt {damage}, refresh this card."
       }
     },
@@ -8649,7 +8905,9 @@
         "Category": "Support",
         "Sun": 3,
         "Moon": 3,
-        "Text": "Copy PMs Action card. Use the Skilled Imitator Action card as if it was an exact copy of that chosen Action card (you must fulfil its requirements). After resolving it, place the Skilled Imitator card in your Pouch."
+        "Text": [
+          "Copy PMs Action card. Use the Skilled Imitator Action card as if it was an exact copy of that chosen Action card (you must fulfil its requirements). After resolving it, place the Skilled Imitator card in your Pouch."
+        ]
       }
     }
   }

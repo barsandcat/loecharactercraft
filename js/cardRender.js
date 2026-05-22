@@ -335,10 +335,12 @@ function renderCardContent(parent, block, options = {}) {
 
   // Render Text
   if (text) {
-    const textEl = document.createElement("div");
-    textEl.className = textClassName;
-    appendFormattedText(textEl, text);
-    container.appendChild(textEl);
+    text.forEach((textItem) => {
+      const textEl = document.createElement("div");
+      textEl.className = textClassName;
+      appendFormattedText(textEl, textItem);
+      container.appendChild(textEl);
+    });
   }
 
   // Render Note
