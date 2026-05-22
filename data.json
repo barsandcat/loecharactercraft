@@ -3798,6 +3798,7 @@
       "Level": 1,
       "Front": {
         "Name": "Bash",
+        "Sun": 1,
         "DisplayName": "Bash",
         "Type": "Action",
         "Category": "Offensive",
@@ -3806,7 +3807,6 @@
         ],
         "Condition": "Requires [Melee]",
         "Target": "1 in R1",
-        "Sun": 1,
         "Roll": {
           "ATT": [
             "STR"
@@ -3824,6 +3824,7 @@
       "Level": 2,
       "Front": {
         "Name": "Endurance",
+		"Sun": 2,
         "DisplayName": "Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
@@ -3837,12 +3838,13 @@
             "1": "Prevent {successes} {damage} or 1 {terror}."
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B02": {
       "Level": 3,
       "Front": {
         "Name": "Endurance",
+		"Sun": 2,
         "DisplayName": "Exceptional Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
@@ -3856,12 +3858,13 @@
             "1": "Prevent ({successes}+1) {damage} or 1 {terror}."
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B03": {
       "Level": 1,
       "Front": {
         "Name": "Endurance",
+		"Sun": 2,
         "DisplayName": "Limited Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
@@ -3876,7 +3879,7 @@
             "1": "Prevent 1 {damage} or 1 {terror}."
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B04": {
       "Level": 2,
@@ -3903,7 +3906,7 @@
             "1": "Prevent 3 {damage}"
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B05": {
       "Level": 3,
@@ -3931,7 +3934,7 @@
             "1": "Prevent 5 {damage}"
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B06": {
       "Level": 1,
@@ -3959,7 +3962,7 @@
             "2": "Prevent 3 {damage}"
           }
         }
-      }
+      }, "Back": { "Note": "Anytime: Pay 1 {fate} to refresh this card" }
     },
     "B07": {
       "Level": 2,
@@ -3989,6 +3992,20 @@
         ]
       }
     },
+	"B09": {
+      "Level": 1,
+      "Front": {
+        "Name": "Combat Insight",
+        "DisplayName": "Minor Combat Insight",
+        "Type": "Reaction",
+        "Category": "Support",
+        "Condition": "During a Roll",
+        "Target": "PM in any range",
+        "Text": [
+          "Support with 1 dice"
+        ]
+      }		
+	},
     "B10": {
       "Level": 2,
       "Front": {
@@ -4014,7 +4031,7 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
-      }
+      }, "Back": { "Sun": 1, "Moon": 1, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "B11": {
       "Level": 3,
@@ -4041,7 +4058,7 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
-      }
+      }, "Back": { "Sun": 1, "Moon": 1, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "B12": {
       "Level": 1,
@@ -4068,12 +4085,13 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
-      }
+      }, "Back": { "Sun": 1, "Moon": 1, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "B13": {
       "Level": 1,
       "Front": {
         "Name": "Bite",
+		"Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4092,6 +4110,7 @@
         }
       },
       "Back": {
+		  "Sun": 2,
         "Text": [
           "Start of your Activation: The Enemy with your effect token loses 2HP."
         ],
@@ -4102,6 +4121,7 @@
       "Level": 2,
       "Front": {
         "Name": "Bash",
+		"Sun": 1,
         "DisplayName": "Mighty Bash",
         "Type": "Action",
         "Category": "Offensive",
@@ -4119,12 +4139,13 @@
             "1": "Deal ({successes}+1) {damage} ignoring AGI {armor}."
           }
         }
-      }
+      }, "Back": { "Sun": 2 }
     },
     "B15": {
       "Level": 1,
       "Front": {
         "Name": "Shoot",
+		"Moon": 1,
         "DisplayName": "Shoot",
         "Type": "Action",
         "Category": "Offensive",
@@ -4141,7 +4162,7 @@
             "1": "Deal {successes} {damage}"
           }
         }
-      }
+      }, "Back": { "Moon": 2 }
     },
     "B16": {
       "Level": 2,
@@ -4164,7 +4185,7 @@
             "1": "Deal ({successes}+2) {damage}"
           }
         }
-      }
+      }, "Back": { "Moon": 2 }
     },
     "P01": {
       "Front": {
@@ -4881,7 +4902,7 @@
         "Text": [
           "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
         ]
-      }
+      }, "Back": { "Sun": 2 }
     },
     "P23": {
       "Front": {
@@ -4908,7 +4929,7 @@
             "1": "Deal STR {damage} to active Enemy in R1"
           }
         }
-      }
+      }, "Back": { "Sun": 3, "Note": "Anytime: Pay 2 {fate} to refresh this card" }
     },
     "P24": {
       "Front": {
@@ -4938,11 +4959,12 @@
             "0": "Place this card in your Pouch"
           }
         }
-      }
+      }, "Back": { "Sun": 3 }
     },
     "P25": {
       "Front": {
         "Name": "Spikes",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4974,11 +4996,12 @@
             "1": "Deal {successes} [Divinum] {damage} to the target and to all other (including you) in {half div} range from it."
           }
         }
-      }
+      }, "Back": { "Moon": 2, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}" }
     },
     "P26": {
       "Front": {
         "Name": "Earth Shell",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Keywords": [
@@ -5006,6 +5029,8 @@
         }
       },
       "Back": {
+		  "Sun": 2,
+		  "Moon": 2,
         "Text": [
           "Gain 1 {armor} and lose 1 MOB for each marker on this card."
         ],
@@ -5041,6 +5066,8 @@
         }
       },
       "Back": {
+		  "Sun": 1,
+		  "Moon": 1,
         "Text": [
           "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation."
         ],
@@ -5050,6 +5077,7 @@
     "P28": {
       "Front": {
         "Name": "Animal Form",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -5087,6 +5115,7 @@
     "P29": {
       "Front": {
         "Name": "Evoke Blizzard",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -5122,8 +5151,10 @@
         }
       },
       "Back": {
+		  "Moon": 3,
         "Text": [
-          "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2"
+          "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}.",
+		  "All Enemy moves and MOB of all PMs are reduced by 2"
         ],
         "Warning": "Instead of refreshing this card, place it in your Pouch"
       }
@@ -5131,6 +5162,7 @@
     "P30": {
       "Front": {
         "Name": "True Bond",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "CH in R4",
@@ -5164,6 +5196,7 @@
     "P31": {
       "Front": {
         "Name": "Sneak",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -5195,6 +5228,7 @@
     "P32": {
       "Front": {
         "Name": "Focus",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -5229,6 +5263,7 @@
     "P33": {
       "Front": {
         "Name": "Blend In",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "At the start of Enemy Activation",
@@ -5247,6 +5282,7 @@
     "P34": {
       "Front": {
         "Name": "Inhale Divinum",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you defeat and Enemy",
@@ -5256,6 +5292,8 @@
         ]
       },
       "Back": {
+		  "Sun": 3,
+		  "Moon": 3,
         "Text": [
           "Anytime: You may discard a marker from this card to reroll any number of dice."
         ],
@@ -5270,10 +5308,11 @@
         "Condition": "At the start of your Activation",
         "Moon": 2,
         "Text": [
-          "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
+          "You may flip this card.", "If there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
         ]
       },
       "Back": {
+		  "Sun": 2,
         "Text": [
           "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice"
         ],
@@ -5318,17 +5357,19 @@
     "P37": {
       "Front": {
         "Name": "Charge",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
         "Text": [
           "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action."
         ]
-      }
+      }, "Back": { "Sun": 2 }
     },
     "P38": {
       "Front": {
         "Name": "Target Weak Spot",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "EN in R4",
@@ -5359,6 +5400,8 @@
         }
       },
       "Back": {
+		  "Sun": 2,
+		  "Moon": 2,
         "Text": [
           "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them."
         ],
@@ -5395,6 +5438,7 @@
         }
       },
       "Back": {
+		  "Sun": 3,
         "Text": [
           "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation"
         ]
@@ -5403,15 +5447,15 @@
     "P40": {
       "Front": {
         "Name": "Strength of Heart",
+		"Moon": 1,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "After revealing Enemy Activation card",
         "Target": "Self and PMs in R4",
-        "Moon": 1,
         "Text": [
           "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}"
         ]
-      }
+      }, "Back": { "Moon": 3 }
     },
     "P41": {
       "Front": {
@@ -5442,6 +5486,8 @@
         }
       },
       "Back": {
+		  "Sun": 2,
+		  "Moon": 1,
         "Text": [
           "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers"
         ],
@@ -5475,6 +5521,8 @@
         }
       },
       "Back": {
+		  "Sun": 4,
+		  "Moon": 4,
         "Text": [
           "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it."
         ],
