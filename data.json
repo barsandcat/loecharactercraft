@@ -6897,7 +6897,7 @@
 		  "Condition": "Against [Attack]",
 		  "Type": "Reaction",
 		  "Category": "Defensive",
-		  "Range": "Self or PM in R4",
+		  "Target": "Self or PM in R4",
 		  "Roll": {
 			  "ATT": [ "INT" ],
 			  "DIV": true,
@@ -6913,6 +6913,7 @@
     "PP19": {
       "Front": {
         "Name": "Adamant Stance",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During Offensive Action using [Melee]",
@@ -6920,18 +6921,21 @@
         "Text": "Roll 1 additional die for each Enemy in R2 (max 3 dice)."
       },
       "Back": {
+		  "Sun": 4,
         "Text": "Gain 1 {armor} against [Melee]"
       }
     },
     "PP20": {
       "Front": {
         "Name": "Guidance",
+		"Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "During Offensive Action or Defensive Reaction",
         "Target": "PM in R4",
         "Text": "Support with 1 die. During this Roll each 11 result is treated as 12 and each 2 is treated as 1 instead"
-      }
+      },
+	  "Back": { "Moon": 2 }
     },
     "PP21": {
       "Front": {
@@ -6951,6 +6955,7 @@
     "PP22": {
       "Front": {
         "Name": "Eliminate",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -6984,11 +6989,17 @@
             "1": "Deal {successes} [Divinum] {damage}"
           }
         }
-      }
+      },
+	  "Back": {
+		  "Moon": 2,
+          "Sun": 2,
+          "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"		  
+	  }
     },
     "PP23": {
       "Front": {
         "Name": "Impose Your Will",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Minion in R4",
@@ -7015,7 +7026,7 @@
             "2": "Choose an empty space in any range. Pull the target by your MOB toward that space. Then, deal ({successes}+2) {damage} to all in R1 from the target."
           }
         }
-      }
+      }, "Back": { "Moon": 1 }
     },
     "PP24": {
       "Front": {
@@ -7051,6 +7062,7 @@
         }
       },
       "Back": {
+		  "Sun": 2,
         "Text": "You and Party Members roll 1 additional die when using Offensive Actions against an Enemy with your Effect token.",
         "Warning": "This card cannot be refreshed. When all enemies with the Effect token are defeated, place this card in your Pouch."
       }
@@ -7092,11 +7104,13 @@
             "1": "Deal {half div} [Divinum] {damage}"
           }
         }
-      }
+      }, 
+	  "Back": { "Moon": 2 }
     },
     "PP26": {
       "Front": {
         "Name": "Swing of Incense",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -7178,6 +7192,7 @@
     "PP28": {
       "Front": {
         "Name": "Weapon Steal",
+		"Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
