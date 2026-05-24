@@ -336,7 +336,7 @@ function createCardDatabase(data) {
       }
       if (filters.modifier) {
         if (!card.Front.Roll || !card.Front.Roll.Modifiers) return false;
-        if (!card.Front.Roll.Modifiers.some((mod) => mod.Triggers.includes(filters.modifier))) return false;
+        if (!card.Front.Roll.Modifiers.some((mod) => !mod.against && mod.Triggers.includes(filters.modifier))) return false;
       }
       return true;
     });
