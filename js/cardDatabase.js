@@ -99,14 +99,20 @@ function populateFilters(db) {
     if (card.Front.Type) typeCounts.set(card.Front.Type, (typeCounts.get(card.Front.Type) || 0) + 1);
     if (card.Front.Category) categoryCounts.set(card.Front.Category, (categoryCounts.get(card.Front.Category) || 0) + 1);
 
-    const hasRoll = Boolean(card.Front.Roll);
-    const hasDIV = hasRoll && card.Front.Roll.DIV;
+    const frontHasRoll = Boolean(card.Front.Roll);
+    const backHasRoll = card.Back && Boolean(card.Back.Roll);
+    const hasRoll = frontHasRoll || backHasRoll;
+    const hasDIV = (frontHasRoll && card.Front.Roll.DIV) || (backHasRoll && card.Back.Roll.DIV);
     if (!hasRoll) rollTypeCounts.none++;
     else if (hasDIV) rollTypeCounts.div++;
     else rollTypeCounts.regular++;
 
     if (card.Front.Roll) {
       const attList = getRollAttributeList(card.Front.Roll);
+      attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
+    }
+    if (card.Back && card.Back.Roll) {
+      const attList = getRollAttributeList(card.Back.Roll);
       attList.forEach((att) => attCounts.set(att, (attCounts.get(att) || 0) + 1));
     }
 
@@ -122,6 +128,16 @@ function populateFilters(db) {
 
     if (card.Front.Roll && card.Front.Roll.Modifiers) {
       card.Front.Roll.Modifiers.forEach((mod) => {
+        if (mod.against) return;
+        if (mod.Dice < 0) {
+          mod.Triggers.forEach((t) => negatives.add(t));
+        } else {
+          mod.Triggers.forEach((t) => modifierCounts.set(t, (modifierCounts.get(t) || 0) + 1));
+        }
+      });
+    }
+    if (card.Back && card.Back.Roll && card.Back.Roll.Modifiers) {
+      card.Back.Roll.Modifiers.forEach((mod) => {
         if (mod.against) return;
         if (mod.Dice < 0) {
           mod.Triggers.forEach((t) => negatives.add(t));
@@ -313,16 +329,18 @@ function createCardDatabase(data) {
       if (filters.type && card.Front.Type !== filters.type) return false;
       if (filters.category && card.Front.Category !== filters.category) return false;
       if (filters.rollType) {
-        const hasRoll = Boolean(card.Front.Roll);
-        const hasDIV = hasRoll && card.Front.Roll.DIV;
+        const frontHasRoll = Boolean(card.Front.Roll);
+        const backHasRoll = card.Back && Boolean(card.Back.Roll);
+        const hasRoll = frontHasRoll || backHasRoll;
+        const hasDIV = (frontHasRoll && card.Front.Roll.DIV) || (backHasRoll && card.Back.Roll.DIV);
         if (filters.rollType === "div" && !hasDIV) return false;
         if (filters.rollType === "regular" && (!hasRoll || hasDIV)) return false;
         if (filters.rollType === "none" && hasRoll) return false;
       }
       if (filters.att) {
-        if (!card.Front.Roll) return false;
-        const attList = getRollAttributeList(card.Front.Roll);
-        if (!attList.includes(filters.att)) return false;
+        const frontHasAtt = card.Front.Roll && getRollAttributeList(card.Front.Roll).includes(filters.att);
+        const backHasAtt = card.Back && card.Back.Roll && getRollAttributeList(card.Back.Roll).includes(filters.att);
+        if (!frontHasAtt && !backHasAtt) return false;
       }
       if (filters.keywords) {
         // Combine Keywords and Requires arrays for filtering
@@ -335,8 +353,9 @@ function createCardDatabase(data) {
         }
       }
       if (filters.modifier) {
-        if (!card.Front.Roll || !card.Front.Roll.Modifiers) return false;
-        if (!card.Front.Roll.Modifiers.some((mod) => !mod.against && mod.Triggers.includes(filters.modifier))) return false;
+        const frontHasMod = card.Front.Roll && card.Front.Roll.Modifiers && card.Front.Roll.Modifiers.some((mod) => !mod.against && mod.Triggers.includes(filters.modifier));
+        const backHasMod = card.Back && card.Back.Roll && card.Back.Roll.Modifiers && card.Back.Roll.Modifiers.some((mod) => !mod.against && mod.Triggers.includes(filters.modifier));
+        if (!frontHasMod && !backHasMod) return false;
       }
       return true;
     });
