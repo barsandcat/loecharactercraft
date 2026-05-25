@@ -6864,7 +6864,7 @@
         "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
-        "Condition": "When you deal at least 6 {damage}",
+        "Condition": "When you deal at least 6 {damage} or defeat the Enemy",
         "Target": "Self",
         "Text": [
           "Flip this card"
