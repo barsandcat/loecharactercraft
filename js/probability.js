@@ -48,6 +48,9 @@ function probAtLeast(dist, k) {
 export function computeAppliedModifiers(modifiers, keywordCounts) {
   const applied = [];
   for (const mod of modifiers) {
+    // Skip modifiers marked as "against"
+    if (mod.against) continue;
+
     let bestTrigger = null;
     let bestCount = 0;
     for (const trigger of mod.Triggers) {

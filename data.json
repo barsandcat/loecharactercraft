@@ -3798,15 +3798,14 @@
       "Level": 1,
       "Front": {
         "Name": "Bash",
+        "Sun": 1,
         "DisplayName": "Bash",
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
-        "Sun": 1,
         "Roll": {
           "ATT": [
             "STR"
@@ -3814,7 +3813,10 @@
           "Successes": {
             "1": "Deal {successes} {damage}."
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2
@@ -3824,6 +3826,7 @@
       "Level": 2,
       "Front": {
         "Name": "Endurance",
+        "Sun": 2,
         "DisplayName": "Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
@@ -3837,12 +3840,16 @@
             "1": "Prevent {successes} {damage} or 1 {terror}."
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B02": {
       "Level": 3,
       "Front": {
         "Name": "Endurance",
+        "Sun": 2,
         "DisplayName": "Exceptional Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
@@ -3856,18 +3863,21 @@
             "1": "Prevent ({successes}+1) {damage} or 1 {terror}."
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B03": {
       "Level": 1,
       "Front": {
         "Name": "Endurance",
+        "Sun": 2,
         "DisplayName": "Limited Endurance",
         "Type": "Reaction",
         "Category": "Defensive",
         "Condition": "Against [Attack]",
         "Target": "Self",
-        "Sun": 2,
         "Roll": {
           "ATT": [
             "STR"
@@ -3876,6 +3886,9 @@
             "1": "Prevent 1 {damage} or 1 {terror}."
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B04": {
@@ -3903,6 +3916,9 @@
             "1": "Prevent 3 {damage}"
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B05": {
@@ -3931,6 +3947,9 @@
             "1": "Prevent 5 {damage}"
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B06": {
@@ -3959,6 +3978,9 @@
             "2": "Prevent 3 {damage}"
           }
         }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 1 {fate} to refresh this card"
       }
     },
     "B07": {
@@ -3989,6 +4011,20 @@
         ]
       }
     },
+    "B09": {
+      "Level": 1,
+      "Front": {
+        "Name": "Combat Insight",
+        "DisplayName": "Minor Combat Insight",
+        "Type": "Reaction",
+        "Category": "Support",
+        "Condition": "During a Roll",
+        "Target": "PM in any range",
+        "Text": [
+          "Support with 1 dice"
+        ]
+      }
+    },
     "B10": {
       "Level": 2,
       "Front": {
@@ -4014,6 +4050,11 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
+      },
+      "Back": {
+        "Sun": 1,
+        "Moon": 1,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"
       }
     },
     "B11": {
@@ -4041,6 +4082,11 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
+      },
+      "Back": {
+        "Sun": 1,
+        "Moon": 1,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"
       }
     },
     "B12": {
@@ -4068,12 +4114,18 @@
             "2": "Place a white Activation token from supply on a Character that has not been Activated this Round. End your Activation, then Activate that Character."
           }
         }
+      },
+      "Back": {
+        "Sun": 1,
+        "Moon": 1,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"
       }
     },
     "B13": {
       "Level": 1,
       "Front": {
         "Name": "Bite",
+        "Sun": 1,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4092,6 +4144,7 @@
         }
       },
       "Back": {
+        "Sun": 2,
         "Text": [
           "Start of your Activation: The Enemy with your effect token loses 2HP."
         ],
@@ -4102,15 +4155,14 @@
       "Level": 2,
       "Front": {
         "Name": "Bash",
+        "Sun": 1,
         "DisplayName": "Mighty Bash",
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
-        "Sun": 1,
         "Roll": {
           "ATT": [
             "STR"
@@ -4118,20 +4170,26 @@
           "Successes": {
             "1": "Deal ({successes}+1) {damage} ignoring AGI {armor}."
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 2
       }
     },
     "B15": {
       "Level": 1,
       "Front": {
         "Name": "Shoot",
+        "Moon": 1,
         "DisplayName": "Shoot",
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "1 in R2+",
         "Roll": {
           "ATT": [
@@ -4140,7 +4198,13 @@
           "Successes": {
             "1": "Deal {successes} {damage}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
+      },
+      "Back": {
+        "Moon": 2
       }
     },
     "B16": {
@@ -4153,7 +4217,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "1 in R2+",
         "Moon": 1,
         "Roll": {
@@ -4163,13 +4226,19 @@
           "Successes": {
             "1": "Deal ({successes}+2) {damage}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
+      },
+      "Back": {
+        "Moon": 2
       }
     },
     "P01": {
       "Front": {
         "Name": "Soothing Voice",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "1 in R4",
@@ -4191,7 +4260,11 @@
             "1": "Heal {half div} {terror} or Stabilize"
           }
         }
-      }, "Back": { "Moon": 2, "Warning": "Start of your Acitvation: Do not refresh this card, unless you pay 1 {fate}" }
+      },
+      "Back": {
+        "Moon": 2,
+        "Warning": "Start of your Acitvation: Do not refresh this card, unless you pay 1 {fate}"
+      }
     },
     "P02": {
       "Front": {
@@ -4229,12 +4302,16 @@
             "1": "Deal {half div} [Divinum] {damage} ignoring 3 {armor}"
           }
         }
-      }, "Back": { "Moon": 3, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate} and gain 1 {fate}" }
+      },
+      "Back": {
+        "Moon": 3,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate} and gain 1 {fate}"
+      }
     },
     "P03": {
       "Front": {
         "Name": "Rousing Ballad",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "PMs in R4",
@@ -4258,7 +4335,7 @@
         }
       },
       "Back": {
-		  "Moon": 2,
+        "Moon": 2,
         "Text": [
           "When a PM in R4 performs a Roll, support them with 1 die. If they roll for DIV, additionally support them with your DIV"
         ]
@@ -4288,12 +4365,15 @@
             "1": "Prevent {successes} {damage}. Deal ({successes}-1) {damage} to the attacking Enemy"
           }
         }
-      }, "Back": { "Note": "Anytime: Pay 2 {fate} to refresh this card." }
+      },
+      "Back": {
+        "Note": "Anytime: Pay 2 {fate} to refresh this card."
+      }
     },
     "P05": {
       "Front": {
         "Name": "Battle Prayer",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
@@ -4319,7 +4399,12 @@
             "1": "Add {successes} and {half div}. Distribute that many ATT Boons among targets in R4 (max 4 per target). One Character cannot gain same Boon twice."
           }
         }
-      }, "Back": { "Moon": 2, "Sun": 2, "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}" }
+      },
+      "Back": {
+        "Moon": 2,
+        "Sun": 2,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}"
+      }
     },
     "P06": {
       "Front": {
@@ -4329,7 +4414,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Roll": {
@@ -4356,8 +4440,14 @@
             "2": "Discard 1 Boon to deal ({successes}+{half div}) [Divinum] {damage} OR you gain 1 ATT Boon and deal {successes} {damage}",
             "1": "Deal {successes} {damage}"
           }
-        }
-      }, "Back": { "Sun": 2 }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 2
+      }
     },
     "P07": {
       "Front": {
@@ -4396,7 +4486,7 @@
     "P08": {
       "Front": {
         "Name": "Beacon of Hope",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -4425,8 +4515,8 @@
         "Moon": 2,
         "Text": [
           "When a Party Memeber in R4 begins their Activation, roll DIV:",
-		  "  8+: They gain 1 ATT Boon and heal 2 HP.",
-		  "  4+: They gain 1 ATT Boon or heal 1 HP"
+          "  8+: They gain 1 ATT Boon and heal 2 HP.",
+          "  4+: They gain 1 ATT Boon or heal 1 HP"
         ],
         "Note": "Start of your Activation: You may choose not to refresh this card"
       }
@@ -4434,7 +4524,7 @@
     "P09": {
       "Front": {
         "Name": "Divine Intervention",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you or a PM would be Knocked Out",
@@ -4508,7 +4598,7 @@
     "P11": {
       "Front": {
         "Name": "Magic Circle",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Roll": {
@@ -4582,7 +4672,11 @@
             "1": "Deal {half div} [Ice] {damage} (+2 {damage} against [Vestigial]). If you rolled for AGI ignore {successes} {armor}. If you rolled for INT deal {half div} [Ice] {damage} to {successes} other Enemies in any range."
           }
         }
-      }, "Back": { "Moon": 2, "Warning": "Start of your Activation: Do not refresh thsi card, unless you gain 1 {terror}" }
+      },
+      "Back": {
+        "Moon": 2,
+        "Warning": "Start of your Activation: Do not refresh thsi card, unless you gain 1 {terror}"
+      }
     },
     "P13": {
       "Front": {
@@ -4672,14 +4766,14 @@
         "Moon": 2,
         "Text": [
           "Choose a space in range equal to the sum of your AGI and INT. Then, target all (including you) in range equal to your STR from that space.",
-		  "Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
+          "Roll for DIV. Deal {div} [Fire] {damage} (if you have [Armor], {half div} instead) to each target ignoring 5 {armor}. Place this card in your Pouch"
         ]
       }
     },
     "P16": {
       "Front": {
         "Name": "Song of Protection",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Target": "Self",
@@ -4713,7 +4807,7 @@
     "P17": {
       "Front": {
         "Name": "Sly Tongue",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4753,7 +4847,7 @@
         }
       },
       "Back": {
-		  "Moon": 2,
+        "Moon": 2,
         "Text": [
           "Reduce all {damage} dealt by the Enemy with your Effect token by 2 per Effect token, and their {en} by  2 per Effect token. When Enemy with your Effect token is dealt {damage}, discard 1 Effect token from it."
         ],
@@ -4764,7 +4858,7 @@
     "P18": {
       "Front": {
         "Name": "Applause",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -4783,9 +4877,9 @@
       "Back": {
         "Text": [
           "You may discard markers from this card at any time:",
-		  "  1: Heal 2HP or 1{terror}",
-		  "  2: Refresh 1 card ignoring its refresh costs or restrictions",
-		  "  3: Gain 1 Action."
+          "  1: Heal 2HP or 1{terror}",
+          "  2: Refresh 1 card ignoring its refresh costs or restrictions",
+          "  3: Gain 1 Action."
         ],
         "Warning": "End of your Activation: Discard all markers from this card and place it in your Pouch"
       }
@@ -4798,7 +4892,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "All in R1",
         "Sun": 1,
         "Roll": {
@@ -4810,8 +4903,14 @@
           "Successes": {
             "1": "Deal {successes} {damage} to {half div} targets."
           }
-        }
-      }, "Back": { "Sun": 2 }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 2
+      }
     },
     "P20": {
       "Front": {
@@ -4838,7 +4937,7 @@
         }
       },
       "Back": {
-		  "Moon": 2,
+		"Moon": 2,
         "Text": [
           "The enemy with your Effect token always chooses you as a target."
         ]
@@ -4847,7 +4946,7 @@
     "P21": {
       "Front": {
         "Name": "Dual Wielding",
-		"Moon": 0,
+        "Moon": 0,
         "Type": "Reaction",
         "Category": "Offensive",
         "Condition": "Before your [Melee] [Attack]",
@@ -4856,17 +4955,30 @@
           "During this [Melee] Attack, deal {damage} from 2 [Melee] Items instead of 1."
         ]
       },
-	  "Back": {
-		  "Sun": 1,
-		  "Note": "Start of your Action: You may choose not to refresh this card",
-		  "Text": ["Before you refresh this card"],
-		  "Roll":
-		  {
-			  "ATT": ["AGI"],
-			  "Modifiers": [ { "Dice": 1, "Triggers": ["Performer"]}],
-			  "Successes": { "2": "Refresh this card", "0": "Place 1 of your [Melee] Items in your Pouch. Refresh this card" }
-		  }
-	  }
+      "Back": {
+        "Sun": 1,
+        "Note": "Start of your Action: You may choose not to refresh this card",
+        "Text": [
+          "Before you refresh this card"
+        ],
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Performer"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Refresh this card",
+            "0": "Place 1 of your [Melee] Items in your Pouch. Refresh this card"
+          }
+        }
+      }
     },
     "P22": {
       "Front": {
@@ -4882,6 +4994,9 @@
         "Text": [
           "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
         ]
+      },
+      "Back": {
+        "Sun": 2
       }
     },
     "P23": {
@@ -4909,6 +5024,10 @@
             "1": "Deal STR {damage} to active Enemy in R1"
           }
         }
+      },
+      "Back": {
+        "Sun": 3,
+        "Note": "Anytime: Pay 2 {fate} to refresh this card"
       }
     },
     "P24": {
@@ -4919,7 +5038,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Roll": {
@@ -4938,12 +5056,19 @@
             "2": "Deal {successes} {damage}. If target is defeated, you move by AGI, then resolve this card again, or resolve 0",
             "0": "Place this card in your Pouch"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 3
       }
     },
     "P25": {
       "Front": {
         "Name": "Spikes",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -4975,11 +5100,16 @@
             "1": "Deal {successes} [Divinum] {damage} to the target and to all other (including you) in {half div} range from it."
           }
         }
+      },
+      "Back": {
+        "Moon": 2,
+        "Warning": "Start of your Activation: Do not refresh this card, unless you pay 1 {fate}"
       }
     },
     "P26": {
       "Front": {
         "Name": "Earth Shell",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Keywords": [
@@ -5007,6 +5137,8 @@
         }
       },
       "Back": {
+        "Sun": 2,
+        "Moon": 2,
         "Text": [
           "Gain 1 {armor} and lose 1 MOB for each marker on this card."
         ],
@@ -5042,6 +5174,8 @@
         }
       },
       "Back": {
+        "Sun": 1,
+        "Moon": 1,
         "Text": [
           "At the start of their Activation, a Character in R1 from the Cauldron may take 1 Cauldron's Effect token. Characters with this Effect token treat each of their ATT as 1 higher. They discard Effect token at the end of their Activation."
         ],
@@ -5051,13 +5185,13 @@
     "P28": {
       "Front": {
         "Name": "Animal Form",
+        "Sun": 1,
         "Type": "Action",
         "Category": "Support",
         "Keywords": [
           "Spell"
         ],
         "Target": "Self",
-        "Sun": 1,
         "Moon": 1,
         "Roll": {
           "ATT": [],
@@ -5088,6 +5222,7 @@
     "P29": {
       "Front": {
         "Name": "Evoke Blizzard",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -5123,8 +5258,10 @@
         }
       },
       "Back": {
+        "Moon": 3,
         "Text": [
-          "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}. Passive: All Enemy moves and MOB of all PMs are reduced by 2"
+          "Push all Enemies by 1 in one chosen direction and deal them {half div} [Ice] {damage}.",
+          "All Enemy moves and MOB of all PMs are reduced by 2"
         ],
         "Warning": "Instead of refreshing this card, place it in your Pouch"
       }
@@ -5132,6 +5269,7 @@
     "P30": {
       "Front": {
         "Name": "True Bond",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "CH in R4",
@@ -5165,6 +5303,7 @@
     "P31": {
       "Front": {
         "Name": "Sneak",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
@@ -5196,6 +5335,7 @@
     "P32": {
       "Front": {
         "Name": "Focus",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -5230,6 +5370,7 @@
     "P33": {
       "Front": {
         "Name": "Blend In",
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "At the start of Enemy Activation",
@@ -5248,6 +5389,7 @@
     "P34": {
       "Front": {
         "Name": "Inhale Divinum",
+        "Sun": 0,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "When you defeat and Enemy",
@@ -5257,6 +5399,8 @@
         ]
       },
       "Back": {
+        "Sun": 3,
+        "Moon": 3,
         "Text": [
           "Anytime: You may discard a marker from this card to reroll any number of dice."
         ],
@@ -5271,10 +5415,12 @@
         "Condition": "At the start of your Activation",
         "Moon": 2,
         "Text": [
-          "You may flip this card. Passive: if there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
+          "You may flip this card.",
+          "If there is at least 1 Enemy in R4 with HP below their starting HP, you roll an additional D4 DIV die during your DIV rolls"
         ]
       },
       "Back": {
+        "Sun": 2,
         "Text": [
           "If there is at least 1 Enemy in R4 with HP below their starting HP, roll 2 additional dice"
         ],
@@ -5319,17 +5465,22 @@
     "P37": {
       "Front": {
         "Name": "Charge",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Target": "Self",
         "Text": [
           "Move in a line by your MOB. Resolve another Offensive Action for free. Roll 1 additional die during this Action."
         ]
+      },
+      "Back": {
+        "Sun": 2
       }
     },
     "P38": {
       "Front": {
         "Name": "Target Weak Spot",
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "EN in R4",
@@ -5360,6 +5511,8 @@
         }
       },
       "Back": {
+        "Sun": 2,
+        "Moon": 2,
         "Text": [
           "The Enemy {armor} is reduced by 3 for each of your Effect tokens on them."
         ],
@@ -5396,6 +5549,7 @@
         }
       },
       "Back": {
+        "Sun": 3,
         "Text": [
           "Gain 1 {armor}. Each Enemy in R1 that targets you loses 1 HP at end of their Activation"
         ]
@@ -5404,14 +5558,17 @@
     "P40": {
       "Front": {
         "Name": "Strength of Heart",
+        "Moon": 1,
         "Type": "Reaction",
         "Category": "Support",
         "Condition": "After revealing Enemy Activation card",
         "Target": "Self and PMs in R4",
-        "Moon": 1,
         "Text": [
           "During this Activation, you and Party Members in R4 prevent your CHA {terror} and gain your CHA {armor}"
         ]
+      },
+      "Back": {
+        "Moon": 3
       }
     },
     "P41": {
@@ -5443,6 +5600,8 @@
         }
       },
       "Back": {
+        "Sun": 2,
+        "Moon": 1,
         "Text": [
           "Anytime: Discard all markers from this card to roll an additional number of dice equal to twice the number of markers"
         ],
@@ -5476,6 +5635,8 @@
         }
       },
       "Back": {
+        "Sun": 4,
+        "Moon": 4,
         "Text": [
           "Action cards with Effect tokens may be used for free. When you use such a card, discard an Effect token from it."
         ],
@@ -5535,7 +5696,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Roll": {
@@ -5554,7 +5714,10 @@
           "Successes": {
             "1": "Deal {successes} {damage}. Push by 3 (+1 space: against Small)."
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2
@@ -5651,7 +5814,6 @@
           "Attack",
           "Spell"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Moon": 1,
@@ -5686,7 +5848,10 @@
           "Successes": {
             "1": "Deal {successes} {damage}. Add 3 {damage} if {en} is 6 or less OR 5 {damage} if {en} is 2"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2,
@@ -6475,7 +6640,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "1 in R2+",
         "Sun": 1,
         "Roll": {
@@ -6502,7 +6666,10 @@
             "3": "Deal {successes} {damage}. Ignore {half div} {armor}. Do not flip this card",
             "1": "Deal {successes} {damage}. Ignore {half div} {armor}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
       },
       "Back": {
         "Moon": 2
@@ -6556,7 +6723,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Roll": {
@@ -6576,7 +6742,10 @@
           "Successes": {
             "1": "Deal {successes} {damage}. If the target is [Elite] or [Boss] and there is no other Enemy in R4 from you, add 3 {damage}. If you defeated the [Elite] or [Boss], gain 2 {fate}"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2
@@ -6590,7 +6759,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R2",
         "Sun": 1,
         "Roll": {
@@ -6610,7 +6778,10 @@
             "3": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large]). Place your Effect token on the Enemy",
             "1": "Deal {successes} [Ice] {damage} (+1 {damage} against [Large])"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 1,
@@ -6711,7 +6882,6 @@
         "Name": "Weapon Throw",
         "Type": "Action",
         "Category": "Offensive",
-        "Condition": "Requires [Melee]",
         "Target": "1 in R2+",
         "Sun": 1,
         "Roll": {
@@ -6737,7 +6907,10 @@
             "3": "Deal 2{successes} {damage}. Place your [Melee] item in your Pouch",
             "1": "Deal {successes} {damage}. Place your [Melee] item in your Pouch"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Moon": 2
@@ -6867,7 +7040,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "1 in R2+",
         "Moon": 1,
         "Roll": {
@@ -6895,7 +7067,10 @@
             "3": "Deal ({successes}+{div}) [Divinum] {damage} to the target and all others in R1 from the target",
             "1": "Deal ({successes}+{half div}) [Divinum] {damage}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
       },
       "Back": {
         "Moon": 2
@@ -7183,7 +7358,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Roll": {
           "DIV": true,
@@ -7210,7 +7384,10 @@
             "2": "If the target has {div} or less HP, defeat it. Otherwise resolve 1",
             "1": "Deal {successes} [Divinum] {damage}"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Moon": 2,
@@ -7344,7 +7521,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R2",
         "Roll": {
           "ATT": [
@@ -7370,7 +7546,10 @@
             "3": "Deal {successes} {damage}. Place your Effect token on the Enemy",
             "1": "Deal {successes} {damage}"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2,
@@ -7540,7 +7719,7 @@
       "Back": {
         "Text": [
           "After revealing an Enemy Activation card, but before resolving it you may:",
-		  " * Discard 3 markers - you cannot be targeted as PM during this Activation",
+          " * Discard 3 markers - you cannot be targeted as PM during this Activation",
           " * Discard any number of markers - reduce your {sun} or {moon} until the end of this Activation by 1 for each marker discarded."
         ],
         "Warning": "When you refresh this card, discard all markers from it"
@@ -7549,13 +7728,12 @@
     "PP31": {
       "Front": {
         "Name": "Pike Strike",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Roll": {
           "ATT": [
@@ -7580,13 +7758,19 @@
           "Successes": {
             "1": "Deal {successes} {damage} (+3 {damage} if the target was Pulled during this Activation)."
           }
-        }
-      }, "Back": { "Sun": 2 }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 2
+      }
     },
     "PP32": {
       "Front": {
         "Name": "Bright Mind",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -7616,12 +7800,12 @@
         }
       },
       "Back": {
-		  "Name": "Mental Embrace",
-		  "Sun": 0,
-		  "Condition": "During a Roll",
-		  "Target": "Self or PM in any range",
-		  "Type": "Reaction",
-		  "Category": "Support",
+        "Name": "Mental Embrace",
+        "Sun": 0,
+        "Condition": "During a Roll",
+        "Target": "Self or PM in any range",
+        "Type": "Reaction",
+        "Category": "Support",
         "Text": [
           "Discard all markers from this card to add that many dice to your Roll OR gain 1 {terror} and discard all markers from this card to Support with that many dice."
         ],
@@ -7640,12 +7824,15 @@
         "Text": [
           "Roll DIV. Ignore {half DIV} {armor} during this Action."
         ]
-      }, "Back": { "Moon": 1 }
+      },
+      "Back": {
+        "Moon": 1
+      }
     },
     "PP34": {
       "Front": {
         "Name": "Release Pollen",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self",
@@ -7679,7 +7866,7 @@
     "PP35": {
       "Front": {
         "Name": "Guardian Spirits",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Defensive",
         "Keywords": [
@@ -7716,7 +7903,7 @@
     "PP36": {
       "Front": {
         "Name": "Tumorous Growth",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Offensive",
         "Keywords": [
@@ -7747,12 +7934,15 @@
             "2": "Deal {half div} [Divinum] {damage} ignoring 4 {armor}. You gain 1 {terror}"
           }
         }
-      }, "Back": { "Moon": 2 }
+      },
+      "Back": {
+        "Moon": 2
+      }
     },
     "S01": {
       "Front": {
         "Name": "Coordinated Advance",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self and PM in R4",
@@ -7774,7 +7964,11 @@
             "1": "You and one PM move by 4"
           }
         }
-      }, "Back": { "Sun": 1, "Moon": 1 }
+      },
+      "Back": {
+        "Sun": 1,
+        "Moon": 1
+      }
     },
     "S02": {
       "Front": {
@@ -7784,7 +7978,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 1,
         "Roll": {
@@ -7809,13 +8002,19 @@
           "Successes": {
             "1": "Deal {successes} {damage}. Add 2 {damage} for each PM in R1 from the target."
           }
-        }
-      }, "Back": { "Sun": 2 }
+        },
+        "Requires": [
+          "Melee"
+        ]
+      },
+      "Back": {
+        "Sun": 2
+      }
     },
     "S03": {
       "Front": {
         "Name": "Coordinated Attack",
-		"Sun": 0,
+        "Sun": 0,
         "Type": "Action",
         "Category": "Support",
         "Target": "Self and PMs in R4",
@@ -7842,8 +8041,8 @@
         "Sun": 1,
         "Moon": 1,
         "Text": [
-          "You may treat yourself as PM for this effect.", 
-		  "  3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die.",
+          "You may treat yourself as PM for this effect.",
+          "  3: Two PMs in R4 may resolve their Offensive Action for free, rolling 1 additional die.",
           "  1: One Party Member in R4 may resolve their Offensive Action for free, rolling 1 additional die."
         ]
       }
@@ -7875,7 +8074,7 @@
         }
       },
       "Back": {
-		  "Sun": 2,
+        "Sun": 2,
         "Text": [
           "You and PMs in R4 gain {armor} for each marker on this card."
         ],
@@ -7898,7 +8097,7 @@
         ]
       },
       "Back": {
-		  "Moon": 2,
+        "Moon": 2,
         "Warning": "Start of your Acitvation: Do not refresh this card unless you pay 1 {fate}"
       }
     },
@@ -7931,7 +8130,10 @@
             "2": "Prevent {div} {damage}"
           }
         }
-      }, "Back": { "Warning": "Start of you Acitvation: Do not refresh this card, unless you pay 1 {fate}" }
+      },
+      "Back": {
+        "Warning": "Start of you Acitvation: Do not refresh this card, unless you pay 1 {fate}"
+      }
     },
     "S07": {
       "Front": {
@@ -8202,7 +8404,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 0,
         "Roll": {
@@ -8228,7 +8429,10 @@
             "3": "Deal ({successes}-2) {damage}. Place your Effect token on the Enemy",
             "1": "Deal ({successes}-2) {damage} or place your Effect token on the Enemy"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 2,
@@ -8247,7 +8451,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Sun": 0,
         "Roll": {
@@ -8273,7 +8476,10 @@
             "3": "Deal {successes} {damage}. Place your Effect token on the Enemy",
             "1": "Deal {successes} {damage} or place your Effect token on the Enemy"
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Sun": 3,
@@ -8291,7 +8497,10 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires {Melee} and PM in R1 from the target",
+        "Requires": [
+          "Melee"
+        ],
+        "Condition": "Requires PM in R1 from the target",
         "Target": "1 in R1",
         "Moon": 1,
         "Roll": {
@@ -8441,7 +8650,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "1 in R2+",
         "Moon": 1,
         "Roll": {
@@ -8461,7 +8669,10 @@
           "Successes": {
             "1": "Deal ({successes}-1) {damage}. You move by {div}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
       },
       "Back": {
         "Moon": 2
@@ -8511,7 +8722,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "EN in R2+",
         "Sun": 1,
         "Roll": {
@@ -8523,7 +8733,10 @@
           "Successes": {
             "1": "Deal {successes} {damage}. Then deal ({successes}-2) {damage} to {half div} other Enemies in R2 from the target."
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
       },
       "Back": {
         "Moon": 1
@@ -8537,7 +8750,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Ranged]",
         "Target": "All in 1 line",
         "Moon": 1,
         "Roll": {
@@ -8558,7 +8770,10 @@
             "4": "Deal ({successes}+2) [Ice] {damage} ignoring 5 {armor}",
             "2": "Deal {successes} [Ice] {damage} ignoring 5 {armor}"
           }
-        }
+        },
+        "Requires": [
+          "Ranged"
+        ]
       },
       "Back": {
         "Moon": 2
@@ -8912,7 +9127,6 @@
         "Keywords": [
           "Attack"
         ],
-        "Condition": "Requires [Melee]",
         "Target": "1 in R1",
         "Moon": 2,
         "Roll": {
@@ -8939,7 +9153,10 @@
             "3": "Deal ({successes}+3) {damage}. Reduce this {damage} by 1 for each space connected to the target's space.",
             "1": "Deal ({successes}+2) {damage}. Reduce this {damage} by 1 for each space connected to the target's space."
           }
-        }
+        },
+        "Requires": [
+          "Melee"
+        ]
       },
       "Back": {
         "Moon": 4
