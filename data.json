@@ -4838,10 +4838,11 @@
         }
       },
       "Back": {
+		  "Moon": 2,
         "Text": [
           "The enemy with your Effect token always chooses you as a target."
         ]
-      }, "Back": { "Moon": 2 }
+      }
     },
     "P21": {
       "Front": {
