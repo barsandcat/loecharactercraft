@@ -276,15 +276,18 @@ function renderCardContent(parent, block, options = {}) {
       const rollATTList = getRollAttributeList(roll);
       const attDice = attrs ? getRollAttributeDice(attrs, rollATTList, rollMode) : 0;
 
+      let appendProbLabel = null;
+      let appliedMods = [];
+      let effectiveDice = 0;
+
       if (attDice > 0) {
         const sortedNum = sortedKeys.map(Number);
-        const appliedMods = (keywordCounts && roll.Modifiers)
+        appliedMods = (keywordCounts && roll.Modifiers)
           ? computeAppliedModifiers(roll.Modifiers, keywordCounts)
           : [];
         const modDiceTotal = appliedMods.reduce((sum, m) => sum + m.totalDice, 0);
-        const effectiveDice = Math.max(0, attDice + modDiceTotal);
+        effectiveDice = Math.max(0, attDice + modDiceTotal);
 
-        let appendProbLabel;
         if (roll.Difficulty != null) {
           const dist = computeSuccessDist(effectiveDice, roll.Difficulty);
           appendProbLabel = (parent, i) => {
@@ -304,15 +307,16 @@ function renderCardContent(parent, block, options = {}) {
             parent.appendChild(document.createTextNode(")"));
           };
         }
+      }
 
-        for (let i = 0; i < sortedKeys.length; i++) {
-          const key = sortedKeys[i];
-          const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome" + (headerElementClass ? " " + headerElementClass : "");
-          outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, roll.Successes[key]);
+      sortedKeys.forEach((key, i) => {
+        const outEl = document.createElement("div");
+        outEl.className = "action-card-outcome" + (headerElementClass ? " " + headerElementClass : "");
+        outEl.appendChild(document.createTextNode((key === "0" ? "X" : key) + ": "));
+        appendFormattedText(outEl, roll.Successes[key]);
+
+        if (appendProbLabel) {
           outEl.appendChild(document.createTextNode(" "));
-
           const probWrap = document.createElement("span");
           probWrap.className = "action-card-prob";
           appendProbLabel(probWrap, i);
@@ -347,17 +351,10 @@ function renderCardContent(parent, block, options = {}) {
           }
           probWrap.appendChild(tooltip);
           outEl.appendChild(probWrap);
-          container.appendChild(outEl);
         }
-      } else {
-        sortedKeys.forEach((key) => {
-          const outEl = document.createElement("div");
-          outEl.className = "action-card-outcome" + (headerElementClass ? " " + headerElementClass : "");
-          outEl.appendChild(document.createTextNode(key + ": "));
-          appendFormattedText(outEl, roll.Successes[key]);
-          container.appendChild(outEl);
-        });
-      }
+
+        container.appendChild(outEl);
+      });
     }
   }
 
