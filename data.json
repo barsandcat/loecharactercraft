@@ -5054,7 +5054,7 @@
             }
           ],
           "Successes": {
-            "2": "Deal {successes} {damage}. If target is defeated, you move by AGI, then resolve this card again, or resolve 0",
+            "2": "Deal {successes} {damage}. If target is defeated, you move by AGI, then resolve this card again, or resolve X",
             "0": "Place this card in your Pouch"
           }
         },
@@ -6250,8 +6250,8 @@
             }
           ],
           "Successes": {
-            "1": "Place 2 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0",
-            "3": "Place 1 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0",
+            "1": "Place 2 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve X",
+            "3": "Place 1 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve X",
 			"0": "Do not flip this card"
           }
         }
@@ -9076,7 +9076,7 @@
             }
           ],
           "Successes": {
-            "1": "Move by {successes}. Then if you are adjacent to an impassable border, flip this card. Otherwise resolve 0",
+            "1": "Move by {successes}. Then if you are adjacent to an impassable border, flip this card. Otherwise resolve X",
             "0": "Do not flip this card"
           }
         }
