@@ -6252,6 +6252,7 @@
           "Successes": {
             "1": "Place 2 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0",
             "3": "Place 1 of your [Vestigial] Items in your Pouch and resolve the effect on the back OR resolve 0"
+			"0": "Do not flip this card"
           }
         }
       },
