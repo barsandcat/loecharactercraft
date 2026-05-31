@@ -4629,7 +4629,7 @@
       "Back": {
         "Moon": 2,
         "Text": [
-          "When using a Spell in R2 from your Effect token, roll and additional 1 die and D6 DIV die, then discard your Effect token."
+          "When using a Spell in R2 from your Effect token, roll an additional 1 die and D6 DIV die, then discard your Effect token."
         ],
         "Note": "Start of your Activation: You may choose not to refresh this card",
         "Warning": "When you refresh this card, discard your Effect tokens from the Sheet"
