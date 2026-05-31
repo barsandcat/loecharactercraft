@@ -7143,7 +7143,7 @@
       },
       "Back": {
         "Text": [
-          "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by [Minion] (and [Elite] and [Bosse] if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it."
+          "A space with your Effect tokens is treated as a Character with most {sun} and {moon} by [Minion] (and [Elite] and [Boss] if there are 2 tokens). When an Enemy attacks this space, discard all Effect tokens from it."
         ],
         "Warning": "Start of your Activation: Do not refresh this card, unless you pay 2 {fate}. When you refresh this card discard all your Effect tokens from the Sheet."
       }
