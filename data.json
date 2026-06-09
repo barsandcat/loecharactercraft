@@ -1214,7 +1214,7 @@
     "Iron Mask": {
       "Type": "Head",
       "DisplayName": "Iron Mask",
-      "Effect": "Agains [Spell]: Prevent 4 {damage} or 2 {terror}"
+      "Effect": "Against [Spell]: Prevent 4 {damage} or 2 {terror}"
     },
     "Highlander's Belt": {
       "Type": "Chest",
