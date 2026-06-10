@@ -7824,7 +7824,7 @@
         "Target": "Self",
         "Moon": 1,
         "Text": [
-          "Roll DIV. Ignore {half DIV} {armor} during this Action."
+          "Roll DIV. Ignore {half div} {armor} during this Action."
         ]
       },
       "Back": {
