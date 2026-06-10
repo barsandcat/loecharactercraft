@@ -8095,7 +8095,10 @@
         "Target": "Self or PM in R4",
         "Moon": 1,
         "Text": [
-          "If you INT is: 5+: Roll and additional D10 DIV die. 3-4: Roll and additional D6 DIV die. 1-2: Roll and additional D4 DIV die."
+          "If your INT is:",
+		  "  5+: Roll and additional D10 DIV die.",
+		  "  3-4: Roll and additional D6 DIV die.",
+		  "  1-2: Roll and additional D4 DIV die."
         ]
       },
       "Back": {
