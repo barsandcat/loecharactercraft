@@ -34,6 +34,7 @@ async function init() {
     ui.resetButton.disabled = false;
     ui.randomButton.disabled = false;
     ui.copyLinkButton.disabled = false;
+    ui.printableButton.disabled = false;
     clearError();
 
     const encodedState = location.hash.slice(1);
@@ -54,6 +55,7 @@ function cacheUi() {
   ui.newBuildButton = document.getElementById("newBuildButton");
   ui.randomButton = document.getElementById("randomButton");
   ui.copyLinkButton = document.getElementById("copyLinkButton");
+  ui.printableButton = document.getElementById("printableButton");
   ui.resetButton = document.getElementById("resetButton");
   ui.errorBanner = document.getElementById("errorBanner");
   ui.controlsPanel = document.getElementById("controlsPanel");
@@ -76,6 +78,7 @@ function bindEvents() {
   ui.resetButton.addEventListener("click", () => requestBuildConfirmation(() => builder.resetBuild()));
   ui.randomButton.addEventListener("click", () => requestBuildConfirmation(() => builder.randomBuild()));
   ui.copyLinkButton.addEventListener("click", copyLink);
+  ui.printableButton.addEventListener("click", openPrintable);
   ui.selectorClose.addEventListener("click", () => builder.closeSelector());
   ui.selectorOverlay.addEventListener("click", (event) => {
     if (event.target === ui.selectorOverlay) {
@@ -118,6 +121,22 @@ function copyLink() {
   }).catch((error) => {
     showError("Could not copy link. " + (error && error.message ? error.message : "Clipboard access failed."));
   });
+}
+
+function openPrintable() {
+  const printableText = builder.buildPrintableText();
+  const blob = new Blob([printableText], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const printableWindow = window.open(url, "_blank");
+
+  if (!printableWindow) {
+    URL.revokeObjectURL(url);
+    showError("Could not open printable window. Please allow pop-ups for this site.");
+    return;
+  }
+
+  printableWindow.opener = null;
+  window.setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
 function openNewBuild() {
