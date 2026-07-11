@@ -43,7 +43,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     const race = pick(state.data.Races);
     state.selectedRace = race;
-    const attrs = race.Attributes;
+    const attrs = getRaceAttributeOptions(race);
     state.selectedAttributeSet = attrs.length ? pick(attrs) : null;
     const freeSkills = getRaceFreeSkills(race);
     state.selectedFreeSkill = freeSkills.length ? pick(freeSkills) : null;
@@ -70,10 +70,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (compact.r) {
       state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
       if (state.selectedRace && compact.ai !== null) {
-        state.selectedAttributeSet = state.selectedRace.Attributes[compact.ai] || null;
+        state.selectedAttributeSet = getOptionByIndex(getRaceAttributeOptions(state.selectedRace), compact.ai);
       }
       if (state.selectedRace && compact.fi != null) {
-        state.selectedFreeSkill = getRaceFreeSkills(state.selectedRace)[compact.fi] || null;
+        state.selectedFreeSkill = getOptionByIndex(getRaceFreeSkills(state.selectedRace), compact.fi);
       }
     }
 
@@ -122,10 +122,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function serializeState() {
     const attrIndex = state.selectedRace && state.selectedAttributeSet
-      ? state.selectedRace.Attributes.indexOf(state.selectedAttributeSet)
+      ? getOptionIndex(getRaceAttributeOptions(state.selectedRace), state.selectedAttributeSet)
       : null;
     const freeSkillIndex = state.selectedRace && state.selectedFreeSkill
-      ? getRaceFreeSkills(state.selectedRace).indexOf(state.selectedFreeSkill)
+      ? getOptionIndex(getRaceFreeSkills(state.selectedRace), state.selectedFreeSkill)
       : null;
 
     const lu = state.levelUps.map((slot) =>
@@ -220,7 +220,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     if (raceChanged) {
       state.selectedAttributeSet = null;
       state.selectedFreeSkill = null;
-      const attrOptions = race.Attributes;
+      const attrOptions = getRaceAttributeOptions(race);
       if (attrOptions.length === 1) {
         state.selectedAttributeSet = attrOptions[0];
       }
@@ -761,7 +761,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const container = ui.controlsPanel;
     container.replaceChildren();
 
-    const attrOptions = state.selectedRace ? state.selectedRace.Attributes : [];
+    const attrOptions = state.selectedRace ? getRaceAttributeOptions(state.selectedRace) : [];
     const freeSkillOptions = getRaceFreeSkills();
     const pathOptions = state.selectedProf ? state.selectedProf.Paths : [];
 
@@ -1937,8 +1937,36 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     return cardName ? cardId + ": " + cardName : cardId;
   }
 
+  function getOptionIndex(options, selection) {
+    return options.indexOf(selection);
+  }
+
+  function getOptionByIndex(options, index) {
+    return options[index] || null;
+  }
+
+  function getRaceAttributeOptions(race = state.selectedRace) {
+    const attributeSets = race?.Attributes;
+
+    if (attributeSets && typeof attributeSets === "object") {
+      return Object.entries(attributeSets)
+        .sort(([leftId], [rightId]) => Number(leftId) - Number(rightId))
+        .map(([, attributeSet]) => attributeSet);
+    }
+
+    return [];
+  }
+
   function getRaceFreeSkills(race = state.selectedRace) {
-    return Array.isArray(race?.FreeSkills) ? race.FreeSkills : [];
+    const freeSkills = race?.FreeSkills;
+
+    if (freeSkills && typeof freeSkills === "object") {
+      return Object.entries(freeSkills)
+        .sort(([leftId], [rightId]) => Number(leftId) - Number(rightId))
+        .map(([, skill]) => skill);
+    }
+
+    return [];
   }
 
   function getFilledLevelCount() {
