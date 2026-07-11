@@ -67,37 +67,70 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
     resetSelectionState();
 
-    if (compact.r) {
-      state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
-      if (state.selectedRace && compact.ai !== null) {
-        state.selectedAttributeSet = getOptionByIndex(getRaceAttributeOptions(state.selectedRace), compact.ai);
+    if (compact.format === "v1") {
+      state.selectedRace = state.data.Races.find((race) => race.Id === compact.raceId) || null;
+      if (state.selectedRace) {
+        state.selectedAttributeSet = getAttributeSetById(state.selectedRace, compact.attributeId);
+        state.selectedFreeSkill = getFreeSkillById(state.selectedRace, compact.freeSkillId);
       }
-      if (state.selectedRace && compact.fi != null) {
-        state.selectedFreeSkill = getOptionByIndex(getRaceFreeSkills(state.selectedRace), compact.fi);
+
+      state.selectedOrigin = state.data.Origins.find((origin) => origin.Id === compact.originId) || null;
+      state.selectedProf = state.data.Professions.find((profession) => profession.Id === compact.professionId) || null;
+      if (state.selectedProf) {
+        state.selectedPath = state.selectedProf.Paths.find((path) => path.Id === compact.pathId) || null;
       }
-    }
 
-    if (compact.o) {
-      state.selectedOrigin = state.data.Origins.find((origin) => origin.Name === compact.o) || null;
-    }
-
-    if (compact.p) {
-      state.selectedProf = state.data.Professions.find((profession) => profession.Name === compact.p) || null;
-      if (state.selectedProf && compact.pa) {
-        state.selectedPath = state.selectedProf.Paths.find((path) => path.Name === compact.pa) || null;
-      }
-    }
-
-    if (compact.lu) {
-      compact.lu.forEach((entry, index) => {
-        if (entry && index < LEVEL_UP_SLOTS) {
-          state.levelUps[index] = {
-            treeName: entry[0],
-            level: entry[1],
-            versionIndex: entry[2],
-          };
+      const levelUps = Array.isArray(compact.levelUps) ? compact.levelUps : [];
+      levelUps.forEach((levelUp, index) => {
+        if (!levelUp || index >= LEVEL_UP_SLOTS) {
+          return;
         }
+
+        const tree = state.data.AdvancementTrees.find((entry) => entry.Id === levelUp.treeId) || null;
+        if (!tree) {
+          return;
+        }
+
+        const versionIndex = findTreeLevelVersionIndex(tree, levelUp.level, levelUp.optionId);
+        state.levelUps[index] = {
+          treeName: tree.Name,
+          level: levelUp.level || null,
+          versionIndex: versionIndex !== null ? versionIndex : null,
+        };
       });
+    } else {
+      if (compact.r) {
+        state.selectedRace = state.data.Races.find((race) => race.Name === compact.r) || null;
+        if (state.selectedRace && compact.ai !== null) {
+          state.selectedAttributeSet = getOptionByIndex(getRaceAttributeOptions(state.selectedRace), compact.ai);
+        }
+        if (state.selectedRace && compact.fi != null) {
+          state.selectedFreeSkill = getOptionByIndex(getRaceFreeSkills(state.selectedRace), compact.fi);
+        }
+      }
+
+      if (compact.o) {
+        state.selectedOrigin = state.data.Origins.find((origin) => origin.Name === compact.o) || null;
+      }
+
+      if (compact.p) {
+        state.selectedProf = state.data.Professions.find((profession) => profession.Name === compact.p) || null;
+        if (state.selectedProf && compact.pa) {
+          state.selectedPath = state.selectedProf.Paths.find((path) => path.Name === compact.pa) || null;
+        }
+      }
+
+      if (compact.lu) {
+        compact.lu.forEach((entry, index) => {
+          if (entry && index < LEVEL_UP_SLOTS) {
+            state.levelUps[index] = {
+              treeName: entry[0],
+              level: entry[1],
+              versionIndex: entry[2],
+            };
+          }
+        });
+      }
     }
 
     commitSelection();
@@ -121,35 +154,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function serializeState() {
-    const attrIndex = state.selectedRace && state.selectedAttributeSet
-      ? getOptionIndex(getRaceAttributeOptions(state.selectedRace), state.selectedAttributeSet)
-      : null;
-    const freeSkillIndex = state.selectedRace && state.selectedFreeSkill
-      ? getOptionIndex(getRaceFreeSkills(state.selectedRace), state.selectedFreeSkill)
-      : null;
-
-    const lu = state.levelUps.map((slot) =>
-      slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
-        ? [slot.treeName, slot.level, slot.versionIndex]
-        : null
-    );
-    while (lu.length > 0 && lu[lu.length - 1] === null) {
-      lu.pop();
-    }
-
-    const compact = {
-      r: state.selectedRace ? state.selectedRace.Name : null,
-      ai: attrIndex !== null && attrIndex !== -1 ? attrIndex : null,
-      fi: freeSkillIndex !== null && freeSkillIndex !== -1 ? freeSkillIndex : null,
-      o: state.selectedOrigin ? state.selectedOrigin.Name : null,
-      p: state.selectedProf ? state.selectedProf.Name : null,
-      pa: state.selectedPath ? state.selectedPath.Name : null,
-      lu: lu.length > 0 ? lu : null,
-    };
-
     try {
-      const json = JSON.stringify(compact);
-      return btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16))));
+      return encodeV1State();
     } catch (_) {
       return null;
     }
@@ -188,14 +194,242 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   }
 
   function deserializeState(encoded) {
+    if (!encoded) {
+      return null;
+    }
+
+    if (encoded.startsWith("v1:")) {
+      return decodeV1State(encoded.slice(3));
+    }
+
     try {
+      const decoded = atob(encoded);
       const json = decodeURIComponent(
-        atob(encoded).split("").map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0")).join("")
+        decoded.split("").map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0")).join("")
       );
       return JSON.parse(json);
     } catch (_) {
       return null;
     }
+  }
+
+  function encodeV1State() {
+    const widths = getV1EncodingWidths();
+    const totalBits = widths.race + widths.attribute + widths.freeSkill + widths.origin + widths.profession + widths.path + widths.levelUps * (widths.tree + widths.level + widths.option);
+    const bytes = new Uint8Array(Math.ceil(totalBits / 8));
+    let offset = 0;
+
+    const writeValue = (value, bits) => {
+      for (let bitIndex = 0; bitIndex < bits; bitIndex += 1) {
+        const bitPosition = offset + bitIndex;
+        const byteIndex = Math.floor(bitPosition / 8);
+        const bitOffsetInByte = bitPosition % 8;
+        if ((value >> bitIndex) & 1) {
+          bytes[byteIndex] |= 1 << bitOffsetInByte;
+        }
+      }
+      offset += bits;
+    };
+
+    writeValue(encodeV1Id(state.selectedRace?.Id, widths.race), widths.race);
+    writeValue(encodeV1Id(getSelectionIdFromMap(state.selectedRace?.Attributes, state.selectedAttributeSet), widths.attribute), widths.attribute);
+    writeValue(encodeV1Id(getSelectionIdFromMap(state.selectedRace?.FreeSkills, state.selectedFreeSkill), widths.freeSkill), widths.freeSkill);
+    writeValue(encodeV1Id(state.selectedOrigin?.Id, widths.origin), widths.origin);
+    writeValue(encodeV1Id(state.selectedProf?.Id, widths.profession), widths.profession);
+    writeValue(encodeV1Id(state.selectedPath?.Id, widths.path), widths.path);
+
+    state.levelUps.forEach((slot) => {
+      const tree = slot.treeName ? state.trees.get(slot.treeName) : null;
+      const treeId = tree?.Id ?? null;
+      const levelValue = slot.level !== null ? slot.level : 0;
+      const optionId = slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
+        ? getTreeLevelOptionId(tree, slot.level, slot.versionIndex)
+        : null;
+
+      writeValue(encodeV1Id(treeId, widths.tree), widths.tree);
+      writeValue(encodeV1Value(levelValue, widths.level), widths.level);
+      writeValue(encodeV1Id(optionId, widths.option), widths.option);
+    });
+
+    return "v1:" + encodeBytesToBase64Url(bytes);
+  }
+
+  function decodeV1State(encoded) {
+    const bytes = decodeBase64Url(encoded);
+    const widths = getV1EncodingWidths();
+    const totalBits = widths.race + widths.attribute + widths.freeSkill + widths.origin + widths.profession + widths.path + widths.levelUps * (widths.tree + widths.level + widths.option);
+
+    if (bytes.length * 8 < totalBits) {
+      return null;
+    }
+
+    let offset = 0;
+    const readValue = (bits) => {
+      let value = 0;
+      for (let bitIndex = 0; bitIndex < bits; bitIndex += 1) {
+        const bitPosition = offset + bitIndex;
+        const byteIndex = Math.floor(bitPosition / 8);
+        const bitOffsetInByte = bitPosition % 8;
+        if (byteIndex < bytes.length && (bytes[byteIndex] & (1 << bitOffsetInByte))) {
+          value |= 1 << bitIndex;
+        }
+      }
+      offset += bits;
+      return value;
+    };
+
+    const raceId = decodeV1Id(readValue(widths.race), widths.race);
+    const attributeId = decodeV1Id(readValue(widths.attribute), widths.attribute);
+    const freeSkillId = decodeV1Id(readValue(widths.freeSkill), widths.freeSkill);
+    const originId = decodeV1Id(readValue(widths.origin), widths.origin);
+    const professionId = decodeV1Id(readValue(widths.profession), widths.profession);
+    const pathId = decodeV1Id(readValue(widths.path), widths.path);
+
+    const levelUps = [];
+    for (let index = 0; index < LEVEL_UP_SLOTS; index += 1) {
+      const treeId = decodeV1Id(readValue(widths.tree), widths.tree);
+      const level = decodeV1Value(readValue(widths.level), widths.level);
+      const optionId = decodeV1Id(readValue(widths.option), widths.option);
+
+      if (treeId !== null && level > 0 && optionId !== null) {
+        const tree = state.data.AdvancementTrees.find((entry) => entry.Id === treeId) || null;
+        const versionIndex = tree ? findTreeLevelVersionIndex(tree, level, optionId) : null;
+        levelUps.push({
+          treeId,
+          level,
+          optionId,
+          versionIndex,
+        });
+      } else {
+        levelUps.push(null);
+      }
+    }
+
+    return {
+      format: "v1",
+      raceId,
+      attributeId,
+      freeSkillId,
+      originId,
+      professionId,
+      pathId,
+      levelUps,
+    };
+  }
+
+  function getV1EncodingWidths() {
+    const maxEncodedId = (values) => {
+      const maxValue = values.reduce((current, value) => Math.max(current, value ?? 0), 0);
+      return Math.max(1, Math.ceil(Math.log2(maxValue + 2)));
+    };
+
+    const scoreIds = state.data.Races.map((race) => race.Id ?? 0);
+    const attributeIds = state.data.Races.flatMap((race) => Object.keys(race.Attributes || {}).map((id) => Number(id)));
+    const freeSkillIds = state.data.Races.flatMap((race) => Object.keys(race.FreeSkills || {}).map((id) => Number(id)));
+    const originIds = state.data.Origins.map((origin) => origin.Id ?? 0);
+    const professionIds = state.data.Professions.map((profession) => profession.Id ?? 0);
+    const pathIds = state.data.Professions.flatMap((profession) => profession.Paths.map((path) => path.Id ?? 0));
+    const treeIds = state.data.AdvancementTrees.map((tree) => tree.Id ?? 0);
+    const optionIds = state.data.AdvancementTrees.flatMap((tree) =>
+      Object.values(tree.Levels || {}).flatMap((options) => options.map((option) => option.Id ?? 0))
+    );
+
+    return {
+      race: maxEncodedId(scoreIds),
+      attribute: maxEncodedId(attributeIds),
+      freeSkill: maxEncodedId(freeSkillIds),
+      origin: maxEncodedId(originIds),
+      profession: maxEncodedId(professionIds),
+      path: maxEncodedId(pathIds),
+      tree: maxEncodedId(treeIds),
+      level: Math.max(1, Math.ceil(Math.log2(9))),
+      option: maxEncodedId(optionIds),
+      levelUps: LEVEL_UP_SLOTS,
+    };
+  }
+
+  function encodeV1Id(id) {
+    return id === null || id === undefined ? 0 : id;
+  }
+
+  function decodeV1Id(value) {
+    return value <= 0 ? null : value;
+  }
+
+  function encodeV1Value(value, width) {
+    return value === null || value === undefined ? 0 : value;
+  }
+
+  function decodeV1Value(value, width) {
+    return value <= 0 ? 0 : value;
+  }
+
+  function encodeBytesToBase64Url(bytes) {
+    let binary = "";
+    bytes.forEach((byte) => {
+      binary += String.fromCharCode(byte);
+    });
+
+    return btoa(binary)
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/g, "");
+  }
+
+  function decodeBase64Url(value) {
+    const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+    const padding = "=".repeat((4 - (normalized.length % 4)) % 4);
+    const binary = atob(normalized + padding);
+    return Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  }
+
+  function getSelectionIdFromMap(options, selection) {
+    if (!options || typeof options !== "object" || !selection) {
+      return null;
+    }
+
+    for (const [id, value] of Object.entries(options)) {
+      if (value === selection) {
+        return Number(id);
+      }
+    }
+
+    return null;
+  }
+
+  function getAttributeSetById(race, id) {
+    if (!race?.Attributes || id === null || id === undefined) {
+      return null;
+    }
+
+    return race.Attributes[String(id)] || race.Attributes[id] || null;
+  }
+
+  function getFreeSkillById(race, id) {
+    if (!race?.FreeSkills || id === null || id === undefined) {
+      return null;
+    }
+
+    return race.FreeSkills[String(id)] || race.FreeSkills[id] || null;
+  }
+
+  function findTreeLevelVersionIndex(tree, level, optionId) {
+    if (!tree?.Levels || !tree.Levels[String(level)]) {
+      return null;
+    }
+
+    const options = tree.Levels[String(level)];
+    const optionIndex = options.findIndex((option) => option.Id === optionId);
+    return optionIndex >= 0 ? optionIndex : null;
+  }
+
+  function getTreeLevelOptionId(tree, level, versionIndex) {
+    if (!tree?.Levels || !tree.Levels[String(level)]) {
+      return null;
+    }
+
+    const option = tree.Levels[String(level)][versionIndex];
+    return option?.Id ?? null;
   }
 
   function resetSelectionState() {

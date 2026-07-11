@@ -31,6 +31,7 @@ async function init() {
 
     bindEvents();
     ui.newBuildButton.disabled = false;
+    window.addEventListener("hashchange", handleUrlHashChange);
     ui.resetButton.disabled = false;
     ui.randomButton.disabled = false;
     ui.copyLinkButton.disabled = false;
@@ -38,7 +39,7 @@ async function init() {
     clearError();
 
     const encodedState = location.hash.slice(1);
-    const restored = encodedState ? builder.restoreStateFromEncoded(encodedState) : false;
+    const restored = encodedState ? restoreStateFromHash(encodedState) : false;
     if (!restored) {
       builder.render();
       syncUrlHash(builder.serializeState());
@@ -108,6 +109,24 @@ function bindEvents() {
 // URL and clipboard
 function syncUrlHash(encoded) {
   history.replaceState(null, "", encoded ? "#" + encoded : location.pathname + location.search);
+}
+
+function restoreStateFromHash(encodedState) {
+  return encodedState ? builder.restoreStateFromEncoded(encodedState) : false;
+}
+
+function handleUrlHashChange() {
+  const encodedState = location.hash.slice(1);
+  if (!encodedState) {
+    builder.resetBuild();
+    return;
+  }
+
+  const restored = restoreStateFromHash(encodedState);
+  if (!restored) {
+    builder.render();
+    syncUrlHash(builder.serializeState());
+  }
 }
 
 function copyLink() {

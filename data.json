@@ -8,7 +8,7 @@
         "Subterranean"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 1,
           "AGI": 2,
           "INT": 3,
@@ -25,7 +25,8 @@
         "B08",
         "B10",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
       "Id": 2,
@@ -34,7 +35,7 @@
         "Large"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 2,
           "AGI": 2,
           "INT": 2,
@@ -51,7 +52,8 @@
         "B07",
         "B10",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
       "Id": 3,
@@ -61,7 +63,7 @@
         "Wild"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 3,
           "AGI": 1,
           "INT": 2,
@@ -78,7 +80,8 @@
         "B07",
         "B10",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
       "Id": 4,
@@ -88,7 +91,7 @@
         "Subterranean"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 3,
           "AGI": 2,
           "INT": 2,
@@ -105,7 +108,8 @@
         "B07",
         "B12",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
       "Id": 5,
@@ -114,7 +118,7 @@
         "Small"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 1,
           "AGI": 3,
           "INT": 1,
@@ -131,7 +135,8 @@
         "B07",
         "B10",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
       "Id": 6,
@@ -140,27 +145,27 @@
         "Human"
       ],
       "FreeSkills": {
-        "0": "Alchemy",
-        "1": "Animal Handling",
-        "2": "Arcana",
-        "3": "Artistry",
-        "4": "Athletics",
-        "5": "Charm",
-        "6": "Deception",
-        "7": "Diplomacy",
-        "8": "Engineering",
-        "9": "Intimidation",
-        "10": "Investigation",
-        "11": "Leadership",
-        "12": "Lore",
-        "13": "Medicine",
-        "14": "Pathfinding",
-        "15": "Performer",
-        "16": "Resilience",
-        "17": "Sleight of Hand",
-        "18": "Stealth",
-        "19": "Survival",
-        "20": "Vigilance"
+        "1": "Alchemy",
+        "2": "Animal Handling",
+        "3": "Arcana",
+        "4": "Artistry",
+        "5": "Athletics",
+        "6": "Charm",
+        "7": "Deception",
+        "8": "Diplomacy",
+        "9": "Engineering",
+        "10": "Intimidation",
+        "11": "Investigation",
+        "12": "Leadership",
+        "13": "Lore",
+        "14": "Medicine",
+        "15": "Pathfinding",
+        "16": "Performer",
+        "17": "Resilience",
+        "18": "Sleight of Hand",
+        "19": "Stealth",
+        "20": "Survival",
+        "21": "Vigilance"
       },
       "Attributes": [
         {
@@ -274,22 +279,23 @@
         "B12",
         "B13",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     },
     {
-      "Id": 0,
+      "Id": 8,
       "Name": "Algrim",
       "Keywords": [
         "Outlandish"
       ],
       "Attributes": {
-        "0": {
+        "1": {
           "STR": 1,
           "AGI": 2,
           "INT": 2,
           "CHA": 3
         },
-        "1": {
+        "2": {
           "STR": 2,
           "AGI": 1,
           "INT": 2,
@@ -306,7 +312,8 @@
         "B08",
         "B11",
         "B15"
-      ]
+      ],
+      "FreeSkills": null
     }
   ],
   "Origins": [
@@ -321,7 +328,7 @@
         "Spellbook"
       ],
       "Brill": 1,
-      "Id": 0
+      "Id": 1
     },
     {
       "Name": "Asylum",
@@ -334,7 +341,7 @@
         "Iron Mask"
       ],
       "Brill": 0,
-      "Id": 1
+      "Id": 2
     },
     {
       "Name": "Battleborn",
@@ -347,7 +354,7 @@
         "Highlander's Belt"
       ],
       "Brill": 1,
-      "Id": 2
+      "Id": 3
     },
     {
       "Name": "Blackridge Lookout",
@@ -360,7 +367,7 @@
         "Lantern"
       ],
       "Brill": 2,
-      "Id": 3
+      "Id": 4
     },
     {
       "Name": "Cult of Makrash",
@@ -373,7 +380,7 @@
         "Sunbreaker Pendant"
       ],
       "Brill": 1,
-      "Id": 4
+      "Id": 5
     },
     {
       "Name": "Drysea Nomad",
@@ -386,7 +393,7 @@
         "Drysea Strider Hatchling"
       ],
       "Brill": 0,
-      "Id": 5
+      "Id": 6
     },
     {
       "Name": "Fadeborn",
@@ -399,7 +406,7 @@
         "High Realm Collar"
       ],
       "Brill": 0,
-      "Id": 6
+      "Id": 7
     },
     {
       "Name": "Farmstead",
@@ -412,7 +419,7 @@
         "Straw Hat"
       ],
       "Brill": 1,
-      "Id": 7
+      "Id": 8
     },
     {
       "Name": "Forgetown",
@@ -425,7 +432,7 @@
         "Leather Apron"
       ],
       "Brill": 1,
-      "Id": 8
+      "Id": 9
     },
     {
       "Name": "Freed Rotlander",
@@ -438,7 +445,7 @@
         "Puffshroom Bomb"
       ],
       "Brill": 1,
-      "Id": 9
+      "Id": 10
     },
     {
       "Name": "Kestrel's Chosen",
@@ -451,7 +458,7 @@
         "Poisoned Needle"
       ],
       "Brill": 1,
-      "Id": 10
+      "Id": 11
     },
     {
       "Name": "Midlands Aristocrat",
@@ -464,7 +471,7 @@
         "Heirloom"
       ],
       "Brill": 1,
-      "Id": 11
+      "Id": 12
     },
     {
       "Name": "Midlands Citizen",
@@ -477,7 +484,7 @@
         "Fancy Poulaines"
       ],
       "Brill": 3,
-      "Id": 12
+      "Id": 13
     },
     {
       "Name": "Militia",
@@ -490,7 +497,7 @@
         "Poleyn"
       ],
       "Brill": 2,
-      "Id": 13
+      "Id": 14
     },
     {
       "Name": "Orphanage",
@@ -503,7 +510,7 @@
         "Moon Pendant"
       ],
       "Brill": 1,
-      "Id": 14
+      "Id": 15
     },
     {
       "Name": "Port Town",
@@ -516,7 +523,7 @@
         "Crystal Glasses"
       ],
       "Brill": 2,
-      "Id": 15
+      "Id": 16
     },
     {
       "Name": "Scavenger Outpost",
@@ -529,7 +536,7 @@
         "Warden's Greaves"
       ],
       "Brill": 1,
-      "Id": 16
+      "Id": 17
     },
     {
       "Name": "Sepulcher",
@@ -542,7 +549,7 @@
         "Survival Kit"
       ],
       "Brill": 1,
-      "Id": 17
+      "Id": 18
     },
     {
       "Name": "Street Urchin",
@@ -555,7 +562,7 @@
         "Lucky Charm"
       ],
       "Brill": 1,
-      "Id": 18
+      "Id": 19
     },
     {
       "Name": "Traveling Show",
@@ -568,7 +575,7 @@
         "Lute"
       ],
       "Brill": 2,
-      "Id": 19
+      "Id": 20
     },
     {
       "Name": "Vagabond",
@@ -581,7 +588,7 @@
         "Reliable Boots"
       ],
       "Brill": 1,
-      "Id": 20
+      "Id": 21
     },
     {
       "Name": "Weeping Heart Monastery",
@@ -594,7 +601,7 @@
         "Censer"
       ],
       "Brill": 1,
-      "Id": 21
+      "Id": 22
     }
   ],
   "Professions": [
@@ -620,7 +627,8 @@
           ],
           "ActionCards": [
             "PP07"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Wildling",
@@ -634,7 +642,8 @@
           ],
           "ActionCards": [
             "PP08"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Glowdrinker",
@@ -648,10 +657,11 @@
           ],
           "ActionCards": [
             "PP09"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 0
+      "Id": 1
     },
     {
       "Name": "Bard",
@@ -675,7 +685,8 @@
           ],
           "ActionCards": [
             "PP13"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Trickster",
@@ -689,7 +700,8 @@
           ],
           "ActionCards": [
             "PP14"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Lorekeeper",
@@ -703,10 +715,11 @@
           ],
           "ActionCards": [
             "PP15"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 1
+      "Id": 2
     },
     {
       "Name": "Custodian",
@@ -730,7 +743,8 @@
           ],
           "ActionCards": [
             "PP31"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Savant",
@@ -744,7 +758,8 @@
           ],
           "ActionCards": [
             "PP32"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Librarian",
@@ -758,10 +773,11 @@
           ],
           "ActionCards": [
             "PP33"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 2
+      "Id": 3
     },
     {
       "Name": "Druid",
@@ -785,7 +801,8 @@
           ],
           "ActionCards": [
             "PP04"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Soothsayer",
@@ -795,7 +812,8 @@
           ],
           "ActionCards": [
             "PP05"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Beastmaster",
@@ -809,10 +827,11 @@
           ],
           "ActionCards": [
             "PP06"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 3
+      "Id": 4
     },
     {
       "Name": "Executor",
@@ -836,7 +855,8 @@
           ],
           "ActionCards": [
             "PP22"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Reclaimer",
@@ -850,7 +870,8 @@
           ],
           "ActionCards": [
             "PP23"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Bounty Hunter",
@@ -864,10 +885,11 @@
           ],
           "ActionCards": [
             "PP24"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 4
+      "Id": 5
     },
     {
       "Name": "Fighter",
@@ -891,7 +913,8 @@
           ],
           "ActionCards": [
             "PP19"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Sentinel",
@@ -905,7 +928,8 @@
           ],
           "ActionCards": [
             "PP20"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Duelist",
@@ -919,10 +943,11 @@
           ],
           "ActionCards": [
             "PP21"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 5
+      "Id": 6
     },
     {
       "Name": "Hunter",
@@ -946,7 +971,8 @@
           ],
           "ActionCards": [
             "PP01"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Tracker",
@@ -960,7 +986,8 @@
           ],
           "ActionCards": [
             "PP02"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Beastslayer",
@@ -974,10 +1001,11 @@
           ],
           "ActionCards": [
             "PP03"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 6
+      "Id": 7
     },
     {
       "Name": "Lifeshaper",
@@ -1001,7 +1029,8 @@
           ],
           "ActionCards": [
             "PP34"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Spiritmaker",
@@ -1015,7 +1044,8 @@
           ],
           "ActionCards": [
             "PP35"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Evolver",
@@ -1025,10 +1055,11 @@
           ],
           "ActionCards": [
             "PP36"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 7
+      "Id": 8
     },
     {
       "Name": "Mage",
@@ -1048,7 +1079,8 @@
           ],
           "ActionCards": [
             "PP10"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Advisor",
@@ -1062,7 +1094,8 @@
           ],
           "ActionCards": [
             "PP11"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Runecarver",
@@ -1076,10 +1109,11 @@
           ],
           "ActionCards": [
             "PP12"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 8
+      "Id": 9
     },
     {
       "Name": "Moonshield Paladin",
@@ -1103,7 +1137,8 @@
           ],
           "ActionCards": [
             "PP16"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Arbiter",
@@ -1117,7 +1152,8 @@
           ],
           "ActionCards": [
             "PP17"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Skygazer",
@@ -1131,10 +1167,11 @@
           ],
           "ActionCards": [
             "PP18"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 9
+      "Id": 10
     },
     {
       "Name": "Omu Priest",
@@ -1158,7 +1195,8 @@
           ],
           "ActionCards": [
             "PP25"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Hermit",
@@ -1172,7 +1210,8 @@
           ],
           "ActionCards": [
             "PP26"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Justiciar",
@@ -1186,10 +1225,11 @@
           ],
           "ActionCards": [
             "PP27"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 10
+      "Id": 11
     },
     {
       "Name": "Scoundrel",
@@ -1213,7 +1253,8 @@
           ],
           "ActionCards": [
             "PP28"
-          ]
+          ],
+          "Id": 1
         },
         {
           "Name": "Spy",
@@ -1227,7 +1268,8 @@
           ],
           "ActionCards": [
             "PP29"
-          ]
+          ],
+          "Id": 2
         },
         {
           "Name": "Con Artist",
@@ -1241,10 +1283,11 @@
           ],
           "ActionCards": [
             "PP30"
-          ]
+          ],
+          "Id": 3
         }
       ],
-      "Id": 11
+      "Id": 12
     }
   ],
   "Items": {
@@ -1667,13 +1710,13 @@
             "ActionCards": [
               "P19"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P20"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -1684,7 +1727,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -1695,7 +1738,7 @@
             "Skills": [
               "Athletics"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -1708,7 +1751,7 @@
             "Skills": [
               "Leadership"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -1724,7 +1767,7 @@
             "Skills": [
               "Resilience"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1738,7 +1781,7 @@
             "Skills": [
               "Resilience"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -1751,7 +1794,7 @@
             "ActionCards": [
               "P23"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -1760,7 +1803,7 @@
               "P22"
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -1774,7 +1817,7 @@
             "ActionCards": [
               "P24"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1786,11 +1829,11 @@
             "ActionCards": [
               "P24"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 0
+      "Id": 1
     },
     {
       "Name": "Bard",
@@ -1800,13 +1843,13 @@
             "ActionCards": [
               "P16"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P01"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -1819,7 +1862,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1830,7 +1873,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -1839,7 +1882,7 @@
             "ActionCards": [
               "P02"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -1852,7 +1895,7 @@
             "Skills": [
               "Charm"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -1866,7 +1909,7 @@
             "ActionCards": [
               "B11"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1878,7 +1921,7 @@
             "ActionCards": [
               "B11"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -1887,7 +1930,7 @@
             "Skills": [
               "Performer"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1898,7 +1941,7 @@
             "Skills": [
               "Performer"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "7": [
@@ -1911,7 +1954,7 @@
             "ActionCards": [
               "P03"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1922,7 +1965,7 @@
             "ActionCards": [
               "P17"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "8": [
@@ -1931,11 +1974,11 @@
             "ActionCards": [
               "P18"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 1
+      "Id": 2
     },
     {
       "Name": "Custodian",
@@ -1945,13 +1988,13 @@
             "ActionCards": [
               "P61"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P62"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -1962,7 +2005,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -1973,7 +2016,7 @@
             "Skills": [
               "Engineering"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -1986,7 +2029,7 @@
             "Skills": [
               "Artistry"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -1997,7 +2040,7 @@
             "Skills": [
               "Artistry"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "5": [
@@ -2013,7 +2056,7 @@
             "Skills": [
               "Vigilance"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2027,7 +2070,7 @@
             "Skills": [
               "Vigilance"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -2036,7 +2079,7 @@
             "ActionCards": [
               "P64"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -2045,7 +2088,7 @@
               "P65"
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -2059,7 +2102,7 @@
             "ActionCards": [
               "P66"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "DIV": "Upgrade",
@@ -2067,11 +2110,11 @@
             "ActionCards": [
               "P66"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 2
+      "Id": 3
     },
     {
       "Name": "Druid",
@@ -2081,13 +2124,13 @@
             "ActionCards": [
               "P25"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P26"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2098,7 +2141,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2109,7 +2152,7 @@
             "Skills": [
               "Alchemy"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2122,7 +2165,7 @@
             "Skills": [
               "Resilience"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -2138,7 +2181,7 @@
             "Skills": [
               "Leadership"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2152,7 +2195,7 @@
             "Skills": [
               "Leadership"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -2161,7 +2204,7 @@
               "P29"
             ],
             "DIV": "Upgrade",
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -2170,7 +2213,7 @@
               "P28"
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -2184,7 +2227,7 @@
             "ActionCards": [
               "P30"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2196,11 +2239,11 @@
             "ActionCards": [
               "P30"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 3
+      "Id": 4
     },
     {
       "Name": "Executor",
@@ -2210,13 +2253,13 @@
             "ActionCards": [
               "P43"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P44"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2227,7 +2270,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2243,7 +2286,7 @@
             "Skills": [
               "Investigation"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2256,7 +2299,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -2273,7 +2316,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2288,7 +2331,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 1
+            "Id": 2
           },
           {
             "Attributes": [
@@ -2303,7 +2346,7 @@
             "Skills": [
               "Pathfinding"
             ],
-            "Id": 2
+            "Id": 3
           },
           {
             "Attributes": [
@@ -2318,7 +2361,7 @@
             "Skills": [
               "Pathfinding"
             ],
-            "Id": 3
+            "Id": 4
           }
         ],
         "6": [
@@ -2329,7 +2372,7 @@
               }
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2338,7 +2381,7 @@
               }
             ],
             "MOB": 2,
-            "Id": 1
+            "Id": 2
           }
         ],
         "7": [
@@ -2346,13 +2389,13 @@
             "ActionCards": [
               "P46"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P47"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "8": [
@@ -2361,11 +2404,11 @@
             "ActionCards": [
               "P48"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 4
+      "Id": 5
     },
     {
       "Name": "Fighter",
@@ -2375,13 +2418,13 @@
             "ActionCards": [
               "P37"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P38"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2394,7 +2437,7 @@
             "Skills": [
               "Athletics"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2403,7 +2446,7 @@
             "ActionCards": [
               "P39"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2416,7 +2459,7 @@
             "Skills": [
               "Charm"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2427,7 +2470,7 @@
             "Skills": [
               "Charm"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "5": [
@@ -2441,7 +2484,7 @@
             "ActionCards": [
               "B02"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "6": [
@@ -2454,7 +2497,7 @@
             "ActionCards": [
               "P40"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2465,7 +2508,7 @@
             "ActionCards": [
               "P40"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "7": [
@@ -2478,7 +2521,7 @@
             "ActionCards": [
               "P41"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -2489,7 +2532,7 @@
             "Skills": [
               "Survival"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
@@ -2498,11 +2541,11 @@
             "Skills": [
               "Animal Handling"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 5
+      "Id": 6
     },
     {
       "Name": "Hunter",
@@ -2512,13 +2555,13 @@
             "ActionCards": [
               "P31"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P32"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2529,7 +2572,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2540,7 +2583,7 @@
             "Skills": [
               "Survival"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2553,7 +2596,7 @@
             "Skills": [
               "Pathfinding"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -2569,7 +2612,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2583,7 +2626,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -2592,7 +2635,7 @@
               "P34"
             ],
             "DIV": "Upgrade",
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -2601,7 +2644,7 @@
               "P35"
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -2615,7 +2658,7 @@
             "ActionCards": [
               "P36"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2627,11 +2670,11 @@
             "ActionCards": [
               "P36"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 6
+      "Id": 7
     },
     {
       "Name": "Lifeshaper",
@@ -2641,13 +2684,13 @@
             "ActionCards": [
               "P67"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P68"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2658,7 +2701,7 @@
               }
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2667,7 +2710,7 @@
             "ActionCards": [
               "P69"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2680,7 +2723,7 @@
             "Skills": [
               "Survival"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -2697,7 +2740,7 @@
             "Skills": [
               "Alchemy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2712,7 +2755,7 @@
             "Skills": [
               "Alchemy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -2721,7 +2764,7 @@
             "Skills": [
               "Arcana"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2732,7 +2775,7 @@
             "Skills": [
               "Arcana"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "7": [
@@ -2745,7 +2788,7 @@
             "ActionCards": [
               "P70"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2756,7 +2799,7 @@
             "ActionCards": [
               "P71"
             ],
-            "Id": 1
+            "Id": 2
           },
           {
             "Attributes": [
@@ -2767,7 +2810,7 @@
             "ActionCards": [
               "P70"
             ],
-            "Id": 2
+            "Id": 3
           },
           {
             "Attributes": [
@@ -2778,7 +2821,7 @@
             "ActionCards": [
               "P71"
             ],
-            "Id": 3
+            "Id": 4
           }
         ],
         "8": [
@@ -2787,11 +2830,11 @@
             "ActionCards": [
               "P72"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 7
+      "Id": 8
     },
     {
       "Name": "Mage",
@@ -2801,13 +2844,13 @@
             "ActionCards": [
               "P10"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P12"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2818,7 +2861,7 @@
               }
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2831,7 +2874,7 @@
             "ActionCards": [
               "P11"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2845,7 +2888,7 @@
             "Skills": [
               "Lore"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2857,7 +2900,7 @@
             "Skills": [
               "Lore"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "5": [
@@ -2871,7 +2914,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2883,7 +2926,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -2894,7 +2937,7 @@
             "Skills": [
               "Artistry"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -2902,13 +2945,13 @@
             "ActionCards": [
               "P13"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P14"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "8": [
@@ -2917,11 +2960,11 @@
               "P15"
             ],
             "DIV": "Upgrade",
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 8
+      "Id": 9
     },
     {
       "Name": "Moonshield",
@@ -2931,13 +2974,13 @@
             "ActionCards": [
               "P04"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P05"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -2950,7 +2993,7 @@
             "Skills": [
               "Vigilance"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -2959,7 +3002,7 @@
             "ActionCards": [
               "P06"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -2972,7 +3015,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -2983,7 +3026,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "5": [
@@ -2998,7 +3041,7 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3011,7 +3054,7 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -3020,7 +3063,7 @@
             "Skills": [
               "Lore"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -3028,13 +3071,13 @@
             "ActionCards": [
               "P07"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P08"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "8": [
@@ -3047,7 +3090,7 @@
             "ActionCards": [
               "P09"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3058,11 +3101,11 @@
             "ActionCards": [
               "P09"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 9
+      "Id": 10
     },
     {
       "Name": "Omu Priest",
@@ -3072,13 +3115,13 @@
             "ActionCards": [
               "P49"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P50"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3089,7 +3132,7 @@
               }
             ],
             "MOB": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -3100,7 +3143,7 @@
             "Skills": [
               "Arcana"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -3113,7 +3156,7 @@
             "Skills": [
               "Medicine"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3124,7 +3167,7 @@
             "Skills": [
               "Medicine"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "5": [
@@ -3140,7 +3183,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3154,7 +3197,7 @@
             "Skills": [
               "Diplomacy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -3163,7 +3206,7 @@
             "ActionCards": [
               "P52"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -3172,7 +3215,7 @@
             "ActionCards": [
               "P53"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -3186,7 +3229,7 @@
             "ActionCards": [
               "P54"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3198,11 +3241,11 @@
             "ActionCards": [
               "P54"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 10
+      "Id": 11
     },
     {
       "Name": "Scoundrel",
@@ -3212,13 +3255,13 @@
             "ActionCards": [
               "P55"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "P56"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3229,7 +3272,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -3240,7 +3283,7 @@
             "Skills": [
               "Vigilance"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -3253,7 +3296,7 @@
             "Skills": [
               "Survival"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "5": [
@@ -3269,7 +3312,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3283,7 +3326,7 @@
             "Skills": [
               "Stealth"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "6": [
@@ -3292,7 +3335,7 @@
             "ActionCards": [
               "P58"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "7": [
@@ -3301,7 +3344,7 @@
             "ActionCards": [
               "P59"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "8": [
@@ -3315,7 +3358,7 @@
             "ActionCards": [
               "P60"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3327,11 +3370,11 @@
             "ActionCards": [
               "P60"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 11
+      "Id": 12
     },
     {
       "Name": "Close Combat",
@@ -3341,13 +3384,13 @@
             "ActionCards": [
               "S17"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S18"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3360,7 +3403,7 @@
             "Skills": [
               "Intimidation"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3371,7 +3414,7 @@
             "Skills": [
               "Intimidation"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -3384,7 +3427,7 @@
             "ActionCards": [
               "B02"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3395,7 +3438,7 @@
             "ActionCards": [
               "B14"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -3404,18 +3447,18 @@
             "ActionCards": [
               "S19"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "HP": 2,
             "ActionCards": [
               "S20"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 12
+      "Id": 13
     },
     {
       "Name": "Warfare",
@@ -3425,13 +3468,13 @@
             "ActionCards": [
               "S01"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S02"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3442,7 +3485,7 @@
               }
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3451,7 +3494,7 @@
               }
             ],
             "HP": 2,
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -3460,28 +3503,28 @@
               "S03",
               "B11"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S03",
               "B14"
             ],
-            "Id": 1
+            "Id": 2
           },
           {
             "ActionCards": [
               "S04",
               "B11"
             ],
-            "Id": 2
+            "Id": 3
           },
           {
             "ActionCards": [
               "S04",
               "B14"
             ],
-            "Id": 3
+            "Id": 4
           }
         ],
         "4": [
@@ -3494,11 +3537,11 @@
             "Skills": [
               "Leadership"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 13
+      "Id": 14
     },
     {
       "Name": "Marksmanship",
@@ -3508,13 +3551,13 @@
             "ActionCards": [
               "S21"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S22"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3527,7 +3570,7 @@
             "Skills": [
               "Athletics"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3538,7 +3581,7 @@
             "Skills": [
               "Athletics"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -3551,7 +3594,7 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3562,7 +3605,7 @@
             "ActionCards": [
               "B16"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -3571,18 +3614,18 @@
             "ActionCards": [
               "S23"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "MOB": 2,
             "ActionCards": [
               "S24"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 14
+      "Id": 15
     },
     {
       "Name": "Nature",
@@ -3592,13 +3635,13 @@
             "ActionCards": [
               "S25"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S26"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3611,7 +3654,7 @@
             "ActionCards": [
               "B05"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -3624,7 +3667,7 @@
             "Skills": [
               "Medicine"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3635,7 +3678,7 @@
             "Skills": [
               "Animal Handling"
             ],
-            "Id": 1
+            "Id": 2
           },
           {
             "Attributes": [
@@ -3646,7 +3689,7 @@
             "Skills": [
               "Medicine"
             ],
-            "Id": 2
+            "Id": 3
           },
           {
             "Attributes": [
@@ -3657,7 +3700,7 @@
             "Skills": [
               "Animal Handling"
             ],
-            "Id": 3
+            "Id": 4
           }
         ],
         "4": [
@@ -3666,18 +3709,18 @@
             "ActionCards": [
               "S27"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "HP": 2,
             "ActionCards": [
               "S28"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 15
+      "Id": 16
     },
     {
       "Name": "Battle Magic",
@@ -3687,13 +3730,13 @@
             "ActionCards": [
               "S05"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S06"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3706,7 +3749,7 @@
             "ActionCards": [
               "B02"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "3": [
@@ -3715,14 +3758,14 @@
             "ActionCards": [
               "S07"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "HP": 2,
             "ActionCards": [
               "S08"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -3731,7 +3774,7 @@
             "Skills": [
               "Arcana"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3742,11 +3785,11 @@
             "Skills": [
               "Arcana"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 16
+      "Id": 17
     },
     {
       "Name": "Support Magic",
@@ -3756,13 +3799,13 @@
             "ActionCards": [
               "S09"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S10"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3775,7 +3818,7 @@
             "Skills": [
               "Alchemy"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3786,7 +3829,7 @@
             "Skills": [
               "Alchemy"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -3795,14 +3838,14 @@
             "ActionCards": [
               "S11"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "HP": 2,
             "ActionCards": [
               "S12"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -3815,11 +3858,11 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 17
+      "Id": 18
     },
     {
       "Name": "Thiefcraft",
@@ -3829,13 +3872,13 @@
             "ActionCards": [
               "S13"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S14"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3848,7 +3891,7 @@
             "ActionCards": [
               "B05"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3859,7 +3902,7 @@
             "ActionCards": [
               "B16"
             ],
-            "Id": 1
+            "Id": 2
           },
           {
             "Attributes": [
@@ -3870,7 +3913,7 @@
             "ActionCards": [
               "B05"
             ],
-            "Id": 2
+            "Id": 3
           },
           {
             "Attributes": [
@@ -3881,7 +3924,7 @@
             "ActionCards": [
               "B16"
             ],
-            "Id": 3
+            "Id": 4
           }
         ],
         "3": [
@@ -3890,14 +3933,14 @@
             "ActionCards": [
               "S15"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "MOB": 2,
             "ActionCards": [
               "S16"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -3910,11 +3953,11 @@
             "Skills": [
               "Sleight of Hand"
             ],
-            "Id": 0
+            "Id": 1
           }
         ]
       },
-      "Id": 18
+      "Id": 19
     },
     {
       "Name": "Subterfuge",
@@ -3924,13 +3967,13 @@
             "ActionCards": [
               "S33"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S34"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -3943,7 +3986,7 @@
             "Skills": [
               "Deception"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -3954,7 +3997,7 @@
             "Skills": [
               "Deception"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -3967,7 +4010,7 @@
             "ActionCards": [
               "B05"
             ],
-            "Id": 0
+            "Id": 1
           }
         ],
         "4": [
@@ -3976,18 +4019,18 @@
             "ActionCards": [
               "S36"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "MOB": 2,
             "ActionCards": [
               "S35"
             ],
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 19
+      "Id": 20
     },
     {
       "Name": "Scholarship",
@@ -3997,13 +4040,13 @@
             "ActionCards": [
               "S29"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S30"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "2": [
@@ -4016,7 +4059,7 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -4027,7 +4070,7 @@
             "ActionCards": [
               "B08"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "3": [
@@ -4040,7 +4083,7 @@
             "Skills": [
               "Lore"
             ],
-            "Id": 0
+            "Id": 1
           },
           {
             "Attributes": [
@@ -4051,7 +4094,7 @@
             "Skills": [
               "Investigation"
             ],
-            "Id": 1
+            "Id": 2
           }
         ],
         "4": [
@@ -4060,18 +4103,18 @@
               "S32"
             ],
             "HP": 2,
-            "Id": 0
+            "Id": 1
           },
           {
             "ActionCards": [
               "S31"
             ],
             "HP": 2,
-            "Id": 1
+            "Id": 2
           }
         ]
       },
-      "Id": 20
+      "Id": 21
     }
   ],
   "ActionCards": {
