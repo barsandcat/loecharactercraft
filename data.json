@@ -167,80 +167,80 @@
         "20": "Survival",
         "21": "Vigilance"
       },
-      "Attributes": [
-        {
+      "Attributes": {
+        "1": {
           "STR": 1,
           "AGI": 2,
           "INT": 2,
           "CHA": 3
         },
-        {
+        "2": {
           "STR": 2,
           "AGI": 1,
           "INT": 2,
           "CHA": 3
         },
-        {
+        "3": {
           "STR": 2,
           "AGI": 2,
           "INT": 1,
           "CHA": 3
         },
-        {
+        "4": {
           "STR": 1,
           "AGI": 2,
           "INT": 3,
           "CHA": 2
         },
-        {
+        "5": {
           "STR": 2,
           "AGI": 1,
           "INT": 3,
           "CHA": 2
         },
-        {
+        "6": {
           "STR": 2,
           "AGI": 2,
           "INT": 3,
           "CHA": 1
         },
-        {
+        "7": {
           "STR": 1,
           "AGI": 3,
           "INT": 2,
           "CHA": 2
         },
-        {
+        "8": {
           "STR": 2,
           "AGI": 3,
           "INT": 1,
           "CHA": 2
         },
-        {
+        "9": {
           "STR": 2,
           "AGI": 3,
           "INT": 2,
           "CHA": 1
         },
-        {
+        "10": {
           "STR": 3,
           "AGI": 1,
           "INT": 2,
           "CHA": 2
         },
-        {
+        "11": {
           "STR": 3,
           "AGI": 2,
           "INT": 1,
           "CHA": 2
         },
-        {
+        "12": {
           "STR": 3,
           "AGI": 2,
           "INT": 2,
           "CHA": 1
         }
-      ],
+      },
       "MOB": 6,
       "DIV": "D4",
       "HP": 6,
@@ -260,14 +260,14 @@
         "Small",
         "Outlandish"
       ],
-      "Attributes": [
-        {
+      "Attributes": {
+        "1": {
           "STR": 2,
           "AGI": 3,
           "INT": 2,
           "CHA": 1
         }
-      ],
+      },
       "MOB": 8,
       "DIV": "D4",
       "HP": 6,
