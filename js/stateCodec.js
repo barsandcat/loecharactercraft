@@ -88,7 +88,9 @@ export function serializeStateV2(selection, data, trees) {
     writeValue(familyId, widths.basicUpgradeFamily);
   });
 
-  return "v2:" + encodeBytesToBase64Url(bytes);
+  // "." rather than v1's ":" — some forum/board auto-linkers treat a colon
+  // right after a URL fragment as a scheme boundary and split the link there.
+  return "v2." + encodeBytesToBase64Url(bytes);
 }
 
 export function deserializeState(encoded, data, trees) {
@@ -96,7 +98,7 @@ export function deserializeState(encoded, data, trees) {
     return null;
   }
 
-  if (encoded.startsWith("v2:")) {
+  if (encoded.startsWith("v2.")) {
     const decoded = decodeV2State(encoded.slice(3), data);
     return decoded ? resolveV2Patch(decoded, data) : null;
   }
