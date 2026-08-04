@@ -19,7 +19,13 @@
   --shadow:         0 4px 16px rgba(20, 12, 4, 0.18);
   --shadow-lg:      0 8px 28px rgba(20, 12, 4, 0.26);
   --gold-bar-h:     10px;
-  --action-card-width: 280px;
+  /* Approximates the middle .board column's content width (its fr-share of
+     .app-shell, minus the panel/summary-card/slot padding chain down to the
+     card itself, ~56px) so a card renders at roughly the same size wherever
+     it appears — hotbar, selector popup, mention tooltip — without a JS
+     resize observer measuring anything at runtime. Retune if .board's
+     grid-template-columns or the padding chain above ever change. */
+  --action-card-width: clamp(291px, 30.7vw - 70px, 420px);
 }
 
 * { box-sizing: border-box; }
@@ -547,7 +553,8 @@ h1 {
 /* Action card full layout (inline in Action Cards list) */
 .action-card-full {
   display: flex;
-  width: 100%;
+  width: var(--action-card-width, 280px);
+  max-width: 100%;
   border: 1px solid rgba(70, 48, 12, 0.1);
   border-radius: 1px;
   background: rgba(255, 255, 255, 0.32);
@@ -1167,6 +1174,9 @@ h1 {
   .board { grid-template-columns: 1fr; }
   .panel { min-width: 0; }
   .choice-grid.two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* .board is now a single stacked column spanning the full app-shell width
+     rather than a fr-share of it — same padding-chain fudge as above. */
+  :root { --action-card-width: calc(100vw - 2 * clamp(14px, 2.5vw, 28px) - 56px); }
 }
 
 @media (max-width: 900px) {
