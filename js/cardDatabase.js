@@ -200,7 +200,11 @@ function getCardAttributes(card) {
 }
 
 function getCardAllKeywords(card) {
-  return [...(card.Front.Keywords || []), ...(card.Front.Requires || [])];
+  const keywords = [...(card.Front.Keywords || []), ...(card.Front.Requires || [])];
+  if (card.Back) {
+    keywords.push(...(card.Back.Keywords || []), ...(card.Back.Requires || []));
+  }
+  return keywords;
 }
 
 function getCardModifiers(card) {
@@ -240,7 +244,7 @@ function getCardNegativeModifiers(card) {
       }
     });
   }
-  return negatives;
+  return Array.from(negatives);
 }
 
 function cardHasModifier(card, modifier) {
@@ -296,7 +300,7 @@ function createCardDatabase(data) {
       metaEl.appendChild(lockEl);
 
       li.appendChild(metaEl);
-      li.appendChild(buildActionCardElement(card._cardId, card, null, null, true));
+      li.appendChild(buildActionCardElement(card._cardId, card, null, null));
       list.appendChild(li);
     });
 
