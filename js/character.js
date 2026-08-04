@@ -5,8 +5,9 @@ import {
   serializeStateV1,
   deserializeState,
 } from "./stateCodec.js";
-import { tryAutoSelect, refreshLevelUpStates } from "./advancementTree.js";
+import { tryAutoSelect, refreshLevelUpStates, getTreeLevelOption, getVersionOptions } from "./advancementTree.js";
 import { buildPrintableText as buildPrintableTextModule } from "./printableText.js";
+import { describeVersionOption } from "./selectorDescriptors.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
 
@@ -193,6 +194,33 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     slot.level = treeLevelOption.level;
     slot.versionIndex = null;
     commitSelection();
+    return openRewardSelectorIfNeeded(slotIndex);
+  }
+
+  // Skips straight to the reward step after a tree pick when there's a real
+  // choice to make (a single reward is already auto-selected by tryAutoSelect).
+  function openRewardSelectorIfNeeded(slotIndex) {
+    const slot = state.levelUps[slotIndex];
+    if (slot.versionIndex !== null) {
+      return false;
+    }
+
+    const treeLevelOption = getTreeLevelOption(state, slot.treeName, slot.level);
+    const versionOptions = treeLevelOption ? getVersionOptions(treeLevelOption) : [];
+    if (versionOptions.length <= 1) {
+      return false;
+    }
+
+    selectorOverlay.openSelector({
+      kicker: "Level Up " + (slotIndex + 1),
+      title: "Choose Reward",
+      description: "Pick the reward version for this tree level.",
+      options: versionOptions,
+      getOptionContent: (option) => describeVersionOption(state, option, slotIndex),
+      onSelect: (option) => selectLevelUpVersion(slotIndex, option),
+      isSelected: () => false,
+    });
+    return true;
   }
 
   function selectLevelUpVersion(slotIndex, versionOption) {

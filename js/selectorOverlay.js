@@ -25,8 +25,10 @@ export function createSelectorOverlay(ui) {
         }
 
         button.addEventListener("click", () => {
-          config.onSelect(option);
-          closeSelector();
+          const keepOpen = config.onSelect(option);
+          if (!keepOpen) {
+            closeSelector();
+          }
         });
 
         const title = document.createElement("div");
