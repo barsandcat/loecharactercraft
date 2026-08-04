@@ -1,6 +1,14 @@
 import { ATTRIBUTES } from "./cardRender.js";
-import { DICE_PROGRESSION, BASIC_UPGRADE_FAMILIES } from "./constants.js";
-import { getSelectedAdvancementEntries } from "./advancementTree.js";
+import {
+  DICE_PROGRESSION,
+  BASIC_UPGRADE_FAMILIES,
+  ACTION_CATEGORIES,
+  SKILL_SLOTS,
+  ITEM_SLOT_TYPES,
+  ACTION_SLOT_RULES,
+} from "./constants.js";
+import { getSelectedAdvancementEntries, getFilledLevelCount } from "./advancementTree.js";
+import { resolveLoadoutSlots } from "./loadoutSlots.js";
 
 const BASIC_UPGRADE_CARD_IDS = new Set(BASIC_UPGRADE_FAMILIES.map((family) => family.maxCardId));
 
@@ -15,19 +23,23 @@ export function collectCharacterStats(state, selection = state) {
     skillCounts: new Map(),
     items: new Map(),
     actions: new Map(),
+    actionPool: [],
+    itemPool: [],
+    skillPool: [],
     basicUpgradeSlots: [],
   };
 
   if (selection.selectedRace) {
-    applyRace(state.data, stats, selection.selectedRace, selection.selectedAttributeSet);
+    applyRace(state.data, stats, selection.selectedRace, selection.selectedAttributeSet, { kind: "race" });
   }
   if (selection.selectedFreeSkill) {
     incrementCountMap(stats.skillCounts, [selection.selectedFreeSkill]);
+    stats.skillPool.push({ skill: selection.selectedFreeSkill, source: { kind: "freeSkill" } });
   }
 
   if (selection.selectedOrigin) {
     incrementCountMap(stats.keywordCounts, selection.selectedOrigin.Keywords || []);
-    (selection.selectedOrigin.Items || []).forEach((item) => addItem(state.data, stats, item));
+    (selection.selectedOrigin.Items || []).forEach((item) => addItem(state.data, stats, item, { kind: "origin" }));
     stats.brill += selection.selectedOrigin.Brill || 0;
   }
 
@@ -36,12 +48,15 @@ export function collectCharacterStats(state, selection = state) {
   }
 
   if (selection.selectedPath) {
-    applyEntry(state.data, stats, selection.selectedPath);
+    applyEntry(state.data, stats, selection.selectedPath, { kind: "path" });
   }
 
   getSelectedAdvancementEntries(state, selection.levelUps).forEach(({ slotIndex, entry }) => {
-    const isBasicDuplicate = applyEntry(state.data, stats, entry);
+    const isBasicDuplicate = applyEntry(state.data, stats, entry, { kind: "levelUp", slotIndex });
     incrementCountMap(stats.skillCounts, entry.Skills || []);
+    (entry.Skills || []).forEach((skill) => {
+      stats.skillPool.push({ skill, source: { kind: "levelUp", slotIndex } });
+    });
 
     if (isBasicDuplicate) {
       const chosenName = selection.levelUps[slotIndex]?.basicUpgradeFamily ?? null;
@@ -113,7 +128,7 @@ export function buildItemPreviews(data, itemNames) {
     .filter(Boolean);
 }
 
-export function applyRace(data, stats, race, attributes) {
+export function applyRace(data, stats, race, attributes, source) {
   if (attributes) {
     Object.keys(attributes).forEach((key) => {
       stats.attributes[key] += attributes[key];
@@ -125,10 +140,10 @@ export function applyRace(data, stats, race, attributes) {
   stats.divDie = race.DIV || null;
   incrementCountMap(stats.keywordCounts, race.Keywords || []);
   incrementCountMap(stats.skillCounts, race.Skills || []);
-  (race.ActionCards || []).forEach((action) => addAction(data, stats, action));
+  (race.ActionCards || []).forEach((action) => addAction(data, stats, action, source));
 }
 
-export function applyEntry(data, stats, entry) {
+export function applyEntry(data, stats, entry, source) {
   (entry.Attributes || []).forEach((attributeSet) => {
     Object.keys(attributeSet).forEach((key) => {
       stats.attributes[key] += attributeSet[key];
@@ -147,18 +162,18 @@ export function applyEntry(data, stats, entry) {
     stats.divDie = divValue;
   }
 
-  (entry.Items || []).forEach((item) => addItem(data, stats, item));
+  (entry.Items || []).forEach((item) => addItem(data, stats, item, source));
 
   let sawBasicDuplicate = false;
   (entry.ActionCards || []).forEach((action) => {
-    if (addAction(data, stats, action)) {
+    if (addAction(data, stats, action, source)) {
       sawBasicDuplicate = true;
     }
   });
   return sawBasicDuplicate;
 }
 
-export function addItem(data, stats, itemName) {
+export function addItem(data, stats, itemName, source) {
   const itemObj = data.Items[itemName];
   if (!itemObj) {
     console.warn('Item not found:', itemName);
@@ -168,24 +183,36 @@ export function addItem(data, stats, itemName) {
   const key = itemName + "::" + itemObj.Type;
   if (!stats.items.has(key)) {
     stats.items.set(key, itemObj);
+    stats.itemPool.push({ itemName, item: itemObj, source });
   }
 }
 
-function upgradeActionSlot(stats, card, cardId) {
+function upgradeActionSlot(stats, card, cardId, source) {
   const current = stats.actions.get(card.Front.Name);
-  if (!current || card.Level > current.Level) {
-    stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
+  if (!current) {
+    const stored = { ...card, _cardId: cardId };
+    stats.actions.set(card.Front.Name, stored);
+    stats.actionPool.push({ cardName: card.Front.Name, card: stored, source });
+    return;
+  }
+  if (card.Level > current.Level) {
+    const stored = { ...card, _cardId: cardId };
+    stats.actions.set(card.Front.Name, stored);
+    const poolEntry = stats.actionPool.find((entry) => entry.cardName === card.Front.Name);
+    if (poolEntry) {
+      poolEntry.card = stored;
+    }
   }
 }
 
-export function addAction(data, stats, cardId) {
+export function addAction(data, stats, cardId, source) {
   const card = data.ActionCards[cardId];
   if (!card) {
     return false;
   }
   const current = stats.actions.get(card.Front.Name);
   const isBasicDuplicate = Boolean(current && card.Level === current.Level && BASIC_UPGRADE_CARD_IDS.has(cardId));
-  upgradeActionSlot(stats, card, cardId);
+  upgradeActionSlot(stats, card, cardId, source);
   return isBasicDuplicate;
 }
 
@@ -194,7 +221,7 @@ export function applyManualBasicUpgrade(data, stats, cardId) {
   if (!card) {
     return;
   }
-  upgradeActionSlot(stats, card, cardId);
+  upgradeActionSlot(stats, card, cardId, { kind: "basicUpgrade" });
 }
 
 export function getEligibleBasicUpgradeFamilies(data, stats) {
@@ -216,5 +243,63 @@ export function upgradeDivDie(divDie) {
 export function incrementCountMap(map, values) {
   values.forEach((value) => {
     map.set(value, (map.get(value) || 0) + 1);
+  });
+}
+
+export function matchesSkillTarget(source, target) {
+  if (!target || !source || target.kind !== source.kind) {
+    return false;
+  }
+  return target.kind === "levelUp" ? target.slotIndex === source.slotIndex : true;
+}
+
+function normalizeActionCategory(category) {
+  return ACTION_CATEGORIES.includes(category) ? category : "Offensive";
+}
+
+export function resolveSkillSlots(state, stats) {
+  const slots = Array.from({ length: SKILL_SLOTS }, () => ({ locked: false, matches: () => true }));
+  return resolveLoadoutSlots({
+    pool: stats.skillPool,
+    slots,
+    overrides: state.skillSlots,
+    matchesTarget: (entry, target) => matchesSkillTarget(entry.source, target),
+  });
+}
+
+export function resolveItemSlots(state, stats) {
+  const slots = ITEM_SLOT_TYPES.map((type) => ({
+    locked: false,
+    matches: (entry) => entry.item.Type === type,
+  }));
+  return resolveLoadoutSlots({
+    pool: stats.itemPool,
+    slots,
+    overrides: state.itemSlots,
+    matchesTarget: (entry, target) => entry.itemName === target.itemName,
+  });
+}
+
+export function getEligibleItemPouchForSlot(pouch, slotIndex) {
+  const type = ITEM_SLOT_TYPES[slotIndex];
+  return pouch.filter((entry) => entry.item.Type === type);
+}
+
+export function getEligibleActionPouchForSlot(pouch, slotIndex) {
+  const rule = ACTION_SLOT_RULES[slotIndex];
+  return pouch.filter((entry) => rule.categories.includes(normalizeActionCategory(entry.card.Front.Category)));
+}
+
+export function resolveActionSlots(state, stats) {
+  const filledLevelCount = getFilledLevelCount(state);
+  const slots = ACTION_SLOT_RULES.map((rule) => ({
+    locked: filledLevelCount < rule.unlockAt,
+    matches: (entry) => rule.categories.includes(normalizeActionCategory(entry.card.Front.Category)),
+  }));
+  return resolveLoadoutSlots({
+    pool: stats.actionPool,
+    slots,
+    overrides: state.actionSlots,
+    matchesTarget: (entry, target) => entry.cardName === target.cardName,
   });
 }

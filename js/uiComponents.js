@@ -16,6 +16,7 @@ export function singleChoiceGrid(config) {
       disabled: config.disabled,
       empty: config.empty,
       accent: config.complete,
+      locked: config.locked,
     })
   );
   return grid;
@@ -39,7 +40,10 @@ export function createChoiceButton(config) {
   if (config.accent) {
     button.classList.add("is-accent");
   }
-  button.disabled = Boolean(config.disabled);
+  if (config.locked) {
+    button.classList.add("is-locked");
+  }
+  button.disabled = Boolean(config.disabled) || Boolean(config.locked);
 
   if (!button.disabled && typeof config.onClick === "function") {
     button.addEventListener("click", config.onClick);

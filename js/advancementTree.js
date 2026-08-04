@@ -253,3 +253,9 @@ export function getVersionOptions(treeLevelOption) {
     entry,
   }));
 }
+
+export function getFilledLevelCount(state) {
+  return state.levelUps.reduce((count, slotState) => {
+    return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
+  }, 0);
+}

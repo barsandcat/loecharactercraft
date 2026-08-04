@@ -2,15 +2,41 @@ import {
   createEmptyLevelUps,
   getRaceAttributeOptions,
   getRaceFreeSkills,
-  serializeStateV2,
+  serializeStateV3,
   deserializeState,
 } from "./stateCodec.js";
-import { tryAutoSelect, refreshLevelUpStates, getTreeLevelOption, getVersionOptions } from "./advancementTree.js";
+import {
+  tryAutoSelect,
+  refreshLevelUpStates,
+  getTreeLevelOption,
+  getVersionOptions,
+  getFilledLevelCount,
+} from "./advancementTree.js";
 import { buildPrintableText as buildPrintableTextModule } from "./printableText.js";
-import { describeVersionOption, describeBasicUpgradeFamilyOption } from "./selectorDescriptors.js";
-import { collectCharacterStats, buildActionCardPreviewStats, getEligibleBasicUpgradeFamilies } from "./characterStats.js";
+import {
+  describeVersionOption,
+  describeBasicUpgradeFamilyOption,
+  describeSkillSlotOption,
+  describeItemSlotOption,
+  describeActionSlotOption,
+} from "./selectorDescriptors.js";
+import {
+  collectCharacterStats,
+  buildActionCardPreviewStats,
+  getEligibleBasicUpgradeFamilies,
+  resolveSkillSlots,
+  resolveItemSlots,
+  resolveActionSlots,
+  getEligibleItemPouchForSlot,
+  getEligibleActionPouchForSlot,
+} from "./characterStats.js";
+import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
+
+function createEmptySlots(count) {
+  return new Array(count).fill(null);
+}
 
 export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   const state = {
@@ -23,6 +49,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     selectedProf: null,
     selectedPath: null,
     levelUps: createEmptyLevelUps(),
+    skillSlots: createEmptySlots(SKILL_SLOTS),
+    itemSlots: createEmptySlots(ITEM_SLOT_TYPES.length),
+    actionSlots: createEmptySlots(ACTION_SLOT_RULES.length),
   };
 
   // Slot indices already auto-offered a basic-upgrade picker this session, so a
@@ -46,6 +75,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       selectLevelUpTree,
       selectLevelUpVersion,
       openBasicUpgradePickerForSlot,
+      openSkillPickerForSlot,
+      openItemPickerForSlot,
+      openActionPickerForSlot,
     },
   });
 
@@ -99,6 +131,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedProf = patch.selectedProf;
     state.selectedPath = patch.selectedPath;
     state.levelUps = patch.levelUps;
+    state.skillSlots = patch.skillSlots || createEmptySlots(SKILL_SLOTS);
+    state.itemSlots = patch.itemSlots || createEmptySlots(ITEM_SLOT_TYPES.length);
+    state.actionSlots = patch.actionSlots || createEmptySlots(ACTION_SLOT_RULES.length);
 
     commitSelection();
     return true;
@@ -110,7 +145,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       !state.selectedOrigin &&
       !state.selectedProf &&
       !state.selectedPath &&
-      getFilledLevelCount() === 0
+      getFilledLevelCount(state) === 0
     );
   }
 
@@ -138,7 +173,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function serializeState() {
     try {
-      return serializeStateV2(state, state.data, state.trees);
+      return serializeStateV3(state, state.data, state.trees);
     } catch (_) {
       return null;
     }
@@ -156,7 +191,22 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedProf = null;
     state.selectedPath = null;
     state.levelUps = createEmptyLevelUps();
+    state.skillSlots = createEmptySlots(SKILL_SLOTS);
+    state.itemSlots = createEmptySlots(ITEM_SLOT_TYPES.length);
+    state.actionSlots = createEmptySlots(ACTION_SLOT_RULES.length);
     acknowledgedBasicUpgradeSlots = new Set();
+  }
+
+  // Skill slots can pin a specific level-up slot's grant (or the free-skill
+  // pick) by provenance, not by name — so unlike item/action slots (identity =
+  // a stable name), a skill pin can silently start pointing at a *different*
+  // skill if the thing it points at changes underneath it without being
+  // cleared. Clear any pin whose target matches the given predicate whenever
+  // that provenance is directly edited.
+  function clearSkillSlotsMatching(predicate) {
+    state.skillSlots = state.skillSlots.map((override) => (
+      override && override.target && predicate(override.target) ? null : override
+    ));
   }
 
   // Selection
@@ -171,6 +221,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       if (attrOptions.length === 1) {
         state.selectedAttributeSet = attrOptions[0];
       }
+      clearSkillSlotsMatching((target) => target?.kind === "freeSkill");
     }
 
     commitSelection();
@@ -202,6 +253,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         state.selectedPath = pathOptions[0];
       }
       state.levelUps = createEmptyLevelUps();
+      clearSkillSlotsMatching((target) => target?.kind === "levelUp");
     }
 
     commitSelection();
@@ -219,6 +271,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     slot.versionIndex = null;
     slot.basicUpgradeFamily = null;
     acknowledgedBasicUpgradeSlots.delete(slotIndex);
+    clearSkillSlotsMatching((target) => target?.kind === "levelUp" && target.slotIndex === slotIndex);
     commitSelection();
     openRewardSelectorIfNeeded(slotIndex);
   }
@@ -253,6 +306,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     slot.versionIndex = versionOption.index;
     slot.basicUpgradeFamily = null;
     acknowledgedBasicUpgradeSlots.delete(slotIndex);
+    clearSkillSlotsMatching((target) => target?.kind === "levelUp" && target.slotIndex === slotIndex);
     commitSelection();
   }
 
@@ -277,10 +331,70 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     });
   }
 
-  function getFilledLevelCount() {
-    return state.levelUps.reduce((count, slotState) => {
-      return count + (slotState.treeName !== null && slotState.versionIndex !== null ? 1 : 0);
-    }, 0);
+  function selectSkillSlot(slotIndex, override) {
+    state.skillSlots[slotIndex] = override;
+    commitSelection();
+  }
+
+  function openSkillPickerForSlot(slotIndex) {
+    const stats = collectCharacterStats(state);
+    const { slots, pouch } = resolveSkillSlots(state, stats);
+    const options = slots[slotIndex].entry ? [{ __clear: true }, ...pouch] : pouch;
+
+    selectorOverlay.openSelector({
+      title: "Choose Skill",
+      description: "Pick a skill from your pouch to fill this slot.",
+      options,
+      getOptionContent: (option) => describeSkillSlotOption(option),
+      onSelect: (option) => selectSkillSlot(slotIndex, option.__clear ? { cleared: true } : { target: option.source }),
+      isSelected: () => false,
+    });
+  }
+
+  function selectItemSlot(slotIndex, override) {
+    state.itemSlots[slotIndex] = override;
+    commitSelection();
+  }
+
+  function openItemPickerForSlot(slotIndex) {
+    const stats = collectCharacterStats(state);
+    const { slots, pouch } = resolveItemSlots(state, stats);
+    const eligiblePouch = getEligibleItemPouchForSlot(pouch, slotIndex);
+    const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
+
+    selectorOverlay.openSelector({
+      title: "Choose Item",
+      description: "Pick an item from your pouch to fill this slot.",
+      options,
+      getOptionContent: (option) => describeItemSlotOption(option),
+      onSelect: (option) =>
+        selectItemSlot(slotIndex, option.__clear ? { cleared: true } : { target: { itemName: option.itemName } }),
+      isSelected: () => false,
+    });
+  }
+
+  function selectActionSlot(slotIndex, override) {
+    state.actionSlots[slotIndex] = override;
+    commitSelection();
+  }
+
+  function openActionPickerForSlot(slotIndex) {
+    const stats = collectCharacterStats(state);
+    const { slots, pouch } = resolveActionSlots(state, stats);
+    const eligiblePouch = getEligibleActionPouchForSlot(pouch, slotIndex);
+    const previewStats = buildActionCardPreviewStats(stats);
+    const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
+
+    selectorOverlay.openSelector({
+      kicker: "Hotbar Slot " + (slotIndex + 1),
+      title: "Choose Action Card",
+      description: "Pick an action card from your pouch to fill this slot.",
+      options,
+      getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
+      onSelect: (option) =>
+        selectActionSlot(slotIndex, option.__clear ? { cleared: true } : { target: { cardName: option.cardName } }),
+      isSelected: () => false,
+    });
   }
 
   return {

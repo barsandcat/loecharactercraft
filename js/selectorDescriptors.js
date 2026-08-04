@@ -5,7 +5,13 @@ import {
   buildPreviewStatsForSelection,
   buildLevelUpPreview,
 } from "./characterStats.js";
-import { buildEntryParts, buildRaceDetailParts, formatAttributeSummary } from "./displayParts.js";
+import {
+  buildEntryParts,
+  buildRaceDetailParts,
+  formatAttributeSummary,
+  getItemDisplayName,
+  getActionCardDisplayName,
+} from "./displayParts.js";
 import { appendDisplayParts } from "./displayPartsDom.js";
 
 export function describeVersionOption(state, option, slotIndex) {
@@ -117,5 +123,32 @@ export function describeBasicUpgradeFamilyOption(state, family, previewStats) {
   return {
     title: family.name,
     actionCards: buildActionCardPreviews(state.data, [family.maxCardId], previewStats),
+  };
+}
+
+export function describeSkillSlotOption(option) {
+  if (option.__clear) {
+    return { title: "Clear Slot", detail: "Return this skill to the pouch." };
+  }
+  return { title: option.skill };
+}
+
+export function describeItemSlotOption(option) {
+  if (option.__clear) {
+    return { title: "Clear Slot", detail: "Return this item to the pouch." };
+  }
+  return {
+    title: getItemDisplayName(option.item),
+    items: [option.item],
+  };
+}
+
+export function describeActionSlotOption(state, option, previewStats) {
+  if (option.__clear) {
+    return { title: "Clear Slot", detail: "Return this action card to the pouch." };
+  }
+  return {
+    title: getActionCardDisplayName(option.card),
+    actionCards: buildActionCardPreviews(state.data, [option.card._cardId], previewStats),
   };
 }

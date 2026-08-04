@@ -267,6 +267,24 @@ h1 {
   border-color: rgba(201, 168, 64, 0.45);
 }
 
+/* Locked: distinct from plain :disabled dimming — a game-rule threshold isn't
+   met yet, not merely "no options available right now". */
+.choice-button.is-locked {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(120, 110, 90, 0.10),
+    rgba(120, 110, 90, 0.10) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  border-color: rgba(120, 110, 90, 0.32);
+}
+.choice-button.is-locked .choice-label,
+.choice-button.is-locked .choice-main,
+.choice-button.is-locked .choice-detail {
+  color: var(--muted);
+}
+
 /* Accent / selected: dark band style like handbook section headers */
 .choice-button.is-accent {
   background: var(--dark);
@@ -302,6 +320,72 @@ h1 {
   margin-bottom: 8px;
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(201, 168, 64, 0.22);
+}
+
+/* A section title with a trailing "N in pouch" note (Skills/Items/Action
+   Card Hotbar) — the header itself carries the underline so it spans the
+   whole row instead of just the h3's own width. */
+.summary-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(201, 168, 64, 0.22);
+}
+.summary-card-header h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.pouch-count {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.slot-grid {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+}
+
+/* Items/Action Card Hotbar: one row per slot, full width — an occupied slot
+   renders its actual item/action-card element (same as before this feature),
+   so rows need to stretch full width rather than sit in a compact grid. */
+.slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slot-full-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  padding: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 130ms ease, background 130ms ease;
+}
+.slot-full-button:hover,
+.slot-full-button:focus-visible {
+  border-color: rgba(201, 168, 64, 0.4);
+  background: rgba(250, 244, 230, 0.5);
+  outline: none;
+}
+
+.slot-full-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gold-text);
+  margin-bottom: 4px;
 }
 
 .summary-stat-group {

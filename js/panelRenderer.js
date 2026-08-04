@@ -1,13 +1,22 @@
 import { ATTRIBUTES, buildActionCardElement } from "./cardRender.js";
-import { ACTION_CATEGORIES, ITEM_TYPE_ORDER } from "./constants.js";
+import { ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
 import { getRaceAttributeOptions, getRaceFreeSkills } from "./stateCodec.js";
 import {
   getAccessibleAdvancementTreeNames,
   buildSelectedByTree,
   isAdvancementLevelUnlocked,
 } from "./advancementTree.js";
-import { collectCharacterStats, buildActionCardPreviewStats, buildPreviewStatsForSelection } from "./characterStats.js";
-import { buildRaceDetailParts, buildEntryParts, formatAttributeSummary, getItemDisplayName } from "./displayParts.js";
+import {
+  collectCharacterStats,
+  buildActionCardPreviewStats,
+  buildPreviewStatsForSelection,
+  resolveSkillSlots,
+  resolveItemSlots,
+  resolveActionSlots,
+  getEligibleItemPouchForSlot,
+  getEligibleActionPouchForSlot,
+} from "./characterStats.js";
+import { buildRaceDetailParts, buildEntryParts, formatAttributeSummary } from "./displayParts.js";
 import { appendDisplayParts, appendCountSummary } from "./displayPartsDom.js";
 import {
   describeRaceOption,
@@ -28,9 +37,31 @@ import {
   renderEntryToElement,
 } from "./uiComponents.js";
 
-export function createPanelRenderer({ state, ui, callbacks }) {
-  let cardWidthObserver = null;
+// Slot labels, computed once — e.g. ["Head", "Chest", "Hand 1", "Hand 2", "Hand 3", "Feet", "Small 1", ...].
+const ITEM_SLOT_LABELS = (() => {
+  const seenCounts = {};
+  return ITEM_SLOT_TYPES.map((type) => {
+    seenCounts[type] = (seenCounts[type] || 0) + 1;
+    const totalOfType = ITEM_SLOT_TYPES.filter((candidate) => candidate === type).length;
+    return totalOfType > 1 ? type + " " + seenCounts[type] : type;
+  });
+})();
 
+// e.g. "Slot 1 (Off)", "Slot 3 (Off/Sup)", "Slot 7 (Any)".
+const ACTION_SLOT_LABELS = ACTION_SLOT_RULES.map((rule, index) => {
+  const categoryLabel = rule.categories.length === 3
+    ? "Any"
+    : rule.categories.map((category) => category.slice(0, 3)).join("/");
+  return "Slot " + (index + 1) + " (" + categoryLabel + ")";
+});
+
+function describeStolenReason(slotResult) {
+  return slotResult.reason === "stolen"
+    ? "Currently used in Slot " + (slotResult.stolenBySlot + 1) + "."
+    : "";
+}
+
+export function createPanelRenderer({ state, ui, callbacks }) {
   function renderControls(levelMeta) {
     const container = ui.controlsPanel;
     container.replaceChildren();
@@ -293,139 +324,116 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       }]));
     }
 
-    if (stats.skillCounts.size) {
-      container.appendChild(createListSection("Skills (max 3)", [{
-        render: (parent) => appendCountSummary(parent, stats.skillCounts, "skill"),
-      }]));
-    }
+    container.appendChild(buildSlotSection({
+      title: "Skills",
+      resolved: resolveSkillSlots(state, stats),
+      slotLabel: (slotIndex) => "Skill " + (slotIndex + 1),
+      slotMain: (entry) => entry.skill,
+      eligiblePouchCount: (pouch) => pouch.length,
+      onClick: (slotIndex) => callbacks.openSkillPickerForSlot(slotIndex),
+    }));
 
-    const items = Array.from(stats.items.values());
-    if (items.length) {
-      const itemsSection = document.createElement("section");
-      itemsSection.className = "summary-card";
+    container.appendChild(buildSlotSection({
+      title: "Items",
+      resolved: resolveItemSlots(state, stats),
+      slotLabel: (slotIndex) => ITEM_SLOT_LABELS[slotIndex],
+      renderOccupiedContent: (entry) => buildItemElement(entry.item),
+      listLayout: true,
+      eligiblePouchCount: (pouch, slotIndex) => getEligibleItemPouchForSlot(pouch, slotIndex).length,
+      onClick: (slotIndex) => callbacks.openItemPickerForSlot(slotIndex),
+    }));
 
-      const itemsTitle = document.createElement("h3");
-      itemsTitle.textContent = "Items";
-      itemsSection.appendChild(itemsTitle);
+    container.appendChild(buildSlotSection({
+      title: "Action Card Hotbar",
+      resolved: resolveActionSlots(state, stats),
+      slotLabel: (slotIndex) => ACTION_SLOT_LABELS[slotIndex],
+      renderOccupiedContent: (entry) =>
+        buildActionCardElement(entry.card._cardId, entry.card, actionCardPreviewStats.attributes, actionCardPreviewStats.keywordCounts),
+      listLayout: true,
+      eligiblePouchCount: (pouch, slotIndex) => getEligibleActionPouchForSlot(pouch, slotIndex).length,
+      lockedDetail: (slotIndex) => {
+        const unlockAt = ACTION_SLOT_RULES[slotIndex].unlockAt;
+        return "Locked — needs " + unlockAt + " level-up" + (unlockAt === 1 ? "" : "s") + ".";
+      },
+      onClick: (slotIndex) => callbacks.openActionPickerForSlot(slotIndex),
+    }));
+  }
 
-      const itemsByType = new Map();
-      items.forEach((item) => {
-        const type = item.Type;
-        if (!itemsByType.has(type)) {
-          itemsByType.set(type, []);
-        }
-        itemsByType.get(type).push(item);
-      });
+  // Shared renderer for the Skills/Items/Action-Card-Hotbar slot grids — a
+  // header with a pouch count, then one row per slot. Skills stay a compact
+  // choice-button grid (no rich rendering exists for a bare skill name).
+  // Items/actions instead render their FULL existing element (buildItemElement
+  // / buildActionCardElement, same as before this feature existed) for an
+  // occupied slot, wrapped in a plain clickable button, falling back to the
+  // compact button only for empty/locked slots.
+  function buildSlotSection({
+    title,
+    resolved,
+    slotLabel,
+    slotMain,
+    eligiblePouchCount,
+    lockedDetail,
+    onClick,
+    renderOccupiedContent,
+    listLayout,
+  }) {
+    const { slots, pouch } = resolved;
 
-      const sortedTypes = Array.from(itemsByType.keys()).sort((a, b) => {
-        const indexA = ITEM_TYPE_ORDER.indexOf(a);
-        const indexB = ITEM_TYPE_ORDER.indexOf(b);
+    const section = document.createElement("section");
+    section.className = "summary-card";
 
-        if (indexA !== -1 || indexB !== -1) {
-          if (indexA === -1) return 1;
-          if (indexB === -1) return -1;
-          return indexA - indexB;
-        }
+    const header = document.createElement("div");
+    header.className = "summary-card-header";
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    header.appendChild(heading);
+    const pouchCount = document.createElement("span");
+    pouchCount.className = "pouch-count";
+    pouchCount.textContent = pouch.length + " in pouch";
+    header.appendChild(pouchCount);
+    section.appendChild(header);
 
-        return a.localeCompare(b);
-      });
+    const list = document.createElement("div");
+    list.className = listLayout ? "slot-list" : "slot-grid";
+    slots.forEach((slotResult, slotIndex) => {
+      const occupied = Boolean(slotResult.entry);
+      const locked = slotResult.reason === "locked";
 
-      sortedTypes.forEach((type) => {
-        const typeGroup = document.createElement("div");
-        typeGroup.className = "action-category-group";
+      if (occupied && renderOccupiedContent) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "slot-full-button";
 
-        const typeTitle = document.createElement("h4");
-        typeTitle.className = "action-category-title";
-        typeTitle.textContent = type;
-        typeGroup.appendChild(typeTitle);
+        const label = document.createElement("div");
+        label.className = "slot-full-label";
+        label.textContent = slotLabel(slotIndex);
+        button.appendChild(label);
 
-        const itemsList = document.createElement("ul");
-        itemsList.className = "list-block";
-
-        itemsByType
-          .get(type)
-          .sort((a, b) => getItemDisplayName(a).localeCompare(getItemDisplayName(b)))
-          .forEach((item) => {
-            const itemLi = document.createElement("li");
-            itemLi.className = "action-list-item";
-            itemLi.appendChild(buildItemElement(item));
-
-            itemsList.appendChild(itemLi);
-          });
-
-        typeGroup.appendChild(itemsList);
-        itemsSection.appendChild(typeGroup);
-      });
-
-      container.appendChild(itemsSection);
-    }
-
-    if (stats.actions.size) {
-      const actionSection = document.createElement("section");
-      actionSection.className = "summary-card";
-
-      const actionTitle = document.createElement("h3");
-      actionTitle.textContent = "Action Cards";
-      actionSection.appendChild(actionTitle);
-
-      const cardsByCategory = {
-        Offensive: [],
-        Defensive: [],
-        Support: [],
-      };
-
-      Array.from(stats.actions.values()).forEach((card) => {
-        const category = cardsByCategory[card.Front.Category] ? card.Front.Category : "Offensive";
-        cardsByCategory[category].push({ cardId: card._cardId, card });
-      });
-
-      ACTION_CATEGORIES.forEach((category) => {
-        const cards = cardsByCategory[category];
-        if (cards.length > 0) {
-          const categoryGroup = document.createElement("div");
-          categoryGroup.className = "action-category-group";
-
-          const categoryTitle = document.createElement("h4");
-          categoryTitle.className = "action-category-title";
-          categoryTitle.textContent = category;
-          categoryGroup.appendChild(categoryTitle);
-
-          const actionList = document.createElement("ul");
-          actionList.className = "action-list";
-
-          cards.forEach(({ cardId, card }) => {
-            const li = document.createElement("li");
-            li.className = "action-list-item";
-            li.appendChild(
-              buildActionCardElement(
-                cardId,
-                card,
-                actionCardPreviewStats.attributes,
-                actionCardPreviewStats.keywordCounts
-              )
-            );
-            actionList.appendChild(li);
-          });
-
-          categoryGroup.appendChild(actionList);
-          actionSection.appendChild(categoryGroup);
-        }
-      });
-
-      container.appendChild(actionSection);
-
-      if (!cardWidthObserver) {
-        const syncCardWidth = () => {
-          const firstCard = ui.summaryPanel.querySelector('.action-card-full');
-          if (firstCard) {
-            document.documentElement.style.setProperty('--action-card-width', firstCard.offsetWidth + 'px');
-          }
-        };
-        requestAnimationFrame(syncCardWidth);
-        cardWidthObserver = new ResizeObserver(syncCardWidth);
-        cardWidthObserver.observe(ui.summaryPanel);
+        button.appendChild(renderOccupiedContent(slotResult.entry));
+        button.addEventListener("click", () => onClick(slotIndex));
+        list.appendChild(button);
+        return;
       }
-    }
+
+      const hasEligiblePouch = !locked && eligiblePouchCount(pouch, slotIndex) > 0;
+      list.appendChild(singleChoiceGrid({
+        label: slotLabel(slotIndex),
+        main: occupied && slotMain
+          ? slotMain(slotResult.entry)
+          : locked
+            ? "Locked"
+            : "Empty",
+        detail: locked && lockedDetail ? lockedDetail(slotIndex) : describeStolenReason(slotResult),
+        complete: occupied,
+        empty: !occupied && !locked,
+        locked,
+        disabled: !occupied && !locked && !hasEligiblePouch,
+        onClick: () => onClick(slotIndex),
+      }));
+    });
+    section.appendChild(list);
+
+    return section;
   }
 
   function renderTrees(levelMeta) {

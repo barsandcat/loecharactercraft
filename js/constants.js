@@ -13,3 +13,23 @@ export const BASIC_UPGRADE_FAMILIES = [
   { name: "Combat Insight", maxCardId: "B08" },
   { name: "Command", maxCardId: "B11" },
 ];
+
+export const SKILL_SLOTS = 3;
+
+// Index-aligned with state.itemSlots — which item Type each of the 10 slots accepts.
+export const ITEM_SLOT_TYPES = ["Head", "Chest", "Hand", "Hand", "Hand", "Feet", "Small", "Small", "Small", "Small"];
+
+// Index-aligned with state.actionSlots — which categories each of the 10
+// hotbar slots accepts, and the getFilledLevelCount() threshold that unlocks it.
+export const ACTION_SLOT_RULES = [
+  { categories: ["Offensive"], unlockAt: 0 },
+  { categories: ["Defensive"], unlockAt: 0 },
+  { categories: ["Offensive", "Support"], unlockAt: 0 },
+  { categories: ["Defensive", "Support"], unlockAt: 0 },
+  { categories: ["Offensive", "Support"], unlockAt: 0 },
+  { categories: ["Defensive", "Support"], unlockAt: 0 },
+  { categories: ["Offensive", "Support"], unlockAt: 1 },
+  { categories: ["Defensive", "Support"], unlockAt: 3 },
+  { categories: ["Offensive", "Defensive", "Support"], unlockAt: 5 },
+  { categories: ["Offensive", "Defensive", "Support"], unlockAt: 7 },
+];

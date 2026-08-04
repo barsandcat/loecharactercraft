@@ -1,4 +1,5 @@
-import { LEVEL_UP_SLOTS, BASIC_UPGRADE_FAMILIES } from "./constants.js";
+import { LEVEL_UP_SLOTS, BASIC_UPGRADE_FAMILIES, SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
+import { collectCharacterStats, matchesSkillTarget } from "./characterStats.js";
 
 export function createEmptyLevelUps() {
   return Array.from({ length: LEVEL_UP_SLOTS }, () => ({
@@ -37,9 +38,9 @@ export function getOptionByIndex(options, index) {
   return options[index] || null;
 }
 
-export function serializeStateV2(selection, data, trees) {
-  const widths = getV2EncodingWidths(data);
-  const totalBits = getTotalBitsV2(widths);
+export function serializeStateV3(selection, data, trees) {
+  const widths = getV3EncodingWidths(data);
+  const totalBits = getTotalBitsV3(widths);
   const bytes = new Uint8Array(Math.ceil(totalBits / 8));
   let offset = 0;
 
@@ -81,21 +82,50 @@ export function serializeStateV2(selection, data, trees) {
     const familyId = familyIndex >= 0 ? familyIndex + 1 : 0;
 
     writeValue(encodeV1Id(treeId), widths.tree);
-    // levelValue is always a non-negative integer (0 for an empty slot), so the
-    // nullable-id encoding is safe to reuse here instead of a separate encoder.
     writeValue(encodeV1Id(levelValue), widths.level);
     writeValue(encodeV1Id(optionId), widths.option);
     writeValue(familyId, widths.basicUpgradeFamily);
   });
 
-  // "." rather than v1's ":" — some forum/board auto-linkers treat a colon
-  // right after a URL fragment as a scheme boundary and split the link there.
-  return "v2." + encodeBytesToBase64Url(bytes);
+  // Slot overrides reference a pool entry by *position*, never by a persisted
+  // long-term id — the pool is rebuilt identically (same deterministic walk)
+  // on decode from the already-resolved race/origin/profession/path/levelUps
+  // fields above, so position N always means "whatever this exact build's
+  // Nth pool entry currently is." collectCharacterStats accepts `selection`
+  // directly here since it already has the `.data`/`.trees` shape of a full
+  // state object (character.js always calls this with the live state).
+  const stats = collectCharacterStats(selection);
+
+  selection.skillSlots.forEach((override) => {
+    writeValue(
+      encodeSlotOverride(override, stats.skillPool, (entry, target) => matchesSkillTarget(entry.source, target)),
+      widths.skillSlot
+    );
+  });
+  selection.itemSlots.forEach((override) => {
+    writeValue(
+      encodeSlotOverride(override, stats.itemPool, (entry, target) => entry.itemName === target.itemName),
+      widths.itemSlot
+    );
+  });
+  selection.actionSlots.forEach((override) => {
+    writeValue(
+      encodeSlotOverride(override, stats.actionPool, (entry, target) => entry.cardName === target.cardName),
+      widths.actionSlot
+    );
+  });
+
+  return "v3." + encodeBytesToBase64Url(bytes);
 }
 
 export function deserializeState(encoded, data, trees) {
   if (!encoded) {
     return null;
+  }
+
+  if (encoded.startsWith("v3.")) {
+    const decoded = decodeV3State(encoded.slice(3), data);
+    return decoded ? resolveV3Patch(decoded, data, trees) : null;
   }
 
   if (encoded.startsWith("v2.")) {
@@ -210,6 +240,63 @@ function resolveV2Patch(compact, data) {
       basicUpgradeFamily: levelUp.basicUpgradeFamily || null,
     };
   });
+
+  return patch;
+}
+
+function resolveV3Patch(compact, data, trees) {
+  const patch = {
+    selectedRace: null,
+    selectedAttributeSet: null,
+    selectedFreeSkill: null,
+    selectedOrigin: null,
+    selectedProf: null,
+    selectedPath: null,
+    levelUps: createEmptyLevelUps(),
+  };
+
+  patch.selectedRace = data.Races.find((race) => race.Id === compact.raceId) || null;
+  if (patch.selectedRace) {
+    patch.selectedAttributeSet = getAttributeSetById(patch.selectedRace, compact.attributeId);
+    patch.selectedFreeSkill = getFreeSkillById(patch.selectedRace, compact.freeSkillId);
+  }
+
+  patch.selectedOrigin = data.Origins.find((origin) => origin.Id === compact.originId) || null;
+  patch.selectedProf = data.Professions.find((profession) => profession.Id === compact.professionId) || null;
+  if (patch.selectedProf) {
+    patch.selectedPath = patch.selectedProf.Paths.find((path) => path.Id === compact.pathId) || null;
+  }
+
+  const levelUps = Array.isArray(compact.levelUps) ? compact.levelUps : [];
+  levelUps.forEach((levelUp, index) => {
+    if (!levelUp || index >= LEVEL_UP_SLOTS) {
+      return;
+    }
+
+    const tree = data.AdvancementTrees.find((entry) => entry.Id === levelUp.treeId) || null;
+    if (!tree) {
+      return;
+    }
+
+    const versionIndex = findTreeLevelVersionIndex(tree, levelUp.level, levelUp.optionId);
+    patch.levelUps[index] = {
+      treeName: tree.Name,
+      level: levelUp.level || null,
+      versionIndex: versionIndex !== null ? versionIndex : null,
+      basicUpgradeFamily: levelUp.basicUpgradeFamily || null,
+    };
+  });
+
+  // Only now that race/origin/profession/path/levelUps are resolved can the
+  // pool be rebuilt identically to how the live UI computes it, so each
+  // slot's wire-format pool index can be translated back into a stable
+  // name/provenance target — this dependency order (base selections first,
+  // slot arrays second) is required, not incidental.
+  const stats = collectCharacterStats({ data, trees, ...patch });
+
+  patch.skillSlots = decodeSlotArray(compact.skillSlotCodes, stats.skillPool, (entry) => entry.source);
+  patch.itemSlots = decodeSlotArray(compact.itemSlotCodes, stats.itemPool, (entry) => ({ itemName: entry.itemName }));
+  patch.actionSlots = decodeSlotArray(compact.actionSlotCodes, stats.actionPool, (entry) => ({ cardName: entry.cardName }));
 
   return patch;
 }
@@ -392,6 +479,87 @@ function decodeV2State(encoded, data) {
   };
 }
 
+function decodeV3State(encoded, data) {
+  const bytes = decodeBase64Url(encoded);
+  const widths = getV3EncodingWidths(data);
+  const totalBits = getTotalBitsV3(widths);
+
+  if (bytes.length * 8 < totalBits) {
+    return null;
+  }
+
+  let offset = 0;
+  const readValue = (bits) => {
+    let value = 0;
+    for (let bitIndex = 0; bitIndex < bits; bitIndex += 1) {
+      const bitPosition = offset + bitIndex;
+      const byteIndex = Math.floor(bitPosition / 8);
+      const bitOffsetInByte = bitPosition % 8;
+      if (byteIndex < bytes.length && (bytes[byteIndex] & (1 << bitOffsetInByte))) {
+        value |= 1 << bitIndex;
+      }
+    }
+    offset += bits;
+    return value;
+  };
+
+  const raceId = decodeV1Id(readValue(widths.race));
+  const attributeId = decodeV1Id(readValue(widths.attribute));
+  const freeSkillId = decodeV1Id(readValue(widths.freeSkill));
+  const originId = decodeV1Id(readValue(widths.origin));
+  const professionId = decodeV1Id(readValue(widths.profession));
+  const pathId = decodeV1Id(readValue(widths.path));
+
+  const levelUps = [];
+  for (let index = 0; index < LEVEL_UP_SLOTS; index += 1) {
+    const treeId = decodeV1Id(readValue(widths.tree));
+    const level = decodeV1Id(readValue(widths.level));
+    const optionId = decodeV1Id(readValue(widths.option));
+    const familyId = readValue(widths.basicUpgradeFamily);
+    const basicUpgradeFamily = familyId > 0 ? (BASIC_UPGRADE_FAMILIES[familyId - 1]?.name ?? null) : null;
+
+    if (treeId !== null && level > 0 && optionId !== null) {
+      const tree = data.AdvancementTrees.find((entry) => entry.Id === treeId) || null;
+      const versionIndex = tree ? findTreeLevelVersionIndex(tree, level, optionId) : null;
+      levelUps.push({
+        treeId,
+        level,
+        optionId,
+        versionIndex,
+        basicUpgradeFamily,
+      });
+    } else {
+      levelUps.push(null);
+    }
+  }
+
+  const skillSlotCodes = [];
+  for (let index = 0; index < widths.skillSlotCount; index += 1) {
+    skillSlotCodes.push(readValue(widths.skillSlot));
+  }
+  const itemSlotCodes = [];
+  for (let index = 0; index < widths.itemSlotCount; index += 1) {
+    itemSlotCodes.push(readValue(widths.itemSlot));
+  }
+  const actionSlotCodes = [];
+  for (let index = 0; index < widths.actionSlotCount; index += 1) {
+    actionSlotCodes.push(readValue(widths.actionSlot));
+  }
+
+  return {
+    raceId,
+    attributeId,
+    freeSkillId,
+    originId,
+    professionId,
+    pathId,
+    levelUps,
+    skillSlotCodes,
+    itemSlotCodes,
+    actionSlotCodes,
+  };
+}
+
 function getV1EncodingWidths(data) {
   const maxEncodedId = (values) => {
     const maxValue = values.reduce((current, value) => Math.max(current, value ?? 0), 0);
@@ -432,6 +600,38 @@ function getV2EncodingWidths(data) {
   };
 }
 
+function getV3EncodingWidths(data) {
+  // Bounds computed live from `data` (not hardcoded today's numbers) so this
+  // self-adjusts if data.json's shape ever changes, rather than silently
+  // under-sizing — the same philosophy getV1EncodingWidths already applies
+  // to race/tree/option ids.
+  const allLevelOptions = data.AdvancementTrees.flatMap((tree) => Object.values(tree.Levels || {}).flat());
+  const allPaths = data.Professions.flatMap((profession) => profession.Paths);
+
+  const skillPoolBound = 2 + 1 + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.Skills);
+  const itemPoolBound = 2
+    + maxArrayLength(data.Origins, (origin) => origin.Items)
+    + maxArrayLength(allPaths, (path) => path.Items);
+  const actionPoolBound = 2
+    + maxArrayLength(data.Races, (race) => race.ActionCards)
+    + maxArrayLength(allPaths, (path) => path.ActionCards)
+    + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.ActionCards);
+
+  return {
+    ...getV2EncodingWidths(data),
+    skillSlotCount: SKILL_SLOTS,
+    itemSlotCount: ITEM_SLOT_TYPES.length,
+    actionSlotCount: ACTION_SLOT_RULES.length,
+    skillSlot: Math.max(1, Math.ceil(Math.log2(skillPoolBound))),
+    itemSlot: Math.max(1, Math.ceil(Math.log2(itemPoolBound))),
+    actionSlot: Math.max(1, Math.ceil(Math.log2(actionPoolBound))),
+  };
+}
+
+function maxArrayLength(items, getArray) {
+  return items.reduce((max, item) => Math.max(max, (getArray(item) || []).length), 0);
+}
+
 function getTotalBits(widths) {
   return widths.race + widths.attribute + widths.freeSkill + widths.origin + widths.profession + widths.path
     + widths.levelUps * (widths.tree + widths.level + widths.option);
@@ -439,6 +639,39 @@ function getTotalBits(widths) {
 
 function getTotalBitsV2(widths) {
   return getTotalBits(widths) + widths.levelUps * widths.basicUpgradeFamily;
+}
+
+function getTotalBitsV3(widths) {
+  return getTotalBitsV2(widths)
+    + widths.skillSlotCount * widths.skillSlot
+    + widths.itemSlotCount * widths.itemSlot
+    + widths.actionSlotCount * widths.actionSlot;
+}
+
+function encodeSlotOverride(override, pool, matches) {
+  if (!override) {
+    return 0; // auto
+  }
+  if (override.cleared) {
+    return 1;
+  }
+  const poolIndex = pool.findIndex((entry) => matches(entry, override.target));
+  // A stale target (no longer in the pool) encodes as auto, matching the live
+  // resolver's own degrade-to-auto behavior for the same situation.
+  return poolIndex >= 0 ? poolIndex + 2 : 0;
+}
+
+function decodeSlotArray(codes, pool, extractTarget) {
+  return (codes || []).map((code) => {
+    if (code === 0) {
+      return null;
+    }
+    if (code === 1) {
+      return { cleared: true };
+    }
+    const entry = pool[code - 2];
+    return entry ? { target: extractTarget(entry) } : null;
+  });
 }
 
 function encodeV1Id(id) {
