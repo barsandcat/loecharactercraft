@@ -19,7 +19,7 @@ export function buildPrintableText(state) {
   lines.push("");
 
   lines.push("Level Up Choices");
-  const choices = getPrintableLevelUpChoices(state);
+  const choices = getPrintableLevelUpChoices(state, stats);
   if (!choices.length) {
     lines.push("- None");
   } else {
@@ -35,9 +35,9 @@ export function buildPrintableText(state) {
   return lines.join("\n");
 }
 
-function getPrintableLevelUpChoices(state) {
+function getPrintableLevelUpChoices(state, stats) {
   return state.levelUps
-    .map((slotState) => {
+    .map((slotState, slotIndex) => {
       if (
         slotState.treeName === null ||
         slotState.level === null ||
@@ -57,13 +57,25 @@ function getPrintableLevelUpChoices(state) {
         return null;
       }
 
+      const basicUpgradeSlot = stats.basicUpgradeSlots.find((slot) => slot.slotIndex === slotIndex);
+      const selection = formatEntryForPlainText(state, versionOption.entry) + formatBasicUpgradeSuffix(basicUpgradeSlot);
+
       return {
         treeName: option.treeName,
         level: option.level,
-        selection: formatEntryForPlainText(state, versionOption.entry),
+        selection,
       };
     })
     .filter(Boolean);
+}
+
+function formatBasicUpgradeSuffix(basicUpgradeSlot) {
+  if (!basicUpgradeSlot) {
+    return "";
+  }
+  return basicUpgradeSlot.chosenFamily
+    ? " (duplicate reward — upgraded " + basicUpgradeSlot.chosenFamily.name + " instead)"
+    : " (duplicate reward — basic upgrade not chosen yet)";
 }
 
 function formatEntryForPlainText(state, entry) {
