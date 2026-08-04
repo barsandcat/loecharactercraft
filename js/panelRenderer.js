@@ -35,6 +35,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     const container = ui.controlsPanel;
     container.replaceChildren();
 
+    const stats = collectCharacterStats(state);
     const attrOptions = state.selectedRace ? getRaceAttributeOptions(state.selectedRace) : [];
     const freeSkillOptions = getRaceFreeSkills(state.selectedRace);
     const pathOptions = state.selectedProf ? state.selectedProf.Paths : [];
@@ -219,6 +220,20 @@ export function createPanelRenderer({ state, ui, callbacks }) {
             }),
         },
       }));
+
+      const basicUpgradeSlot = stats.basicUpgradeSlots.find((slot) => slot.slotIndex === slotMeta.slotIndex);
+      if (basicUpgradeSlot) {
+        container.appendChild(singleChoiceGrid({
+          label: "Basic Upgrade",
+          main: basicUpgradeSlot.chosenFamily
+            ? "Upgraded: " + basicUpgradeSlot.chosenFamily.name
+            : "Select basic to upgrade",
+          detail: "This reward duplicates a basic action you already have at its top tier.",
+          complete: Boolean(basicUpgradeSlot.chosenFamily),
+          empty: !basicUpgradeSlot.chosenFamily,
+          onClick: () => callbacks.openBasicUpgradePickerForSlot(slotMeta.slotIndex),
+        }));
+      }
     });
   }
 
@@ -352,13 +367,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       const actionTitle = document.createElement("h3");
       actionTitle.textContent = "Action Cards";
       actionSection.appendChild(actionTitle);
-
-      if (stats.freeUpgrades > 0) {
-        const upgradeChip = document.createElement("div");
-        upgradeChip.className = "free-upgrades-chip";
-        upgradeChip.textContent = stats.freeUpgrades + " free upgrade" + (stats.freeUpgrades > 1 ? "s" : "") + " available";
-        actionSection.appendChild(upgradeChip);
-      }
 
       const cardsByCategory = {
         Offensive: [],

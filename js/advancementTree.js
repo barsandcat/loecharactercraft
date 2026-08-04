@@ -28,10 +28,12 @@ function walkLevelUpSlots(state, { autoSelect }) {
         selectedTree = treeOptions[0];
         slotState.treeName = selectedTree.treeName;
         slotState.level = selectedTree.level;
+        slotState.basicUpgradeFamily = null;
       } else {
         slotState.treeName = null;
         slotState.level = null;
         slotState.versionIndex = null;
+        slotState.basicUpgradeFamily = null;
       }
     }
 
@@ -48,8 +50,10 @@ function walkLevelUpSlots(state, { autoSelect }) {
     if (autoSelect) {
       if (selectedTree && !selectedVersion && versionOptions.length !== 1) {
         slotState.versionIndex = null;
+        slotState.basicUpgradeFamily = null;
       } else if (!selectedTree) {
         slotState.versionIndex = null;
+        slotState.basicUpgradeFamily = null;
       }
     }
 
@@ -127,7 +131,7 @@ export function getAvailableLevelUpOptions(state, slotIndex, priorSelectedOption
 export function getSelectedAdvancementEntries(state, levelUps = state.levelUps) {
   const entries = [];
 
-  levelUps.forEach((slotState) => {
+  levelUps.forEach((slotState, slotIndex) => {
     if (
       slotState.treeName === null ||
       slotState.level === null ||
@@ -146,7 +150,7 @@ export function getSelectedAdvancementEntries(state, levelUps = state.levelUps) 
       slotState.versionIndex >= 0 &&
       slotState.versionIndex < versionOptions.length
     ) {
-      entries.push(versionOptions[slotState.versionIndex].entry);
+      entries.push({ slotIndex, entry: versionOptions[slotState.versionIndex].entry });
     }
   });
 

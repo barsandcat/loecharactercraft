@@ -1,7 +1,12 @@
-import { LEVEL_UP_SLOTS } from "./constants.js";
+import { LEVEL_UP_SLOTS, BASIC_UPGRADE_FAMILIES } from "./constants.js";
 
 export function createEmptyLevelUps() {
-  return Array.from({ length: LEVEL_UP_SLOTS }, () => ({ treeName: null, level: null, versionIndex: null }));
+  return Array.from({ length: LEVEL_UP_SLOTS }, () => ({
+    treeName: null,
+    level: null,
+    versionIndex: null,
+    basicUpgradeFamily: null,
+  }));
 }
 
 export function getRaceAttributeOptions(race) {
@@ -32,9 +37,9 @@ export function getOptionByIndex(options, index) {
   return options[index] || null;
 }
 
-export function serializeStateV1(selection, data, trees) {
-  const widths = getV1EncodingWidths(data);
-  const totalBits = getTotalBits(widths);
+export function serializeStateV2(selection, data, trees) {
+  const widths = getV2EncodingWidths(data);
+  const totalBits = getTotalBitsV2(widths);
   const bytes = new Uint8Array(Math.ceil(totalBits / 8));
   let offset = 0;
 
@@ -70,20 +75,30 @@ export function serializeStateV1(selection, data, trees) {
     const optionId = slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
       ? getTreeLevelOptionId(tree, slot.level, slot.versionIndex)
       : null;
+    const familyIndex = slot.basicUpgradeFamily
+      ? BASIC_UPGRADE_FAMILIES.findIndex((family) => family.name === slot.basicUpgradeFamily)
+      : -1;
+    const familyId = familyIndex >= 0 ? familyIndex + 1 : 0;
 
     writeValue(encodeV1Id(treeId), widths.tree);
     // levelValue is always a non-negative integer (0 for an empty slot), so the
     // nullable-id encoding is safe to reuse here instead of a separate encoder.
     writeValue(encodeV1Id(levelValue), widths.level);
     writeValue(encodeV1Id(optionId), widths.option);
+    writeValue(familyId, widths.basicUpgradeFamily);
   });
 
-  return "v1:" + encodeBytesToBase64Url(bytes);
+  return "v2:" + encodeBytesToBase64Url(bytes);
 }
 
 export function deserializeState(encoded, data, trees) {
   if (!encoded) {
     return null;
+  }
+
+  if (encoded.startsWith("v2:")) {
+    const decoded = decodeV2State(encoded.slice(3), data);
+    return decoded ? resolveV2Patch(decoded, data) : null;
   }
 
   if (encoded.startsWith("v1:")) {
@@ -144,6 +159,53 @@ function resolveV1Patch(compact, data) {
       treeName: tree.Name,
       level: levelUp.level || null,
       versionIndex: versionIndex !== null ? versionIndex : null,
+      basicUpgradeFamily: null,
+    };
+  });
+
+  return patch;
+}
+
+function resolveV2Patch(compact, data) {
+  const patch = {
+    selectedRace: null,
+    selectedAttributeSet: null,
+    selectedFreeSkill: null,
+    selectedOrigin: null,
+    selectedProf: null,
+    selectedPath: null,
+    levelUps: createEmptyLevelUps(),
+  };
+
+  patch.selectedRace = data.Races.find((race) => race.Id === compact.raceId) || null;
+  if (patch.selectedRace) {
+    patch.selectedAttributeSet = getAttributeSetById(patch.selectedRace, compact.attributeId);
+    patch.selectedFreeSkill = getFreeSkillById(patch.selectedRace, compact.freeSkillId);
+  }
+
+  patch.selectedOrigin = data.Origins.find((origin) => origin.Id === compact.originId) || null;
+  patch.selectedProf = data.Professions.find((profession) => profession.Id === compact.professionId) || null;
+  if (patch.selectedProf) {
+    patch.selectedPath = patch.selectedProf.Paths.find((path) => path.Id === compact.pathId) || null;
+  }
+
+  const levelUps = Array.isArray(compact.levelUps) ? compact.levelUps : [];
+  levelUps.forEach((levelUp, index) => {
+    if (!levelUp || index >= LEVEL_UP_SLOTS) {
+      return;
+    }
+
+    const tree = data.AdvancementTrees.find((entry) => entry.Id === levelUp.treeId) || null;
+    if (!tree) {
+      return;
+    }
+
+    const versionIndex = findTreeLevelVersionIndex(tree, levelUp.level, levelUp.optionId);
+    patch.levelUps[index] = {
+      treeName: tree.Name,
+      level: levelUp.level || null,
+      versionIndex: versionIndex !== null ? versionIndex : null,
+      basicUpgradeFamily: levelUp.basicUpgradeFamily || null,
     };
   });
 
@@ -189,6 +251,7 @@ function resolveLegacyPatch(compact, data) {
           treeName: entry[0],
           level: entry[1],
           versionIndex: entry[2],
+          basicUpgradeFamily: null,
         };
       }
     });
@@ -262,6 +325,71 @@ function decodeV1State(encoded, data) {
   };
 }
 
+function decodeV2State(encoded, data) {
+  const bytes = decodeBase64Url(encoded);
+  const widths = getV2EncodingWidths(data);
+  const totalBits = getTotalBitsV2(widths);
+
+  if (bytes.length * 8 < totalBits) {
+    return null;
+  }
+
+  let offset = 0;
+  const readValue = (bits) => {
+    let value = 0;
+    for (let bitIndex = 0; bitIndex < bits; bitIndex += 1) {
+      const bitPosition = offset + bitIndex;
+      const byteIndex = Math.floor(bitPosition / 8);
+      const bitOffsetInByte = bitPosition % 8;
+      if (byteIndex < bytes.length && (bytes[byteIndex] & (1 << bitOffsetInByte))) {
+        value |= 1 << bitIndex;
+      }
+    }
+    offset += bits;
+    return value;
+  };
+
+  const raceId = decodeV1Id(readValue(widths.race));
+  const attributeId = decodeV1Id(readValue(widths.attribute));
+  const freeSkillId = decodeV1Id(readValue(widths.freeSkill));
+  const originId = decodeV1Id(readValue(widths.origin));
+  const professionId = decodeV1Id(readValue(widths.profession));
+  const pathId = decodeV1Id(readValue(widths.path));
+
+  const levelUps = [];
+  for (let index = 0; index < LEVEL_UP_SLOTS; index += 1) {
+    const treeId = decodeV1Id(readValue(widths.tree));
+    const level = decodeV1Id(readValue(widths.level));
+    const optionId = decodeV1Id(readValue(widths.option));
+    const familyId = readValue(widths.basicUpgradeFamily);
+    const basicUpgradeFamily = familyId > 0 ? (BASIC_UPGRADE_FAMILIES[familyId - 1]?.name ?? null) : null;
+
+    if (treeId !== null && level > 0 && optionId !== null) {
+      const tree = data.AdvancementTrees.find((entry) => entry.Id === treeId) || null;
+      const versionIndex = tree ? findTreeLevelVersionIndex(tree, level, optionId) : null;
+      levelUps.push({
+        treeId,
+        level,
+        optionId,
+        versionIndex,
+        basicUpgradeFamily,
+      });
+    } else {
+      levelUps.push(null);
+    }
+  }
+
+  return {
+    raceId,
+    attributeId,
+    freeSkillId,
+    originId,
+    professionId,
+    pathId,
+    levelUps,
+  };
+}
+
 function getV1EncodingWidths(data) {
   const maxEncodedId = (values) => {
     const maxValue = values.reduce((current, value) => Math.max(current, value ?? 0), 0);
@@ -293,9 +421,22 @@ function getV1EncodingWidths(data) {
   };
 }
 
+function getV2EncodingWidths(data) {
+  return {
+    ...getV1EncodingWidths(data),
+    // Fixed, code-defined constant (not data-dependent, unlike every other width
+    // above) — must stay outside getV1EncodingWidths's dynamic-cardinality system.
+    basicUpgradeFamily: Math.max(1, Math.ceil(Math.log2(BASIC_UPGRADE_FAMILIES.length + 1))),
+  };
+}
+
 function getTotalBits(widths) {
   return widths.race + widths.attribute + widths.freeSkill + widths.origin + widths.profession + widths.path
     + widths.levelUps * (widths.tree + widths.level + widths.option);
+}
+
+function getTotalBitsV2(widths) {
+  return getTotalBits(widths) + widths.levelUps * widths.basicUpgradeFamily;
 }
 
 function encodeV1Id(id) {

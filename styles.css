@@ -364,20 +364,6 @@ h1 {
   list-style: none;
 }
 
-.free-upgrades-chip {
-  display: inline-block;
-  margin-bottom: 8px;
-  padding: 4px 10px;
-  background: rgba(201, 168, 64, 0.12);
-  border: 1px solid rgba(201, 168, 64, 0.38);
-  color: var(--gold-text);
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-}
-
 .list-item {
   display: flex;
   gap: 8px;

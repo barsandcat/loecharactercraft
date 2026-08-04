@@ -1,6 +1,8 @@
 import { ATTRIBUTES } from "./cardRender.js";
-import { DICE_PROGRESSION } from "./constants.js";
+import { DICE_PROGRESSION, BASIC_UPGRADE_FAMILIES } from "./constants.js";
 import { getSelectedAdvancementEntries } from "./advancementTree.js";
+
+const BASIC_UPGRADE_CARD_IDS = new Set(BASIC_UPGRADE_FAMILIES.map((family) => family.maxCardId));
 
 export function collectCharacterStats(state, selection = state) {
   const stats = {
@@ -13,7 +15,7 @@ export function collectCharacterStats(state, selection = state) {
     skillCounts: new Map(),
     items: new Map(),
     actions: new Map(),
-    freeUpgrades: 0,
+    basicUpgradeSlots: [],
   };
 
   if (selection.selectedRace) {
@@ -37,9 +39,20 @@ export function collectCharacterStats(state, selection = state) {
     applyEntry(state.data, stats, selection.selectedPath);
   }
 
-  getSelectedAdvancementEntries(state, selection.levelUps).forEach((entry) => {
-    applyEntry(state.data, stats, entry);
+  getSelectedAdvancementEntries(state, selection.levelUps).forEach(({ slotIndex, entry }) => {
+    const isBasicDuplicate = applyEntry(state.data, stats, entry);
     incrementCountMap(stats.skillCounts, entry.Skills || []);
+
+    if (isBasicDuplicate) {
+      const chosenName = selection.levelUps[slotIndex]?.basicUpgradeFamily ?? null;
+      const chosenFamily = chosenName
+        ? BASIC_UPGRADE_FAMILIES.find((family) => family.name === chosenName) || null
+        : null;
+      if (chosenFamily) {
+        applyManualBasicUpgrade(state.data, stats, chosenFamily.maxCardId);
+      }
+      stats.basicUpgradeSlots.push({ slotIndex, chosenFamily });
+    }
   });
   return stats;
 }
@@ -135,7 +148,14 @@ export function applyEntry(data, stats, entry) {
   }
 
   (entry.Items || []).forEach((item) => addItem(data, stats, item));
-  (entry.ActionCards || []).forEach((action) => addAction(data, stats, action));
+
+  let sawBasicDuplicate = false;
+  (entry.ActionCards || []).forEach((action) => {
+    if (addAction(data, stats, action)) {
+      sawBasicDuplicate = true;
+    }
+  });
+  return sawBasicDuplicate;
 }
 
 export function addItem(data, stats, itemName) {
@@ -151,19 +171,38 @@ export function addItem(data, stats, itemName) {
   }
 }
 
+function upgradeActionSlot(stats, card, cardId) {
+  const current = stats.actions.get(card.Front.Name);
+  if (!current || card.Level > current.Level) {
+    stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
+  }
+}
+
 export function addAction(data, stats, cardId) {
+  const card = data.ActionCards[cardId];
+  if (!card) {
+    return false;
+  }
+  const current = stats.actions.get(card.Front.Name);
+  const isBasicDuplicate = Boolean(current && card.Level === current.Level && BASIC_UPGRADE_CARD_IDS.has(cardId));
+  upgradeActionSlot(stats, card, cardId);
+  return isBasicDuplicate;
+}
+
+export function applyManualBasicUpgrade(data, stats, cardId) {
   const card = data.ActionCards[cardId];
   if (!card) {
     return;
   }
-  const current = stats.actions.get(card.Front.Name);
-  if (!current) {
-    stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
-  } else if (card.Level === current.Level) {
-    stats.freeUpgrades += 1;
-  } else if (card.Level > current.Level) {
-    stats.actions.set(card.Front.Name, { ...card, _cardId: cardId });
-  }
+  upgradeActionSlot(stats, card, cardId);
+}
+
+export function getEligibleBasicUpgradeFamilies(data, stats) {
+  return BASIC_UPGRADE_FAMILIES.filter((family) => {
+    const current = stats.actions.get(family.name);
+    const maxLevel = data.ActionCards[family.maxCardId]?.Level;
+    return !current || current.Level < maxLevel;
+  });
 }
 
 export function upgradeDivDie(divDie) {

@@ -2,12 +2,13 @@ import {
   createEmptyLevelUps,
   getRaceAttributeOptions,
   getRaceFreeSkills,
-  serializeStateV1,
+  serializeStateV2,
   deserializeState,
 } from "./stateCodec.js";
 import { tryAutoSelect, refreshLevelUpStates, getTreeLevelOption, getVersionOptions } from "./advancementTree.js";
 import { buildPrintableText as buildPrintableTextModule } from "./printableText.js";
-import { describeVersionOption } from "./selectorDescriptors.js";
+import { describeVersionOption, describeBasicUpgradeFamilyOption } from "./selectorDescriptors.js";
+import { collectCharacterStats, buildActionCardPreviewStats, getEligibleBasicUpgradeFamilies } from "./characterStats.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
 
@@ -24,6 +25,11 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     levelUps: createEmptyLevelUps(),
   };
 
+  // Slot indices already auto-offered a basic-upgrade picker this session, so a
+  // dismissed offer doesn't immediately re-pop on the next unrelated action —
+  // the per-slot button remains available regardless.
+  let acknowledgedBasicUpgradeSlots = new Set();
+
   const selectorOverlay = createSelectorOverlay(ui);
   const panelRenderer = createPanelRenderer({
     state,
@@ -39,6 +45,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       selectPath,
       selectLevelUpTree,
       selectLevelUpVersion,
+      openBasicUpgradePickerForSlot,
     },
   });
 
@@ -111,11 +118,27 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     tryAutoSelect(state);
     onStateChange(serializeState());
     render();
+    offerNextBasicUpgradeIfNew();
+  }
+
+  function offerNextBasicUpgradeIfNew() {
+    const stats = collectCharacterStats(state);
+    const nextNew = stats.basicUpgradeSlots
+      .filter((slot) => !slot.chosenFamily)
+      .map((slot) => slot.slotIndex)
+      .find((slotIndex) => !acknowledgedBasicUpgradeSlots.has(slotIndex));
+
+    if (nextNew === undefined) {
+      return;
+    }
+
+    acknowledgedBasicUpgradeSlots.add(nextNew);
+    openBasicUpgradePickerForSlot(nextNew);
   }
 
   function serializeState() {
     try {
-      return serializeStateV1(state, state.data, state.trees);
+      return serializeStateV2(state, state.data, state.trees);
     } catch (_) {
       return null;
     }
@@ -133,6 +156,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.selectedProf = null;
     state.selectedPath = null;
     state.levelUps = createEmptyLevelUps();
+    acknowledgedBasicUpgradeSlots = new Set();
   }
 
   // Selection
@@ -193,8 +217,10 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     slot.treeName = treeLevelOption.treeName;
     slot.level = treeLevelOption.level;
     slot.versionIndex = null;
+    slot.basicUpgradeFamily = null;
+    acknowledgedBasicUpgradeSlots.delete(slotIndex);
     commitSelection();
-    return openRewardSelectorIfNeeded(slotIndex);
+    openRewardSelectorIfNeeded(slotIndex);
   }
 
   // Skips straight to the reward step after a tree pick when there's a real
@@ -202,13 +228,13 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function openRewardSelectorIfNeeded(slotIndex) {
     const slot = state.levelUps[slotIndex];
     if (slot.versionIndex !== null) {
-      return false;
+      return;
     }
 
     const treeLevelOption = getTreeLevelOption(state, slot.treeName, slot.level);
     const versionOptions = treeLevelOption ? getVersionOptions(treeLevelOption) : [];
     if (versionOptions.length <= 1) {
-      return false;
+      return;
     }
 
     selectorOverlay.openSelector({
@@ -220,12 +246,35 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       onSelect: (option) => selectLevelUpVersion(slotIndex, option),
       isSelected: () => false,
     });
-    return true;
   }
 
   function selectLevelUpVersion(slotIndex, versionOption) {
-    state.levelUps[slotIndex].versionIndex = versionOption.index;
+    const slot = state.levelUps[slotIndex];
+    slot.versionIndex = versionOption.index;
+    slot.basicUpgradeFamily = null;
+    acknowledgedBasicUpgradeSlots.delete(slotIndex);
     commitSelection();
+  }
+
+  function selectBasicUpgradeForSlot(slotIndex, family) {
+    state.levelUps[slotIndex].basicUpgradeFamily = family.name;
+    commitSelection();
+  }
+
+  function openBasicUpgradePickerForSlot(slotIndex) {
+    const stats = collectCharacterStats(state);
+    const eligibleFamilies = getEligibleBasicUpgradeFamilies(state.data, stats);
+    const previewStats = buildActionCardPreviewStats(stats);
+
+    selectorOverlay.openSelector({
+      kicker: "Level Up " + (slotIndex + 1),
+      title: "Choose Basic Upgrade",
+      description: "This reward duplicates a basic action you already have at its top tier — pick a different basic to upgrade instead.",
+      options: eligibleFamilies,
+      getOptionContent: (family) => describeBasicUpgradeFamilyOption(state, family, previewStats),
+      onSelect: (family) => selectBasicUpgradeForSlot(slotIndex, family),
+      isSelected: (family) => state.levelUps[slotIndex].basicUpgradeFamily === family.name,
+    });
   }
 
   function getFilledLevelCount() {

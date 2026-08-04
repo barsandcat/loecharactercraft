@@ -112,3 +112,10 @@ export function describeFreeSkillOption(skill) {
     title: skill,
   };
 }
+
+export function describeBasicUpgradeFamilyOption(state, family, previewStats) {
+  return {
+    title: family.name,
+    actionCards: buildActionCardPreviews(state.data, [family.maxCardId], previewStats),
+  };
+}

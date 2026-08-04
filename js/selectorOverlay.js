@@ -2,7 +2,10 @@ import { createEmptyState, buildItemElement } from "./uiComponents.js";
 import { buildActionCardElement } from "./cardRender.js";
 
 export function createSelectorOverlay(ui) {
+  let generation = 0;
+
   function openSelector(config) {
+    const openedGeneration = ++generation;
     ui.selectorKicker.textContent = config.kicker || "Choose Option";
     ui.selectorTitle.textContent = config.title || "Options";
     ui.selectorDescription.textContent = config.description || "";
@@ -25,8 +28,8 @@ export function createSelectorOverlay(ui) {
         }
 
         button.addEventListener("click", () => {
-          const keepOpen = config.onSelect(option);
-          if (!keepOpen) {
+          config.onSelect(option);
+          if (generation === openedGeneration) {
             closeSelector();
           }
         });
