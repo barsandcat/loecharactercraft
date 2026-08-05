@@ -1,7 +1,7 @@
 import { createEmptyState, buildItemElement } from "./uiComponents.js";
 import { buildActionCardElement } from "./cardRender.js";
 
-export function createSelectorOverlay(ui) {
+export function createSelectorOverlay(ui, data) {
   let generation = 0;
 
   function openSelector(config) {
@@ -58,7 +58,8 @@ export function createSelectorOverlay(ui) {
           const itemsEl = document.createElement("div");
           itemsEl.className = "option-items";
           content.items.forEach((item) => {
-            itemsEl.appendChild(buildItemElement(item));
+            const card = item.Card ? data.ActionCards[item.Card] : null;
+            itemsEl.appendChild(buildItemElement(item, card));
           });
           button.appendChild(itemsEl);
         }

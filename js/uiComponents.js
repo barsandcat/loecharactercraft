@@ -1,6 +1,6 @@
-import { buildFoldedEffectText, appendFormattedText, buildTokenPart } from "./cardRender.js";
+import { appendFormattedText, buildTokenPart } from "./cardRender.js";
 import { buildEntryParts, getItemDisplayName } from "./displayParts.js";
-import { appendDisplayParts } from "./displayPartsDom.js";
+import { appendDisplayParts, createActionCardMention } from "./displayPartsDom.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -121,12 +121,36 @@ export function renderEntryToElement(element, entry, data, previewStats = null) 
   appendDisplayParts(element, parts, previewStats);
 }
 
-export function buildItemElement(item) {
+export function buildItemElement(item, card = null, previewStats = null) {
   const wrapper = document.createElement("div");
   wrapper.className = "item-preview";
   wrapper.appendChild(buildItemDetailsElement(item));
-  wrapper.appendChild(buildFoldedEffectText(item.Effect || "None", "item-effect"));
+  wrapper.appendChild(buildItemEffectElement(item, card, previewStats));
   return wrapper;
+}
+
+// The referenced card (if any) is prepended before the effect text, as a
+// hoverable mention with the same action-card tooltip used in advancement
+// trees. "None" is only shown when there's neither an effect nor a card —
+// a card reference alone already conveys what the item does.
+function buildItemEffectElement(item, card, previewStats) {
+  const effectEl = document.createElement("div");
+  effectEl.className = "folded-effect-text item-effect";
+
+  if (card) {
+    effectEl.appendChild(createActionCardMention(item.Card, card, previewStats, { showId: true }));
+    if (item.Effect) {
+      effectEl.appendChild(document.createTextNode(" "));
+    }
+  }
+
+  if (item.Effect) {
+    appendFormattedText(effectEl, item.Effect);
+  } else if (!card) {
+    appendFormattedText(effectEl, "None");
+  }
+
+  return effectEl;
 }
 
 export function buildItemDetailsElement(item) {

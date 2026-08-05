@@ -79,10 +79,10 @@ export function appendInlineItemDetails(parent, item) {
   }
 }
 
-export function createActionCardMention(cardId, card, previewStats = null) {
+export function createActionCardMention(cardId, card, previewStats = null, { showId = false } = {}) {
   const span = document.createElement("span");
   span.className = "action-card-mention";
-  span.textContent = getActionCardDisplayName(card);
+  span.textContent = showId ? cardId : getActionCardDisplayName(card);
 
   const tooltipEl = document.createElement("div");
   tooltipEl.className = "action-card-mention-tooltip";
@@ -95,6 +95,22 @@ export function createActionCardMention(cardId, card, previewStats = null) {
     )
   );
   span.appendChild(tooltipEl);
+
+  // A mention often sits inside a box that clips overflow (an item's
+  // bordered effect text, a scrollable selector sheet) — position:fixed
+  // alone doesn't escape that as long as the tooltip stays a descendant of
+  // the clipping box, so reparent it to <body> while hovered.
+  span.addEventListener("mouseenter", () => {
+    const rect = span.getBoundingClientRect();
+    tooltipEl.style.left = Math.min(rect.left, window.innerWidth - 24) + "px";
+    tooltipEl.style.top = (rect.bottom + 4) + "px";
+    document.body.appendChild(tooltipEl);
+    tooltipEl.classList.add("is-visible");
+  });
+  span.addEventListener("mouseleave", () => {
+    tooltipEl.classList.remove("is-visible");
+    span.appendChild(tooltipEl);
+  });
 
   return span;
 }

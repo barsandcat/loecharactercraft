@@ -920,10 +920,15 @@ button.pouch-count:focus-visible {
   border-bottom: 1px dotted currentColor;
 }
 
+/* position:fixed with left/top set by JS (displayPartsDom.js) from the
+   mention's own bounding rect, rather than position:absolute relative to the
+   mention itself — the mention commonly sits inside a box that clips
+   overflow (an item's bordered effect text, a scrollable selector sheet),
+   which would otherwise cut the tooltip off. Reparented to <body> while
+   hovered for the same reason: overflow:hidden clips fixed-position
+   descendants too as long as they remain in that ancestor's subtree. */
 .action-card-mention-tooltip {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 4px);
+  position: fixed;
   z-index: 50;
   width: var(--action-card-width, 280px);
   max-width: calc(100vw - 24px);
@@ -943,7 +948,7 @@ button.pouch-count:focus-visible {
   box-shadow: var(--shadow-lg);
 }
 
-.action-card-mention:hover .action-card-mention-tooltip {
+.action-card-mention-tooltip.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

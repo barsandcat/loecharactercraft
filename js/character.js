@@ -60,7 +60,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   // the per-slot button remains available regardless.
   let acknowledgedBasicUpgradeSlots = new Set();
 
-  const selectorOverlay = createSelectorOverlay(ui);
+  const selectorOverlay = createSelectorOverlay(ui, data);
   const panelRenderer = createPanelRenderer({
     state,
     ui,

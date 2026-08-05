@@ -362,6 +362,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       eligiblePouchCount: (pouch, slotIndex) => getEligibleItemPouchForSlot(pouch, slotIndex).length,
       onClick: (slotIndex) => callbacks.openItemPickerForSlot(slotIndex),
       onPouchClick: () => callbacks.openItemPouch(),
+      previewStats: actionCardPreviewStats,
     }));
 
     container.appendChild(buildSlotSection({
@@ -488,7 +489,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
   // left, Head/Chest/Feet on the right) plus a bottom row of the 4 Small
   // slots — grouped from ITEM_SLOT_TYPES rather than hardcoded indices, so it
   // stays correct if the slot layout ever changes.
-  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick, onPouchClick }) {
+  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick, onPouchClick, previewStats }) {
     const { slots, pouch } = resolved;
 
     const section = document.createElement("section");
@@ -499,7 +500,11 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       slotResult: slots[slotIndex],
       slotIndex,
       slotLabel,
-      renderOccupiedContent: (entry) => buildItemElement(entry.item),
+      renderOccupiedContent: (entry) => buildItemElement(
+        entry.item,
+        entry.item.Card ? state.data.ActionCards[entry.item.Card] : null,
+        previewStats
+      ),
       eligiblePouchCount,
       onClick,
       pouch,
