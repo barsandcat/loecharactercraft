@@ -1,5 +1,5 @@
 import { ATTRIBUTES, buildActionCardElement } from "./cardRender.js";
-import { ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
+import { ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS } from "./constants.js";
 import { getRaceAttributeOptions, getRaceFreeSkills } from "./stateCodec.js";
 import {
   getAccessibleAdvancementTreeNames,
@@ -16,7 +16,7 @@ import {
   getEligibleItemPouchForSlot,
   getEligibleActionPouchForSlot,
 } from "./characterStats.js";
-import { buildRaceDetailParts, buildEntryParts, formatAttributeSummary } from "./displayParts.js";
+import { buildRaceDetailParts, buildEntryParts, formatAttributeSummary, getItemDisplayName } from "./displayParts.js";
 import { appendDisplayParts, appendCountSummary } from "./displayPartsDom.js";
 import {
   describeRaceOption,
@@ -266,6 +266,27 @@ export function createPanelRenderer({ state, ui, callbacks }) {
         }));
       }
     });
+
+    state.addedItems.forEach((itemName) => {
+      const item = state.data.Items[itemName];
+      container.appendChild(singleChoiceGrid({
+        label: "Added Item",
+        main: item ? getItemDisplayName(item) : itemName,
+        detail: "Click to remove from your build.",
+        complete: true,
+        onClick: () => callbacks.removeAddedItem(itemName),
+      }));
+    });
+
+    container.appendChild(singleChoiceGrid({
+      label: "Items",
+      main: "Add Item",
+      detail: state.addedItems.length >= MAX_ADDED_ITEMS
+        ? "Maximum of " + MAX_ADDED_ITEMS + " added items reached."
+        : "Browse available items and add one to your build.",
+      disabled: state.addedItems.length >= MAX_ADDED_ITEMS,
+      onClick: () => callbacks.openAddItemSelector(),
+    }));
   }
 
   function renderSummary() {

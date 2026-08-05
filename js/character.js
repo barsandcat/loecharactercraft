@@ -30,7 +30,7 @@ import {
   getEligibleItemPouchForSlot,
   getEligibleActionPouchForSlot,
 } from "./characterStats.js";
-import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
+import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS } from "./constants.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
 
@@ -52,6 +52,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     skillSlots: createEmptySlots(SKILL_SLOTS),
     itemSlots: createEmptySlots(ITEM_SLOT_TYPES.length),
     actionSlots: createEmptySlots(ACTION_SLOT_RULES.length),
+    addedItems: [],
   };
 
   // Slot indices already auto-offered a basic-upgrade picker this session, so a
@@ -81,6 +82,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       openSkillPouch,
       openItemPouch,
       openActionPouch,
+      openAddItemSelector,
+      removeAddedItem,
     },
   });
 
@@ -137,6 +140,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.skillSlots = patch.skillSlots || createEmptySlots(SKILL_SLOTS);
     state.itemSlots = patch.itemSlots || createEmptySlots(ITEM_SLOT_TYPES.length);
     state.actionSlots = patch.actionSlots || createEmptySlots(ACTION_SLOT_RULES.length);
+    state.addedItems = patch.addedItems || [];
 
     commitSelection();
     return true;
@@ -197,6 +201,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     state.skillSlots = createEmptySlots(SKILL_SLOTS);
     state.itemSlots = createEmptySlots(ITEM_SLOT_TYPES.length);
     state.actionSlots = createEmptySlots(ACTION_SLOT_RULES.length);
+    state.addedItems = [];
     acknowledgedBasicUpgradeSlots = new Set();
   }
 
@@ -439,6 +444,36 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       options: pouch,
       getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
       onSelect: () => {},
+      isSelected: () => false,
+    });
+  }
+
+  function addOwnedItem(itemName) {
+    if (state.addedItems.includes(itemName) || state.addedItems.length >= MAX_ADDED_ITEMS) {
+      return;
+    }
+    state.addedItems.push(itemName);
+    commitSelection();
+  }
+
+  function removeAddedItem(itemName) {
+    state.addedItems = state.addedItems.filter((name) => name !== itemName);
+    commitSelection();
+  }
+
+  function openAddItemSelector() {
+    const stats = collectCharacterStats(state);
+    const ownedNames = new Set(stats.itemPool.map((entry) => entry.itemName));
+    const availableItems = Object.entries(state.data.Items)
+      .filter(([itemName]) => !ownedNames.has(itemName))
+      .map(([itemName, item]) => ({ itemName, item }));
+
+    selectorOverlay.openSelector({
+      title: "Add Item",
+      description: "Browse available items and add one to your build.",
+      options: availableItems,
+      getOptionContent: (option) => describeItemSlotOption(option),
+      onSelect: (option) => addOwnedItem(option.itemName),
       isSelected: () => false,
     });
   }

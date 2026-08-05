@@ -16,6 +16,8 @@ export const BASIC_UPGRADE_FAMILIES = [
 
 export const SKILL_SLOTS = 3;
 
+export const MAX_ADDED_ITEMS = 15;
+
 // Index-aligned with state.itemSlots — which item Type each of the 10 slots accepts.
 export const ITEM_SLOT_TYPES = ["Head", "Chest", "Hand", "Hand", "Hand", "Feet", "Small", "Small", "Small", "Small"];
 

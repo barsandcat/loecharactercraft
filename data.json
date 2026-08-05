@@ -1291,25 +1291,31 @@
     }
   ],
   "Items": {
-	  "Warhammer of Chaos": {
-		  "Type": "Hand",
-		  "DisplayName": "Warhammer of Chaos",
-		  "Keywords": [ "Darkness", "Melee"	],
-		  "Passive": "[Melee]: +4{damage}",
-		  "Tier": "Rare",
-		  "Card": "i29"
-	  },
+    "Warhammer of Chaos": {
+      "Type": "Hand",
+      "DisplayName": "Warhammer of Chaos",
+      "Keywords": [
+        "Darkness",
+        "Melee"
+      ],
+      "Passive": "[Melee]: +4{damage}",
+      "Tier": "Rare",
+      "Card": "i29",
+      "Id": 1
+    },
     "Spellbook": {
       "Type": "Small",
       "DisplayName": "Spellbook",
       "Effect": "During your [Spell] Roll: Roll 2 additional dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 2
     },
     "Iron Mask": {
       "Type": "Head",
       "DisplayName": "Iron Mask",
       "Effect": "Against [Spell]: Prevent 4 {damage} or 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 3
     },
     "Highlander's Belt": {
       "Type": "Chest",
@@ -1319,7 +1325,8 @@
       ],
       "Passive": "[Melee]: +1{damage}",
       "Effect": "Passive: During [Melee] [Attack]: Add 1 {damage}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 4
     },
     "Lantern": {
       "Type": "Hand",
@@ -1328,19 +1335,22 @@
         "Light"
       ],
       "Effect": "When you gain {terror}: Prevent 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 5
     },
     "Sunbreaker Pendant": {
       "Type": "Small",
       "DisplayName": "Sunbreaker Pendant",
       "Effect": "Against [Spell]: After [Attack], deal 3 {damage} to the attacking Enemy",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 6
     },
     "Drysea Strider Hatchling": {
       "Type": "Small",
       "DisplayName": "Drysea Strider Hatchling",
       "Effect": "Switch places with a PM in R4",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 7
     },
     "High Realm Collar": {
       "Type": "Head",
@@ -1349,13 +1359,15 @@
         "Brilliance"
       ],
       "Effect": "Gain 1 {fate}, Lose 2 HP",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 8
     },
     "Straw Hat": {
       "Type": "Head",
       "DisplayName": "Straw Hat",
       "Effect": "During EN Activation: You cannot be targeted",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 9
     },
     "Leather Apron": {
       "Type": "Chest",
@@ -1365,7 +1377,8 @@
       ],
       "Passive": "1 {armor}",
       "Effect": "Passive: Gain 1 {armor}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 10
     },
     "Puffshroom Bomb": {
       "Type": "Small",
@@ -1374,7 +1387,8 @@
         "Poison"
       ],
       "Effect": "Deal 3 {damage} to anyone in R4",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 11
     },
     "Poisoned Needle": {
       "Type": "Small",
@@ -1383,7 +1397,8 @@
         "Poison"
       ],
       "Effect": "During your [Ranged] [Attack]: Add 2 {damage}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 12
     },
     "Heirloom": {
       "Type": "Small",
@@ -1392,7 +1407,8 @@
         "Brilliance"
       ],
       "Effect": "During your DIV Roll: Roll an additional D4 DIV die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 13
     },
     "Fancy Poulaines": {
       "Type": "Feet",
@@ -1401,7 +1417,8 @@
         "Diplomacy"
       ],
       "Effect": "During you CHA Roll: Roll 1 additional die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 14
     },
     "Poleyn": {
       "Type": "Feet",
@@ -1410,7 +1427,8 @@
         "Armor"
       ],
       "Effect": "Against [Attack]: Gain 2 {armor}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 15
     },
     "Moon Pendant": {
       "Type": "Small",
@@ -1419,7 +1437,8 @@
         "Artifact"
       ],
       "Effect": "You or PM in R1 heal 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 16
     },
     "Crystal Glasses": {
       "Type": "Head",
@@ -1428,7 +1447,8 @@
         "Investigation"
       ],
       "Effect": "During you INT Roll: Roll 1 additional die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 17
     },
     "Warden's Greaves": {
       "Type": "Feet",
@@ -1437,7 +1457,8 @@
         "Vigilance"
       ],
       "Effect": "During you STR or AGI Roll: Roll 1 additional die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 18
     },
     "Survival Kit": {
       "Type": "Small",
@@ -1446,7 +1467,8 @@
         "Survival"
       ],
       "Effect": "Your PM in R1 heal 2 HP",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 19
     },
     "Lucky Charm": {
       "Type": "Small",
@@ -1455,7 +1477,8 @@
         "Charm"
       ],
       "Effect": "During your Roll: Reroll all dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 20
     },
     "Lute": {
       "Type": "Hand",
@@ -1464,7 +1487,8 @@
         "Performer"
       ],
       "Effect": "You and a PM in R2 gain 1 ATT Boon",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 21
     },
     "Reliable Boots": {
       "Type": "Feet",
@@ -1473,7 +1497,8 @@
         "Resilience"
       ],
       "Effect": "Move by 1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 22
     },
     "Censer": {
       "Type": "Hand",
@@ -1482,13 +1507,15 @@
         "Medicine"
       ],
       "Effect": "Stabilize a PM in R1. You or a PM in R1 heal 1 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 23
     },
     "Death Whistle": {
       "Type": "Small",
       "DisplayName": "Death Whistle",
       "Effect": "Pull anyone in R3 by 2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 24
     },
     "Notram's Ring": {
       "Type": "Small",
@@ -1497,13 +1524,15 @@
         "Artifact"
       ],
       "Effect": "Move by 2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 25
     },
     "Glowjuice": {
       "Type": "Small",
       "DisplayName": "Glowjuice",
       "Effect": "During your Roll: Roll 1 additional die. Gain 1 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 26
     },
     "Throwing Dagger": {
       "Type": "Hand",
@@ -1512,13 +1541,15 @@
         "Ranged"
       ],
       "Effect": "Deal 4 {damage} to anyone in R4",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 27
     },
     "Smoke Bomb": {
       "Type": "Small",
       "DisplayName": "Smoke Bomb",
       "Effect": "Against [Ranged]: Prevent 4 {damage}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 28
     },
     "Book of Sagas": {
       "Type": "Small",
@@ -1527,13 +1558,15 @@
         "Lore"
       ],
       "Effect": "During your Roll: Gain 1 choosen [Keyword]",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 29
     },
     "Anchor Chain": {
       "Type": "Hand",
       "DisplayName": "Anchor Chain",
       "Effect": "Pull anyone in R3 by 2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 30
     },
     "Whispering Box": {
       "Type": "Small",
@@ -1542,7 +1575,8 @@
         "Vestigial"
       ],
       "Effect": "During your Roll: Roll 3 additional dice, Gain 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 31
     },
     "Codex Vestigium": {
       "Type": "Small",
@@ -1551,7 +1585,8 @@
         "Vestigial"
       ],
       "Effect": "Deal 1 {damage} to all in R1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 32
     },
     "Curing Leaves": {
       "Type": "Small",
@@ -1560,7 +1595,8 @@
         "Medicine"
       ],
       "Effect": "You or PM in R1 heal 2 HP",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 33
     },
     "Stone of Nivar": {
       "Type": "Small",
@@ -1569,13 +1605,15 @@
         "Artifact"
       ],
       "Effect": "You or another PM in R1 gain 1 {fate}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 34
     },
     "Calling Reed": {
       "Type": "Small",
       "DisplayName": "Calling Reed",
       "Effect": "Move PM in any range by 2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 35
     },
     "Garrote": {
       "Type": "Hand",
@@ -1584,7 +1622,8 @@
         "Melee"
       ],
       "Effect": "Defeat a [Minion] in R1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 36
     },
     "Evidence": {
       "Type": "Small",
@@ -1593,7 +1632,8 @@
         "Diplomacy",
         "Intimidation"
       ],
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 37
     },
     "Weighted Net": {
       "Type": "Hand",
@@ -1602,13 +1642,15 @@
         "Survival"
       ],
       "Effect": "During your [Melee] Roll: reduce {en} by 1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 38
     },
     "Lucky Pommel": {
       "Type": "Hand",
       "DisplayName": "Lucky Pommel",
       "Effect": "During your [Melee] Roll: Roll 2 additional dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 39
     },
     "War Horn": {
       "Type": "Small",
@@ -1617,7 +1659,8 @@
         "Leadership"
       ],
       "Effect": "After drawing a dual token: Choose which side to resolve",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 40
     },
     "Parrying Cape": {
       "Type": "Chest",
@@ -1626,7 +1669,8 @@
         "Performer"
       ],
       "Effect": "During Defensive Reaction Roll against [Melee]: Roll 2 additional dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 41
     },
     "Prayer Bell": {
       "Type": "Small",
@@ -1635,7 +1679,8 @@
         "Artifact"
       ],
       "Effect": "When refreshing your Action card with {fate} cost, ignore paying {fate}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 42
     },
     "Peliago's Coin": {
       "Type": "Small",
@@ -1644,7 +1689,8 @@
         "Brilliance"
       ],
       "Effect": "When you Move: Treat your MOB as 4 higher",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 43
     },
     "Grisly Trophy": {
       "Type": "Small",
@@ -1653,25 +1699,29 @@
         "Intimidation"
       ],
       "Effect": "Push anyone in R2 by 2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 44
     },
     "Rootstalk": {
       "Type": "Small",
       "DisplayName": "Rootstalk",
       "Effect": "Support a PM in R2 with 2 dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 45
     },
     "Homunculus": {
       "Type": "Small",
       "DisplayName": "Homunculus",
       "Effect": "Gain 2 {fate} and 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 46
     },
     "Fleshcraft Toolkit": {
       "Type": "Small",
       "DisplayName": "Fleshcraft Toolkit",
       "Effect": "You or PM in R1 heal 3 HP",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 47
     },
     "Grimoire": {
       "Type": "Small",
@@ -1680,7 +1730,8 @@
         "Artifact"
       ],
       "Effect": "During your [Spell] Roll: roll 1 additional die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 48
     },
     "Orb": {
       "Type": "Small",
@@ -1689,7 +1740,8 @@
         "Artifact"
       ],
       "Effect": "You or PM in R6 heal 1 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 49
     },
     "Runic Chisel": {
       "Type": "Small",
@@ -1698,13 +1750,15 @@
         "Artifact"
       ],
       "Effect": "During [Attack]: Add AGI {damage}, Lose 2HP",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 50
     },
     "Buckler": {
       "Type": "Small",
       "DisplayName": "Buckler",
       "Effect": "Against [Attack]: gain 3 {armor}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 51
     },
     "Blessed Charm": {
       "Type": "Small",
@@ -1713,19 +1767,22 @@
         "Artifact"
       ],
       "Effect": "Support a PM in any range with 2 dice",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 52
     },
     "Spyglass": {
       "Type": "Small",
       "DisplayName": "Spyglass",
       "Effect": "During your DIV Roll: Roll an additional D6 DIV die. Gain 2 {terror}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 53
     },
     "Penitent's Clogs": {
       "Type": "Feet",
       "DisplayName": "Penitent's Clogs",
       "Effect": "Druing your Roll: Reduce {en} by 1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 54
     },
     "Incense": {
       "Type": "Hand",
@@ -1734,13 +1791,15 @@
         "Alchemy"
       ],
       "Effect": "You or PM in R2 heal 2 HP or deal 2 {damage} to anyone in R2",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 55
     },
     "Tome of Omu": {
       "Type": "Small",
       "DisplayName": "Tome of Omu",
       "Effect": "Heal 2 HP for each Enemy in R1",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 56
     },
     "Thief's Gloves": {
       "Type": "Hand",
@@ -1749,13 +1808,15 @@
         "Sleight of Hand"
       ],
       "Effect": "When in R1 of an [Elite]: Gain 1 brill",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 57
     },
     "Needle Dart": {
       "Type": "Small",
       "DisplayName": "Needle Dart",
       "Effect": "During your [Ranged] [Attack]: Ignore 3 {armor}",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 58
     },
     "False Documents": {
       "Type": "Small",
@@ -1764,7 +1825,8 @@
         "Deception"
       ],
       "Effect": "During your CHA Roll: Roll 1 additional die",
-      "Tier": "Basic"
+      "Tier": "Basic",
+      "Id": 59
     }
   },
   "AdvancementTrees": [
@@ -4184,26 +4246,40 @@
     }
   ],
   "ActionCards": {
-	"i29": {
-		  "Front": {
-			  "Name": "Split the Earth",
-			  "Sun": 2,
-			  "Type": "Action",
-			  "Category": "Offensive",
-			  "Keywords": ["Attack"],
-			  "Requires": ["Warhammer of Chaos"],
-			  "Target": "1 in R1",
-			  "Roll": {
-				  "ATT": ["STR"],
-				  "Modifiers": [{"Dice": 1,"Triggers": [ "Athletics", "Resilience" ]}],
-				  "Successes": {
-				  "4": "Deal ({successes}+2) [Darkness] {damage} to the target and {successes} [Darkness] {damage} to all in a line behind the target",
-				  "2": "You gain 3 {terror}. Resolve 4"
-				  }
-			  }
-		  },
-		  "Back": {}
-	},
+    "i29": {
+      "Front": {
+        "Name": "Split the Earth",
+        "Sun": 2,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "Warhammer of Chaos"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Athletics",
+                "Resilience"
+              ]
+            }
+          ],
+          "Successes": {
+            "4": "Deal ({successes}+2) [Darkness] {damage} to the target and {successes} [Darkness] {damage} to all in a line behind the target",
+            "2": "You gain 3 {terror}. Resolve 4"
+          }
+        }
+      },
+      "Back": {}
+    },
     "B00": {
       "Level": 1,
       "Front": {

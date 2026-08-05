@@ -1,5 +1,14 @@
-import { LEVEL_UP_SLOTS, BASIC_UPGRADE_FAMILIES, SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES } from "./constants.js";
-import { collectCharacterStats, matchesSkillTarget } from "./characterStats.js";
+import {
+  LEVEL_UP_SLOTS,
+  BASIC_UPGRADE_FAMILIES,
+  SKILL_SLOTS,
+  ITEM_SLOT_TYPES,
+  ACTION_SLOT_RULES,
+  MAX_ADDED_ITEMS,
+} from "./constants.js";
+import { collectCharacterStats, matchesSkillTarget, getItemNameById } from "./characterStats.js";
+
+const ADDED_ITEMS_COUNT_BITS = Math.max(1, Math.ceil(Math.log2(MAX_ADDED_ITEMS + 1)));
 
 export function createEmptyLevelUps() {
   return Array.from({ length: LEVEL_UP_SLOTS }, () => ({
@@ -40,7 +49,12 @@ export function getOptionByIndex(options, index) {
 
 export function serializeStateV3(selection, data, trees) {
   const widths = getV3EncodingWidths(data);
-  const totalBits = getTotalBitsV3(widths);
+  const fixedBits = getTotalBitsV3(widths);
+
+  // Capped defensively here too — the UI already enforces MAX_ADDED_ITEMS,
+  // but the wire format must never trust that alone.
+  const addedItems = (selection.addedItems || []).slice(0, MAX_ADDED_ITEMS);
+  const totalBits = fixedBits + widths.addedItemCountBits + addedItems.length * widths.addedItem;
   const bytes = new Uint8Array(Math.ceil(totalBits / 8));
   let offset = 0;
 
@@ -93,8 +107,10 @@ export function serializeStateV3(selection, data, trees) {
   // fields above, so position N always means "whatever this exact build's
   // Nth pool entry currently is." collectCharacterStats accepts `selection`
   // directly here since it already has the `.data`/`.trees` shape of a full
-  // state object (character.js always calls this with the live state).
-  const stats = collectCharacterStats(selection);
+  // state object (character.js always calls this with the live state). Uses
+  // the capped `addedItems` (not `selection.addedItems`) so the pool it
+  // builds always agrees with what gets written below.
+  const stats = collectCharacterStats({ ...selection, addedItems });
 
   selection.skillSlots.forEach((override) => {
     writeValue(
@@ -113,6 +129,11 @@ export function serializeStateV3(selection, data, trees) {
       encodeSlotOverride(override, stats.actionPool, (entry, target) => entry.cardName === target.cardName),
       widths.actionSlot
     );
+  });
+
+  writeValue(addedItems.length, widths.addedItemCountBits);
+  addedItems.forEach((itemName) => {
+    writeValue(data.Items[itemName]?.Id ?? 0, widths.addedItem);
   });
 
   return "v3." + encodeBytesToBase64Url(bytes);
@@ -287,11 +308,19 @@ function resolveV3Patch(compact, data, trees) {
     };
   });
 
-  // Only now that race/origin/profession/path/levelUps are resolved can the
-  // pool be rebuilt identically to how the live UI computes it, so each
-  // slot's wire-format pool index can be translated back into a stable
-  // name/provenance target — this dependency order (base selections first,
-  // slot arrays second) is required, not incidental.
+  // addedItems decodes directly from stable Ids (no pool dependency), but —
+  // unlike the slot-override codes below — it must resolve BEFORE the pool
+  // rebuild, since it's an *input* to pool construction (collectCharacterStats
+  // reads selection.addedItems), not an output derived from the pool.
+  patch.addedItems = (compact.addedItemIds || [])
+    .map((itemId) => getItemNameById(data, itemId))
+    .filter(Boolean);
+
+  // Only now that race/origin/profession/path/levelUps/addedItems are
+  // resolved can the pool be rebuilt identically to how the live UI computes
+  // it, so each slot's wire-format pool index can be translated back into a
+  // stable name/provenance target — this dependency order (base selections
+  // first, slot arrays second) is required, not incidental.
   const stats = collectCharacterStats({ data, trees, ...patch });
 
   patch.skillSlots = decodeSlotArray(compact.skillSlotCodes, stats.skillPool, (entry) => entry.source);
@@ -546,6 +575,21 @@ function decodeV3State(encoded, data) {
     actionSlotCodes.push(readValue(widths.actionSlot));
   }
 
+  // Variable-length section: unlike every field above (statically sized from
+  // `data` alone), how many bits this needs depends on the count value just
+  // read from the payload itself, so it needs its own guard here rather than
+  // relying on the single upfront totalBits check, which only covers the
+  // fixed-width prefix above.
+  const addedItemCount = readValue(widths.addedItemCountBits);
+  const addedItemsBits = addedItemCount * widths.addedItem;
+  if (offset + addedItemsBits > bytes.length * 8) {
+    return null; // corrupted/truncated count — fail closed
+  }
+  const addedItemIds = [];
+  for (let index = 0; index < addedItemCount; index += 1) {
+    addedItemIds.push(readValue(widths.addedItem));
+  }
+
   return {
     raceId,
     attributeId,
@@ -557,6 +601,7 @@ function decodeV3State(encoded, data) {
     skillSlotCodes,
     itemSlotCodes,
     actionSlotCodes,
+    addedItemIds,
   };
 }
 
@@ -611,11 +656,15 @@ function getV3EncodingWidths(data) {
   const skillPoolBound = 2 + 1 + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.Skills);
   const itemPoolBound = 2
     + maxArrayLength(data.Origins, (origin) => origin.Items)
-    + maxArrayLength(allPaths, (path) => path.Items);
+    + maxArrayLength(allPaths, (path) => path.Items)
+    + MAX_ADDED_ITEMS; // the pool can now also hold added items
   const actionPoolBound = 2
     + maxArrayLength(data.Races, (race) => race.ActionCards)
     + maxArrayLength(allPaths, (path) => path.ActionCards)
-    + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.ActionCards);
+    + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.ActionCards)
+    + MAX_ADDED_ITEMS; // each added item can grant one card
+
+  const maxItemId = Object.values(data.Items).reduce((max, item) => Math.max(max, item.Id ?? 0), 0);
 
   return {
     ...getV2EncodingWidths(data),
@@ -625,6 +674,8 @@ function getV3EncodingWidths(data) {
     skillSlot: Math.max(1, Math.ceil(Math.log2(skillPoolBound))),
     itemSlot: Math.max(1, Math.ceil(Math.log2(itemPoolBound))),
     actionSlot: Math.max(1, Math.ceil(Math.log2(actionPoolBound))),
+    addedItemCountBits: ADDED_ITEMS_COUNT_BITS,
+    addedItem: Math.max(1, Math.ceil(Math.log2(maxItemId + 1))),
   };
 }
 

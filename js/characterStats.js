@@ -70,6 +70,21 @@ export function collectCharacterStats(state, selection = state) {
       stats.basicUpgradeSlots.push({ slotIndex, chosenFamily });
     }
   });
+
+  (selection.addedItems || []).forEach((itemName) => {
+    addItem(state.data, stats, itemName, { kind: "added" });
+  });
+
+  // Any pool item with a Card grants that card into actionPool, regardless of
+  // source or the item's own equip status — matches every other action-card
+  // source (race/path/levelUp already enter actionPool unconditionally; equip
+  // status is a downstream/hotbar-only concern, not a pool-membership rule).
+  stats.itemPool.forEach((entry) => {
+    if (entry.item.Card) {
+      addAction(state.data, stats, entry.item.Card, { kind: "itemCard", itemSource: entry.source });
+    }
+  });
+
   return stats;
 }
 
@@ -112,6 +127,7 @@ export function createSelectionPreview(state, overrides = {}) {
     selectedProf: overrides.selectedProf !== undefined ? overrides.selectedProf : state.selectedProf,
     selectedPath: overrides.selectedPath !== undefined ? overrides.selectedPath : state.selectedPath,
     levelUps: overrides.levelUps !== undefined ? overrides.levelUps : state.levelUps,
+    addedItems: state.addedItems,
   };
 }
 
@@ -198,6 +214,14 @@ export function addItem(data, stats, itemName, source) {
     stats.items.set(key, itemObj);
     stats.itemPool.push({ itemName, item: itemObj, source });
   }
+}
+
+// Live state stores added items by name; the URL wire format stores them by
+// the stable numeric Id data.json gives every item, so decoding needs this
+// reverse lookup.
+export function getItemNameById(data, itemId) {
+  const entry = Object.entries(data.Items).find(([, item]) => item.Id === itemId);
+  return entry ? entry[0] : null;
 }
 
 function upgradeActionSlot(stats, card, cardId, source) {
