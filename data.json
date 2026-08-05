@@ -1291,6 +1291,14 @@
     }
   ],
   "Items": {
+	  "Warhammer of Chaos": {
+		  "Type": "Hand",
+		  "DisplayName": "Warhammer of Chaos",
+		  "Keywords": [ "Darkness", "Melee"	],
+		  "Passive": "[Melee]: +4{damage}",
+		  "Tier": "Rare",
+		  "Card": "i29"
+	  },
     "Spellbook": {
       "Type": "Small",
       "DisplayName": "Spellbook",
@@ -4176,6 +4184,26 @@
     }
   ],
   "ActionCards": {
+	"i29": {
+		  "Front": {
+			  "Name": "Split the Earth",
+			  "Sun": 2,
+			  "Type": "Action",
+			  "Category": "Offensive",
+			  "Keywords": ["Attack"],
+			  "Requires": ["Warhammer of Chaos"],
+			  "Target": "1 in R1",
+			  "Roll": {
+				  "ATT": ["STR"],
+				  "Modifiers": [{"Dice": 1,"Triggers": [ "Athletics", "Resilience" ]}],
+				  "Successes": {
+				  "4": "Deal ({successes}+2) [Darkness] {damage} to the target and {successes} [Darkness] {damage} to all in a line behind the target",
+				  "2": "You gain 3 {terror}. Resolve 4"
+				  }
+			  }
+		  },
+		  "Back": {}
+	},
     "B00": {
       "Level": 1,
       "Front": {
