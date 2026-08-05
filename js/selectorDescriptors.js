@@ -9,7 +9,6 @@ import {
   buildEntryParts,
   buildRaceDetailParts,
   formatAttributeSummary,
-  getItemDisplayName,
   getActionCardDisplayName,
 } from "./displayParts.js";
 import { appendDisplayParts } from "./displayPartsDom.js";
@@ -133,13 +132,13 @@ export function describeSkillSlotOption(option) {
   return { title: option.skill };
 }
 
-export function describeItemSlotOption(option) {
+export function describeItemSlotOption(state, option, previewStats) {
   if (option.__clear) {
     return { title: "Clear Slot", detail: "Return this item to the pouch." };
   }
   return {
-    title: getItemDisplayName(option.item),
     items: [option.item],
+    actionCards: buildActionCardPreviews(state.data, option.item.Card ? [option.item.Card] : [], previewStats),
   };
 }
 

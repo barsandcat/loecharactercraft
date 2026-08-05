@@ -30,7 +30,7 @@ import {
   getEligibleItemPouchForSlot,
   getEligibleActionPouchForSlot,
 } from "./characterStats.js";
-import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS } from "./constants.js";
+import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS, ITEM_TIERS } from "./constants.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
 
@@ -368,13 +368,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const stats = collectCharacterStats(state);
     const { slots, pouch } = resolveItemSlots(state, stats);
     const eligiblePouch = getEligibleItemPouchForSlot(pouch, slotIndex);
+    const previewStats = buildActionCardPreviewStats(state, stats);
     const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
 
     selectorOverlay.openSelector({
       title: "Choose Item",
       description: "Pick an item from your pouch to fill this slot.",
       options,
-      getOptionContent: (option) => describeItemSlotOption(option),
+      getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
       onSelect: (option) =>
         selectItemSlot(slotIndex, option.__clear ? { cleared: true } : { target: { itemName: option.itemName } }),
       isSelected: () => false,
@@ -424,11 +425,12 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function openItemPouch() {
     const stats = collectCharacterStats(state);
     const { pouch } = resolveItemSlots(state, stats);
+    const previewStats = buildActionCardPreviewStats(state, stats);
     selectorOverlay.openSelector({
       title: "Item Pouch",
       description: "Items not currently assigned to a slot.",
       options: pouch,
-      getOptionContent: (option) => describeItemSlotOption(option),
+      getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
       onSelect: () => {},
       isSelected: () => false,
     });
@@ -461,6 +463,8 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     commitSelection();
   }
 
+  // Two-step browse: pick a tier first, then pick an item from that tier's
+  // (much shorter) list — the full catalog is too long to browse in one go.
   function openAddItemSelector() {
     const stats = collectCharacterStats(state);
     const ownedNames = new Set(stats.itemPool.map((entry) => entry.itemName));
@@ -468,11 +472,35 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       .filter(([itemName]) => !ownedNames.has(itemName))
       .map(([itemName, item]) => ({ itemName, item }));
 
+    const tierOptions = ITEM_TIERS
+      .map((tier) => ({
+        tier,
+        items: availableItems.filter((option) => (option.item.Tier || "Basic") === tier),
+      }))
+      .filter((tierOption) => tierOption.items.length > 0);
+
     selectorOverlay.openSelector({
       title: "Add Item",
-      description: "Browse available items and add one to your build.",
-      options: availableItems,
-      getOptionContent: (option) => describeItemSlotOption(option),
+      description: "Choose an item tier to browse.",
+      options: tierOptions,
+      getOptionContent: (tierOption) => ({
+        title: tierOption.tier,
+        detail: tierOption.items.length + " item" + (tierOption.items.length === 1 ? "" : "s") + " available.",
+      }),
+      onSelect: (tierOption) => openAddItemTierSelector(tierOption.tier, tierOption.items),
+      isSelected: () => false,
+    });
+  }
+
+  function openAddItemTierSelector(tier, items) {
+    const stats = collectCharacterStats(state);
+    const previewStats = buildActionCardPreviewStats(state, stats);
+
+    selectorOverlay.openSelector({
+      title: "Add Item — " + tier,
+      description: "Browse " + tier.toLowerCase() + " items and add one to your build.",
+      options: items,
+      getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
       onSelect: (option) => addOwnedItem(option.itemName),
       isSelected: () => false,
     });

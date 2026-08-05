@@ -34,14 +34,16 @@ export function createSelectorOverlay(ui, data) {
           }
         });
 
-        const title = document.createElement("div");
-        title.className = "option-title";
-        if (typeof content.renderTitle === "function") {
-          content.renderTitle(title);
-        } else {
-          title.textContent = content.title || "";
+        if (typeof content.renderTitle === "function" || content.title) {
+          const title = document.createElement("div");
+          title.className = "option-title";
+          if (typeof content.renderTitle === "function") {
+            content.renderTitle(title);
+          } else {
+            title.textContent = content.title;
+          }
+          button.appendChild(title);
         }
-        button.appendChild(title);
 
         if (typeof content.renderDetail === "function" || content.detail) {
           const detail = document.createElement("div");
