@@ -78,6 +78,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       openSkillPickerForSlot,
       openItemPickerForSlot,
       openActionPickerForSlot,
+      openSkillPouch,
+      openItemPouch,
+      openActionPouch,
     },
   });
 
@@ -393,6 +396,49 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
       getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
       onSelect: (option) =>
         selectActionSlot(slotIndex, option.__clear ? { cleared: true } : { target: { cardName: option.cardName } }),
+      isSelected: () => false,
+    });
+  }
+
+  // Pouch browsers: read-only, not tied to any slot — selecting an entry does
+  // nothing (there's no slot to assign it to from here), so onSelect is a
+  // no-op and the overlay just closes, matching how it closes after any pick.
+  function openSkillPouch() {
+    const stats = collectCharacterStats(state);
+    const { pouch } = resolveSkillSlots(state, stats);
+    selectorOverlay.openSelector({
+      title: "Skill Pouch",
+      description: "Skills not currently assigned to a slot.",
+      options: pouch,
+      getOptionContent: (option) => describeSkillSlotOption(option),
+      onSelect: () => {},
+      isSelected: () => false,
+    });
+  }
+
+  function openItemPouch() {
+    const stats = collectCharacterStats(state);
+    const { pouch } = resolveItemSlots(state, stats);
+    selectorOverlay.openSelector({
+      title: "Item Pouch",
+      description: "Items not currently assigned to a slot.",
+      options: pouch,
+      getOptionContent: (option) => describeItemSlotOption(option),
+      onSelect: () => {},
+      isSelected: () => false,
+    });
+  }
+
+  function openActionPouch() {
+    const stats = collectCharacterStats(state);
+    const { pouch } = resolveActionSlots(state, stats);
+    const previewStats = buildActionCardPreviewStats(state, stats);
+    selectorOverlay.openSelector({
+      title: "Action Card Pouch",
+      description: "Action cards not currently assigned to a hotbar slot.",
+      options: pouch,
+      getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
+      onSelect: () => {},
       isSelected: () => false,
     });
   }

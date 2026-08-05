@@ -331,6 +331,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       slotMain: (entry) => entry.skill,
       eligiblePouchCount: (pouch) => pouch.length,
       onClick: (slotIndex) => callbacks.openSkillPickerForSlot(slotIndex),
+      onPouchClick: () => callbacks.openSkillPouch(),
     }));
 
     container.appendChild(buildItemSlotSection({
@@ -339,6 +340,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       slotLabel: (slotIndex) => ITEM_SLOT_LABELS[slotIndex],
       eligiblePouchCount: (pouch, slotIndex) => getEligibleItemPouchForSlot(pouch, slotIndex).length,
       onClick: (slotIndex) => callbacks.openItemPickerForSlot(slotIndex),
+      onPouchClick: () => callbacks.openItemPouch(),
     }));
 
     container.appendChild(buildSlotSection({
@@ -354,18 +356,25 @@ export function createPanelRenderer({ state, ui, callbacks }) {
         return "Locked — needs " + unlockAt + " level-up" + (unlockAt === 1 ? "" : "s") + ".";
       },
       onClick: (slotIndex) => callbacks.openActionPickerForSlot(slotIndex),
+      onPouchClick: () => callbacks.openActionPouch(),
     }));
   }
 
-  function buildSlotSectionHeader(title, pouchCount) {
+  function buildSlotSectionHeader(title, pouchCount, onPouchClick) {
     const header = document.createElement("div");
     header.className = "summary-card-header";
     const heading = document.createElement("h3");
     heading.textContent = title;
     header.appendChild(heading);
-    const pouchCountEl = document.createElement("span");
+
+    const clickable = pouchCount > 0 && Boolean(onPouchClick);
+    const pouchCountEl = document.createElement(clickable ? "button" : "span");
     pouchCountEl.className = "pouch-count";
     pouchCountEl.textContent = pouchCount + " in pouch";
+    if (clickable) {
+      pouchCountEl.type = "button";
+      pouchCountEl.addEventListener("click", onPouchClick);
+    }
     header.appendChild(pouchCountEl);
     return header;
   }
@@ -433,12 +442,13 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     onClick,
     renderOccupiedContent,
     listLayout,
+    onPouchClick,
   }) {
     const { slots, pouch } = resolved;
 
     const section = document.createElement("section");
     section.className = "summary-card";
-    section.appendChild(buildSlotSectionHeader(title, pouch.length));
+    section.appendChild(buildSlotSectionHeader(title, pouch.length, onPouchClick));
 
     const list = document.createElement("div");
     list.className = listLayout ? "slot-list" : "slot-grid";
@@ -457,12 +467,12 @@ export function createPanelRenderer({ state, ui, callbacks }) {
   // left, Head/Chest/Feet on the right) plus a bottom row of the 4 Small
   // slots — grouped from ITEM_SLOT_TYPES rather than hardcoded indices, so it
   // stays correct if the slot layout ever changes.
-  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick }) {
+  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick, onPouchClick }) {
     const { slots, pouch } = resolved;
 
     const section = document.createElement("section");
     section.className = "summary-card";
-    section.appendChild(buildSlotSectionHeader(title, pouch.length));
+    section.appendChild(buildSlotSectionHeader(title, pouch.length, onPouchClick));
 
     const renderOne = (slotIndex) => renderSlotRow({
       slotResult: slots[slotIndex],

@@ -351,6 +351,23 @@ h1 {
   font-size: 0.78rem;
   color: var(--muted);
   white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Only rendered as a <button> when the pouch has something to browse. */
+button.pouch-count {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 80, 48, 0.35);
+  text-underline-offset: 2px;
+}
+button.pouch-count:hover,
+button.pouch-count:focus-visible {
+  color: var(--gold-text);
+  text-decoration-color: currentColor;
+  outline: none;
 }
 
 .slot-grid {
