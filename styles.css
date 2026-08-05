@@ -542,7 +542,17 @@ button.pouch-count:focus-visible {
   align-content: center;
 }
 
+.item-name-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 1.4em;
+}
+
 .item-name {
+  position: absolute;
+  left: 0;
+  right: 0;
   font-family: 'EB Garamond', serif;
   font-size: 1rem;
   font-weight: 600;
@@ -550,6 +560,19 @@ button.pouch-count:focus-visible {
   color: var(--ink);
   line-height: 1.3;
   overflow-wrap: anywhere;
+}
+
+/* Item tier: a small outline shape in the corner of the name row — circle/
+   triangle/square/rhombus/star for Basic/Common/Uncommon/Rare/Quest. */
+.item-tier-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+  overflow: visible;
 }
 
 .item-keywords {
@@ -667,8 +690,8 @@ button.pouch-count:focus-visible {
 
 .action-card-name {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   font-family: 'EB Garamond', serif;
   font-size: 1rem;
   font-weight: 600;

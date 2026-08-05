@@ -2,6 +2,38 @@ import { buildFoldedEffectText, appendFormattedText, buildTokenPart } from "./ca
 import { buildEntryParts, getItemDisplayName } from "./displayParts.js";
 import { appendDisplayParts } from "./displayPartsDom.js";
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function createSvgElement(tag, attrs) {
+  const el = document.createElementNS(SVG_NS, tag);
+  Object.keys(attrs).forEach((key) => el.setAttribute(key, attrs[key]));
+  return el;
+}
+
+// Outline-only shapes (no fill) distinguishing item tiers — drawn as real SVG
+// geometry rather than CSS clip-path, since clip-path can only cut a filled
+// background, not produce a hollow stroke.
+const TIER_SHAPES = {
+  basic: () => createSvgElement("circle", { cx: 5, cy: 5, r: 4 }),
+  common: () => createSvgElement("polygon", { points: "5,1 1,9 9,9" }),
+  uncommon: () => createSvgElement("rect", { x: 1, y: 1, width: 8, height: 8 }),
+  rare: () => createSvgElement("polygon", { points: "5,0.5 9.5,5 5,9.5 0.5,5" }),
+  quest: () => createSvgElement("polygon", {
+    points: "5,0.3 6.13,3.53 9.76,3.53 6.82,5.66 7.94,9 5,6.87 2.06,9 3.18,5.66 0.24,3.53 3.87,3.53",
+  }),
+};
+
+function buildTierIcon(tier) {
+  const tierName = tier || "Basic";
+  const shape = TIER_SHAPES[tierName.toLowerCase()] || TIER_SHAPES.basic;
+  const svg = createSvgElement("svg", { viewBox: "0 0 10 10", class: "item-tier-icon" });
+  svg.appendChild(shape());
+  const titleEl = createSvgElement("title", {});
+  titleEl.textContent = tierName + " tier";
+  svg.appendChild(titleEl);
+  return svg;
+}
+
 export function singleChoiceGrid(config) {
   const grid = document.createElement("div");
   grid.className = "choice-grid";
@@ -101,10 +133,16 @@ export function buildItemDetailsElement(item) {
   const detailsEl = document.createElement("div");
   detailsEl.className = "item-details";
 
+  const nameRowEl = document.createElement("div");
+  nameRowEl.className = "item-name-row";
+  nameRowEl.appendChild(buildTierIcon(item.Tier));
+
   const nameEl = document.createElement("div");
   nameEl.className = "item-name";
   appendFormattedText(nameEl, getItemDisplayName(item));
-  detailsEl.appendChild(nameEl);
+  nameRowEl.appendChild(nameEl);
+
+  detailsEl.appendChild(nameRowEl);
 
   if (item.Passive) {
     const passiveEl = document.createElement("div");
