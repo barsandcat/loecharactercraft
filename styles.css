@@ -394,6 +394,44 @@ h1 {
   margin-bottom: 4px;
 }
 
+/* Items: a top row of two columns (Hand slots | Head/Chest/Feet) plus a
+   bottom row of the 4 Small slots, instead of one long list — cuts the
+   section's vertical footprint substantially. */
+.item-slot-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.item-slot-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.item-slot-small-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Each column/cell here is much narrower than .item-preview's normal
+   horizontal layout (name+keywords beside a fixed 260px effect box) is
+   designed for — force the same stacked layout the global mobile breakpoint
+   already uses, so item cards stay legible at this width. */
+.item-slot-columns .item-preview,
+.item-slot-small-row .item-preview {
+  flex-direction: column;
+  align-items: stretch;
+}
+.item-slot-columns .item-effect,
+.item-slot-small-row .item-effect {
+  width: 100%;
+  flex-shrink: 1;
+}
+
 .summary-stat-group {
   display: grid;
   gap: 6px;

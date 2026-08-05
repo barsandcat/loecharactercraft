@@ -282,7 +282,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     }
 
     const stats = collectCharacterStats(state);
-    const actionCardPreviewStats = buildActionCardPreviewStats(stats);
+    const actionCardPreviewStats = buildActionCardPreviewStats(state, stats);
     const allKeywordCounts = actionCardPreviewStats.keywordCounts;
 
     const attributeCard = document.createElement("section");
@@ -333,12 +333,10 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       onClick: (slotIndex) => callbacks.openSkillPickerForSlot(slotIndex),
     }));
 
-    container.appendChild(buildSlotSection({
+    container.appendChild(buildItemSlotSection({
       title: "Items",
       resolved: resolveItemSlots(state, stats),
       slotLabel: (slotIndex) => ITEM_SLOT_LABELS[slotIndex],
-      renderOccupiedContent: (entry) => buildItemElement(entry.item),
-      listLayout: true,
       eligiblePouchCount: (pouch, slotIndex) => getEligibleItemPouchForSlot(pouch, slotIndex).length,
       onClick: (slotIndex) => callbacks.openItemPickerForSlot(slotIndex),
     }));
@@ -359,13 +357,72 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     }));
   }
 
-  // Shared renderer for the Skills/Items/Action-Card-Hotbar slot grids — a
-  // header with a pouch count, then one row per slot. Skills stay a compact
-  // choice-button grid (no rich rendering exists for a bare skill name).
-  // Items/actions instead render their FULL existing element (buildItemElement
-  // / buildActionCardElement, same as before this feature existed) for an
-  // occupied slot, wrapped in a plain clickable button, falling back to the
-  // compact button only for empty/locked slots.
+  function buildSlotSectionHeader(title, pouchCount) {
+    const header = document.createElement("div");
+    header.className = "summary-card-header";
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    header.appendChild(heading);
+    const pouchCountEl = document.createElement("span");
+    pouchCountEl.className = "pouch-count";
+    pouchCountEl.textContent = pouchCount + " in pouch";
+    header.appendChild(pouchCountEl);
+    return header;
+  }
+
+  // One slot's row: the FULL existing element (buildItemElement /
+  // buildActionCardElement, same as before this feature existed) wrapped in a
+  // plain clickable button when occupied; a compact choice-button for
+  // empty/locked slots, or for systems with no rich rendering (skills).
+  function renderSlotRow({
+    slotResult,
+    slotIndex,
+    slotLabel,
+    slotMain,
+    eligiblePouchCount,
+    lockedDetail,
+    onClick,
+    renderOccupiedContent,
+    pouch,
+  }) {
+    const occupied = Boolean(slotResult.entry);
+    const locked = slotResult.reason === "locked";
+
+    if (occupied && renderOccupiedContent) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "slot-full-button";
+
+      const label = document.createElement("div");
+      label.className = "slot-full-label";
+      label.textContent = slotLabel(slotIndex);
+      button.appendChild(label);
+
+      button.appendChild(renderOccupiedContent(slotResult.entry));
+      button.addEventListener("click", () => onClick(slotIndex));
+      return button;
+    }
+
+    const hasEligiblePouch = !locked && eligiblePouchCount(pouch, slotIndex) > 0;
+    return singleChoiceGrid({
+      label: slotLabel(slotIndex),
+      main: occupied && slotMain
+        ? slotMain(slotResult.entry)
+        : locked
+          ? "Locked"
+          : "Empty",
+      detail: locked && lockedDetail ? lockedDetail(slotIndex) : describeStolenReason(slotResult),
+      complete: occupied,
+      empty: !occupied && !locked,
+      locked,
+      disabled: !occupied && !locked && !hasEligiblePouch,
+      onClick: () => onClick(slotIndex),
+    });
+  }
+
+  // Shared renderer for the Skills/Action-Card-Hotbar slot grids — a header
+  // with a pouch count, then one row per slot in a single list/grid. Items
+  // uses buildItemSlotSection instead, which groups slots into columns.
   function buildSlotSection({
     title,
     resolved,
@@ -381,57 +438,74 @@ export function createPanelRenderer({ state, ui, callbacks }) {
 
     const section = document.createElement("section");
     section.className = "summary-card";
-
-    const header = document.createElement("div");
-    header.className = "summary-card-header";
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    header.appendChild(heading);
-    const pouchCount = document.createElement("span");
-    pouchCount.className = "pouch-count";
-    pouchCount.textContent = pouch.length + " in pouch";
-    header.appendChild(pouchCount);
-    section.appendChild(header);
+    section.appendChild(buildSlotSectionHeader(title, pouch.length));
 
     const list = document.createElement("div");
     list.className = listLayout ? "slot-list" : "slot-grid";
     slots.forEach((slotResult, slotIndex) => {
-      const occupied = Boolean(slotResult.entry);
-      const locked = slotResult.reason === "locked";
-
-      if (occupied && renderOccupiedContent) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "slot-full-button";
-
-        const label = document.createElement("div");
-        label.className = "slot-full-label";
-        label.textContent = slotLabel(slotIndex);
-        button.appendChild(label);
-
-        button.appendChild(renderOccupiedContent(slotResult.entry));
-        button.addEventListener("click", () => onClick(slotIndex));
-        list.appendChild(button);
-        return;
-      }
-
-      const hasEligiblePouch = !locked && eligiblePouchCount(pouch, slotIndex) > 0;
-      list.appendChild(singleChoiceGrid({
-        label: slotLabel(slotIndex),
-        main: occupied && slotMain
-          ? slotMain(slotResult.entry)
-          : locked
-            ? "Locked"
-            : "Empty",
-        detail: locked && lockedDetail ? lockedDetail(slotIndex) : describeStolenReason(slotResult),
-        complete: occupied,
-        empty: !occupied && !locked,
-        locked,
-        disabled: !occupied && !locked && !hasEligiblePouch,
-        onClick: () => onClick(slotIndex),
+      list.appendChild(renderSlotRow({
+        slotResult, slotIndex, slotLabel, slotMain, eligiblePouchCount, lockedDetail, onClick, renderOccupiedContent, pouch,
       }));
     });
     section.appendChild(list);
+
+    return section;
+  }
+
+  // Items get a dedicated grouped layout instead of one long list, to cut
+  // down on vertical space: a top row of two columns (3 Hand slots on the
+  // left, Head/Chest/Feet on the right) plus a bottom row of the 4 Small
+  // slots — grouped from ITEM_SLOT_TYPES rather than hardcoded indices, so it
+  // stays correct if the slot layout ever changes.
+  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick }) {
+    const { slots, pouch } = resolved;
+
+    const section = document.createElement("section");
+    section.className = "summary-card";
+    section.appendChild(buildSlotSectionHeader(title, pouch.length));
+
+    const renderOne = (slotIndex) => renderSlotRow({
+      slotResult: slots[slotIndex],
+      slotIndex,
+      slotLabel,
+      renderOccupiedContent: (entry) => buildItemElement(entry.item),
+      eligiblePouchCount,
+      onClick,
+      pouch,
+    });
+
+    const handIndexes = [];
+    const armorIndexes = [];
+    const smallIndexes = [];
+    ITEM_SLOT_TYPES.forEach((type, slotIndex) => {
+      if (type === "Hand") {
+        handIndexes.push(slotIndex);
+      } else if (type === "Small") {
+        smallIndexes.push(slotIndex);
+      } else {
+        armorIndexes.push(slotIndex);
+      }
+    });
+
+    const columns = document.createElement("div");
+    columns.className = "item-slot-columns";
+
+    const handColumn = document.createElement("div");
+    handColumn.className = "item-slot-column";
+    handIndexes.forEach((slotIndex) => handColumn.appendChild(renderOne(slotIndex)));
+    columns.appendChild(handColumn);
+
+    const armorColumn = document.createElement("div");
+    armorColumn.className = "item-slot-column";
+    armorIndexes.forEach((slotIndex) => armorColumn.appendChild(renderOne(slotIndex)));
+    columns.appendChild(armorColumn);
+
+    section.appendChild(columns);
+
+    const smallRow = document.createElement("div");
+    smallRow.className = "item-slot-small-row";
+    smallIndexes.forEach((slotIndex) => smallRow.appendChild(renderOne(slotIndex)));
+    section.appendChild(smallRow);
 
     return section;
   }
@@ -457,7 +531,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     }
 
     const selectedByTree = buildSelectedByTree(state);
-    const actionCardPreviewStats = buildActionCardPreviewStats(collectCharacterStats(state));
+    const actionCardPreviewStats = buildActionCardPreviewStats(state, collectCharacterStats(state));
     treeNames.forEach((treeName, index) => {
       const tree = state.trees.get(treeName);
       if (!tree) {

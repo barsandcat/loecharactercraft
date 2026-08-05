@@ -74,17 +74,29 @@ export function collectCharacterStats(state, selection = state) {
 }
 
 export function buildPreviewStatsForSelection(state, overrides = {}) {
-  return buildActionCardPreviewStats(collectCharacterStats(state, createSelectionPreview(state, overrides)));
+  return buildActionCardPreviewStats(state, collectCharacterStats(state, createSelectionPreview(state, overrides)));
 }
 
-export function buildActionCardPreviewStats(stats) {
+// Only items/skills actually resolved into an equipped slot contribute their
+// keywords to dice-roll math — a granted-but-pouched item or skill is not
+// active. Uses the same resolver (and the same stale-target self-healing) as
+// the item/skill slot panels themselves, so this always agrees with what's
+// actually shown equipped on screen.
+export function buildActionCardPreviewStats(state, stats) {
   const keywordCounts = new Map(stats.keywordCounts);
-  for (const itemObj of stats.items.values()) {
-    incrementCountMap(keywordCounts, itemObj.Keywords || []);
-  }
-  for (const [skill, count] of stats.skillCounts) {
-    keywordCounts.set(skill, (keywordCounts.get(skill) || 0) + count);
-  }
+
+  resolveItemSlots(state, stats).slots.forEach((slotResult) => {
+    if (slotResult.entry) {
+      incrementCountMap(keywordCounts, slotResult.entry.item.Keywords || []);
+    }
+  });
+
+  resolveSkillSlots(state, stats).slots.forEach((slotResult) => {
+    if (slotResult.entry) {
+      keywordCounts.set(slotResult.entry.skill, (keywordCounts.get(slotResult.entry.skill) || 0) + 1);
+    }
+  });
+
   return {
     attributes: { ...stats.attributes },
     keywordCounts,
@@ -332,7 +344,7 @@ function actionEntryPriority(entry, previewStats) {
 
 export function resolveActionSlots(state, stats) {
   const filledLevelCount = getFilledLevelCount(state);
-  const previewStats = buildActionCardPreviewStats(stats);
+  const previewStats = buildActionCardPreviewStats(state, stats);
   const slots = ACTION_SLOT_RULES.map((rule) => ({
     locked: filledLevelCount < rule.unlockAt,
     matches: (entry) => rule.categories.includes(normalizeActionCategory(entry.card.Front.Category)),

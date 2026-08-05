@@ -318,7 +318,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
   function openBasicUpgradePickerForSlot(slotIndex) {
     const stats = collectCharacterStats(state);
     const eligibleFamilies = getEligibleBasicUpgradeFamilies(state.data, stats);
-    const previewStats = buildActionCardPreviewStats(stats);
+    const previewStats = buildActionCardPreviewStats(state, stats);
 
     selectorOverlay.openSelector({
       kicker: "Level Up " + (slotIndex + 1),
@@ -382,7 +382,7 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const stats = collectCharacterStats(state);
     const { slots, pouch } = resolveActionSlots(state, stats);
     const eligiblePouch = getEligibleActionPouchForSlot(pouch, slotIndex);
-    const previewStats = buildActionCardPreviewStats(stats);
+    const previewStats = buildActionCardPreviewStats(state, stats);
     const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
 
     selectorOverlay.openSelector({
