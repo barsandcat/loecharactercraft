@@ -49,13 +49,20 @@ export function getOptionByIndex(options, index) {
 
 export function serializeStateV3(selection, data, trees) {
   const widths = getV3EncodingWidths(data);
-  const fixedBits = getTotalBitsV3(widths);
 
   // Capped defensively here too — the UI already enforces MAX_ADDED_ITEMS,
   // but the wire format must never trust that alone.
   const addedItems = (selection.addedItems || []).slice(0, MAX_ADDED_ITEMS);
-  const totalBits = fixedBits + widths.addedItemCountBits + addedItems.length * widths.addedItem;
-  const bytes = new Uint8Array(Math.ceil(totalBits / 8));
+
+  // Sized from an analytic worst case (every presence-gated field present),
+  // not an exact dry-run pass — a dry run would mean the presence/value logic
+  // exists in two places that can drift apart. Over-allocating and trimming
+  // to the real `offset` at the end can't under-allocate by construction,
+  // since writeValue only ever sets bits, never assumes prior content.
+  const presenceBits = widths.levelUps + widths.skillSlotCount + widths.itemSlotCount + widths.actionSlotCount;
+  const worstCaseBits = getTotalBitsV3(widths) + presenceBits
+    + widths.addedItemCountBits + addedItems.length * widths.addedItem;
+  const bytes = new Uint8Array(Math.ceil(worstCaseBits / 8));
   let offset = 0;
 
   const writeValue = (value, bits) => {
@@ -68,6 +75,17 @@ export function serializeStateV3(selection, data, trees) {
       }
     }
     offset += bits;
+  };
+
+  // 1 presence bit ("is this at its default?") + the full width only when
+  // it's not — most builds leave most slots at auto (0), so this is a net
+  // win despite the +1 bit tax on the fields that are actually set.
+  const writeOptional = (value, bits, isDefault) => {
+    const present = !isDefault(value);
+    writeValue(present ? 1 : 0, 1);
+    if (present) {
+      writeValue(value, bits);
+    }
   };
 
   writeValue(encodeV1Id(selection.selectedRace?.Id), widths.race);
@@ -86,8 +104,19 @@ export function serializeStateV3(selection, data, trees) {
   selection.levelUps.forEach((slot) => {
     const tree = slot.treeName ? trees.get(slot.treeName) : null;
     const treeId = tree?.Id ?? null;
+
+    // One presence bit gates all four subfields as a block — basicUpgradeFamily
+    // can only ever be set once tree/level/versionIndex already are, so there's
+    // no case where a slot is "partially present" in a way worth encoding
+    // separately. An unfilled slot (common — depends on in-fiction level) now
+    // costs 1 bit instead of tree+level+option+basicUpgradeFamily bits.
+    writeValue(treeId !== null ? 1 : 0, 1);
+    if (treeId === null) {
+      return;
+    }
+
     const levelValue = slot.level !== null ? slot.level : 0;
-    const optionId = slot.treeName !== null && slot.level !== null && slot.versionIndex !== null
+    const optionId = slot.level !== null && slot.versionIndex !== null
       ? getTreeLevelOptionId(tree, slot.level, slot.versionIndex)
       : null;
     const familyIndex = slot.basicUpgradeFamily
@@ -112,23 +141,19 @@ export function serializeStateV3(selection, data, trees) {
   // builds always agrees with what gets written below.
   const stats = collectCharacterStats({ ...selection, addedItems });
 
+  // code 0 (auto/no override) is the expected common case — the whole point
+  // of the auto-fill resolver is that manual overrides are the exception.
   selection.skillSlots.forEach((override) => {
-    writeValue(
-      encodeSlotOverride(override, stats.skillPool, (entry, target) => matchesSkillTarget(entry.source, target)),
-      widths.skillSlot
-    );
+    const code = encodeSlotOverride(override, stats.skillPool, (entry, target) => matchesSkillTarget(entry.source, target));
+    writeOptional(code, widths.skillSlot, (value) => value === 0);
   });
   selection.itemSlots.forEach((override) => {
-    writeValue(
-      encodeSlotOverride(override, stats.itemPool, (entry, target) => entry.itemName === target.itemName),
-      widths.itemSlot
-    );
+    const code = encodeSlotOverride(override, stats.itemPool, (entry, target) => entry.itemName === target.itemName);
+    writeOptional(code, widths.itemSlot, (value) => value === 0);
   });
   selection.actionSlots.forEach((override) => {
-    writeValue(
-      encodeSlotOverride(override, stats.actionPool, (entry, target) => entry.cardName === target.cardName),
-      widths.actionSlot
-    );
+    const code = encodeSlotOverride(override, stats.actionPool, (entry, target) => entry.cardName === target.cardName);
+    writeOptional(code, widths.actionSlot, (value) => value === 0);
   });
 
   writeValue(addedItems.length, widths.addedItemCountBits);
@@ -136,7 +161,7 @@ export function serializeStateV3(selection, data, trees) {
     writeValue(data.Items[itemName]?.Id ?? 0, widths.addedItem);
   });
 
-  return "v3." + encodeBytesToBase64Url(bytes);
+  return "v3." + encodeBytesToBase64Url(bytes.slice(0, Math.ceil(offset / 8)));
 }
 
 export function deserializeState(encoded, data, trees) {
@@ -511,9 +536,14 @@ function decodeV2State(encoded, data) {
 function decodeV3State(encoded, data) {
   const bytes = decodeBase64Url(encoded);
   const widths = getV3EncodingWidths(data);
-  const totalBits = getTotalBitsV3(widths);
 
-  if (bytes.length * 8 < totalBits) {
+  // Only the base fields (race..path) are un-gated fixed-width — everything
+  // after them is presence-coded, so there's no longer one static total to
+  // check upfront. This guard still rejects a payload too short to even
+  // carry the base identity fields; each presence-gated field below checks
+  // its own bounds right after reading "present," before trusting its width.
+  const baseFixedBits = widths.race + widths.attribute + widths.freeSkill + widths.origin + widths.profession + widths.path;
+  if (bytes.length * 8 < baseFixedBits) {
     return null;
   }
 
@@ -541,12 +571,25 @@ function decodeV3State(encoded, data) {
 
   const levelUps = [];
   for (let index = 0; index < LEVEL_UP_SLOTS; index += 1) {
+    const present = readValue(1);
+    if (!present) {
+      levelUps.push(null);
+      continue;
+    }
+    const slotBits = widths.tree + widths.level + widths.option + widths.basicUpgradeFamily;
+    if (offset + slotBits > bytes.length * 8) {
+      return null; // truncated mid-slot
+    }
+
     const treeId = decodeV1Id(readValue(widths.tree));
     const level = decodeV1Id(readValue(widths.level));
     const optionId = decodeV1Id(readValue(widths.option));
     const familyId = readValue(widths.basicUpgradeFamily);
     const basicUpgradeFamily = familyId > 0 ? (BASIC_UPGRADE_FAMILIES[familyId - 1]?.name ?? null) : null;
 
+    // Unchanged from before presence-coding — kept verbatim so existing v3
+    // collapse semantics for a mid-selection slot (tree/level picked, reward
+    // not yet chosen) don't shift.
     if (treeId !== null && level > 0 && optionId !== null) {
       const tree = data.AdvancementTrees.find((entry) => entry.Id === treeId) || null;
       const versionIndex = tree ? findTreeLevelVersionIndex(tree, level, optionId) : null;
@@ -562,24 +605,49 @@ function decodeV3State(encoded, data) {
     }
   }
 
+  // code 0 (auto/no override) is the expected common case, matching the
+  // write side's writeOptional — see serializeStateV3.
   const skillSlotCodes = [];
   for (let index = 0; index < widths.skillSlotCount; index += 1) {
+    const present = readValue(1);
+    if (!present) {
+      skillSlotCodes.push(0);
+      continue;
+    }
+    if (offset + widths.skillSlot > bytes.length * 8) {
+      return null;
+    }
     skillSlotCodes.push(readValue(widths.skillSlot));
   }
   const itemSlotCodes = [];
   for (let index = 0; index < widths.itemSlotCount; index += 1) {
+    const present = readValue(1);
+    if (!present) {
+      itemSlotCodes.push(0);
+      continue;
+    }
+    if (offset + widths.itemSlot > bytes.length * 8) {
+      return null;
+    }
     itemSlotCodes.push(readValue(widths.itemSlot));
   }
   const actionSlotCodes = [];
   for (let index = 0; index < widths.actionSlotCount; index += 1) {
+    const present = readValue(1);
+    if (!present) {
+      actionSlotCodes.push(0);
+      continue;
+    }
+    if (offset + widths.actionSlot > bytes.length * 8) {
+      return null;
+    }
     actionSlotCodes.push(readValue(widths.actionSlot));
   }
 
-  // Variable-length section: unlike every field above (statically sized from
-  // `data` alone), how many bits this needs depends on the count value just
-  // read from the payload itself, so it needs its own guard here rather than
-  // relying on the single upfront totalBits check, which only covers the
-  // fixed-width prefix above.
+  // Variable-length section: how many bits this needs depends on the count
+  // value just read from the payload itself, so — like every presence-gated
+  // field above — it needs its own bounds check rather than a single upfront
+  // total (there no longer is one; only the base fields have a static size).
   const addedItemCount = readValue(widths.addedItemCountBits);
   const addedItemsBits = addedItemCount * widths.addedItem;
   if (offset + addedItemsBits > bytes.length * 8) {
