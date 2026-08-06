@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Database - Lands of Evershade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card-database-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Lands of Evershade</p>
+        <h1>Item Database</h1>
+      </div>
+      <div class="hero-actions">
+        <button id="resetFiltersButton" class="ghost-button" type="button">Reset Filters</button>
+      </div>
+    </header>
+
+    <section class="card-database-controls">
+      <div class="controls-section">
+        <h2>Filter</h2>
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="filterName">Name:</label>
+            <input type="text" id="filterName" placeholder="Any">
+          </div>
+          <div class="filter-group">
+            <label for="filterType">Type:</label>
+            <select id="filterType">
+              <option value="">Any</option>
+              <option value="Head">Head</option>
+              <option value="Chest">Chest</option>
+              <option value="Hand">Hand</option>
+              <option value="Feet">Feet</option>
+              <option value="Small">Small</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterTier">Tier:</label>
+            <select id="filterTier">
+              <option value="">Any</option>
+              <option value="Basic">Basic</option>
+              <option value="Common">Common</option>
+              <option value="Uncommon">Uncommon</option>
+              <option value="Rare">Rare</option>
+              <option value="Quest">Quest</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterKeywords">Keywords:</label>
+            <select id="filterKeywords">
+              <option value="">Any</option>
+              <option value="has">At least one</option>
+              <option value="none">No keywords</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterCard">Grants Action Card:</label>
+            <select id="filterCard">
+              <option value="">Any</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-section">
+        <h2>Sort</h2>
+        <div class="sort-group">
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option value="name" selected>Name</option>
+            <option value="tier">Tier</option>
+            <option value="type">Type</option>
+          </select>
+          <label for="sortOrder">
+            <input type="checkbox" id="sortOrder" checked>
+            Ascending
+          </label>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="card-database-content">
+      <div id="cardList" class="card-list"></div>
+    </section>
+
+    <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+  </main>
+
+  <script type="module" src="js/itemDatabase.js"></script>
+</body>
+</html>

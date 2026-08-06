@@ -1400,13 +1400,16 @@ button.pouch-count:focus-visible {
   color: var(--dark-text);
   text-decoration: none;
   font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
-  padding: 6px 12px;
+  padding: 5px 9px;
   border: 1px solid rgba(201, 168, 64, 0.28);
   border-radius: 1px;
   transition: all 200ms ease;
   display: inline-block;
+  white-space: nowrap;
+  width: 136px;
+  text-align: center;
 }
 
 .nav-link:hover,
