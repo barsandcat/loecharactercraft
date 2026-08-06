@@ -2,6 +2,19 @@ import { PROB_EN_DIFFICULTIES, computeSuccessDist, bandProb, pct, avgSuccesses, 
 
 export const ATTRIBUTES = ["STR", "AGI", "INT", "CHA"];
 
+// Catches the "forgot the [ ] brackets in data.json" class of mistake right
+// where the bad field is read, instead of a generic "<var>.forEach is not a
+// function" several calls deep with no indication which card or field it was.
+function assertArrayField(value, fieldPath) {
+  if (value === undefined || value === null || Array.isArray(value)) {
+    return;
+  }
+  const gotDescription = typeof value === "string" ? `a string ("${value}")` : typeof value;
+  throw new Error(
+    `data.json: "${fieldPath}" should be an array, but got ${gotDescription}. Did you forget the [ ] brackets?`
+  );
+}
+
 // Action card rendering
 export function buildActionCardElement(cardId, card, attrs = null, keywordCounts = null) {
   const front = card.Front || {};
@@ -29,6 +42,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     noteClassName: "action-card-note",
     warningClassName: "action-card-warning",
     headerElementClass: "",
+    fieldPrefix: `ActionCards["${cardId}"].Front`,
   });
 
   // Render back
@@ -40,6 +54,7 @@ export function buildActionCardElement(cardId, card, attrs = null, keywordCounts
     noteClassName: "action-card-note",
     warningClassName: "action-card-warning",
     headerElementClass: "action-card-back-text",
+    fieldPrefix: `ActionCards["${cardId}"].Back`,
   });
 
   wrapper.appendChild(body);
@@ -168,7 +183,14 @@ function renderCardContent(parent, block, options = {}) {
     noteClassName,
     warningClassName,
     headerElementClass,
+    fieldPrefix = "",
   } = options;
+
+  assertArrayField(block?.Text, fieldPrefix + ".Text");
+  assertArrayField(block?.Keywords, fieldPrefix + ".Keywords");
+  assertArrayField(block?.Requires, fieldPrefix + ".Requires");
+  assertArrayField(block?.Roll?.ATT, fieldPrefix + ".Roll.ATT");
+  assertArrayField(block?.Roll?.Modifiers, fieldPrefix + ".Roll.Modifiers");
 
   const roll = block?.Roll || null;
   const text = block?.Text || null;
