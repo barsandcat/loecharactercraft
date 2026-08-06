@@ -13,6 +13,7 @@ const LOCK_LEVEL_MAP = {
 };
 
 const BASIC_TREE = "Basic";
+const ITEM_CARD_TREE = "Item Cards";
 
 let cardDatabase = null;
 const ui = {};
@@ -345,12 +346,13 @@ function createCardDatabase(data) {
 
     Object.entries(actionCardsMap).forEach(([cardId, card]) => {
       const isBasic = cardId.startsWith("B");
-      const tree = isBasic ? BASIC_TREE : (treeByCard.get(cardId) || BASIC_TREE);
+      const isItemCard = cardId.startsWith("i");
+      const tree = isBasic ? BASIC_TREE : isItemCard ? ITEM_CARD_TREE : (treeByCard.get(cardId) || BASIC_TREE);
       cards.push({
         ...card,
         _cardId: cardId,
         _tree: tree,
-        _lockLevel: isBasic ? 0 : (lockLevelByCard.get(cardId) ?? 0),
+        _lockLevel: (isBasic || isItemCard) ? 0 : (lockLevelByCard.get(cardId) ?? 0),
       });
     });
 
