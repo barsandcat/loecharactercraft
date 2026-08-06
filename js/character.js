@@ -30,7 +30,15 @@ import {
   getEligibleItemPouchForSlot,
   getEligibleActionPouchForSlot,
 } from "./characterStats.js";
-import { SKILL_SLOTS, ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS, ITEM_TIERS } from "./constants.js";
+import {
+  SKILL_SLOTS,
+  ITEM_SLOT_TYPES,
+  ACTION_SLOT_RULES,
+  MAX_ADDED_ITEMS,
+  ITEM_TIERS,
+  ITEM_TYPE_ORDER,
+} from "./constants.js";
+import { getItemDisplayName } from "./displayParts.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
 import { createPanelRenderer } from "./panelRenderer.js";
 
@@ -463,8 +471,9 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     commitSelection();
   }
 
-  // Two-step browse: pick a tier first, then pick an item from that tier's
-  // (much shorter) list — the full catalog is too long to browse in one go.
+  // Three-step browse: tier, then item type, then the (now much shorter)
+  // name-sorted list within that tier+type — the full catalog is too long to
+  // browse in one go.
   function openAddItemSelector() {
     const stats = collectCharacterStats(state);
     const ownedNames = new Set(stats.itemPool.map((entry) => entry.itemName));
@@ -487,19 +496,45 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
         title: tierOption.tier,
         detail: tierOption.items.length + " item" + (tierOption.items.length === 1 ? "" : "s") + " available.",
       }),
-      onSelect: (tierOption) => openAddItemTierSelector(tierOption.tier, tierOption.items),
+      onSelect: (tierOption) => openAddItemTypeSelector(tierOption.tier, tierOption.items),
       isSelected: () => false,
     });
   }
 
-  function openAddItemTierSelector(tier, items) {
-    const stats = collectCharacterStats(state);
-    const previewStats = buildActionCardPreviewStats(state, stats);
+  function openAddItemTypeSelector(tier, items) {
+    const typeOptions = ITEM_TYPE_ORDER
+      .map((type) => ({
+        type,
+        items: items.filter((option) => option.item.Type === type),
+      }))
+      .filter((typeOption) => typeOption.items.length > 0);
 
     selectorOverlay.openSelector({
-      title: "Add Item — " + tier,
-      description: "Browse " + tier.toLowerCase() + " items and add one to your build.",
-      options: items,
+      kicker: "Add Item — " + tier,
+      title: "Choose Item Type",
+      description: "Choose an item type to browse.",
+      options: typeOptions,
+      getOptionContent: (typeOption) => ({
+        title: typeOption.type,
+        detail: typeOption.items.length + " item" + (typeOption.items.length === 1 ? "" : "s") + " available.",
+      }),
+      onSelect: (typeOption) => openAddItemFinalSelector(tier, typeOption.type, typeOption.items),
+      isSelected: () => false,
+    });
+  }
+
+  function openAddItemFinalSelector(tier, type, items) {
+    const stats = collectCharacterStats(state);
+    const previewStats = buildActionCardPreviewStats(state, stats);
+    const sortedItems = [...items].sort(
+      (a, b) => getItemDisplayName(a.item).localeCompare(getItemDisplayName(b.item))
+    );
+
+    selectorOverlay.openSelector({
+      kicker: "Add Item — " + tier,
+      title: type + " Items",
+      description: "Browse " + tier.toLowerCase() + " " + type.toLowerCase() + " items and add one to your build.",
+      options: sortedItems,
       getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
       onSelect: (option) => addOwnedItem(option.itemName),
       isSelected: () => false,
