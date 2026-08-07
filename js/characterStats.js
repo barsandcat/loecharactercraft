@@ -53,7 +53,8 @@ export function collectCharacterStats(state, selection = state) {
   }
 
   getSelectedAdvancementEntries(state, selection.levelUps).forEach(({ slotIndex, entry }) => {
-    const isBasicDuplicate = applyEntry(state.data, stats, entry, { kind: "levelUp", slotIndex });
+    const level = selection.levelUps[slotIndex].level;
+    const isBasicDuplicate = applyEntry(state.data, stats, entry, { kind: "levelUp", slotIndex, level });
     incrementCountMap(stats.skillCounts, entry.Skills || []);
     (entry.Skills || []).forEach((skill) => {
       stats.skillPool.push({ skill, source: { kind: "levelUp", slotIndex } });
@@ -349,6 +350,11 @@ function isWeakRollForBuild(card, attrs, keywordCounts) {
   return effectiveDice <= 2;
 }
 
+// Highest level a level-up slot can be — matches advancementTree.js's
+// isAdvancementLevelUnlocked, which already hardcodes this same ceiling
+// (mirrors cardDatabase.js's LOCK_LEVEL_MAP doing the same).
+const MAX_ADVANCEMENT_LEVEL = 8;
+
 // Priority for the hotbar's auto-fill when the pool has more eligible cards
 // than slots. Whether the card is a weak roll for this build (see
 // isWeakRollForBuild) is the dominant, primary split — e.g. Bash vs Shoot
@@ -357,13 +363,14 @@ function isWeakRollForBuild(card, attrs, keywordCounts) {
 // the weak/non-weak group (applied to both groups identically, so a weak
 // path card still ranks above a weak un-upgraded basic if a weak card ever
 // becomes unavoidable):
-//   0 — path/levelUp cards, a basic-family card at its max tier, or an item
-//       card granted by an Uncommon/Rare/Quest item
+//   0 — path cards, a basic-family card at its max tier, an item card
+//       granted by an Uncommon/Rare/Quest item, or a level-up card (level-up
+//       cards are further ranked among themselves — see actionEntrySubRank)
 //   1 — an item card granted by a Basic/Common item
 //   2 — a basic-family card not yet at its max tier
 function actionEntryPriority(entry, previewStats) {
   const weak = isWeakRollForBuild(entry.card, previewStats.attributes, previewStats.keywordCounts);
-  return (weak ? 1 : 0) * 3 + actionEntryTierRank(entry);
+  return (weak ? 1 : 0) * 100 + actionEntryTierRank(entry) * 10 + actionEntrySubRank(entry);
 }
 
 function actionEntryTierRank(entry) {
@@ -383,6 +390,19 @@ function actionEntryTierRank(entry) {
     default:
       return 2;
   }
+}
+
+// Tie-break within tier 0: a level-up card granted later in the tree ranks
+// above one granted earlier. Path cards, maxed-out basics, and high-tier
+// item cards are treated as being at least as good as the latest possible
+// level-up pick (subRank 0), so this refinement only ever reorders level-up
+// cards relative to each other — it never displaces those other tier-0
+// entries, since none of them can score better than 0 here.
+function actionEntrySubRank(entry) {
+  if (entry.source.kind === "levelUp" && typeof entry.source.level === "number") {
+    return MAX_ADVANCEMENT_LEVEL - entry.source.level;
+  }
+  return 0;
 }
 
 export function resolveActionSlots(state, stats) {
