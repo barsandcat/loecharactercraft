@@ -79,9 +79,11 @@ export function collectCharacterStats(state, selection = state) {
   // source or the item's own equip status — matches every other action-card
   // source (race/path/levelUp already enter actionPool unconditionally; equip
   // status is a downstream/hotbar-only concern, not a pool-membership rule).
+  // itemTier is carried along so actionEntryPriority can rank it without a
+  // second lookup back into the item pool.
   stats.itemPool.forEach((entry) => {
     if (entry.item.Card) {
-      addAction(state.data, stats, entry.item.Card, { kind: "itemCard", itemSource: entry.source });
+      addAction(state.data, stats, entry.item.Card, { kind: "itemCard", itemTier: entry.item.Tier || "Basic" });
     }
   });
 
@@ -348,22 +350,39 @@ function isWeakRollForBuild(card, attrs, keywordCounts) {
 }
 
 // Priority for the hotbar's auto-fill when the pool has more eligible cards
-// than slots. Whether the card is a weak roll for this build dominates (e.g.
-// Bash vs Shoot resolves by which one this character's attributes actually
-// make worthwhile) — a basic-family card not yet at its max tier is only a
-// secondary tie-break among cards that are equally weak or equally strong,
-// never an independent override that could preempt the roll-fit check (two
-// same-tier-status basics, like two un-upgraded basics, must still be able
-// to be told apart by build fit).
+// than slots. Whether the card is a weak roll for this build (see
+// isWeakRollForBuild) is the dominant, primary split — e.g. Bash vs Shoot
+// resolves by which one this character's attributes actually make
+// worthwhile, regardless of provenance. Provenance only breaks ties *within*
+// the weak/non-weak group (applied to both groups identically, so a weak
+// path card still ranks above a weak un-upgraded basic if a weak card ever
+// becomes unavoidable):
+//   0 — path/levelUp cards, a basic-family card at its max tier, or an item
+//       card granted by an Uncommon/Rare/Quest item
+//   1 — an item card granted by a Basic/Common item
+//   2 — a basic-family card not yet at its max tier
 function actionEntryPriority(entry, previewStats) {
   const weak = isWeakRollForBuild(entry.card, previewStats.attributes, previewStats.keywordCounts);
-  let notAtMaxTier = 0;
-  if (entry.source.kind === "race") {
-    const family = BASIC_UPGRADE_FAMILIES.find((candidate) => candidate.name === entry.cardName);
-    const atMaxTier = Boolean(family) && entry.card._cardId === family.maxCardId;
-    notAtMaxTier = atMaxTier ? 0 : 1;
+  return (weak ? 1 : 0) * 3 + actionEntryTierRank(entry);
+}
+
+function actionEntryTierRank(entry) {
+  switch (entry.source.kind) {
+    case "path":
+    case "levelUp":
+      return 0;
+    case "race": {
+      const family = BASIC_UPGRADE_FAMILIES.find((candidate) => candidate.name === entry.cardName);
+      const atMaxTier = Boolean(family) && entry.card._cardId === family.maxCardId;
+      return atMaxTier ? 0 : 2;
+    }
+    case "itemCard": {
+      const isHighItemTier = ["Uncommon", "Rare", "Quest"].includes(entry.source.itemTier);
+      return isHighItemTier ? 0 : 1;
+    }
+    default:
+      return 2;
   }
-  return (weak ? 2 : 0) + notAtMaxTier;
 }
 
 export function resolveActionSlots(state, stats) {
