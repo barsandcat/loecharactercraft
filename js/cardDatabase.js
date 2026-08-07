@@ -200,10 +200,14 @@ function getCardAttributes(card) {
   return Array.from(attributes);
 }
 
+// Item cards' Requires field states the item's own equip prerequisite, not a
+// thematic keyword the card carries — including it here would pollute the
+// keyword filter with entries that don't describe the card itself.
 function getCardAllKeywords(card) {
-  const keywords = [...(card.Front.Keywords || []), ...(card.Front.Requires || [])];
+  const isItemCard = card._cardId.startsWith("i");
+  const keywords = [...(card.Front.Keywords || []), ...(isItemCard ? [] : card.Front.Requires || [])];
   if (card.Back) {
-    keywords.push(...(card.Back.Keywords || []), ...(card.Back.Requires || []));
+    keywords.push(...(card.Back.Keywords || []), ...(isItemCard ? [] : card.Back.Requires || []));
   }
   return keywords;
 }
