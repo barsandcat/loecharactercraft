@@ -2412,6 +2412,397 @@
       ],
       "Card": "i33",
       "DisplayName": "Reclaimed Tunic"
+    },
+    "Bow": {
+      "Id": 122,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "Keywords": [
+        "Ranged"
+      ],
+      "Card": "i05",
+      "DisplayName": "Bow"
+    },
+    "Dagger": {
+      "Id": 123,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i09",
+      "DisplayName": "Dagger"
+    },
+    "Hammer": {
+      "Id": 124,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i02",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Hammer"
+    },
+    "Javelins": {
+      "Id": 125,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Ranged"
+      ],
+      "Card": "i04",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Javelins"
+    },
+    "Magic Ward": {
+      "Id": 126,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Card": "i19",
+      "DisplayName": "Magic Ward"
+    },
+    "Quarterstaff": {
+      "Id": 127,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Melee",
+        "Reach"
+      ],
+      "Card": "i10",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "DisplayName": "Quarterstaff"
+    },
+    "Shield": {
+      "Id": 128,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Armor"
+      ],
+      "Card": "i03",
+      "DisplayName": "Shield"
+    },
+    "Slingshot": {
+      "Id": 129,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Ranged"
+      ],
+      "Card": "i17",
+      "DisplayName": "Slingshot"
+    },
+    "Spear": {
+      "Id": 130,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Melee",
+        "Reach"
+      ],
+      "Card": "i07",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Spear"
+    },
+    "Sword": {
+      "Id": 131,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i01",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Sword"
+    },
+    "Torch": {
+      "Id": 132,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Fire",
+        "Light"
+      ],
+      "Effect": "Push anyone in R1 by 2",
+      "DisplayName": "Torch"
+    },
+    "Wand of Ice": {
+      "Id": 133,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Arcana",
+        "Ice",
+        "Ranged"
+      ],
+      "Card": "i22",
+      "Passive": "During your [Spell] [Attack]: Add 1{damage}",
+      "DisplayName": "Wand of Ice"
+    },
+    "War Axe": {
+      "Id": 134,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i08",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "War Axe"
+    },
+    "War Drums": {
+      "Id": 135,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Performer"
+      ],
+      "Card": "i18",
+      "DisplayName": "War Drums"
+    },
+    "Whimsical Songbook": {
+      "Id": 136,
+      "Type": "Hand",
+      "Tier": "Common",
+      "Keywords": [
+        "Arcana",
+        "Performer",
+        "Ranged"
+      ],
+      "Card": "i20",
+      "DisplayName": "Whimsical Songbook"
+    },
+    "Celestial Shield": {
+      "Id": 137,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Armor",
+        "Celestial",
+        "Divinum"
+      ],
+      "Card": "i36",
+      "DisplayName": "Celestial Shield"
+    },
+    "Celestial Sword": {
+      "Id": 138,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Celestial",
+        "Melee"
+      ],
+      "Card": "i35",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Celestial Sword"
+    },
+    "Crossbow": {
+      "Id": 139,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Ranged"
+      ],
+      "Card": "i25",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "DisplayName": "Crossbow"
+    },
+    "Greatbow": {
+      "Id": 140,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Ranged"
+      ],
+      "Card": "i39",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "DisplayName": "Greatbow"
+    },
+    "Icy Throwing Stars": {
+      "Id": 141,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Ice",
+        "Ranged"
+      ],
+      "Card": "i24",
+      "Passive": "During your [Attack]: Add 1{damage}",
+      "DisplayName": "Icy Throwing Stars"
+    },
+    "Mace of Thunderous Shock": {
+      "Id": 142,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Melee",
+        "Thunder"
+      ],
+      "Card": "i16",
+      "Passive": "During your [Attack]: Add 3{damage}",
+      "DisplayName": "Mace of Thunderous Shock"
+    },
+    "Two-handed Axe": {
+      "Id": 143,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i11",
+      "Passive": "During your [Attack]: Add 3{damage}",
+      "DisplayName": "Two-handed Axe"
+    },
+    "Table of Chaos": {
+      "Id": 144,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Artifact",
+        "Darkness",
+        "Ranged"
+      ],
+      "Card": "i26",
+      "DisplayName": "Table of Chaos"
+    },
+    "Tablet of Flame": {
+      "Id": 145,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Artifact",
+        "Fire",
+        "Ranged"
+      ],
+      "Card": "i14",
+      "DisplayName": "Tablet of Flame"
+    },
+    "Tablet of Shrinking": {
+      "Id": 146,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Artifact",
+        "Small"
+      ],
+      "Effect": "During your Defensive Reaction: Roll 2 additional dice",
+      "DisplayName": "Tablet of Shrinking"
+    },
+    "Two-handed Sword": {
+      "Id": 147,
+      "Type": "Hand",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i12",
+      "Passive": "During your [Attack]: Add 3{damage}",
+      "DisplayName": "Two-handed Sword"
+    },
+    "Corrupted Bow": {
+      "Id": 148,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Darkness",
+        "Ranged"
+      ],
+      "Card": "i38",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Corrupted Bow"
+    },
+    "Corrupted Brillshard": {
+      "Id": 149,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Melee"
+      ],
+      "Card": "i28",
+      "Passive": "During your [Attack]: Add 2{damage}",
+      "DisplayName": "Corrupted Brillshard"
+    },
+    "Cursed Fiddle": {
+      "Id": 150,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Darkness",
+        "Performer"
+      ],
+      "Card": "i27",
+      "DisplayName": "Cursed Fiddle"
+    },
+    "Generals Banner": {
+      "Id": 151,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Leadership"
+      ],
+      "Effect": "Copy and resolve an effect of your equipped small item",
+      "DisplayName": "Generals Banner"
+    },
+    "Mace of Divine Light": {
+      "Id": 152,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Ligth",
+        "Melee"
+      ],
+      "Card": "i06",
+      "Passive": "During your [Attack]: Add 3{damage}",
+      "DisplayName": "Mace of Divine Light"
+    },
+    "Reclaimed Scythe": {
+      "Id": 153,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Melee",
+        "Reclaimed"
+      ],
+      "Card": "i34",
+      "Passive": "During your [Attack]: Add 3{damage}",
+      "DisplayName": "Reclaimed Scythe"
+    },
+    "Springbow": {
+      "Id": 154,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Brilliance",
+        "Ranged"
+      ],
+      "Card": "i40",
+      "Passive": "During your [Attack]: Add 4{damage}",
+      "DisplayName": "Springbow"
+    },
+    "Tablet of Flight": {
+      "Id": 155,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact"
+      ],
+      "Effect": "Move by 12. Ignore {danger} spaces during this Move",
+      "DisplayName": "Tablet of Flight"
+    },
+    "Tablet of Thunder": {
+      "Id": 150,
+      "Type": "Hand",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact",
+        "Thunder"
+      ],
+      "Card": "i15",
+      "DisplayName": "Tablet of Thunder"
     }
   },
   "AdvancementTrees": [
