@@ -2179,6 +2179,239 @@
       ],
       "Effect": "Stabile a PM in R1. You or a PM in R1 heal 10HP",
       "DisplayName": "Potent Herbs"
+    },
+    "Head": {
+      "Id": 99,
+      "Type": "Head",
+      "Tier": "Common",
+      "Keywords": [
+        "Stealth"
+      ],
+      "DisplayName": "Head"
+    },
+    "Iron Helmet": {
+      "Id": 100,
+      "Type": "Head",
+      "Tier": "Common",
+      "Effect": "Against [Melee]: Prevent 4{damage}",
+      "DisplayName": "Iron Helmet"
+    },
+    "Merchant's Headwear": {
+      "Id": 101,
+      "Type": "Head",
+      "Tier": "Common",
+      "Keywords": [
+        "Cityborn"
+      ],
+      "Effect": "During your CHA or INT Roll: Roll 1 additional die.",
+      "DisplayName": "Merchant's Headwear"
+    },
+    "Priest's Cowl": {
+      "Id": 102,
+      "Type": "Head",
+      "Tier": "Common",
+      "Effect": "During your DIV Roll: Roll an additional D4 DIV die. Gain 1{terror}",
+      "DisplayName": "Priest's Cowl"
+    },
+    "Crown of Ice": {
+      "Id": 103,
+      "Type": "Head",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Ice"
+      ],
+      "Effect": "Against [Melee]: After [Attack], deal 5{damage} to the attacking Enemy.",
+      "DisplayName": "Crown of Ice"
+    },
+    "Diadem of Flame": {
+      "Id": 104,
+      "Type": "Head",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Fire",
+        "Intimidation"
+      ],
+      "Effect": "Target all ENs in R1. Deal 2 {damage}. Push by 2",
+      "DisplayName": "Diadem of Flame"
+    },
+    "Hunter's Hood": {
+      "Id": 105,
+      "Type": "Head",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Resilience",
+        "Vigilance"
+      ],
+      "Effect": "During EN activation: You cannot be targeted",
+      "DisplayName": "Hunter's Hood"
+    },
+    "Scholar's Headdress": {
+      "Id": 106,
+      "Type": "Head",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Artifact",
+        "Lore"
+      ],
+      "Effect": "During a [Spell] Support Action or Reaction: Roll 2 additional dice.",
+      "DisplayName": "Scholar's Headdress"
+    },
+    "Moonshadow Hood": {
+      "Id": 107,
+      "Type": "Head",
+      "Tier": "Rare",
+      "Keywords": [
+        "Stealth"
+      ],
+      "Effect": "Against [Spell] or [Ranged]: Prevent 12{damage} and gain 1{terror}",
+      "DisplayName": "Moonshadow Hood"
+    },
+    "Reinforced Headguard": {
+      "Id": 108,
+      "Type": "Head",
+      "Tier": "Rare",
+      "Passive": "1{armor}",
+      "Keywords": [
+        "Armor"
+      ],
+      "DisplayName": "Reinforced Headguard"
+    },
+    "Vestigial Crown": {
+      "Id": 109,
+      "Type": "Head",
+      "Tier": "Rare",
+      "Keywords": [
+        "Vestigial"
+      ],
+      "Effect": "During your Roll: Your ATT Bons give you 1 additional die",
+      "DisplayName": "Vestigial Crown"
+    },
+    "Iron Chainmail": {
+      "Id": 110,
+      "Type": "Chest",
+      "Tier": "Common",
+      "Keywords": [
+        "Armor"
+      ],
+      "Card": "i21",
+      "DisplayName": "Iron Chainmail"
+    },
+    "Sage's Robes": {
+      "Id": 111,
+      "Type": "Chest",
+      "Tier": "Common",
+      "Keywords": [
+        "Lore"
+      ],
+      "Card": "i32",
+      "DisplayName": "Sage's Robes"
+    },
+    "Studded Armor": {
+      "Id": 112,
+      "Type": "Chest",
+      "Tier": "Common",
+      "Passive": "1{armor}",
+      "Keywords": [
+        "Armor"
+      ],
+      "DisplayName": "Studded Armor"
+    },
+    "Traveler's Cloak": {
+      "Id": 113,
+      "Type": "Chest",
+      "Tier": "Common",
+      "Keywords": [
+        "Stealth"
+      ],
+      "Card": "i13",
+      "DisplayName": "Traveler's Cloak"
+    },
+    "Brillmail": {
+      "Id": 114,
+      "Type": "Chest",
+      "Tier": "Uncommon",
+      "Passive": "2{armor}",
+      "Keywords": [
+        "Armor",
+        "Brilliance"
+      ],
+      "DisplayName": "Brillmail"
+    },
+    "Celestial Runeplate": {
+      "Id": 115,
+      "Type": "Chest",
+      "Tier": "Uncommon",
+      "Passive": "2{armor}",
+      "Keywords": [
+        "Armor",
+        "Celestial",
+        "Divinum"
+      ],
+      "DisplayName": "Celestial Runeplate"
+    },
+    "Infused Brillcoat": {
+      "Id": 116,
+      "Type": "Chest",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Brilliance"
+      ],
+      "Card": "i31",
+      "DisplayName": "Infused Brillcoat"
+    },
+    "Light Leather Armor": {
+      "Id": 117,
+      "Type": "Chest",
+      "Tier": "Uncommon",
+      "Passive": "1{armor}",
+      "Keywords": [
+        "Armor"
+      ],
+      "Card": "i30",
+      "DisplayName": "Light Leather Armor"
+    },
+    "Hardened Battleplate": {
+      "Id": 118,
+      "Type": "Chest",
+      "Tier": "Rare",
+      "Passive": "3{armor}",
+      "Keywords": [
+        "Armor"
+      ],
+      "DisplayName": "Hardened Battleplate"
+    },
+    "Higer Realm Robes": {
+      "Id": 119,
+      "Type": "Chest",
+      "Tier": "Rare",
+      "Keywords": [
+        "Lore"
+      ],
+      "Card": "i23",
+      "DisplayName": "Higer Realm Robes"
+    },
+    "Moonshroud": {
+      "Id": 120,
+      "Type": "Chest",
+      "Tier": "Rare",
+      "Passive": "1{armor}",
+      "Keywords": [
+        "Armor"
+      ],
+      "Card": "i41",
+      "DisplayName": "Moonshroud"
+    },
+    "Reclaimed Tunic": {
+      "Id": 121,
+      "Type": "Chest",
+      "Tier": "Rare",
+      "Passive": "1{armor}",
+      "Keywords": [
+        "Reclaimed",
+        "Stealth"
+      ],
+      "Card": "i33",
+      "DisplayName": "Reclaimed Tunic"
     }
   },
   "AdvancementTrees": [
