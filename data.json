@@ -2794,7 +2794,7 @@
       "DisplayName": "Tablet of Flight"
     },
     "Tablet of Thunder": {
-      "Id": 150,
+      "Id": 156,
       "Type": "Hand",
       "Tier": "Rare",
       "Keywords": [
@@ -2803,6 +2803,99 @@
       ],
       "Card": "i15",
       "DisplayName": "Tablet of Thunder"
+    },
+    "Light Sandals": {
+      "Id": 157,
+      "Type": "Feet",
+      "Tier": "Common",
+      "Effect": "Move by 2",
+      "DisplayName": "Light Sandals"
+    },
+    "Ragged Boots": {
+      "Id": 158,
+      "Type": "Feet",
+      "Tier": "Common",
+      "Passive": "Treat your MOB as 1 higher",
+      "DisplayName": "Ragged Boots"
+    },
+    "Shiny Shoes": {
+      "Id": 159,
+      "Type": "Feet",
+      "Tier": "Common",
+      "Keywords": [
+        "Charm"
+      ],
+      "Effect": "During your CHA Roll: Roll 1 additional die",
+      "DisplayName": "Shiny Shoes"
+    },
+    "Traveling Boots": {
+      "Id": 160,
+      "Type": "Feet",
+      "Tier": "Common",
+      "Keywords": [
+        "Pathfinding"
+      ],
+      "Effect": "When you move: Treat your MOB as 3 higher",
+      "DisplayName": "Traveling Boots"
+    },
+    "Higher Realm Footgear": {
+      "Id": 161,
+      "Type": "Feet",
+      "Tier": "Uncommon",
+      "Effect": "Roll for DIV. Move by {half div}",
+      "DisplayName": "Higher Realm Footgear"
+    },
+    "Master Thief's Sneakers": {
+      "Id": 162,
+      "Type": "Feet",
+      "Tier": "Uncommon",
+      "Keywords": [
+        "Stealth"
+      ],
+      "Effect": "When you move treat your MOB as 5 higer",
+      "DisplayName": "Master Thief's Sneakers"
+    },
+    "Runner's Boots": {
+      "Id": 163,
+      "Type": "Feet",
+      "Tier": "Uncommon",
+      "Passive": "Treat your MOB as 2 higer",
+      "DisplayName": "Runner's Boots"
+    },
+    "Swift Jackboots": {
+      "Id": 164,
+      "Type": "Feet",
+      "Tier": "Uncommon",
+      "Effect": "Move by 4",
+      "DisplayName": "Swift Jackboots"
+    },
+    "Armored Greaves": {
+      "Id": 165,
+      "Type": "Feet",
+      "Tier": "Rare",
+      "Effect": "Move by AGI. Then deal STR{damage} to anyone in R1",
+      "DisplayName": "Armored Greaves"
+    },
+    "Brill-Woven Shoes": {
+      "Id": 166,
+      "Type": "Feet",
+      "Tier": "Rare",
+      "Keywords": [
+        "Brilliance"
+      ],
+      "Effect": "Roll for DIV. Move by {div}",
+      "DisplayName": "Brill-Woven Shoes"
+    },
+    "Reclaimed Slippers": {
+      "Id": 167,
+      "Type": "Feet",
+      "Tier": "Rare",
+      "Keywords": [
+        "Reclaimed",
+        "Stealth"
+      ],
+      "Effect": "During your [Melee] [Attack] Add+3{damage} for each your [Stealth]",
+      "DisplayName": "Reclaimed Slippers"
     }
   },
   "AdvancementTrees": [
@@ -10714,6 +10807,32 @@
         "Moon": 2
       }
     },
+    "i05": {
+      "Front": {
+        "Name": "Release Arrow",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "Bow"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage} ignoring 1{armor}"
+          }
+        }
+      },
+      "Back": {
+        "Moon": 2
+      }
+    },
     "i06": {
       "Front": {
         "Name": "Divine Smash",
@@ -10783,6 +10902,36 @@
         "Sun": 2
       }
     },
+    "i08": {
+      "Front": {
+        "Name": "Heavy Strike",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "War Axe"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage}. If target is [Elite] or [Boss], place your Effect token on the Enemy"
+          }
+        }
+      },
+      "Back": {
+        "Sun": 2,
+        "Text": [
+          "You and PMs roll 1 additional die during all [Melee] [Attacks] against the Enemy with your Effect token"
+        ],
+        "Warning": "When you refersh this card, discard your Effect token from the Enemy"
+      }
+    },
     "i09": {
       "Front": {
         "Name": "Stab",
@@ -10843,6 +10992,33 @@
         ]
       }
     },
+    "i12": {
+      "Front": {
+        "Name": "Split",
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "Two-handed Sword"
+        ],
+        "Target": "2 in line in  R2",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Difficulty": 9,
+          "Successes": {
+            "1": "Deal {successes}{damage}"
+          }
+        }
+      },
+      "Back": {
+        "Sun": 3,
+        "Warning": "Do not refresh this card unless you pay 1{fate}"
+      }
+    },
     "i11": {
       "Front": {
         "Name": "Swing",
@@ -10895,6 +11071,49 @@
         "Text": [
           "Your {sun} and {moon} are reduced by 1"
         ]
+      }
+    },
+    "i14": {
+      "Front": {
+        "Name": "Flame Bolt",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack",
+          "Spell"
+        ],
+        "Requires": [
+          "Tablet of Flame"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "INT"
+          ],
+          "DIV": true,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Fire"
+              ]
+            },
+            {
+              "Dice": -1,
+              "Triggers": [
+                "Armor"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Deal ({successes}+{half div})[Fire]{damage}",
+            "1": "Deal ({successes}+{half div})[Fire]{damage}. You loose 2 HP"
+          }
+        }
+      },
+      "Back": {
+        "Moon": 2
       }
     },
     "i15": {
@@ -10981,6 +11200,35 @@
       },
       "Back": {
         "Moon": 2
+      }
+    },
+    "i18": {
+      "Front": {
+        "Name": "Rythm of War",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Support",
+        "Keywords": [
+          "Spell"
+        ],
+        "Requires": [
+          "War Drums"
+        ],
+        "Target": "Self and PMs in any range",
+        "Roll": {
+          "ATT": [
+            "CHA"
+          ],
+          "Difficulty": 9,
+          "Successes": {
+            "2": "Heal a total of {successes}{terror}",
+            "0": "You gain 1{terror}"
+          }
+        }
+      },
+      "Back": {
+        "Moon": 2,
+        "Warning": "Start of your Activation: Do not refresh this card unless you pay 1{fate}"
       }
     },
     "i19": {
@@ -11219,6 +11467,53 @@
         "Warning": "Start of your Activation: do not refresh this card unless you pay 2{fate}"
       }
     },
+    "i26": {
+      "Front": {
+        "Name": "Voidstorm",
+        "Moon": 2,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack",
+          "Spell"
+        ],
+        "Requires": [
+          "Tablet of Chaos"
+        ],
+        "Target": "STR targets in AGI range",
+        "Roll": {
+          "ATT": [
+            "INT",
+            "CHA"
+          ],
+          "Difficulty": 10,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Darkness",
+                "Light"
+              ]
+            },
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Fire",
+                "Ice",
+                "Thunder"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "Deal {successes} [Darkness], [Fire], [Ice], [Light] or [Thunder]{damage} (-2{damage}: [Armor]). Place this card in your Pouch",
+            "1": "You gain 2 {terror}. Resolve 3"
+          }
+        }
+      },
+      "Back": {
+        "Sun": 2
+      }
+    },
     "i27": {
       "Front": {
         "Name": "Debilitating Tune",
@@ -11402,6 +11697,92 @@
       "Back": {
         "Moon": 3,
         "Note": "Anytime: Pay 2{fate} to refresh this card"
+      }
+    },
+    "i32": {
+      "Front": {
+        "Name": "Bulwark of Light",
+        "Moon": 3,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+          "Sage's Robes"
+        ],
+        "Condition": "Against [Attack]",
+        "Target": "Self",
+        "Text": [
+          "Roll for DIV. Prevent {half div}{damage}.",
+          "You may gain 2{terror} to prevent {div}{damage} instead.",
+          "Place this card in your Pouch"
+        ]
+      },
+      "Back": {}
+    },
+    "i33": {
+      "Front": {
+        "Name": "Into the Shadows",
+        "Type": "Action",
+        "Category": "Support",
+        "Requires": [
+          "Reclaimed Tunic"
+        ],
+        "Target": "Self",
+        "Text": [
+          "Place your Effect toekn in a space in R6 without{danger}"
+        ]
+      },
+      "Back": {
+        "Name": "Daring Escape",
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Sun": 2,
+        "Moon": 2,
+        "Condition": "Against [Attack]",
+        "Target": "Self",
+        "Text": [
+          "Prevent AGI{damage} and Pull your Character by up to 6 toward Effect token. Discard that Effect token"
+        ],
+        "Warning": "Start of your Activation: You may pay 2{fate} to not refresh this card. When you refresh this card, discard your Effect token from the Sheet"
+      }
+    },
+    "i34": {
+      "Front": {
+        "Name": "Shadowreap",
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "Reclaimed Scythe"
+        ],
+        "Target": "All in R1",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Difficulty": 10,
+          "Modifiers": [
+            {
+              "Dice": 2,
+              "Triggers": [
+                "Rural"
+              ]
+            },
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Stealth"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Deal {successes}{damage} (+1{damage}: [Reclaimed])"
+          }
+        }
+      },
+      "Back": {
+        "Sun": 2
       }
     },
     "i35": {
@@ -11624,6 +12005,32 @@
       "Back": {
         "Sun": 1,
         "Note": "Anytime: Pay 2{fate} to refresh this card"
+      }
+    },
+    "i42": {
+      "Front": {
+        "Name": "Hideous Block",
+        "Sun": 3,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+          "Imperial Shield"
+        ],
+        "Condition": "Against [Melee] or [Ranged]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "3": "Prevent 5{damage}. Gain 1{terror}",
+            "1": "Prevent 2{damage}"
+          }
+        }
+      },
+      "Back": {
+        "Sun": 1,
+        "Note": "Anytime: Gain 1{terror} to refresh this card"
       }
     }
   }
