@@ -1827,7 +1827,57 @@
       "Effect": "During your CHA Roll: Roll 1 additional die",
       "Tier": "Basic",
       "Id": 59
-    }
+    },
+	"Aged Amulet": {
+		"Type": "Small",
+		"DisplayName": "Aged Amulet",
+		"Keywords": [ "Diplomacy", "Legacy" ],
+		"Tier": "Basic",
+		"Id": 60
+	},
+	"Demonic Dice": {
+		"Id": 61,
+		"DisplayName": "Demonic Dice",
+		"Type": "Small",
+		"Tier": "Basic",
+		"Effect": "During your Roll: If at least one 2 result, gain 1 {success}, 1 {fate}, and 2 {terror}"
+	},
+	"Protective Raiment": {
+		"Id": 62,
+		"DisplayName": "Protective Raiment",
+		"Type": "Chest",
+		"Tier": "Basic",
+		"Card": "i37"
+	},
+	"Erid's Headband": {
+		"Id": 63,
+		"DisplayName": "Erid's Headband",
+		"Type": "Head",
+		"Tier": "Basic",
+		"Effect": "Against Attack: If your HP is 4 or lower, prevent 10 {damage}"
+	},
+	"Imperial Shield": {
+		"Id": 64,
+		"DisplayName": "Imperial Shield",
+		"Type": "Hand",
+		"Tier": "Basic",
+		"Keywords": [ "Forgotten" ],
+		"Card": "i42"
+	},
+	"Runaway Shoes": {
+		"Id": 65,
+		"DisplayName": "Runaway Shoes",
+		"Type": "Feet",
+		"Tier": "Basic",
+		"Effect": "Move by 2 (+2 spaces [Sleight of Hand]"
+	},
+	"Treads of Fate": {
+		"Id": 66,
+		"DisplayName": "Treads of Fate",
+		"Type": "Feet",
+		"Tier": "Basic",
+		"Effect": "If you have no {fate} gain 3{fate}"
+	}
   },
   "AdvancementTrees": [
     {
@@ -4246,40 +4296,6 @@
     }
   ],
   "ActionCards": {
-    "i29": {
-      "Front": {
-        "Name": "Split the Earth",
-        "Sun": 2,
-        "Type": "Action",
-        "Category": "Offensive",
-        "Keywords": [
-          "Attack"
-        ],
-        "Requires": [
-          "Warhammer of Chaos"
-        ],
-        "Target": "1 in R1",
-        "Roll": {
-          "ATT": [
-            "STR"
-          ],
-          "Modifiers": [
-            {
-              "Dice": 1,
-              "Triggers": [
-                "Athletics",
-                "Resilience"
-              ]
-            }
-          ],
-          "Successes": {
-            "4": "Deal ({successes}+2) [Darkness] {damage} to the target and {successes} [Darkness] {damage} to all in a line behind the target",
-            "2": "You gain 3 {terror}. Resolve 4"
-          }
-        }
-      },
-      "Back": {}
-    },
     "B00": {
       "Level": 1,
       "Front": {
@@ -9664,6 +9680,1025 @@
           "Copy PMs Action card. Use the Skilled Imitator Action card as if it was an exact copy of that chosen Action card (you must fulfil its requirements). After resolving it, place the Skilled Imitator card in your Pouch."
         ]
       }
-    }
+    },
+	"i01": {
+      "Front": {
+        "Name": "Slash",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Sword"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          
+          "Successes": {
+            "1": "Deal {successes} {damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Text": ["Roll 1 additional die during your Defensive Reactions against [Melee]"]
+	  }
+	},
+	"i02": {
+      "Front": {
+        "Name": "Smash",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Hammer"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Deal {successes} {damage} ignoring 1{armor}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2
+	  }
+	},
+	"i03": {
+      "Front": {
+        "Name": "Block",
+        "Sun": 2,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Shield"
+        ],
+		"Condition": "Against [Melee] or [Ranged]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Prevent 3{damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Note": "Anytime: Pay 1{fate} to refresh this card"
+	  }
+	},
+	"i04": {
+      "Front": {
+        "Name": "Throw",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Javelins"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage} ignoring 1{armor}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 2
+	  }
+	},
+	"i06": {
+      "Front": {
+        "Name": "Divine Smash",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Mace of Divine Light"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+		  "DIV": true,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Brilliance", "Large"
+              ]
+            },
+			{
+              "Dice": 1,
+              "Triggers": [
+			  "Light"
+              ]
+            }
+          ],
+          "Successes": {
+            "1": "Deal {successes} [Light] {damage} ingoring {half div} {armor}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 3,
+		  "Warning": "Start of your activation: Do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i07": {
+      "Front": {
+        "Name": "Thrust",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Spear"
+        ],
+        "Target": "1 in R2",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage} (+1{damage} against [Large])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2
+	  }
+	},
+	"i09": {
+      "Front": {
+        "Name": "Stab",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Dagger"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+              ]
+            }
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage} (+1{damage}: [Stealth])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2
+	  }
+	},
+	"i10": {
+      "Front": {
+        "Name": "Whack",
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Quarterstaff"
+        ],
+        "Target": "1 in R2",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Successes": {
+            "1": "Deal {successes}{damage} (+2: against [Small])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Text": ["Roll 1 additional die during your Defensive Reactions against [Melee]"]
+	  }
+	},
+	"i11": {
+      "Front": {
+        "Name": "Swing",
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Two-handed Axe"
+        ],
+        "Target": "2 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+		  "Difficulty": 9,
+          "Successes": {
+            "1": "Deal {successes}{damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 3,
+		  "Warning": "Start of your activation: Do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i13": {
+      "Front": {
+        "Name": "Hide",
+        "Type": "Action",
+        "Category": "Defensive",
+        "Requires": [
+		"Traveler's Cloak"
+        ],
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+		  "Difficulty": 8,
+          "Successes": {
+			"3": "Gain 1 AGI Boon and 1{fate}",
+            "1": "Gain 1 AGI Boon"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Text": ["Your {sun} and {moon} are reduced by 1"]
+	  }
+	},
+	"i15": {
+      "Front": {
+        "Name": "Thundershock",
+        "Type": "Reaction",
+        "Category": "Support",
+        "Keywords": [
+          "Spell"
+        ],
+        "Requires": [
+		"Tablet of Thunder"
+        ],
+		"Condition": "During Offensive Action",
+        "Target": "Self or PM in R2",
+		"Text": ["Target each Enemy that received {damage} during the Action.", "Roll for DIV", "Deal {half div} [Thunder] {damage} ignoring {armor}. Push by 1"]
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Warning": "Start of your activation: Do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i16": {
+      "Front": {
+        "Name": "Thunderous Smash",
+        "Sun": 2,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Mace of Thunderous Shock"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+		  "DIV": true,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Thunder"
+              ]
+            }
+          ],
+          "Successes": {
+            "1": "Deal {successes}[Thunder]{damage} ignoring {half div}{armor}. If the Enemy has no [Large], push them by {half div}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 4,
+		  "Warning": "Start of your activation: Do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i17": {
+      "Front": {
+        "Name": "Right in the Eye",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Slingshot"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Successes": {
+            "2": "Deal {successes}{damage} (+3{damage}: against [Large])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 2
+	  }
+	},
+	"i19": {
+      "Front": {
+        "Name": "Arcane Ward",
+        "Sun": 1,
+		"Moon": 1,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Keywords": [
+          "Spell"
+        ],
+        "Requires": [
+		"Magic Ward"
+        ],
+		"Condition": "Against [Attack]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "INT"
+          ],
+          "Modifiers": [
+            {
+              "Dice": -1,
+              "Triggers": [
+			  "Armor"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Prevent 2{damage}. Push the attacking Enemy by 1",
+			"0": "Gain 1{terror}. Resolve 2"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 1,
+		  "Note": "Anytime: Pay 2{fate} to refresh this card"
+	  }
+	},
+	"i20": {
+      "Front": {
+        "Name": "Song of Reapthrive",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Support",
+        "Keywords": [
+          "Spell"
+        ],
+        "Requires": [
+		"Whimsical Songbook"
+        ],
+        "Target": "Elite or Boss in any range",
+        "Roll": {
+          "ATT": [
+            "CHA"
+          ],
+          "Successes": {
+            "1": "Place your Effect token on the Enemy. Flip this card and place {successes} markers on it",
+			"0": "You gain 1{terror}. Do not flip this card"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 2,
+		  "Text": ["When the Enemy with your Effect token ends their Activation, deal them {damage} equal to the number of markers on this card.", "Then heal a PM in anmy range by the same number."],
+		  "Warning": "When youo refresh this card, discard all markers from this card and the Effect token from the Enemy"
+	  }
+	},
+	"i21": {
+      "Front": {
+        "Name": "Stand your Ground",
+        "Type": "Action",
+        "Category": "Defensive",
+        "Requires": [
+		"Iron Chainmail"
+        ],
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+		  "Difficulty": 9,
+          "Successes": {
+            "2": "Gain a STR Boon"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 3,
+		  "Moon": 3,
+		  "Text": ["Gain 2{armor}. Your MOB is reduced by 2"],
+		  "Note": "You may choose not to refresh this card at the start of your Activation"
+	  }
+	},
+	"i22": {
+      "Front": {
+        "Name": "Shap Freeze",
+        "Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack", "Spell"
+        ],
+        "Requires": [
+		"Wand of Ice"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "INT"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Ice"
+              ]
+            },
+			{
+              "Dice": -1,
+              "Triggers": [
+			  "Armor"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Deal {successes} [Ice] {damage}. If the target is [Elite] or [Boss], place your Effect token on the Enemy",
+			"1": "You gain 1{terror}. Resolve 2"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 2,
+		  "Text": ["The Enemy with your Effect token moves by 2 spaces fewer."],
+		  "Warning": "When you refersh this card, discard your Effect token from the Enemy"
+	  }
+	},
+	"i23": {
+      "Front": {
+        "Name": "Focus the Arcane",
+        "Moon": 1,
+        "Type": "Reaction",
+        "Category": "Support",
+        "Requires": [
+		"Higer Realm Robes"
+        ],
+		"Condition": "During a Roll using [Spell]",
+        "Target": "Self",
+        "Text": ["Roll 1 additional die for each [Artifact]"]
+      },
+      "Back": 
+	  {
+		  "Moon": 2,
+		  "Warning": "Start of your Activation: do not refresh this card unless you pay 2{fate}"
+	  }
+	},
+	"i24": {
+      "Front": {
+        "Name": "Chilling Blades",
+        "Sun": 1,
+		"Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack", "Ranged"
+        ],
+        "Requires": [
+		"Icy Throwing Stars"
+        ],
+        "Target": "2 in R5",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+		  "Difficulty": 9,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Performer", "Sleight of Hand"
+              ]
+            },
+			{
+              "Dice": 1,
+              "Triggers": [
+			  "Ice"
+              ]
+            }
+          ],
+          "Successes": {
+            "1": "Deal {successes} [Ice] {damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 3
+	  }
+	},
+	"i25": {
+      "Front": {
+        "Name": "Heavy Blast",
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Crossbow"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Successes": {
+            "3": "Deal ({successes}+5){damage}",
+			"1": "Deal ({successes}+2){damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 1,
+		  "Moon": 2,
+		  "Warning": "Start of your Activation: do not refresh this card unless you pay 2{fate}"
+	  }
+	},
+	"i27": {
+      "Front": {
+        "Name": "Debilitating Tune",
+        "Sun": 1,
+        "Type": "Action",
+        "Category": "Support",
+        "Requires": [
+		"Cursed Fiddle"
+        ],
+        "Target": "1 in any range",
+        "Roll": {
+          "ATT": [
+            "CHA"
+          ],
+		  "Difficulty": 10,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Artistry", "Divinum"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Place your Effect token on the Enemy",
+			"0": "You gain 1{terror}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Text": ["The Enemy with your Effect token has their {en} lowered by 2"],
+		  "Note": "Start of your Activation: You may choose not to refresh this card",
+		  "Warning": "When you refresh this card, discard your Effect token from the Enemy"
+	  }
+	},
+	"i28": {
+      "Front": {
+        "Name": "Divine Sacrafice",
+        "Sun": 1,
+		"Moon": 1,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Corrupted Brillshard"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR",
+			"AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Brilliance"
+              ]
+            }
+          ],
+          "Successes": {
+            "2": "Deal ({successes}+1){damage}. Add STR{damage} if you rolled for AGI. Add AGI {damage} if you rolled for STR"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Moon": 2,
+		  "Text": ["When you gain {terror}, you may lose up to 3 HP to prevent that much {terror}"],
+		  "Note": "Start of your Activation: You may choose not to refresh this card."
+	  }
+	},
+	"i29": {
+      "Front": {
+        "Name": "Split the Earth",
+        "Sun": 2,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+          "Warhammer of Chaos"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+                "Athletics",
+                "Resilience"
+              ]
+            }
+          ],
+          "Successes": {
+            "4": "Deal ({successes}+2) [Darkness] {damage} to the target and {successes} [Darkness] {damage} to all in a line behind the target",
+            "2": "You gain 3 {terror}. Resolve 4"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2
+	  }
+    },
+	"i30": {
+      "Front": {
+        "Name": "Out of the Way",
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Light Leather Armor"
+        ],
+	  "Condition": "Against [Attack]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Small", "Stealth"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "Prevent ({successes}+1) {damage}. Move by 2 (you can not enter {danger} spaces)",
+			"1": "Prevent 3{damage}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Note": "Anytime: Pay 2{fate} to refresh this card"
+	  }
+	},
+	"i31": {
+      "Front": {
+        "Name": "Overwhelming Brilliance",
+        "Moon": 1,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Infused Brillcoat"
+        ],
+		"Condition": "Against [Attack]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "INT"
+          ],
+		  "Difficulty": 8,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Divinum"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "You may gain 1{terror}. Prevent 3{damage} (+2{damage} for each {terror} you have",
+			"1": "Prevent 3{damage} (+2{damage} for each {terror} you have). Gain 1{terror}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 3,
+		  "Note": "Anytime: Pay 2{fate} to refresh this card"
+	  }
+	},
+	"i35": {
+      "Front": {
+        "Name": "Grand Illumination",
+        "Sun": 2,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack", "Spell"
+        ],
+        "Requires": [
+		"Celestial Sword"
+        ],
+        "Target": "1 in R1",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+		  "DIV": true,
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Divinum"
+              ]
+            }
+          ],
+          "Successes": {
+            "5": "Deal {div} [Divinum] {damage} (+2{damage}: [Celestial])",
+			"2": "Deal {half div} [Divinum] {damage} (+1{damage}: [Celestial])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 3,
+		  "Moon": 1,
+		  "Warning": "Do not refresh this card unless you gain 1 {terror}"
+	  }
+	},
+	"i36": {
+      "Front": {
+        "Name": "Divine Bastion",
+        "Sun": 3,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Celestial Shield"
+        ],
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "STR"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Divinum"
+              ]
+            }
+          ],
+          "Successes": {
+		  "2": "Prevent 3{damage} (+2{damage}: [Celestial])"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 2,
+		  "Note": "Anytime: Pay 1{fate} to refresh this card"
+	  }
+	},
+	"i37": {
+      "Front": {
+        "Name": "Protective Cover",
+        "Sun": 2,
+		"Moon": 2,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Protective Raiment"
+        ],
+		"Condition": "Against Attack",
+        "Target": "Self",
+	    "Text": ["Prevent 2{damage} (+2{damage} for each Condition you have}"]
+      },
+      "Back":
+	  {
+		  "Note": "Anytime: Pay 1{fate} and gain 1{terror} to refresh this card"
+	  }
+	},
+	"i38": {
+      "Front": {
+        "Name": "Engulfing Assault",
+        "Moon": 3,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Corrupted Bow"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 1,
+              "Triggers": [
+			  "Darkness"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "Deal ({successes}+3) [Darkness] {damage} ignoring STR {armor}. Deal 1{damage} (+1{damage}: [Darkness]) to all others in R1 from target",
+			"1": "Deal {successes} [Darkness] {damage} ignoring 2 {armor}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Moon": 1,
+		  "Warning": "Start of your Activation: Do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i39": {
+      "Front": {
+        "Name": "Steelpierce",
+        "Moon": 3,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Greatbow"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+          "Modifiers": [
+            {
+              "Dice": 2,
+              "Triggers": [
+			  "Large"
+              ]
+            },
+			{
+              "Dice": 1,
+              "Triggers": [
+			  "Athletics"
+              ]
+            }
+          ],
+          "Successes": {
+            "3": "Deal ({successes}+STR){damage}ignoring AGI{armor}",
+			"1": "You loose 2 HP. Resolve 3"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 1,
+		  "Warning": "Start of your Activation: do not refresh this card unless you pay 1{fate}"
+	  }
+	},
+	"i40": {
+      "Front": {
+        "Name": "Piercing Volley",
+        "Moon": 3,
+        "Type": "Action",
+        "Category": "Offensive",
+        "Keywords": [
+          "Attack"
+        ],
+        "Requires": [
+		"Springwood Bow"
+        ],
+        "Target": "1 in R2+",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+		  "DIV": true,
+          "Successes": {
+            "2": "Deal {successes}{damage} ignoring {half div}{armor}"
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 1
+	  }
+	},
+	"i41": {
+      "Front": {
+        "Name": "Moondance",
+        "Moon": 2,
+        "Type": "Reaction",
+        "Category": "Defensive",
+        "Requires": [
+		"Moonshroud"
+        ],
+		"Condition": "Against [Attack]",
+        "Target": "Self",
+        "Roll": {
+          "ATT": [
+            "AGI"
+          ],
+		  "Difficulty": 9,
+          "Successes": {
+            "2": "Prevent CHA {damage} (+2{damage}: Charm, Performer)."
+          }
+        }
+      },
+      "Back": 
+	  {
+		  "Sun": 1,
+		  "Note": "Anytime: Pay 2{fate} to refresh this card"
+	  }
+	}
   }
 }
