@@ -5700,7 +5700,7 @@
         "Target": "Self",
         "Sun": 1,
         "Text": [
-          "Move up to your MOB in a Line. Roll one die for each space moved this way {8}, +1 die: [Large]. 1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
+          "Move up to your MOB in a Line.", "Roll one die for each space moved this way {8} +1 die: [Large]", "1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
         ]
       },
       "Back": {
