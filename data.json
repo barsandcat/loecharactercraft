@@ -1995,7 +1995,7 @@
     "Cheater's die": {
       "Id": 79,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Sleight of Hand"
       ],
@@ -2005,14 +2005,14 @@
     "Enchanted Pauldrons": {
       "Id": 80,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Effect": "Against [Melee] prevet 10{damage}",
       "DisplayName": "Enchanted Pauldrons"
     },
     "Fine Herbs": {
       "Id": 81,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Medicine"
       ],
@@ -2022,21 +2022,21 @@
     "Flogger": {
       "Id": 82,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Effect": "Gain 2{fate}. Loose 2 HP.",
       "DisplayName": "Flogger"
     },
     "Force Ward": {
       "Id": 83,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Effect": "Against [Attack]: Gain 5{armor}",
       "DisplayName": "Force Ward"
     },
     "Grim Totem": {
       "Id": 84,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Darkness"
       ],
@@ -2046,7 +2046,7 @@
     "Locky Bone": {
       "Id": 85,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Pathfinding"
       ],
@@ -2056,7 +2056,7 @@
     "Lucky Wrench": {
       "Id": 86,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Engineering"
       ],
@@ -2066,7 +2066,7 @@
     "Runic Vestigial": {
       "Id": 87,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Vestigial"
       ],
@@ -2076,12 +2076,109 @@
     "Shroomdust": {
       "Id": 88,
       "Type": "Small",
-      "Tier": "Common",
+      "Tier": "Uncommon",
       "Keywords": [
         "Poison"
       ],
       "Effect": "During your [Melee] [Attack]: Add 5{damage}",
       "DisplayName": "Shroomdust"
+    },
+    "Ancient Medal": {
+      "Id": 89,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact"
+      ],
+      "Effect": "During your Roll: Roll 2 additional dice",
+      "DisplayName": "Ancient Medal"
+    },
+    "Empowering Incense": {
+      "Id": 90,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact"
+      ],
+      "Effect": "Stabilize all PMs in any range.",
+      "DisplayName": "Empowering Incense"
+    },
+    "Energigin Brew": {
+      "Id": 91,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Alchemy"
+      ],
+      "Effect": "Gain 1 Action",
+      "DisplayName": "Energigin Brew"
+    },
+    "Focus Band": {
+      "Id": 92,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Sleight of Hand"
+      ],
+      "Effect": "During any Roll: Your ATT Bons give 2 additional dice. Gain 1 {terror}",
+      "DisplayName": "Focus Band"
+    },
+    "Forgotten Seal": {
+      "Id": 93,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Vestigial"
+      ],
+      "Effect": "Deal (STR+INT){damage} to anyone in R1",
+      "DisplayName": "Forgotten Seal"
+    },
+    "Golden Amulet": {
+      "Id": 94,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact"
+      ],
+      "Effect": "During your DIV Roll: Roll an additional D10 DIV die. Gain 2{terror}",
+      "DisplayName": "Golden Amulet"
+    },
+    "Golden Obol": {
+      "Id": 95,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Effect": "Gain 3{fate}",
+      "DisplayName": "Golden Obol"
+    },
+    "Jeweled Ring": {
+      "Id": 96,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Aritstry"
+      ],
+      "Effect": "You and PMs in R2 heal 3{terror}",
+      "DisplayName": "Jeweled Ring"
+    },
+    "Pin Doll": {
+      "Id": 97,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Artifact"
+      ],
+      "Effect": "Push or Pull anyone in R4 by 3",
+      "DisplayName": "Pin Doll"
+    },
+    "Potent Herbs": {
+      "Id": 98,
+      "Type": "Small",
+      "Tier": "Rare",
+      "Keywords": [
+        "Medicine"
+      ],
+      "Effect": "Stabile a PM in R1. You or a PM in R1 heal 10HP",
+      "DisplayName": "Potent Herbs"
     }
   },
   "AdvancementTrees": [
@@ -5700,7 +5797,9 @@
         "Target": "Self",
         "Sun": 1,
         "Text": [
-          "Move up to your MOB in a Line.", "Roll one die for each space moved this way {8} +1 die: [Large]", "1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
+          "Move up to your MOB in a Line.",
+          "Roll one die for each space moved this way {8} +1 die: [Large]",
+          "1: Deal {successes} {damage} to 1 in R1 and Push the target by {successes} (+2 spaces: against [Small])."
         ]
       },
       "Back": {
