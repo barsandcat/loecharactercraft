@@ -331,9 +331,9 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     attributeCard.appendChild(statGroup);
     container.appendChild(attributeCard);
 
-    if (stats.keywordCounts.size) {
+    if (allKeywordCounts.size) {
       container.appendChild(createListSection("Keywords", [{
-        render: (parent) => appendCountSummary(parent, stats.keywordCounts, "keyword"),
+        render: (parent) => appendCountSummary(parent, allKeywordCounts, "keyword"),
       }]));
     }
 
