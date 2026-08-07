@@ -1877,6 +1877,153 @@
 		"Type": "Feet",
 		"Tier": "Basic",
 		"Effect": "If you have no {fate} gain 3{fate}"
+	},
+	"Bandages": {
+		"Id": 67,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Medicine"],
+		"Effect": "You or a PM in R1 heal 4 HP"
+	},
+	"Bracers": {
+		"Id": 68,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "During your [Melee] [Attack] Add{armor}{damage}"
+	},
+	"Bright Lamp": {
+		"Id": 69,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Light"],
+		"Effect": "Heal 1{terror} or gain 1 ATT Boon"
+	},
+	"Gilded Amulet": {
+		"Id": 70,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Aritfact"],
+		"Effect": "Support a [Spell] using PM in any range with 2 dice"
+	},
+	"Gizmos": {
+		"Id": 71,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Engineering"],
+		"Effect": "During your DIV roll: Roll and additional D4 DIV die. Gain 1 {terror}"
+	},
+	"Herbs": {
+		"Id": 72,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Medicine"],
+		"Effect": "Stabilize a PM in R1. You or a Party Member in R1 beat 2 HP."
+	},
+	"Orb of Light": {
+		"Id": 73,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Artifact", "Light"],
+		"Effect": "You or a PM in R2 heal 2{terror}"
+	},
+	"Poison Vial": {
+		"Id": 74,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Poison"],
+		"Effect": "During your [Melee] [Attack]: Add 2{damage}"
+	},
+	"Rallying Whistle": {
+		"Id": 75,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "PM in any range gain 1{fate}"
+	},
+	"Rat Flute": {
+		"Id": 76,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Animal Handling"],
+		"Effect": "Move PM by 3"
+	},
+	"Spiked Bracers": {
+		"Id": 77,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "Push anyone in R3 by 3"
+	},
+	"Whetstone": {
+		"Id": 78,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "During your [Melee] roll: Roll 1 additional die"
+	},
+	"Cheater's die": {
+		"Id": 79,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Sleight of Hand" ],
+		"Effect": "You and PM in R2 gain 1{fate}"
+	},
+	"Enchanted Pauldrons": {
+		"Id": 80,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "Against [Melee] prevet 10{damage}"
+	},
+	"Fine Herbs": {
+		"Id": 81,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Medicine"],
+		"Effect": "Stabilize a PM in R1. You or PM in R1 heal 6 HP"
+	},
+	"Flogger": {
+		"Id": 82,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "Gain 2{fate}. Loose 2 HP."
+	},
+	"Force Ward": {
+		"Id": 83,
+		"Type": "Small",
+		"Tier": "Common",
+		"Effect": "Against [Attack]: Gain 5{armor}"
+	},
+	"Grim Totem": {
+		"Id": 84,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Darkness"],
+		"Effect": "Switch places with PM in R4"
+	},
+	"Locky Bone": {
+		"Id": 85,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Pathfinding"],
+		"Effect": "During your roll: If you have at least one 12 result, gain 1 brill"
+	},
+	"Lucky Wrench": {
+		"Id": 86,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Engineering"],
+		"Effect": "Deal 10{damage} to an [Automaton] in R1"
+	},
+	"Runic Vestigial": {
+		"Id": 87,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Vestigial"],
+		"Effect": "During your Roll: use any ATT instead of required one"
+	},
+	"Shroomdust": {
+		"Id": 88,
+		"Type": "Small",
+		"Tier": "Common",
+		"Keywords": ["Poison"],
+		"Effect": "During your [Melee] [Attack]: Add 5{damage}"
 	}
   },
   "AdvancementTrees": [
