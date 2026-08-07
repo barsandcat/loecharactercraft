@@ -13,8 +13,6 @@ import {
   resolveSkillSlots,
   resolveItemSlots,
   resolveActionSlots,
-  getEligibleItemPouchForSlot,
-  getEligibleActionPouchForSlot,
 } from "./characterStats.js";
 import { buildRaceDetailParts, buildEntryParts, formatAttributeSummary, getItemDisplayName } from "./displayParts.js";
 import { appendDisplayParts, appendCountSummary } from "./displayPartsDom.js";
@@ -54,12 +52,6 @@ const ACTION_SLOT_LABELS = ACTION_SLOT_RULES.map((rule, index) => {
     : rule.categories.map((category) => category.slice(0, 3)).join("/");
   return "Slot " + (index + 1) + " (" + categoryLabel + ")";
 });
-
-function describeStolenReason(slotResult) {
-  return slotResult.reason === "stolen"
-    ? "Currently used in Slot " + (slotResult.stolenBySlot + 1) + "."
-    : "";
-}
 
 export function createPanelRenderer({ state, ui, callbacks }) {
   function renderControls(levelMeta) {
@@ -350,7 +342,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       resolved: resolveSkillSlots(state, stats),
       slotLabel: (slotIndex) => "Skill " + (slotIndex + 1),
       slotMain: (entry) => entry.skill,
-      eligiblePouchCount: (pouch) => pouch.length,
       onClick: (slotIndex) => callbacks.openSkillPickerForSlot(slotIndex),
       onPouchClick: () => callbacks.openSkillPouch(),
     }));
@@ -359,7 +350,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       title: "Items",
       resolved: resolveItemSlots(state, stats),
       slotLabel: (slotIndex) => ITEM_SLOT_LABELS[slotIndex],
-      eligiblePouchCount: (pouch, slotIndex) => getEligibleItemPouchForSlot(pouch, slotIndex).length,
       onClick: (slotIndex) => callbacks.openItemPickerForSlot(slotIndex),
       onPouchClick: () => callbacks.openItemPouch(),
       previewStats: actionCardPreviewStats,
@@ -372,7 +362,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       renderOccupiedContent: (entry) =>
         buildActionCardElement(entry.card._cardId, entry.card, actionCardPreviewStats.attributes, actionCardPreviewStats.keywordCounts),
       listLayout: true,
-      eligiblePouchCount: (pouch, slotIndex) => getEligibleActionPouchForSlot(pouch, slotIndex).length,
       lockedDetail: (slotIndex) => {
         const unlockAt = ACTION_SLOT_RULES[slotIndex].unlockAt;
         return "Locked — needs " + unlockAt + " level-up" + (unlockAt === 1 ? "" : "s") + ".";
@@ -405,16 +394,17 @@ export function createPanelRenderer({ state, ui, callbacks }) {
   // buildActionCardElement, same as before this feature existed) wrapped in a
   // plain clickable button when occupied; a compact choice-button for
   // empty/locked slots, or for systems with no rich rendering (skills).
+  // Every unlocked slot is clickable regardless of occupancy — the picker now
+  // offers every eligible pool entry (including ones equipped elsewhere), not
+  // just the pouch, and gracefully shows "no options" if truly nothing fits.
   function renderSlotRow({
     slotResult,
     slotIndex,
     slotLabel,
     slotMain,
-    eligiblePouchCount,
     lockedDetail,
     onClick,
     renderOccupiedContent,
-    pouch,
   }) {
     const occupied = Boolean(slotResult.entry);
     const locked = slotResult.reason === "locked";
@@ -434,7 +424,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
       return button;
     }
 
-    const hasEligiblePouch = !locked && eligiblePouchCount(pouch, slotIndex) > 0;
     return singleChoiceGrid({
       label: slotLabel(slotIndex),
       main: occupied && slotMain
@@ -442,11 +431,10 @@ export function createPanelRenderer({ state, ui, callbacks }) {
         : locked
           ? "Locked"
           : "Empty",
-      detail: locked && lockedDetail ? lockedDetail(slotIndex) : describeStolenReason(slotResult),
+      detail: locked && lockedDetail ? lockedDetail(slotIndex) : "",
       complete: occupied,
       empty: !occupied && !locked,
       locked,
-      disabled: !occupied && !locked && !hasEligiblePouch,
       onClick: () => onClick(slotIndex),
     });
   }
@@ -459,7 +447,6 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     resolved,
     slotLabel,
     slotMain,
-    eligiblePouchCount,
     lockedDetail,
     onClick,
     renderOccupiedContent,
@@ -476,7 +463,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     list.className = listLayout ? "slot-list" : "slot-grid";
     slots.forEach((slotResult, slotIndex) => {
       list.appendChild(renderSlotRow({
-        slotResult, slotIndex, slotLabel, slotMain, eligiblePouchCount, lockedDetail, onClick, renderOccupiedContent, pouch,
+        slotResult, slotIndex, slotLabel, slotMain, lockedDetail, onClick, renderOccupiedContent,
       }));
     });
     section.appendChild(list);
@@ -489,7 +476,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
   // left, Head/Chest/Feet on the right) plus a bottom row of the 4 Small
   // slots — grouped from ITEM_SLOT_TYPES rather than hardcoded indices, so it
   // stays correct if the slot layout ever changes.
-  function buildItemSlotSection({ title, resolved, slotLabel, eligiblePouchCount, onClick, onPouchClick, previewStats }) {
+  function buildItemSlotSection({ title, resolved, slotLabel, onClick, onPouchClick, previewStats }) {
     const { slots, pouch } = resolved;
 
     const section = document.createElement("section");
@@ -505,9 +492,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
         entry.item.Card ? state.data.ActionCards[entry.item.Card] : null,
         previewStats
       ),
-      eligiblePouchCount,
       onClick,
-      pouch,
     });
 
     const handIndexes = [];

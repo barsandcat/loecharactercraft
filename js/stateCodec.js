@@ -721,12 +721,14 @@ function getV3EncodingWidths(data) {
   const allLevelOptions = data.AdvancementTrees.flatMap((tree) => Object.values(tree.Levels || {}).flat());
   const allPaths = data.Professions.flatMap((profession) => profession.Paths);
 
-  const skillPoolBound = 2 + 1 + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.Skills);
-  const itemPoolBound = 2
+  // +1 sentinel headroom for "auto" (code 0) — there's no separate "cleared"
+  // sentinel anymore, overrides are just null | { target }.
+  const skillPoolBound = 1 + 1 + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.Skills);
+  const itemPoolBound = 1
     + maxArrayLength(data.Origins, (origin) => origin.Items)
     + maxArrayLength(allPaths, (path) => path.Items)
     + MAX_ADDED_ITEMS; // the pool can now also hold added items
-  const actionPoolBound = 2
+  const actionPoolBound = 1
     + maxArrayLength(data.Races, (race) => race.ActionCards)
     + maxArrayLength(allPaths, (path) => path.ActionCards)
     + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.ActionCards)
@@ -771,13 +773,10 @@ function encodeSlotOverride(override, pool, matches) {
   if (!override) {
     return 0; // auto
   }
-  if (override.cleared) {
-    return 1;
-  }
   const poolIndex = pool.findIndex((entry) => matches(entry, override.target));
   // A stale target (no longer in the pool) encodes as auto, matching the live
   // resolver's own degrade-to-auto behavior for the same situation.
-  return poolIndex >= 0 ? poolIndex + 2 : 0;
+  return poolIndex >= 0 ? poolIndex + 1 : 0;
 }
 
 function decodeSlotArray(codes, pool, extractTarget) {
@@ -785,10 +784,7 @@ function decodeSlotArray(codes, pool, extractTarget) {
     if (code === 0) {
       return null;
     }
-    if (code === 1) {
-      return { cleared: true };
-    }
-    const entry = pool[code - 2];
+    const entry = pool[code - 1];
     return entry ? { target: extractTarget(entry) } : null;
   });
 }

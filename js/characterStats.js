@@ -320,14 +320,18 @@ export function resolveItemSlots(state, stats) {
   });
 }
 
-export function getEligibleItemPouchForSlot(pouch, slotIndex) {
+// Takes any array of item-pool entries — the full pool (slot pickers, so a
+// slot can offer reassigning something already equipped elsewhere) or just
+// the pouch (the pouch browser) — filtering logic doesn't care which.
+export function getEligibleItemsForSlot(items, slotIndex) {
   const type = ITEM_SLOT_TYPES[slotIndex];
-  return pouch.filter((entry) => entry.item.Type === type);
+  return items.filter((entry) => entry.item.Type === type);
 }
 
-export function getEligibleActionPouchForSlot(pouch, slotIndex) {
+// Same as getEligibleItemsForSlot, for action-card pool entries.
+export function getEligibleActionsForSlot(cards, slotIndex) {
   const rule = ACTION_SLOT_RULES[slotIndex];
-  return pouch.filter((entry) => rule.categories.includes(normalizeActionCategory(entry.card.Front.Category)));
+  return cards.filter((entry) => rule.categories.includes(normalizeActionCategory(entry.card.Front.Category)));
 }
 
 // A card is a weak fit for the build if its Front roll, computed against the

@@ -1,40 +1,47 @@
-// Shared "no cascade" slot-assignment resolver used identically by the skill,
-// item, and action-card hotbar loadout systems (and by stateCodec.js for
-// encode/decode). See the loadout-slots plan for the full algorithm rationale;
-// in short: explicit assignments always win where they target something real,
-// auto slots get an override-independent "fixed positional default," and a
-// slot whose default gets claimed elsewhere by an explicit assignment simply
-// goes empty — nothing ever reflows to fill the gap.
+// Shared slot-assignment resolver used identically by the skill, item, and
+// action-card hotbar loadout systems (and by stateCodec.js for encode/decode).
+// See the loadout-slots plan for the full algorithm rationale; in short:
+// explicit assignments always win where they target something real, and
+// every other unlocked slot auto-fills from whatever's left in the pool once
+// explicit claims are set aside — if a slot's usual default gets explicitly
+// pinned to a different slot, this slot backfills with the next best
+// available entry instead of going empty.
 //
 // pool: array of opaque entries, in first-appearance acquisition order.
 // slots: array (same length as overrides), each { locked: boolean, matches: (entry) => boolean }.
 //   A locked slot is excluded from every step as if absent — it never claims a
 //   pool entry and never hides one from the pouch.
-// overrides: array (same length), each null | { cleared: true } | { target }.
+// overrides: array (same length), each null | { target }.
 // matchesTarget(poolEntry, target): identity-equality check for this system.
 //
 const DEFAULT_PRIORITY = () => 0;
 
-// Maximum bipartite matching (Kuhn's / augmenting-path algorithm) between pool
-// entries and eligible slots, so the default table always fills as many slots
-// as the (pool, slots) graph allows — naive first-fit can strand a slot empty
-// even when a full assignment exists (e.g. a flexible slot greedily consumes
-// an entry that a later, equally-eligible slot also needed). Processing pool
-// entries in priority order (ties broken by pool index, for determinism)
-// means a failed match only ever displaces a lower-priority entry, never a
-// higher-priority one — see the loadout-slots plan for the full proof.
-function computeFixedDefaultBySlot(pool, slots, priority = DEFAULT_PRIORITY) {
+// Maximum bipartite matching (Kuhn's / augmenting-path algorithm) between
+// unclaimed pool entries and slots that don't already have a winning explicit
+// assignment, so the default table always fills as many of the *remaining*
+// slots as the (pool, slots) graph allows — naive first-fit can strand a slot
+// empty even when a full assignment exists (e.g. a flexible slot greedily
+// consumes an entry that a later, equally-eligible slot also needed).
+// Processing pool entries in priority order (ties broken by pool index, for
+// determinism) means a failed match only ever displaces a lower-priority
+// entry, never a higher-priority one — see the loadout-slots plan for the
+// full proof. claimedPoolIndexes/winningSlotIndexes remove explicitly-spoken-
+// for entries and slots from contention entirely, so this table can never
+// suggest a pool entry that some other slot already explicitly won.
+function computeFixedDefaultBySlot(pool, slots, priority = DEFAULT_PRIORITY, claimedPoolIndexes = new Set(), winningSlotIndexes = new Set()) {
   const slotCount = slots.length;
   const eligibleSlotIndexes = [];
   slots.forEach((slot, slotIndex) => {
-    if (!slot.locked) {
+    if (!slot.locked && !winningSlotIndexes.has(slotIndex)) {
       eligibleSlotIndexes.push(slotIndex);
     }
   });
 
   const matchPoolBySlotIndex = new Array(slotCount).fill(null);
 
-  const order = pool.map((_, poolIndex) => poolIndex);
+  const order = pool
+    .map((_, poolIndex) => poolIndex)
+    .filter((poolIndex) => !claimedPoolIndexes.has(poolIndex));
   order.sort((a, b) => {
     const diff = priority(pool[a], a) - priority(pool[b], b);
     return diff !== 0 ? diff : a - b;
@@ -64,8 +71,8 @@ function computeFixedDefaultBySlot(pool, slots, priority = DEFAULT_PRIORITY) {
   return fixedDefaultBySlot;
 }
 
-// Returns { slots: [{ entry, poolIndex, reason, stolenBySlot? }], pouch: [entry] }.
-// `reason` is one of "locked" | "cleared" | "assigned" | "auto" | "stolen" | "empty".
+// Returns { slots: [{ entry, poolIndex, reason }], pouch: [entry] }.
+// `reason` is one of "locked" | "assigned" | "auto" | "empty".
 //
 // priority(entry, poolIndex): optional, lower = higher priority. Used only to
 // break ties in the pass-2 default table below when the pool has more
@@ -103,11 +110,13 @@ export function resolveLoadoutSlots({ pool, slots, overrides, matchesTarget, pri
     }
   });
 
-  // Pass 2: fixed positional default table — computed once from (pool, eligible
-  // slots, priority) only, never from the override array. This is what makes
-  // "no cascade" hold: an override change can never change what this table
-  // says.
-  const fixedDefaultBySlot = computeFixedDefaultBySlot(pool, slots, priority);
+  // Pass 2: fixed default table for every slot that ISN'T winning an explicit
+  // claim, computed from the pool with explicitly-claimed entries removed —
+  // so a slot robbed of its usual default backfills with whatever's next
+  // best, rather than needing the robbing slot's own override to change.
+  const claimedPoolIndexes = new Set(winningSlotByPoolIndex.keys());
+  const winningSlotIndexes = new Set(winningSlotByPoolIndex.values());
+  const fixedDefaultBySlot = computeFixedDefaultBySlot(pool, slots, priority, claimedPoolIndexes, winningSlotIndexes);
 
   // Pass 3: resolve each slot's final occupant.
   const result = new Array(slotCount);
@@ -119,12 +128,6 @@ export function resolveLoadoutSlots({ pool, slots, overrides, matchesTarget, pri
       return;
     }
 
-    const override = overrides[slotIndex];
-    if (override && override.cleared) {
-      result[slotIndex] = { entry: null, poolIndex: null, reason: "cleared" };
-      return;
-    }
-
     const explicitIndex = explicitPoolIndexBySlot[slotIndex];
     if (explicitIndex !== null && winningSlotByPoolIndex.get(explicitIndex) === slotIndex) {
       result[slotIndex] = { entry: pool[explicitIndex], poolIndex: explicitIndex, reason: "assigned" };
@@ -133,16 +136,12 @@ export function resolveLoadoutSlots({ pool, slots, overrides, matchesTarget, pri
     }
 
     // Either no override, or an explicit target that's stale (not in the pool)
-    // or lost the tie-break — both fall through to the fixed default.
+    // or lost the tie-break — both fall through to the fixed default, which by
+    // construction never points at a pool index some other slot already won.
     const defaultIndex = fixedDefaultBySlot[slotIndex];
-    if (defaultIndex !== null && winningSlotByPoolIndex.get(defaultIndex) === undefined) {
+    if (defaultIndex !== null) {
       result[slotIndex] = { entry: pool[defaultIndex], poolIndex: defaultIndex, reason: "auto" };
       occupiedPoolIndexes.add(defaultIndex);
-      return;
-    }
-
-    if (defaultIndex !== null) {
-      result[slotIndex] = { entry: null, poolIndex: null, reason: "stolen", stolenBySlot: winningSlotByPoolIndex.get(defaultIndex) };
       return;
     }
 

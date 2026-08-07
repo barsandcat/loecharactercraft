@@ -27,8 +27,8 @@ import {
   resolveSkillSlots,
   resolveItemSlots,
   resolveActionSlots,
-  getEligibleItemPouchForSlot,
-  getEligibleActionPouchForSlot,
+  getEligibleItemsForSlot,
+  getEligibleActionsForSlot,
 } from "./characterStats.js";
 import {
   SKILL_SLOTS,
@@ -354,16 +354,17 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function openSkillPickerForSlot(slotIndex) {
     const stats = collectCharacterStats(state);
-    const { slots, pouch } = resolveSkillSlots(state, stats);
-    const options = slots[slotIndex].entry ? [{ __clear: true }, ...pouch] : pouch;
+    const { slots } = resolveSkillSlots(state, stats);
+    const currentEntry = slots[slotIndex].entry;
+    const options = state.skillSlots[slotIndex] ? [{ __autofill: true }, ...stats.skillPool] : stats.skillPool;
 
     selectorOverlay.openSelector({
       title: "Choose Skill",
-      description: "Pick a skill from your pouch to fill this slot.",
+      description: "Pick any skill this character has to fill this slot.",
       options,
       getOptionContent: (option) => describeSkillSlotOption(option),
-      onSelect: (option) => selectSkillSlot(slotIndex, option.__clear ? { cleared: true } : { target: option.source }),
-      isSelected: () => false,
+      onSelect: (option) => selectSkillSlot(slotIndex, option.__autofill ? null : { target: option.source }),
+      isSelected: (option) => option === currentEntry,
     });
   }
 
@@ -374,19 +375,20 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function openItemPickerForSlot(slotIndex) {
     const stats = collectCharacterStats(state);
-    const { slots, pouch } = resolveItemSlots(state, stats);
-    const eligiblePouch = getEligibleItemPouchForSlot(pouch, slotIndex);
+    const { slots } = resolveItemSlots(state, stats);
+    const currentEntry = slots[slotIndex].entry;
+    const eligibleItems = getEligibleItemsForSlot(stats.itemPool, slotIndex);
     const previewStats = buildActionCardPreviewStats(state, stats);
-    const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
+    const options = state.itemSlots[slotIndex] ? [{ __autofill: true }, ...eligibleItems] : eligibleItems;
 
     selectorOverlay.openSelector({
       title: "Choose Item",
-      description: "Pick an item from your pouch to fill this slot.",
+      description: "Pick any eligible item this character has to fill this slot.",
       options,
       getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
       onSelect: (option) =>
-        selectItemSlot(slotIndex, option.__clear ? { cleared: true } : { target: { itemName: option.itemName } }),
-      isSelected: () => false,
+        selectItemSlot(slotIndex, option.__autofill ? null : { target: { itemName: option.itemName } }),
+      isSelected: (option) => option === currentEntry,
     });
   }
 
@@ -397,20 +399,21 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
 
   function openActionPickerForSlot(slotIndex) {
     const stats = collectCharacterStats(state);
-    const { slots, pouch } = resolveActionSlots(state, stats);
-    const eligiblePouch = getEligibleActionPouchForSlot(pouch, slotIndex);
+    const { slots } = resolveActionSlots(state, stats);
+    const currentEntry = slots[slotIndex].entry;
+    const eligibleCards = getEligibleActionsForSlot(stats.actionPool, slotIndex);
     const previewStats = buildActionCardPreviewStats(state, stats);
-    const options = slots[slotIndex].entry ? [{ __clear: true }, ...eligiblePouch] : eligiblePouch;
+    const options = state.actionSlots[slotIndex] ? [{ __autofill: true }, ...eligibleCards] : eligibleCards;
 
     selectorOverlay.openSelector({
       kicker: "Hotbar Slot " + (slotIndex + 1),
       title: "Choose Action Card",
-      description: "Pick an action card from your pouch to fill this slot.",
+      description: "Pick any eligible action card this character has to fill this slot.",
       options,
       getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
       onSelect: (option) =>
-        selectActionSlot(slotIndex, option.__clear ? { cleared: true } : { target: { cardName: option.cardName } }),
-      isSelected: () => false,
+        selectActionSlot(slotIndex, option.__autofill ? null : { target: { cardName: option.cardName } }),
+      isSelected: (option) => option === currentEntry,
     });
   }
 

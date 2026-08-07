@@ -126,15 +126,15 @@ export function describeBasicUpgradeFamilyOption(state, family, previewStats) {
 }
 
 export function describeSkillSlotOption(option) {
-  if (option.__clear) {
-    return { title: "Clear Slot", detail: "Return this skill to the pouch." };
+  if (option.__autofill) {
+    return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
   return { title: option.skill };
 }
 
 export function describeItemSlotOption(state, option, previewStats) {
-  if (option.__clear) {
-    return { title: "Clear Slot", detail: "Return this item to the pouch." };
+  if (option.__autofill) {
+    return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
   return {
     items: [option.item],
@@ -143,8 +143,8 @@ export function describeItemSlotOption(state, option, previewStats) {
 }
 
 export function describeActionSlotOption(state, option, previewStats) {
-  if (option.__clear) {
-    return { title: "Clear Slot", detail: "Return this action card to the pouch." };
+  if (option.__autofill) {
+    return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
   return {
     title: getActionCardDisplayName(option.card),
