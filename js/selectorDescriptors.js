@@ -125,29 +125,34 @@ export function describeBasicUpgradeFamilyOption(state, family, previewStats) {
   };
 }
 
-export function describeSkillSlotOption(option) {
+// residence is undefined when called from the read-only pouch browser (every
+// entry there is trivially "in the pouch"), so the detail line is simply
+// omitted there rather than stating the obvious.
+export function describeSkillSlotOption(option, residence) {
   if (option.__autofill) {
     return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
-  return { title: option.skill };
+  return { title: option.skill, detail: residence };
 }
 
-export function describeItemSlotOption(state, option, previewStats) {
+export function describeItemSlotOption(state, option, previewStats, residence) {
   if (option.__autofill) {
     return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
   return {
+    detail: residence,
     items: [option.item],
     actionCards: buildActionCardPreviews(state.data, option.item.Card ? [option.item.Card] : [], previewStats),
   };
 }
 
-export function describeActionSlotOption(state, option, previewStats) {
+export function describeActionSlotOption(state, option, previewStats, residence) {
   if (option.__autofill) {
     return { title: "Autofill", detail: "Remove the manual pin - this slot will fill automatically again." };
   }
   return {
     title: getActionCardDisplayName(option.card),
+    detail: residence,
     actionCards: buildActionCardPreviews(state.data, [option.card._cardId], previewStats),
   };
 }

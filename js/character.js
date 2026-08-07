@@ -29,6 +29,7 @@ import {
   resolveActionSlots,
   getEligibleItemsForSlot,
   getEligibleActionsForSlot,
+  buildResidenceLabels,
 } from "./characterStats.js";
 import {
   SKILL_SLOTS,
@@ -37,6 +38,9 @@ import {
   MAX_ADDED_ITEMS,
   ITEM_TIERS,
   ITEM_TYPE_ORDER,
+  SKILL_SLOT_LABELS,
+  ITEM_SLOT_LABELS,
+  ACTION_SLOT_LABELS,
 } from "./constants.js";
 import { getItemDisplayName } from "./displayParts.js";
 import { createSelectorOverlay } from "./selectorOverlay.js";
@@ -357,12 +361,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const { slots } = resolveSkillSlots(state, stats);
     const currentEntry = slots[slotIndex].entry;
     const options = state.skillSlots[slotIndex] ? [{ __autofill: true }, ...stats.skillPool] : stats.skillPool;
+    const residenceBySlotIndex = buildResidenceLabels(slots, SKILL_SLOT_LABELS);
 
     selectorOverlay.openSelector({
       title: "Choose Skill",
       description: "Pick any skill this character has to fill this slot.",
       options,
-      getOptionContent: (option) => describeSkillSlotOption(option),
+      getOptionContent: (option) =>
+        describeSkillSlotOption(option, residenceBySlotIndex.get(option) || "Pouch"),
       onSelect: (option) => selectSkillSlot(slotIndex, option.__autofill ? null : { target: option.source }),
       isSelected: (option) => option === currentEntry,
     });
@@ -380,12 +386,14 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const eligibleItems = getEligibleItemsForSlot(stats.itemPool, slotIndex);
     const previewStats = buildActionCardPreviewStats(state, stats);
     const options = state.itemSlots[slotIndex] ? [{ __autofill: true }, ...eligibleItems] : eligibleItems;
+    const residenceBySlotIndex = buildResidenceLabels(slots, ITEM_SLOT_LABELS);
 
     selectorOverlay.openSelector({
       title: "Choose Item",
       description: "Pick any eligible item this character has to fill this slot.",
       options,
-      getOptionContent: (option) => describeItemSlotOption(state, option, previewStats),
+      getOptionContent: (option) =>
+        describeItemSlotOption(state, option, previewStats, residenceBySlotIndex.get(option) || "Pouch"),
       onSelect: (option) =>
         selectItemSlot(slotIndex, option.__autofill ? null : { target: { itemName: option.itemName } }),
       isSelected: (option) => option === currentEntry,
@@ -404,13 +412,15 @@ export function createCharacterBuilder({ data, ui, onStateChange = () => {} }) {
     const eligibleCards = getEligibleActionsForSlot(stats.actionPool, slotIndex);
     const previewStats = buildActionCardPreviewStats(state, stats);
     const options = state.actionSlots[slotIndex] ? [{ __autofill: true }, ...eligibleCards] : eligibleCards;
+    const residenceBySlotIndex = buildResidenceLabels(slots, ACTION_SLOT_LABELS);
 
     selectorOverlay.openSelector({
       kicker: "Hotbar Slot " + (slotIndex + 1),
       title: "Choose Action Card",
       description: "Pick any eligible action card this character has to fill this slot.",
       options,
-      getOptionContent: (option) => describeActionSlotOption(state, option, previewStats),
+      getOptionContent: (option) =>
+        describeActionSlotOption(state, option, previewStats, residenceBySlotIndex.get(option) || "Pouch"),
       onSelect: (option) =>
         selectActionSlot(slotIndex, option.__autofill ? null : { target: { cardName: option.cardName } }),
       isSelected: (option) => option === currentEntry,

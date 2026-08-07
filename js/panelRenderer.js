@@ -1,5 +1,12 @@
 import { ATTRIBUTES, buildActionCardElement } from "./cardRender.js";
-import { ITEM_SLOT_TYPES, ACTION_SLOT_RULES, MAX_ADDED_ITEMS } from "./constants.js";
+import {
+  ITEM_SLOT_TYPES,
+  ACTION_SLOT_RULES,
+  MAX_ADDED_ITEMS,
+  SKILL_SLOT_LABELS,
+  ITEM_SLOT_LABELS,
+  ACTION_SLOT_LABELS,
+} from "./constants.js";
 import { getRaceAttributeOptions, getRaceFreeSkills } from "./stateCodec.js";
 import {
   getAccessibleAdvancementTreeNames,
@@ -34,24 +41,6 @@ import {
   buildItemElement,
   renderEntryToElement,
 } from "./uiComponents.js";
-
-// Slot labels, computed once — e.g. ["Head", "Chest", "Hand 1", "Hand 2", "Hand 3", "Feet", "Small 1", ...].
-const ITEM_SLOT_LABELS = (() => {
-  const seenCounts = {};
-  return ITEM_SLOT_TYPES.map((type) => {
-    seenCounts[type] = (seenCounts[type] || 0) + 1;
-    const totalOfType = ITEM_SLOT_TYPES.filter((candidate) => candidate === type).length;
-    return totalOfType > 1 ? type + " " + seenCounts[type] : type;
-  });
-})();
-
-// e.g. "Slot 1 (Off)", "Slot 3 (Off/Sup)", "Slot 7 (Any)".
-const ACTION_SLOT_LABELS = ACTION_SLOT_RULES.map((rule, index) => {
-  const categoryLabel = rule.categories.length === 3
-    ? "Any"
-    : rule.categories.map((category) => category.slice(0, 3)).join("/");
-  return "Slot " + (index + 1) + " (" + categoryLabel + ")";
-});
 
 export function createPanelRenderer({ state, ui, callbacks }) {
   function renderControls(levelMeta) {
@@ -340,7 +329,7 @@ export function createPanelRenderer({ state, ui, callbacks }) {
     container.appendChild(buildSlotSection({
       title: "Skills",
       resolved: resolveSkillSlots(state, stats),
-      slotLabel: (slotIndex) => "Skill " + (slotIndex + 1),
+      slotLabel: (slotIndex) => SKILL_SLOT_LABELS[slotIndex],
       slotMain: (entry) => entry.skill,
       onClick: (slotIndex) => callbacks.openSkillPickerForSlot(slotIndex),
       onPouchClick: () => callbacks.openSkillPouch(),

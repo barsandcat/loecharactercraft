@@ -424,3 +424,17 @@ export function resolveActionSlots(state, stats) {
     priority: (entry) => actionEntryPriority(entry, previewStats),
   });
 }
+
+// For slot-override pickers: where does each pool entry currently sit, so the
+// option list can caption "Slot 2" / "Pouch" instead of repeating the
+// picked-slot's own contents. Pool entries are resolved by reference (see
+// resolveLoadoutSlots), so `===` against a resolved slot's entry is exact.
+export function buildResidenceLabels(resolvedSlots, slotLabels) {
+  const labelByEntry = new Map();
+  resolvedSlots.forEach((slotResult, slotIndex) => {
+    if (slotResult.entry) {
+      labelByEntry.set(slotResult.entry, slotLabels[slotIndex]);
+    }
+  });
+  return labelByEntry;
+}
