@@ -49,6 +49,7 @@ function cacheUi() {
   ui.filterATT = document.getElementById("filterATT");
   ui.filterKeywords = document.getElementById("filterKeywords");
   ui.filterModifier = document.getElementById("filterModifier");
+  ui.filterTarget = document.getElementById("filterTarget");
   ui.sortBy = document.getElementById("sortBy");
   ui.sortOrder = document.getElementById("sortOrder");
   ui.resetFiltersButton = document.getElementById("resetFiltersButton");
@@ -65,6 +66,7 @@ function bindEvents() {
   ui.filterATT.addEventListener("change", () => cardDatabase.render());
   ui.filterKeywords.addEventListener("change", () => cardDatabase.render());
   ui.filterModifier.addEventListener("change", () => cardDatabase.render());
+  ui.filterTarget.addEventListener("change", () => cardDatabase.render());
   ui.sortBy.addEventListener("change", () => cardDatabase.render());
   ui.sortOrder.addEventListener("change", () => cardDatabase.render());
   ui.resetFiltersButton.addEventListener("click", () => {
@@ -76,6 +78,7 @@ function bindEvents() {
     ui.filterATT.value = "";
     ui.filterKeywords.value = "";
     ui.filterModifier.value = "";
+    ui.filterTarget.value = "";
     ui.sortBy.value = "tree";
     ui.sortOrder.checked = true;
     cardDatabase.render();
@@ -93,6 +96,7 @@ function populateFilters(db) {
   const modifierCounts = new Map();
   const keywordCounts = { has: 0, none: 0 };
   const individualKeywordCounts = new Map();
+  const targetCounts = new Map();
 
   db.getAllCards().forEach((card) => {
     treeCounts.set(card._tree, (treeCounts.get(card._tree) || 0) + 1);
@@ -116,6 +120,8 @@ function populateFilters(db) {
 
     getCardNegativeModifiers(card).forEach((t) => negatives.add(t));
     getCardModifiers(card).forEach((t) => modifierCounts.set(t, (modifierCounts.get(t) || 0) + 1));
+
+    getCardTargets(card).forEach((target) => targetCounts.set(target, (targetCounts.get(target) || 0) + 1));
   });
   negatives.forEach((t) => modifierCounts.delete(t));
 
@@ -163,6 +169,14 @@ function populateFilters(db) {
     opt.textContent = modifier + " (" + modifierCounts.get(modifier) + ")";
     ui.filterModifier.appendChild(opt);
   });
+
+  // Dynamic options: Target
+  Array.from(targetCounts.keys()).sort().forEach((target) => {
+    const opt = document.createElement("option");
+    opt.value = target;
+    opt.textContent = target + " (" + targetCounts.get(target) + ")";
+    ui.filterTarget.appendChild(opt);
+  });
 }
 
 function getActiveFilters() {
@@ -175,6 +189,7 @@ function getActiveFilters() {
     att: ui.filterATT.value || null,
     keywords: ui.filterKeywords.value || null,
     modifier: ui.filterModifier.value || null,
+    target: ui.filterTarget.value || null,
   };
 }
 
@@ -250,6 +265,13 @@ function getCardNegativeModifiers(card) {
     });
   }
   return Array.from(negatives);
+}
+
+function getCardTargets(card) {
+  const targets = new Set();
+  if (card.Front.Target) targets.add(card.Front.Target);
+  if (card.Back && card.Back.Target) targets.add(card.Back.Target);
+  return Array.from(targets);
 }
 
 function cardHasModifier(card, modifier) {
@@ -391,6 +413,7 @@ function createCardDatabase(data) {
         }
       }
       if (filters.modifier && !cardHasModifier(card, filters.modifier)) return false;
+      if (filters.target && !getCardTargets(card).includes(filters.target)) return false;
       return true;
     });
   }

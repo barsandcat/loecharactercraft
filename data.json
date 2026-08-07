@@ -5430,7 +5430,7 @@
         "Name": "Evoke Nightmares",
         "Type": "Action",
         "Category": "Support",
-        "Target": "[Elite] or [Boss] in R5",
+        "Target": "Elite or Boss in R5",
         "Sun": 2,
         "Roll": {
           "ATT": [
@@ -7097,7 +7097,7 @@
         "Keywords": [
           "Spell"
         ],
-        "Target": "[Elite] or [Boss] in R4",
+        "Target": "Elite or Boss in R4",
         "Roll": {
           "ATT": [
             "INT"
