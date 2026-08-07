@@ -142,7 +142,7 @@ function createItemDatabase(data) {
     }
 
     const list = document.createElement("ul");
-    list.className = "card-database-list";
+    list.className = "item-database-list";
 
     items.forEach(({ item }) => {
       const li = document.createElement("li");

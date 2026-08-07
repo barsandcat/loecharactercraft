@@ -435,21 +435,6 @@ button.pouch-count:focus-visible {
   margin-top: 8px;
 }
 
-/* Each column/cell here is much narrower than .item-preview's normal
-   horizontal layout (name+keywords beside a fixed 260px effect box) is
-   designed for — force the same stacked layout the global mobile breakpoint
-   already uses, so item cards stay legible at this width. */
-.item-slot-columns .item-preview,
-.item-slot-small-row .item-preview {
-  flex-direction: column;
-  align-items: stretch;
-}
-.item-slot-columns .item-effect,
-.item-slot-small-row .item-effect {
-  width: 100%;
-  flex-shrink: 1;
-}
-
 .summary-stat-group {
   display: grid;
   gap: 6px;
@@ -523,10 +508,14 @@ button.pouch-count:focus-visible {
   color: var(--ink);
 }
 
+/* Always stacked (name/details above, effect/card below) — consistent
+   across every context this renders in (equipped-item panels, the selector
+   overlay, the item database), regardless of how wide that context is. */
 .item-preview {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: 8px;
-  align-items: center;
   width: 100%;
   min-width: 0;
   padding: 6px 9px;
@@ -592,8 +581,8 @@ button.pouch-count:focus-visible {
 }
 
 .item-effect {
-  flex-shrink: 0;
-  width: 260px;
+  width: 100%;
+  flex-shrink: 1;
 }
 
 /* Action Card Categories */
@@ -1333,16 +1322,6 @@ button.pouch-count:focus-visible {
     align-items: stretch;
   }
 
-  .item-preview {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .item-effect {
-    width: 100%;
-    flex-shrink: 1;
-  }
-
   .tree-title-row,
   .tree-level {
     flex-direction: column;
@@ -1528,6 +1507,19 @@ button.pouch-count:focus-visible {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+/* Items render about half as wide as a full action card in the middle
+   column (they share a 2-column sub-grid there — .item-slot-columns/
+   .item-slot-small-row) — match that here so more fit per row, instead of
+   reusing the action-card-width-tuned minimum above. */
+.item-database-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--action-card-width, 280px) / 2 - 4px), 1fr));
   gap: 16px;
 }
 
