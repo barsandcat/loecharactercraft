@@ -320,9 +320,8 @@ export function resolveItemSlots(state, stats) {
   });
 }
 
-// Takes any array of item-pool entries — the full pool (slot pickers, so a
-// slot can offer reassigning something already equipped elsewhere) or just
-// the pouch (the pouch browser) — filtering logic doesn't care which.
+// Called with the full pool, not just the pouch, so a slot's picker can offer
+// reassigning something already equipped elsewhere (see character.js).
 export function getEligibleItemsForSlot(items, slotIndex) {
   const type = ITEM_SLOT_TYPES[slotIndex];
   return items.filter((entry) => entry.item.Type === type);

@@ -399,13 +399,6 @@ function renderCardContent(parent, block, options = {}) {
   parent.appendChild(container);
 }
 
-export function buildFoldedEffectText(text, className = "") {
-  const effectEl = document.createElement("div");
-  effectEl.className = "folded-effect-text" + (className ? " " + className : "");
-  appendFormattedText(effectEl, text);
-  return effectEl;
-}
-
 export function appendRollModifiers(parent, modifiers) {
   modifiers.forEach((mod) => {
     const sign = mod.Dice > 0 ? "+" : "";
