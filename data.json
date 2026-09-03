@@ -26,6 +26,9 @@
         "B10",
         "B15"
       ],
+      "Items": [
+        "Staff/Sling"
+      ],
       "FreeSkills": null
     },
     {
@@ -52,6 +55,9 @@
         "B07",
         "B10",
         "B15"
+      ],
+      "Items": [
+        "Staff/Sling"
       ],
       "FreeSkills": null
     },
@@ -81,6 +87,9 @@
         "B10",
         "B15"
       ],
+      "Items": [
+        "Staff/Sling"
+      ],
       "FreeSkills": null
     },
     {
@@ -109,6 +118,9 @@
         "B12",
         "B15"
       ],
+      "Items": [
+        "Staff/Sling"
+      ],
       "FreeSkills": null
     },
     {
@@ -135,6 +147,9 @@
         "B07",
         "B10",
         "B15"
+      ],
+      "Items": [
+        "Staff/Sling"
       ],
       "FreeSkills": null
     },
@@ -244,6 +259,9 @@
       "MOB": 6,
       "DIV": "D4",
       "HP": 6,
+      "Items": [
+        "Staff/Sling"
+      ],
       "ActionCards": [
         "B00",
         "B01",
@@ -312,6 +330,9 @@
         "B08",
         "B11",
         "B15"
+      ],
+      "Items": [
+        "Staff/Sling"
       ],
       "FreeSkills": null
     }
@@ -2896,6 +2917,16 @@
       ],
       "Effect": "During your [Melee] [Attack] Add+3{damage} for each your [Stealth]",
       "DisplayName": "Reclaimed Slippers"
+    },
+    "Staff/Sling": {
+      "Id": 168,
+      "Type": "Hand",
+      "Tier": "Basic",
+      "Keywords": [
+        "Melee",
+        "Ranged"
+      ],
+      "DisplayName": "Staff/Sling"
     }
   },
   "AdvancementTrees": [

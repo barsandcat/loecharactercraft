@@ -725,6 +725,7 @@ function getV3EncodingWidths(data) {
   // sentinel anymore, overrides are just null | { target }.
   const skillPoolBound = 1 + 1 + LEVEL_UP_SLOTS * maxArrayLength(allLevelOptions, (option) => option.Skills);
   const itemPoolBound = 1
+    + maxArrayLength(data.Races, (race) => race.Items)
     + maxArrayLength(data.Origins, (origin) => origin.Items)
     + maxArrayLength(allPaths, (path) => path.Items)
     + MAX_ADDED_ITEMS; // the pool can now also hold added items

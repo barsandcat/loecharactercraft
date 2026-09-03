@@ -172,6 +172,7 @@ export function applyRace(data, stats, race, attributes, source) {
   stats.divDie = race.DIV || null;
   incrementCountMap(stats.keywordCounts, race.Keywords || []);
   incrementCountMap(stats.skillCounts, race.Skills || []);
+  (race.Items || []).forEach((item) => addItem(data, stats, item, source));
   (race.ActionCards || []).forEach((action) => addAction(data, stats, action, source));
 }
 

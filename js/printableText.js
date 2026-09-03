@@ -94,6 +94,10 @@ function formatPrintableRace(state) {
   if (state.selectedFreeSkill) {
     details.push("Skill: " + state.selectedFreeSkill);
   }
+  const itemsDetail = formatPrintableItemsDetail(state, state.selectedRace.Items || []);
+  if (itemsDetail) {
+    details.push(itemsDetail);
+  }
 
   return details.length
     ? state.selectedRace.Name + " (" + details.join("; ") + ")"
